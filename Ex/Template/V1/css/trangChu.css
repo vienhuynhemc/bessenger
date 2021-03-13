@@ -15,7 +15,7 @@ body {
 .divsecondindextitle h3 {
   font-size: 36px;
   line-height: 46px;
-  color: #232020;
+  color: #C71585;
   text-transform: uppercase;
   font-weight: 700;
   font-family: "Oswald", sans-serif;
@@ -25,7 +25,7 @@ body {
   margin-bottom: 1.5rem !important;
   line-height: 1.5;
   font-size: 16px;
-  color: #6b778d;
+  color: #f594d1;
 }
 
 .divsiitem {
@@ -63,7 +63,7 @@ body {
   margin-top: -47px;
   margin-left: 26px;
   padding: 48px 20px;
-  background-color: #232020b5;
+  background-color: #C71585b5;
   border-radius: 50%;
   color: white;
   font-size: 20px;
@@ -74,13 +74,13 @@ body {
 }
 
 .divsiitem a h3:hover {
-  color: #ff7315;
+  color: #9acd32;
 }
 
 .divsiitem h4 {
   font-size: 18px;
   line-height: 30px;
-  color: #232020;
+  color: #C71585;
   display: block;
   font-weight: 600;
   text-transform: capitalize;
@@ -114,7 +114,7 @@ body {
 .qc1cttitle h3 {
   font-size: 36px;
   line-height: 46px;
-  color: #232020;
+  color: #C71585;
   margin-bottom: 24px;
   text-transform: uppercase;
   font-weight: 700;
@@ -124,7 +124,7 @@ body {
 .qc1cttitle p {
   line-height: 1.5;
   font-size: 16px;
-  color: #6b778d;
+  color: #f594d1;
   font-family: "Lato", sans-serif;
   margin-top: 0;
   margin-bottom: 1rem;
@@ -146,7 +146,7 @@ body {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #232020;
+  background-color: #C71585;
   margin-top: 20px;
   color: #fff;
   border-radius: 25px;
@@ -154,7 +154,7 @@ body {
 }
 
 .qc1cttitle a:hover {
-  background-color: #ff7315;
+  background-color: #9acd32;
 }
 
 .qc1ctimg img {
@@ -188,7 +188,7 @@ body {
 .maintt h3 {
   font-size: 36px;
   line-height: 46px;
-  color: #232020;
+  color: #C71585;
   text-transform: uppercase;
   font-weight: 700;
   font-family: "Oswald", sans-serif;
@@ -198,7 +198,7 @@ body {
   margin-bottom: 1.5rem !important;
   line-height: 1.5;
   font-size: 16px;
-  color: #6b778d;
+  color: #f594d1;
 }
 
 .maintt {
@@ -209,16 +209,16 @@ body {
 }
 
 .aa-products-tab li.active a {
-  border-bottom: 1px solid rgb(255 115 43) !important;
+  border-bottom: 1px solid #9acd32 !important;
 }
 
 .aa-products-tab li a:hover,
 .aa-products-tab li a:focus {
-  border-bottom: 1px solid rgb(255 115 43) !important;
+  border-bottom: 1px solid #9acd32 !important;
 }
 
 .aa-product-catg li .aa-product-title {
-  color: #232020;
+  color: #C71585;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.2;
@@ -226,25 +226,25 @@ body {
 }
 
 .sprice {
-  color: #3a3535 !important;
+  color: #d349a1 !important;
   font-size: 16px !important;
   font-weight: bold !important;
   font-family: "Lato", sans-serif !important;
 }
 
 .aa-browse-btn:hover {
-  color: #ff7315;
-  border-bottom: 2px solid #ff7315;
+  color: #9acd32;
+  border-bottom: 2px solid #9acd32;
 }
 
 .aa-browse-btn {
   display: inline-block;
   padding: 6px 0px;
-  border-bottom: 2px solid #232020;
+  border-bottom: 2px solid #C71585;
   margin-top: 50px;
   font-size: 20px;
   font-weight: bold;
-  color: #232020;
+  color: #C71585;
 }
 
 .aa-browse-btn span {
@@ -303,14 +303,14 @@ body {
   font-size: 16px;
   background-color: #fff;
   margin-top: 20px;
-  color: #232020;
+  color: #C71585;
   border-radius: 25px;
   -webkit-border-radius: 25px;
 }
 
 .ctqc3 a:hover {
   color: #fff;
-  background-color: #ff7315;
+  background-color: #9acd32;
 }
 
 .ctqc3 {
@@ -342,7 +342,7 @@ body {
 .kh h3 {
   font-size: 36px;
   line-height: 46px;
-  color: #232020;
+  color: #C71585;
   text-transform: uppercase;
   font-weight: 700;
   font-family: sans-serif;
@@ -352,7 +352,7 @@ body {
 .kh p {
   line-height: 1.5;
   font-size: 16px;
-  color: #6b778d;
+  color: #f594d1;
 }
 
 .khlist {
@@ -388,7 +388,7 @@ body {
   padding: 40px 20px;
   position: relative;
   text-align: center;
-  background-color: #232020;
+  background-color: #3e0027;
   border-radius: 6px;
 }
 
@@ -403,7 +403,7 @@ body {
 
 span.fa.fa-quote-left {
   display: block;
-  color: #ff7315;
+  color: #9acd32;
   font-size: 24px;
 }
 
@@ -424,7 +424,7 @@ span.fa.fa-quote-left {
 .khlistitemchildfooter h5 {
   font-size: 16px;
   line-height: 26px;
-  color: #232020;
+  color: #C71585;
   margin-top: 10px;
   font-weight: 600;
   font-family: sans-serif;
