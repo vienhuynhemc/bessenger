@@ -39,7 +39,7 @@
 body {
   background-color: #ffffff;
   font-family: "Lato", sans-serif;
-  color: #333333;
+  color:   rgb(28 7 28);
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -57,7 +57,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #333333;
+  color:   rgb(28 7 28);
 }
 
 a:hover,
@@ -698,7 +698,7 @@ header#aa-header:after {
   .aa-cartbox-info
   h4 {
   font-size: 14px;
-  color: #333333;
+  color:   rgb(28 7 28);
   margin-bottom: 20px;
   margin-top: 0;
 }
@@ -711,7 +711,7 @@ header#aa-header:after {
   .aa-cartbox-info
   h4
   a {
-  color: #333333;
+  color:   rgb(28 7 28);
   letter-spacing: 0.5px;
 }
 #aa-header
@@ -2418,7 +2418,7 @@ ul.dropdown-menu.menucountry {
   .aa-cartbox-info
   h4 {
   font-size: 14px;
-  color: #333333;
+  color:   rgb(28 7 28);
   margin-bottom: 20px;
   margin-top: 0;
 }
@@ -2431,7 +2431,7 @@ ul.dropdown-menu.menucountry {
   .aa-cartbox-info
   h4
   a {
-  color: #333333;
+  color:   rgb(28 7 28);
   letter-spacing: 0.5px;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -3263,7 +3263,7 @@ p.nt {
 ====================*/
 
 h3.title {
-  color: #333333;
+  color:   rgb(28 7 28);
 }
 
 .field {
@@ -3968,7 +3968,7 @@ span.payment-due-price {
   .aa-cartbox-info
   h4 {
   font-size: 18px;
-  color: #333333;
+  color:   rgb(28 7 28);
   margin-bottom: 10px;
   margin-top: 0;
 }
@@ -3982,7 +3982,7 @@ span.payment-due-price {
   .aa-cartbox-info
   h4
   a {
-  color: #333333;
+  color:   rgb(28 7 28);
   letter-spacing: 0.5px;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
