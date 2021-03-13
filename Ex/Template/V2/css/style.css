@@ -6318,7 +6318,7 @@ span.red{
     border-radius: 20px;
     bottom: 167px;
     right: 12px;
-    box-shadow: 0 0.5em 1em -0.125em rgb(255 117 25), 0 0 20px 3px rgb(255 118 26);
+    box-shadow: rgb(255 255 182) 0px 0.5em 1em -0.125em, rgb(255 255 150) 0px 0px 20px 3px;
     overflow: hidden;
 }
 

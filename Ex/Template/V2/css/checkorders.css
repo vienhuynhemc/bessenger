@@ -19,7 +19,7 @@
 .colorbar {
   position: absolute;
   width: 52%;
-  background-color: #ff7315;
+  background-color: #f1f100;
   height: 40px;
   border-radius: 100px;
   top: 0px;
@@ -50,11 +50,11 @@
 }
 
 .hiddenitem {
-  background-color: #ff7315;
+  background-color: #f1f100;
 }
 
 .futureitem {
-  border: 3px solid #ff7315;
+  border: 3px solid #f1f100;
   background-color: #f0f1f4;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .nowitem i {
-  color: #ff7315;
+  color: #f1f100;
   display: block;
 }
 
@@ -188,7 +188,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   margin-right: -7px;
   margin-top: 30px;
   display: flex;
@@ -231,7 +231,7 @@
 
 .mainsearch a {
   border-radius: 5px;
-  background-color: #ff7315;
+  background-color: #f1f100;
   color: white;
   border: none;
   width: 120px;

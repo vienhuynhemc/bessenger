@@ -31,7 +31,7 @@
   font-family: sans-serif;
   font-weight: bold;
   font-size: 16px;
-  color: #36363f;
+  color: rgb(28 7 28);
   display: flex;
   align-items: center;
   margin-top: 110px;
@@ -40,7 +40,7 @@
 }
 
 .titleleft i {
-  color: #ff7315;
+  color: #f1f100;
   margin-right: 12px;
   font-size: 22px;
 }
@@ -54,7 +54,7 @@
   align-items: center;
   height: 45px;
   margin-top: 20px;
-  color: #36363f;
+  color: rgb(28 7 28);
   cursor: pointer;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .leftitemselect a i {
-  color: #ff7315;
+  color: #f1f100;
   font-size: 22px;
   width: 35px;
 }
@@ -87,7 +87,7 @@
 }
 
 .leftitemselect p i {
-  color: #ff7315;
+  color: #f1f100;
   font-size: 22px;
   width: 35px;
 }
@@ -98,13 +98,13 @@
 }
 
 .activeeselect {
-  color: #ff7315;
-  border-left: 3px solid #ff7315;
+  color: #f1f100;
+  border-left: 3px solid #f1f100;
   background-color: #f2f4f9;
 }
 
 .activeeselect i {
-  color: #ff7315;
+  color: #f1f100;
 }
 
 .lineleft {
@@ -132,7 +132,7 @@
 
 .titleuser {
   font-size: 14px;
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold !important;
   margin-top: 20px;
 }
@@ -152,12 +152,12 @@
   font-weight: bold;
   font-family: sans-serif;
   font-size: 14px;
-  color: #ff7315;
+  color: #f1f100;
 }
 
 .changeimg {
   border: none;
-  background-color: #ff7315;
+  background-color: #f1f100;
   color: white;
   font-weight: bold;
   font-family: sans-serif;
@@ -176,7 +176,7 @@
 
 .headerplanclick p {
   font-weight: bold;
-  color: #36363f;
+  color: rgb(28 7 28);
   font-size: 12px;
 }
 
@@ -186,7 +186,7 @@
 }
 
 .lineheaderplanclick > div {
-  background-color: #ff7315;
+  background-color: #f1f100;
   width: 60%;
   height: 4px;
 }
@@ -206,7 +206,7 @@
 
 .itemplanclick h3 {
   font-size: 20px;
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-family: sans-serif;
 }
@@ -239,7 +239,7 @@
   box-shadow: 0 0 40px 7px #dad7d7;
 }
 .statustitle {
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-size: 26px;
   font-family: sans-serif;
@@ -248,7 +248,7 @@
 }
 
 .statusavatar {
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-size: 14px;
   font-family: sans-serif;
@@ -288,7 +288,7 @@
 }
 
 .divavatar button:nth-child(2) {
-  color: #ff7315;
+  color: #f1f100;
   margin-left: 20px;
 }
 
@@ -315,7 +315,7 @@
 .statusdivinputitem > div p:nth-child(1) {
   font-family: sans-serif;
   font-weight: bold;
-  color: #36363f;
+  color: rgb(28 7 28);
   transform: translateY(5px);
   font-size: 14px;
 }
@@ -349,7 +349,7 @@
 }
 
 .doimatkhau {
-  color: #ff7315 !important;
+  color: #f1f100 !important;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -362,7 +362,7 @@
 .connectgg p:nth-child(1) {
   font-family: sans-serif;
   font-size: 14px;
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
 }
 
@@ -398,7 +398,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: #7d8799;
-  color: #ff7315;
+  color: #f1f100;
   margin-right: -7px;
 }
 
@@ -433,7 +433,7 @@
 .deleleaccount > div p:nth-child(1) {
   font-family: sans-serif;
   font-size: 14px;
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
 }
 
@@ -453,7 +453,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   margin-right: -7px;
   position: absolute;
   left: 74%;
@@ -509,7 +509,7 @@ input[disabled] {
 .changepasswordtitle {
   text-align: center;
   font-family: sans-serif;
-  color: #ff7315;
+  color: #f1f100;
   font-weight: bold;
   font-size: 22px;
   margin-top: 50px;
@@ -530,7 +530,7 @@ input[disabled] {
 }
 
 .changepassworddiv p {
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-size: 18px;
 }
@@ -556,7 +556,7 @@ input[disabled] {
 
 .changepassworddiv button {
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   border: none;
   border-radius: 3px;
   width: 350px;
@@ -585,7 +585,7 @@ input[disabled] {
 }
 
 .changepasswordsuccess p:nth-child(1) {
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-size: 18px;
 }
@@ -605,7 +605,7 @@ input[disabled] {
 
 .changepasswordsuccess button {
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   border: none;
   border-radius: 3px;
   width: 350px;
@@ -621,7 +621,7 @@ input[disabled] {
 }
 
 .historytitle {
-  color: #36363f;
+  color: rgb(28 7 28);
   font-weight: bold;
   font-size: 26px;
   font-family: sans-serif;
@@ -910,7 +910,7 @@ input[disabled] {
 }
 
 .footerleft ul li:hover {
-  background-color: #ff7315;
+  background-color: #f1f100;
   color: white;
 }
 
@@ -937,7 +937,7 @@ input[disabled] {
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   margin-right: -7px;
   width: 168px;
   margin-top: -20px;
