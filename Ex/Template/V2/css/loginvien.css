@@ -1,0 +1,654 @@
+.mainlogin {
+  display: flex;
+  width: 100%;
+  background-color: #f4f4f4;
+}
+
+.login {
+  position: relative;
+  height: 800px;
+  margin: 100px auto;
+  width: 80%;
+  box-shadow: 0 0.5em 4em -0.125em rgb(162 160 160), 0 0 0 1px white;
+  border-radius: 10px;
+}
+
+.left {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  background-color: white;
+  left: 0%;
+  z-index: 2;
+}
+
+.right {
+  display: flex;
+  background-color: #ff7315;
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  left: 60%;
+  background-image: url("../img/qc2.jpg");
+  background-size: cover;
+  z-index: 3;
+}
+
+.hiddenright {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  position: absolute;
+  opacity: 0.5;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.contentleft {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 100px;
+  position: absolute;
+  width: 69%;
+  background-color: white;
+}
+
+.signuppage {
+  z-index: 2;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.loginpage {
+  z-index: 5;
+  transition: all 1s ease-in-out;
+}
+
+.signuppage .form {
+  margin-top: 0px;
+}
+
+.signuppage .title {
+  color: #374049;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 36px;
+  line-height: 45px;
+  margin-top: 10px;
+}
+
+.signuppage .info {
+  color: #969fa7;
+  font-size: 14px;
+}
+
+.headerleft {
+  display: flex;
+  color: #2d2d2d;
+}
+
+.headerleft p {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: 400;
+  transform: scaleX(1.2);
+  margin-left: 10px;
+}
+
+.headerleft a:nth-child(1) {
+  display: inline-block;
+  background: linear-gradient(to right, #ff7315, #ffb07b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wellcome {
+  width: 75%;
+  color: #767676;
+  font-size: 20px;
+  margin-top: 33px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 600;
+}
+
+.loginwith {
+  display: flex;
+  margin-top: 20px;
+}
+
+.loginwithitem {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: center;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginwithitem p {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 14px;
+  margin-left: 7px;
+}
+.loginwithitem i {
+  margin-right: 7px;
+  color: white;
+}
+
+.loginwithitem:nth-child(1) {
+  background-color: #425f9e;
+}
+
+.loginwithitem:nth-child(2) {
+  margin-left: 20px;
+  background-color: #df4930;
+}
+
+.or {
+  color: #5a5a5a;
+  font-weight: b;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 35px;
+}
+
+.form {
+  margin-top: 10px;
+}
+
+.titletk {
+  color: #adadad;
+  font-size: 14px;
+  transform: translateY(5px);
+  margin-top: 15px;
+}
+
+.tk input {
+  border: none;
+  outline: none;
+  color: black;
+  font-weight: bold;
+  font-family: sans-serif;
+  width: 85%;
+}
+
+.lineinput1 {
+  width: 85%;
+  height: 2px;
+  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  margin-top: 10px;
+}
+
+.mk {
+  position: relative;
+}
+
+.mk input {
+  border: none;
+  outline: none;
+  font-family: sans-serif;
+  color: #787878;
+  width: 85%;
+}
+
+.lineinput2 {
+  width: 85%;
+  height: 1px;
+  background-color: #dcdcdc;
+  margin-top: 10px;
+}
+
+.helpLogin {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin-top: 30px;
+}
+
+.helpLogin label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.helpLogin input {
+  cursor: pointer;
+}
+
+.helpLogin button {
+  font-size: 14px;
+  border: none;
+  background-color: white;
+  font-weight: bold;
+}
+
+.divsubmit {
+  margin-top: 30px;
+}
+
+.divsubmit button {
+  width: 150px;
+  height: 45px;
+}
+
+.divsubmit button:nth-child(1) {
+  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  border: none;
+  outline: none;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0px 15px 14px #d6d1d1;
+}
+
+.form input::placeholder {
+  color: #cacaca;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.divsubmit button:nth-child(2) {
+  margin-left: 30px;
+  border: 1px solid #cacaca;
+  background-color: white;
+  color: #2d2d2d;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.divalink {
+  display: flex;
+}
+
+.alink {
+  border: none !important;
+  background: white !important;
+  color: #398df9 !important;
+  font-weight: bold;
+  box-shadow: none !important;
+  width: 166px !important;
+  margin-top: -49px !important;
+}
+
+.dkcsbm {
+  margin-top: 50px;
+}
+
+.dkcsbm p {
+  font-size: 12px;
+  width: 66%;
+  color: #737373;
+  font-family: sans-serif;
+}
+
+.dkcsbm a {
+  color: #398df9;
+}
+.contentright {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: center;
+  align-self: center;
+  margin-top: auto;
+  position: absolute;
+  top: 50%;
+  margin-top: -126px;
+  left: 60%;
+  opacity: 1;
+  transition: all 1s ease-in-out;
+}
+
+.ctl {
+  left: 0%;
+  z-index: 1;
+  opacity: 0;
+}
+
+.eye {
+  border: none;
+  background-color: white;
+  position: absolute;
+  right: 15%;
+  color: #737373;
+}
+
+.contentright p:nth-child(1) {
+  color: white;
+  font-family: sans-serif;
+  font-size: 33px;
+  font-weight: bold;
+  line-height: 45px;
+  margin: auto;
+}
+
+.contentright p:nth-child(2) {
+  color: white;
+  font-family: sans-serif;
+  margin: auto;
+  text-align: center;
+  width: 85%;
+  line-height: 30px;
+  margin-top: 35px;
+}
+
+.contentright button {
+  background-color: #2d2d2d00;
+  border: none;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+  font-size: 18px;
+  border-radius: 41px;
+  width: 220px;
+  margin: auto;
+  margin-top: 50px;
+  height: 61px;
+}
+
+.left {
+  transition: all 1s ease-in-out;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.right {
+  transition: all 1s ease-in-out;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.agree {
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.agree label {
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.signuppage .divsubmit {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.signuppage .divsubmit p {
+  color: #737b82;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.signuppage .divsubmit p span {
+  color: #7845d9;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.agree label p {
+  width: 85%;
+}
+
+.success {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000009a;
+  z-index: 1000;
+  transition: all 0.2s ease-in-out;
+  transform: scaleY(0);
+}
+
+.contentsuccess {
+  position: absolute;
+  width: 400px;
+  background: white;
+  height: 500px;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 20px 0px #191818;
+}
+
+.contentsuccess h3 {
+  color: #374049;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.contentsuccess p {
+  text-align: center;
+  font-family: sans-serif;
+  color: #737373;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.contentsuccess p span {
+  color: #00d459;
+}
+
+.logosuccess {
+  width: 120px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.closesuccess {
+  font-size: 20px;
+  position: absolute;
+  left: 92%;
+  top: 2%;
+  color: #adadad;
+  cursor: pointer;
+}
+
+.contentsuccess button {
+  background-color: #00d459;
+  color: white;
+  border: none;
+  width: 300px;
+  height: 60px;
+  border-radius: 50px;
+}
+
+.helponclick {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.boxdivpassword {
+  display: flex;
+  align-items: center;
+  width: 77%;
+  margin: 0 auto;
+  background: #f6f6f6;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 20px 0px 20px 20px;
+  cursor: pointer;
+}
+
+.boxdivpassword p {
+  font-size: 14px;
+  font-family: sans-serif;
+  position: absolute;
+  text-align: left;
+  left: 33%;
+  width: 200px;
+  color: #898b8e;
+}
+
+.boxdivpassword i {
+  font-size: 50px;
+}
+
+#divpassword .fa-mobile {
+  margin-left: 14px;
+  margin-right: 28px;
+}
+
+#divpassword .boxdivpassword:nth-child(4) {
+  margin-bottom: 35px;
+}
+
+.left1divpassword {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+#divpassword .contentsuccess {
+  flex-direction: row;
+}
+
+.left2divpassword {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.left2divpassword .tk {
+  text-align: left;
+  width: 78%;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.left2divpassword .tk .lineinput1 {
+  width: 100%;
+}
+
+.left2divpassword .tk input {
+  width: 100%;
+}
+
+.left2divpassword .tk input::placeholder {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+#divpassword button {
+  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  border: none;
+  outline: none;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0px 15px 14px #d6d1d1;
+}
+
+.left2divpassword button {
+  margin-top: 30px;
+}
+
+.left2divpassword h3 {
+  text-align: center;
+}
+
+.left2divpassword p {
+  margin: auto;
+}
+
+.left2divpassword1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+}
+
+.divbutton {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+#left2divpassword1 {
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  top: 100%;
+}
+
+#left2divpassword11 {
+  transition: all 1s ease-in-out;
+  z-index: 5;
+  width: 100%;
+}
+#left2divpassword12 {
+  transition: all 1s ease-in-out;
+  z-index: 2;
+}
+
+#left2divpassword2 {
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  top: 100%;
+}
+
+#left2divpassword21 {
+  width: 100%;
+}
+
+#left2divpassword22 {
+  width: 100%;
+}
+
+#left2divpassword2 .tk {
+  margin-top: 82px;
+}
+
+#left2divpassword2 .divbutton button {
+  margin-top: 82px;
+}
+
+#left3divpassword .tk {
+  margin-top: 20px;
+  position: relative;
+}
+
+#left3divpassword .tk .eye {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: white !important;
+  color: #737373 !important;
+  box-shadow: none !important;
+  top: -87% !important;
+  right: 0% !important;
+}
+
+#left3divpassword {
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  top: 100%;
+}
+
+#notifi1 .contentsuccess h3,
+#notifi2 .contentsuccess h3 {
+  margin-top: -20px;
+}
