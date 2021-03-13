@@ -102,13 +102,14 @@ input[disabled] {
 }
 
 .left .header h3 {
+  color: #9e0967;
   font-size: 40px;
   font-weight: bold;
   font-family: sans-serif;
 }
 
 .left .header h3 i {
-  color: #ff7315;
+  color:  #9acd32;
 }
 
 .left .header > div {
@@ -206,7 +207,7 @@ input[disabled] {
   border-radius: 50%;
   top: -20px;
   right: -20px;
-  border: 3px solid #ff7315;
+  border: 3px solid  #9acd32;
 }
 
 #rd1:checked ~ .lbtt1 .checkpttt {
@@ -214,7 +215,7 @@ input[disabled] {
 }
 
 #rd1:checked ~ .lbtt1 .ptttdiv {
-  border: 3px solid #ff7315;
+  border: 3px solid  #9acd32;
   background-color: #fff6f2;
 }
 
@@ -228,7 +229,7 @@ input[disabled] {
 }
 
 #rd2:checked ~ .lbtt2 .ptttdiv {
-  border: 3px solid #ff7315;
+  border: 3px solid  #9acd32;
   background-color: #fff6f2;
 }
 
@@ -242,7 +243,7 @@ input[disabled] {
 }
 
 #rd3:checked ~ .lbtt3 .ptttdiv {
-  border: 3px solid #ff7315;
+  border: 3px solid  #9acd32;
   background-color: #fff6f2;
 }
 
@@ -294,7 +295,7 @@ input[disabled] {
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color:  #9acd32;
   margin-right: -7px;
   width: 168px;
   margin-top: 30px;

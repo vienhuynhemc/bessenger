@@ -98,7 +98,7 @@
 .titlemain {
   font-size: 36px !important;
   line-height: 46px !important;
-  color: #232020 !important;
+  color: rgb(93 0 58) !important;
   text-transform: uppercase !important;
   font-weight: 700 !important;
   font-family: "Oswald", sans-serif !important;
@@ -125,15 +125,15 @@
 .selectdiv {
   display: flex;
   justify-content: center;
-  background-color: #232020;
+  background-color:  rgb(93 0 58);
   width: 80%;
   margin: auto;
   color: white;
   height: 40px;
   align-items: center;
   margin-top: 80px;
-  border-left: 2px solid #232020;
-  border-right: 2px solid #232020;
+  border-left: 2px solid  rgb(93 0 58);
+  border-right: 2px solid  rgb(93 0 58);
 }
 
 .men,
@@ -147,12 +147,12 @@
   justify-content: center;
   font-family: sans-serif;
   font-weight: bold;
-  border-top: 2px solid #232020;
+  border-top: 2px solid rgb(93 0 58);
   transition: all 0.2s ease-in;
 }
 .men {
   background-color: white;
-  color: #232020;
+  color:  rgb(93 0 58);
 }
 
 #size3,
