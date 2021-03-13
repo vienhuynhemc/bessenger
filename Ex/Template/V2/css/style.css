@@ -132,7 +132,7 @@ img {
 .aa-browse-btn {
   display: inline-block;
   font-size: 16px;
-  color: #232020;
+  color: rgb(28 7 28);
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
@@ -150,7 +150,7 @@ img {
 
 .aa-add-to-cart-btn {    color: #fff;
   display: inline-block;
-  background: #232020;
+  background: rgb(28 7 28);
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 0.5px;
@@ -231,7 +231,7 @@ img {
   width: 100%;
   position: fixed;
   z-index: 999;
-  background: rgba(16, 16, 16, 0.470588);
+  background: #ee82ee73;
 }
 header#aa-header:after {
   content: "";
@@ -241,8 +241,7 @@ header#aa-header:after {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: -webkit-linear-gradient(#000000b0 23%, transparent 77%);
-}
+  background-image: -webkit-linear-gradient( #654965 23%, transparent 77%)}
 #aa-header .aa-header-top {
   padding-top: 15px;
 }
@@ -416,7 +415,7 @@ header#aa-header:after {
   transition: 0.4s;
 }
 #aa-header .aa-header-top .aa-header-top-right .aa-head-top-nav-right li:hover {
-  background-color: #ff7315;
+  background-color: #f1f100;
 }
 #aa-header .aa-header-top .aa-header-top-right .aa-head-top-nav-right li a {
   display: inline-block;
@@ -965,7 +964,7 @@ ul.dropdown-menu.menucountry {
 }
 
 #wpf-loader-two .wpf-loader-two-inner {
-  border: 2px solid #ff7315;
+  border: 2px solid #f1f100;
   border-radius: 50%;
   height: 200px;
   left: 50%;
@@ -1014,7 +1013,7 @@ ul.dropdown-menu.menucountry {
 }
 
 #wpf-loader-two .wpf-loader-two-inner span {
-  color: #ff7315;
+  color: #f1f100;
   display: inline-block;
   margin-top: 42%;
   font-family: sans-serif;
@@ -1330,12 +1329,12 @@ ul.dropdown-menu.menucountry {
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-  color:#232020;
+  color:rgb(28 7 28);
   font-weight: bold;
 }
 .aa-products-tab li a:hover,
 .aa-products-tab li a:focus {
-  color:#232020;
+  color:rgb(28 7 28);
   background-color: inherit;
 }
 .aa-products-tab li.active a {
@@ -1395,7 +1394,7 @@ ul.dropdown-menu.menucountry {
   height: 300px;
 }
 .aa-product-catg li figure .aa-add-card-btn {
-  background-color: #232020;
+  background-color: rgb(28 7 28);
   bottom: 0;
   color: #fff;
   font-size: 16px;
@@ -4633,7 +4632,7 @@ span.payment-due-price {
 ====================*/
 
 #aa-footer {
-  background: #232020;
+  background: rgb(28 7 28);
   display: inline;
   float: left;
   width: 100%;
@@ -4690,7 +4689,7 @@ span.payment-due-price {
   .aa-footer-nav
   li
   a:focus {
-  color: #ff7315;
+  color: #f1f100;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -4727,7 +4726,7 @@ span.payment-due-price {
   .aa-footer-widget
   .aa-footer-social
   a:hover {
-  background-color: #ff7315;
+  background-color: #f1f100;
   border-color: #fff;
 }
 #aa-footer .aa-footer-bottom {
@@ -5767,7 +5766,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #a09292;
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area a:hover {
-  color: #ff7315;
+  color: #f1f100;
 }
 /*==================
  END FOOTER
@@ -5788,7 +5787,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #fff;
   width: 38px;
   height: 38px;
-  background: #3a3535;
+  background: #f1f100;
   padding: 0;
   line-height: 38px;
   transition: 0.5s ease-out;
@@ -5796,7 +5795,7 @@ ul.aa-footer-nav.giaohang li img {
 }
 
 .movetop:hover {
-  background: #ff7315;
+  background: #f1f100;
   color: white;
 }
 
@@ -5870,7 +5869,7 @@ span.fa.fa-credit-card {
 .choiselanguage li{
   display: inline-block;
     text-align: right;
-    background-color: #232020 !important;
+    background-color: rgb(28 7 28) !important;
     border-radius: 35px;
     /* height: 32px; */
     /* margin-bottom: 3px; */
@@ -5883,11 +5882,11 @@ span.fa.fa-credit-card {
 }
 
 .choiselanguage li:hover{
-  background-color: #ff7315 !important;
+  background-color: #f1f100 !important;
 }
 
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a > span {
-color: #ff7315;
+color: #f1f100;
 margin-right: 10px;
 }
 
@@ -5900,11 +5899,11 @@ margin-right: 10px;
 }
 
 .leftnav li:hover a{
-  color:#ff7315 !important;
+  color:#f1f100 !important;
 }
 
 .activeee{
-  color: #ff7315 !important;
+  color: #f1f100 !important;
 }
 
 span.fa.fa-search {
@@ -5912,7 +5911,7 @@ span.fa.fa-search {
 }
 
 span.fa.fa-cart-arrow-down {
-  color: #ff7315;
+  color: #f1f100;
   font-size: 34px;
   transform: translateX(-2px);
 }
@@ -5985,7 +5984,7 @@ width: 100%;
 }
 
 .shopnow:hover{
-  background: #ff7315;
+  background: #f1f100;
   color: #fff;
 }
 .shopnow{
@@ -5997,7 +5996,7 @@ width: 100%;
   font-size: 16px;
   background-color: #fff;
   margin-top: 30px;
-  color: #232020;
+  color: rgb(28 7 28);
   border-radius: 25px;
 }
 
@@ -6100,7 +6099,7 @@ line-height: 68px;
 }
 
 .subscribedivchild button:hover{
-  background-color: #232020 ;
+  background-color: rgb(28 7 28) ;
 }
 
 .subscribedivchild button{
@@ -6116,7 +6115,7 @@ line-height: 68px;
   height: 53px;
   width: 100%;
   text-decoration: none;
-  background: rgb(255, 115, 21);
+  background: #f1f100;
   transition: all 0.3s ease 0s;
   border-width: initial;
   border-style: none;
@@ -6132,12 +6131,12 @@ line-height: 68px;
 }
 
 .tinhtien{
-  background-color: #232020;
+  background-color: rgb(28 7 28);
   color:white;
 }
 
 .tinhtien:hover{
-  background-color: #ff7315;
+  background-color: #f1f100;
   color:white;
 }
 
@@ -6229,7 +6228,7 @@ line-height: 68px;
   margin-right: 10px;
   outline: none;
   border: none;
-  border-bottom: 2px solid #232020;
+  border-bottom: 2px solid rgb(28 7 28);
   font-size: 20px;
 }
 
@@ -6239,7 +6238,7 @@ line-height: 68px;
   margin-right:10px;
   outline:none;
   color:white;
-  background-color: #232020;
+  background-color: rgb(28 7 28);
   font-size:30px;
   font-family: sans-serif;
   font-weight: bold;
@@ -6250,7 +6249,7 @@ line-height: 68px;
 }
 
 .inputsl button:hover{
-  background-color: #ff7315;
+  background-color: #f1f100;
 }
 
 .danhmucprod{
@@ -6265,14 +6264,14 @@ line-height: 68px;
 }
 
 .addTocardViewQuick{
-  background-color: #ff7315;
+  background-color: #f1f100;
 }
 
 .addTocardViewQuick:hover{
-  background-color: #232020;;
+  background-color: rgb(28 7 28);;
 }
 span.red{
-  color: #ff7315;
+  color: #f1f100;
 }
 
 .chatbox{
@@ -6305,7 +6304,7 @@ span.red{
 }
 
 .iconchatbox i{
-  color:#ff7315;
+  color:#f1f100;
     font-size: 50px;
     z-index: 100;
 }
@@ -6344,7 +6343,7 @@ span.red{
 }
 
 .chatboxheader div:nth-child(1) i:hover{
-  background-color: #ff7315;
+  background-color: #f1f100;
   color:white;
 }
 
@@ -6398,7 +6397,7 @@ margin-left: 45px;
 
 .userchat{
   display: inline-block;
-  background-color: #ff7315;
+  background-color: #f1f100;
   color: white;
   width: auto;
   border-radius: 20px;
@@ -6408,7 +6407,7 @@ margin-left: 45px;
 
 .iconTS{
   position: absolute;
-  background: #232020;
+  background: rgb(28 7 28);
   color: white;
   border-radius: 50%;
   padding: 5px 7px;
@@ -6430,7 +6429,7 @@ margin-left: 45px;
 }
 
 .chatboxfooter i{
-  color: #ff7315;
+  color: #f1f100;
   font-size: 24px;
   margin-left: 96px;
   cursor: pointer;
@@ -6452,7 +6451,7 @@ margin-left: 45px;
 }
 
 .activeeeicon{
-  background-color: #ff7315 !important;
+  background-color: #f1f100 !important;
 }
 
 .aa-cartbox-summary.xemnhanhgiohang {

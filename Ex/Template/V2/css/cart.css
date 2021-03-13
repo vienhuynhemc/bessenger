@@ -40,7 +40,7 @@ body {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 38px;
-  color: #494541;
+  color: rgb(28 7 28);
 }
 
 .cartleftheader h5 {
@@ -56,7 +56,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   margin-left: 20px;
-  color: #494541;
+  color: rgb(28 7 28);
   font-size: 25px;
 }
 
@@ -111,7 +111,7 @@ body {
 }
 
 .cartleftmainiteminfor p {
-  color: #494541;
+  color: rgb(28 7 28);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -131,7 +131,7 @@ body {
 }
 
 .cartleftmainitemcolor {
-  color: #494541;
+  color: rgb(28 7 28);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -147,7 +147,7 @@ body {
 }
 
 .cartleftmainitemsl p {
-  color: #494541;
+  color: rgb(28 7 28);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -163,7 +163,7 @@ body {
 }
 
 .cartleftmainitemsl > div button:hover {
-  background-color: #ff7315;
+  background-color: #f1f100;
 }
 
 .cartleftmainitemsl > div button {
@@ -180,7 +180,7 @@ body {
 }
 
 .cartleftmainitemprice {
-  color: #494541;
+  color: rgb(28 7 28);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -230,11 +230,11 @@ body {
 }
 
 .cartleftfooter a:hover,.cartleftfooter a:hover i{
-  color:#ff7315;
+  color:#f1f100;
 }
 
 .cartleftfooter a i {
-  color: #494541;
+  color: rgb(28 7 28);
   font-size: 20px;
   font-weight: 100;
   margin-right: 15px;
@@ -258,7 +258,7 @@ body {
 }
 
 .footertongtien p:nth-child(2) {
-  color: #494541;
+  color: rgb(28 7 28);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -267,7 +267,7 @@ body {
 }
 
 .cartright {
-  background-color: #494541;
+  background-color: rgb(28 7 28);
   width: 34%;
   display: flex;
   flex-direction: column;
@@ -278,7 +278,7 @@ body {
 .cartright h3 {
   margin: 0;
   padding: 0;
-  color: #ff7315;
+  color: #f1f100;
   margin-top: 100px;
   font-family: sans-serif;
   margin-left: 60px;
@@ -372,7 +372,7 @@ body {
 
 .submit {
   color: white;
-  background-color: #ff7315;
+  background-color: #f1f100;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -393,14 +393,14 @@ body {
 }
 
 .cartleftmainitemright:hover div{
-  border: 1px solid #ff7315;
+  border: 1px solid #f1f100;
 }
 
 .box1 {
   position: absolute;
   width: 40px;
   height: 127px;
-  background-color: #494541;
+  background-color: rgb(28 7 28);
   border-radius: 93%;
   top: 49px;
   left: -11px;
@@ -410,7 +410,7 @@ body {
   position: absolute;
   width: 76px;
   height: 99px;
-  background-color: #494541;
+  background-color: rgb(28 7 28);
   border-radius: 20px;
   top: 64px;
   left: -29px;
