@@ -325,7 +325,7 @@ ul.dropdown-menu.menucountry {
 
 .scrollToTop:hover,
 .scrollToTop:focus {
-  background-color: #ff7315;
+  background-color:  #9acd32;
   text-decoration: none;
   outline: none;
 }
@@ -4160,7 +4160,7 @@ span.payment-due-price {
   .aa-footer-nav
   li
   a:focus {
-  color: #ff7315;
+  color:  #9acd32;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -4197,7 +4197,7 @@ span.payment-due-price {
   .aa-footer-widget
   .aa-footer-social
   a:hover {
-  background-color: #ff7315;
+  background-color:  #9acd32;
   border-color: #fff;
 }
 #aa-footer .aa-footer-bottom {
@@ -5237,7 +5237,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #a09292;
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area a:hover {
-  color: #ff7315;
+  color:  #9acd32;
 }
 /*==================
  END FOOTER
@@ -5266,7 +5266,7 @@ ul.aa-footer-nav.giaohang li img {
 }
 
 #movetop:hover {
-  background: #ff7315;
+  background:  #9acd32;
 }
 
 /*==================
@@ -5348,7 +5348,7 @@ span.red {
 }
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:hover,
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:focus {
-  color: #ff7315;
+  color:  #9acd32;
 }
 #aa-product-category
   .aa-product-catg-content
@@ -5360,7 +5360,7 @@ span.red {
   .aa-product-catg-head
   .aa-product-catg-head-right
   a:focus {
-  color: #ff7315;
+  color:  #9acd32;
 }
 
 .aa-product-img img {
@@ -5493,7 +5493,7 @@ ul.aa-catg-nav li {
 
 .divsize a:hover {
   background-color: white;
-  color: #ff7315 !important;
+  color:  #9acd32 !important;
 }
 
 .leftdivsmall {
@@ -5594,7 +5594,7 @@ ul.aa-catg-nav li {
 }
 
 .aa-sort-form select {
-  color: rgb(245 153 91);
+  color:  #9acd32;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
@@ -5611,7 +5611,7 @@ ul.aa-catg-nav li {
   text-transform: uppercase;
   font-size: 13px;
   margin-top: -2px;
-  color: rgb(245 153 91);
+  color:  #9acd32;
   font-family: sans-serif;
 }
 
@@ -5631,7 +5631,7 @@ ul.aa-catg-nav li {
 }
 
 .aa-show-form select {
-  color: rgb(245 153 91);
+  color:  #9acd32;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
@@ -5648,7 +5648,7 @@ ul.aa-catg-nav li {
   text-transform: uppercase;
   font-size: 13px;
   margin-top: -2px;
-  color: rgb(245 153 91);
+  color:  #9acd32;
   font-family: sans-serif;
 }
 
@@ -5707,7 +5707,7 @@ ul.pagination {
 }
 
 .color1li {
-  color: rgb(245 153 91) !important;
+  color:  #9acd32 !important;
 }
 
 .color2li {

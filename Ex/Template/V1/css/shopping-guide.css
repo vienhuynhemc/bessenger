@@ -3,7 +3,7 @@ body {
 }
 .huongdan {
   width: 127px;
-  background-color: #ff7315;
+  background-color:  #9acd32;
   color: white;
   height: 49px;
   text-align: center;
@@ -11,8 +11,8 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 45px;
-  box-shadow: rgb(234 108 24) 0px 0.5em 1em -0.125em,
-    rgb(255, 230, 213) 0px 0px 20px 3px;
+    box-shadow: rgb(154 205 50) 0px 0.5em 1em -0.125em, rgb(223 232 205) 0px 0px 20px 3px;
+}
 }
 span.c1 {
   font-size: 20px;
@@ -78,8 +78,7 @@ img.hd {
   width: 80%;
   height: 101px;
   margin: auto;
-  box-shadow: rgb(216 192 176) 0px 0.5em 5em -0.125em,
-    rgb(255, 230, 213) 0px 0px 20px 3px;
+  box-shadow: rgb(217 241 170) 0px 0.5em 5em -0.125em, rgb(232 245 199) 0px 0px 20px 3px;
   border-radius: 30px;
   align-items: center;
   display: flex;
@@ -136,7 +135,7 @@ img.hd {
 
 .line1step {
   position: absolute;
-  border: 2px solid #ff7315;
+  border: 2px solid  #9acd32;
   top: 50%;
   margin-top: -1px;
   z-index: 5;
@@ -150,7 +149,7 @@ img.hd {
 }
 
 .stepitem {
-  background-color: #ff7315;
+  background-color:  #9acd32;
   width: 30px;
   height: 30px;
   z-index: 6;
@@ -203,7 +202,7 @@ img.hd {
 }
 
 .contentstep {
-  color: #ff7315;
+  color:  #9acd32;
   position: absolute;
   width: 200px;
   top: 110%;
