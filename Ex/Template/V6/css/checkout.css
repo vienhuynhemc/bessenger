@@ -2345,7 +2345,7 @@ button.field-input-btn.btn.btn-default.btn-disabled {
   transition: all 0.4s;
 }
 button.field-input-btn.btn.btn-default.btn-disabled:hover {
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 .field-input-wrapper {
@@ -3280,7 +3280,7 @@ span.payment-due-price {
   .aa-footer-nav
   li
   a:focus {
-  color: #ff7315;
+  color: #03e04dde;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -3317,7 +3317,7 @@ span.payment-due-price {
   .aa-footer-widget
   .aa-footer-social
   a:hover {
-  background-color: #ff7315;
+  background-color: #03e04dde;
   border-color: #fff;
 }
 #aa-footer .aa-footer-bottom {
@@ -4176,7 +4176,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #a09292;
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area a:hover {
-  color: #ff7315;
+  color: #03e04dde;
 }
 /*==================
  END FOOTER
@@ -4205,7 +4205,7 @@ ul.aa-footer-nav.giaohang li img {
 }
 
 .movetop:hover {
-  background: #ff7315;
+  background: #03e04dde;
 }
 
 /*==================
@@ -4213,7 +4213,7 @@ end move top
 ====================*/
 
 span.red {
-  color: #ff7315;
+  color: #03e04dde;
 }
 h3.title {
   color: #333333;

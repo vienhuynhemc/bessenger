@@ -146,7 +146,7 @@ body {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #232020;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-top: 20px;
   color: #fff;
   border-radius: 25px;
@@ -301,9 +301,9 @@ body {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #fff;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-top: 20px;
-  color: #232020;
+  color: #fff;
   border-radius: 25px;
   -webkit-border-radius: 25px;
 }
@@ -388,7 +388,7 @@ body {
   padding: 40px 20px;
   position: relative;
   text-align: center;
-  background-color: #232020;
+  background-color: rgba(3, 68, 51, 0.788);
   border-radius: 6px;
 }
 

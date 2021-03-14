@@ -267,7 +267,7 @@ body {
 }
 
 .cartright {
-  background-color: #494541;
+  background-color: rgba(3, 68, 51, 0.788);
   width: 34%;
   display: flex;
   flex-direction: column;

@@ -231,7 +231,7 @@ img {
   width: 100%;
   position: fixed;
   z-index: 999;
-  background: rgba(16, 16, 16, 0.470588);
+  background: rgba(3, 68, 51, 0.788);
 }
 header#aa-header:after {
   content: "";
@@ -4633,7 +4633,7 @@ span.payment-due-price {
 ====================*/
 
 #aa-footer {
-  background: #232020;
+  background: rgba(3, 68, 51, 0.788);
   display: inline;
   float: left;
   width: 100%;
@@ -5995,9 +5995,9 @@ width: 100%;
   font-weight: 600;
   padding: 10px 26px;
   font-size: 16px;
-  background-color: #fff;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-top: 30px;
-  color: #232020;
+  color: #ffff;
   border-radius: 25px;
 }
 
@@ -6116,7 +6116,7 @@ line-height: 68px;
   height: 53px;
   width: 100%;
   text-decoration: none;
-  background: rgb(255, 115, 21);
+  background: rgba(3, 68, 51, 0.788);
   transition: all 0.3s ease 0s;
   border-width: initial;
   border-style: none;

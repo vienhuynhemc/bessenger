@@ -163,7 +163,7 @@ body {
 }
 
 .cartleftmainitemsl > div button:hover {
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 .cartleftmainitemsl > div button {
@@ -230,7 +230,7 @@ body {
 }
 
 .cartleftfooter a:hover,.cartleftfooter a:hover i{
-  color:#ff7315;
+  color:#03e04dde;
 }
 
 .cartleftfooter a i {
@@ -278,7 +278,7 @@ body {
 .cartright h3 {
   margin: 0;
   padding: 0;
-  color: #ff7315;
+  color: #03e04dde;
   margin-top: 100px;
   font-family: sans-serif;
   margin-left: 60px;
@@ -372,7 +372,7 @@ body {
 
 .submit {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -393,7 +393,7 @@ body {
 }
 
 .cartleftmainitemright:hover div{
-  border: 1px solid #ff7315;
+  border: 1px solid #03e04dde;
 }
 
 .box1 {

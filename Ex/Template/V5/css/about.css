@@ -5316,7 +5316,7 @@ a.read-more.btn {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #232020;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-top: 20px;
   color: #fff;
   border-radius: 25px;
@@ -10035,7 +10035,7 @@ iframe {
 }
 
 .features-4 .features4-grid-inn:hover {
-  background: #f8e2d3;
+  background: rgba(3, 68, 51, 0.788);
 }
 
 .features-4 .features4-grid-inn:hover p {

@@ -212,7 +212,7 @@
   text-transform: uppercase;
   font-family: sans-serif;
   font-weight: bold;
-  color: #ff7315;
+  color: #03e04dde;
   font-size: 15px;
 }
 
@@ -301,7 +301,7 @@
 
 .guidesize a {
   font-size: 14px;
-  color: #ff7315;
+  color: #03e04dde;
 }
 
 .selectsize {
@@ -322,27 +322,27 @@
 
 #size1:checked ~ .labelsize1 {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 #size2:checked ~ .labelsize2 {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 #size3:checked ~ .labelsize3 {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 #size4:checked ~ .labelsize4 {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 #size5:checked ~ .labelsize5 {
   color: white;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 .dpconlai {
@@ -410,7 +410,7 @@
 }
 
 .wlaatc button:nth-child(2) {
-  background-color: #ff7315;
+  background-color: #03e04dde;
   box-shadow: rgb(255 177 125) 0px 8px 19px;
 }
 
@@ -476,7 +476,7 @@
 .danhgia p:nth-child(4) {
   font-size: 13px;
   cursor: pointer;
-  color: #ff7315;
+  color: #03e04dde;
   font-family: sans-serif;
   letter-spacing: 0.5px;
   margin-top: 30px;
@@ -557,7 +557,7 @@
 
 .xephangrightitem > div > div:nth-child(2) {
   height: 100%;
-  background-color: #ff7315;
+  background-color: #03e04dde;
   border-radius: 50px;
 }
 
@@ -607,7 +607,7 @@
 .activeboloc {
   border: 1px solid #fff1e8 !important;
   background-color: #fff1e8 !important;
-  color: #ff7315 !important;
+  color: #03e04dde !important;
 }
 
 .headerbinhluanitem {
@@ -730,7 +730,7 @@
 }
 
 .dpnextpage ul li:nth-child(1) {
-  background-color: #ff7315;
+  background-color: #03e04dde;
   box-shadow: 0px 4px 7px 0px #f9a065;
   color: white;
 }
@@ -802,7 +802,7 @@
 
 .headerformvietdanhgia {
   display: flex;
-  background-color: #ff7315;
+  background-color: #03e04dde;
   align-items: center;
 }
 
@@ -905,7 +905,7 @@
   text-transform: uppercase;
   font-family: sans-serif;
   font-weight: bold;
-  color: #ff7315;
+  color: #03e04dde;
 }
 
 .vdgsubmit button:nth-child(1) {
@@ -927,7 +927,7 @@
 #danhgia2 > p:nth-child(4) {
   font-size: 13px;
   cursor: pointer;
-  color: #ff7315;
+  color: #03e04dde;
   font-family: sans-serif;
   letter-spacing: 0.5px;
   margin-top: 30px;

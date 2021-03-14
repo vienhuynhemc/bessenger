@@ -112,7 +112,7 @@
   border: none;
   color: white;
   font-family: sans-serif;
-  background: #ff9751;
+  background: #03e04dde;
   border-radius: 5px;
   height: 35px;
   font-size: 14px;
@@ -212,7 +212,7 @@
   font-family: sans-serif;
   border-radius: 7px;
   background: #faf4ed;
-  color: #ff7315;
+  color: #03e04dde;
   width: 85px;
   display: flex;
   justify-content: center;
@@ -303,7 +303,7 @@
 }
 
 .titletable > div ul li:nth-child(1) {
-  background-color: #ff9751;
+  background-color: #03e04dde;
   color: white;
 }
 
@@ -320,7 +320,7 @@
   border: none;
   color: white;
   font-family: sans-serif;
-  background: #ff9751;
+  background: #03e04dde;
   border-radius: 5px;
   font-size: 14px;
   font-weight: bold;

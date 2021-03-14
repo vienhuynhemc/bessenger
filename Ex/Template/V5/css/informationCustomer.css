@@ -157,7 +157,7 @@
 
 .changeimg {
   border: none;
-  background-color: #ff7315;
+  background-color: rgba(3, 68, 51, 0.788);
   color: white;
   font-weight: bold;
   font-family: sans-serif;
@@ -453,7 +453,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-right: -7px;
   position: absolute;
   left: 74%;

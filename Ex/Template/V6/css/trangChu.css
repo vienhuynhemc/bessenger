@@ -74,7 +74,7 @@ body {
 }
 
 .divsiitem a h3:hover {
-  color: #ff7315;
+  color: #03e04dde;
 }
 
 .divsiitem h4 {
@@ -154,7 +154,7 @@ body {
 }
 
 .qc1cttitle a:hover {
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 .qc1ctimg img {
@@ -233,8 +233,8 @@ body {
 }
 
 .aa-browse-btn:hover {
-  color: #ff7315;
-  border-bottom: 2px solid #ff7315;
+  color: #03e04dde;
+  border-bottom: 2px solid #03e04dde;
 }
 
 .aa-browse-btn {
@@ -301,16 +301,16 @@ body {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #fff;
+  background-color: #232020;
   margin-top: 20px;
-  color: #232020;
+  color: white;
   border-radius: 25px;
   -webkit-border-radius: 25px;
 }
 
 .ctqc3 a:hover {
   color: #fff;
-  background-color: #ff7315;
+  background-color: #03e04dde;
 }
 
 .ctqc3 {
@@ -403,7 +403,7 @@ body {
 
 span.fa.fa-quote-left {
   display: block;
-  color: #ff7315;
+  color: #03e04dde;
   font-size: 24px;
 }
 

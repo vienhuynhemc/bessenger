@@ -294,7 +294,7 @@ input[disabled] {
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: rgba(3, 68, 51, 0.788);
   margin-right: -7px;
   width: 168px;
   margin-top: 30px;
@@ -499,5 +499,5 @@ input[disabled] {
 }
 
 .ghichu .note {
-  color: #398df9;
+  color: #ff7315;
 }

@@ -325,7 +325,7 @@ ul.dropdown-menu.menucountry {
 
 .scrollToTop:hover,
 .scrollToTop:focus {
-  background-color: #ff7315;
+  background-color: #03e04dde;
   text-decoration: none;
   outline: none;
 }
@@ -4103,7 +4103,7 @@ span.payment-due-price {
 ====================*/
 
 #aa-footer {
-  background: #232020;
+  background: rgba(134, 9, 9, 0.74);
   display: inline;
   float: left;
   width: 100%;
@@ -4160,7 +4160,7 @@ span.payment-due-price {
   .aa-footer-nav
   li
   a:focus {
-  color: #ff7315;
+  color: #03e04dde;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -4197,7 +4197,7 @@ span.payment-due-price {
   .aa-footer-widget
   .aa-footer-social
   a:hover {
-  background-color: #ff7315;
+  background-color: #03e04dde;
   border-color: #fff;
 }
 #aa-footer .aa-footer-bottom {
@@ -5237,7 +5237,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #a09292;
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area a:hover {
-  color: #ff7315;
+  color: #03e04dde;
 }
 /*==================
  END FOOTER
@@ -5266,7 +5266,7 @@ ul.aa-footer-nav.giaohang li img {
 }
 
 #movetop:hover {
-  background: #ff7315;
+  background: #03e04dde;
 }
 
 /*==================
@@ -5325,7 +5325,7 @@ span.red {
   display: inline;
   float: left;
   width: 100%;
-  background-color: rgb(62 63 67 / 1);
+  background-color: rgba(177, 23, 23, 0.74);
   padding: 33px 40px;
   /* top: 30px; */
   box-shadow: 0px 20px 20px 0px rgb(202 199 200);
@@ -5348,7 +5348,7 @@ span.red {
 }
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:hover,
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:focus {
-  color: #ff7315;
+  color: #03e04dde;
 }
 #aa-product-category
   .aa-product-catg-content
@@ -5360,7 +5360,7 @@ span.red {
   .aa-product-catg-head
   .aa-product-catg-head-right
   a:focus {
-  color: #ff7315;
+  color: #03e04dde;
 }
 
 .aa-product-img img {
@@ -5493,14 +5493,14 @@ ul.aa-catg-nav li {
 
 .divsize a:hover {
   background-color: white;
-  color: #ff7315 !important;
+  color: #03e04dde !important;
 }
 
 .leftdivsmall {
   display: inline;
   float: left;
   width: 100%;
-  background-color: rgb(62 63 67 / 1);
+  background-color: rgba(177, 23, 23, 0.74);
   padding: 33px 40px;
   box-shadow: 0px 20px 20px 0px rgb(202 199 200);
   margin-top: 50px;
