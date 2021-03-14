@@ -19,7 +19,7 @@
 .colorbar {
   position: absolute;
   width: 52%;
-  background-color: #ff7315;
+  background-color: #ffd700;
   height: 40px;
   border-radius: 100px;
   top: 0px;
@@ -50,11 +50,11 @@
 }
 
 .hiddenitem {
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
 }
 
 .futureitem {
-  border: 3px solid #ff7315;
+  border: 3px solid rgba(114, 70, 216, 1);
   background-color: #f0f1f4;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .nowitem i {
-  color: #ff7315;
+  color: rgba(114, 70, 216, 1);
   display: block;
 }
 
@@ -98,7 +98,7 @@
   margin: 0;
   margin-top: 5px;
   font-size: 14px;
-  color: #6a687b !important;
+  color: rgb(35, 32, 32) !important;
   font-family: sans-serif !important;
 }
 
@@ -108,7 +108,7 @@
 
 .titleupdate {
   text-align: left;
-  color: #6a687b;
+  color: rgb(35, 32, 32) ;
   font-weight: bold;
   font-size: 26px;
   font-family: sans-serif;
@@ -122,7 +122,7 @@
 .headerupdate p {
   margin: 0;
   text-align: left;
-  color: #6a687b;
+  color: rgb(35, 32, 32);
   font-weight: bold;
   font-size: 14px;
   font-family: sans-serif;
@@ -151,7 +151,7 @@
 .itemupdate p {
   margin: 0;
   text-align: left;
-  color: #6a687b;
+  color: rgb(35, 32, 32);
   font-size: 15px;
   font-family: sans-serif;
   width: 33%;
@@ -188,7 +188,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
   margin-right: -7px;
   margin-top: 30px;
   display: flex;
@@ -228,10 +228,12 @@
   font-weight: normal;
   color: #c4c4c4;
 }
-
+.divtitle {
+  background-color: rgba(207, 193, 241, 1);
+}
 .mainsearch a {
   border-radius: 5px;
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
   color: white;
   border: none;
   width: 120px;

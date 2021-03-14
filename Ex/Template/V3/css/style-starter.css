@@ -73,7 +73,7 @@ h3.hny-title.two {
 
 h3.hny-title span,
 h3.hny-title span {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 a.read-more.btn {
@@ -7688,7 +7688,7 @@ iframe {
 }
 
 .w3l-contacts-8 span.texthny {
-  color: #ff7315;
+  color: #ffd700;
   font-family: 'Oswald', sans-serif;
 }
 
@@ -7698,7 +7698,7 @@ iframe {
 }
 
 .w3l-contacts-8 .partners p a:hover {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .w3l-contacts-8 .cont-details h5 {
@@ -7841,9 +7841,9 @@ iframe {
   padding: 14px 60px;
   font-size: 18px;
   line-height: 25px;
-  background: #ff7315;
+  background: rgba(114, 70, 216, 1);
   border: none;
-  color: black;
+  color: #fff;
   font-weight: bold;
   transition: 0.3s ease;
   width: 100%;
@@ -7853,7 +7853,8 @@ iframe {
 .w3l-contacts-8 button:hover {
   opacity: 0.9;
   transition: 0.3s ease;
-  color: white;
+  color: #fff;
+  background-color: #ffd700;
 }
 
 .w3l-contacts-8 .contacts-sub-9 address h4 {

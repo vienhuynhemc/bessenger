@@ -27,6 +27,7 @@
   position: relative;
   width: 87%;
   margin: auto;
+  
 }
 
 .linesesstion {
@@ -212,7 +213,7 @@
   text-transform: uppercase;
   font-family: sans-serif;
   font-weight: bold;
-  color: #ff7315;
+  color: #ffd700;
   font-size: 15px;
 }
 
@@ -301,7 +302,7 @@
 
 .guidesize a {
   font-size: 14px;
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .selectsize {
@@ -322,27 +323,27 @@
 
 #size1:checked ~ .labelsize1 {
   color: white;
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 #size2:checked ~ .labelsize2 {
   color: white;
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 #size3:checked ~ .labelsize3 {
   color: white;
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 #size4:checked ~ .labelsize4 {
   color: white;
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 #size5:checked ~ .labelsize5 {
   color: white;
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 .dpconlai {
@@ -405,12 +406,12 @@
 }
 
 .wlaatc button:nth-child(1) {
-  background-color: #9f9f9f;
+  background-color: rgba(114, 70, 216, 1);
   box-shadow: 0px 8px 19px #d0d0d0;
 }
 
 .wlaatc button:nth-child(2) {
-  background-color: #ff7315;
+  background-color: #ffd700;
   box-shadow: rgb(255 177 125) 0px 8px 19px;
 }
 
@@ -476,7 +477,7 @@
 .danhgia p:nth-child(4) {
   font-size: 13px;
   cursor: pointer;
-  color: #ff7315;
+  color: #ffd700;
   font-family: sans-serif;
   letter-spacing: 0.5px;
   margin-top: 30px;
@@ -500,7 +501,7 @@
 }
 
 .xephangleft > div > div:nth-child(2) i {
-  color: rgb(245, 178, 35);
+  color: #ffd700;
 }
 
 .xephangleft p:nth-child(1) {
@@ -557,7 +558,7 @@
 
 .xephangrightitem > div > div:nth-child(2) {
   height: 100%;
-  background-color: #ff7315;
+  background-color: #ffd700;
   border-radius: 50px;
 }
 
@@ -605,9 +606,9 @@
 }
 
 .activeboloc {
-  border: 1px solid #fff1e8 !important;
-  background-color: #fff1e8 !important;
-  color: #ff7315 !important;
+  border: 1px solid rgba(207, 193, 241, 1) !important;
+  background-color: #ffd700 !important;
+  color: #fff !important;
 }
 
 .headerbinhluanitem {
@@ -671,7 +672,7 @@
 .inforbinhluanitem > div:nth-child(1) > div:nth-child(2) {
   position: absolute;
   top: 0px;
-  color: rgb(245, 178, 35);
+  color: #ffd700;
   font-size: 13px;
 }
 
@@ -730,7 +731,7 @@
 }
 
 .dpnextpage ul li:nth-child(1) {
-  background-color: #ff7315;
+  background-color: #ffd700;
   box-shadow: 0px 4px 7px 0px #f9a065;
   color: white;
 }

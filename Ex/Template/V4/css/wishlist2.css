@@ -7,7 +7,7 @@
 }
 
 .item {
-  background-color: white;
+  background-color: rgba(13, 151, 186, 0.27);
   width: 90%;
   margin: 3px auto;
   border-radius: 5px;
@@ -112,7 +112,7 @@
   border: none;
   color: white;
   font-family: sans-serif;
-  background: #ff9751;
+  background: #EE9A00;
   border-radius: 5px;
   height: 35px;
   font-size: 14px;
@@ -211,8 +211,8 @@
   font-size: 14px;
   font-family: sans-serif;
   border-radius: 7px;
-  background: #faf4ed;
-  color: #ff7315;
+  background: rgba(13, 151, 186, 0.27);
+  color: #EE9A00;
   width: 85px;
   display: flex;
   justify-content: center;
@@ -220,6 +220,7 @@
   height: 35px;
   border: none;
   margin-right: 10px;
+  font-weight: bold;
 }
 
 .titletable {
@@ -303,7 +304,7 @@
 }
 
 .titletable > div ul li:nth-child(1) {
-  background-color: #ff9751;
+  background-color: #EE9A00;
   color: white;
 }
 
@@ -320,7 +321,7 @@
   border: none;
   color: white;
   font-family: sans-serif;
-  background: #ff9751;
+  background: #EE9A00;
   border-radius: 5px;
   font-size: 14px;
   font-weight: bold;

@@ -325,7 +325,7 @@ ul.dropdown-menu.menucountry {
 
 .scrollToTop:hover,
 .scrollToTop:focus {
-  background-color: #ff7315;
+  background-color: #EE9A00;
   text-decoration: none;
   outline: none;
 }
@@ -815,7 +815,7 @@ ul.dropdown-menu.menucountry {
   width: 100%;
 }
 .aa-product-catg li figure .aa-add-card-btn {
-  background: #000 none repeat scroll 0 0;
+  background: #0d98ba none repeat scroll 0 0;
   bottom: 0;
   color: #fff;
   font-size: 16px;
@@ -4160,7 +4160,7 @@ span.payment-due-price {
   .aa-footer-nav
   li
   a:focus {
-  color: #ff7315;
+  color: #EE9A00;
 }
 #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget address p {
   margin-bottom: 5px;
@@ -4197,7 +4197,7 @@ span.payment-due-price {
   .aa-footer-widget
   .aa-footer-social
   a:hover {
-  background-color: #ff7315;
+  background-color: #EE9A00;
   border-color: #fff;
 }
 #aa-footer .aa-footer-bottom {
@@ -5237,7 +5237,7 @@ ul.aa-footer-nav.giaohang li img {
   color: #a09292;
 }
 #aa-footer .aa-footer-bottom .aa-footer-bottom-area a:hover {
-  color: #ff7315;
+  color: #EE9A00;
 }
 /*==================
  END FOOTER
@@ -5266,7 +5266,7 @@ ul.aa-footer-nav.giaohang li img {
 }
 
 #movetop:hover {
-  background: #ff7315;
+  background: #EE9A00;
 }
 
 /*==================
@@ -5348,7 +5348,7 @@ span.red {
 }
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:hover,
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-catg-nav li a:focus {
-  color: #ff7315;
+  color: #EE9A00;
 }
 #aa-product-category
   .aa-product-catg-content
@@ -5360,7 +5360,7 @@ span.red {
   .aa-product-catg-head
   .aa-product-catg-head-right
   a:focus {
-  color: #ff7315;
+  color: #EE9A00;
 }
 
 .aa-product-img img {
@@ -5493,7 +5493,7 @@ ul.aa-catg-nav li {
 
 .divsize a:hover {
   background-color: white;
-  color: #ff7315 !important;
+  color: #EE9A00 !important;
 }
 
 .leftdivsmall {
@@ -5594,7 +5594,7 @@ ul.aa-catg-nav li {
 }
 
 .aa-sort-form select {
-  color: rgb(245 153 91);
+  color: #EE9A00;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
@@ -5631,7 +5631,7 @@ ul.aa-catg-nav li {
 }
 
 .aa-show-form select {
-  color: rgb(245 153 91);
+  color: #EE9A00;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
@@ -5687,7 +5687,7 @@ ul.aa-catg-nav li {
 
 .activenextbar {
   color: white !important;
-  background-color: #9e9c9c !important;
+  background-color: rgba(13, 151, 186, 0.27) !important;
 }
 
 .pagination li a:hover .nextprebar {

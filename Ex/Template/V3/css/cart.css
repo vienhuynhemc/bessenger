@@ -20,7 +20,7 @@ body {
 
 .cartleft {
   width: 66%;
-  background-color: white;
+  background-color: rgb(207, 193, 241);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -163,7 +163,7 @@ body {
 }
 
 .cartleftmainitemsl > div button:hover {
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 .cartleftmainitemsl > div button {
@@ -220,7 +220,7 @@ body {
 }
 
 .cartleftfooter a {
-  color: #b1b2b4;
+  color: #6b778d;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -230,7 +230,7 @@ body {
 }
 
 .cartleftfooter a:hover,.cartleftfooter a:hover i{
-  color:#ff7315;
+  color:#ffd700;
 }
 
 .cartleftfooter a i {
@@ -248,7 +248,7 @@ body {
 }
 
 .footertongtien p:nth-child(1) {
-  color: #7f7f81;
+  color: #6b778d;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -278,7 +278,7 @@ body {
 .cartright h3 {
   margin: 0;
   padding: 0;
-  color: #ff7315;
+  color: #ffd700;
   margin-top: 100px;
   font-family: sans-serif;
   margin-left: 60px;
@@ -372,7 +372,7 @@ body {
 
 .submit {
   color: white;
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -388,12 +388,12 @@ body {
 }
 
 .submit:hover{
-  background-color: white;
-  color:#7f7f81;
+  background-color: #ffd700;
+  color:#fff;
 }
 
 .cartleftmainitemright:hover div{
-  border: 1px solid #ff7315;
+  border: 1px solid #ffd700;
 }
 
 .box1 {

@@ -5306,7 +5306,7 @@ h3.hny-title.two {
 
 h3.hny-title span,
 h3.hny-title span {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 a.read-more.btn {
@@ -5316,7 +5316,7 @@ a.read-more.btn {
   font-weight: 600;
   padding: 12px 32px;
   font-size: 16px;
-  background-color: #232020;
+  background-color: rgba(114, 70, 216, 1);
   margin-top: 20px;
   color: #fff;
   border-radius: 25px;
@@ -5327,7 +5327,7 @@ a.read-more.btn {
 }
 
 a.read-more.btn:hover {
-  background-color: #ff7315;
+  background-color: #ffd700;
 }
 
 a.read-more-btn2.btn {
@@ -9813,7 +9813,7 @@ iframe {
 }
 
 .w3l-team-main .team_name:hover {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .w3l-team-main span.team_role {
@@ -9863,7 +9863,7 @@ iframe {
 }
 
 .w3l-team-main ul.team-social li a:hover {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .w3l-team-main ul.team-social li a span.fa {
@@ -9897,7 +9897,7 @@ iframe {
 }
 
 .w3l-specification-6 .specification-6-mian {
-  background: #f4f4f4;
+  background: rgba(207, 193, 241, 1);
   margin-top: 35px;
 }
 
@@ -9921,7 +9921,7 @@ iframe {
 }
 
 .w3l-specification-6 .story-info h5 a:hover {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 @media (max-width: 992px) {
@@ -9971,7 +9971,7 @@ iframe {
 }
 
 .w3l-services-6 .w3-icon-grid1 a:hover h3 {
-  color: #ff7315;
+  color: #ffd700;
   transition: 0.3s;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -9983,7 +9983,7 @@ iframe {
   font-size: 26px;
   float: left;
   width: 40px;
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .w3l-services-6 .w3-icon-grid1 p {
@@ -10035,18 +10035,18 @@ iframe {
 }
 
 .features-4 .features4-grid-inn:hover {
-  background: #f8e2d3;
+  background: rgba(207, 193, 241, 1);
 }
 
 .features-4 .features4-grid-inn:hover p {
-  color: #84410f;
+  color: #333333;
 }
 
 .features-4 .features4-block h6 {
   text-align: center;
   font-weight: 300;
   text-transform: uppercase;
-  color: #ff7315;
+  color: #ffd700;
   font-size: 19px;
   font-family: sans-serif;
   margin-bottom: -25px;
@@ -10082,7 +10082,7 @@ iframe {
 .features-4 span.fa.icon-fea4 {
   font-size: 50px;
   margin-bottom: 16px;
-  color: #ff7315;
+  color: #ffd700;
 }
 
 @media all and (max-width: 1080px) {

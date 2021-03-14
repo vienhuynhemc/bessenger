@@ -3,7 +3,7 @@ body {
 }
 .huongdan {
   width: 127px;
-  background-color: #ff7315;
+  background-color: #EE9A00;
   color: white;
   height: 49px;
   text-align: center;
@@ -136,7 +136,7 @@ img.hd {
 
 .line1step {
   position: absolute;
-  border: 2px solid #ff7315;
+  border: 2px solid #EE9A00;
   top: 50%;
   margin-top: -1px;
   z-index: 5;
@@ -150,7 +150,7 @@ img.hd {
 }
 
 .stepitem {
-  background-color: #ff7315;
+  background-color: #EE9A00;
   width: 30px;
   height: 30px;
   z-index: 6;
@@ -203,7 +203,7 @@ img.hd {
 }
 
 .contentstep {
-  color: #ff7315;
+  color: #EE9A00;
   position: absolute;
   width: 200px;
   top: 110%;

@@ -96,7 +96,7 @@
 
 .headerleft a:nth-child(1) {
   display: inline-block;
-  background: linear-gradient(to right, #ff7315, #ffb07b);
+  background: linear-gradient(to right, #ffd700, #ffb07b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -177,7 +177,7 @@
 .lineinput1 {
   width: 85%;
   height: 2px;
-  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  background: linear-gradient(to right, #ffd698, #fd9a46, #ffd700);
   margin-top: 10px;
 }
 
@@ -233,14 +233,15 @@
 }
 
 .divsubmit button:nth-child(1) {
-  background: linear-gradient(to right, #ffd698, #fd9a46, #ff5c00);
+  background: linear-gradient(to right, #f3f58d, #fce940, #ffd700);
   border: none;
   outline: none;
-  color: white;
+  color: #2d2d2d;
   font-family: sans-serif;
   border-radius: 5px;
   font-size: 14px;
   box-shadow: 0px 15px 14px #d6d1d1;
+  font-weight: bold;
 }
 
 .form input::placeholder {
@@ -252,7 +253,7 @@
 .divsubmit button:nth-child(2) {
   margin-left: 30px;
   border: 1px solid #cacaca;
-  background-color: white;
+  background: linear-gradient(to right, rgb(192, 172, 240), rgb(136, 115, 185), rgba(114, 70, 216, 1));
   color: #2d2d2d;
   font-weight: bold;
   font-family: sans-serif;

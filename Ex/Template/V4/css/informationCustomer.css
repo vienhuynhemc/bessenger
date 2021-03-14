@@ -18,7 +18,7 @@
   width: 20%;
   left: 0%;
   top: -50px;
-  background-color: white;
+  background-color: rgba(13, 151, 186, 0.27);
   box-shadow: 0 0 40px 7px #dad7d7;
   height: 1225px;
   border-radius: 40px;
@@ -40,7 +40,7 @@
 }
 
 .titleleft i {
-  color: #ff7315;
+  color: #EE9A00;
   margin-right: 12px;
   font-size: 22px;
 }
@@ -70,7 +70,7 @@
 }
 
 .leftitemselect a i {
-  color: #ff7315;
+  color: #EE9A00;
   font-size: 22px;
   width: 35px;
 }
@@ -87,7 +87,7 @@
 }
 
 .leftitemselect p i {
-  color: #ff7315;
+  color: #EE9A00;
   font-size: 22px;
   width: 35px;
 }
@@ -98,13 +98,13 @@
 }
 
 .activeeselect {
-  color: #ff7315;
-  border-left: 3px solid #ff7315;
+  color: #EE9A00;
+  border-left: 3px solid #EE9A00;
   background-color: #f2f4f9;
 }
 
 .activeeselect i {
-  color: #ff7315;
+  color: #EE9A00;
 }
 
 .lineleft {
@@ -152,12 +152,12 @@
   font-weight: bold;
   font-family: sans-serif;
   font-size: 14px;
-  color: #ff7315;
+  color: #EE9A00;
 }
 
 .changeimg {
   border: none;
-  background-color: #ff7315;
+  background-color: #EE9A00;
   color: white;
   font-weight: bold;
   font-family: sans-serif;
@@ -186,7 +186,7 @@
 }
 
 .lineheaderplanclick > div {
-  background-color: #ff7315;
+  background-color: #EE9A00;
   width: 60%;
   height: 4px;
 }
@@ -288,7 +288,7 @@
 }
 
 .divavatar button:nth-child(2) {
-  color: #ff7315;
+  color: #EE9A00;
   margin-left: 20px;
 }
 
@@ -349,7 +349,7 @@
 }
 
 .doimatkhau {
-  color: #ff7315 !important;
+  color: #EE9A00 !important;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -398,7 +398,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: #7d8799;
-  color: #ff7315;
+  color: #EE9A00;
   margin-right: -7px;
 }
 
@@ -453,7 +453,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #0d98ba;
   margin-right: -7px;
   position: absolute;
   left: 74%;
@@ -509,7 +509,7 @@ input[disabled] {
 .changepasswordtitle {
   text-align: center;
   font-family: sans-serif;
-  color: #ff7315;
+  color: #EE9A00;
   font-weight: bold;
   font-size: 22px;
   margin-top: 50px;
@@ -556,7 +556,7 @@ input[disabled] {
 
 .changepassworddiv button {
   color: white;
-  background-color: #ff7315;
+  background-color: #EE9A00;
   border: none;
   border-radius: 3px;
   width: 350px;
@@ -605,7 +605,7 @@ input[disabled] {
 
 .changepasswordsuccess button {
   color: white;
-  background-color: #ff7315;
+  background-color: #EE9A00;
   border: none;
   border-radius: 3px;
   width: 350px;
@@ -910,7 +910,7 @@ input[disabled] {
 }
 
 .footerleft ul li:hover {
-  background-color: #ff7315;
+  background-color: #EE9A00;
   color: white;
 }
 
@@ -937,7 +937,7 @@ input[disabled] {
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #EE9A00;
   margin-right: -7px;
   width: 168px;
   margin-top: -20px;

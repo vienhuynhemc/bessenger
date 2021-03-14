@@ -1,7 +1,7 @@
 .mainAccount {
   display: flex;
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: rgb(207, 193, 241);
 }
 
 .contentAccount {
@@ -18,7 +18,7 @@
   width: 20%;
   left: 0%;
   top: -50px;
-  background-color: white;
+  background-color: #494541;
   box-shadow: 0 0 40px 7px #dad7d7;
   height: 1225px;
   border-radius: 40px;
@@ -31,7 +31,7 @@
   font-family: sans-serif;
   font-weight: bold;
   font-size: 16px;
-  color: #36363f;
+  color: #fff;
   display: flex;
   align-items: center;
   margin-top: 110px;
@@ -40,7 +40,7 @@
 }
 
 .titleleft i {
-  color: #ff7315;
+  color: #ffd700;
   margin-right: 12px;
   font-size: 22px;
 }
@@ -54,7 +54,7 @@
   align-items: center;
   height: 45px;
   margin-top: 20px;
-  color: #36363f;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -68,9 +68,11 @@
   width: 79%;
   font-size: 14px;
 }
-
+.leftitemselect .dangxuat {
+  color: #fff;
+}
 .leftitemselect a i {
-  color: #ff7315;
+  color: #ffd700;
   font-size: 22px;
   width: 35px;
 }
@@ -87,7 +89,7 @@
 }
 
 .leftitemselect p i {
-  color: #ff7315;
+  color: #ffd700;
   font-size: 22px;
   width: 35px;
 }
@@ -98,13 +100,13 @@
 }
 
 .activeeselect {
-  color: #ff7315;
-  border-left: 3px solid #ff7315;
+  color: #ffd700;
+  border-left: 3px solid #ffd700;
   background-color: #f2f4f9;
 }
 
 .activeeselect i {
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .lineleft {
@@ -132,7 +134,7 @@
 
 .titleuser {
   font-size: 14px;
-  color: #36363f;
+  color: #fff;
   font-weight: bold !important;
   margin-top: 20px;
 }
@@ -152,12 +154,12 @@
   font-weight: bold;
   font-family: sans-serif;
   font-size: 14px;
-  color: #ff7315;
+  color: #ffd700;
 }
 
 .changeimg {
   border: none;
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
   color: white;
   font-weight: bold;
   font-family: sans-serif;
@@ -176,7 +178,7 @@
 
 .headerplanclick p {
   font-weight: bold;
-  color: #36363f;
+  color: #fff;
   font-size: 12px;
 }
 
@@ -186,7 +188,7 @@
 }
 
 .lineheaderplanclick > div {
-  background-color: #ff7315;
+  background-color: #ffd700;
   width: 60%;
   height: 4px;
 }
@@ -206,13 +208,13 @@
 
 .itemplanclick h3 {
   font-size: 20px;
-  color: #36363f;
+  color: #fff;
   font-weight: bold;
   font-family: sans-serif;
 }
 
 .itemplanclick p {
-  color: #747474;
+  color: #acacac;
   font-family: sans-serif;
   font-size: 10px;
   text-align: center;
@@ -288,7 +290,7 @@
 }
 
 .divavatar button:nth-child(2) {
-  color: #ff7315;
+  color: #ffd700;
   margin-left: 20px;
 }
 
@@ -349,7 +351,7 @@
 }
 
 .doimatkhau {
-  color: #ff7315 !important;
+  color: #ffd700 !important;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -398,7 +400,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: #7d8799;
-  color: #ff7315;
+  color: #ffd700;
   margin-right: -7px;
 }
 
@@ -453,7 +455,7 @@
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: rgba(114, 70, 216, 1);
   margin-right: -7px;
   position: absolute;
   left: 74%;

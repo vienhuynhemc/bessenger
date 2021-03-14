@@ -108,7 +108,7 @@ input[disabled] {
 }
 
 .left .header h3 i {
-  color: #ff7315;
+  color: #EE9A00;
 }
 
 .left .header > div {
@@ -206,7 +206,7 @@ input[disabled] {
   border-radius: 50%;
   top: -20px;
   right: -20px;
-  border: 3px solid #ff7315;
+  border: 3px solid #EE9A00;
 }
 
 #rd1:checked ~ .lbtt1 .checkpttt {
@@ -214,8 +214,8 @@ input[disabled] {
 }
 
 #rd1:checked ~ .lbtt1 .ptttdiv {
-  border: 3px solid #ff7315;
-  background-color: #fff6f2;
+  border: 3px solid #EE9A00;
+  background-color: rgba(13, 151, 186, 0.27);
 }
 
 #rd1:checked ~ .lbtt1 .ptttdiv p {
@@ -228,8 +228,8 @@ input[disabled] {
 }
 
 #rd2:checked ~ .lbtt2 .ptttdiv {
-  border: 3px solid #ff7315;
-  background-color: #fff6f2;
+  border: 3px solid #EE9A00;
+  background-color: rgba(13, 151, 186, 0.27);
 }
 
 #rd2:checked ~ .lbtt2 .ptttdiv p {
@@ -242,8 +242,8 @@ input[disabled] {
 }
 
 #rd3:checked ~ .lbtt3 .ptttdiv {
-  border: 3px solid #ff7315;
-  background-color: #fff6f2;
+  border: 3px solid #EE9A00;
+  background-color: rgba(13, 151, 186, 0.27);
 }
 
 #rd3:checked ~ .lbtt3 .ptttdiv p {
@@ -294,7 +294,7 @@ input[disabled] {
   font-weight: bold;
   font-family: sans-serif;
   color: white;
-  background-color: #ff7315;
+  background-color: #0d98ba;
   margin-right: -7px;
   width: 168px;
   margin-top: 30px;
@@ -305,7 +305,7 @@ input[disabled] {
 }
 
 .danhsachsanpham {
-  background-color: white;
+  background-color: rgba(13, 151, 186, 0.27);
   box-shadow: 0 0 17px 0px #cacaca;
   padding-top: 50px;
   border-radius: 5px;
@@ -368,7 +368,7 @@ input[disabled] {
 }
 
 .danhsachsanpham .item .infor p:nth-child(2) {
-  color: #b1b2b4;
+  color: #494541;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
