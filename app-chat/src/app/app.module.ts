@@ -14,6 +14,8 @@ import { HomePageComponent } from './view/main-page/home-page/home-page.componen
 import { LoginPageComponent } from './view/main-page/login-page/login-page.component';
 import { NotFoundPageComponent } from './view/not-found-page/not-found-page.component';
 import { SettingPageComponent } from './view/main-page/setting-page/setting-page.component';
+import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
+import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 export function playerFactory() {
   return player;
 }
@@ -29,7 +31,9 @@ export function playerFactory() {
     FriendsPageComponent,
     NotFoundPageComponent,
     LoginPageComponent,
-    MainPageComponent
+    MainPageComponent,
+    ChatRequestPageComponent,
+    PersonalPageComponent
   ],
   imports: [
     BrowserModule,
