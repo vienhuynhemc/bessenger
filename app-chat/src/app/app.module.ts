@@ -13,7 +13,6 @@ import { SettingPageComponent } from './view/setting-page/setting-page.component
 import { NotFoundPageComponent } from './view/not-found-page/not-found-page.component';
 import { LoginPageComponent } from './view/login-page/login-page.component';
 
-
 @NgModule({
   declarations: [
 
@@ -30,7 +29,7 @@ import { LoginPageComponent } from './view/login-page/login-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
