@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-
+// Lottie
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+export function playerFactory() {
+  return player;
+}
 // Trang index
 import { AppComponent } from './app.component';
-
 // Các trang của chat app
 import { ChatPageComponent } from './view/chat-page/chat-page.component';
 import { FriendsPageComponent } from './view/friends-page/friends-page.component';
@@ -15,10 +19,8 @@ import { LoginPageComponent } from './view/login-page/login-page.component';
 
 @NgModule({
   declarations: [
-
     // Trang index
     AppComponent,
-
     // Các trang của chat app
     ChatPageComponent,
     HomePageComponent,
@@ -30,6 +32,7 @@ import { LoginPageComponent } from './view/login-page/login-page.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]
