@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  ComponentFactoryResolver, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-chat-page',

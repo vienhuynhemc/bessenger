@@ -7,6 +7,7 @@ import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, 
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -21,6 +22,7 @@ export class MainPageComponent implements OnInit {
   @ViewChild('chat_request_page') chat_request_page: ElementRef | undefined;
   @ViewChild('setting_page') setting_page: ElementRef | undefined;
   @ViewChild('friends_page') friends_page: ElementRef | undefined;
+
   // Danh sách các component của container
   components: ComponentRef<unknown>[] = [];
   // Danh sách gán tên component để dùng bên HTML
@@ -44,6 +46,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
   }
 
   // Đăng xuất
@@ -69,6 +72,7 @@ export class MainPageComponent implements OnInit {
     if (this.container != undefined) {
       let componentFactory = this.componentFactoryResolver.resolveComponentFactory(name_component);
       let component = this.container.createComponent(componentFactory);
+      component.changeDetectorRef.detectChanges();
       this.components.push(component);
     }
   }

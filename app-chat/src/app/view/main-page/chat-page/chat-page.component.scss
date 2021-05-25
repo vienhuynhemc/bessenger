@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+
 }
 
 .container {
@@ -9,4 +10,10 @@
   border-radius: 40px;
   height: 100%;
   width: 1144px;
+  app-friends-list {
+    height: 100%;
+    position: absolute;
+    top: 2.5%;
+    left: 20px;
+  }
 }
