@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-
 }
 
 .container {
@@ -10,10 +9,12 @@
   border-radius: 40px;
   height: 100%;
   width: 1144px;
+
+  // Danh sách bạn bè và tin nhắn của họ
   app-friends-list {
     height: 100%;
     position: absolute;
-    top: 2.5%;
+    top: 20px;
     left: 20px;
   }
 }
