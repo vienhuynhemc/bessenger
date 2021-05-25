@@ -1,0 +1,330 @@
+$color-bg-item: #e5f1fc;
+$color-bg-online: rgb(48, 228, 48);
+$color-bg-main: #f5f9fc;
+.friends-list{
+    font-family: sans-serif;
+    // width main
+    width: 281px;
+    height: 95%;
+    border-radius: 40px;
+    background-color: white;
+
+    box-shadow: -19px 0px 31px -17px #d7e2edd6;
+
+    // bao gồm title và search
+    .header {
+       padding-top: 27px;
+        
+        .title {
+            width: 80%;
+            display: flex;
+            margin: auto;
+            margin-bottom: 25px;
+            position: relative;
+            h3 {
+                margin: 0;
+               
+            }
+            .new-message {
+                position: absolute;
+                right: -10px;
+                border-radius: 50%;
+                background-color: $color-bg-item;
+                width: 30px;
+                height: 30px;
+                top: -5px;
+                cursor: pointer;
+                i {
+                    position: absolute;
+                    font-size: 15px;
+                    left: 7px;
+                    top: 7px;
+                }
+            }
+        }
+        
+        .search {
+            width: 85%;
+            height: 35px;
+            margin: auto;
+            border-radius: 20px;
+            position: relative;
+            background-color: $color-bg-item;
+            input {
+                height: 70%;
+                margin-left: 20px;
+                margin-top: 5px;
+                border: none;
+                outline: none;
+            }
+            input[type="text"]
+            {
+                font-size:13px;
+                background-color: $color-bg-item;
+            }
+            i {
+                font-size: 15px;
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                cursor: pointer;    
+            }
+        }
+    }
+    // danh sách những người đang onl
+    .status {
+        margin-top: 25px;
+        display: flex;
+        overflow: hidden;
+        .content {
+            width: 85%;
+            
+            margin: auto;
+
+            position: relative;
+            display: flex;
+            
+            .myContent {
+                margin-right: 20px;
+                max-width: 45px;
+                position: relative;
+                img {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+                .name {
+                    text-align: center;
+                    font-size: 11px;
+                    cursor: pointer;
+                    word-wrap: break-word;
+                }
+                .cover-online {
+                    width: 15px;
+                    height: 15px;
+                    position: absolute;
+                    background-color: white;
+                    top: 28px;
+                    right: 0px;
+                    border-radius: 50%;
+                    .online {
+                        position: absolute;
+                        top: 2.5px;
+                        left: 17%;
+                        width: 9.5px;
+                        height: 9.5px;
+                        border-radius: 50%;
+                        background-color: $color-bg-online;
+                    }
+                }
+            }
+            .o1 {
+                margin-left: 16px;
+            }
+            .o4 {
+                margin-right: 0px;
+            }
+            
+             
+        }
+        .prev, .next {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 15px;
+            text-align: center;
+            background-color: $color-bg-item;
+            top: 145px;
+            
+            cursor: pointer;
+        }
+        .next {
+            right: 15px;
+            
+        }
+        .prev {
+            left: 15px;
+            // display: none;
+        }
+        // slide online
+        .prev-none {
+             display: none;
+        }
+        .next-none {
+            display: none;
+        }
+         // slide 1 duoc chon
+        .slide1-selected {
+           
+            opacity: 1;
+            transform: translateX(6%);
+            transition: all 1s;
+        }
+        .slide2-unselected {
+            
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 1s;
+        }
+        // slide 2 duoc chon
+        .slide1-unselected {
+            
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: all 1s;
+        }
+        .slide2-selected {
+         
+            opacity: 1;
+            transform: translateX(-94%);
+            transition: all 1s;
+        }
+      
+    }
+    .friends {
+        width: 100%;
+        margin-top: 10px;
+        max-height: 523px;
+        overflow: hidden;
+        overflow-y: overlay;
+        .container {
+            width: 100%;
+            height: 75px;
+            background-color: white;
+            position: relative;
+            cursor: pointer;
+            border-bottom: $color-bg-item solid 0.1px;
+            z-index: 10;
+            .content {
+                width: 85%;
+                margin: auto;
+                display: flex;
+                padding-top: 12px;
+                position: relative;
+                .left {
+                    position: relative;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                      
+                    }
+                 
+                    .cover-online {
+                        width: 18px;
+                        height: 18px;
+                        position: absolute;
+                        background-color: white;
+                        top: 33px;
+                        right: -2px;
+                        border-radius: 50%;
+                        display: none;
+                        .online {
+                            position: absolute;
+                            top: 16%;
+                            left: 17%;
+                            width: 12px;
+                            height: 12px;
+                            border-radius: 50%;
+                            background-color: $color-bg-online;
+                      
+                        }
+                    }
+                   
+                }
+                .right {
+                    margin-left: 15px;
+                    padding-top: 7px;
+                    max-width: 215px;
+                    .name {
+                        word-wrap:break-word;
+                        font-size: 15px;
+                        
+                    }
+                    .message {
+                        font-size: 12px;
+                        color: grey;
+                        padding-top: 3px;
+                    }
+                }
+             
+                .timer{
+                    font-size: 12px;
+                    color: grey;
+                    padding-top: 3px;
+                    position: absolute;
+                    right: -7px;
+                    top: 18px;
+                }
+            }
+           
+            
+           
+        }
+        .a2, .a4 {
+            .content {
+                .left {
+                    .cover-online {
+                        display: block;
+                        
+                    }
+                }
+                
+            }
+        }
+        .a9 {
+            border-bottom: none;
+            
+        }
+        .selected-prev {
+          
+            border-bottom-right-radius: 50px;
+            border-bottom: #a8c9e7 solid 2px;
+            box-shadow: 23px 22px 41px -1px $color-bg-main;
+
+        }
+        
+        .selected-next {
+            border-top-right-radius: 50px;
+            border-top: #a8c9e7 solid 2px;
+            box-shadow: 23px -22px 29px -15px $color-bg-main;
+
+        }
+        .container:hover {
+            background-color: $color-bg-item;
+            .content {
+                .left{ 
+                    .cover-online {
+                        background-color: $color-bg-item;
+                    }
+                }
+            }
+        }
+        .selected-container {
+            background-color: $color-bg-main;
+            border-bottom: none;
+            border-left: #3275f7 solid 4px;
+            transition: all 0.5s;
+            .content {
+               
+                .left{ 
+                    .cover-online {
+                        background-color: $color-bg-main;
+                    }
+                }
+            }
+        }
+       
+    }
+   
+    ::-webkit-scrollbar {
+        width: 7px;
+        // hiển thị scrollbar
+        // background: $color-bg-item;
+    }
+   
+}
