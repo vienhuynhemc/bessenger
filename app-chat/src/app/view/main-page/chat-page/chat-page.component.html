@@ -1,4 +1,8 @@
 <!-- Trang chat với bạn bè -->
 <div class="container">
-    <app-friends-list class="friends-list"></app-friends-list>
+
+    <!-- Danh sách bạn bè và tin nhắn gần nhất với họ -->
+    <app-friends-list class="friends-list" [online_list]="online_list" [friends_list]="friends_list"
+        [selectedUser]="selectedUser" (outToParentSelectedUser)="setSelectedUser($event)"></app-friends-list>
+
 </div>
