@@ -326,13 +326,24 @@ $color-bg-main: #f5f9fc;
       .done-select {
         // box-shadow: 4px 8px 28px 0px #d3dceb;
         background-color: white;
+
+        &:hover {
+          background-color: $color-bg-item;
+          .content {
+            .left {
+              .cover-online {
+                background-color: $color-bg-item;
+              }
+            }
+          }
+        }
       }
 
       .selected-container {
         //   background-color: $color-bg-main;
         border-bottom: none;
         border-left: #3275f7 solid 4px;
-        transition: all 0.5s;
+        transition: all 0.25s ease-in;
         .content {
           .left {
             .cover-online {
