@@ -29,6 +29,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { FormsModule } from '@angular/forms';
+import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
+import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { FormsModule } from '@angular/forms';
     MainPageComponent,
     ChatRequestPageComponent,
     PersonalPageComponent,
-    FriendsListComponent
+    FriendsListComponent,
+    MessengerComponent,
+    FileSendComponent
   ],
   imports: [
     BrowserModule,
