@@ -18,13 +18,14 @@ import { ChatRequestPageComponent } from './view/main-page/chat-request-page/cha
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
 // các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/service/user-chat.service';
+import { UserChatService } from 'src/service/user-chat/user-chat.service';
+import { UserOnlineService } from 'src/service/user-online/user-online.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // firebase
 import { AngularFireModule  } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { AngularFireDatabaseModule} from '@angular/fire/database'
 import { FormsModule } from '@angular/forms';
 export function playerFactory() {
   return player;
@@ -57,9 +58,10 @@ export function playerFactory() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule
+
     
   ],
-  providers: [UserChatService],
+  providers: [UserChatService, UserOnlineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

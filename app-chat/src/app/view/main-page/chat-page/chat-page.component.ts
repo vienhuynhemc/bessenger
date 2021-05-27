@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserChat } from 'src/models/user_chat';
-import { UserChatService } from 'src/service/user-chat.service';
+import { map } from 'rxjs/operators';
+import { UserChatService } from 'src/service/user-chat/user-chat.service';
+import { UserOnlineService } from 'src/service/user-online/user-online.service';
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -90,19 +92,57 @@ export class ChatPageComponent implements OnInit {
     timer: '07:50',
     content: 'umbala alaba trap',
   }]
-
+  friends_list_main : any;
+  online_list_1 : any;
+  online_list_2 : any;
   selectedUser: number = 0;
 
   // khi component được tạo thì userchatservice cũng được tạo
-  constructor(private userChatService:UserChatService) { }
+  constructor(private userChatService:UserChatService, private userOnlineService: UserOnlineService) { }
+  // lấy về danh sách bạn bè đang online
+  getFriendsOnline(start: number, end:number):void {
+      this.userOnlineService.getUsersOnline(start, end).snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c =>
+            ({ key: c.payload.key, ...c.payload.val() })
+          )
+        )
+      ).subscribe(usersOnl=> {
+      
+        for (let index = 0; index < usersOnl.length; index++) {
+              if(index < 4)
+                  // 4 user đầu lưu vào mảng_1
+                this.online_list_1[index] = usersOnl[index];
+              else
+                // 4 user tiếp theo lưu vào mảng_2
+                this.online_list_2[index - 4] = usersOnl[index];
+          
+        }
+      });
 
+      return this.friends_list_main;
+  }
   // lấy về danh sách bạn bè nhắn tin gần đây
-  getFriendsListAgo() :void {
+  getFriendsListAgo(amount: number) :void {
+    this.userChatService.getUsersChatList(amount).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(users => {
+      this.friends_list_main = users;
+    });
+  
+  }
+  // lấy danh 2 list friend đang online mỗi list size = 4
+  getFriendsListOnline() : void {
 
   }
   // lấy dữ liệu cho vào component
   ngOnInit(): void {
-    this.getFriendsListAgo();
+    // this.getFriendsListAgo(10);
+    // this.getFriendsListOnline();
   }
 
   setSelectedUser(value: number): void {

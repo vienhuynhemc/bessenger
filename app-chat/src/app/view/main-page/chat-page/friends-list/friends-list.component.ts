@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserChat } from 'src/models/user_chat';
 
 @Component({
   selector: 'app-friends-list',
@@ -10,6 +11,11 @@ export class FriendsListComponent implements OnInit {
   change_slide: number = 0;
   prev: number = -1;
   next: number = 1;
+  // truyền vào list friends chat gần đây bản DB
+  @Input() friends_list_main : any;
+  @Input() online_list_1 : any;
+  @Input() online_list_2 : any;
+  // bản mẫu demo code cứng
   @Input() online_list!: any[];
 
   @Input() friends_list!: any[];
@@ -21,10 +27,12 @@ export class FriendsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
   // tạo chuyển động slide danh sách bạn đang onl
   changeSlide(change: number): void {
     this.change_slide = change;
+ 
   }
   // chọn vào bạn bè thì tô màu background
   onSelected(index: number): void {

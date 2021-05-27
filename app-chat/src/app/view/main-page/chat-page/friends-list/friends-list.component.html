@@ -16,7 +16,10 @@
 
         <div class="content slide1" [class.slide1-selected]="change_slide === 0"
             [class.slide1-unselected]="change_slide === 1">
-            <div class="myContent" *ngFor="let index of online_list" [class]="'o'+index.id">
+            <!-- list online lấy từ DB-->
+            <!-- <div class="myContent" *ngFor="let index of online_list_1"> -->
+            <!-- list online mẫu -->
+            <div class="myContent" *ngFor="let index of online_list" >
                 <img [src]="index.link" alt="">
                 <div class="name">{{index.name}}</div>
                 <div class="cover-online">
@@ -27,7 +30,17 @@
         </div>
         <div class="content slide2" [class.slide2-unselected]="change_slide === 0"
             [class.slide2-selected]="change_slide === 1">
-            <div class="myContent" *ngFor="let index of online_list" [class]="'o'+index.id">
+            <!-- list online lấy từ DB-->
+            <!-- <div class="myContent" *ngFor="let index of online_list_2"> 
+                    <img [src]="index.img" alt="">
+                    <div class="name">{{index.name}}</div>
+                    <div class="cover-online">
+                        <div class="online"></div>
+                    </div>
+                </div>
+                -->
+            <!-- list online mẫu -->
+            <div class="myContent" *ngFor="let index of online_list">
                 <img [src]="index.link" alt="">
                 <div class="name">{{index.name}}</div>
                 <div class="cover-online">
@@ -45,6 +58,29 @@
     </div>
     <div class="friends">
         <div class="content-friends">
+               <!-- đoạn này lấy data từ DB -->
+            <!-- <div #container *ngFor="let item of friends_list_main; let i = index" class="container" (click)="onSelected(i)"
+            [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
+            [class.selected-next]="i===next" [class.done-select]="selectedUser != i"> 
+                <div class="content">
+                        <div class="left">
+                            <img [src]="item.img" alt="">
+                            <div class="cover-online"  [class.status-online] = "item.status === 'online'">
+                                <div class="online"></div>
+                            </div>
+                        </div>
+
+                        <div class="right">
+
+                            <div class="name">{{item.name}}</div>
+                            <div class="message">{{item.lastMessage}}</div>
+                        </div>
+
+                        <div class="timer">{{item.timeLastMessage}}</div>
+                </div>
+            </div>-->
+            
+            <!-- dưới này demo thôi sau này delete -->
             <div #container *ngFor="let item of friends_list; let i = index" class="container" (click)="onSelected(i)"
                 [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
                 [class.selected-next]="i===next" [class.done-select]="selectedUser != i">
@@ -55,7 +91,6 @@
                             <div class="online"></div>
                         </div>
                     </div>
-
                     <div class="right">
 
                         <div class="name">{{item.name}}</div>
@@ -65,6 +100,7 @@
                     <div class="timer">{{item.timer}}</div>
                 </div>
             </div>
+            
             <!-- Box shadown ở trên -->
             <div *ngIf="selectedUser != 0" [ngStyle]="getStyleShadowTop()">
             </div>

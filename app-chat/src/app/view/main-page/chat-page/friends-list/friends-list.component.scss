@@ -129,12 +129,7 @@ $color-bg-main: #f5f9fc;
           }
         }
       }
-      .o1 {
-        margin-left: 16px;
-      }
-      .o4 {
-        margin-right: 0px;
-      }
+   
     }
     .prev,
     .next {
@@ -172,11 +167,13 @@ $color-bg-main: #f5f9fc;
       opacity: 1;
       transform: translateX(6%);
       transition: all 1s;
+      margin-left: 15px;
     }
     .slide2-unselected {
       opacity: 0;
       transform: translateX(100%);
       transition: all 1s;
+      
     }
     // slide 2 duoc chon
     .slide1-unselected {
@@ -188,6 +185,7 @@ $color-bg-main: #f5f9fc;
       opacity: 1;
       transform: translateX(-94%);
       transition: all 1s;
+      margin-left: 17px;
     }
   }
 
@@ -253,12 +251,16 @@ $color-bg-main: #f5f9fc;
               .online {
                 position: absolute;
                 top: 16%;
-                left: 17%;
+                left: 16%;
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
                 background-color: $color-bg-online;
               }
+            }
+            .status-online {         
+              background-color: white !important;
+              display: block !important;
             }
           }
           .right {
