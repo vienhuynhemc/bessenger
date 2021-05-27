@@ -17,6 +17,15 @@ import { SettingPageComponent } from './view/main-page/setting-page/setting-page
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
+// các service để lấy dữ liệu từ đâu đó
+import { UserChatService } from 'src/service/user-chat.service';
+// thư viện get request
+import { HttpClientModule } from '@angular/common/http';
+// firebase
+import { AngularFireModule  } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { FormsModule } from '@angular/forms';
 export function playerFactory() {
   return player;
 }
@@ -42,8 +51,15 @@ export function playerFactory() {
     AppRoutingModule,
     // lottie
     LottieModule.forRoot({ player: playerFactory }),
+    // http
+    HttpClientModule,
+    // firebase
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    FormsModule
+    
   ],
-  providers: [],
+  providers: [UserChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
