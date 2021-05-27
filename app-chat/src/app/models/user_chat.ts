@@ -3,5 +3,4 @@ export class UserChat {
     id_user: number;
     name: string;
     img : string;
-    
 }

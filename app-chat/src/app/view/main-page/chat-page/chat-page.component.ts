@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserChat } from 'src/models/user_chat';
-import { UserChatService } from 'src/service/user-chat.service';
+import { UserChat } from 'src/app/models/user_chat';
+import { UserChatService } from 'src/app/service/user-chat.service';
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -94,10 +94,10 @@ export class ChatPageComponent implements OnInit {
   selectedUser: number = 0;
 
   // khi component được tạo thì userchatservice cũng được tạo
-  constructor(private userChatService:UserChatService) { }
+  constructor(private userChatService: UserChatService) { }
 
   // lấy về danh sách bạn bè nhắn tin gần đây
-  getFriendsListAgo() :void {
+  getFriendsListAgo(): void {
 
   }
   // lấy dữ liệu cho vào component

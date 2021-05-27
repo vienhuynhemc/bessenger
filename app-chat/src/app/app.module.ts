@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import player from 'lottie-web';
 // Lottie
+import player from 'lottie-web';
 import { LottieModule } from 'ngx-lottie';
 import { AppRoutingModule } from './app-routing.module';
+export function playerFactory() {
+  return player;
+}
 // Trang index
 import { AppComponent } from './app.component';
 // Các trang của chat app
@@ -18,17 +21,14 @@ import { ChatRequestPageComponent } from './view/main-page/chat-request-page/cha
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
 // các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/service/user-chat.service';
+import { UserChatService } from 'src/app/service/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // firebase
-import { AngularFireModule  } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { FormsModule } from '@angular/forms';
-export function playerFactory() {
-  return player;
-}
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ export function playerFactory() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule
-    
+
   ],
   providers: [UserChatService],
   bootstrap: [AppComponent]
