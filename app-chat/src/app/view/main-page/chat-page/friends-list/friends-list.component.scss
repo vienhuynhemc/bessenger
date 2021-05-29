@@ -232,13 +232,42 @@ $color-bg-main: #f5f9fc;
           position: relative;
           .left {
             position: relative;
+            width: 20%;
             img {
               width: 50px;
               height: 50px;
               object-fit: cover;
               border-radius: 50%;
             }
-
+            .img-1 {
+              position: absolute;
+              width: 40px;
+              height: 40px;
+              object-fit: cover;
+              border-radius: 50%;
+              top: -7px;
+              left: 5px;
+            }
+            .cover-img-2 {
+              position: absolute;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background-color: white;
+              left: -5px;
+              bottom: -15px;
+              .img-2 {
+                
+                width: 35px;
+                height: 35px;
+                object-fit: cover;
+                border-radius: 50%;
+                display: block;
+                margin: auto;
+                margin-top: 2.5px;
+              }
+            }
+           
             .cover-online {
               width: 18px;
               height: 18px;
@@ -278,6 +307,7 @@ $color-bg-main: #f5f9fc;
               color: grey;
               padding-top: 10px;
             }
+           
           }
 
           .timer {
@@ -286,44 +316,21 @@ $color-bg-main: #f5f9fc;
             padding-top: 3px;
             position: absolute;
             right: 0px;
-            top: 18px;
+            top: 16px;
           }
         }
       }
-      // .a2,
-      // .a4 {
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         display: block;
-      //       }
-      //     }
-      //   }
-      // }
-      // .a9 {
-      //   border-bottom: none;
-      // }
+  
       .selected-prev {
         border-bottom-right-radius: 27px;
-        //   border-bottom: #a8c9e7 solid 2px;
-        //   box-shadow: 23px 22px 41px -1px $color-bg-main;
+     
       }
 
       .selected-next {
         border-top-right-radius: 27px;
-        //   border-top: #a8c9e7 solid 2px;
-        //   box-shadow: 23px -22px 29px -15px $color-bg-main;
+     
       }
-      // .container:hover {
-      //   background-color: $color-bg-item;
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         background-color: $color-bg-item;
-      //       }
-      //     }
-      //   }
-      // }
+    
 
       .done-select {
         // box-shadow: 4px 8px 28px 0px #d3dceb;
@@ -354,6 +361,7 @@ $color-bg-main: #f5f9fc;
           }
         }
       }
+     
     }
 
     .hidden_error {

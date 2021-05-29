@@ -3,6 +3,6 @@
 
     <!-- Danh sách bạn bè và tin nhắn gần nhất với họ -->
     <app-friends-list class="friends-list" [friends_list_main] = "friends_list_main" [online_list_1] = "online_list_1" [online_list_2] = "online_list_2" [online_list]="online_list" [friends_list]="friends_list"
-        [selectedUser]="selectedUser" (outToParentSelectedUser)="setSelectedUser($event)"></app-friends-list>
+        [selectedUser]="selectedUser" (outToParentChangeSlide)="getDataChangeSlide($event)" (outToParentSelectedUser)="setSelectedUser($event)"></app-friends-list>
 
 </div>

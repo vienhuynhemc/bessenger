@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserChat } from 'src/models/user_chat';
 import { map } from 'rxjs/operators';
 import { UserChatService } from 'src/service/user-chat/user-chat.service';
 import { UserOnlineService } from 'src/service/user-online/user-online.service';
@@ -92,23 +91,36 @@ export class ChatPageComponent implements OnInit {
     timer: '07:50',
     content: 'umbala alaba trap',
   }]
+  // @input iduser: id khi đăng nhập từ component cha
+  idUser:number;
+  // @input idFriendsList truyền vào từ component cha lúc đăng nhập
+  idFriendsList:number;
+  // danh sách user chat
   friends_list_main : any;
   online_list_1 : any;
   online_list_2 : any;
-  selectedUser: number = 0;
-
+  selectedUser: number = 1;
+  startOnline:number = 0;
+  endOnline:number = 7;
+  // danh sách id box chat
+  groupIDList: any;
+  start:number = 0;
+  end:number =0;
   // khi component được tạo thì userchatservice cũng được tạo
-  constructor(private userChatService:UserChatService, private userOnlineService: UserOnlineService) { }
+  constructor(private userChatService:UserChatService, private userOnlineService: UserOnlineService) {
+   }
+  
   // lấy về danh sách bạn bè đang online
-  getFriendsOnline(start: number, end:number):void {
-      this.userOnlineService.getUsersOnline(start, end).snapshotChanges().pipe(
+  getFriendsOnline(count:number):void {
+      this.start += count;
+      this.end = (this.end + count)*2;
+      this.userOnlineService.getUsersOnline(this.start, this.end, this.idFriendsList).snapshotChanges().pipe(
         map(changes =>
           changes.map(c =>
             ({ key: c.payload.key, ...c.payload.val() })
           )
         )
       ).subscribe(usersOnl=> {
-      
         for (let index = 0; index < usersOnl.length; index++) {
               if(index < 4)
                   // 4 user đầu lưu vào mảng_1
@@ -116,33 +128,66 @@ export class ChatPageComponent implements OnInit {
               else
                 // 4 user tiếp theo lưu vào mảng_2
                 this.online_list_2[index - 4] = usersOnl[index];
-          
         }
       });
+  }
 
-      return this.friends_list_main;
-  }
-  // lấy về danh sách bạn bè nhắn tin gần đây
-  getFriendsListAgo(amount: number) :void {
-    this.userChatService.getUsersChatList(amount).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
+  // lấy danh sách id box chat dựa vào idUser, amount là số id muốn lấy ra
+  getConversationsIdList(amount:number) {
+  this.userChatService.getConversationsIDListByIdUser(this.idUser,amount).snapshotChanges().pipe(
+    map(changes =>
+      changes.map(c =>
+        ({ key: c.payload.key, ...c.payload.val() })
       )
-    ).subscribe(users => {
-      this.friends_list_main = users;
-    });
-  
+    )
+  ).subscribe(users => {
+    this.groupIDList = users;
+  });
   }
-  // lấy danh 2 list friend đang online mỗi list size = 4
-  getFriendsListOnline() : void {
+
+
+   // lấy về danh sách bạn bè nhắn tin gần đây
+   getFriendsListRecentlyChat() :void {
+    // tham khảo khi có DB viết lại
+    this.groupIDList.forEach((element,index) => {
+      this.userChatService.getUsersChatList(element).snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c =>
+            ({ key: c.payload.key, ...c.payload.val() })
+          )
+        )
+      ).subscribe(users => {
+        this.friends_list_main[index] = users;
+      });
+    });
+  }
+
+  // set bạn bè được chọn đầu tiên khi load trang
+  setSelectedUserFirstLoad() {
+    this.friends_list_main.forEach((element, index) => {
+      // nếu có người đọc tin nhắn
+        element.memberReadedMessage.forEach((e,i) => {
+          if(e === this.idUser ) {
+            this.setSelectedUser(index)
+            return;
+          }
+        });
+        
+    });
+  }
+  // lấy data chuyển slide
+  getDataChangeSlide(count:number) {
 
   }
   // lấy dữ liệu cho vào component
   ngOnInit(): void {
-    // this.getFriendsListAgo(10);
-    // this.getFriendsListOnline();
+    // lấy lên 10 người chat gần đây
+    // this.getFriendsListRecentlyChat(10);
+    // lấy lên những người đang online từ vị trí start => end mặc định 0 => 7
+    // this. getFriendsOnline(startOnline, endOnline);
+    // chọn ra tin nhắn được selected khi load trang
+    // this.setSelectedUserFirstLoad();
+    
   }
 
   setSelectedUser(value: number): void {
