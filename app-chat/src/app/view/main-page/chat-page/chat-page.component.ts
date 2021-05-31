@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { map } from 'rxjs/operators';
 import { UserChatService } from 'src/service/user-chat/user-chat.service';
 import { UserOnlineService } from 'src/service/user-online/user-online.service';
+=======
+import { UserChat } from 'src/app/models/user_chat';
+import { UserChatService } from 'src/app/service/user-chat.service';
+>>>>>>> master
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -145,6 +150,7 @@ export class ChatPageComponent implements OnInit {
   });
   }
 
+<<<<<<< HEAD
 
    // lấy về danh sách bạn bè nhắn tin gần đây
    getFriendsListRecentlyChat() :void {
@@ -177,6 +183,13 @@ export class ChatPageComponent implements OnInit {
   }
   // lấy data chuyển slide
   getDataChangeSlide(count:number) {
+=======
+  // khi component được tạo thì userchatservice cũng được tạo
+  constructor(private userChatService: UserChatService) { }
+
+  // lấy về danh sách bạn bè nhắn tin gần đây
+  getFriendsListAgo(): void {
+>>>>>>> master
 
   }
   // lấy dữ liệu cho vào component
