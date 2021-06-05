@@ -6,15 +6,15 @@ export const environment = {
   production: false,
   // firebase config
   firebaseConfig : {
-  apiKey: "AIzaSyDOCAbC123dEf456GhI789jKl01-MnO",
-  authDomain: "myapp-project-123.firebaseapp.com",
-  databaseURL: "https://myapp-project-123.firebaseio.com",
-  projectId: "myapp-project-123",
-  storageBucket: "myapp-project-123.appspot.com",
-  messagingSenderId: "65211879809",
-  appId: "1:65211879909:web:3ae38ef1cdcb2e01fe5f0c",
-  measurementId: "G-8GSGZQ44ST"
-}
+    apiKey: "AIzaSyDAQbiqx4NKbp8C1yOts5pNH6erphbhdYo",
+    authDomain: "chat-app-d133c.firebaseapp.com",
+    databaseURL: "https://chat-app-d133c-default-rtdb.firebaseio.com",
+    projectId: "chat-app-d133c",
+    storageBucket: "chat-app-d133c.appspot.com",
+    messagingSenderId: "278838825964",
+    appId: "1:278838825964:web:0cf9c6ca675da2e61aa6c9",
+    measurementId: "G-T8BNZTJ0TN"
+  }
 };
 
 /*

@@ -70,7 +70,7 @@
         <div class="content-friends">
             
                <!-- đoạn này lấy data từ DB -->
-            <!-- <div *ngFor="let item of friends_list_main; let i = index" class="container" (click)="onSelected(i)"
+            <!-- <div *ngFor="let item of friends_list_main; let i = index" class="container" (click)="onSelectedFilter(i, true, item.idGroup)""
             [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
             [class.selected-next]="i===next" [class.done-select]="selectedUser != i"> 
                 <div class="content"> -->
@@ -117,7 +117,7 @@
             </div> -->
             
             <!-- dưới này demo thôi sau này delete -->
-            <div *ngFor="let item of friends_list; let i = index" class="container message_read" (click)="onSelectedFilter(i, true)"
+            <div *ngFor="let item of friends_list; let i = index" class="container message_read" (click)="onSelectedFilter(i, true, 0)"
                 [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
                 [class.selected-next]="i===next" [class.done-select]="selectedUser != i" >
                 <div class="content">
