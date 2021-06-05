@@ -21,7 +21,7 @@ import { ChatRequestPageComponent } from './view/main-page/chat-request-page/cha
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
 // các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/app/service/user-chat.service';
+import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // firebase
@@ -31,7 +31,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
-
+import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
 @NgModule({
   declarations: [
     // Trang index
@@ -63,7 +63,7 @@ import { FileSendComponent } from './view/main-page/chat-page/file-send/file-sen
     FormsModule
 
   ],
-  providers: [UserChatService],
+  providers: [UserChatService, UserOnlineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

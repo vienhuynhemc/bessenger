@@ -172,6 +172,7 @@ $color-bg-main: #f5f9fc;
       opacity: 1;
       transform: translateX(6%);
       transition: all 1s;
+      margin-left: 15px;
     }
     .slide2-unselected {
       opacity: 0;
@@ -188,6 +189,7 @@ $color-bg-main: #f5f9fc;
       opacity: 1;
       transform: translateX(-94%);
       transition: all 1s;
+      margin-left: 17px;
     }
   }
 
