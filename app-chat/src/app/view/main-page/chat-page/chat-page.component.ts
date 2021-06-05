@@ -107,6 +107,7 @@ export class ChatPageComponent implements OnInit {
     groupIDList: any;
     start:number = 0;
     end:number =0;
+    iDGroup:number = 0;
   // khi component được tạo thì userchatservice cũng được tạo
   constructor(private userChatService: UserChatService, private userOnlineService: UserOnlineService) { }
 
@@ -149,16 +150,30 @@ export class ChatPageComponent implements OnInit {
   // lấy data chuyển slide
   getDataChangeSlide(count:number) {
   }
+  // lấy idGroup khi list friend thay đổi
+  getIDGroupFromListFriends(idGroup: number){
+    this.iDGroup = idGroup;
+  }
+  // set friend trong list friends được chọn
   setSelectedUser(value: number): void {
     this.selectedUser = value;
   }
+  setSelectedUserFirstLoad() {
+    for (let index = 0; index < this.friends_list_main.length; index++) {
+      this.idFriendsList[index].memberReadedMessage.forEach(e => {
+        if(e == this.idUser) {
+          this.selectedUser = index;
+          this.iDGroup = this.idFriendsList[index].idGroup;
+          return;
+        }
+    });
+    }
 
+  }
   // lấy dữ liệu cho vào component
   ngOnInit(): void {
     // lấy lên 10 người chat gần đây
     // this.getFriendsListRecentlyChat(10);
-    // lấy lên những người đang online từ vị trí start => end mặc định 0 => 7
-    // this. getFriendsOnline(startOnline, endOnline);
     // chọn ra tin nhắn được selected khi load trang
     // this.setSelectedUserFirstLoad();
   }

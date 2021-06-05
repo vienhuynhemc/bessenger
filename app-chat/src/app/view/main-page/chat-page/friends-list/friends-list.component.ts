@@ -28,12 +28,12 @@ export class FriendsListComponent implements OnInit {
 
   @Output() outToParentSelectedUser = new EventEmitter<number>();
   @Output() outToParentChangeSlide = new EventEmitter<number>();
-
+  @Output() outToParentSendIdGroup = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {
         // selected khi load lần đầu
-        this.onSelectedFilter(this.selectedUser, false)
+        this.onSelectedFilter(this.selectedUser, false, 0)
   }
   
 
@@ -54,15 +54,22 @@ export class FriendsListComponent implements OnInit {
       }
   }
   // set trường hợp load lần đầu 
-  onSelectedFilter(index:number, check:boolean) {
+  onSelectedFilter(index:number, check:boolean, idGorup: number) {
     // check == false là xử lý load lần đầu, check == true kiểm tra click
     if (check) {
-      if (index != this.selectedUser) 
+      if (index != this.selectedUser) {
         this.onSelected(index); 
-    } else 
+        this.sendIdGroundToMessage(idGorup);
+      }
+    } else {
       this.onSelected(index)
+      this.sendIdGroundToMessage(idGorup);
+    }
   }
-
+  // truyền idGroup qua message
+    sendIdGroundToMessage(idGroup: number) {
+    this.outToParentSendIdGroup.emit(idGroup);
+  }
 
  // chọn vào bạn bè thì tô màu background
  onSelected(index: number): void {
