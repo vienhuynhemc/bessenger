@@ -1,0 +1,383 @@
+$color-bg-item: #e5f1fc;
+$color-bg-online: rgb(48, 228, 48);
+$color-bg-main: #f5f9fc;
+.friends-list {
+  font-family: 'Raleway';
+  // width main
+  width: 281px;
+  position: relative;
+  height: 95%;
+  border-radius: 27px;
+  background-color: rgba(255, 255, 255, 0);
+  // bao gồm title và search
+  .header {
+    z-index: 4;
+    background-color: white;
+    padding-top: 27px;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+    position: relative;
+
+    .title {
+      width: 80%;
+      display: flex;
+      margin: auto;
+      margin-bottom: 25px;
+      position: relative;
+      h3 {
+        margin: 0;
+      }
+      .new-message {
+        position: absolute;
+        right: -4px;
+        border-radius: 50%;
+        background-color: $color-bg-main;
+        width: 35px;
+        height: 35px;
+        top: -8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        i {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .search {
+      width: 85%;
+      height: 35px;
+      margin: auto;
+      border-radius: 20px;
+      position: relative;
+      background-color: $color-bg-main;
+      input {
+        height: 70%;
+        margin-left: 20px;
+        margin-top: 5px;
+        border: none;
+        outline: none;
+      }
+      ::placeholder {
+        color: #a4afbf;
+      }
+      input[type="text"] {
+        font-size: 13px;
+        background-color: $color-bg-main;
+      }
+      i {
+        color: #a4afbf;
+        font-size: 15px;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+  // danh sách những người đang onl
+  .status {
+    position: relative;
+    z-index: 4;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    display: flex;
+    background-color: white;
+    overflow: hidden;
+    .content {
+      width: 85%;
+
+      margin: auto;
+
+      position: relative;
+      display: flex;
+
+      .myContent {
+        margin-right: 20px;
+        max-width: 45px;
+        position: relative;
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .name {
+          text-align: center;
+          font-size: 11px;
+          cursor: pointer;
+          word-wrap: break-word;
+        }
+        .cover-online {
+          width: 15px;
+          height: 15px;
+          position: absolute;
+          background-color: white;
+          top: 28px;
+          right: 0px;
+          border-radius: 50%;
+          .online {
+            position: absolute;
+            top: 2.5px;
+            left: 17%;
+            width: 9.5px;
+            height: 9.5px;
+            border-radius: 50%;
+            background-color: $color-bg-online;
+          }
+        }
+      }
+      .o1 {
+        margin-left: 16px;
+      }
+      .o4 {
+        margin-right: 0px;
+      }
+    }
+    .prev,
+    .next {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 15px;
+      text-align: center;
+      background-color: $color-bg-item;
+      top: 145px;
+
+      cursor: pointer;
+    }
+    .next {
+      position: absolute;
+      top: 37px;
+      right: 21px;
+    }
+    .prev {
+      position: absolute;
+      top: 37px;
+      left: 21px;
+      // display: none;
+    }
+    // slide online
+    .prev-none {
+      display: none;
+    }
+    .next-none {
+      display: none;
+    }
+    // slide 1 duoc chon
+    .slide1-selected {
+      opacity: 1;
+      transform: translateX(6%);
+      transition: all 1s;
+    }
+    .slide2-unselected {
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 1s;
+    }
+    // slide 2 duoc chon
+    .slide1-unselected {
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: all 1s;
+    }
+    .slide2-selected {
+      opacity: 1;
+      transform: translateX(-94%);
+      transition: all 1s;
+    }
+  }
+
+  //  Box shadow cho header + status
+  .box-shadow-header-and-status {
+    box-shadow: 4px 8px 28px 0px #d3dceb;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 210px;
+    z-index: 2;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+  }
+
+  // Danh sách bạn bè và tin nhắn của họ
+  .friends {
+    z-index: 3;
+    overflow-y: hidden;
+    position: relative;
+    height: 541px;
+    width: 320px;
+
+    .content-friends {
+      width: 320px;
+      height: 541px;
+      overflow: scroll;
+      position: relative;
+      .container {
+        width: 281px;
+        height: 75px;
+        z-index: 2;
+        //   background-color: white;
+        position: relative;
+        cursor: pointer;
+        border-bottom: $color-bg-item solid 0.1px;
+        z-index: 10;
+        .content {
+          width: 85%;
+          margin: auto;
+          display: flex;
+          padding-top: 12px;
+          position: relative;
+          .left {
+            position: relative;
+            img {
+              width: 50px;
+              height: 50px;
+              object-fit: cover;
+              border-radius: 50%;
+            }
+
+            .cover-online {
+              width: 18px;
+              height: 18px;
+              position: absolute;
+              background-color: white;
+              top: 33px;
+              right: -2px;
+              border-radius: 50%;
+              display: none;
+              .online {
+                position: absolute;
+                top: 16%;
+                left: 17%;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: $color-bg-online;
+              }
+            }
+          }
+          .right {
+            margin-left: 15px;
+            padding-top: 5px;
+            max-width: 215px;
+            .name {
+              font-family: "Raleway";
+              word-wrap: break-word;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            .message {
+              font-size: 11px;
+              color: grey;
+              padding-top: 10px;
+            }
+          }
+
+          .timer {
+            font-size: 11px;
+            color: grey;
+            padding-top: 3px;
+            position: absolute;
+            right: 0px;
+            top: 18px;
+          }
+        }
+      }
+      // .a2,
+      // .a4 {
+      //   .content {
+      //     .left {
+      //       .cover-online {
+      //         display: block;
+      //       }
+      //     }
+      //   }
+      // }
+      // .a9 {
+      //   border-bottom: none;
+      // }
+      .selected-prev {
+        border-bottom-right-radius: 27px;
+        //   border-bottom: #a8c9e7 solid 2px;
+        //   box-shadow: 23px 22px 41px -1px $color-bg-main;
+      }
+
+      .selected-next {
+        border-top-right-radius: 27px;
+        //   border-top: #a8c9e7 solid 2px;
+        //   box-shadow: 23px -22px 29px -15px $color-bg-main;
+      }
+      // .container:hover {
+      //   background-color: $color-bg-item;
+      //   .content {
+      //     .left {
+      //       .cover-online {
+      //         background-color: $color-bg-item;
+      //       }
+      //     }
+      //   }
+      // }
+
+      .done-select {
+        // box-shadow: 4px 8px 28px 0px #d3dceb;
+        background-color: white;
+
+        &:hover {
+          background-color: $color-bg-item;
+          .content {
+            .left {
+              .cover-online {
+                background-color: $color-bg-item;
+              }
+            }
+          }
+        }
+      }
+
+      .selected-container {
+        //   background-color: $color-bg-main;
+        border-bottom: none;
+        border-left: #3275f7 solid 4px;
+        transition: all 0.25s ease-in;
+        .content {
+          .left {
+            .cover-online {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .hidden_error {
+      width: 26px;
+      height: 22px;
+      color: #e5f1fc;
+      left: 299px;
+      position: absolute;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    // hiển thị scrollbar
+    // background: $color-bg-item;
+  }
+
+  .end {
+    z-index: 2;
+    box-shadow: 8px 5px 37px 0px #b3bac5;
+    margin-top: -17px;
+    width: 100%;
+    height: 25px;
+    border-bottom-right-radius: 27px;
+    border-bottom-left-radius: 27px;
+    background-color: white;
+    position: relative;
+  }
+}

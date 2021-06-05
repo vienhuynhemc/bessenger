@@ -1,0 +1,41 @@
+<div class="container">
+
+    <div class="container-left">
+        <div class="container-left-icon">
+            <i class="fas fa-dragon"></i>
+        </div>
+        <div class="container-left-avatar">
+            <div class="container-left-avatar-image">
+                <img src="assets/images/man.png" alt="">
+            </div>
+        </div>
+        <div class="container-left-menu" id="container-left-menu">
+            <div #home_page class="container-left-menu-icon" (click)="moveToPage(home_page,homePageComponent)">
+                <i class="fas fa-pager"></i>
+            </div>
+            <div #personal_page class="container-left-menu-icon"
+                (click)="moveToPage(personal_page,personalPageComponent)">
+                <i class="fas fa-user-cog"></i>
+            </div>
+            <div #friends_page class="container-left-menu-icon" (click)="moveToPage(friends_page,friendsPageComponent)">
+                <i class="fas fa-user-friends"></i>
+            </div>
+            <div #chat_page class="container-left-menu-icon" (click)="moveToPage(chat_page,chatPageComponent)">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+            <div #chat_request_page class="container-left-menu-icon"
+                (click)="moveToPage(chat_request_page,chatRequestPageComponent)">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <div #setting_page class="container-left-menu-icon" (click)="moveToPage(setting_page,settingPageComponent)">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <div #log_out class="container-left-menu-icon" (click)="logOut()">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #container></ng-template>
+
+</div>
