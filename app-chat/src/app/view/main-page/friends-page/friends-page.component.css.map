@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACX;;AAED,AAAA,UAAU,CAAC;EACT,QAAQ,EAAE,QAAQ;EAClB,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,MAAM;CACd",
+    "sources": [
+        "friends-page.component.scss"
+    ],
+    "names": [],
+    "file": "friends-page.component.css"
+}

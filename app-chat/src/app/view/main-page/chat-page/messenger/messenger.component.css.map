@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACX;;AAED,AAAA,UAAU,CAAC;EACT,QAAQ,EAAE,QAAQ;EAClB,KAAK,EAAE,KAAK;EACZ,gBAAgB,EAAE,GAAG;EACrB,MAAM,EAAE,KAAK;EACb,IAAI,EAAE,KAAK;EACX,GAAG,EAAE,IAAI;CACV",
+    "sources": [
+        "messenger.component.scss"
+    ],
+    "names": [],
+    "file": "messenger.component.css"
+}

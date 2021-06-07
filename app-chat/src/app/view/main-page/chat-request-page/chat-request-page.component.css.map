@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACX;;AAED,AAAA,UAAU,CAAC;EACT,QAAQ,EAAE,QAAQ;EAClB,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,MAAM;CACd",
+    "sources": [
+        "chat-request-page.component.scss"
+    ],
+    "names": [],
+    "file": "chat-request-page.component.css"
+}
