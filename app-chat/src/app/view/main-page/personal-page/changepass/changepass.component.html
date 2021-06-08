@@ -1,0 +1,24 @@
+<div class="change-pass">
+    <div class="container">
+        <div class="change-pass-container-passold content">
+            <div class="change-pass-container-full-passold-title title" >Mật khẩu cũ</div>
+            <input (focusout)="getEventInputError('ip-old-pass','old-pass-check')"  class="input-data " id="ip-old-pass" type="password">   
+            <i id="old-pass-check" class="far fa-check-circle i-check"></i>      
+        </div>
+        <div class="change-pass-container-newpasss content ">
+            <div class="change-pass-container-newpass-title title" >Mật khẩu mới</div>
+            <input (focusout)="getEventInputError('ip-new-pass','new-pass-check')" id="ip-new-pass" class="input-data" type="password">     
+            <i id="new-pass-check" class="far fa-check-circle i-check"></i>    
+        </div>
+        <div class="change-pass-container-confirm content ">
+            <div class="change-pass-container-confirm-title title" >Xác nhận mật khẩu mới</div>
+            <input (focusout)="getEventInputError('ip-confirm','confirm-pass-check')" id="ip-confirm" class="input-data" type="password">  
+            <i id="confirm-pass-check" class="far fa-check-circle i-check"></i>       
+        </div>
+        <div class="profile-container-save">
+            <button (click)="eventSave()" class="btn-save"><span>Lưu</span><i class="fas fa-arrow-right"></i></button>   
+        </div>
+       
+    </div>
+   
+</div>

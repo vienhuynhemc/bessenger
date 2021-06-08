@@ -32,6 +32,9 @@ import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
 import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
+import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.component';
+import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
+import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
 @NgModule({
   declarations: [
     // Trang index
@@ -48,7 +51,10 @@ import { UserOnlineService } from 'src/app/service/user-online/user-online.servi
     PersonalPageComponent,
     FriendsListComponent,
     MessengerComponent,
-    FileSendComponent
+    FileSendComponent,
+    AvatarComponent,
+    ProfileComponent,
+    ChangepassComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<div class="profile">
+    <div class="profile-container">
+
+        <div class="profile-container-full-name content">
+            <div class="profile-container-full-name-title title" >Tên người dùng</div>
+            <!-- <input (focusout)="nonFocusInputEvent('ip-name','check-name')" class="input-data" id="ip-name" type="text" value="{{userProfile.name}}">  -->
+            <input (focusout)="nonFocusInputEvent('ip-name','check-name')" class="input-data" id="ip-name" type="text" value="Anh Duy"> 
+            <i id="check-name" class="far fa-check-circle i-check"></i>     
+        </div>
+        <div class="profile-container-email content ">
+            <div class="profile-container-email-title title" >Địa chỉ Email</div>
+            <!-- <input (focusout)="nonFocusInputEvent('ip-email','check-email')" class="input-data" id="ip-email type="text" value="{{userProfile.email}}">    -->
+            <input (focusout)="nonFocusInputEvent('ip-email','check-email')" class="input-data" id="ip-email" type="text" value="181300xx@st.hcmuaf.edu.vn">   
+            <i id="check-email" class="far fa-check-circle i-check"></i>   
+        </div>
+        <div class="profile-container-id content-right" >
+            <div class="profile-container-id-title title" >Mã người dùng</div>
+            <div class="profile-container-id-content cnt-read" >xxxxxxxxxxxxxxxxxxx</div>
+            <!-- <div class="profile-container-id-content cnt-read"  >{{userProfile.idUser}}</div> -->
+        </div>
+        <div class="profile-container-date-create content-right" >
+            <div class="profile-container-date-title title" >Ngày tạo</div>
+            <div class="profile-container-date-content cnt-read" >30.05.2021</div>     
+            <!-- <div class="profile-container-date-content cnt-read" >{{userProfile.dateCreate}}</div>   -->
+        </div>
+        <div class="profile-container-save">
+            <button class="btn-save" (click) = "saveEvent()"><span>Lưu</span><i class="fas fa-arrow-right"></i></button>   
+        </div>
+    
+    </div>
+</div>
