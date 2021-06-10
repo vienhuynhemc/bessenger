@@ -10,6 +10,7 @@ $color-bg-main: #f5f9fc;
   border-radius: 27px;
 
   // bao gồm title và search
+
   .header {
     z-index: 4;
     background-color: white;
@@ -17,17 +18,16 @@ $color-bg-main: #f5f9fc;
     border-top-left-radius: 27px;
     border-top-right-radius: 27px;
     position: relative;
-
+    padding-bottom: 25px;
     .title {
       width: 80%;
+      height: 20px;
       display: flex;
       margin: auto;
       margin-bottom: 25px;
       position: relative;
-      h3 {
-        margin: 0;
-      }
-      .new-message {
+     
+      .new-friend, .new-group {
         position: absolute;
         right: -4px;
         border-radius: 50%;
@@ -41,7 +41,11 @@ $color-bg-main: #f5f9fc;
         cursor: pointer;
         i {
           font-size: 15px;
+          color: rgb(66, 66, 66);
         }
+      }
+      .new-friend {
+        right: 40px;
       }
     }
 
@@ -75,124 +79,89 @@ $color-bg-main: #f5f9fc;
         cursor: pointer;
       }
     }
+   
   }
   // danh sách những người đang onl
   .status {
+    z-index: 3;
     position: relative;
-    z-index: 4;
-    padding-top: 25px;
-    padding-bottom: 20px;
-    display: flex;
-    background-color: white;
-    overflow: hidden;
-    .content {
-      width: 85%;
-
-      margin: auto;
-
+    background-color: $color-bg-main;
+    width: 320px;
+    &-content{
       position: relative;
-      display: flex;
-
-      .myContent {
-        margin-right: 20px;
-        max-width: 45px;
+      width: 100%;
+      .cover {
+        width: 281px;
+        height: 70px;
+        cursor: pointer;
+        background-color: white;
+        z-index: 4;
         position: relative;
-        img {
-          width: 40px;
-          height: 40px;
-          object-fit: cover;
-          border-radius: 50%;
-          cursor: pointer;
-        }
-        .name {
-          text-align: center;
-          font-size: 11px;
-          cursor: pointer;
-          word-wrap: break-word;
-        }
-        .cover-online {
-          width: 15px;
-          height: 15px;
-          position: absolute;
-          background-color: white;
-          top: 28px;
-          right: 0px;
-          border-radius: 50%;
-          .online {
+        .list-header {
+          width: 85%;
+          display: flex;
+          margin: auto;
+          position: relative;
+          padding-top: 9px;
+          .sub-left {
+            img {
+              object-fit: cover;
+              width: 50px;
+              height: 50px;
+            }
+          
+          }
+          .sub-right {
             position: absolute;
-            top: 2.5px;
-            left: 17%;
-            width: 9.5px;
-            height: 9.5px;
-            border-radius: 50%;
-            background-color: $color-bg-online;
+            left: 80px;
+            top: 25px;
+          }
+          .request-left {
+            margin-left: 5px;
+          }
+        
+        }
+        .group-chat-list {
+          .group-left {
+            img {
+              width: 60px;
+              height: 52px;
+            }
           }
         }
-      }
-      .o1 {
-        margin-left: 16px;
-      }
-      .o4 {
-        margin-right: 0px;
+      
+        
       }
     }
-    .prev,
-    .next {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      font-size: 15px;
-      text-align: center;
-      background-color: $color-bg-item;
-      top: 145px;
+    .done-selected {
+      &:hover {
+        background-color: $color-bg-item;
+      }
+    }
 
-      cursor: pointer;
+    .title-friends {
+      padding: 10px 20px;
+      background-color: white;
+      width: 240px;
+      z-index: 10;
+      box-shadow: 0px 2px 28px 0px #d3dceb,
     }
-    .next {
-      position: absolute;
-      top: 37px;
-      right: 21px;
+ 
+    .selected-cover {
+      background-color: $color-bg-main;
+      border-bottom: none;
+      border-left: #3275f7 solid 4px;
+      transition: all 0.25s ease-in;
+      z-index: 1;
     }
-    .prev {
-      position: absolute;
-      top: 37px;
-      left: 21px;
-      // display: none;
+    .group-selected {
+      border-bottom-right-radius: 27px;
     }
-    // slide online
-    .prev-none {
-      display: none;
+    .request-selected {
+      border-top-right-radius: 27px;
     }
-    .next-none {
-      display: none;
-    }
-    // slide 1 duoc chon
-    .slide1-selected {
-      opacity: 1;
-      transform: translateX(6%);
-      transition: all 1s;
-      margin-left: 15px;
-    }
-    .slide2-unselected {
-      opacity: 0;
-      transform: translateX(100%);
-      transition: all 1s;
-    }
-    // slide 2 duoc chon
-    .slide1-unselected {
-      opacity: 0;
-      transform: translateX(-100%);
-      transition: all 1s;
-    }
-    .slide2-selected {
-      opacity: 1;
-      transform: translateX(-94%);
-      transition: all 1s;
-      margin-left: 17px;
-    }
+ 
   }
-
   //  Box shadow cho header + status
   .box-shadow-header-and-status {
     box-shadow: 4px 8px 28px 0px #d3dceb;
@@ -200,18 +169,18 @@ $color-bg-main: #f5f9fc;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 210px;
+    height: 110px;
     z-index: 2;
     border-top-left-radius: 27px;
     border-top-right-radius: 27px;
   }
-
+ 
   // Danh sách bạn bè và tin nhắn của họ
   .friends {
     z-index: 3;
     overflow-y: hidden;
     position: relative;
-    height: 541px;
+    height: 450px;
     width: 320px;
 
     .content-friends {
@@ -221,7 +190,7 @@ $color-bg-main: #f5f9fc;
       position: relative;
       .container {
         width: 281px;
-        height: 75px;
+        height: 72px;
         z-index: 2;
         //   background-color: white;
         position: relative;
@@ -229,10 +198,10 @@ $color-bg-main: #f5f9fc;
         border-bottom: $color-bg-item solid 0.1px;
         z-index: 10;
         .content {
-          width: 85%;
+          width: 80%;
           margin: auto;
           display: flex;
-          padding-top: 12px;
+          padding-top: 11px;
           position: relative;
           .left {
             position: relative;
@@ -268,7 +237,7 @@ $color-bg-main: #f5f9fc;
           }
           .right {
             margin-left: 15px;
-            padding-top: 5px;
+            padding-top: 18px;
             max-width: 215px;
             .name {
               font-family: "Raleway";
@@ -293,43 +262,19 @@ $color-bg-main: #f5f9fc;
           }
         }
       }
-      // .a2,
-      // .a4 {
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         display: block;
-      //       }
-      //     }
-      //   }
-      // }
-      // .a9 {
-      //   border-bottom: none;
-      // }
+ 
       .selected-prev {
         border-bottom-right-radius: 27px;
-        //   border-bottom: #a8c9e7 solid 2px;
-        //   box-shadow: 23px 22px 41px -1px $color-bg-main;
+     
       }
 
       .selected-next {
         border-top-right-radius: 27px;
-        //   border-top: #a8c9e7 solid 2px;
-        //   box-shadow: 23px -22px 29px -15px $color-bg-main;
+    
       }
-      // .container:hover {
-      //   background-color: $color-bg-item;
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         background-color: $color-bg-item;
-      //       }
-      //     }
-      //   }
-      // }
+    
 
       .done-select {
-        // box-shadow: 4px 8px 28px 0px #d3dceb;
         background-color: white;
 
         &:hover {
@@ -349,13 +294,7 @@ $color-bg-main: #f5f9fc;
         border-bottom: none;
         border-left: #3275f7 solid 4px;
         transition: all 0.25s ease-in;
-        .content {
-          .left {
-            .cover-online {
-              background-color: transparent;
-            }
-          }
-        }
+       
       }
     }
 
