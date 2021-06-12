@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs'
 
-// firebass
+// firebase
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 // user online
 import { UserOnline } from 'src/app/models/user_online';
