@@ -9,10 +9,11 @@
     position: absolute;
     font-weight: 500;
     font-size: 25px;
-    top: 10px;
+    top: 0px;
     left: 50px;
     width: 300px;
     display: flex;
+    margin-bottom: 5px;
 
     i {
       font-size: 25px;
@@ -68,10 +69,9 @@
   }
   .request-list{ 
     width: 85%;
-    // height: 740px;
-    height: 650px;
+    height: 735px;
     position: absolute;
-    top: 50px;
+    top: 35px;
     left: 68px;
 
     overflow-y: scroll;

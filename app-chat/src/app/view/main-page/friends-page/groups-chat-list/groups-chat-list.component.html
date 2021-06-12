@@ -1,1 +1,23 @@
-<p>groups-chat-list works!</p>
+<div class="group-list">
+    <div class="group-list-title"><i class="fas fa-angle-right"></i> Danh sách nhóm</div>
+    <div class="group-list-container">
+        <div  class="group-list-container-content" *ngFor="let item of group_list; let i = index" >
+            <div  class="group-list-container-content-option" >
+                <i id="icon-click-option-{{i}}" class="fas fa-ellipsis-v" (click)="onClickOptionGroup(i)"></i>
+            </div>
+            <div id="option-group-{{i}}" class="group-list-container-content-option-detail" [class.option-detail-block]="i === optionClick">
+                <div  class="row_1">Thêm thành viên</div>
+                <div  class="row_2">Rời nhóm</div>
+            </div>
+            <div class="group-list-container-content-img">
+                <img [src]="item.link" alt="">
+            </div>
+            <div class="group-list-container-content-name">
+                {{item.name}}
+            </div>
+            <div class="group-list-container-content-members">
+                {{item.members}} thành viên
+            </div>
+        </div>
+    </div>
+</div>
