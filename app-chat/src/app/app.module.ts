@@ -35,7 +35,6 @@ import { UserOnlineService } from 'src/app/service/user-online/user-online.servi
 import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.component';
 import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
 import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
-import { ContactsComponent } from './view/main-page/friends-page/contacts/contacts.component';
 import { AddFriendComponent } from './view/main-page/friends-page/add-friend/add-friend.component';
 import { AddGroupComponent } from './view/main-page/friends-page/add-group/add-group.component';
 import { GroupsChatListComponent } from './view/main-page/friends-page/groups-chat-list/groups-chat-list.component';
@@ -60,7 +59,7 @@ import { RequestAddFriendsListComponent } from './view/main-page/friends-page/re
     AvatarComponent,
     ProfileComponent,
     ChangepassComponent,
-    ContactsComponent,
+
     AddFriendComponent,
     AddGroupComponent,
     GroupsChatListComponent,
