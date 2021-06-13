@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 1244px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 800px;
+  background-color: #03294e;
+  -webkit-box-shadow: 0 0 73px 10px #d7e2edd6;
+          box-shadow: 0 0 73px 10px #d7e2edd6;
+  border-radius: 30px;
+  margin: 50px;
+  position: relative;
+}
+
+.container .anim {
+  -webkit-transform: translateX(-100px);
+          transform: translateX(-100px);
+}
+
+.container .title {
+  position: absolute;
+  color: white;
+  font-family: "Raleway";
+  left: 622px;
+  top: 200px;
+  font-size: 130px;
+  font-weight: 700;
+}
+
+.container .line {
+  left: 622px;
+  top: 410px;
+  width: 72px;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #009688;
+  height: 5px;
+}
+
+.container .sub-title {
+  position: absolute;
+  font-family: sans-serif;
+  color: white;
+  left: 622px;
+  top: 450px;
+  font-size: 20px;
+}
+
+.container .go-to-home-page {
+  position: absolute;
+  font-family: sans-serif;
+  color: white;
+  left: 622px;
+  top: 510px;
+  border-radius: 10px;
+  background-color: #009688;
+  text-decoration: none;
+  padding: 13px 90px;
+}
+/*# sourceMappingURL=not-found-page.component.css.map */

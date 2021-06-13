@@ -1,0 +1,406 @@
+.friends-list {
+  font-family: 'Raleway';
+  width: 281px;
+  position: relative;
+  height: 95%;
+  border-radius: 27px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.friends-list .header {
+  z-index: 4;
+  background-color: white;
+  padding-top: 27px;
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+  position: relative;
+}
+
+.friends-list .header .title {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.friends-list .header .title h3 {
+  margin: 0;
+}
+
+.friends-list .header .title .new-message {
+  position: absolute;
+  right: -4px;
+  border-radius: 50%;
+  background-color: #f5f9fc;
+  width: 35px;
+  height: 35px;
+  top: -8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.friends-list .header .title .new-message i {
+  font-size: 15px;
+}
+
+.friends-list .header .search {
+  width: 85%;
+  height: 35px;
+  margin: auto;
+  border-radius: 20px;
+  position: relative;
+  background-color: #f5f9fc;
+}
+
+.friends-list .header .search input {
+  height: 70%;
+  margin-left: 20px;
+  margin-top: 5px;
+  border: none;
+  outline: none;
+}
+
+.friends-list .header .search ::-webkit-input-placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search :-ms-input-placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search ::-ms-input-placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search ::placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search input[type="text"] {
+  font-size: 13px;
+  background-color: #f5f9fc;
+}
+
+.friends-list .header .search i {
+  color: #a4afbf;
+  font-size: 15px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.friends-list .status {
+  position: relative;
+  z-index: 4;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  overflow: hidden;
+}
+
+.friends-list .status .content {
+  width: 85%;
+  margin: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.friends-list .status .content .myContent {
+  margin-right: 20px;
+  max-width: 45px;
+  position: relative;
+}
+
+.friends-list .status .content .myContent img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.friends-list .status .content .myContent .name {
+  text-align: center;
+  font-size: 11px;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+
+.friends-list .status .content .myContent .cover-online {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: white;
+  top: 28px;
+  right: 0px;
+  border-radius: 50%;
+}
+
+.friends-list .status .content .myContent .cover-online .online {
+  position: absolute;
+  top: 2.5px;
+  left: 17%;
+  width: 9.5px;
+  height: 9.5px;
+  border-radius: 50%;
+  background-color: #30e430;
+}
+
+.friends-list .status .content .o1 {
+  margin-left: 16px;
+}
+
+.friends-list .status .content .o4 {
+  margin-right: 0px;
+}
+
+.friends-list .status .prev,
+.friends-list .status .next {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 15px;
+  text-align: center;
+  background-color: #e5f1fc;
+  top: 145px;
+  cursor: pointer;
+}
+
+.friends-list .status .next {
+  position: absolute;
+  top: 37px;
+  right: 21px;
+}
+
+.friends-list .status .prev {
+  position: absolute;
+  top: 37px;
+  left: 21px;
+}
+
+.friends-list .status .prev-none {
+  display: none;
+}
+
+.friends-list .status .next-none {
+  display: none;
+}
+
+.friends-list .status .slide1-selected {
+  opacity: 1;
+  -webkit-transform: translateX(6%);
+          transform: translateX(6%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  margin-left: 15px;
+}
+
+.friends-list .status .slide2-unselected {
+  opacity: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.friends-list .status .slide1-unselected {
+  opacity: 0;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.friends-list .status .slide2-selected {
+  opacity: 1;
+  -webkit-transform: translateX(-94%);
+          transform: translateX(-94%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  margin-left: 17px;
+}
+
+.friends-list .box-shadow-header-and-status {
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 210px;
+  z-index: 2;
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+}
+
+.friends-list .friends {
+  z-index: 3;
+  overflow-y: hidden;
+  position: relative;
+  height: 541px;
+  width: 320px;
+}
+
+.friends-list .friends .content-friends {
+  width: 320px;
+  height: 541px;
+  overflow: scroll;
+  position: relative;
+}
+
+.friends-list .friends .content-friends .container {
+  width: 281px;
+  height: 75px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  border-bottom: #e5f1fc solid 0.1px;
+  z-index: 10;
+}
+
+.friends-list .friends .content-friends .container .content {
+  width: 85%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 12px;
+  position: relative;
+}
+
+.friends-list .friends .content-friends .container .content .left {
+  position: relative;
+}
+
+.friends-list .friends .content-friends .container .content .left img {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.friends-list .friends .content-friends .container .content .left .cover-online {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  background-color: white;
+  top: 33px;
+  right: -2px;
+  border-radius: 50%;
+  display: none;
+}
+
+.friends-list .friends .content-friends .container .content .left .cover-online .online {
+  position: absolute;
+  top: 16%;
+  left: 17%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #30e430;
+}
+
+.friends-list .friends .content-friends .container .content .right {
+  margin-left: 15px;
+  padding-top: 5px;
+  max-width: 215px;
+}
+
+.friends-list .friends .content-friends .container .content .right .name {
+  font-family: "Raleway";
+  word-wrap: break-word;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.friends-list .friends .content-friends .container .content .right .message {
+  font-size: 11px;
+  color: grey;
+  padding-top: 10px;
+}
+
+.friends-list .friends .content-friends .container .content .timer {
+  font-size: 11px;
+  color: grey;
+  padding-top: 3px;
+  position: absolute;
+  right: 0px;
+  top: 18px;
+}
+
+.friends-list .friends .content-friends .selected-prev {
+  border-bottom-right-radius: 27px;
+}
+
+.friends-list .friends .content-friends .selected-next {
+  border-top-right-radius: 27px;
+}
+
+.friends-list .friends .content-friends .done-select {
+  background-color: white;
+}
+
+.friends-list .friends .content-friends .done-select:hover {
+  background-color: #e5f1fc;
+}
+
+.friends-list .friends .content-friends .done-select:hover .content .left .cover-online {
+  background-color: #e5f1fc;
+}
+
+.friends-list .friends .content-friends .selected-container {
+  border-bottom: none;
+  border-left: #3275f7 solid 4px;
+  -webkit-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+}
+
+.friends-list .friends .content-friends .selected-container .content .left .cover-online {
+  background-color: transparent;
+}
+
+.friends-list .friends .hidden_error {
+  width: 26px;
+  height: 22px;
+  color: #e5f1fc;
+  left: 299px;
+  position: absolute;
+}
+
+.friends-list ::-webkit-scrollbar {
+  width: 7px;
+}
+
+.friends-list .end {
+  z-index: 2;
+  -webkit-box-shadow: 8px 5px 37px 0px #b3bac5;
+          box-shadow: 8px 5px 37px 0px #b3bac5;
+  margin-top: -17px;
+  width: 100%;
+  height: 25px;
+  border-bottom-right-radius: 27px;
+  border-bottom-left-radius: 27px;
+  background-color: white;
+  position: relative;
+}
+/*# sourceMappingURL=friends-list.component.css.map */

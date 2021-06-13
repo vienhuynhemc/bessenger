@@ -1,0 +1,27 @@
+<div class="request">
+    <div class="request-title"><i class="fas fa-angle-right"></i> Danh sách kết bạn<div class="cover"  *ngIf="request_list.length > 0">{{request_list.length}} mới</div></div>
+    <div class="request-list">
+        <div class="request-list-content"  *ngFor="let item of request_list; let i = index" [class.request-list-top]="i == 0" [class.request-list-bot]="i == request_list.length - 1">
+            <div class="request-list-content-left">
+                <img [src]="item.link" alt="">
+            </div>
+            <div class="request-list-content-center-name">{{item.name}}</div>
+            <div class="request-list-content-center-time">
+                {{item.timer}}
+            </div>
+            <div class="request-list-content-right">
+                <button class="button-abort">Hủy bỏ</button>
+                <button class="button-accept">Chấp nhận</button>
+            </div>
+        </div>
+        <div class="list-empty" *ngIf="request_list.length === 0">
+            <div class="list-empty-img">
+                <img src="assets/images/list-friends-friends-page/friends-empty.png" alt="">
+            </div>
+            <div class="list-empty-content">Bạn chưa có lời mời kết bạn nào</div>
+            <button class="btn-add-friend">Thêm bạn</button>
+        </div>
+        
+    </div>
+   
+</div>

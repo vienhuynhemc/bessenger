@@ -1,0 +1,120 @@
+<div class="container">
+    <!-- part 1 -->
+    <div class="right-avatar">
+        <!-- *ngFor="let item of friends_list" -->
+        <div class="avatar">
+            <img src="{{avatar}}" />
+            <!-- <img [src]="item.link" alt="" /> -->
+        </div>
+    </div>
+    <div class="right-title">
+        <div class="name">{{name}}</div>
+        <div class="career">{{career}}</div>
+    </div>
+
+    <!-- part 2 messages -->
+    <div class="dropdown">
+        <div class="maindropdown-start">
+            <div class="startMessages">
+                <div class="includes">
+                    <div class="start">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="starred-messages">Starred Messages</div>
+                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
+            </div>
+            <div class="dropdown-content">
+            </div>
+        </div>
+    </div>
+    <!-- part 3 media -->
+    <div class="dropdown">
+        <div class="maindropdown-media">
+            <div class="media">
+                <div class="includes">
+                    <div class="images">
+                        <i class="far fa-image"></i>
+
+                    </div>
+                </div>
+                <div class="media-title">Media({{amountMedia}})</div>
+                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
+            </div>
+            <div class="dropdown-content">
+                <!-- TYPE MEDIA -->
+                <div class="filesMedia">
+                    <div class="mediaInclude">
+                        <div class="mediaIcon"><i class="far fa-image"></i></div>
+                    </div>
+                    <div class="mediaName"><a href="#">avt.png</a></div>
+                    <div class="mediaLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- part 4 files & docs -->
+    <div class="dropdown">
+        <div class="maindropdown">
+            <div class="includes">
+                <div class="drop-icon">
+                    <i class="far fa-file-alt"></i>
+                </div>
+            </div>
+            <div class="drop-files"><span>File & Docs({{amountFiles}})</span></div>
+            <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
+            <div class="dropdown-content">
+                <!-- TYPE ZIP -->
+                <div class="filesZip">
+                    <div class="zipInclude">
+                        <div class="zipIcon"><i class="fas fa-folder-open"></i></div>
+                    </div>
+                    <div class="zipName"><a href="#">MockUp.zip</a></div>
+                    <div class="zipLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
+                </div>
+                <!-- TYPE DOCX -->
+                <div class="filesDocx">
+                    <div class="docxInclude">
+                        <div class="docxIcon"><i class="far fa-file-word"></i></div>
+                    </div>
+                    <div class="docxName"><a href="#">Feedback.docx</a></div>
+                    <div class="docxLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
+                </div>
+                <!-- TYPE TXT -->
+                <div class="filesTxt">
+                    <div class="txtInclude">
+                        <div class="txtIcon"><i class="far fa-file-alt"></i></div>
+                    </div>
+                    <div class="txtName"><a href="#">Client.txt</a></div>
+                    <div class="txtLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
+                </div>
+                <!-- TYPE PDF -->
+                <div class="filesPdf">
+                    <div class="pdfInclude">
+                        <div class="pdfIcon"><i class="far fa-file-pdf"></i></div>
+                    </div>
+                    <div class="pdfName"><a href="#">New.pdf</a></div>
+                    <div class="pdfLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- part 5 infor -->
+    <div class="dropdown">
+        <div class="maindropdown-infor">
+            <div class="information">
+                <div class="includes">
+                    <div class="includes-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                </div>
+                <div class="information-title">Information</div>
+                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
+            </div>
+            <div class="dropdown-content">
+            </div>
+        </div>
+    </div>
+</div>

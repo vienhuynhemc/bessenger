@@ -1,0 +1,90 @@
+<div class="container">
+   <!-- danh sách bạn bè -->
+    <div class="friends-list">
+        <div class="header" >
+            <div class="title">
+            
+                <div class="new-friend" (click)="moveToPage(addFriendComponent)">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="new-group" (click)="moveToPage(addGroupComponent)">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Tìm kiếm">
+                <i class="fas fa-search"></i>
+            </div>
+        
+        </div>
+        <div class="status">
+            <div class="status-content">
+                <div class="cover " (click)="onSelectedRequesAndGroup(0)" [class.selected-cover]="selectedGroupRequest === 0"
+                [class.done-selected]="selectedGroupRequest != 0" [class.group-selected]="selectedGroupRequest === 1" (click)="moveToPage(requestAdds)">
+                    <div class="request-add-list list-header ">
+                        <div class="request-left sub-left">
+                            <img src="assets/images/list-friends-friends-page/list-request.png" alt="">
+                        </div>
+                        <div class="request-right sub-right">
+                        Danh sách kết bạn
+                        </div>
+                    </div>
+                </div>
+                <div class="cover " (click)="onSelectedRequesAndGroup(1)" [class.selected-cover]="selectedGroupRequest === 1"
+                [class.done-selected]="selectedGroupRequest != 1" [class.request-selected]="selectedGroupRequest === 0">
+                    <div class="group-chat-list list-header" (click)="moveToPage(groupChatList)">
+                        <div class="group-left sub-left" >
+                            <img src="assets/images/list-friends-friends-page/group-list.png" alt="">
+                        </div>
+                        <div class="group-right sub-right">Danh sách nhóm
+                        </div>
+                    </div>
+                </div>
+                <div [ngStyle]="selectedGroupRequest == 0 ? getStyleBotHeader() : null"></div>
+                <div [ngStyle]="selectedGroupRequest == 1 ? getStyleTopHeader() : null"></div>
+            </div>
+            <div class="title-friends" >Bạn bè (8)</div>
+        
+        </div>
+    
+        <!-- Box shadow cho header + status-->
+        <div class="box-shadow-header-and-status" id="box-shadow-header-and-status">
+
+        </div>
+        <div class="friends">
+            <div class="content-friends">
+                <!-- dưới này demo thôi sau này delete -->
+                <div *ngFor="let item of friends_list; let i = index" class="container message_read" 
+                    [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
+                    [class.selected-next]="i===next" [class.done-select]="selectedUser != i" (click)="onSelected(i)" >
+                    <div class="content">
+                        <div class="left" >
+                            <img [src]="item.link" alt="">
+                            <div class="cover-online"  [class.status-online]="i == 1">
+                                <div class="online"></div>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <div class="name" >{{item.name}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Box shadown ở trên -->
+                <div *ngIf="selectedUser != 0" [ngStyle]="getStyleShadowTop()">
+                </div>
+                <!-- Box shadow ớ dưới-->
+                <div *ngIf="selectedUser != friends_list.length-1" [ngStyle]="getStyleShadowBottom()">
+                </div>
+            </div>
+            <!-- Che thằng lòi -->
+            <div class="hidden_error">
+            </div>
+        </div>
+        <!-- Điền hết chỗ trống ở đuôi-->
+        <div class="end">
+        </div>
+    </div>
+<ng-template #container></ng-template>
+</div>
