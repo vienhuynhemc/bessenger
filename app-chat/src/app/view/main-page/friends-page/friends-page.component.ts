@@ -85,7 +85,7 @@ export class FriendsPageComponent implements OnInit {
   
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    fiendsPageService: FriendsPageService
+    public fiendsPageService: FriendsPageService
   ) {}
 
   // Container
