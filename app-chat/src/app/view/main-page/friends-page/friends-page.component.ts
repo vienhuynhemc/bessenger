@@ -82,53 +82,7 @@ export class FriendsPageComponent implements OnInit {
     name: 'Kaisa Pentakill',
 
   }]
-  public friends_list: any[] = [
-    {
-      id: '1',
-      link: 'assets/images/list-friends-chat-page/avt1.jpg',
-      name: 'Karlyn Carabello',
-    },
-    {
-      id: '2',
-      link: 'assets/images/list-friends-chat-page/avt2.jpg',
-      name: 'Junior Sabine',
-    },
-    {
-      id: '3',
-      link: 'assets/images/list-friends-chat-page/avt3.jpg',
-      name: 'Melinie Sherk',
-    },
-    {
-      id: '4',
-      link: 'assets/images/list-friends-chat-page/avt4.jpg',
-      name: 'Harrison Palmatier',
-    },
-    {
-      id: '5',
-      link: 'assets/images/list-friends-chat-page/avt5.jpg',
-      name: 'Tressa Duhart',
-    },
-    {
-      id: '6',
-      link: 'assets/images/list-friends-chat-page/avt6.jpg',
-      name: 'Erick Spiva',
-    },
-    {
-      id: '7',
-      link: 'assets/images/list-friends-chat-page/avt7.png',
-      name: 'Josefina Simpson',
-    },
-    {
-      id: '8',
-      link: 'assets/images/list-friends-chat-page/avt8.jpg',
-      name: 'Yasuo Can 5',
-    },
-    {
-      id: '9',
-      link: 'assets/images/list-friends-chat-page/avt9.jpg',
-      name: 'Kaisa Pentakill',
-    },
-  ];
+
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     fiendsPageService: FriendsPageService
