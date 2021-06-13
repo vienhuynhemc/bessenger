@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BoxChat } from 'src/app/models/box_chat';
-import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
-import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
-import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -93,58 +90,21 @@ export class ChatPageComponent implements OnInit {
     content: 'umbala alaba trap',
   }]
   // @input iduser: id khi đăng nhập từ component cha
-  idUser: number;
+  idUser: number = 0;
   // @input idFriendsList truyền vào từ component cha lúc đăng nhập
-  idFriendsList: number;
-  // danh sách user chat
-  friends_list_main: any;
-  online_list_1: any;
-  online_list_2: any;
+  idFriendsList: number = 0;
+ 
   selectedUser: number = 1;
   startOnline: number = 0;
   endOnline: number = 7;
   // danh sách id box chat
-  groupIDList: any;
-  start: number = 0;
-  end: number = 0;
+  groupIDList: any = 0;
+ 
   iDGroup: number = 0;
   // khi component được tạo thì userchatservice cũng được tạo
-  constructor(private userChatService: UserChatService, private userOnlineService: UserOnlineService) { }
+  constructor() { }
 
-  // lấy về danh sách bạn bè đang online
-  getFriendsOnline(count: number): void {
-    this.start += count;
-    this.end = (this.end + count) * 2;
-    this.userOnlineService.getUsersOnline(this.start, this.end, this.idFriendsList).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(usersOnl => {
-      for (let index = 0; index < usersOnl.length; index++) {
-        if (index < 4)
-          // 4 user đầu lưu vào mảng_1
-          this.online_list_1[index] = usersOnl[index];
-        else
-          // 4 user tiếp theo lưu vào mảng_2
-          this.online_list_2[index - 4] = usersOnl[index];
-      }
-    });
-  }
-
-  // lấy danh sách id box chat dựa vào idUser, amount là số id muốn lấy ra
-  getConversationsIdList(amount: number) {
-    this.userChatService.getConversationsIDListByIdUser(this.idUser, amount).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(users => {
-      this.groupIDList = users;
-    });
-  }
+ 
 
 
   // lấy data chuyển slide
@@ -158,22 +118,10 @@ export class ChatPageComponent implements OnInit {
   setSelectedUser(value: number): void {
     this.selectedUser = value;
   }
-  setSelectedUserFirstLoad() {
-    for (let index = 0; index < this.friends_list_main.length; index++) {
-      this.idFriendsList[index].memberReadedMessage.forEach(e => {
-        if (e == this.idUser) {
-          this.selectedUser = index;
-          this.iDGroup = this.idFriendsList[index].idGroup;
-          return;
-        }
-      });
-    }
-
-  }
+  
   // lấy dữ liệu cho vào component
   ngOnInit(): void {
-    // lấy lên 10 người chat gần đây
-    // this.getFriendsListRecentlyChat(10);
+    
     // chọn ra tin nhắn được selected khi load trang
     // this.setSelectedUserFirstLoad();
   }
