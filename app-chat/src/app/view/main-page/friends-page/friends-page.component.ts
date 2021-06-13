@@ -73,6 +73,7 @@ export class FriendsPageComponent implements OnInit {
       name: 'Kaisa Pentakill',
     },
   ];
+
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private fiendsPageService: FriendsPageService

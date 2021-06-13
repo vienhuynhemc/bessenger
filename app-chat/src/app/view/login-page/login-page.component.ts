@@ -29,6 +29,11 @@ export class LoginPageComponent implements OnInit {
     this.setDelay(10000);
   }
 
+  dangNhap(): void {
+    this.login_service.login();
+    this.router.navigate(["/bessenger"]);
+  }
+
 
   hiddenAndShowPassword(e: HTMLInputElement, eye: HTMLElement): void {
     if (e.type == 'text') {
@@ -54,7 +59,7 @@ export class LoginPageComponent implements OnInit {
       document.getElementById(nameOld).style.opacity = '0';
       document.getElementById(nameNew).style.opacity = '1';
       document.getElementById("child").style.left = `${this.countSlide * 80}px`;
-      document.getElementById("content_child").innerText = `0${this.countSlide+1}`;
+      document.getElementById("content_child").innerText = `0${this.countSlide + 1}`;
       // repeate
       this.setDelay(times);
     }, times);
