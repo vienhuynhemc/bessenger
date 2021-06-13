@@ -1,11 +1,12 @@
-import { LoginPageComponent } from './login-page/login-page.component';
-import { SettingPageComponent } from './setting-page/setting-page.component';
+import { LoginService } from './../../service/login/login.service';
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ChatRequestPageComponent } from './chat-request-page/chat-request-page.component';
 import { FriendsPageComponent } from './friends-page/friends-page.component';
-import { PersonalPageComponent } from './personal-page/personal-page.component';
-import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ChatPageComponent } from './chat-page/chat-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PersonalPageComponent } from './personal-page/personal-page.component';
+import { SettingPageComponent } from './setting-page/setting-page.component';
 
 
 @Component({
@@ -32,9 +33,10 @@ export class MainPageComponent implements OnInit {
   friendsPageComponent = FriendsPageComponent;
   chatRequestPageComponent = ChatRequestPageComponent;
   settingPageComponent = SettingPageComponent;
-  loginPageComponent = LoginPageComponent;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+    private router: Router,
+    private login_service: LoginService) {
   }
 
   // Tạo sẵn chat-page  || AE code sửa lại trang tương ứng
@@ -46,22 +48,16 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    if (!this.login_service.isLoginSuccess()) {
+      this.router.navigate(['/dang-nhap']);
+    }
   }
 
   // Đăng xuất
   logOut(): void {
-    this.moveToPage(null, this.loginPageComponent);
-    this.hiddenMenu();
+    this.login_service.logOut();
+    this.router.navigate(['/dang-nhap']);
   }
-
-  hiddenMenu(): void {
-    let container_left_menu = document.getElementById("container-left-menu");
-    if (container_left_menu != null) {
-      container_left_menu.style.display = "none";
-    }
-  }
-
 
   // Di chuyển trang
   moveToPage(elementSelect: any, name_component: any): void {
