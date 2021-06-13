@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
+
 import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-chat-page',
