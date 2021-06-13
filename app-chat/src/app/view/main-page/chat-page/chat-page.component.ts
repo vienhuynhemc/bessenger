@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',

@@ -1,16 +1,20 @@
 <!-- Trang chat với bạn bè -->
 <div class="container">
   <!-- Danh sách bạn bè và tin nhắn gần nhất với họ -->
-  <app-friends-list class="friends-list" [friends_list_main] = "friends_list_main" [online_list]="online_list" [friends_list]="friends_list"
-  [selectedUser]="selectedUser" (outToParentChangeSlide)="getDataChangeSlide($event)" (outToParentSelectedUser)="setSelectedUser($event)" 
-  (outToParentSendIdGroup) = "getIDGroupFromListFriends($event)">
+  <app-friends-list
+    class="friends-list"
+    [friends_list_main]="friends_list_main"
+    [online_list]="online_list"
+    [friends_list]="friends_list"
+    [selectedUser]="selectedUser"
+    (outToParentChangeSlide)="getDataChangeSlide($event)"
+    (outToParentSelectedUser)="setSelectedUser($event)"
+  >
   </app-friends-list>
 
+  <!-- Nội dung tin nhắn -->
+  <app-messenger [idGroupInp]="iDGroup"></app-messenger>
 
-    <!-- Nội dung tin nhắn -->
-    <app-messenger [idGroupInp] = "iDGroup"></app-messenger>
-
-    <!-- Các tệp đã được gửi -->
-    <app-file-send></app-file-send>
-
+  <!-- Các tệp đã được gửi -->
+  <app-file-send></app-file-send>
 </div>
