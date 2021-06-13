@@ -8,7 +8,7 @@ export class LoginService {
   private isLogin: boolean;
 
   constructor() {
-    this.isLogin = JSON.parse(localStorage.getItem('login'));
+    this.getData();
   }
 
   public isLoginSuccess(): boolean {
@@ -17,6 +17,16 @@ export class LoginService {
 
   public logOut(): void {
     localStorage.removeItem('login');
+    this.getData();
+  }
+
+  public login(): void {
+    localStorage.setItem('login', "true");
+    this.getData();
+  }
+
+  public getData(): void {
+    this.isLogin = JSON.parse(localStorage.getItem('login'));
   }
 
 }
