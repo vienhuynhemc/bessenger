@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserChatService } from './user-chat.service';
+import { FriendsListService } from './friends-list.service';
 
-describe('UserChatService', () => {
-  let service: UserChatService;
+describe('FriendsListService', () => {
+  let service: FriendsListService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserChatService);
+    service = TestBed.inject(FriendsListService);
   });
 
   it('should be created', () => {

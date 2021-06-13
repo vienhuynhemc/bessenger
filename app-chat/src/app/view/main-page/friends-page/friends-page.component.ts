@@ -75,7 +75,7 @@ export class FriendsPageComponent implements OnInit {
   ];
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    fiendsPageService: FriendsPageService
+    private fiendsPageService: FriendsPageService
   ) {}
   // Container
   @ViewChild('container', { read: ViewContainerRef }) container:

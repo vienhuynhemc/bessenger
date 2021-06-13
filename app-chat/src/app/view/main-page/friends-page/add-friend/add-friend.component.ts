@@ -8,7 +8,7 @@ import { AddFriendService } from 'src/app/service/friends-page/add-friend/add-fr
 })
 export class AddFriendComponent implements OnInit {
 
-  constructor(addFriendService: AddFriendService) { }
+  constructor(private addFriendService: AddFriendService) { }
   openProfile :boolean = false;
   profile: any = {
     id: 1,

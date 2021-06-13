@@ -73,7 +73,7 @@ export class RequestAddFriendsListComponent implements OnInit {
   
   }
 ]
-  constructor(requestAddFriendsListService: RequestAddFriendService) { }
+  constructor(private requestAddFriendsListService: RequestAddFriendService) { }
 
   ngOnInit(): void {
   }

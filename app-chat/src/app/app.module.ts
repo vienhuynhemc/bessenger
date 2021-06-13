@@ -20,8 +20,7 @@ import { SettingPageComponent } from './view/main-page/setting-page/setting-page
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
-// các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
+
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // firebase
@@ -31,7 +30,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
-import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
 import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.component';
 import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
 import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
@@ -43,6 +41,7 @@ import { FriendsPageService } from './service/friends-page/main/friends-page.ser
 import { RequestAddFriendService } from './service/friends-page/request-add/request-add-friend.service';
 import { AddGroupService } from './service/friends-page/add-group/add-group.service';
 import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
+import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
 @NgModule({
   declarations: [
     // Trang index
@@ -82,12 +81,11 @@ import { AddFriendService } from './service/friends-page/add-friend/add-friend.s
     FormsModule,
   ],
   providers: [
-    UserChatService,
-    UserOnlineService,
     FriendsPageService,
     RequestAddFriendService,
     AddGroupService,
-    AddFriendService
+    AddFriendService,
+    FriendsListService
   ],
   bootstrap: [AppComponent],
 })

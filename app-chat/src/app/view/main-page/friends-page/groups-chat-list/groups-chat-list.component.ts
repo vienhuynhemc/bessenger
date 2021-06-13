@@ -107,7 +107,7 @@ export class GroupsChatListComponent implements OnInit {
   xIcon = -1;
   yIcon = -1;
 
-  constructor(addFriendService: AddFriendService) { }
+  constructor(private addFriendService: AddFriendService) { }
 
   ngOnInit(): void {
     this.onClick = this.onClick.bind(this);

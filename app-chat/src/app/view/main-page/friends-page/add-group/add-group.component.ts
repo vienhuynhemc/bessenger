@@ -84,7 +84,7 @@ export class AddGroupComponent implements OnInit {
       name: 'Kaisa Pentakill',
     },
   ];
-  constructor(addGroupService: AddGroupService) {}
+  constructor(private addGroupService: AddGroupService) {}
 
   ngOnInit(): void {}
   // tick vào checkbox khi chọn 1 người bạn thêm vào group chat
