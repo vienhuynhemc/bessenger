@@ -90,15 +90,15 @@ export class ChatPageComponent implements OnInit {
     content: 'umbala alaba trap',
   }]
   // @input iduser: id khi đăng nhập từ component cha
-  idUser: number;
+  idUser: number = 0;
   // @input idFriendsList truyền vào từ component cha lúc đăng nhập
-  idFriendsList: number;
+  idFriendsList: number = 0;
  
   selectedUser: number = 1;
   startOnline: number = 0;
   endOnline: number = 7;
   // danh sách id box chat
-  groupIDList: any;
+  groupIDList: any = 0;
  
   iDGroup: number = 0;
   // khi component được tạo thì userchatservice cũng được tạo
