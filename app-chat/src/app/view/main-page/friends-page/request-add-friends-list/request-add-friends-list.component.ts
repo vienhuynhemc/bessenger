@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestAddFriendService } from 'src/app/service/friends-page/request-add/request-add-friend.service';
 
 @Component({
   selector: 'app-request-add-friends-list',
@@ -72,9 +73,13 @@ export class RequestAddFriendsListComponent implements OnInit {
   
   }
 ]
-  constructor() { }
+  constructor(requestAddFriendsListService: RequestAddFriendService) { }
 
   ngOnInit(): void {
   }
 
+  // lấy từ service danh sách lời mời kết bạn
+  getRequestAddService() {
+    
+  }
 }

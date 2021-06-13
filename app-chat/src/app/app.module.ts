@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 // firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
@@ -39,6 +39,10 @@ import { AddFriendComponent } from './view/main-page/friends-page/add-friend/add
 import { AddGroupComponent } from './view/main-page/friends-page/add-group/add-group.component';
 import { GroupsChatListComponent } from './view/main-page/friends-page/groups-chat-list/groups-chat-list.component';
 import { RequestAddFriendsListComponent } from './view/main-page/friends-page/request-add-friends-list/request-add-friends-list.component';
+import { FriendsPageService } from './service/friends-page/main/friends-page.service';
+import { RequestAddFriendService } from './service/friends-page/request-add/request-add-friend.service';
+import { AddGroupService } from './service/friends-page/add-group/add-group.service';
+import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
 @NgModule({
   declarations: [
     // Trang index
@@ -63,7 +67,7 @@ import { RequestAddFriendsListComponent } from './view/main-page/friends-page/re
     AddFriendComponent,
     AddGroupComponent,
     GroupsChatListComponent,
-    RequestAddFriendsListComponent
+    RequestAddFriendsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,10 +79,16 @@ import { RequestAddFriendsListComponent } from './view/main-page/friends-page/re
     // firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    FormsModule
-
+    FormsModule,
   ],
-  providers: [UserChatService, UserOnlineService],
-  bootstrap: [AppComponent]
+  providers: [
+    UserChatService,
+    UserOnlineService,
+    FriendsPageService,
+    RequestAddFriendService,
+    AddGroupService,
+    AddFriendService
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
