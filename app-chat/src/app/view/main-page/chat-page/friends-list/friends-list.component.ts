@@ -114,10 +114,10 @@ export class FriendsListComponent implements OnInit {
     if (check) {
       if (index != this.selectedUser) {
         this.onSelected(index); 
-        this.iDGroup = idGorup;
+       this.iDGroup = idGorup;
       }
     } else {
-      this.onSelected(index)
+      this.onSelected(index);
       this.iDGroup = idGorup;
     }
   }
