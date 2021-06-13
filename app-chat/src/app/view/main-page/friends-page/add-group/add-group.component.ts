@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddGroupService } from 'src/app/service/friends-page/add-group/add-group.service';
 
 @Component({
   selector: 'app-add-group',
@@ -83,7 +84,7 @@ export class AddGroupComponent implements OnInit {
       name: 'Kaisa Pentakill',
     },
   ];
-  constructor() {}
+  constructor(addGroupService: AddGroupService) {}
 
   ngOnInit(): void {}
   // tick vào checkbox khi chọn 1 người bạn thêm vào group chat
@@ -105,5 +106,10 @@ export class AddGroupComponent implements OnInit {
     if (idCheck.value.length == 0) {
       idCheck.style.border ='red solid 1px';
     }
+  }
+  
+  // chuyển data qua service
+  insertGroupChat() {
+
   }
 }

@@ -157,7 +157,7 @@ $color-bg-main: #f5f9fc;
     .title-friends {
       padding: 10px 20px;
       background-color: white;
-      width: 240px;
+      width: 241px;
       z-index: 10;
       box-shadow: 0px 2px 28px 0px #d3dceb,
     }
@@ -192,7 +192,6 @@ $color-bg-main: #f5f9fc;
  
   // Danh sách bạn bè và tin nhắn của họ
   .friends {
-    z-index: 3;
     overflow-y: hidden;
     position: relative;
     height: 450px;
