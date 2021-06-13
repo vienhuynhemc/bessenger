@@ -43,6 +43,7 @@ import { FriendsPageService } from './service/friends-page/main/friends-page.ser
 import { RequestAddFriendService } from './service/friends-page/request-add/request-add-friend.service';
 import { AddGroupService } from './service/friends-page/add-group/add-group.service';
 import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
+import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
 @NgModule({
   declarations: [
     // Trang index
@@ -87,7 +88,8 @@ import { AddFriendService } from './service/friends-page/add-friend/add-friend.s
     FriendsPageService,
     RequestAddFriendService,
     AddGroupService,
-    AddFriendService
+    AddFriendService,
+    FriendsListService
   ],
   bootstrap: [AppComponent],
 })
