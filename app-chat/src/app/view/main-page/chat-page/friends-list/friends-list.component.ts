@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FriendsListService } from 'src/app/service/chat-page/friends-list/friends-list.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-friends-list',
@@ -13,12 +15,20 @@ export class FriendsListComponent implements OnInit {
   countPrev:number = 0;
   countNext:number = 0;
   slideStep = 4;
+  start: number = 0;
+  end: number = 0;
+   // @input idFriendsList truyền vào từ component cha lúc đăng nhập
+   idFriendsList: number;
   // truyền vào list friends chat gần đây bản DB
-  @Input() friends_list_main : any;
-  @Input() online_list_1 : any;
-  @Input() online_list_2 : any;
+  friends_list_main : any;
+  online_list_1 : any;
+  online_list_2 : any;
   // @input idUser sau này truyền từ component vào để xử lý
   idUser : number;
+   // danh sách id box chat
+  groupIDList: any;
+  // id group dc chọn
+  iDGroup: number = 0;
   // bản mẫu demo code cứng
   @Input() online_list!: any[];
 
@@ -29,13 +39,58 @@ export class FriendsListComponent implements OnInit {
   @Output() outToParentSelectedUser = new EventEmitter<number>();
   @Output() outToParentChangeSlide = new EventEmitter<number>();
   @Output() outToParentSendIdGroup = new EventEmitter<number>();
-  constructor() { }
+  constructor(private friendsListService: FriendsListService) { }
 
   ngOnInit(): void {
         // selected khi load lần đầu
         this.onSelectedFilter(this.selectedUser, false, 0)
   }
   
+   // lấy về danh sách bạn bè đang online
+   getFriendsOnline(count: number): void {
+    this.start += count;
+    this.end = (this.end + count) * 2;
+    this.friendsListService.getUsersOnlineService(this.start, this.end, this.idFriendsList).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(usersOnl => {
+      for (let index = 0; index < usersOnl.length; index++) {
+        if (index < 4)
+          // 4 user đầu lưu vào mảng_1
+          this.online_list_1[index] = usersOnl[index];
+        else
+          // 4 user tiếp theo lưu vào mảng_2
+          this.online_list_2[index - 4] = usersOnl[index];
+      }
+    });
+  }
+  setSelectedUserFirstLoad() {
+    for (let index = 0; index < this.friends_list_main.length; index++) {
+      this.idFriendsList[index].memberReadedMessage.forEach(e => {
+        if (e == this.idUser) {
+          this.selectedUser = index;
+          this.iDGroup = this.idFriendsList[index].idGroup;
+          return;
+        }
+      });
+    }
+
+  }
+  // lấy danh sách id box chat dựa vào idUser, amount là số id muốn lấy ra
+  getConversationsIdList(amount: number) {
+    this.friendsListService.getConversationsIDListByIdUserService(this.idUser, amount).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(users => {
+      this.groupIDList = users;
+    });
+  }
 
   // tạo chuyển động slide danh sách bạn đang onl
   changeSlide(change: number): void {
@@ -59,16 +114,16 @@ export class FriendsListComponent implements OnInit {
     if (check) {
       if (index != this.selectedUser) {
         this.onSelected(index); 
-        this.sendIdGroundToMessage(idGorup);
+        this.iDGroup = idGorup;
       }
     } else {
       this.onSelected(index)
-      this.sendIdGroundToMessage(idGorup);
+      this.iDGroup = idGorup;
     }
   }
   // truyền idGroup qua message
     sendIdGroundToMessage(idGroup: number) {
-    this.outToParentSendIdGroup.emit(idGroup);
+    this.iDGroup = idGroup
   }
 
  // chọn vào bạn bè thì tô màu background
