@@ -1,3 +1,5 @@
+import { LoginService } from './../../service/login/login.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie
 import { AnimationItem } from 'lottie-web';
@@ -16,13 +18,21 @@ export class NotFoundPageComponent implements OnInit {
     path: '/assets/json/lottie/404-not-found.json',
   };
 
-  constructor() { }
+  constructor(private router: Router, private login_service: LoginService) { }
 
   ngOnInit(): void {
   }
 
   animationCreated(animationItem: AnimationItem): void {
     console.log(animationItem);
+  }
+
+  back(): void {
+    if (this.login_service.isLoginSuccess()) {
+      this.router.navigate(['/bessenger']);
+    } else {
+      this.router.navigate(['/dang-nhap']);
+    }
   }
 
 }
