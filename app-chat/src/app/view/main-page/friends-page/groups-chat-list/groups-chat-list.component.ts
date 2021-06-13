@@ -1,5 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { AddFriendService } from 'src/app/service/friends-page/add-friend/add-friend.service';
 
 @Component({
   selector: 'app-groups-chat-list',
@@ -105,12 +106,19 @@ export class GroupsChatListComponent implements OnInit {
   yOption = -1;
   xIcon = -1;
   yIcon = -1;
-  constructor() { }
+
+  constructor(addFriendService: AddFriendService) { }
 
   ngOnInit(): void {
     this.onClick = this.onClick.bind(this);
     document.addEventListener('click', this.onClick);
   }
+
+  // lấy từ service danh sách nhóm chat
+  getGroupsList() {
+
+  }
+  
   // hiển thị option, xử lý click lại chính nó
   onClickOptionGroup(index: number) {
     if (index === this.indexOption) {

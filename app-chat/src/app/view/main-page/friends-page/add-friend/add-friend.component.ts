@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddFriendService } from 'src/app/service/friends-page/add-friend/add-friend.service';
 
 @Component({
   selector: 'app-add-friend',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddFriendComponent implements OnInit {
 
-  constructor() { }
+  constructor(addFriendService: AddFriendService) { }
   openProfile :boolean = false;
   profile: any = {
     id: 1,
@@ -29,5 +30,9 @@ export class AddFriendComponent implements OnInit {
     } else
       this.openProfile = open;
 
+  }
+  // chuyển data qua service
+  insertFriend() {
+    
   }
 }
