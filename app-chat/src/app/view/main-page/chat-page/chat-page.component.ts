@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainPageService } from 'src/app/service/main-page/main-page.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -102,10 +103,7 @@ export class ChatPageComponent implements OnInit {
  
   iDGroup: number = 0;
   // khi component được tạo thì userchatservice cũng được tạo
-  constructor() { }
-
- 
-
+  constructor(private main_page_service: MainPageService) { }
 
   // lấy data chuyển slide
   getDataChangeSlide(count: number) {
@@ -122,6 +120,11 @@ export class ChatPageComponent implements OnInit {
   // lấy dữ liệu cho vào component
   ngOnInit(): void {
     
+    setTimeout(() => {
+      this.main_page_service.reset();
+      this.main_page_service.selectChatPage();
+    }, 0);
+
     // chọn ra tin nhắn được selected khi load trang
     // this.setSelectedUserFirstLoad();
   }

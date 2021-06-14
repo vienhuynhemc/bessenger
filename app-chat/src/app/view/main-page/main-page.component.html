@@ -10,32 +10,67 @@
             </div>
         </div>
         <div class="container-left-menu" id="container-left-menu">
-            <div #home_page class="container-left-menu-icon" (click)="moveToPage(home_page,homePageComponent)">
+
+            <div *ngIf="!main_page_service.isSelectHomePage()" class="container-left-menu-icon"
+                (click)="moveToHomePage()">
                 <i class="fas fa-pager"></i>
             </div>
-            <div #personal_page class="container-left-menu-icon"
-                (click)="moveToPage(personal_page,personalPageComponent)">
+            <div *ngIf="main_page_service.isSelectHomePage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-pager"></i>
+            </div>
+
+            <div *ngIf="!main_page_service.isSelectPersonalPage()" class="container-left-menu-icon"
+                (click)="moveToPersonalPage()">
                 <i class="fas fa-user-cog"></i>
             </div>
-            <div #friends_page class="container-left-menu-icon" (click)="moveToPage(friends_page,friendsPageComponent)">
+            <div *ngIf="main_page_service.isSelectPersonalPage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-user-cog"></i>
+            </div>
+
+            <div *ngIf="!main_page_service.isSelectFriendsPage()" class="container-left-menu-icon"
+                (click)="moveToFriendsPage()">
                 <i class="fas fa-user-friends"></i>
             </div>
-            <div #chat_page class="container-left-menu-icon" (click)="moveToPage(chat_page,chatPageComponent)">
+            <div *ngIf="main_page_service.isSelectFriendsPage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-user-friends"></i>
+            </div>
+
+            <div *ngIf="!main_page_service.isSelectChatPage()" class="container-left-menu-icon"
+                (click)="moveToChatPage()">
                 <i class="fas fa-comment-alt"></i>
             </div>
-            <div #chat_request_page class="container-left-menu-icon"
-                (click)="moveToPage(chat_request_page,chatRequestPageComponent)">
+            <div *ngIf="main_page_service.isSelectChatPage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+
+            <div *ngIf="!main_page_service.isSelectChatRequestPage()" class="container-left-menu-icon"
+                (click)="moveToChatRequestPage()">
                 <i class="fas fa-comment-dots"></i>
             </div>
-            <div #setting_page class="container-left-menu-icon" (click)="moveToPage(setting_page,settingPageComponent)">
+            <div *ngIf="main_page_service.isSelectChatRequestPage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+
+            <div *ngIf="!main_page_service.isSelectSettingPage()" class="container-left-menu-icon"
+                (click)="moveToSettingPage()">
                 <i class="fas fa-cogs"></i>
             </div>
-            <div #log_out class="container-left-menu-icon" (click)="logOut()">
+            <div *ngIf="main_page_service.isSelectSettingPage()"
+                class="container-left-menu-icon container-left-menu-icon-selected">
+                <i class="fas fa-cogs"></i>
+            </div>
+
+            <div class="container-left-menu-icon" (click)="logOut()">
                 <i class="fas fa-sign-out-alt"></i>
             </div>
         </div>
     </div>
 
-    <ng-template #container></ng-template>
+    <router-outlet></router-outlet>
 
 </div>

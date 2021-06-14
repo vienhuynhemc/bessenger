@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainPageService } from 'src/app/service/main-page/main-page.service';
 
 @Component({
   selector: 'app-setting-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private main_page_service: MainPageService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.main_page_service.reset();
+      this.main_page_service.selectSettingPage();
+    }, 0);
   }
 
 }

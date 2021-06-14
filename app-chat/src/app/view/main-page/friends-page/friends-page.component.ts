@@ -8,6 +8,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FriendsPageService } from 'src/app/service/friends-page/main/friends-page.service';
+import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { GroupsChatListComponent } from './groups-chat-list/groups-chat-list.component';
@@ -76,7 +77,8 @@ export class FriendsPageComponent implements OnInit {
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private fiendsPageService: FriendsPageService
+    private fiendsPageService: FriendsPageService,
+    private main_page_service: MainPageService
   ) {}
 
   // Container
@@ -116,7 +118,12 @@ export class FriendsPageComponent implements OnInit {
       }
     }
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.main_page_service.reset();
+      this.main_page_service.selectFriendsPage();
+    }, 0);    
+  }
   // index = 0 ? request selected : group selected
   onSelectedRequesAndGroup(index: number): void {
     this.selectedGroupRequest = index;
