@@ -14,8 +14,12 @@
 
         <p class="content">Bessenger giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.</p>
 
-        <div class="login">
+        <div id="dang-ky-2" class="login" (click)="dangKyTaoKhoanChuyenComponent()">
             <p>Đăng ký</p>
+        </div>
+
+        <div id="dang-nhap-2" style="display: none;" class="login" (click)="dangNhapChuyenComponent()">
+            <p>Đăng nhập</p>
         </div>
 
         <div class="bar">
@@ -25,7 +29,7 @@
         <div class="content_child">
             <p id="content_child">01 </p>
             <p> - 05</p>
-         </div>
+        </div>
 
     </div>
 
@@ -35,35 +39,89 @@
             <p>Bessenger</p>
         </div>
 
-        <div class="right_header2">
-            <p>Đăng nhập tài khoản của bạn</p>
+        <div class="dang-nhap" id="dang-nhap">
+            <div class="right_header2">
+                <p>Đăng nhập tài khoản của bạn</p>
+            </div>
+
+            <div class="input_data">
+                <i class="far fa-paper-plane"></i>
+                <input type="text" placeholder="Tài khoản" [(ngModel)]="userName">
+            </div>
+
+            <div class="input_data">
+                <i class="fab fa-keycdn"></i>
+                <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord">
+                <i #eye class="far fa-eye eye" (click)="hiddenAndShowPassword(password,eye)"></i>
+            </div>
+
+            <div class="login" (click)="dangNhap()">
+                <p>Đăng nhập</p>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="more">
+                <p (click)="dangKyTaoKhoanChuyenComponent()">Đăng ký tài khoản mới?</p>
+                <p>Quên mặt khẩu?</p>
+            </div>
+
+            <div class="terms">
+                <p>Chính sách bảo mật</p>
+                <p>Điều khoản sử dụng</p>
+            </div>
         </div>
 
-        <div class="input_data">
-            <i class="far fa-paper-plane"></i>
-            <input type="text" placeholder="Tài khoản" [(ngModel)]="userName">
-        </div>
+        <div class="dang-ky" id="dang-ky">
+            <div class="right_header2">
+                <p>Đăng ký tài khoản của bạn</p>
+            </div>
 
-        <div class="input_data">
-            <i class="fab fa-keycdn"></i>
-            <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord">
-            <i #eye class="far fa-eye eye" (click)="hiddenAndShowPassword(password,eye)"></i>
-        </div>
+            <div class="input_data" id="dk-email">
+                <i class="far fa-paper-plane"></i>
+                <input type="text" placeholder="Email" [(ngModel)]="userName" (ngModelChange)="dkEmail($event)">
+            </div>
 
-        <div class="login">
-            <p>Đăng nhập</p>
-        </div>
+            <p class="error" id="dk-error-1">Email không thể thiếu</p>
 
-        <div class="line"></div>
+            <div class="input_data" id="dk-ten">
+                <i class="fas fa-signature"></i>
+                <input type="text" placeholder="Tên của bạn" [(ngModel)]="ten" (ngModelChange)="dkTen($event)">
+            </div>
 
-        <div class="more">
-            <p>Đăng ký tài khoản mới?</p>
-            <p>Quên mặt khẩu?</p>
-        </div>
+            <p class="error" id="dk-error-2">Tên không thể thiếu</p>
 
-        <div class="terms">
-            <p>Chính sách bảo mật</p>
-            <p>Điều khoản sử dụng</p>
+            <div class="input_data" id="dk-password">
+                <i class="fab fa-keycdn"></i>
+                <input #password2 type="password" placeholder="Mật khẩu" [(ngModel)]="passWord" (ngModelChange) = "changePassword($event)">
+                <i #eye2 class="far fa-eye eye" (click)="hiddenAndShowPassword(password2,eye2)"></i>
+            </div>
+
+            <p class="error" id="dk-error-3">Mật khẩu không thể thiếu</p>
+
+            <div class="level-password" id="level-password">
+                <div class="child">
+                </div>
+                <div class="child">
+                </div>
+                <div class="child">
+                </div>
+                <p>Hãy nhập mật khẩu</p>
+            </div>
+
+            <p class="bao-mat">Bằng cách đăng ký, bạn xác nhận rằng đã đọc và chấp thuật <span>Thông Báo Người
+                    Dùng</span> và
+                <span>Chính Sách Bảo Mật</span> của
+                chúng tôi
+            </p>
+
+            <div class="login" (click)="dangKy()">
+                <p>Đăng ký</p>
+            </div>
+
+            <div class="terms" (click)="dangNhapChuyenComponent()">
+                <p>Bạn đã có tài khoản? Đăng nhập</p>
+            </div>
         </div>
     </div>
 
