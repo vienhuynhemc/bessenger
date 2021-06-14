@@ -1,3 +1,4 @@
+import { MainPageService } from './../../service/main-page/main-page.service';
 import { LoginService } from './../../service/login/login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +14,11 @@ export class LoginPageComponent implements OnInit {
   public passWord: string;
   public ten: string;
   public countSlide: number;
+  public isRunningSlide:boolean;
 
-  constructor(private router: Router, private login_service: LoginService) {
+  constructor(
+    private router: Router, 
+    private login_service: LoginService) {
   }
 
   ngOnInit(): void {
@@ -23,6 +27,7 @@ export class LoginPageComponent implements OnInit {
     document.getElementById("hinh4").style.opacity = "0";
     document.getElementById("hinh5").style.opacity = "0";
     this.countSlide = 0;
+    this.isRunningSlide =true;
 
     if (this.login_service.isLoginSuccess()) {
       this.router.navigate(["/bessenger"]);
@@ -32,6 +37,7 @@ export class LoginPageComponent implements OnInit {
 
   dangNhap(): void {
     this.login_service.login();
+    this.isRunningSlide =false;
     this.router.navigate(["/bessenger"]);
   }
 
@@ -142,7 +148,9 @@ export class LoginPageComponent implements OnInit {
       document.getElementById("child").style.left = `${this.countSlide * 80}px`;
       document.getElementById("content_child").innerText = `0${this.countSlide + 1}`;
       // repeate
-      this.setDelay(times);
+      if(this.isRunningSlide){
+        this.setDelay(times);
+      }
     }, times);
   }
 
