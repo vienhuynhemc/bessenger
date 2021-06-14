@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 // Lottie
 import player from 'lottie-web';
 import { LottieModule } from 'ngx-lottie';
@@ -62,15 +63,15 @@ import { FriendsListService } from './service/chat-page/friends-list/friends-lis
     ProfileComponent,
     ChangepassComponent,
 
-   
+
   ],
   imports: [
     BrowserModule,
+    // http
+    HttpClientModule,
     AppRoutingModule,
     // lottie
     LottieModule.forRoot({ player: playerFactory }),
-    // http
-    HttpClientModule,
     // firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
@@ -87,4 +88,4 @@ import { FriendsListService } from './service/chat-page/friends-list/friends-lis
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
