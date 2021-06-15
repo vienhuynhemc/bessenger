@@ -1,3 +1,7 @@
+<div class="loading" *ngIf="isLoading">
+    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+</div>
+
 <div class="container">
 
     <div class="left">

@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './../../service/login/login.service';
 import { RegisterAccountService } from './../../service/register-account/register-account.service';
+// lottie
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
+
 
 @Component({
   selector: 'app-login-page',
@@ -11,11 +15,17 @@ import { RegisterAccountService } from './../../service/register-account/registe
 })
 export class LoginPageComponent implements OnInit {
 
+  // lottie
+  options: AnimationOptions = {
+    path: '/assets/json/lottie/loading.json',
+  };
+
   public userName: string;
   public passWord: string;
   public ten: string;
   public countSlide: number;
   public isRunningSlide: boolean;
+  public isLoading: boolean;
 
   constructor(
     private router: Router,
@@ -24,12 +34,16 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
+  animationCreated(animationItem: AnimationItem): void {
+  }
+
   ngOnInit(): void {
     document.getElementById("hinh2").style.opacity = "0";
     document.getElementById("hinh3").style.opacity = "0";
     document.getElementById("hinh4").style.opacity = "0";
     document.getElementById("hinh5").style.opacity = "0";
     this.countSlide = 0;
+    this.isLoading = false;
     this.isRunningSlide = true;
 
     if (this.login_service.isLoginSuccess()) {
@@ -111,18 +125,20 @@ export class LoginPageComponent implements OnInit {
     } else {
       document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-1").style.display = "block";
+      document.getElementById("dk-error-1").innerText = "Email không thể thiếu"
     }
   }
 
   dangKy(): void {
-    let email = this.userName.trim();
-    let ten = this.ten.trim();
-    let mat_khau = this.passWord;
+    let email:string = this.userName.trim();
+    let ten:string = this.ten.trim();
+    let mat_khau:string = this.passWord;
     let count = 0;
     if (email.length == 0) {
       count++;
       document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-1").style.display = "block";
+      document.getElementById("dk-error-1").innerText = "Email không thể thiếu"
     }
     if (ten.length == 0) {
       count++;
@@ -135,7 +151,9 @@ export class LoginPageComponent implements OnInit {
       document.getElementById("dk-error-3").style.display = "block";
     }
     if (count == 0) {
-      let code = "";
+      // showloading
+      this.isLoading = true;
+      let code:string = "";
       for (let i = 0; i < 6; i++) {
         let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
         code += newNumber + "";
@@ -143,7 +161,25 @@ export class LoginPageComponent implements OnInit {
       let newData = new RegisterObjectSendMail();
       newData.code = code;
       newData.email = email;
-      this.register_account_service.sendMail(newData).subscribe((data) => {
+      // check email
+      this.register_account_service.checkEmail(email).subscribe(data => {
+        // Bên kia trả về 1 bảng object AccountWebservice 
+        if (data.length != 0) {
+          document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
+          document.getElementById("dk-error-1").style.display = "block";
+          document.getElementById("dk-error-1").innerText = "Email đã được đăng ký, bạn có thể chọn quên mật khẩu để lấy lại mật khẩu"
+          this.isLoading = false;
+        } else {
+          // Oke email không tồn tại thì tạo tài khoản
+          // set thông tin
+          // Fill data
+          this.register_account_service.insertNewAccountToFirebase(ten,email,mat_khau,code);
+          // gửi email rồi tới trang đăng ký
+          this.register_account_service.sendMail(newData).subscribe((data) => {
+            this.isLoading = false;
+            this.router.navigate(['dang-ky']);
+          });
+        }
       });
     }
   }
