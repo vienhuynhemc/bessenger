@@ -40,6 +40,45 @@
     </div>
 
     <div class="right">
+        <div class="header">
+            <p class="title">Chào mừng đến với dịch vụ Bessenger!</p>
+            <div class="process">
 
+                <i *ngIf="!register_process_service.isChonGioiTinh() && !register_process_service.isXacNhanEmail() && !register_process_service.isChonHinhDaiDien()" class="far fa-circle"></i>
+                <i *ngIf="register_process_service.isChonGioiTinh() || register_process_service.isChonHinhDaiDien() || register_process_service.isXacNhanEmail()"
+                    class="fas fa-check-circle"></i>
+                <i *ngIf="!register_process_service.isChonHinhDaiDien() && !register_process_service.isXacNhanEmail()" class="far fa-circle"></i>
+                <i *ngIf="register_process_service.isChonHinhDaiDien() || register_process_service.isXacNhanEmail()"
+                    class="fas fa-check-circle"></i>
+                <i *ngIf="!register_process_service.isXacNhanEmail()" class="far fa-circle"></i>
+                <i *ngIf="register_process_service.isXacNhanEmail()" class="fas fa-check-circle"></i>
+
+                <div class="line-done-1">
+                </div>
+                <div class="line-done-2">
+                </div>
+            </div>
+            <div class="process-name">
+
+                <p *ngIf="!register_process_service.isChonGioiTinh()">Chọn giới tính</p>
+                <p *ngIf="register_process_service.isChonGioiTinh()" style="color: #4290f6;">Chọn giới tính</p>
+
+                <p *ngIf="!register_process_service.isChonHinhDaiDien()">Chọn hình đại diện</p>
+                <p *ngIf="register_process_service.isChonHinhDaiDien()" style="color: #4290f6;">Chọn hình đại diện</p>
+
+                <p *ngIf="!register_process_service.isXacNhanEmail()">Xác nhận email</p>
+                <p *ngIf="register_process_service.isXacNhanEmail()" style="color: #4290f6;">Xác nhận email</p>
+
+            </div>
+            <div class="line"></div>
+        </div>
+
+        <router-outlet></router-outlet>
+
+        <div class="footer">
+            <i class="far fa-question-circle"></i>
+            <p>Mọi thắc mắc, câu hỏi hãy liên hệ với chúng tôi qua địa chỉ mail: bessenger@gmail.com, chúng tôi sẽ giải
+                đáp cho bạn sớm nhất có thể. Cảm ơn!</p>
+        </div>
     </div>
 </div>

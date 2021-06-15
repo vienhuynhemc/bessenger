@@ -1,5 +1,6 @@
+import { RegisterProcessService } from './../../service/register-account/register-process.service';
 import { RegisterAccountService } from './../../service/register-account/register-account.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie
 import { AnimationItem } from 'lottie-web';
@@ -11,7 +12,7 @@ import { AnimationOptions } from 'ngx-lottie';
   styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
-  
+
   // lottie
   options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -22,13 +23,21 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     public register_account_service: RegisterAccountService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    public register_process_service: RegisterProcessService
   ) { }
 
   ngOnInit(): void {
     if (!this.register_account_service.isRegister()) {
       this.router.navigate(['/bessenger']);
     } else {
+      let count = JSON.parse(localStorage.getItem("register-process"));
+      if (count == null) {
+        localStorage.setItem("register-process", JSON.stringify("0"));
+        this.register_process_service.reset();
+        this.register_process_service.getData();
+      }
       this.init();
     }
   }
@@ -42,6 +51,14 @@ export class RegisterPageComponent implements OnInit {
     this.countSlide = 0;
     this.isRunningSlide = true;
     this.setDelay(10000);
+    // Xử lý việc đi tới component tương ứng
+    if (this.register_process_service.isChonGioiTinh()) {
+      this.moveToSelectSexPage();
+    } else if (this.register_process_service.isChonHinhDaiDien()) {
+      this.moveToSelectAvatarPage();
+    } else if (this.register_process_service.isXacNhanEmail()) {
+      this.moveToVerifyEmailPage();
+    }
   }
 
   animationCreated(animationItem: AnimationItem): void {
@@ -67,5 +84,17 @@ export class RegisterPageComponent implements OnInit {
     }, times);
   }
 
+  ///////////////////////////////////////
+  // Các hàm di chuyển trang
+  moveToSelectSexPage(): void {
+    this.router.navigate(['chon-gioi-tinh'], { relativeTo: this.route });
+  }
+  moveToSelectAvatarPage(): void {
+    this.router.navigate(['chon-hinh-dai-dien'], { relativeTo: this.route });
+  }
+  moveToVerifyEmailPage(): void {
+    this.router.navigate(['xac-nhan-email'], { relativeTo: this.route });
+  }
+  ////////////////////////////////////////
 
 }

@@ -89,7 +89,7 @@ export class RegisterAccountService {
   }
 
   public isRegister(): boolean {
-    return this.ma_tai_khoan != null;
+    return JSON.parse(localStorage.getItem("ma_tai_khoan")) != null;
   }
 
   public list: any[];
