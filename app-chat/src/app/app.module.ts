@@ -44,6 +44,9 @@ import { AddGroupService } from './service/friends-page/add-group/add-group.serv
 import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
 import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
 import { RegisterPageComponent } from './view/register-page/register-page.component';
+import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
+import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
+import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
 @NgModule({
   declarations: [
     // Trang index
@@ -65,6 +68,9 @@ import { RegisterPageComponent } from './view/register-page/register-page.compon
     ProfileComponent,
     ChangepassComponent,
     RegisterPageComponent,
+    SelectSexComponent,
+    SelectAvatarComponent,
+    VerifyEmailComponent,
 
 
   ],
