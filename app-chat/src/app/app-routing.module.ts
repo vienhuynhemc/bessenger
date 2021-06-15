@@ -1,3 +1,4 @@
+import { RegisterPageComponent } from './view/register-page/register-page.component';
 import { SettingPageComponent } from './view/main-page/setting-page/setting-page.component';
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { FriendsPageComponent } from './view/main-page/friends-page/friends-page.component';
@@ -15,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: "", redirectTo: "dang-nhap", pathMatch: "full" },
   { path: "dang-nhap", component: LoginPageComponent },
+  { path: "dang-ky", component: RegisterPageComponent },
   {
     path: "bessenger",
     component: MainPageComponent,
@@ -27,7 +29,7 @@ const routes: Routes = [
       { path: "thong-tin-ca-nhan", component: PersonalPageComponent },
       { path: "cai-dat", component: SettingPageComponent },
     ]
-  },  
+  },
   { path: "**", component: NotFoundPageComponent },
 ];
 

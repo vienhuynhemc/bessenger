@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   // firebase config
-  firebaseConfig : {
-    apiKey: "AIzaSyDAQbiqx4NKbp8C1yOts5pNH6erphbhdYo",
-    authDomain: "chat-app-d133c.firebaseapp.com",
-    databaseURL: "https://chat-app-d133c-default-rtdb.firebaseio.com",
-    projectId: "chat-app-d133c",
-    storageBucket: "chat-app-d133c.appspot.com",
-    messagingSenderId: "278838825964",
-    appId: "1:278838825964:web:0cf9c6ca675da2e61aa6c9",
-    measurementId: "G-T8BNZTJ0TN"
+  firebaseConfig: {
+    apiKey: "AIzaSyBbM1A0v4VJY5Ly5ib2Og_zDSw-abrBfq0",
+    authDomain: "bessenger-6b25f.firebaseapp.com",
+    databaseURL: "https://bessenger-6b25f-default-rtdb.firebaseio.com",
+    projectId: "bessenger-6b25f",
+    storageBucket: "bessenger-6b25f.appspot.com",
+    messagingSenderId: "23435073727",
+    appId: "1:23435073727:web:a2b3d58888a5df49d4ce0a",
+    measurementId: "G-WWR7ES6LYB"
   }
 };
 

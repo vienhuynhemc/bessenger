@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
@@ -42,6 +43,7 @@ import { RequestAddFriendService } from './service/friends-page/request-add/requ
 import { AddGroupService } from './service/friends-page/add-group/add-group.service';
 import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
 import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
+import { RegisterPageComponent } from './view/register-page/register-page.component';
 @NgModule({
   declarations: [
     // Trang index
@@ -62,6 +64,7 @@ import { FriendsListService } from './service/chat-page/friends-list/friends-lis
     AvatarComponent,
     ProfileComponent,
     ChangepassComponent,
+    RegisterPageComponent,
 
 
   ],
@@ -75,6 +78,7 @@ import { FriendsListService } from './service/chat-page/friends-list/friends-lis
     // firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     FormsModule,
   ],
   providers: [
