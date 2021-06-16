@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 65%;
+  height: 488px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .title-header {
+    font-family: "Raleway";
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 23px;
+    margin-top: 30px;
+    color: #23262e;
+  }
+
+  .noi-dung {
+    letter-spacing: 1px;
+    font-size: 11px;
+    color: #888888;
+    margin-top: 20px;
+    font-family: "Raleway";
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+
+    .icon {
+      width: 200px;
+      box-shadow: 0 0 46px 10px #a0a0a026;
+      border-radius: 27px;
+      overflow: hidden;
+      padding: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      img {
+        width: 200px;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    :hover {
+      transform: scale(1.2);
+    }
+  }
+}

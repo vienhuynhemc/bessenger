@@ -35,6 +35,30 @@ export class SelectSexComponent implements OnInit {
     }
   }
 
+  public selectSex(gioiTinh: string) {
+    // Hiện loading
+    setTimeout(() => {
+      this.register_process_service.setLoading(true);
+    }, 0);
+    // Cập nhật lại dữ liệu trong localStorage
+    localStorage.setItem("register-process", JSON.stringify("1"));
+    setTimeout(() => {
+      this.register_process_service.reset();
+      this.register_process_service.getData();
+    }, 0);
+    // Tải hình mặt định tương ứng lên firebase và cập dữ liệu trong firebase
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan"));
+    this.register_account_service.taiHinhMacDinhChoTaiKhoan(ma_tai_khoan, gioiTinh);
+    // Ẩn loading
+    setTimeout(() => {
+      this.register_process_service.setLoading(false);
+    }, 0);
+    // Di chuyển tới bước tiếp theo
+    this.register_process_service.reset();
+    this.register_process_service.getData();
+    this.moveToSelectAvatarPage();
+  }
+
   ///////////////////////////////////////
   // Các hàm di chuyển trang
   moveToSelectAvatarPage(): void {

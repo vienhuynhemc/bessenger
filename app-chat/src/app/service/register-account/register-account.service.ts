@@ -1,4 +1,4 @@
-import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireStorageModule, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -52,7 +52,7 @@ export class RegisterAccountService {
     localStorage.setItem("ma_tai_khoan", JSON.stringify(new_account.key));
     this.getData();
     // Đẩy cho firebase cái hình mặt định
-    this.taiHinhMacDinhChoTaiKhoan(new_account.key);
+    this.taiHinhMacDinhChoTaiKhoan(new_account.key,"nam");
     // Thêm dữ liêu vô webservice
     this.themDuLieuTaiKhoanMoiWebservice(ten, email, password, code);
   }
@@ -62,9 +62,16 @@ export class RegisterAccountService {
     this.httpClient.get(url).subscribe(data => { });
   }
 
-  public taiHinhMacDinhChoTaiKhoan(ma_tai_khoan:string): void {
+  public taiHinhMacDinhChoTaiKhoan(ma_tai_khoan:string,gioi_tinh:string): void {
     // Tải hình từ assets
-    this.httpClient.get("assets/images/man.png", { responseType: 'blob' }).subscribe(data => {
+    let link_hinh:string = "assets/images/register-page/nam.png";
+    let gioi_tinh_string:string = "Nam";
+    if(gioi_tinh == "nu"){
+      gioi_tinh_string = "Nữ"
+      link_hinh = "assets/images/register-page/nu.png";
+    }
+
+    this.httpClient.get(link_hinh, { responseType: 'blob' }).subscribe(data => {
       let file: File = new File([data], ma_tai_khoan + ".png", { type: data.type });
       let filePath: string = "/tai_khoan/" + ma_tai_khoan + ".png";
       const storageRef = this.storage.ref(filePath);
@@ -73,7 +80,7 @@ export class RegisterAccountService {
         finalize(
           () => {
             storageRef.getDownloadURL().subscribe(downloadURL => {
-              this.db.object("/tai_khoan/" + ma_tai_khoan).update({ hinh: filePath, link_hinh: downloadURL });
+              this.db.object("/tai_khoan/" + ma_tai_khoan).update({ hinh: filePath, link_hinh: downloadURL,gioi_tinh:gioi_tinh_string });
             });
           }
         )
