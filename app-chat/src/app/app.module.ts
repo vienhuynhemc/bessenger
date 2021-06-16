@@ -38,10 +38,7 @@ import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.co
 import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
 import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
 
-import { FriendsPageService } from './service/friends-page/main/friends-page.service';
-import { RequestAddFriendService } from './service/friends-page/request-add/request-add-friend.service';
-import { AddGroupService } from './service/friends-page/add-group/add-group.service';
-import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
+
 import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
 
 import { FriendsComponent } from './view/main-page/friends-page/friends/friends/friends.component';
@@ -98,10 +95,6 @@ import { VerifyEmailComponent } from './view/register-page/verify-email/verify-e
   providers: [
     UserChatService,
     UserOnlineService,
-    FriendsPageService,
-    RequestAddFriendService,
-    AddGroupService,
-    AddFriendService,
     FriendsListService
   ],
   bootstrap: [AppComponent],
