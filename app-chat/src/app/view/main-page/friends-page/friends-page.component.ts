@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
@@ -9,29 +10,40 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
   templateUrl: './friends-page.component.html',
   styleUrls: ['./friends-page.component.scss'],
 })
-export class FriendsPageComponent implements OnInit {
+export class FriendsPageComponent implements OnInit, OnDestroy {
   friendsPageDefautl: number;
+  private valueFromChildSubscription: Subscription;
   constructor(
     private main_page_service: MainPageService,
     private route: ActivatedRoute,
     private router: Router,
-    public friendsPageService: FriendsPageService
+    public friendsPageService: FriendsPageService,
+    private cdr: ChangeDetectorRef
   ) {}
+
+  ngOnDestroy(): void {
+    this.valueFromChildSubscription.unsubscribe();
+  }
   ngOnInit(): void {
     setTimeout(() => {
       this.main_page_service.reset();
       this.main_page_service.selectFriendsPage();
       
     }, 0);
-    this.getSelectedFriendsPage();
-   
+    
+    this. getSelectedFriendsPage();
+  }
+
+  ngAfterViewChecked(){
+   this.cdr.detectChanges();
   }
 
   // get về trạng thái page
   getSelectedFriendsPage() {
-    this.friendsPageService.friendsDefault.subscribe(friendsDefault => 
+    this.valueFromChildSubscription = this.friendsPageService.friendsDefault.subscribe(friendsDefault => 
       {this.friendsPageDefautl = friendsDefault,
       this.onClickMenu(this.friendsPageDefautl);
+     
       });
     
   }
@@ -45,19 +57,19 @@ export class FriendsPageComponent implements OnInit {
     const iconRequest = document.getElementById('icon_r');
     const iconSend = document.getElementById('icon_s');
     if (index === 0) {
-      friends.style.cssText = 'background-color: #3275f7; color: white;';
+      friends.style.cssText = 'background-color: #3275f7;color: white;';
       iconFriends.style.color = 'white';
 
-      request.style.cssText = 'background-color: white; color: black;';
+      request.style.cssText = 'background-color: white;color: black;';
       iconRequest.style.color = 'rgb(136, 133, 133)';
 
-      send.style.cssText = 'background-color: white; color: black;';
+      send.style.cssText = 'background-color: white;color: black;';
       iconSend.style.color = 'rgb(136, 133, 133)';
     } else if (index === 1) {
       friends.style.cssText = 'background-color: white;color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
 
-      request.style.cssText = 'background-color: #3275f7; color: white;';
+      request.style.cssText = 'background-color: #3275f7;color: white;';
       iconRequest.style.color = 'white';
 
       send.style.cssText = 'background-color: white; color: black;';

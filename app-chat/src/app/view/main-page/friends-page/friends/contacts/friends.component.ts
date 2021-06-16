@@ -30,7 +30,7 @@ export class FriendsComponent implements OnInit {
     },
     {
       id: 2,
-      img: 'assets/images/list-friends-chat-page/avt1.jpg',
+      img: 'assets/images/list-friends-chat-page/ol3.jpg',
       name: 'Junior Sabine',
       mutualFriends: 10,
     },
@@ -142,7 +142,7 @@ export class FriendsComponent implements OnInit {
   }
   // send object đén profile
   sendFriendToProfile(friendInfor: FriendInfor) {
-    this.contactsService.setFriendInforService(friendInfor);
+      this.contactsService.setFriendInforService(friendInfor);
   }
   // get data từ service
   getListFriends() {}
