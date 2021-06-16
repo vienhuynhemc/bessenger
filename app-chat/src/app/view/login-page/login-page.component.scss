@@ -3,6 +3,26 @@
   padding: 0;
 }
 
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #e8a2a224;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  .anim {
+    border: 4px solid #da9696;
+    border-radius: 50%;
+    background: white;
+    width: 300px;
+    height: 300px;
+  }
+}
+
 .container {
   width: 1244px;
   display: flex;
@@ -78,6 +98,7 @@
     margin-right: auto;
 
     p {
+      letter-spacing: 1px;
       font-family: "Raleway";
       font-size: 15px;
       color: white;
@@ -221,6 +242,7 @@
       margin-right: auto;
 
       p {
+        letter-spacing: 1px;
         font-family: "Raleway";
         font-size: 15px;
         color: white;
@@ -350,6 +372,7 @@
       margin-right: auto;
 
       p {
+        letter-spacing: 1px;
         font-family: "Raleway";
         font-size: 15px;
         color: white;

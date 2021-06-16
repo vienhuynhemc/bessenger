@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 // Lottie
 import player from 'lottie-web';
 import { LottieModule } from 'ngx-lottie';
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
@@ -41,8 +43,15 @@ import { RequestAddFriendService } from './service/friends-page/request-add/requ
 import { AddGroupService } from './service/friends-page/add-group/add-group.service';
 import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
 import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
+
 import { FriendsComponent } from './view/main-page/friends-page/friends/friends/friends.component';
 import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
+
+import { RegisterPageComponent } from './view/register-page/register-page.component';
+import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
+import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
+import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
+
 @NgModule({
   declarations: [
     // Trang index
@@ -63,21 +72,27 @@ import { ProfileFriendComponent } from './view/main-page/friends-page/friends/pr
     AvatarComponent,
     ProfileComponent,
     ChangepassComponent,
+
     FriendsComponent,
     ProfileFriendComponent,
 
-   
+    RegisterPageComponent,
+    SelectSexComponent,
+    SelectAvatarComponent,
+    VerifyEmailComponent,
+
   ],
   imports: [
     BrowserModule,
+    // http
+    HttpClientModule,
     AppRoutingModule,
     // lottie
     LottieModule.forRoot({ player: playerFactory }),
-    // http
-    HttpClientModule,
     // firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     FormsModule,
   ],
   providers: [
@@ -91,4 +106,4 @@ import { ProfileFriendComponent } from './view/main-page/friends-page/friends/pr
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,3 +1,7 @@
+import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
+import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
+import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
+import { RegisterPageComponent } from './view/register-page/register-page.component';
 import { SettingPageComponent } from './view/main-page/setting-page/setting-page.component';
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { FriendsPageComponent } from './view/main-page/friends-page/friends-page.component';
@@ -16,6 +20,16 @@ const routes: Routes = [
   { path: "", redirectTo: "dang-nhap", pathMatch: "full" },
   { path: "dang-nhap", component: LoginPageComponent },
   {
+    path: "dang-ky",
+    component: RegisterPageComponent,
+    children: [
+      { path: "", redirectTo: "chon-gioi-tinh", pathMatch: "full" },
+      { path: "chon-gioi-tinh", component: SelectSexComponent },
+      { path: "chon-hinh-dai-dien", component: SelectAvatarComponent },
+      { path: "xac-nhan-email", component: VerifyEmailComponent }
+    ]
+  },
+  {
     path: "bessenger",
     component: MainPageComponent,
     children: [
@@ -27,7 +41,7 @@ const routes: Routes = [
       { path: "thong-tin-ca-nhan", component: PersonalPageComponent },
       { path: "cai-dat", component: SettingPageComponent },
     ]
-  },  
+  },
   { path: "**", component: NotFoundPageComponent },
 ];
 

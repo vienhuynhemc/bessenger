@@ -1,7 +1,12 @@
-import { MainPageService } from './../../service/main-page/main-page.service';
-import { LoginService } from './../../service/login/login.service';
-import { Router } from '@angular/router';
+import { RegisterObjectSendMail } from './../../models/regiser-account/register_object_send_mail';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from './../../service/login/login.service';
+import { RegisterAccountService } from './../../service/register-account/register-account.service';
+// lottie
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
+
 
 @Component({
   selector: 'app-login-page',
@@ -10,15 +15,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
+  // lottie
+  options: AnimationOptions = {
+    path: '/assets/json/lottie/loading.json',
+  };
+
   public userName: string;
   public passWord: string;
   public ten: string;
   public countSlide: number;
-  public isRunningSlide:boolean;
+  public isRunningSlide: boolean;
+  public isLoading: boolean;
 
   constructor(
-    private router: Router, 
-    private login_service: LoginService) {
+    private router: Router,
+    private login_service: LoginService,
+    private register_account_service: RegisterAccountService
+  ) {
+  }
+
+  animationCreated(animationItem: AnimationItem): void {
   }
 
   ngOnInit(): void {
@@ -27,7 +43,8 @@ export class LoginPageComponent implements OnInit {
     document.getElementById("hinh4").style.opacity = "0";
     document.getElementById("hinh5").style.opacity = "0";
     this.countSlide = 0;
-    this.isRunningSlide =true;
+    this.isLoading = false;
+    this.isRunningSlide = true;
 
     if (this.login_service.isLoginSuccess()) {
       this.router.navigate(["/bessenger"]);
@@ -37,7 +54,7 @@ export class LoginPageComponent implements OnInit {
 
   dangNhap(): void {
     this.login_service.login();
-    this.isRunningSlide =false;
+    this.isRunningSlide = false;
     this.router.navigate(["/bessenger"]);
   }
 
@@ -95,7 +112,7 @@ export class LoginPageComponent implements OnInit {
     if (value.trim().length > 0) {
       document.getElementById("dk-ten").style.border = "1px solid #e2e2e2";
       document.getElementById("dk-error-2").style.display = "none";
-    }else{
+    } else {
       document.getElementById("dk-ten").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-2").style.display = "block";
     }
@@ -105,21 +122,23 @@ export class LoginPageComponent implements OnInit {
     if (value.trim().length > 0) {
       document.getElementById("dk-email").style.border = "1px solid #e2e2e2";
       document.getElementById("dk-error-1").style.display = "none";
-    }else{
+    } else {
       document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-1").style.display = "block";
+      document.getElementById("dk-error-1").innerText = "Email không thể thiếu"
     }
   }
 
   dangKy(): void {
-    let email = this.userName.trim();
-    let ten = this.ten.trim();
-    let mat_khau = this.passWord;
+    let email:string = this.userName.trim();
+    let ten:string = this.ten.trim();
+    let mat_khau:string = this.passWord;
     let count = 0;
     if (email.length == 0) {
       count++;
       document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-1").style.display = "block";
+      document.getElementById("dk-error-1").innerText = "Email không thể thiếu"
     }
     if (ten.length == 0) {
       count++;
@@ -131,7 +150,38 @@ export class LoginPageComponent implements OnInit {
       document.getElementById("dk-password").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-3").style.display = "block";
     }
-    console.log(count);
+    if (count == 0) {
+      // showloading
+      this.isLoading = true;
+      let code:string = "";
+      for (let i = 0; i < 6; i++) {
+        let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
+        code += newNumber + "";
+      }
+      let newData = new RegisterObjectSendMail();
+      newData.code = code;
+      newData.email = email;
+      // check email
+      this.register_account_service.checkEmail(email).subscribe(data => {
+        // Bên kia trả về 1 bảng object AccountWebservice 
+        if (data.length != 0) {
+          document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
+          document.getElementById("dk-error-1").style.display = "block";
+          document.getElementById("dk-error-1").innerText = "Email đã được đăng ký, bạn có thể chọn quên mật khẩu để lấy lại mật khẩu"
+          this.isLoading = false;
+        } else {
+          // Oke email không tồn tại thì tạo tài khoản
+          // set thông tin
+          // Fill data
+          this.register_account_service.insertNewAccountToFirebase(ten,email,mat_khau,code);
+          // gửi email rồi tới trang đăng ký
+          this.register_account_service.sendMail(newData).subscribe((data) => {
+            this.isLoading = false;
+            this.router.navigate(['dang-ky']);
+          });
+        }
+      });
+    }
   }
 
   setDelay(times: any) {
@@ -148,7 +198,7 @@ export class LoginPageComponent implements OnInit {
       document.getElementById("child").style.left = `${this.countSlide * 80}px`;
       document.getElementById("content_child").innerText = `0${this.countSlide + 1}`;
       // repeate
-      if(this.isRunningSlide){
+      if (this.isRunningSlide) {
         this.setDelay(times);
       }
     }, times);
@@ -200,7 +250,7 @@ export class LoginPageComponent implements OnInit {
       (<HTMLElement>elements[0]).style.background = "#e2e2e2";
       (<HTMLElement>elements[1]).style.background = "#e2e2e2";
       (<HTMLElement>elements[2]).style.background = "#e2e2e2";
-    
+
       document.getElementById("dk-password").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-3").style.display = "block";
     }

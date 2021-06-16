@@ -24,7 +24,6 @@ export class NotFoundPageComponent implements OnInit {
   }
 
   animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
   }
 
   back(): void {
