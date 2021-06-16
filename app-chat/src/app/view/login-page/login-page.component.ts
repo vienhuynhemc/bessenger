@@ -1,12 +1,14 @@
-import { RegisterObjectSendMail } from './../../models/regiser-account/register_object_send_mail';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { LoginService } from './../../service/login/login.service';
-import { RegisterAccountService } from './../../service/register-account/register-account.service';
 // lottie
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-
+import { finalize } from 'rxjs/operators';
+import { RegisterObjectSendMail } from './../../models/regiser-account/register_object_send_mail';
+import { LoginService } from './../../service/login/login.service';
+import { RegisterAccountService } from './../../service/register-account/register-account.service';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-login-page',
@@ -30,7 +32,9 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private router: Router,
     private login_service: LoginService,
-    private register_account_service: RegisterAccountService
+    private register_account_service: RegisterAccountService,
+    private storage: AngularFireStorage,
+    private db: AngularFireDatabase,
   ) {
   }
 
@@ -130,9 +134,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   dangKy(): void {
-    let email:string = this.userName.trim();
-    let ten:string = this.ten.trim();
-    let mat_khau:string = this.passWord;
+    let email: string = this.userName.trim();
+    let ten: string = this.ten.trim();
+    let mat_khau: string = this.passWord;
     let count = 0;
     if (email.length == 0) {
       count++;
@@ -153,7 +157,7 @@ export class LoginPageComponent implements OnInit {
     if (count == 0) {
       // showloading
       this.isLoading = true;
-      let code:string = "";
+      let code: string = "";
       for (let i = 0; i < 6; i++) {
         let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
         code += newNumber + "";
@@ -173,11 +177,38 @@ export class LoginPageComponent implements OnInit {
           // Oke email không tồn tại thì tạo tài khoản
           // set thông tin
           // Fill data
-          this.register_account_service.insertNewAccountToFirebase(ten,email,mat_khau,code);
-          // gửi email rồi tới trang đăng ký
-          this.register_account_service.sendMail(newData).subscribe((data) => {
-            this.isLoading = false;
-            this.router.navigate(['dang-ky']);
+          this.register_account_service.insertNewAccountToFirebase(ten, email, mat_khau, code);
+          let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan"));
+          // Thêm dữ liêu liệu vô webservice
+          this.register_account_service.themDuLieuTaiKhoanMoiWebservice(ten, email, mat_khau, code, ma_tai_khoan).subscribe(data => {
+            // Thêm vô webservice xong thì cho nó mặt định giới tính là nam và tải hình nam
+            this.register_account_service.taiHinhMacDinhChoTaiKhoan("nam").subscribe(data => {
+              let file: File = new File([data], ma_tai_khoan + ".png", { type: data.type });
+              let filePath: string = "/tai_khoan/" + ma_tai_khoan + ".png";
+              const storageRef = this.storage.ref(filePath);
+              const uploadTask = this.storage.upload(filePath, file);
+              uploadTask.snapshotChanges().pipe(
+                finalize(
+                  () => {
+                    storageRef.getDownloadURL().subscribe(downloadURL => {
+                      let gioi_tinh_string: string = "Nam";
+                      this.db.object("/tai_khoan/" + ma_tai_khoan).update({ hinh: filePath, link_hinh: downloadURL, gioi_tinh: gioi_tinh_string });
+                    });
+                  }
+                )
+              ).subscribe();
+              uploadTask.percentageChanges().subscribe(percent => {
+                console.log("Tiến độ tải hình giới tính: "+percent);
+                if (percent == 100) {
+                  // Tải dữ liệu xong xui hết thì gửi email rồi chuyển trang
+                  // gửi email rồi tới trang đăng ký
+                  this.register_account_service.sendMail(newData).subscribe((data) => {
+                    this.isLoading = false;
+                    this.router.navigate(['dang-ky']);
+                  });
+                }
+              });
+            });
           });
         }
       });
