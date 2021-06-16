@@ -1,0 +1,25 @@
+<div class="friends-list">
+    <div class="friends-list-content">
+        <div [class.detail-selected]="i === selectedIndex" class="detail-friend"  *ngFor="let item of friends_list; let i = index" (click)="onClickSelectedFriend(item, i)">
+                <div class="detail-sub">
+                    <div class="detail-left">
+                        <img [src]="item.img" alt="">
+                    </div>
+                    <div class="detail-center">
+                        <div class="name">{{item.name}}</div>
+                        <div class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                    </div>
+                    <div class="detail-right">
+                        <i class="fas fa-heart"></i>
+                        <i id="icon-option-{{i}}" (click)="onClickOptionGroup(i)" class="fas fa-ellipsis-v" ></i>
+                    </div>
+                </div>
+                <div id="option-{{i}}" class="option" [class.option-detail-block]="i === optionClick">
+                    <div class="option-profile option-detail"><i class="fas fa-comment"></i><span>Nhắn tin</span></div>
+                    <div class="option-abord option-detail"><i class="fas fa-user-times"></i><span>Hủy kết bạn</span></div>
+                </div>
+           
+        </div>
+       
+    </div>
+</div>

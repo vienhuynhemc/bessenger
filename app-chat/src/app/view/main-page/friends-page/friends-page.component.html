@@ -1,3 +1,38 @@
 <div class="container">
-    <p>Home - page works</p>
+    <div class="left">
+        <div class="search">
+            <input type="text" placeholder="Tìm kiếm">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="menu">
+            <div (click)="moveToFriends()" id="btn-friends" class="btn-friends btn-menu " (click)="onClickMenu(0)">
+                <i id="icon_f" class="icon_f fas fa-users"></i>
+                <span id="text-f" class="text_f">
+                Bạn bè
+                </span>
+            </div>
+            <div (click)="moveToRequest()" id="btn-request" class="btn-request btn-menu" (click)="onClickMenu(1)">
+                <i id="icon_r" class="icon_r fas fa-question-circle"></i>
+                <span id="text-r" class="text_r">
+                Lời mời
+                </span>
+            </div>
+            <div (click)="moveToSend()" id="btn-send" class="btn-send btn-menu" (click)="onClickMenu(2)">
+                <i id="icon_s" class="icon_s fas fa-paper-plane"></i>
+                <span id="text-s" class="text-s ">
+                Đã gửi
+                </span>
+            </div>
+        </div>
+        <div class="result">
+            <div class="title">10 kết quả</div>
+            <div class="next btn-result"><i class="fas fa-user-plus"></i></div>
+        </div>
+        <router-outlet ></router-outlet>
+    </div>
+    <div class="right">
+        <app-profile-friend *ngIf="friendsPageDefautl === 0" ></app-profile-friend>
+        <app-profile-request *ngIf="friendsPageDefautl === 1" ></app-profile-request>
+        <app-profile-send *ngIf="friendsPageDefautl === 2"></app-profile-send>
+    </div>
 </div>

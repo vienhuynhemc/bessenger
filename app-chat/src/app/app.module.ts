@@ -38,15 +38,22 @@ import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.co
 import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
 import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
 
-import { FriendsPageService } from './service/friends-page/main/friends-page.service';
-import { RequestAddFriendService } from './service/friends-page/request-add/request-add-friend.service';
-import { AddGroupService } from './service/friends-page/add-group/add-group.service';
-import { AddFriendService } from './service/friends-page/add-friend/add-friend.service';
+
 import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
+
+import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
+import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
+
 import { RegisterPageComponent } from './view/register-page/register-page.component';
 import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
 import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
 import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
+import { ContactsService } from './service/friends-page/contacts/contacts.service';
+import { RequestAddFriendsComponent } from './view/main-page/friends-page/friends/request-add-friends/request-add-friends.component';
+import { SendRequsetAddComponent } from './view/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
+import { ProfileRequestComponent } from './view/main-page/friends-page/friends/profile-request/profile-request.component';
+import { ProfileSendComponent } from './view/main-page/friends-page/friends/profile-send/profile-send.component';
+
 @NgModule({
   declarations: [
     // Trang index
@@ -67,11 +74,18 @@ import { VerifyEmailComponent } from './view/register-page/verify-email/verify-e
     AvatarComponent,
     ProfileComponent,
     ChangepassComponent,
+
+    FriendsComponent,
+    ProfileFriendComponent,
+
     RegisterPageComponent,
     SelectSexComponent,
     SelectAvatarComponent,
     VerifyEmailComponent,
-
+    RequestAddFriendsComponent,
+    SendRequsetAddComponent,
+    ProfileRequestComponent,
+    ProfileSendComponent,
 
   ],
   imports: [
@@ -90,11 +104,8 @@ import { VerifyEmailComponent } from './view/register-page/verify-email/verify-e
   providers: [
     UserChatService,
     UserOnlineService,
-    FriendsPageService,
-    RequestAddFriendService,
-    AddGroupService,
-    AddFriendService,
-    FriendsListService
+    FriendsListService,
+    ContactsService
   ],
   bootstrap: [AppComponent],
 })

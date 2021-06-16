@@ -15,38 +15,55 @@ import { NotFoundPageComponent } from './view/not-found-page/not-found-page.comp
 // Của Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RequestAddFriendsComponent } from './view/main-page/friends-page/friends/request-add-friends/request-add-friends.component';
+import { SendRequsetAddComponent } from './view/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
+import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
+import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
+import { ProfileRequestComponent } from './view/main-page/friends-page/friends/profile-request/profile-request.component';
+import { ProfileSendComponent } from './view/main-page/friends-page/friends/profile-send/profile-send.component';
+import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "dang-nhap", pathMatch: "full" },
-  { path: "dang-nhap", component: LoginPageComponent },
+  { path: '', redirectTo: 'dang-nhap', pathMatch: 'full' },
+  { path: 'dang-nhap', component: LoginPageComponent },
   {
-    path: "dang-ky",
+    path: 'dang-ky',
     component: RegisterPageComponent,
     children: [
-      { path: "", redirectTo: "chon-gioi-tinh", pathMatch: "full" },
-      { path: "chon-gioi-tinh", component: SelectSexComponent },
-      { path: "chon-hinh-dai-dien", component: SelectAvatarComponent },
-      { path: "xac-nhan-email", component: VerifyEmailComponent }
-    ]
+      { path: '', redirectTo: 'chon-gioi-tinh', pathMatch: 'full' },
+      { path: 'chon-gioi-tinh', component: SelectSexComponent },
+      { path: 'chon-hinh-dai-dien', component: SelectAvatarComponent },
+      { path: 'xac-nhan-email', component: VerifyEmailComponent },
+    ],
   },
   {
-    path: "bessenger",
+    path: 'bessenger',
     component: MainPageComponent,
     children: [
-      { path: "", redirectTo: "trang-chu", pathMatch: "full" },
-      { path: "trang-chu", component: HomePageComponent },
-      { path: "tin-nhan", component: ChatPageComponent },
-      { path: "tin-nhan-an", component: ChatRequestPageComponent },
-      { path: "ban-be", component: FriendsPageComponent },
-      { path: "thong-tin-ca-nhan", component: PersonalPageComponent },
-      { path: "cai-dat", component: SettingPageComponent },
-    ]
+      { path: '', redirectTo: 'trang-chu', pathMatch: 'full' },
+      { path: 'trang-chu', component: HomePageComponent },
+      { path: 'tin-nhan', component: ChatPageComponent },
+      { path: 'tin-nhan-an', component: ChatRequestPageComponent },
+      {
+        path: 'ban-be',
+        component: FriendsPageComponent,
+        children: [
+          { path: '', redirectTo: 'lien-lac', pathMatch: 'full' },
+          { path: 'lien-lac', component: FriendsComponent},
+          { path: 'loi-moi', component: RequestAddFriendsComponent},
+          { path: 'da-gui', component: SendRequsetAddComponent}],
+          
+      },
+     
+      { path: 'thong-tin-ca-nhan', component: PersonalPageComponent },
+      { path: 'cai-dat', component: SettingPageComponent },
+    ],
   },
-  { path: "**", component: NotFoundPageComponent },
+  { path: '**', component: NotFoundPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
