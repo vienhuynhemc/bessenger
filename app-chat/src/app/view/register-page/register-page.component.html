@@ -1,4 +1,4 @@
-<div class="loading" *ngIf="isLoading">
+<div class="loading" *ngIf="this.register_process_service.isLoadingProcess()">
     <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
 </div>
 

@@ -17,7 +17,6 @@ export class RegisterPageComponent implements OnInit {
   options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
   };
-  public isLoading: boolean;
   public countSlide: number;
   public isRunningSlide: boolean;
 
@@ -43,7 +42,9 @@ export class RegisterPageComponent implements OnInit {
   }
 
   private init(): void {
-    this.isLoading = false;
+    setTimeout(() => {
+      this.register_process_service.setLoading(false);
+    }, 0);
     document.getElementById("hinh2").style.opacity = "0";
     document.getElementById("hinh3").style.opacity = "0";
     document.getElementById("hinh4").style.opacity = "0";

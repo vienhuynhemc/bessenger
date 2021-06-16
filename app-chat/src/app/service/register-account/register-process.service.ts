@@ -8,6 +8,7 @@ export class RegisterProcessService {
   private chon_gioi_tinh_duoc_chon: boolean;
   private chon_hinh_dai_dien_duoc_chon: boolean;
   private xac_nhan_email_chon: boolean;
+  private isLoading: boolean;
 
   constructor() {
     this.chon_gioi_tinh_duoc_chon = false;
@@ -15,6 +16,14 @@ export class RegisterProcessService {
     this.xac_nhan_email_chon = false;
     this.getData();
   }
+
+  public isLoadingProcess(): boolean {
+    return this.isLoading;
+  }
+
+  public setLoading(loading: boolean): void {
+    this.isLoading = loading
+  };
 
   public getData(): void {
     this.reset();
@@ -32,21 +41,6 @@ export class RegisterProcessService {
     this.chon_gioi_tinh_duoc_chon = false;
     this.chon_hinh_dai_dien_duoc_chon = false;
     this.xac_nhan_email_chon = false;
-  }
-
-  public chonGioiTinh(): void {
-    this.reset();
-    this.chon_gioi_tinh_duoc_chon = true;
-  }
-
-  public chonHinhDaiDien(): void {
-    this.reset();
-    this.chon_hinh_dai_dien_duoc_chon = true;
-  }
-
-  public xacNhanEmail(): void {
-    this.reset();
-    this.xac_nhan_email_chon = true;
   }
 
   public isChonGioiTinh(): boolean {
