@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
+import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
+import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+
 
 @Component({
   selector: 'app-friends',
@@ -6,75 +10,71 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private contactsService: ContactsService,
+    private friendsPageService: FriendsPageService
+  ) {}
 
   ngOnInit(): void {
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
+    this.onClickSelectedFriend(this.friends_list[0], 0);
+    this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
-  public friends_list: any[] = [
+  public friends_list: FriendInfor[] = [
     {
-      id: '1',
-      link: 'assets/images/list-friends-chat-page/avt1.jpg',
+      id: 1,
+      img: 'assets/images/list-friends-chat-page/avt2.jpg',
       name: 'Karlyn Carabello',
-      timer: '08:50',
-      content: 'umbala alaba trap',
+      mutualFriends: 3,
     },
     {
-      id: '2',
-      link: 'assets/images/list-friends-chat-page/avt2.jpg',
+      id: 2,
+      img: 'assets/images/list-friends-chat-page/avt1.jpg',
       name: 'Junior Sabine',
-      timer: '08:45',
-      content: 'yasuo penta kill nè',
+      mutualFriends: 10,
     },
     {
-      id: '3',
-      link: 'assets/images/list-friends-chat-page/avt3.jpg',
+      id: 3,
+      img: 'assets/images/list-friends-chat-page/avt3.jpg',
       name: 'Melinie Sherk',
-      timer: '08:40',
-      content: 'đang bị hàng chờ 5 phút',
+      mutualFriends: 10,
     },
     {
-      id: '4',
-      link: 'assets/images/list-friends-chat-page/avt4.jpg',
+      id: 4,
+      img: 'assets/images/list-friends-chat-page/avt4.jpg',
       name: 'Harrison Palmatier',
-      timer: '08:30',
-      content: 'troll or afk',
+      mutualFriends: 10,
     },
     {
-      id: '5',
-      link: 'assets/images/list-friends-chat-page/avt5.jpg',
+      id: 5,
+      img: 'assets/images/list-friends-chat-page/avt5.jpg',
       name: 'Tressa Duhart',
-      timer: '08:20',
-      content: 'whatsup bro!',
+      mutualFriends: 10,
     },
     {
-      id: '6',
-      link: 'assets/images/list-friends-chat-page/avt6.jpg',
+      id: 6,
+      img: 'assets/images/list-friends-chat-page/avt6.jpg',
       name: 'Erick Spiva',
-      timer: '08:10',
-      content: 'tao ký ngực fan 2k3 2 em',
+      mutualFriends: 10,
     },
     {
-      id: '7',
-      link: 'assets/images/list-friends-chat-page/avt7.png',
+      id: 7,
+      img: 'assets/images/list-friends-chat-page/avt7.png',
       name: 'Josefina Simpson',
-      timer: '08:00',
-      content: 'kẹp 3 2 em ấy đi ăn bún ...',
+      mutualFriends: 10,
     },
     {
-      id: '8',
-      link: 'assets/images/list-friends-chat-page/avt8.jpg',
+      id: 8,
+      img: 'assets/images/list-friends-chat-page/avt8.jpg',
       name: 'Yasuo Can 5',
-      timer: '07:55',
-      content: 'umbala alaba trap',
+      mutualFriends: 10,
     },
     {
-      id: '9',
-      link: 'assets/images/list-friends-chat-page/avt9.jpg',
+      id: 9,
+      img: 'assets/images/list-friends-chat-page/avt9.jpg',
       name: 'Kaisa Pentakill',
-      timer: '07:50',
-      content: 'umbala alaba trap',
+      mutualFriends: 10,
     },
   ];
   selectedIndex: number = -1;
@@ -84,11 +84,14 @@ export class FriendsComponent implements OnInit {
   yOption: number = -1;
   xIcon: number = -1;
   yIcon: number = -1;
-
   // Khi click vào bạn bè bất kì
-  onClickSelectedFriend(index: number) {
-    if (this.optionClick == -1)
-      if (this.selectedIndex != index) this.selectedIndex = index;
+  onClickSelectedFriend(friend: FriendInfor, index: number) {
+    if (this.optionClick == -1) {
+      if (this.selectedIndex != index) {
+        this.selectedIndex = index;
+        this.sendFriendToProfile(friend);
+      }
+    }
   }
 
   // hiển thị option, xử lý click lại chính nó
@@ -137,7 +140,10 @@ export class FriendsComponent implements OnInit {
       }
     }
   }
-
+  // send object đén profile
+  sendFriendToProfile(friendInfor: FriendInfor) {
+    this.contactsService.setFriendInforService(friendInfor);
+  }
   // get data từ service
-  
+  getListFriends() {}
 }

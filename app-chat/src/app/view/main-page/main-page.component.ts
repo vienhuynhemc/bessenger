@@ -3,6 +3,7 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './../../service/login/login.service';
 import { ConditionalExpr } from '@angular/compiler';
+import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class MainPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private login_service: LoginService,
-    public main_page_service: MainPageService
+    public main_page_service: MainPageService,
+    public friendsPageService: FriendsPageService
   ) {
   }
 
@@ -38,11 +40,13 @@ export class MainPageComponent implements OnInit {
   moveToHomePage(): void {
     this.router.navigate(['trang-chu'], { relativeTo: this.route });
   }
-  moveToPersonalPage(): void {
+  moveToPersonalPage(): void {  
     this.router.navigate(['thong-tin-ca-nhan'], { relativeTo: this.route });
   }
   moveToFriendsPage(): void {
     this.router.navigate(['ban-be'], { relativeTo: this.route });
+    // trạng thái mặc định của friends page khi chọn nó
+    this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
   moveToChatPage(): void {
     this.router.navigate(['tin-nhan'], { relativeTo: this.route });

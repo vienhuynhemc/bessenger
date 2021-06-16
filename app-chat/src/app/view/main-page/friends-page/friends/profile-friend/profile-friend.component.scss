@@ -38,7 +38,8 @@
             font-weight: bold;
             z-index: 5;
             left: 10px;
-            
+            word-wrap: break-word;
+            text-shadow: 2px 2px #3275f7;
         }
         .btn {
             color: white;
@@ -50,7 +51,7 @@
             cursor: pointer;
             border-radius: 10px;
             font-size: 15px;
-            top: 460px;
+            top: 500px;
             position: absolute;
             i {
                 margin-right: 9px;
@@ -108,4 +109,5 @@
             z-index: 1;
         }
     }
+   
 }
