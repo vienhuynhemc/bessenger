@@ -1,0 +1,21 @@
+<div class="friends-list">
+    <div class="friends-list-content">
+        <div class="detail-friend"  *ngFor="let item of friends_list">
+           
+                <div class="detail-left">
+                    <img [src]="item.link" alt="">
+                </div>
+                <div class="detail-center">
+                    <div class="name">{{item.name}}</div>
+                    <div class="mutual-friends">10 bạn chung</div>
+                </div>
+                <div class="detail-right">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-ellipsis-v" ></i>
+                </div>
+      
+           
+        </div>
+       
+    </div>
+</div>
