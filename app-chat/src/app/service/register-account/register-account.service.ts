@@ -50,14 +50,17 @@ export class RegisterAccountService {
     this.getData();
   }
 
-  public themDuLieuTaiKhoanMoiWebservice(ten: string, email: string, password: string, code: string,ma_tai_khoan:string) {
+  public themDuLieuTaiKhoanMoiWebservice(ten: string, email: string, password: string, code: string, ma_tai_khoan: string) {
     const url = `${this.REST_API_SERVER}/them_mot_tai_khoan_moi.php?code=${code}&&email=${email}&&ten=${ten}&&mat_khau=${password}&&ma_tai_khoan=${ma_tai_khoan}&&trang_thai_kich_hoat=chua`;
     return this.httpClient.get(url);
   }
 
-  public taiHinhMacDinhChoTaiKhoan(gioiTinh:string){
+  public taiHinhMacDinhChoTaiKhoan(gioiTinh: string) {
     // Tải hình từ assets
-    let link_hinh:string = "assets/images/register-page/nam.png";
+    let link_hinh: string = "assets/images/register-page/nam.png";
+    if (gioiTinh == 'nu') {
+      link_hinh = "assets/images/register-page/nu.png";
+    }
     return this.httpClient.get(link_hinh, { responseType: 'blob' });
   }
 
