@@ -28,6 +28,26 @@ export class VerifyEmailService {
       .get<any>(url);
   }
 
+  public submit(code:string){
+     // Hiện loading
+     setTimeout(() => {
+      this.register_process_service.setLoading(true);
+    }, 0);
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan"));
+    const url = `${this.REST_API_SERVER}/kiem_tra_code.php?ma_tai_khoan=${ma_tai_khoan}&&code=${code}`;
+    return this.http.get<any>(url);
+  }
+
+  public turnOnAccount(){
+     // Hiện loading
+     setTimeout(() => {
+      this.register_process_service.setLoading(true);
+    }, 0);
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan"));
+    const url = `${this.REST_API_SERVER}/cap_nhat_trang_thai_kich_hoat.php?ma_tai_khoan=${ma_tai_khoan}`;
+    return this.http.get<any>(url);
+  }
+
   public updateEmail(code: string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan"));
     const url = `${this.REST_API_SERVER}/cap_nhat_code.php?ma_tai_khoan=${ma_tai_khoan}&&code=${code}`;

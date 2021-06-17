@@ -5,37 +5,38 @@
         đó là bạn!</p>
     <div class="verify">
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num1" (change) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num2" (change) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num3" (change) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num4" (change) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num5" (change) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
         <div class="child">
-            <input type="number"
+            <input type="number" [(ngModel)]="num6" (ngModelChange) = "handleButton(button)"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="1">
         </div>
     </div>
-    <button class="confirm">
+    <p class="error" #error>Mã xác thực không đúng, vui lòng kiểm tra lại!</p>
+    <button class="confirm button-done-select" disabled #button (click)="submit(error)">
         <i class="fab fa-cloudversify"></i>
         <p>Xác thực</p>
     </button>

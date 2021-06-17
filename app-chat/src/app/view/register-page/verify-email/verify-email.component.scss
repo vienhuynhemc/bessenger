@@ -69,9 +69,27 @@
     }
   }
 
+  .button-select {
+    background-color: #4290f6;
+    p {
+      color: white;
+    }
+    i {
+      color: white;
+    }
+  }
+
+  .button-done-select {
+    p {
+      color: #23262e;
+    }
+    i {
+      color: #23262e;
+    }
+  }
+
   .confirm {
     border: none;
-    background-color: #4290f6;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
@@ -88,11 +106,6 @@
       font-weight: 600;
       letter-spacing: 1px;
       margin-left: 10px;
-      color: white;
-    }
-
-    i {
-      color: white;
     }
   }
 
@@ -150,5 +163,21 @@
       font-size: 17px;
       color: #23262e;
     }
+  }
+
+  .error {
+    color: #ff7b5c;
+    display: none;
+    text-align: center;
+    font-family: "Raleway";
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    top: 353px;
+    position: absolute;
+    left: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 }
