@@ -1,24 +1,41 @@
 <div class="container">
-  <img class="bg" src="{{friendInfor.img}}" alt="" />
-  <div class="cover-bg"></div>
-  <div class="cover">
-    <img src="{{friendInfor.img}}" alt="" />
+    <img class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend10.jpg" alt="">
+    <div class="cover-circle">
+        <div class="circle"></div>
+    </div>
+    <div class="cover-avt">
+        <img  class="avt" src="{{friendInfor.img}}" alt="">
+    </div>
     
-  </div>
-  <img class="bg-sub" src="assets/images/list-friends-friends-page/bg-profile-myfriend7.jpg" alt="">
- 
-    <div class="right">
-      <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
-      <div class="name">{{friendInfor.name}}</div>
-      <button class="message btn">
-        <i class="fas fa-comment"></i>Nhắn tin
-      </button>
-      <button class="abort-friend btn">
-        <i class="fas fa-user-times"></i>Từ chối
-      </button>
-      <button class="accept btn">
-        <i class="fas fa-user-times"></i>Chấp nhận
-      </button>
+    <div class="message circle-small">
+        <div class="fill-img"></div>
+        <div class="content"><span class="sp-message">Nhắn tin</span></div>
+      
+        <div class="cover-icon">
+            <i class="fas fa-comment"></i>
+        </div>
+
     </div>
  
+    
+    <div class="accept circle-small">
+        <div class="fill-img"></div>
+        <div class="content"><span class="sp-accept">Chấp nhận</span></div>
+        <div class="cover-icon">
+            <i class="fas fa-user-check"></i>
+        </div>
+    </div>
+  
+    
+    <div class="cancel circle-small">
+      
+        <div class="fill-img"></div>
+        <div class="content"><span class="sp-cancel">Từ chối</span></div>
+        <div class="cover-icon">
+            <i class="fas fa-user-times"></i>
+        </div>
+    </div>
+    <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
+    <div class="name">{{friendInfor.name}}</div>
+   
 </div>

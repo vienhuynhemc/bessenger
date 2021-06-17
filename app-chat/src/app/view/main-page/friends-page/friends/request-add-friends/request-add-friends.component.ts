@@ -18,6 +18,7 @@ export class RequestAddFriendsComponent implements OnInit {
   ngOnInit(): void {
     this.onClickSelectedFriend(this.friends_list[0], 0);
     this.friendsPageService.selectedRequestService();
+    
   }
   
   public friends_list: FriendInfor[] = [
@@ -78,20 +79,15 @@ export class RequestAddFriendsComponent implements OnInit {
   ];
   selectedIndex: number = -1;
   indexOption: number = -1;
-  optionClick: number = -1;
-  xOption: number = -1;
-  yOption: number = -1;
-  xIcon: number = -1;
-  yIcon: number = -1;
+ 
+ 
   
   // Khi click vào bạn bè bất kì
   onClickSelectedFriend(friend: FriendInfor, index: number) {
-    if (this.optionClick == -1) {
       if (this.selectedIndex != index) {
         this.selectedIndex = index;
         this.sendFriendToProfileRequest(friend);
       }
-    }
   }
 
  

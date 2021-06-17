@@ -1,122 +1,221 @@
 .container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  font-family: "Raleway";
-  background-color: white;
-  border-radius: 40px;
-  box-shadow: 4px 8px 28px 0px #d3dceb;
-  position: relative;
-  .bg {
-    object-fit: cover;
-    width: 100%;
-    height: 70%;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    position: absolute;
-  }
-  .cover-bg {
-    position: absolute;
     width: 100%;
     height: 100%;
+    display: flex;
+    font-family: "Raleway";
+    // background-color: rgb(37, 39, 56);
     border-radius: 40px;
-    background-image: linear-gradient(to bottom, #ffffffa2, #568cf7);
-  }
-  .cover {
+    box-shadow: 4px 8px 28px 0px #d3dceb;
     position: relative;
-    top: 235px;
-    width: 330px;
-    height: 330px;
-    background-color: white;
-    box-shadow: 4px 8px 28px 0px #fefeff;
-    border-radius: 50%;
-    z-index: 10;
-    left: 207px;
+    overflow: hidden;
+    .bg {
+       
+    }
+    .cover-circle {
+        position: absolute;
+        width: 720px;
+        height: 720px;
+        border-radius: 50%;
+        background-color: white;
+        top: -100px;
+        right: -200px;
+        .circle {
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-image: linear-gradient(to left, rgba(208, 208, 230, 0.219), #df21b6);
+            
+        }
+    }
+    .cover-avt {
+        width: 510px;
+        height: 510px;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        right: -100px;
+        .avt {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            object-fit: cover;
+            top: 5px;
+            left: 5px;
+            border-radius: 50%;
+        }
+    }
+    
+    .circle-small:hover {
+        .content {
+            width: 120px;
+            opacity: 1;
+            transition: all 0.5s;
+            transform: translate(-120px,0);
+            span {
+                opacity: 1;
+                font-size: 15px;
+                transition: all 0.5s;
+            }
+        }
+       
+    }
+    
+    
+    .circle-small {
+        width: 110px;
+        height: 110px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+       z-index: 10;
+     
+        .cover-icon {
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 37.5px;
+            left: 37.5px;
+           
+            i {
+                color: #3275f7;
+                position: absolute;
+                top: 8px;
+                left: 9px;
+            }
+        }
+        
+        .content {
+            // width: 120px;
+            transition: all 0.5s;
+            width:0px;
+            height: 45px;
+            background-color: white;
+            opacity: 0;
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            position: absolute;
+            left: -5px;
+            top:32px;
+            transition: all 0.5s;
+            border-left: #3275f7 solid 10px;
+            span {
+                position: absolute;
+                top: 14px;
+                font-weight: 600;
+                opacity: 0;
+                font-size: 0;
+                transition: all 0.5s;
+                display: block;
+            }
+            .sp-cancel {
+                left: 33px;
+            }
+            .sp-message {
+                left: 30px;
+            }
+            .sp-accept {
+                left: 22px;
+            }
+
+        }
+       
+        .fill-img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            background-color: #3275f7;
+          
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            opacity: 0.5;
+            
+        }
+    }
+  
+    .message {
+        left: 210px;
+        top: 50px;
+        .cover-icon {
+            i {
+                top:10px;
+            }
+        }
+        .fill-img {
+            // background-image: linear-gradient(to bottom, rgba(105, 105, 230, 0.219), rgb(22, 22, 63));
+        }
+    }
    
-   
-   
-  img {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    object-fit: cover;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    z-index: 10;
-  }
-}
-.bg-sub {
-   
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    right: 0px;
-    border-bottom-left-radius: 40px;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
-    clip-path: polygon(49% 53%, 69% 70%, 100% 70%, 100% 100%, 0 100%, 0 70%, 31% 70%);
-   
-}
- 
-    .right {
-      width: 50%;
-      height: 100%;
-      .ins {
+  
+    .accept {
+        left: 150px;
+        top: 193px;
+        width: 160px;
+        height: 160px;
+        .content {
+            top: 62px;
+        }
+        .cover-icon {
+            top: 62.5px;
+            left: 62.5px;
+        }
+        .fill-img {
+            width: 150px;
+            height: 150px;
+            // background-color: rgba(22, 22, 63, 0.404);
+            
+        }
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+  
+    .cancel {
+        left: 225px;
+        top: 380px;
+        .fill-img {
+          
+        }
+        .content {
+            top: 34px;
+            
+        }
+    }
+    .ins {
         width: 350px;
         position: absolute;
         font-size: 25px;
         font-weight: bold;
-        bottom: 150px;
+        bottom: 250px;
         left: 20px;
         
       }
       .name {
         width: 450px;
         height: 80px;
-        bottom: 65px;
+        bottom: 165px;
         position: absolute;
         font-size: 60px;
         font-weight: bold;
         z-index: 5;
         left: 20px;
         word-wrap: break-word;
-        text-shadow: 3px 3px #3275f7;
+        text-shadow: 2px 2px white;
       }
-      .btn {
-        color: white;
-        outline: none;
-        border: none;
-
-        height: 45px;
-        background-color: #3275f7;
-        cursor: pointer;
-        border-radius: 10px;
-        font-size: 15px;
-        bottom: 132px;
-        position: absolute;
-        i {
-          margin-right: 9px;
-        }
-      }
-      .abort-friend {
-        background-color: white;
-        color: #3275f7;
-        right: 153px;
-        width: 120px;
-        border: #3275f7 solid 1px;
-      }
-      .accept {
-        background-color: white;
-        color: #3275f7;
-        right: 10px;
-        width: 130px;
-        border: #3275f7 solid 1px;
-      }
-      .message {
-        right: 10px;
-        bottom: 75px;
-        width: 262px;
-      }
-    }
-  }
+}

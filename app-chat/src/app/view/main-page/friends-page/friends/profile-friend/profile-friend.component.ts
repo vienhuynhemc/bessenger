@@ -40,9 +40,9 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   
    // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
-    this.valueFromChildSubscription = this.contactsService.friendInforService.subscribe(friendInfor =>{ 
-      this.friendInfor = friendInfor,
-      this.randomImgBackground()
+    this.valueFromChildSubscription = this.contactsService.friendInforService.subscribe(friendInfor =>{
+      this.randomImgBackground(),
+      this.friendInfor = friendInfor
     });
   }
 }

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class FriendsPageService {
-  private source = new BehaviorSubject(0);
+  private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
   constructor(
   ) {

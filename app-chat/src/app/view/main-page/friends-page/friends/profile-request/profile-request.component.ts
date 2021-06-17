@@ -17,6 +17,7 @@ export class ProfileRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFriendFromFriendsRequestAdd();
+   
   }
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
