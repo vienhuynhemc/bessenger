@@ -10,15 +10,12 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
   styleUrls: ['./profile-friend.component.scss']
 })
 export class ProfileFriendComponent implements OnInit, OnDestroy {
-  myFriend = {
-    name:'Melieni Sherk',
-    link:'assets/images/list-friends-chat-page/ol4.jpg'
-  }
+ 
   imgBackground: string = null;
   random: number = -1;
   friendInfor: FriendInfor = null;
   private valueFromChildSubscription: Subscription;
-  valueFromFriendsComponent: Subscription;
+ 
   constructor(private contactsService: ContactsService) { }
   randomImgBackground() {
     let randomNew = 0;

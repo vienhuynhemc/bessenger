@@ -20,7 +20,7 @@
     width: 100%;
     height: 100%;
     border-radius: 40px;
-    background-image: linear-gradient(to bottom, #ffffffa2, #3377ff);;
+    background-image: linear-gradient(to bottom, #ffffffa2, #568cf7);
   }
   .cover {
     position: relative;
@@ -32,6 +32,7 @@
     border-radius: 50%;
     z-index: 10;
     left: 207px;
+   
    
    
   img {
@@ -46,7 +47,7 @@
   }
 }
 .bg-sub {
-    opacity: 0.8;
+   
     width: 100%;
     height: 100%;
     position: absolute;
@@ -54,21 +55,10 @@
     border-bottom-left-radius: 40px;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
-    clip-path: polygon(31% 70%, 100% 1%, 100% 50%, 100% 100%, 0 100%, 0 70%);
+    clip-path: polygon(49% 53%, 69% 70%, 100% 70%, 100% 100%, 0 100%, 0 70%, 31% 70%);
+   
 }
-  .content {
-   
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    right: 0px;
-    border-bottom-left-radius: 40px;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
-    clip-path: polygon(31% 70%, 100% 1%, 100% 50%, 100% 100%, 0 100%, 0 70%);
-   
-      
-    
+ 
     .right {
       width: 50%;
       height: 100%;
@@ -77,12 +67,13 @@
         position: absolute;
         font-size: 25px;
         font-weight: bold;
-        bottom: 135px;
+        bottom: 150px;
         left: 20px;
         
       }
       .name {
-        width: 350px;
+        width: 450px;
+        height: 80px;
         bottom: 65px;
         position: absolute;
         font-size: 60px;
@@ -90,7 +81,7 @@
         z-index: 5;
         left: 20px;
         word-wrap: break-word;
-        text-shadow: 3px 3px rgb(248, 92, 157);
+        text-shadow: 3px 3px #3275f7;
       }
       .btn {
         color: white;
@@ -129,4 +120,3 @@
       }
     }
   }
-}

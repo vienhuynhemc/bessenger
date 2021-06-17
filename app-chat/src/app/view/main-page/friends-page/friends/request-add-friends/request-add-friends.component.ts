@@ -24,7 +24,7 @@ export class RequestAddFriendsComponent implements OnInit {
     {
       id: 1,
       img: 'assets/images/list-friends-chat-page/avt2.jpg',
-      name: 'Karlyn Carabello',
+      name: 'Karlyn Cara',
       mutualFriends: 3,
     },
     {
@@ -83,19 +83,20 @@ export class RequestAddFriendsComponent implements OnInit {
   yOption: number = -1;
   xIcon: number = -1;
   yIcon: number = -1;
+  
   // Khi click vào bạn bè bất kì
   onClickSelectedFriend(friend: FriendInfor, index: number) {
     if (this.optionClick == -1) {
       if (this.selectedIndex != index) {
         this.selectedIndex = index;
-        this.sendFriendToProfile(friend);
+        this.sendFriendToProfileRequest(friend);
       }
     }
   }
 
  
   // send object đén profile
-  sendFriendToProfile(friendInfor: FriendInfor) {
+  sendFriendToProfileRequest(friendInfor: FriendInfor) {
       this.contactsService.setFriendInforService(friendInfor);
   }
   // get data từ service
