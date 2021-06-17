@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 65%;
+  height: 488px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .title-header {
+    font-family: "Raleway";
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 23px;
+    margin-top: 30px;
+    color: #23262e;
+  }
+
+  .noi-dung {
+    letter-spacing: 1px;
+    font-size: 11px;
+    color: #888888;
+    margin-top: 20px;
+    font-family: "Raleway";
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+
+    .icon {
+      width: 200px;
+      box-shadow: 0 0 46px 10px #a0a0a026;
+      border-radius: 27px;
+      overflow: hidden;
+      padding: 13px;
+      transition: all 0.3s ease-in-out;
+
+      img {
+        border-radius: 14px;
+        width: 200px;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    :hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .update-file {
+    background-color: #4290f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 124px;
+    left: 278px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 12px 24px;
+
+    p {
+      font-family: "Raleway";
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-left: 10px;
+      color: white;
+    }
+
+    i {
+      color: white;
+    }
+  }
+
+  .go-next {
+    background-color: #4290f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 400px;
+    left: 407px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 12px 24px;
+
+    p {
+      font-family: "Raleway";
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: white;
+    }
+
+    i {
+      font-size: 17px;
+      margin-left: 10px;
+      color: white;
+    }
+  }
+
+  .go-back {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 400px;
+    left: 278px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 11px 24px;
+    border: 1px solid #23262e;
+
+    p {
+      font-family: "Raleway";
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-left: 10px;
+      color: #23262e;
+    }
+
+    i {
+      font-size: 17px;
+      color: #23262e;
+    }
+  }
+}

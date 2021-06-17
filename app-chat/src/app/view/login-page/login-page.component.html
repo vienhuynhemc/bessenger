@@ -1,3 +1,16 @@
+<div class="notification" *ngIf="this.notification_login_page.isShow()">
+    <div class="content">
+        <main lottie [options]="this.notification_login_page.options"
+            (animationCreated)="this.notification_login_page.animationCreated($event)" class="anim"></main>
+        <p class="title">{{this.notification_login_page.title}}</p>
+        <p class="child">{{this.notification_login_page.child}}</p>
+        <button class="confirm" (click)="this.notification_login_page.hidden()">
+            <i class="fab fa-battle-net"></i>
+            <p>Tiếp tục</p>
+        </button>
+    </div>
+</div>
+
 <div class="loading" *ngIf="isLoading">
     <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
 </div>
