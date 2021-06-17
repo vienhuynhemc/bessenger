@@ -1,3 +1,4 @@
+import { NotificationRegisterPageService } from './../../service/notification/notification-register-page.service';
 import { RegisterProcessService } from './../../service/register-account/register-process.service';
 import { RegisterAccountService } from './../../service/register-account/register-account.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +25,8 @@ export class RegisterPageComponent implements OnInit {
     public register_account_service: RegisterAccountService,
     private router: Router,
     private route: ActivatedRoute,
-    public register_process_service: RegisterProcessService
+    public register_process_service: RegisterProcessService,
+    public notification_register_page:NotificationRegisterPageService
   ) { }
 
   ngOnInit(): void {

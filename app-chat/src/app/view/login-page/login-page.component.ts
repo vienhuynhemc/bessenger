@@ -1,3 +1,4 @@
+import { NotificationLoginPageService } from './../../service/notification/notification-login-page.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
@@ -35,6 +36,7 @@ export class LoginPageComponent implements OnInit {
     private register_account_service: RegisterAccountService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
+    public notification_login_page:NotificationLoginPageService
   ) {
   }
 

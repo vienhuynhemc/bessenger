@@ -1,3 +1,4 @@
+import { SelectAvatarService } from './../../../service/register-account/select-avatar.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterAccountService } from 'src/app/service/register-account/register-account.service';
@@ -10,10 +11,14 @@ import { RegisterProcessService } from 'src/app/service/register-account/registe
 })
 export class SelectAvatarComponent implements OnInit {
 
+  // Link hình ảnh đại diện từ firebase
+  public url_img_avatar: string;
+
   constructor(
     private register_account_service: RegisterAccountService,
     private router: Router,
-    public register_process_service: RegisterProcessService
+    public register_process_service: RegisterProcessService,
+    private select_avatar_service: SelectAvatarService
   ) { }
 
   ngOnInit(): void {
@@ -28,10 +33,47 @@ export class SelectAvatarComponent implements OnInit {
           this.register_process_service.reset();
           this.register_process_service.getData();
         }, 0);
+        this.init();
       } else if (this.register_process_service.isXacNhanEmail()) {
         this.moveToVerifyEmailPage();
       }
     }
+  }
+
+  public init(): void {
+    // Lấy hình đại diện của mã tài khoản đang đăng ký từ firebase
+    this.select_avatar_service.getImg().subscribe(snap => {
+      // Tải
+      let value = snap.payload.toJSON();
+      this.url_img_avatar = value['link_hinh'];
+      // Tải xong ẩn loading
+      setTimeout(() => {
+        this.register_process_service.setLoading(false);
+      }, 0);
+    });
+  }
+
+  public goNext(): void {
+    localStorage.setItem("register-process", JSON.stringify("2"));
+    this.register_process_service.reset();
+    this.register_process_service.getData();
+    this.moveToVerifyEmailPage();
+  }
+
+  public goBack(): void {
+    localStorage.setItem("register-process", JSON.stringify("0"));
+    this.register_process_service.reset();
+    this.register_process_service.getData();
+    this.moveToSelectSexPage();
+  }
+
+  public chonHinh(event) {
+    // Tải hình lên firebase
+    this.select_avatar_service.updateImageToFirebase(event.target.files.item(0));
+  }
+
+  public chonHinhTuMay(element: HTMLInputElement) {
+    element.click();
   }
 
   ///////////////////////////////////////

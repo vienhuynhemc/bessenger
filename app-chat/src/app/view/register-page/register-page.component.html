@@ -1,3 +1,16 @@
+<div class="notification" *ngIf="this.notification_register_page.isShow()">
+    <div class="content">
+        <main lottie [options]="this.notification_register_page.options"
+            (animationCreated)="this.notification_register_page.animationCreated($event)" class="anim"></main>
+        <p class="title">{{this.notification_register_page.title}}</p>
+        <p class="child">{{this.notification_register_page.child}}</p>
+        <button class="confirm" (click)="this.notification_register_page.hidden()">
+            <i class="fab fa-battle-net"></i>
+            <p>Tiếp tục</p>
+        </button>
+    </div>
+</div>
+
 <div class="loading" *ngIf="this.register_process_service.isLoadingProcess()">
     <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
 </div>
@@ -44,10 +57,12 @@
             <p class="title">Chào mừng đến với dịch vụ Bessenger!</p>
             <div class="process">
 
-                <i *ngIf="!register_process_service.isChonGioiTinh() && !register_process_service.isXacNhanEmail() && !register_process_service.isChonHinhDaiDien()" class="far fa-circle"></i>
+                <i *ngIf="!register_process_service.isChonGioiTinh() && !register_process_service.isXacNhanEmail() && !register_process_service.isChonHinhDaiDien()"
+                    class="far fa-circle"></i>
                 <i *ngIf="register_process_service.isChonGioiTinh() || register_process_service.isChonHinhDaiDien() || register_process_service.isXacNhanEmail()"
                     class="fas fa-check-circle"></i>
-                <i *ngIf="!register_process_service.isChonHinhDaiDien() && !register_process_service.isXacNhanEmail()" class="far fa-circle"></i>
+                <i *ngIf="!register_process_service.isChonHinhDaiDien() && !register_process_service.isXacNhanEmail()"
+                    class="far fa-circle"></i>
                 <i *ngIf="register_process_service.isChonHinhDaiDien() || register_process_service.isXacNhanEmail()"
                     class="fas fa-check-circle"></i>
                 <i *ngIf="!register_process_service.isXacNhanEmail()" class="far fa-circle"></i>
