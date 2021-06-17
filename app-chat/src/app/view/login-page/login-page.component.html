@@ -80,7 +80,7 @@
 
             <div class="more">
                 <p (click)="dangKyTaoKhoanChuyenComponent()">Đăng ký tài khoản mới?</p>
-                <p>Quên mặt khẩu?</p>
+                <p (click)="qMK()">Quên mặt khẩu?</p>
             </div>
 
             <div class="terms">
@@ -110,7 +110,8 @@
 
             <div class="input_data" id="dk-password">
                 <i class="fab fa-keycdn"></i>
-                <input #password2 type="password" placeholder="Mật khẩu" [(ngModel)]="passWord" (ngModelChange) = "changePassword($event)">
+                <input #password2 type="password" placeholder="Mật khẩu" [(ngModel)]="passWord"
+                    (ngModelChange)="changePassword($event)">
                 <i #eye2 class="far fa-eye eye" (click)="hiddenAndShowPassword(password2,eye2)"></i>
             </div>
 
@@ -142,4 +143,27 @@
         </div>
     </div>
 
+</div>
+
+<div class="quen-mat-khau" id="quen-mat-khau">
+    <div class="content">
+        <div class="right_header2">
+            <p>Quên mật khẩu</p>
+        </div>
+        <div class="input_data" id="qmk-email">
+            <i class="far fa-paper-plane"></i>
+            <input type="text" placeholder="Email" [(ngModel)]="email_quen_mat_khau" (ngModelChange)="quenMatKhauEmail($event)">
+        </div>
+        <p class="error" id="qmk-error">Email không thể thiếu</p>
+        
+        <div class="buttons">
+            <div class="go-back" (click)="hiddenQMK()">
+                <i class="fas fa-angle-left"></i>
+                <p>Trở lại</p>
+            </div>
+            <div class="login"(click)="requestQMK()" >
+                <p>Gửi yêu cầu</p>
+            </div>
+        </div>
+    </div>
 </div>

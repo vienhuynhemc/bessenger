@@ -5,28 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  private isLogin: boolean;
 
   constructor() {
-    this.getData();
-  }
-
-  public isLoginSuccess(): boolean {
-    return this.isLogin;
   }
 
   public logOut(): void {
-    localStorage.removeItem('login');
-    this.getData();
+    localStorage.removeItem('ma_tai_khoan_dn');
+  }
+
+  public isLogin(): boolean {
+    return JSON.parse(localStorage.getItem("ma_tai_khoan_dn")) != null;
   }
 
   public login(): void {
-    localStorage.setItem('login', "true");
-    this.getData();
-  }
-
-  public getData(): void {
-    this.isLogin = JSON.parse(localStorage.getItem('login'));
+    localStorage.setItem("ma_tai_khoan_dn", JSON.stringify("abc"));
   }
 
 }

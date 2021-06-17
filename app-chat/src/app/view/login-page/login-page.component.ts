@@ -23,6 +23,7 @@ export class LoginPageComponent implements OnInit {
     path: '/assets/json/lottie/loading.json',
   };
 
+  public email_quen_mat_khau: string;
   public userName: string;
   public passWord: string;
   public ten: string;
@@ -36,7 +37,7 @@ export class LoginPageComponent implements OnInit {
     private register_account_service: RegisterAccountService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
-    public notification_login_page:NotificationLoginPageService
+    public notification_login_page: NotificationLoginPageService
   ) {
   }
 
@@ -52,7 +53,7 @@ export class LoginPageComponent implements OnInit {
     this.isLoading = false;
     this.isRunningSlide = true;
 
-    if (this.login_service.isLoginSuccess()) {
+    if (this.login_service.isLogin()) {
       this.router.navigate(["/bessenger"]);
     }
     this.setDelay(10000);
@@ -135,6 +136,60 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  public hiddenQMK(): void {
+    // reset
+    this.email_quen_mat_khau = "";
+    document.getElementById("qmk-email").style.border = "1px solid #e2e2e2";
+    document.getElementById("qmk-error").style.display = "none";
+    // hidden
+    document.getElementById("quen-mat-khau").style.display = "none";
+  }
+
+  public requestQMK(): void {
+    if (this.email_quen_mat_khau == undefined) {
+      document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("qmk-error").style.display = "block";
+      document.getElementById("qmk-error").innerText = "Email không thể thiếu"
+    } else {
+      let email: string = this.email_quen_mat_khau.trim();
+      if (email.length == 0) {
+        document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+        document.getElementById("qmk-error").style.display = "block";
+        document.getElementById("qmk-error").innerText = "Email không thể thiếu"
+      } else {
+        // show loading
+        this.isLoading = true;
+        // check email
+        this.register_account_service.checkEmail(email).subscribe(data => {
+          // Bên kia trả về 1 bảng object AccountWebservice 
+          if (data.length == 0) {
+            document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+            document.getElementById("qmk-error").style.display = "block";
+            document.getElementById("qmk-error").innerText = "Email bạn nhập chưa đăng ký tài khoản Bessenger";
+            this.isLoading = false;
+          } else {
+            
+          }
+        });
+      }
+    }
+  }
+
+  public qMK(): void {
+    document.getElementById("quen-mat-khau").style.display = "flex";
+  }
+
+  quenMatKhauEmail(value) {
+    if (value.trim().length > 0) {
+      document.getElementById("qmk-email").style.border = "1px solid #e2e2e2";
+      document.getElementById("qmk-error").style.display = "none";
+    } else {
+      document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("qmk-error").style.display = "block";
+      document.getElementById("qmk-error").innerText = "Email không thể thiếu"
+    }
+  }
+
   dangKy(): void {
     let email: string = this.userName.trim();
     let ten: string = this.ten.trim();
@@ -200,7 +255,7 @@ export class LoginPageComponent implements OnInit {
                 )
               ).subscribe();
               uploadTask.percentageChanges().subscribe(percent => {
-                console.log("Tiến độ tải hình giới tính: "+percent);
+                console.log("Tiến độ tải hình giới tính: " + percent);
                 if (percent == 100) {
                   // Tải dữ liệu xong xui hết thì gửi email rồi chuyển trang
                   // gửi email rồi tới trang đăng ký
