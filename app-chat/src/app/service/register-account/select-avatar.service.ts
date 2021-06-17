@@ -3,6 +3,7 @@ import { RegisterProcessService } from 'src/app/service/register-account/registe
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { NotificationRegisterPageService } from 'src/app/service/notification/notification-register-page.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class SelectAvatarService {
   constructor(
     private db: AngularFireDatabase,
     private storage: AngularFireStorage,
-    private register_process_service: RegisterProcessService
+    private register_process_service: RegisterProcessService,
+    public notification_register_page_service: NotificationRegisterPageService
   ) { }
 
   public getImg() {
@@ -49,6 +51,10 @@ export class SelectAvatarService {
         setTimeout(() => {
           this.register_process_service.setLoading(false);
         }, 0);
+        // Hiện notification
+        this.notification_register_page_service.setTitle("Cập nhật hình đại diện thành công!")
+        this.notification_register_page_service.setChild("Hình đại diện của bạn đã được lưu lại");
+        this.notification_register_page_service.showPop();
       }
     });
   }
