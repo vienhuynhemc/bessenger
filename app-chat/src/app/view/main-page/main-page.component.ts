@@ -23,7 +23,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.login_service.isLoginSuccess()) {
+    if (!this.login_service.isLogin()) {
       this.router.navigate(['/dang-nhap']);
     }
   }

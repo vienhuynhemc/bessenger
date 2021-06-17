@@ -27,7 +27,7 @@ export class NotFoundPageComponent implements OnInit {
   }
 
   back(): void {
-    if (this.login_service.isLoginSuccess()) {
+    if (this.login_service.isLogin()) {
       this.router.navigate(['/bessenger']);
     } else {
       this.router.navigate(['/dang-nhap']);
