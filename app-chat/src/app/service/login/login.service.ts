@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,28 +6,28 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  private isLogin: boolean;
+  private REST_API_SERVER = "https://bessenger.000webhostapp.com";
 
-  constructor() {
-    this.getData();
+  constructor(
+    private http: HttpClient
+  ) {
   }
 
-  public isLoginSuccess(): boolean {
-    return this.isLogin;
+  public checkEmail(email: string) {
+    const url = `${this.REST_API_SERVER}/kiem_tra_email_dang_nhap.php?email=${email}`;
+    return this.http.get<any>(url);
   }
 
   public logOut(): void {
-    localStorage.removeItem('login');
-    this.getData();
+    localStorage.removeItem('ma_tai_khoan_dn');
   }
 
-  public login(): void {
-    localStorage.setItem('login', "true");
-    this.getData();
+  public isLogin(): boolean {
+    return JSON.parse(localStorage.getItem("ma_tai_khoan_dn")) != null;
   }
 
-  public getData(): void {
-    this.isLogin = JSON.parse(localStorage.getItem('login'));
+  public login(ma_tai_khoan:string): void {
+    localStorage.setItem("ma_tai_khoan_dn", JSON.stringify(ma_tai_khoan));
   }
 
 }
