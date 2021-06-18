@@ -521,6 +521,24 @@
         font-weight: 600;
       }
     }
+
+    .re-capcha {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .error {
+      display: none;
+      font-family: "Raleway";
+      width: 326px;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #ff7b5c;
+      font-size: 13px;
+      font-weight: 600;
+    }
   }
 
   .dang-ky {

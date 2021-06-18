@@ -1,5 +1,5 @@
-import { NotificationLoginPageService } from './../../service/notification/notification-login-page.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 // lottie
@@ -8,8 +8,8 @@ import { AnimationOptions } from 'ngx-lottie';
 import { finalize } from 'rxjs/operators';
 import { RegisterObjectSendMail } from './../../models/regiser-account/register_object_send_mail';
 import { LoginService } from './../../service/login/login.service';
+import { NotificationLoginPageService } from './../../service/notification/notification-login-page.service';
 import { RegisterAccountService } from './../../service/register-account/register-account.service';
-import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-login-page',
@@ -22,6 +22,10 @@ export class LoginPageComponent implements OnInit {
   options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
   };
+
+  //recapcha
+  @ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
+  public isCheckRecapcha: boolean;
 
   public email_quen_mat_khau: string;
   public userName: string;
@@ -41,10 +45,39 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
+  //recapcha
+  addRecaptchaScript() {
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptcha();
+    }
+    (function (d, s, id, obj) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptcha(); return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&render=explicit";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+
+  }
+  renderReCaptcha() {
+    window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+      'sitekey': '6LdT1D0aAAAAAHDZf574nzU5pDf_Reb25rV6SIqY',
+      'callback': (response) => {
+        this.isCheckRecapcha = true;
+        document.getElementById("dn-error-3").style.display = "none";
+      }
+    });
+  }
+  //////////////////////////////////////////////////////////////
+
   animationCreated(animationItem: AnimationItem): void {
   }
 
   ngOnInit(): void {
+    //recapcha
+    this.isCheckRecapcha = false;
+    this.addRecaptchaScript();
+    /////////////////////////
     document.getElementById("hinh2").style.opacity = "0";
     document.getElementById("hinh3").style.opacity = "0";
     document.getElementById("hinh4").style.opacity = "0";
@@ -52,6 +85,8 @@ export class LoginPageComponent implements OnInit {
     this.countSlide = 0;
     this.isLoading = false;
     this.isRunningSlide = true;
+    this.userName = "";
+    this.passWord = "";
 
     if (this.login_service.isLogin()) {
       this.router.navigate(["/bessenger"]);
@@ -60,9 +95,31 @@ export class LoginPageComponent implements OnInit {
   }
 
   dangNhap(): void {
-    this.login_service.login();
-    this.isRunningSlide = false;
-    this.router.navigate(["/bessenger"]);
+    let email: string = this.userName.trim();
+    let mat_khau: string = this.passWord;
+    let count = 0;
+    if (email.length == 0) {
+      count++;
+      document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-1").style.display = "block";
+      document.getElementById("dn-error-1").innerText = "Email không thể thiếu"
+    }
+    if (mat_khau.length == 0) {
+      count++;
+      document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-2").style.display = "block";
+      document.getElementById("dn-error-2").innerText = "Mật khẩu không thể thiếu"
+    }
+    if (!this.isCheckRecapcha) {
+      count++;
+      document.getElementById("dn-error-3").style.display = "block";
+    }
+    if (count == 0) {
+
+    }
+    // this.login_service.login();
+    // this.isRunningSlide = false;
+    // this.router.navigate(["/bessenger"]);
   }
 
   dangKyTaoKhoanChuyenComponent() {
@@ -133,6 +190,28 @@ export class LoginPageComponent implements OnInit {
       document.getElementById("dk-email").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-1").style.display = "block";
       document.getElementById("dk-error-1").innerText = "Email không thể thiếu"
+    }
+  }
+
+  dnEmail(value) {
+    if (value.trim().length > 0) {
+      document.getElementById("dn-email").style.border = "1px solid #e2e2e2";
+      document.getElementById("dn-error-1").style.display = "none";
+    } else {
+      document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-1").style.display = "block";
+      document.getElementById("dn-error-1").innerText = "Email không thể thiếu"
+    }
+  }
+
+  dnPassword(value) {
+    if (value.trim().length > 0) {
+      document.getElementById("dn-mat-khau").style.border = "1px solid #e2e2e2";
+      document.getElementById("dn-error-2").style.display = "none";
+    } else {
+      document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-2").style.display = "block";
+      document.getElementById("dn-error-2").innerText = "Mật khẩu không thể thiếu"
     }
   }
 
