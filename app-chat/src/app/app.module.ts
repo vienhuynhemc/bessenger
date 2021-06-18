@@ -53,6 +53,9 @@ import { RequestAddFriendsComponent } from './view/main-page/friends-page/friend
 import { SendRequsetAddComponent } from './view/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
 import { ProfileRequestComponent } from './view/main-page/friends-page/friends/profile-request/profile-request.component';
 import { ProfileSendComponent } from './view/main-page/friends-page/friends/profile-send/profile-send.component';
+import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
+import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
+import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +89,9 @@ import { ProfileSendComponent } from './view/main-page/friends-page/friends/prof
     SendRequsetAddComponent,
     ProfileRequestComponent,
     ProfileSendComponent,
+    ForgotPasswordComponent,
+    FpVerifyEmailComponent,
+    FpSelectPasswordComponent,
 
   ],
   imports: [
