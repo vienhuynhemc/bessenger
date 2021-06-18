@@ -46,6 +46,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
       });
     
   }
+ 
 
   // click menu ban be, loi moi, da gui
   onClickMenu(index: number) {

@@ -24,7 +24,17 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background-image: linear-gradient(to left, rgba(208, 208, 230, 0.219), #df21b6);
+            
+            img {
+                width: 700px;
+                height: 700px;
+                border-radius: 50%;
+                position: absolute;
+                top: 0px;
+                left: 00px;
+            }
+            // background-image: url('assets/images/list-friends-friends-page/bg-profile-myfriend1.jpg');
+           
             
         }
     }
@@ -82,7 +92,7 @@
             left: 37.5px;
            
             i {
-                color: #3275f7;
+                color: #3274f7af;
                 position: absolute;
                 top: 8px;
                 left: 9px;
@@ -102,7 +112,7 @@
             left: -5px;
             top:32px;
             transition: all 0.5s;
-            border-left: #3275f7 solid 10px;
+            border-left: #3274f7af solid 10px;
             span {
                 position: absolute;
                 top: 14px;
@@ -131,7 +141,7 @@
             border-radius: 50%;
             top: 5px;
             left: 5px;
-            background-color: #3275f7;
+            background-color: #3274f7af;
           
         }
         img {
@@ -147,8 +157,8 @@
     }
   
     .message {
-        left: 210px;
-        top: 50px;
+        left: 190px;
+        top: 40px;
         .cover-icon {
             i {
                 top:10px;
@@ -159,21 +169,21 @@
    
   
     .accept {
-        left: 150px;
+        left: 140px;
         top: 193px;
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 140px;
         .content {
-            top: 62px;
+            top: 52px;
         }
         .cover-icon {
-            top: 62.5px;
-            left: 62.5px;
+            top: 52.5px;
+            left: 52.5px;
         }
         .fill-img {
-            width: 150px;
-            height: 150px;
-            // background-color: rgba(22, 22, 63, 0.404);
+            width: 130px;
+            height: 130px;
+            
             
         }
         img {
@@ -183,7 +193,7 @@
     }
   
     .cancel {
-        left: 225px;
+        left: 200px;
         top: 380px;
        
         .content {
@@ -196,20 +206,20 @@
         position: absolute;
         font-size: 25px;
         font-weight: bold;
-        bottom: 250px;
+        bottom: 210px;
         left: 20px;
         
       }
       .name {
         width: 450px;
         height: 80px;
-        bottom: 165px;
+        bottom: 130px;
         position: absolute;
         font-size: 60px;
         font-weight: bold;
         z-index: 5;
         left: 20px;
         word-wrap: break-word;
-        text-shadow: 2px 2px white;
+        text-shadow: 3px 3px #3275f7;
       }
 }
