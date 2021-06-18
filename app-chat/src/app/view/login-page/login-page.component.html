@@ -61,16 +61,28 @@
                 <p>Đăng nhập tài khoản của bạn</p>
             </div>
 
-            <div class="input_data">
+            <div class="input_data" id="dn-email">
                 <i class="far fa-paper-plane"></i>
-                <input type="text" placeholder="Tài khoản" [(ngModel)]="userName">
+                <input type="text" placeholder="Tài khoản" [(ngModel)]="userName"  (ngModelChange)="dnEmail($event)">
             </div>
 
-            <div class="input_data">
+            <p class="error" id="dn-error-1">Email không thể thiếu</p>
+
+            <div class="input_data" id="dn-mat-khau">
                 <i class="fab fa-keycdn"></i>
-                <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord">
+                <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord"  (ngModelChange)="dnPassword($event)">
                 <i #eye class="far fa-eye eye" (click)="hiddenAndShowPassword(password,eye)"></i>
             </div>
+
+            <p class="error" id="dn-error-2">Mật khẩu không thể thiếu</p>
+
+            <div class="re-capcha">
+                <div class="card-body">
+                    <div #recaptcha></div>
+                </div>
+            </div>
+
+            <p class="error" id="dn-error-3">Bạn là Robot ư ?</p>
 
             <div class="login" (click)="dangNhap()">
                 <p>Đăng nhập</p>
@@ -152,16 +164,17 @@
         </div>
         <div class="input_data" id="qmk-email">
             <i class="far fa-paper-plane"></i>
-            <input type="text" placeholder="Email" [(ngModel)]="email_quen_mat_khau" (ngModelChange)="quenMatKhauEmail($event)">
+            <input type="text" placeholder="Email" [(ngModel)]="email_quen_mat_khau"
+                (ngModelChange)="quenMatKhauEmail($event)">
         </div>
         <p class="error" id="qmk-error">Email không thể thiếu</p>
-        
+
         <div class="buttons">
             <div class="go-back" (click)="hiddenQMK()">
                 <i class="fas fa-angle-left"></i>
                 <p>Trở lại</p>
             </div>
-            <div class="login"(click)="requestQMK()" >
+            <div class="login" (click)="requestQMK()">
                 <p>Gửi yêu cầu</p>
             </div>
         </div>
