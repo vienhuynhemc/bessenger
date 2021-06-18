@@ -168,7 +168,28 @@ export class LoginPageComponent implements OnInit {
             document.getElementById("qmk-error").innerText = "Email bạn nhập chưa đăng ký tài khoản Bessenger";
             this.isLoading = false;
           } else {
-            
+            // Lấy mã tài khoản
+            let ma_tai_khoan = data[0]['ma_tai_khoan'];
+            // Lưu vô session hiện tại đang có request quên mk
+            localStorage.setItem("ma_tai_khoan_qmk", JSON.stringify(ma_tai_khoan));
+            // Gửi lại mã
+            let code: string = "";
+            for (let i = 0; i < 6; i++) {
+              let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
+              code += newNumber + "";
+            }
+            let newData = new RegisterObjectSendMail();
+            newData.code = code;
+            newData.email = email;
+            // Lưu mã mới vô webservice
+            this.register_account_service.updateEmail(code).subscribe(data => {
+              // Lưu xong gửi email
+              this.register_account_service.sendMailQMK(newData).subscribe((data) => {
+                // Gửi xong thì chuyển tới trang quên mật khẩu
+                this.isLoading = false;
+                this.router.navigate(['quen-mat-khau']);
+              });
+            })
           }
         });
       }

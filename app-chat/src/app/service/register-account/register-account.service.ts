@@ -28,9 +28,22 @@ export class RegisterAccountService {
       .get<any>(url);
   }
 
+  public sendMailQMK(data: RegisterObjectSendMail): Observable<any> {
+    const url = `${this.REST_API_SERVER}/sendEmailQMK.php?code=${data.code}&&email=${data.email}`;
+    return this.httpClient
+      .get<any>(url);
+  }
+
   public checkEmail(email: string): Observable<AccountWebservice[]> {
     const url = `${this.REST_API_SERVER}/kiem_tra_email.php?email=${email}`;
     return this.httpClient.get<any>(url);
+  }
+
+  public updateEmail(code: string) {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_qmk"));
+    const url = `${this.REST_API_SERVER}/cap_nhat_code.php?ma_tai_khoan=${ma_tai_khoan}&&code=${code}`;
+    return this.httpClient
+      .get<any>(url);
   }
 
   public insertNewAccountToFirebase(ten: string, email: string, password: string, code: string): void {
