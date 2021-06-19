@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="friendInfor != null">
   <img class="bg" src="{{ friendInfor.img }}" alt="" />
   <div class="cover-bg"></div>
   <div class="cover">
@@ -23,5 +23,8 @@
         <i class="fas fa-comment"></i>Nhắn tin
       </button>
     </div>
+  
+</div>
+<div class="container" *ngIf="friendInfor == null">
   
 </div>

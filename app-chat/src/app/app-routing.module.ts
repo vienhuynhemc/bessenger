@@ -45,7 +45,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'xac-nhan-email', pathMatch: 'full' },
       { path: 'xac-nhan-email', component: FpVerifyEmailComponent },
       { path: 'chon-mat-khau', component: FpSelectPasswordComponent },
-    ]
+    ],
   },
   {
     path: 'bessenger',
@@ -54,32 +54,41 @@ const routes: Routes = [
       { path: '', redirectTo: 'trang-chu', pathMatch: 'full' },
       { path: 'trang-chu', component: HomePageComponent },
       {
-        path: 'tin-nhan', component: ChatPageComponent,
+        path: 'tin-nhan',
+        component: ChatPageComponent,
         children: [
           { path: '', component: FriendsListComponent },
           {
-            path: ':id', component: FriendsListComponent,
+            path: ':id',
+            component: FriendsListComponent,
             children: [
               {
-                path: '', component: MessengerComponent,
-                children: [
-                  { path: '', component: FileSendComponent }
-                ]
+                path: '',
+                component: MessengerComponent,
+                children: [{ path: '', component: FileSendComponent }],
               },
-            ]
+            ],
           },
-        ]
+        ],
       },
       { path: 'tin-nhan-an', component: ChatRequestPageComponent },
       {
         path: 'ban-be',
         component: FriendsPageComponent,
         children: [
-          { path: '', redirectTo: 'lien-lac', pathMatch: 'full' },
-          { path: 'lien-lac', component: FriendsComponent },
-          { path: 'loi-moi', component: RequestAddFriendsComponent },
-          { path: 'da-gui', component: SendRequsetAddComponent }],
-
+          { path: '', redirectTo: 'lien-lac/0', pathMatch: 'full' },
+          {
+            path: 'lien-lac/:id',
+            component: FriendsComponent,
+          },
+          {path: '', redirectTo: 'loi-moi/0',pathMatch:'full'},
+          {
+            path: 'loi-moi/:id',
+            component: RequestAddFriendsComponent,
+          },
+          {path: '', redirectTo: 'da-gui/0',pathMatch:'full'},
+          { path: 'da-gui/:id', component: SendRequsetAddComponent },
+        ],
       },
 
       { path: 'thong-tin-ca-nhan', component: PersonalPageComponent },
@@ -93,4 +102,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

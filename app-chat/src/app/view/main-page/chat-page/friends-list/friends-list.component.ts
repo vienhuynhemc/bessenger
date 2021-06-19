@@ -137,6 +137,8 @@ export class FriendsListComponent implements OnInit {
     if(id == null){
       this.router.navigate(['/bessenger/tin-nhan/123'])
     }
+    
+   
   }
 
   // lấy về danh sách bạn bè đang online

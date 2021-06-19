@@ -57,20 +57,7 @@
         }
     }
     
-    .circle-small:hover {
-        .content {
-            width: 120px;
-            opacity: 1;
-            transition: all 0.5s;
-            transform: translate(-120px,0);
-            span {
-                opacity: 1;
-                font-size: 15px;
-                transition: all 0.5s;
-            }
-        }
-       
-    }
+   
     
     
     .circle-small {
@@ -100,26 +87,20 @@
         }
         
         .content {
-            // width: 120px;
-            transition: all 0.5s;
-            width:0px;
+            width: 120px;
             height: 45px;
             background-color: white;
-            opacity: 0;
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;
             position: absolute;
-            left: -5px;
+            left: -125px;
             top:32px;
-            transition: all 0.5s;
             border-left: #3274f7af solid 10px;
             span {
                 position: absolute;
                 top: 14px;
                 font-weight: 600;
-                opacity: 0;
-                font-size: 0;
-                transition: all 0.5s;
+                font-size: 15px;
                 display: block;
             }
             .sp-cancel {
