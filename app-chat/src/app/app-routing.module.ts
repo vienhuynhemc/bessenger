@@ -1,3 +1,6 @@
+import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
+import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
+import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
 // Của Angular
@@ -50,7 +53,23 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'trang-chu', pathMatch: 'full' },
       { path: 'trang-chu', component: HomePageComponent },
-      { path: 'tin-nhan', component: ChatPageComponent },
+      {
+        path: 'tin-nhan', component: ChatPageComponent,
+        children: [
+          { path: '', component: FriendsListComponent },
+          {
+            path: ':id', component: FriendsListComponent,
+            children: [
+              {
+                path: '', component: MessengerComponent,
+                children: [
+                  { path: '', component: FileSendComponent }
+                ]
+              },
+            ]
+          },
+        ]
+      },
       { path: 'tin-nhan-an', component: ChatRequestPageComponent },
       {
         path: 'ban-be',
