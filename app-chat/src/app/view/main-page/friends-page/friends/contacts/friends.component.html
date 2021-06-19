@@ -1,6 +1,6 @@
 <div class="friends-list">
     <div class="friends-list-content">
-        <div [class.detail-selected]="i === selectedIndex" class="detail-friend"  *ngFor="let item of friends_list_2; let i = index" (click)="onClickSelectedFriend(item, i)">
+        <div [class.detail-selected]="item.id === selectedIndex" class="detail-friend"  *ngFor="let item of friends_list; let i = index" (click)="onClickSelectedFriend(item)" >
                 <div class="detail-sub">
                     <div class="detail-left">
                         <img [src]="item.img" alt="">

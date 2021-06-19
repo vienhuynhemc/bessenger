@@ -87,15 +87,15 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
   }
 // chuyển trang
   moveToFriends(): void {
-    this.router.navigate(['lien-lac'], { relativeTo: this.route});
+    this.router.navigate(['lien-lac/0'], { relativeTo: this.route});
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
   moveToRequest(): void {
-    this.router.navigate(['loi-moi'], { relativeTo: this.route});
+    this.router.navigate(['loi-moi/0'], { relativeTo: this.route});
     this.friendsPageService.selectedRequestService()
   }
   moveToSend(): void {
-    this.router.navigate(['da-gui'], { relativeTo: this.route});
+    this.router.navigate(['da-gui/0'], { relativeTo: this.route});
     this.friendsPageService.selectedSendService()
   }
 }

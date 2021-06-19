@@ -1,12 +1,12 @@
 <div class="container">
     <img class="bg" src="{{imgBackground}}" alt="">
-    <div  class="left">
+    <div *ngIf="friendInfor !== null"  class="left">
         <div  class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
         <div class="name">{{friendInfor.name}}</div>
         <button class="message btn"><i class="fas fa-comment"></i>Nhắn tin</button>
         <button class="abort-friend btn"><i class="fas fa-user-times"></i>Hủy kết bạn</button>
     </div>
-    <div  class="right">
+    <div *ngIf="friendInfor !== null" class="right">
         <div class="cover"></div>
         <div class="avt">
             <img [src]="friendInfor.img" alt="">

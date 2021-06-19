@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
@@ -16,7 +17,10 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   friendInfor: FriendInfor = null;
   private valueFromChildSubscription: Subscription;
  
-  constructor(private contactsService: ContactsService) { }
+  constructor(private contactsService: ContactsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    ) { }
   randomImgBackground() {
     let randomNew = 0;
     do {
@@ -32,18 +36,23 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.getFriendFromFriendsList();
-    
+   
   }
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
-  }
   
+  }
+ 
    // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
+    let x
     this.valueFromChildSubscription = this.contactsService.friendInforService.subscribe(friendInfor =>{
       this.randomImgBackground(),
       this.friendInfor = friendInfor
+     
+    
+      
     });
-  
+   
   }
 }

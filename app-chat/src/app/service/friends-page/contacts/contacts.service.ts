@@ -43,15 +43,14 @@ export class ContactsService {
     ).subscribe(customers => {
         customers.forEach(element => {
           let temp = this.getListFriendsInforByIDFriends(element.key);
-          if(temp != null)
+          if(temp != null )
             this.friendInfor.push(temp)
         });
        
     });
-   
      return this.friendInfor
   }
-
+ 
   // lấy ra list object bạn bè dựa vào id của mỗi object
   getListFriendsInforByIDFriends(idUser: any) {
     // lấy id đăng nhập hiện tại trong localStorage
