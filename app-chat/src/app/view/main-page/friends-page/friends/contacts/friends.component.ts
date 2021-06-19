@@ -1,26 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
-
 
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss'],
 })
-export class FriendsComponent implements OnInit {
-  constructor(
-    private contactsService: ContactsService,
-    private friendsPageService: FriendsPageService
-  ) {}
-  ngOnInit(): void {
-    this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
-    document.addEventListener('click', this.onClickOutFocusOption);
-    this.onClickSelectedFriend(this.friends_list[0], 0);
-    this.friendsPageService.selectedFriendsPageDefaultSerivce();
-  }
-
+export class FriendsComponent implements OnInit, OnDestroy {
+  str: string
+  public friends_list_2 : FriendInfor[]
   public friends_list: FriendInfor[] = [
     {
       id: 1,
@@ -77,6 +70,7 @@ export class FriendsComponent implements OnInit {
       mutualFriends: 10,
     },
   ];
+
   selectedIndex: number = -1;
   indexOption: number = -1;
   optionClick: number = -1;
@@ -84,14 +78,40 @@ export class FriendsComponent implements OnInit {
   yOption: number = -1;
   xIcon: number = -1;
   yIcon: number = -1;
+  valueSub: Subscription;
+  constructor(
+    private contactsService: ContactsService,
+    private friendsPageService: FriendsPageService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
+  ngOnInit(): void {
+    this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
+    document.addEventListener('click', this.onClickOutFocusOption);
+    this.getListFriends();
+    this.onClickSelectedFriend(this.friends_list[0], 1);
+    this.friendsPageService.selectedFriendsPageDefaultSerivce();
+    
+  }
+
+  getIDUrl() {
+    const id = this.route.snapshot.queryParamMap.get('id')
+    console.log(id)
+    
+  }
+  ngOnDestroy() {
+    
+  }
   // Khi click vào bạn bè bất kì
   onClickSelectedFriend(friend: FriendInfor, index: number) {
     if (this.optionClick == -1) {
       if (this.selectedIndex != index) {
         this.selectedIndex = index;
         this.sendFriendToProfile(friend);
+        this.router.navigate([index], { relativeTo: this.route});
       }
     }
+    this.getIDUrl()
   }
 
   // hiển thị option, xử lý click lại chính nó
@@ -142,10 +162,19 @@ export class FriendsComponent implements OnInit {
   }
   // send object đén profile
   sendFriendToProfile(friendInfor: FriendInfor) {
-      this.contactsService.setFriendInforService(friendInfor);
+    this.contactsService.setFriendInforService(friendInfor);
   }
   // get data từ service
   getListFriends() {
+    this.friends_list_2 = this.contactsService.getListIDFriendsByIDUser()
+    this.friends_list_2.push({id: 7,
+      img: 'assets/images/list-friends-chat-page/avt7.png',
+      name: 'Josefina Simpson',
+      mutualFriends: 10,
+    })
    
   }
+
 }
+
+

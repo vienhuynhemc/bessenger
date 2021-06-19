@@ -57,7 +57,8 @@ const routes: Routes = [
         component: FriendsPageComponent,
         children: [
           { path: '', redirectTo: 'lien-lac', pathMatch: 'full' },
-          { path: 'lien-lac', component: FriendsComponent },
+          { path: 'lien-lac', component: FriendsComponent},
+          { path:'lien-lac/:id',component:FriendsComponent},
           { path: 'loi-moi', component: RequestAddFriendsComponent },
           { path: 'da-gui', component: SendRequsetAddComponent }],
 

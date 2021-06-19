@@ -30,7 +30,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
       this.main_page_service.selectFriendsPage();
       
     }, 0);
-   
+  
     this. getSelectedFriendsPage();
   }
 

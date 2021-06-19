@@ -44,5 +44,6 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
       this.randomImgBackground(),
       this.friendInfor = friendInfor
     });
+  
   }
 }

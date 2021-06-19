@@ -1,5 +1,5 @@
 export class FriendInfor {
-    id: number;
+    id: any;
     img: string;
     name: string;
     mutualFriends: number;

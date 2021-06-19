@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
@@ -8,7 +8,7 @@ import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.
   templateUrl: './profile-send.component.html',
   styleUrls: ['./profile-send.component.scss']
 })
-export class ProfileSendComponent implements OnInit {
+export class ProfileSendComponent implements OnInit, OnDestroy {
   friendInfor: FriendInfor = null;
   private valueFromChildSubscription: Subscription;
   constructor(
