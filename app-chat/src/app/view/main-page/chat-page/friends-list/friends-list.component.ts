@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FriendsListService } from 'src/app/service/chat-page/friends-list/friends-list.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { FriendsListService } from 'src/app/service/chat-page/friends-list/friends-list.service';
 
 @Component({
   selector: 'app-friends-list',
@@ -12,42 +13,134 @@ export class FriendsListComponent implements OnInit {
   change_slide: number = 0;
   prev: number = -1;
   next: number = -1;
-  countPrev:number = 0;
-  countNext:number = 0;
+  countPrev: number = 0;
+  countNext: number = 0;
   slideStep = 4;
   start: number = 0;
   end: number = 0;
-   // @input idFriendsList truyền vào từ component cha lúc đăng nhập
-   idFriendsList: number;
+  // @input idFriendsList truyền vào từ component cha lúc đăng nhập
+  idFriendsList: number;
   // truyền vào list friends chat gần đây bản DB
-  friends_list_main : any;
-  online_list_1 : any;
-  online_list_2 : any;
+  friends_list_main: any;
+  online_list_1: any;
+  online_list_2: any;
   // @input idUser sau này truyền từ component vào để xử lý
-  idUser : number;
-   // danh sách id box chat
+  idUser: number;
+  // danh sách id box chat
   groupIDList: any;
   // id group dc chọn
-  iDGroup: number = 0;
   // bản mẫu demo code cứng
-  @Input() online_list!: any[];
 
-  @Input() friends_list!: any[];
 
-  @Input() selectedUser!: number;
+  public online_list: any[] = [{
+    id: '1',
+    link: 'assets/images/list-friends-chat-page/ol1.jpg',
+    name: 'Tâm',
+  }, {
+    id: '2',
+    link: 'assets/images/list-friends-chat-page/ol2.jpg',
+    name: 'Lisa',
+  }, {
+    id: '3',
+    link: 'assets/images/list-friends-chat-page/ol3.jpg',
+    name: 'Jisoo',
+  }, {
+    id: '4',
+    link: 'assets/images/list-friends-chat-page/ol4.jpg',
+    name: 'Jennie',
+  }]
 
-  @Output() outToParentSelectedUser = new EventEmitter<number>();
-  @Output() outToParentChangeSlide = new EventEmitter<number>();
-  @Output() outToParentSendIdGroup = new EventEmitter<number>();
-  constructor(private friendsListService: FriendsListService) { }
+  public friends_list: any[] = [{
+    id: '1',
+    link: 'assets/images/list-friends-chat-page/avt1.jpg',
+    name: 'Karlyn Carabello',
+    timer: '08:50',
+    content: 'umbala alaba trap',
+  },
+  {
+    id: '2',
+    link: 'assets/images/list-friends-chat-page/avt2.jpg',
+    name: 'Junior Sabine',
+    timer: '08:45',
+    content: 'yasuo penta kill nè',
+  },
+  {
+    id: '3',
+    link: 'assets/images/list-friends-chat-page/avt3.jpg',
+    name: 'Melinie Sherk',
+    timer: '08:40',
+    content: 'đang bị hàng chờ 5 phút',
+  },
+  {
+    id: '4',
+    link: 'assets/images/list-friends-chat-page/avt4.jpg',
+    name: 'Harrison Palmatier',
+    timer: '08:30',
+    content: 'troll or afk',
+  },
+  {
+    id: '5',
+    link: 'assets/images/list-friends-chat-page/avt5.jpg',
+    name: 'Tressa Duhart',
+    timer: '08:20',
+    content: 'whatsup bro!',
+  },
+  {
+    id: '6',
+    link: 'assets/images/list-friends-chat-page/avt6.jpg',
+    name: 'Erick Spiva',
+    timer: '08:10',
+    content: 'tao ký ngực fan 2k3 2 em',
+  },
+  {
+    id: '7',
+    link: 'assets/images/list-friends-chat-page/avt7.png',
+    name: 'Josefina Simpson',
+    timer: '08:00',
+    content: 'kẹp 3 2 em ấy đi ăn bún ...',
+  },
+  {
+    id: '8',
+    link: 'assets/images/list-friends-chat-page/avt8.jpg',
+    name: 'Yasuo Can 5',
+    timer: '07:55',
+    content: 'umbala alaba trap',
+  }
+    ,
+  {
+    id: '9',
+    link: 'assets/images/list-friends-chat-page/avt9.jpg',
+    name: 'Kaisa Pentakill',
+    timer: '07:50',
+    content: 'umbala alaba trap',
+  }]
+
+  selectedUser: number = 1;
+  startOnline: number = 0;
+  endOnline: number = 7;
+  // danh sách id box chat
+
+  iDGroup: number = 0;
+
+  constructor
+    (
+      private friendsListService: FriendsListService,
+      private router: Router,
+      private route:ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
-        // selected khi load lần đầu
-        this.onSelectedFilter(this.selectedUser, false, 0)
+    // selected khi load lần đầu
+    this.onSelectedFilter(this.selectedUser, false, 0)
+    // Lấy id thằng hiện tại
+    let id = this.route.snapshot.params['id'];
+    if(id == null){
+      this.router.navigate(['/bessenger/tin-nhan/123'])
+    }
   }
-  
-   // lấy về danh sách bạn bè đang online
-   getFriendsOnline(count: number): void {
+
+  // lấy về danh sách bạn bè đang online
+  getFriendsOnline(count: number): void {
     this.start += count;
     this.end = (this.end + count) * 2;
     this.friendsListService.getUsersOnlineService(this.start, this.end, this.idFriendsList).snapshotChanges().pipe(
@@ -95,26 +188,25 @@ export class FriendsListComponent implements OnInit {
   // tạo chuyển động slide danh sách bạn đang onl
   changeSlide(change: number): void {
     this.change_slide = change;
-
   }
+
   // bảng lấy dữ liệu từ DB có DB xóa bảng phía trên, 0 = prev | 1 = next
   changeSlide1(direction: number) {
     if (direction == 0) {
-        this.countPrev++;
-        this.outToParentChangeSlide.emit(-this.slideStep)
+      this.countPrev++;
+      this.changeSlide
     } else {
-        this.countPrev--;
-        this.countNext++;
-        this.outToParentChangeSlide.emit(this.slideStep)
-      }
+      this.countPrev--;
+      this.countNext++;
+    }
   }
   // set trường hợp load lần đầu 
-  onSelectedFilter(index:number, check:boolean, idGorup: number) {
+  onSelectedFilter(index: number, check: boolean, idGorup: number) {
     // check == false là xử lý load lần đầu, check == true kiểm tra click
     if (check) {
       if (index != this.selectedUser) {
-        this.onSelected(index); 
-       this.iDGroup = idGorup;
+        this.onSelected(index);
+        this.iDGroup = idGorup;
       }
     } else {
       this.onSelected(index);
@@ -122,36 +214,36 @@ export class FriendsListComponent implements OnInit {
     }
   }
   // truyền idGroup qua message
-    sendIdGroundToMessage(idGroup: number) {
+  sendIdGroundToMessage(idGroup: number) {
     this.iDGroup = idGroup
   }
 
- // chọn vào bạn bè thì tô màu background
- onSelected(index: number): void {
-  if ((index - 1) >= 0 && (index + 1) < this.friends_list.length) {
-    this.prev = index - 1;
-    this.next = index + 1;
-  } else if ((index - 1) >= 0) {
-    this.prev = index - 1;
-    this.next = -1;
-  } else if ((index + 1) < this.friends_list.length) {
-    this.prev = -1;
-    this.next = index + 1;
+  // chọn vào bạn bè thì tô màu background
+  onSelected(index: number): void {
+    if ((index - 1) >= 0 && (index + 1) < this.friends_list.length) {
+      this.prev = index - 1;
+      this.next = index + 1;
+    } else if ((index - 1) >= 0) {
+      this.prev = index - 1;
+      this.next = -1;
+    } else if ((index + 1) < this.friends_list.length) {
+      this.prev = -1;
+      this.next = index + 1;
+    }
+    // Cập nhập dữ liêu tại cha
+    this.setSelectedUser(index);
   }
-  // Cập nhập dữ liêu tại cha
-  this.setSelectedUser(index);
-}
 
-   // kiểm tra đã đọc tin nhắn hay chưa, true = chưa đọc | false = đã đọc
-   checkReaded(listIDReaded : []) {
-    for (let index = 0; index < listIDReaded.length; index++) 
-      if (listIDReaded[index] === this.idUser) 
+  // kiểm tra đã đọc tin nhắn hay chưa, true = chưa đọc | false = đã đọc
+  checkReaded(listIDReaded: []) {
+    for (let index = 0; index < listIDReaded.length; index++)
+      if (listIDReaded[index] === this.idUser)
         return false;
     return true;
   }
   // Set index selected user
   setSelectedUser(index: any) {
-    this.outToParentSelectedUser.emit(index);
+    this.selectedUser = index;
   }
   //  Shadow top
   getStyleShadowTop(): any {
@@ -178,8 +270,8 @@ export class FriendsListComponent implements OnInit {
       'box-shadow': '4px 8px 28px 0px #d3dceb'
     };
   }
-   // set style tên cho tin nhắn chưa đọc
-   getStyleNameReadMessage() {
+  // set style tên cho tin nhắn chưa đọc
+  getStyleNameReadMessage() {
     return {
       'font-weight': 'bold',
       'color': 'black',

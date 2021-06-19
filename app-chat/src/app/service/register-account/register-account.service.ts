@@ -55,7 +55,8 @@ export class RegisterAccountService {
         ten: ten,
         email: email,
         ngay_tao: currentTime,
-        mat_khau: password
+        mat_khau: password,
+        lan_cuoi_dang_nhap:currentTime
       }
     );
     // local storage lưu mã tài khoản

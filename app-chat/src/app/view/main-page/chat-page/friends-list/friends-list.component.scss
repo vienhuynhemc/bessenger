@@ -2,11 +2,13 @@ $color-bg-item: #e5f1fc;
 $color-bg-online: rgb(48, 228, 48);
 $color-bg-main: #f5f9fc;
 .friends-list {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   // width main
   width: 281px;
   position: relative;
   height: 95%;
+  top: 20px;
+  left: 20px;
   border-radius: 27px;
 
   // bao gồm title và search
@@ -370,7 +372,6 @@ $color-bg-main: #f5f9fc;
 
   ::-webkit-scrollbar {
     width: 7px;
-   
   }
 
   .end {
