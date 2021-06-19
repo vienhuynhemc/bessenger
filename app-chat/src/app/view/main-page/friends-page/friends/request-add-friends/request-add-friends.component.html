@@ -1,1 +1,21 @@
-<p>request-add-friends works!</p>
+<div class="friends-list">
+    <div class="friends-list-content">
+        <div [class.detail-selected]="i === selectedIndex" class="detail-friend"  *ngFor="let item of friends_list; let i = index" (click)="onClickSelectedFriend(item, i)">
+                <div class="detail-sub">
+                    <div class="detail-left">
+                        <img [src]="item.img" alt="">
+                    </div>
+                    <div class="detail-center">
+                        <div class="name">{{item.name}}</div>
+                        <div class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                    </div>
+                    <div class="detail-right">
+                       <div class="stick detail-btn" title="Chấp nhận" ><i class="fas fa-check"></i></div>
+                       <div class="abort detail-btn" title="Từ chối"><i class="fas fa-times"></i></div>
+                    </div>
+                </div>
+             
+        </div>
+       
+    </div>
+</div>

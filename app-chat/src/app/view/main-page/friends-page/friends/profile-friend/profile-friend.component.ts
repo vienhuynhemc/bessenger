@@ -10,24 +10,39 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
   styleUrls: ['./profile-friend.component.scss']
 })
 export class ProfileFriendComponent implements OnInit, OnDestroy {
-  myFriend = {
-    name:'Melieni Sherk',
-    link:'assets/images/list-friends-chat-page/ol4.jpg'
-  }
+ 
+  imgBackground: string = null;
+  random: number = -1;
   friendInfor: FriendInfor = null;
-  valueFromFriendsComponent: Subscription;
+  private valueFromChildSubscription: Subscription;
+ 
   constructor(private contactsService: ContactsService) { }
-
+  randomImgBackground() {
+    let randomNew = 0;
+    do {
+      randomNew = Math.floor(Math.random() * 3);
+    }while(randomNew === this.random)
+    this.random = randomNew;
+    if(randomNew === 0) 
+      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend.jpg";
+    else if(randomNew === 1)
+      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg";
+    else
+      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend3.jpg";
+  }
   ngOnInit(): void {
     this.getFriendFromFriendsList();
     
   }
   ngOnDestroy(): void {
-
+    this.valueFromChildSubscription.unsubscribe();
   }
   
    // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
-    this.contactsService.friendInforService.subscribe(friendInfor => this.friendInfor = friendInfor);
+    this.valueFromChildSubscription = this.contactsService.friendInforService.subscribe(friendInfor =>{
+      this.randomImgBackground(),
+      this.friendInfor = friendInfor
+    });
   }
 }

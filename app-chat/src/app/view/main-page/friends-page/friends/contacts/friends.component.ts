@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
@@ -14,13 +14,13 @@ export class FriendsComponent implements OnInit {
     private contactsService: ContactsService,
     private friendsPageService: FriendsPageService
   ) {}
-
   ngOnInit(): void {
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.onClickSelectedFriend(this.friends_list[0], 0);
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
+
   public friends_list: FriendInfor[] = [
     {
       id: 1,
@@ -30,7 +30,7 @@ export class FriendsComponent implements OnInit {
     },
     {
       id: 2,
-      img: 'assets/images/list-friends-chat-page/avt1.jpg',
+      img: 'assets/images/list-friends-chat-page/ol3.jpg',
       name: 'Junior Sabine',
       mutualFriends: 10,
     },
@@ -142,8 +142,10 @@ export class FriendsComponent implements OnInit {
   }
   // send object đén profile
   sendFriendToProfile(friendInfor: FriendInfor) {
-    this.contactsService.setFriendInforService(friendInfor);
+      this.contactsService.setFriendInforService(friendInfor);
   }
   // get data từ service
-  getListFriends() {}
+  getListFriends() {
+   
+  }
 }
