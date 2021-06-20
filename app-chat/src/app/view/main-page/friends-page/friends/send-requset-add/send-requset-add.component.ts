@@ -112,14 +112,14 @@ export class SendRequsetAddComponent implements OnInit {
  onClickSelectedFriend(friend: FriendInfor) {
   if (this.selectedIndex != friend.id) {
     this.selectedIndex = friend.id;
-    this.sendFriendToProfileSend(friend);
+    this.sendFriendToProfileSend(this.selectedIndex);
     this.moveLinkRequest(friend.id)
   }
   
 }
 // send object đén profile
-sendFriendToProfileSend(friendInfor: FriendInfor) {
-  this.contactsService.setFriendInforService(friendInfor);
+sendFriendToProfileSend(id : any) {
+  this.contactsService.setFriendInforService(id);
 }
 
 }

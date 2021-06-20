@@ -76,17 +76,24 @@ const routes: Routes = [
         path: 'ban-be',
         component: FriendsPageComponent,
         children: [
-          { path: '', redirectTo: 'lien-lac/0', pathMatch: 'full' },
+          { path: '', redirectTo: 'lien-lac', pathMatch: 'full' },
+          { path: 'lien-lac', component: FriendsComponent },
           {
             path: 'lien-lac/:id',
             component: FriendsComponent,
           },
-          {path: '', redirectTo: 'loi-moi/0',pathMatch:'full'},
+
+          { path: '', redirectTo: 'loi-moi', pathMatch: 'full' },
+          {
+            path: 'loi-moi',
+            component: RequestAddFriendsComponent,
+          },
           {
             path: 'loi-moi/:id',
             component: RequestAddFriendsComponent,
           },
-          {path: '', redirectTo: 'da-gui/0',pathMatch:'full'},
+          { path: '', redirectTo: 'da-gui', pathMatch: 'full' },
+          { path: 'da-gui', component: SendRequsetAddComponent },
           { path: 'da-gui/:id', component: SendRequsetAddComponent },
         ],
       },

@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 
@@ -10,17 +11,22 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
   templateUrl: './friends-page.component.html',
   styleUrls: ['./friends-page.component.scss'],
 })
-export class FriendsPageComponent implements OnInit, OnDestroy {
+export class FriendsPageComponent implements OnInit, OnDestroy  {
   friendsPageDefautl: number;
   private valueFromChildSubscription: Subscription;
+  idFriendFrist: any;
+ 
   constructor(
     private main_page_service: MainPageService,
     private route: ActivatedRoute,
     private router: Router,
     public friendsPageService: FriendsPageService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+  
   ) {}
 
+  
+  
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
   }
@@ -28,14 +34,14 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.main_page_service.reset();
       this.main_page_service.selectFriendsPage();
-      
     }, 0);
-  
-    this. getSelectedFriendsPage();
+    this.getSelectedFriendsPage();
+
   }
 
   ngAfterViewChecked(){
    this.cdr.detectChanges();
+  
   }
 
   // get về trạng thái page
@@ -51,6 +57,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
   // click menu ban be, loi moi, da gui
   onClickMenu(index: number) {
     const friends = document.getElementById('btn-friends');
+   
     const request = document.getElementById('btn-request');
     const send = document.getElementById('btn-send');
     const iconFriends = document.getElementById('icon_f');
@@ -85,17 +92,22 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
       iconSend.style.color = 'white';
     }
   }
-// chuyển trang
+  
+ 
+
+ // chuyển trang
   moveToFriends(): void {
-    this.router.navigate(['lien-lac/0'], { relativeTo: this.route});
+    this.router.navigate(['lien-lac/'], { relativeTo: this.route});
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
   moveToRequest(): void {
     this.router.navigate(['loi-moi/0'], { relativeTo: this.route});
     this.friendsPageService.selectedRequestService()
+  
   }
   moveToSend(): void {
     this.router.navigate(['da-gui/0'], { relativeTo: this.route});
     this.friendsPageService.selectedSendService()
+    
   }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
+import { ContactsService } from './contacts/contacts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class FriendsPageService {
   private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
+ 
   constructor(
   ) {
   }
@@ -21,5 +24,5 @@ export class FriendsPageService {
   selectedSendService() {
     this.source.next(2);
   }
- 
+  
 }

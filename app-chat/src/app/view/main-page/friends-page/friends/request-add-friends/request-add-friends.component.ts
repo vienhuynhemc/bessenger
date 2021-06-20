@@ -110,15 +110,15 @@ export class RequestAddFriendsComponent implements OnInit {
   onClickSelectedFriend(friend: FriendInfor) {
     if (this.selectedIndex != friend.id) {
         this.selectedIndex = friend.id;
-        this.sendFriendToProfileRequest(friend);
+        this.sendFriendToProfileRequest(this.selectedIndex);
         this.moveLinkRequest(friend.id)
       }
   }
 
  
   // send object đén profile
-  sendFriendToProfileRequest(friendInfor: FriendInfor) {
-      this.contactsService.setFriendInforService(friendInfor);
+  sendFriendToProfileRequest(id : any) {
+      this.contactsService.setFriendInforService(id);
   }
   // get data từ service
   getListFriends() {}

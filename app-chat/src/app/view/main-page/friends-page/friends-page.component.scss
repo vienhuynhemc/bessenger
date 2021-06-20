@@ -125,7 +125,8 @@ $color-bg-main: #f5f9fc;
         font-size: 15px;
         color: grey;
       }
-      .btn-result {
+
+      .btn-result, .btn-offer {
         width: 40px;
         border: rgb(231, 231, 231) solid 0.5px;
         height: 35px;
@@ -137,7 +138,7 @@ $color-bg-main: #f5f9fc;
         i {
           position: absolute;
           top: 10px;
-         color: rgb(136, 133, 133);
+          color: rgb(136, 133, 133);
         }
       }
      
@@ -145,6 +146,12 @@ $color-bg-main: #f5f9fc;
         right: 0px;
         i {
           left: 12px;
+        }
+      }
+      .btn-offer {
+        right: 50px;
+        i {
+          left: 15px;
         }
       }
     }
@@ -157,6 +164,7 @@ $color-bg-main: #f5f9fc;
       top: 20px;
       left: 400px;
       border-radius: 40px;
+     
     }
 
   }

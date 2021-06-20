@@ -26,11 +26,13 @@
         </div>
         <div class="result">
             <div class="title">10 kết quả</div>
-            <div class="next btn-result"><i class="fas fa-user-plus"></i></div>
+            <div class="next btn-offer" title="Đề xuất kết bạn"><i class="fas fa-lightbulb"></i></div>
+            <div class="next btn-result" title="Thêm bạn"><i class="fas fa-user-plus"></i></div>
         </div>
-        <router-outlet ></router-outlet>
+        <router-outlet></router-outlet>
     </div>
     <div class="right">
+       
         <app-profile-friend *ngIf="friendsPageDefautl === 0" ></app-profile-friend>
         <app-profile-request *ngIf="friendsPageDefautl === 1" ></app-profile-request>
         <app-profile-send *ngIf="friendsPageDefautl === 2"></app-profile-send>
