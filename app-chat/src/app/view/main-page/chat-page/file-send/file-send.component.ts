@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -20,9 +21,16 @@ export class FileSendComponent implements OnInit {
   @Input() friends_list!: any[];
 
   @Input() selectedUser!: number;
-  constructor() { }
+
+  ma_cuoc_tro_chuyen: string;
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.ma_cuoc_tro_chuyen = id;
   }
 
 }

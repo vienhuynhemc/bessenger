@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-messenger',
@@ -6,11 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./messenger.component.scss']
 })
 export class MessengerComponent implements OnInit {
-  // id box chat lấy từ friends-list, khi click box-chat bất kì data được truyền từ friends-list => messenger
-  @Input() idGroupInp!: number;
-  constructor() { }
+
+  ma_cuoc_tro_chuyen: string;
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.ma_cuoc_tro_chuyen = id;
   }
-
 }
