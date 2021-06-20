@@ -29,8 +29,9 @@ export class FileSendComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.params['id'];
-    this.ma_cuoc_tro_chuyen = id;
+    this.route.params.subscribe(params => {
+      this.ma_cuoc_tro_chuyen = params['id'];
+    });
   }
 
 }
