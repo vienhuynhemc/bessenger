@@ -1,7 +1,8 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
+import { ChatPageBanBe } from './../../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
+import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { FriendsListService } from 'src/app/service/chat-page/friends-list/friends-list.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-friends-list',
@@ -10,7 +11,6 @@ import { FriendsListService } from 'src/app/service/chat-page/friends-list/frien
 })
 
 export class FriendsListComponent implements OnInit {
-  change_slide: number = 0;
   prev: number = -1;
   next: number = -1;
   countPrev: number = 0;
@@ -22,8 +22,6 @@ export class FriendsListComponent implements OnInit {
   idFriendsList: number;
   // truyền vào list friends chat gần đây bản DB
   friends_list_main: any;
-  online_list_1: any;
-  online_list_2: any;
   // @input idUser sau này truyền từ component vào để xử lý
   idUser: number;
   // danh sách id box chat
@@ -32,23 +30,6 @@ export class FriendsListComponent implements OnInit {
   // bản mẫu demo code cứng
 
 
-  public online_list: any[] = [{
-    id: '1',
-    link: 'assets/images/list-friends-chat-page/ol1.jpg',
-    name: 'Tâm',
-  }, {
-    id: '2',
-    link: 'assets/images/list-friends-chat-page/ol2.jpg',
-    name: 'Lisa',
-  }, {
-    id: '3',
-    link: 'assets/images/list-friends-chat-page/ol3.jpg',
-    name: 'Jisoo',
-  }, {
-    id: '4',
-    link: 'assets/images/list-friends-chat-page/ol4.jpg',
-    name: 'Jennie',
-  }]
 
   public friends_list: any[] = [{
     id: '1',
@@ -115,7 +96,7 @@ export class FriendsListComponent implements OnInit {
     content: 'umbala alaba trap',
   }]
 
-  selectedUser: number = 1;
+  selectedUser: number = -1;
   startOnline: number = 0;
   endOnline: number = 7;
   // danh sách id box chat
@@ -124,98 +105,88 @@ export class FriendsListComponent implements OnInit {
 
   constructor
     (
-      private friendsListService: FriendsListService,
       private router: Router,
-      private route:ActivatedRoute
+      private route: ActivatedRoute,
+      public chat_page_friends_service: ChatPageFriendsServiceService,
+      private main_page_process_service: ChatPageProcessServiceService
     ) { }
 
   ngOnInit(): void {
-    // selected khi load lần đầu
-    this.onSelectedFilter(this.selectedUser, false, 0)
-    // Lấy id thằng hiện tại
-    let id = this.route.snapshot.params['id'];
-    if(id == null){
-      this.router.navigate(['/bessenger/tin-nhan/123'])
+    // Lấy thông tin
+    // Nếu như service của trang chưa được chạy lần nào
+    // => đó là lần chạy đầu tiên ta phải lấy dữ liêu đầu tiên
+    if (this.chat_page_friends_service.ban_bes == null) {
+      this.getData();
     }
   }
 
-  // lấy về danh sách bạn bè đang online
-  getFriendsOnline(count: number): void {
-    this.start += count;
-    this.end = (this.end + count) * 2;
-    this.friendsListService.getUsersOnlineService(this.start, this.end, this.idFriendsList).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(usersOnl => {
-      for (let index = 0; index < usersOnl.length; index++) {
-        if (index < 4)
-          // 4 user đầu lưu vào mảng_1
-          this.online_list_1[index] = usersOnl[index];
-        else
-          // 4 user tiếp theo lưu vào mảng_2
-          this.online_list_2[index - 4] = usersOnl[index];
+  public getData(): void {
+    // lấy danh sách ma_tai_khoan bạn bè của tài khoản này
+    this.chat_page_friends_service.getListFriend().subscribe(data => {
+      let object = data.payload.toJSON();
+      let banBes: ChatPageBanBe[] = [];
+      if (object != null) {
+        Object.entries(object).forEach(([key, value]) => {
+          if (value['ton_tai'] == "0") {
+            let cpbb: ChatPageBanBe = new ChatPageBanBe();
+            cpbb.ma_tai_khoan = key;
+            banBes.push(cpbb);
+          }
+        });
       }
-    });
-  }
-  setSelectedUserFirstLoad() {
-    for (let index = 0; index < this.friends_list_main.length; index++) {
-      this.idFriendsList[index].memberReadedMessage.forEach(e => {
-        if (e == this.idUser) {
-          this.selectedUser = index;
-          this.iDGroup = this.idFriendsList[index].idGroup;
-          return;
+      this.chat_page_friends_service.ban_bes = banBes;
+      setTimeout(() => {
+        this.main_page_process_service.setLoading(false);
+      }, 0);
+      // 2. đã có list ma_tai_khoan bạn bè, h sẽ lấy mã các cuộc trò chuyện mà là cuộc trò chuyện đơn ra
+      this.chat_page_friends_service.getCuocTroChuyenDon().subscribe(data => {
+        let object = data.payload.toJSON();
+        let cuocTroChuyenDons: string[] = [];
+        if (object != null) {
+          Object.entries(object).forEach(([key, value]) => {
+            if (value['loai_cuoc_tro_truyen'] == 'don') {
+              cuocTroChuyenDons.push(key);
+            };
+          });
         }
+        this.chat_page_friends_service.maCuocTroChuyenDons = cuocTroChuyenDons;
+        setTimeout(() => {
+          this.main_page_process_service.setLoading(false);
+        }, 0);
+        // 3. Có được list ma_cac_cuoc_tro_chuyen đơn, giờ ta check thành viên của chúng xem thử có 2 người này không ?
+        // Có thì thêm ma_cuoc_tro_chuyen_vao_ban_be_không thì tạo mới cuộc trò chuyện
+        this.chat_page_friends_service.getThanhVienCuocTroChuyenDon().subscribe(data => {
+          let object = data.payload.toJSON();
+          if (object != null) {
+            Object.entries(object).forEach(([key, value]) => {
+              // Duyện đúng mã trò truyện đơn thì check thử nó có chứa 2 tài khoản không
+              if (this.chat_page_friends_service.checkContain(key)) {
+                this.chat_page_friends_service.handleThanhVienCuocTroChuyenDon(value, key);
+              }
+            });
+          }
+          // Sau khi fill các mã trò truyện xong nếu bạn bè nào chưa có mã cuộc trò truyện thì ta tạo cho nó
+          this.chat_page_friends_service.createNhungBanBeChuaCoCuocTroChuyen();
+          // Oke rồi ta update tên và hình đại diện cho bạn bè[]
+          this.chat_page_friends_service.getTaiKhoan().subscribe(data => {
+            let object = data.payload.toJSON();
+            Object.entries(object).forEach(([key, value]) => {
+              this.chat_page_friends_service.getHinhDaiDienVaLanCuoiDangNhapChoChatPageBanBe(key, value);
+            });
+            setTimeout(() => {
+              this.main_page_process_service.setLoading(false);
+            }, 0);
+          });
+        });
       });
-    }
-
-  }
-  // lấy danh sách id box chat dựa vào idUser, amount là số id muốn lấy ra
-  getConversationsIdList(amount: number) {
-    this.friendsListService.getConversationsIDListByIdUserService(this.idUser, amount).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(users => {
-      this.groupIDList = users;
     });
   }
 
-  // tạo chuyển động slide danh sách bạn đang onl
-  changeSlide(change: number): void {
-    this.change_slide = change;
-  }
-
-  // bảng lấy dữ liệu từ DB có DB xóa bảng phía trên, 0 = prev | 1 = next
-  changeSlide1(direction: number) {
-    if (direction == 0) {
-      this.countPrev++;
-      this.changeSlide
-    } else {
-      this.countPrev--;
-      this.countNext++;
-    }
-  }
   // set trường hợp load lần đầu 
-  onSelectedFilter(index: number, check: boolean, idGorup: number) {
-    // check == false là xử lý load lần đầu, check == true kiểm tra click
-    if (check) {
-      if (index != this.selectedUser) {
-        this.onSelected(index);
-        this.iDGroup = idGorup;
-      }
-    } else {
+  onSelectedFilter(index: number) {
+    if (index != this.selectedUser) {
       this.onSelected(index);
-      this.iDGroup = idGorup;
     }
-  }
-  // truyền idGroup qua message
-  sendIdGroundToMessage(idGroup: number) {
-    this.iDGroup = idGroup
   }
 
   // chọn vào bạn bè thì tô màu background
@@ -234,13 +205,15 @@ export class FriendsListComponent implements OnInit {
     this.setSelectedUser(index);
   }
 
-  // kiểm tra đã đọc tin nhắn hay chưa, true = chưa đọc | false = đã đọc
-  checkReaded(listIDReaded: []) {
-    for (let index = 0; index < listIDReaded.length; index++)
-      if (listIDReaded[index] === this.idUser)
-        return false;
-    return true;
+  // chọn 1 đứa chat trong danh sách online
+  public selectChat(ma_cuoc_tro_chuyen: string): void {
+    // Lấy id thằng hiện tại
+    let id = this.route.snapshot.params['id'];
+    if (id != ma_cuoc_tro_chuyen) {
+      this.router.navigate(['/bessenger/tin-nhan/' + ma_cuoc_tro_chuyen]);
+    }
   }
+
   // Set index selected user
   setSelectedUser(index: any) {
     this.selectedUser = index;
