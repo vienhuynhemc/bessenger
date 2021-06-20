@@ -39,8 +39,6 @@ import { ProfileComponent } from './view/main-page/personal-page/profile/profile
 import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
 
 
-import { FriendsListService } from './service/chat-page/friends-list/friends-list.service';
-
 import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
 import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
 
@@ -110,7 +108,6 @@ import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-pass
   providers: [
     UserChatService,
     UserOnlineService,
-    FriendsListService,
     ContactsService
   ],
   bootstrap: [AppComponent],

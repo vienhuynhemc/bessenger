@@ -80,25 +80,44 @@ $color-bg-main: #f5f9fc;
   }
   // danh sách những người đang onl
   .status {
-    position: relative;
+    margin-top: 15px;
+    position: absolute;
     z-index: 4;
-    padding-top: 25px;
-    padding-bottom: 20px;
-    display: flex;
-    background-color: white;
-    overflow: hidden;
-    .content {
-      width: 85%;
+    height: 265px;
+    width: 108px;
+    top: 0px;
+    padding-left: 14px;
+    left: 86px;
+    overflow: scroll;
+    transform: rotate(-90deg);
 
-      margin: auto;
+    .no_user {
+      transform: rotate(90deg) translate(105px, 58px);
+      width: 211px;
+      font-family: "Raleway";
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
 
+    .no_user_2 {
+      transform: rotate(90deg) translate(69px, 79px);
+      width: 211px;
+      position: absolute;
+      font-family: "Raleway";
+      font-weight: 500;
+      font-size: 10px;
+      color: gray;
+      letter-spacing: 1px;
+    }
+
+    .myContent {
+      transform: rotate(90deg);
+      margin-right: 10px;
+      max-width: 45px;
       position: relative;
-      display: flex;
-
-      .myContent {
-        margin-right: 20px;
-        max-width: 45px;
-        position: relative;
+      margin-left: 10px;
+      div {
         img {
           width: 40px;
           height: 40px;
@@ -107,6 +126,7 @@ $color-bg-main: #f5f9fc;
           cursor: pointer;
         }
         .name {
+          margin-top: 7px;
           text-align: center;
           font-size: 11px;
           cursor: pointer;
@@ -131,13 +151,14 @@ $color-bg-main: #f5f9fc;
           }
         }
       }
-      .o1 {
-        margin-left: 16px;
-      }
-      .o4 {
-        margin-right: 0px;
-      }
     }
+    .o1 {
+      margin-left: 16px;
+    }
+    .o4 {
+      margin-right: 0px;
+    }
+
     .prev,
     .next {
       position: absolute;
@@ -200,6 +221,7 @@ $color-bg-main: #f5f9fc;
     box-shadow: 4px 8px 28px 0px #d3dceb;
     position: absolute;
     top: 0px;
+    background-color: white;
     left: 0px;
     width: 100%;
     height: 210px;
@@ -210,6 +232,7 @@ $color-bg-main: #f5f9fc;
 
   // Danh sách bạn bè và tin nhắn của họ
   .friends {
+    margin-top: 101px;
     z-index: 3;
     overflow-y: hidden;
     position: relative;
