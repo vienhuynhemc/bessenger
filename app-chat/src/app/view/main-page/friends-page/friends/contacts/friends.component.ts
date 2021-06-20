@@ -7,8 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
@@ -23,10 +22,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   public friends_list_2: any[];
   public friendFrist: FriendInfor;
 
-  public isLoading: boolean;
-  options: AnimationOptions = {
-    path: '/assets/json/lottie/loading.json',
-  };
+ 
   selectedIndex: string = '';
   indexOption: number = -1;
   optionClick: number = -1;
@@ -44,20 +40,21 @@ export class FriendsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
   ngOnInit(): void {
+   
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.getListFriends();
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
     this.getIDURLFriendsList();
+    
     this.setFriendFirst();
+    
   }
 
-  animationCreated(animationItem: AnimationItem): void {}
 
   // set link mặc đinh là bạn bè đầu tiên
   setFriendFirst() {
-    // deley 1s để lấy dc id-0
-    this.isLoading = true;
+   
     setTimeout(() => {
       let idFriendFirst = document.getElementById('id-0');
       if (idFriendFirst === null) {
@@ -69,18 +66,17 @@ export class FriendsComponent implements OnInit, OnDestroy {
             try {
               idFriendFirst.click();
             } catch (err) {
-              
+              this.sendFriendToProfile(this.iDUrl);
             }
           } else this.sendFriendToProfile(this.iDUrl);
         }, 1500);
       } else {
         if (this.iDUrl === null) idFriendFirst.click();
-        else
-         this.sendFriendToProfile(this.iDUrl);
+        else this.sendFriendToProfile(this.iDUrl);
       }
-     
+  
     }, 0);
-    this.isLoading = false;
+  
   }
 
   // lấy ra idUrl
@@ -106,6 +102,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         this.moveLink(friend.id);
       }
     }
+   
   }
 
   // hiển thị option, xử lý click lại chính nó
@@ -158,6 +155,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   // send object đén profile
   sendFriendToProfile(id: any) {
     this.contactsService.setFriendInforService(id);
+ 
   }
 
   // get data từ service
@@ -171,18 +169,12 @@ export class FriendsComponent implements OnInit, OnDestroy {
           );
           if (temp != null) this.friends_list_2.push(temp);
         }
-      })
-      this.friends_list_2.sort(this.compare)
+      });
     });
-  }
-  // sort mảng
-  compare( a, b ) {
-    if ( a.name < b.name)
-      return -1;
+    setTimeout(() => {
+      this.friendsPageService.setLoading(false)
+    }, 0);
     
-    if ( a.name > b.name )
-      return 1;
-    
-    return 0;
   }
+  
 }

@@ -8,6 +8,7 @@ import {
   snapshotChanges,
 } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { FriendsPageService } from '../friends-page.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class ContactsService {
   friendInforService = this.friendSource.asObservable();
   constructor(
     private httpClient: HttpClient,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private friendsPageService: FriendsPageService
   ) {}
 
   // thay đổi thông tin
@@ -32,6 +34,9 @@ export class ContactsService {
 
   // lấy ra list object bạn bè dựa vào id của mỗi object
   getListFriendsInforByIDFriends(idUser: any) {
+    setTimeout(() => {
+      this.friendsPageService.setLoading(true)
+    }, 0);
     let friendInfor = new FriendInfor();
     const ref = this.db.database.ref('tai_khoan/' + idUser);
     ref.on('value', (data) => {

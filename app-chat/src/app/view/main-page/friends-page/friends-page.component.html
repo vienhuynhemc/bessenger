@@ -1,3 +1,8 @@
+<div class="loading" *ngIf="this.friendsPageService.isLoadingProcess()">
+    <main lottie [options]="this.friendsPageService.options"
+      (animationCreated)="this.friendsPageService.animationCreated($event)" class="anim"></main>
+  </div>
+  
 <div class="container">
     <div class="left">
         <div class="search">
