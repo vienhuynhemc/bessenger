@@ -10,6 +10,9 @@ import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-fr
 })
 export class ChatPageFriendsLeftServiceService {
 
+  // ma_cuoc_tro_chuyen hien hien tai
+  public now_ma_cuoc_tro_chuyen: string;
+
   // Danh sách all cuộc trò truyện
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
   // Danh sách các box chat để hiển thị ra
@@ -66,31 +69,15 @@ export class ChatPageFriendsLeftServiceService {
     return index;
   }
 
-  public updateSelected(ma_cuoc_tro_chuyen: string) {
+  public updateSelected() {
     // Select
     for (let i = 0; i < this.allBoxData.length; i++) {
-      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
+      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == this.now_ma_cuoc_tro_chuyen) {
         this.allBoxData[i].box_chat_dang_duoc_chon = true;
       } else {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
     }
-  }
-
-  public checkSeened(ma_cuoc_tro_chuyen: string): boolean {
-    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-    for (let i = 0; i < this.allBoxData.length; i++) {
-      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
-        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == ma_tai_khoan) {
-            if(this.allBoxData[i].thong_tin_thanh_vien[j].tai_khoan_da_xem_chua == "chua"){
-              return false;
-            }
-          }
-        }
-      }
-    }
-    return true;
   }
 
   public seen(ma_cuoc_tro_chuyen: string) {

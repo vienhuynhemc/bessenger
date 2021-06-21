@@ -27,11 +27,12 @@ export class FriendsListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let id = params['id'];
-      if (id == null) {
-        localStorage.removeItem("ma_cuoc_tro_chuyen");
-        if (this.chat_page_friend_left_service.allBoxData != null) {
-          this.chat_page_friend_left_service.updateSelected(null);
-        }
+      this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen = id;
+      if (id != null) {
+        this.chat_page_friend_left_service.seen(id);
+      }
+      if (this.chat_page_friend_left_service.allBoxData != null) {
+        this.chat_page_friend_left_service.updateSelected();
       }
     });
     // Lấy thông tin
@@ -150,24 +151,11 @@ export class FriendsListComponent implements OnInit {
             return last_time_boxData2 - last_time_boxData1;
           });
           this.chat_page_friend_left_service.allBoxData = allBoxData;
-          // ở đây ta sẽ update theo url
-          let id = this.route.snapshot.params['id'];
-          if (id != null) {
-            // check thử nhóm đó có trong all box ko, ko thì chuyển tới trang 404
-            if (this.chat_page_friend_left_service.checkUrl(id)) {
-              this.chat_page_friend_left_service.seen(id);
-              this.chat_page_friend_left_service.updateSelected(id);
-            } else {
-              this.router.navigate(['/**']);
-            }
-          } else {
-            let ma_cuoc_tro_chuyen = JSON.parse(localStorage.getItem("ma_cuoc_tro_chuyen"));
-            if (ma_cuoc_tro_chuyen != null) {
-              this.chat_page_friend_left_service.seen(ma_cuoc_tro_chuyen);
-              this.chat_page_friend_left_service.updateSelected(ma_cuoc_tro_chuyen);
-              localStorage.removeItem("ma_cuoc_tro_chuyen");
-            }
+          // update select
+          if(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != null){
+            this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
           }
+          this.chat_page_friend_left_service.updateSelected();
           // Oke h lấy tin nhắn cuối cùng của từng cuộc nói chuyện ra
           this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
             let object = data.payload.toJSON();
@@ -195,32 +183,14 @@ export class FriendsListComponent implements OnInit {
   }
 
   onSelected(ma_cuoc_tro_chuyen: string): void {
-    // Lấy id thằng hiện tại
-    let id = this.route.snapshot.params['id'];
-    if (id != ma_cuoc_tro_chuyen) {
-      // Check thử mã trò chuyện này với user này xem chưa chưa thì seen
-      if (!this.chat_page_friend_left_service.checkSeened(ma_cuoc_tro_chuyen)) {
-        localStorage.setItem("ma_cuoc_tro_chuyen", JSON.stringify(ma_cuoc_tro_chuyen));
-        this.chat_page_friend_left_service.seen(ma_cuoc_tro_chuyen);
-      } else {
-        this.chat_page_friend_left_service.updateSelected(ma_cuoc_tro_chuyen);
-      }
+    if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != ma_cuoc_tro_chuyen) {
       this.router.navigate(['/bessenger/tin-nhan/' + ma_cuoc_tro_chuyen]);
     }
   }
 
   // chọn 1 đứa chat trong danh sách online
   public selectChat(ma_cuoc_tro_chuyen: string): void {
-    // Lấy id thằng hiện tại
-    let id = this.route.snapshot.params['id'];
-    if (id != ma_cuoc_tro_chuyen) {
-      // Check thử mã trò chuyện này với user này xem chưa chưa thì seen
-      if (!this.chat_page_friend_left_service.checkSeened(ma_cuoc_tro_chuyen)) {
-        localStorage.setItem("ma_cuoc_tro_chuyen", JSON.stringify(ma_cuoc_tro_chuyen));
-        this.chat_page_friend_left_service.seen(ma_cuoc_tro_chuyen);
-      } else {
-        this.chat_page_friend_left_service.updateSelected(ma_cuoc_tro_chuyen);
-      }
+    if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != ma_cuoc_tro_chuyen) {
       this.router.navigate(['/bessenger/tin-nhan/' + ma_cuoc_tro_chuyen]);
     }
   }
