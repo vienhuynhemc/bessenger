@@ -22,8 +22,12 @@ export class ChatPageFriendsObjectLeft {
         if (this.ngay_tao_tin_nhan_cuoi_cung != null) {
             last_time = this.ngay_tao_tin_nhan_cuoi_cung;
         } else {
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                last_time = this.cuoc_tro_truyen.ngay_tao;
+            if (this.cuoc_tro_truyen != null) {
+                if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                    last_time = this.cuoc_tro_truyen.ngay_tao;
+                } else {
+                    last_time = 0;
+                }
             } else {
                 last_time = 0;
             }

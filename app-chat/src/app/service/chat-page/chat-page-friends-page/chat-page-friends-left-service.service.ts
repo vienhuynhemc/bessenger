@@ -75,6 +75,9 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
     }
+  }
+
+  public seen(ma_cuoc_tro_chuyen: string) {
     // cập nhật là bản thân đã xem tin này rồi
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     this.db.object("/thanh_vien_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen + "/" + ma_tai_khoan).update({ tai_khoan_da_xem_chua: "roi" });
@@ -164,6 +167,7 @@ export class ChatPageFriendsLeftServiceService {
         });
         if (!isOke) return null;
         boxData.thong_tin_thanh_vien = thong_tin_thanh_vien;
+        boxData.box_chat_dang_duoc_chon = false;
         break;
       }
     }
