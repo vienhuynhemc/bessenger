@@ -41,19 +41,27 @@
 
                 <div class="content">
                     <div class="left">
-                        <img [src]="item.getImg()[0] || 'assets/images/loading.gif'" alt="">
+                        <div class="don" *ngIf="!item.isNhom()">
+                            <img [src]="item.getImg()[0] || 'assets/images/loading.gif'" alt="">
+                        </div>
+                        <div class="nhom" *ngIf="item.isNhom()">
+                            <img class="hinh_1" [src]="item.getImg()[0] || 'assets/images/loading.gif'" alt="">
+                            <img class="hinh_2" [src]="item.getImg()[1] || 'assets/images/loading.gif'" alt="">
+                        </div>
                         <div class="cover-online">
                             <div class="online"></div>
                         </div>
                     </div>
                     <div class="right">
-                        <div class="name" [ngStyle]="i == 1 ? getStyleNameReadMessage() : null">{{"item.name"}}
+                        <div class="name" [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
+                            {{item.getName()}}
                         </div>
-                        <div class="message" [ngStyle]="i == 1 ? getStyleMessageReadMessage() : null">
+                        <div class="message" [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null">
                             <span>Bạn: </span>
                             {{"item.content"}}
                         </div>
-                        <div class="message-unread" [ngStyle]="i == 1 ? getStylePointReadMessage() : null"></div>
+                        <div class="message-unread" [ngStyle]="!item.isReaded() ? getStylePointReadMessage() : null">
+                        </div>
                     </div>
 
                     <div class="timer">{{"item.timer"}}</div>

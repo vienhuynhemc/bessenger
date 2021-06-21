@@ -115,11 +115,12 @@ export class ChatPageFriendsServiceService {
 
   public createNhungBanBeChuaCoCuocTroChuyen(): void {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let currentTime = Number(new Date());
     for (let i = 0; i < this.ban_bes.length; i++) {
       if (this.ban_bes[i].ma_cuoc_tro_chuyen == null) {
         let object = this.db.list("/cuoc_tro_chuyen").push({ loai_cuoc_tro_truyen: "don" });
-        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + ma_tai_khoan).update({ tai_khoan_da_xem_chua: "chua" });
-        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + this.ban_bes[i].ma_tai_khoan).update({ tai_khoan_da_xem_chua: "chua" });
+        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + ma_tai_khoan).update({ ngay_tham_gia: currentTime });
+        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + this.ban_bes[i].ma_tai_khoan).update({ ngay_tham_gia: currentTime });
         this.ban_bes[i].ma_cuoc_tro_chuyen = object.key;
       }
     }
