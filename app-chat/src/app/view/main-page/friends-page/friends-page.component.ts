@@ -144,5 +144,53 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
     this.friendsPageService.setNameUnFriend('');
 }
 
-
+  // tìm kiếm bạn bè
+  searchFriends(searchValue: string) {
+      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
+        this.friendsPageService.friendsList = [];
+        // mảng tạm thời lưu tất cả bạn bè để tìm ra bạn chung
+        let friendsListTemp = [];
+        data.forEach((element) => {
+          // lấy ra danh sách bạn bè
+          if (element.val().ton_tai == 0) {
+            let temp = this.contactsService.getListFriendsInforByIDFriends(
+              element.key
+            );
+            // lưu tất cả bạn bè vào mảng tạm
+              if(temp != null ) friendsListTemp.push(temp)
+              // bạn bè tìm được nếu có cùng kí tự với kí tự trong ô
+              if (temp != null && temp.name.toLowerCase().trim().includes(searchValue.toLowerCase().trim())) this.friendsPageService.friendsList.push(temp);
+          }
+        });
+        // lấy số lượng bạn bè
+        this.friendsPageService.setSizeFriends(this.friendsPageService.friendsList.length)
+        // lấy ra bạn chung của mỗi người
+        //  duyệt qua từng mã tài khoản bạn bè
+        data.forEach(element => {
+            let count = 0;
+            // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
+            this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
+              if(data_friends.val() != null) {
+                // kiểm tra có bao nhiêu bạn chung
+                data_friends.forEach(element_f => {
+                  // duyệt qua mảng tạm để có đủ bạn chung
+                  friendsListTemp.forEach(element => {
+                    if(element_f.val().ton_tai == 0 && element_f.key != parseIDUser && element_f.key == element.id) {
+                      count++;
+                    }
+                  })
+                });
+                // thêm bạn chung vào bạn bè
+                this.friendsPageService.friendsList.forEach(element => {
+                    if(element.id == data_friends.key)
+                      element.mutualFriends = count;
+                });
+                count = 0;
+              }
+            })
+        })
+      });
+  
+}
 }
