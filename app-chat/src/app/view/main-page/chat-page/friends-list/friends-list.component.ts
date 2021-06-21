@@ -3,6 +3,9 @@ import { ChatPageBanBe } from './../../../../models/chat-page/chat-page-friends-
 import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
+import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
+import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
 
 @Component({
   selector: 'app-friends-list',
@@ -11,104 +14,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class FriendsListComponent implements OnInit {
-  prev: number = -1;
-  next: number = -1;
-  countPrev: number = 0;
-  countNext: number = 0;
-  slideStep = 4;
-  start: number = 0;
-  end: number = 0;
-  // @input idFriendsList truyền vào từ component cha lúc đăng nhập
-  idFriendsList: number;
-  // truyền vào list friends chat gần đây bản DB
-  friends_list_main: any;
-  // @input idUser sau này truyền từ component vào để xử lý
-  idUser: number;
-  // danh sách id box chat
-  groupIDList: any;
-  // id group dc chọn
-  // bản mẫu demo code cứng
-
-
-
-  public friends_list: any[] = [{
-    id: '1',
-    link: 'assets/images/list-friends-chat-page/avt1.jpg',
-    name: 'Karlyn Carabello',
-    timer: '08:50',
-    content: 'umbala alaba trap',
-  },
-  {
-    id: '2',
-    link: 'assets/images/list-friends-chat-page/avt2.jpg',
-    name: 'Junior Sabine',
-    timer: '08:45',
-    content: 'yasuo penta kill nè',
-  },
-  {
-    id: '3',
-    link: 'assets/images/list-friends-chat-page/avt3.jpg',
-    name: 'Melinie Sherk',
-    timer: '08:40',
-    content: 'đang bị hàng chờ 5 phút',
-  },
-  {
-    id: '4',
-    link: 'assets/images/list-friends-chat-page/avt4.jpg',
-    name: 'Harrison Palmatier',
-    timer: '08:30',
-    content: 'troll or afk',
-  },
-  {
-    id: '5',
-    link: 'assets/images/list-friends-chat-page/avt5.jpg',
-    name: 'Tressa Duhart',
-    timer: '08:20',
-    content: 'whatsup bro!',
-  },
-  {
-    id: '6',
-    link: 'assets/images/list-friends-chat-page/avt6.jpg',
-    name: 'Erick Spiva',
-    timer: '08:10',
-    content: 'tao ký ngực fan 2k3 2 em',
-  },
-  {
-    id: '7',
-    link: 'assets/images/list-friends-chat-page/avt7.png',
-    name: 'Josefina Simpson',
-    timer: '08:00',
-    content: 'kẹp 3 2 em ấy đi ăn bún ...',
-  },
-  {
-    id: '8',
-    link: 'assets/images/list-friends-chat-page/avt8.jpg',
-    name: 'Yasuo Can 5',
-    timer: '07:55',
-    content: 'umbala alaba trap',
-  }
-    ,
-  {
-    id: '9',
-    link: 'assets/images/list-friends-chat-page/avt9.jpg',
-    name: 'Kaisa Pentakill',
-    timer: '07:50',
-    content: 'umbala alaba trap',
-  }]
 
   selectedUser: number = -1;
-  startOnline: number = 0;
-  endOnline: number = 7;
-  // danh sách id box chat
-
-  iDGroup: number = 0;
 
   constructor
     (
       private router: Router,
       private route: ActivatedRoute,
       public chat_page_friends_service: ChatPageFriendsServiceService,
-      private main_page_process_service: ChatPageProcessServiceService
+      private main_page_process_service: ChatPageProcessServiceService,
+      public chat_page_friend_left_service: ChatPageFriendsLeftServiceService
     ) { }
 
   ngOnInit(): void {
@@ -116,13 +31,14 @@ export class FriendsListComponent implements OnInit {
     // Nếu như service của trang chưa được chạy lần nào
     // => đó là lần chạy đầu tiên ta phải lấy dữ liêu đầu tiên
     if (this.chat_page_friends_service.ban_bes == null) {
-      this.getData();
+      this.getDataOnline();
     }
-    
-   
+    if (this.chat_page_friend_left_service.allBoxData == null) {
+      this.getDataLeft();
+    }
   }
 
-  public getData(): void {
+  public getDataOnline(): void {
     // lấy danh sách ma_tai_khoan bạn bè của tài khoản này
     this.chat_page_friends_service.getListFriend().subscribe(data => {
       let object = data.payload.toJSON();
@@ -184,6 +100,69 @@ export class FriendsListComponent implements OnInit {
     });
   }
 
+  public getDataLeft(): void {
+    // lấy all ma_cuoc_tro_chuyen luon
+    this.chat_page_friend_left_service.getAllCuocTroChuyen().subscribe(data => {
+      let object = data.payload.toJSON();
+      let allCuocTroTruyen: ChatPageCuocTroChuyen[] = [];
+      if (object != null) {
+        Object.entries(object).forEach(([key, value]) => {
+          let chatPageCuocTroChuyen = new ChatPageCuocTroChuyen();
+          chatPageCuocTroChuyen.ma_cuoc_tro_chuyen = key;
+          chatPageCuocTroChuyen.loai_cuoc_tro_truyen = value['loai_cuoc_tro_truyen'];
+          allCuocTroTruyen.push(chatPageCuocTroChuyen);
+        });
+      }
+      this.chat_page_friend_left_service.allCuocTroTruyen = allCuocTroTruyen;
+      // Có được danh sách các cuộc trò truyện
+      // Ta hãy fill tên và ngày tạo cho các nhóm có loai là nhóm
+      this.chat_page_friend_left_service.getAllCuocTroChuyenNhom().subscribe(data => {
+        let object = data.payload.toJSON();
+        if (object != null) {
+          Object.entries(object).forEach(([key, value]) => {
+            this.chat_page_friend_left_service.dienThongTinNhom(key, value);
+          });
+        }
+        // Fill xong thông tin nhóm giờ điền thành viên cho nó :v
+        // Những ông nào có chứa bản thân thì mới lấy
+        this.chat_page_friend_left_service.getThanhVienCuocTroTruyen().subscribe(data => {
+          let object = data.payload.toJSON();
+          let allBoxData: ChatPageFriendsObjectLeft[] = [];
+          if (object != null) {
+            Object.entries(object).forEach(([key, value]) => {
+              let boxData = this.chat_page_friend_left_service.getBoxData(key, value);
+              if (boxData != null) {
+                allBoxData.push(boxData);
+              }
+            });
+          }
+          this.chat_page_friend_left_service.allBoxData = allBoxData;
+          // Oke h lấy tin nhắn cuối cùng của từng cuộc nói chuyện ra
+          this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
+            let object = data.payload.toJSON();
+            if (object != null) {
+              Object.entries(object).forEach(([key, value]) => {
+                this.chat_page_friend_left_service.dienTinNhanCuoiCung(key, value);
+              });
+            }
+            // Oke h điền hình và tên cho các thành viên của allboxdata
+            this.chat_page_friend_left_service.getAllTaiKhoan().subscribe(data => {
+              let object = data.payload.toJSON();
+              if (object != null) {
+                Object.entries(object).forEach(([key, value]) => {
+                  this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
+                });
+              }
+              setTimeout(() => {
+                this.main_page_process_service.setLoading(false);
+              }, 0);
+            });
+          });
+        });
+      });
+    });
+  }
+
   // set trường hợp load lần đầu 
   onSelectedFilter(index: number) {
     if (index != this.selectedUser) {
@@ -193,16 +172,6 @@ export class FriendsListComponent implements OnInit {
 
   // chọn vào bạn bè thì tô màu background
   onSelected(index: number): void {
-    if ((index - 1) >= 0 && (index + 1) < this.friends_list.length) {
-      this.prev = index - 1;
-      this.next = index + 1;
-    } else if ((index - 1) >= 0) {
-      this.prev = index - 1;
-      this.next = -1;
-    } else if ((index + 1) < this.friends_list.length) {
-      this.prev = -1;
-      this.next = index + 1;
-    }
     // Cập nhập dữ liêu tại cha
     this.setSelectedUser(index);
   }
@@ -235,8 +204,12 @@ export class FriendsListComponent implements OnInit {
 
   //  Shadow bottom
   getStyleShadowBottom(): any {
+    let pounds = 0;
+    if(this.chat_page_friend_left_service.getLength()<7){
+      pounds = ((7 - this.chat_page_friend_left_service.getLength()) * 75 - (2 + this.chat_page_friend_left_service.getLength()));
+    }
     return {
-      'height': (this.friends_list.length - this.selectedUser - 1) * 76 + 'px',
+      'height': ((this.chat_page_friend_left_service.getLength() - this.selectedUser - 1) * 76) + pounds + 'px',
       'position': 'absolute',
       'width': '281px',
       'top': (this.selectedUser + 1) * 76 + 'px',
@@ -270,6 +243,16 @@ export class FriendsListComponent implements OnInit {
       'background-color': '#3275f7',
       'right': '9px',
       'top': '46.5px',
+    }
+  }
+  getStyleFillAll() {
+    return {
+      'width': '281px',
+      'background': 'white',
+      'z-index': '10',
+      'position': 'relative',
+      'border-bottom': '#e5f1fc solid 0.1px',
+      'height': ((7 - this.chat_page_friend_left_service.getLength()) * 75 - (2 + this.chat_page_friend_left_service.getLength())) + 'px',
     }
   }
 }

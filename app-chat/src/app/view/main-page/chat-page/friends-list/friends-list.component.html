@@ -23,7 +23,8 @@
             </div>
         </div>
         <p *ngIf="this.chat_page_friends_service.checkIsOfflineAll()" class="no_user">Hiện tại không có ai online cả</p>
-        <p *ngIf="this.chat_page_friends_service.checkIsOfflineAll()" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi nào!</p>
+        <p *ngIf="this.chat_page_friends_service.checkIsOfflineAll()" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi
+            nào!</p>
     </div>
     <!-- Box shadow cho header + status-->
     <div class="box-shadow-header-and-status" id="box-shadow-header-and-status">
@@ -31,86 +32,47 @@
     <div class="friends">
         <div class="content-friends">
 
-            <!-- đoạn này lấy data từ DB -->
-            <!-- <div *ngFor="let item of friends_list_main; let i = index" class="container" (click)="onSelectedFilter(i, true, item.idGroup)""
-            [class.selected-container]="selectedUser === i" [class.selected-prev]="i === prev"
-            [class.selected-next]="i===next" [class.done-select]="selectedUser != i"> 
-                <div class="content"> -->
-            <!-- nếu là group chat -->
-            <!-- <div class="left" *ngIf="item.idUser.length > 2">
-                            <img [src]="item.img[0]" alt="">
-                            <img class="img-1" [src]="item.link" alt="">
-                            <div class="cover-img-2">
-                                <img class="img-2" [src]="item.img[1]" alt="">
-                            </div>
-                            <div class="cover-online"  [class.status-online]="item.status === 'online'">
-                                <div class="online"></div>
-                            </div>
-                        </div> -->
-            <!-- nếu là chat 1vs1 -->
-            <!-- <div class="left" *ngIf="item.idUser.length <= 2">
-                            <img [src]="item.link" alt="">
-                             <div class="cover-online"  [class.status-online]="item.status === 'online'">
-                                <div class="online"></div>
-                            </div>
-                        </div> -->
-            <!-- nếu id đang đăng nhập khác id gửi tin nhắn -->
-            <!-- <div class="right" *ngIf="idUser != item.idSend"> -->
-            <!-- nếu id đang đăng nhập chưa đọc tin nhắn -->
-            <!-- <div class="name" *ngIf="item.idUser.length <= 2" [ngStyle]="checkReaded(item.memberReadedMessage) ? getStyleNameReadMessage() : null">{{item.nickName}}</div>
-                            <div class="name" *ngIf="item.idUser.length > 2" [ngStyle]="checkReaded(item.memberReadedMessage) ? getStyleNameReadMessage() : null">{{item.nameGroup}}</div>
-                            <div class="message" [ngStyle]="checkReaded(item.memberReadedMessage) ? getStyleMessageReadMessage() : null">                   
-                                    <span>{{item.nameSend}}: </span>
-                                {{item.lastMessage}}
-                            </div>
-                            <div class="message-unread" [ngStyle]="checkReaded(item.memberReadedMessage) ? getStylePointReadMessage() : null"></div>
-                        </div> -->
-            <!-- nếu id đang đăng nhập trùng với id gửi tin nhắn -->
-            <!-- <div class="right" *ngIf="idUser == item.idSend">
-                            <div class="name" *ngIf="item.idUser.length <= 2">{{item.nickName}}</div>
-                            <div class="name" *ngIf="item.idUser.length > 2">{{item.nameGroup}}</div>
-                            <div class="message">                   
-                                    <span>Bạn: </span>
-                                {{item.lastMessage}}
-                            </div>
-                        </div>
-                        <div class="timer">{{item.timeLastMessage}}</div>
-                </div>
-            </div> -->
-
-            <!-- dưới này demo thôi sau này delete -->
-            <div *ngFor="let item of friends_list; let i = index" class="container message_read"
-                (click)="onSelectedFilter(i)" [class.selected-container]="selectedUser === i"
-                [class.selected-prev]="i === prev" [class.selected-next]="i===next"
+            <div *ngFor="let item of this.chat_page_friend_left_service.allBoxData; let i = index"
+                class="container message_read" (click)="onSelectedFilter(i)"
+                [class.selected-container]="selectedUser === i"
+                [class.selected-prev]="i === (selectedUser -1) && (selectedUser!=-1)"
+                [class.selected-next]="i=== (selectedUser +1) && (selectedUser!=-1)"
                 [class.done-select]="selectedUser != i">
+
                 <div class="content">
                     <div class="left">
-                        <img [src]="item.link" alt="">
+                        <img [src]="item.getImg()[0]" alt="">
                         <div class="cover-online">
                             <div class="online"></div>
                         </div>
                     </div>
-
-
                     <div class="right">
-                        <div class="name" [ngStyle]="item.id == 1 ? getStyleNameReadMessage() : null">{{item.name}}
+                        <div class="name" [ngStyle]="i == 1 ? getStyleNameReadMessage() : null">{{"item.name"}}
                         </div>
-                        <div class="message" [ngStyle]="item.id == 1 ? getStyleMessageReadMessage() : null">
+                        <div class="message" [ngStyle]="i == 1 ? getStyleMessageReadMessage() : null">
                             <span>Bạn: </span>
-                            {{item.content}}
+                            {{"item.content"}}
                         </div>
-                        <div class="message-unread" [ngStyle]="item.id == 1 ? getStylePointReadMessage() : null"></div>
+                        <div class="message-unread" [ngStyle]="i == 1 ? getStylePointReadMessage() : null"></div>
                     </div>
 
-                    <div class="timer">{{item.timer}}</div>
+                    <div class="timer">{{"item.timer"}}</div>
+                </div>
+
+                <div *ngIf="item.trang_thai_online" class="online">
+                    <div class="child"></div>
                 </div>
             </div>
-
+            <!-- Tô trắng phần còn lại-->
+            <div *ngIf="this.chat_page_friend_left_service.getLength() < 7" class="fillAll"
+                [ngStyle]="getStyleFillAll()"
+                [class.selected-next]="selectedUser === this.chat_page_friend_left_service.getLength()-1 && (selectedUser!=-1)">
+            </div>
             <!-- Box shadown ở trên -->
             <div *ngIf="selectedUser != 0" [ngStyle]="getStyleShadowTop()">
             </div>
             <!-- Box shadow ớ dưới-->
-            <div *ngIf="selectedUser != friends_list.length-1" [ngStyle]="getStyleShadowBottom()">
+            <div [ngStyle]="getStyleShadowBottom()">
             </div>
         </div>
         <!-- Che thằng lòi -->
