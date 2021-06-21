@@ -15,7 +15,7 @@
     <div class="status">
         <div class="myContent" *ngFor="let element of this.chat_page_friends_service.ban_bes">
             <div *ngIf="element.trang_thai_online" (click)="selectChat(element.ma_cuoc_tro_chuyen)">
-                <img [src]="element.link_hinh_dai_dien" alt="">
+                <img [src]="element.link_hinh_dai_dien || 'assets/images/loading.gif'" alt="">
                 <div class="name">{{element.tenGioiHan()}}</div>
                 <div class="cover-online">
                     <div class="online"></div>
@@ -41,7 +41,7 @@
 
                 <div class="content">
                     <div class="left">
-                        <img [src]="item.getImg()[0]" alt="">
+                        <img [src]="item.getImg()[0] || 'assets/images/loading.gif'" alt="">
                         <div class="cover-online">
                             <div class="online"></div>
                         </div>
