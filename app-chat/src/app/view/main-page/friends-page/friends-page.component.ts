@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, Afte
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
+import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
@@ -22,7 +23,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
     private router: Router,
     public friendsPageService: FriendsPageService,
     private cdr: ChangeDetectorRef,
-  
+    public contactsService: ContactsService
   ) {}
 
   
@@ -97,17 +98,51 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
 
  // chuyển trang
   moveToFriends(): void {
-    this.router.navigate(['lien-lac/'], { relativeTo: this.route});
-    this.friendsPageService.selectedFriendsPageDefaultSerivce();
+    if(this.friendsPageDefautl != 0) {
+      this.router.navigate(['lien-lac/'], { relativeTo: this.route});
+      this.friendsPageService.selectedFriendsPageDefaultSerivce();
+    }
   }
   moveToRequest(): void {
-    this.router.navigate(['loi-moi/0'], { relativeTo: this.route});
-    this.friendsPageService.selectedRequestService()
+    if(this.friendsPageDefautl != 1) {
+      this.router.navigate(['loi-moi/0'], { relativeTo: this.route});
+      this.friendsPageService.selectedRequestService()
+    }
+   
   
   }
   moveToSend(): void {
+    if(this.friendsPageDefautl != 2) {
     this.router.navigate(['da-gui/0'], { relativeTo: this.route});
     this.friendsPageService.selectedSendService()
-    
+    }
   }
+
+  // xoa ban be
+
+   // không xóa 
+   onClickNonAcceptUnFriend() {
+    this.friendsPageService.setIDUnFriend('');
+    this.friendsPageService.setNameUnFriend('');
+  }
+
+  sendFriendToProfile(id: any) {
+    this.contactsService.setFriendInforService(id);
+  }
+  // chấp nhận xóa kết bạn
+  onClickAcceptUnFriend() {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.contactsService.unFriendByIDUser(this.friendsPageService.getIDUnFriend(), parseIDUser).update({
+      ton_tai: 1
+    })
+    this.contactsService.unFriendByIDUser(parseIDUser, this.friendsPageService.getIDUnFriend()).update({
+      ton_tai: 1
+    })
+    this.router.navigate(['/bessenger/ban-be/lien-lac/']);
+    this.sendFriendToProfile(null);
+    this.friendsPageService.setIDUnFriend('');
+    this.friendsPageService.setNameUnFriend('');
+}
+
+
 }

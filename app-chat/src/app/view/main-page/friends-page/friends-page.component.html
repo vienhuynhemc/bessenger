@@ -30,7 +30,9 @@
             </div>
         </div>
         <div class="result">
-            <div class="title">{{this.friendsPageService.getSizeFriends()}} kết quả</div>
+            <div class="title" *ngIf="friendsPageDefautl === 0">{{this.friendsPageService.getSizeFriends()}} kết quả</div>
+            <div class="title" *ngIf="friendsPageDefautl === 1">1 kết quả</div>
+            <div class="title" *ngIf="friendsPageDefautl === 2">2 kết quả</div>
             <div class="next btn-offer" title="Đề xuất kết bạn"><i class="fas fa-lightbulb"></i></div>
             <div class="next btn-result" title="Thêm bạn"><i class="fas fa-user-plus"></i></div>
         </div>
@@ -41,5 +43,12 @@
         <app-profile-friend *ngIf="friendsPageDefautl === 0" ></app-profile-friend>
         <app-profile-request *ngIf="friendsPageDefautl === 1" ></app-profile-request>
         <app-profile-send *ngIf="friendsPageDefautl === 2"></app-profile-send>
+    </div>
+</div>
+<div class="unfriend" [class.show-unfriend]="this.friendsPageService.getIDUnFriend() != ''">
+    <div class="unfriend-content">
+        <div class="title">Bạn có chắc muốn hủy kết bạn với<span> {{this.friendsPageService.getNameUnFriend()}}</span> không?</div>
+        <button class="not-unfriend btn" (click)="onClickNonAcceptUnFriend()">Không</button>
+        <button class="accept-unfriend btn" (click)="onClickAcceptUnFriend()">Có</button>
     </div>
 </div>

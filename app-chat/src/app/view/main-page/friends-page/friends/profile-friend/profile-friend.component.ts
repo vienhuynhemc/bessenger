@@ -5,6 +5,7 @@ import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
+import { FriendsComponent } from '../contacts/friends.component';
 
 @Component({
   selector: 'app-profile-friend',
@@ -21,34 +22,42 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   constructor(
     private contactsService: ContactsService,
     private profileFriendService: ProfileFriendService,
-    private friendsPageService: FriendsPageService
+    public friendsPageService: FriendsPageService,
   ) {}
- 
+
   ngOnInit(): void {
     this.getFriendFromFriendsList();
   }
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
   }
-
+  // lấy ra người muốn hủy kết bạn
+  onClickUnFriend(id: string, name: string) {
+    this.friendsPageService.setIDUnFriend(id);
+    this.friendsPageService.setNameUnFriend(name)
+  }
   // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
     this.friendInfor = new FriendInfor();
     this.friendInfor.id = 1;
+
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
-          this.profileFriendService.getInforFriend(id).on('value', (data) => {
-            if (data.val() !== null) {
+        if (id == null) {
+          this.friendInfor.id = 1;
+        } else {
+          this.profileFriendService.getInforFriend(id).once('value', (data) => {
+            if (data.val() != null) {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
             }
           });
-           // loading
-          setTimeout(() => {
-            this.friendsPageService.setLoading(false)
-          }, 0);
+        }
+        // loading
+        setTimeout(() => {
+          this.friendsPageService.setLoading(false);
+        }, 0);
       });
-      
   }
 }

@@ -31,6 +31,10 @@ export class ContactsService {
     return this.db.database.ref('ban_be').child(idUser);
   }
 
+  // hủy kết bạn
+  unFriendByIDUser(idUnfriend: string, idUser: string) {
+    return this.db.database.ref('ban_be').child(idUser).child(idUnfriend);
+  }
   // lấy ra list object bạn bè dựa vào id của mỗi object
   getListFriendsInforByIDFriends(idUser: any) {
     let friendInfor = new FriendInfor();

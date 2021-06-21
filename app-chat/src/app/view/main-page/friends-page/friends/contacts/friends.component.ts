@@ -21,7 +21,6 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
 export class FriendsComponent implements OnInit, OnDestroy {
   public friends_list_2: any[];
   public friendFrist: FriendInfor;
-
  
   selectedIndex: string = '';
   indexOption: number = -1;
@@ -50,11 +49,18 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.setFriendFirst();
     
   }
+  // lấy ra người muốn hủy kết bạn
+  onClickUnFriend(id: string, name: string) {
+    this.friendsPageService.setIDUnFriend(id)
+    this.friendsPageService.setNameUnFriend(name);
+    this.optionClick = -1;
+   
+    
+  }
 
-
+  
   // set link mặc đinh là bạn bè đầu tiên
   setFriendFirst() {
-   
     setTimeout(() => {
       let idFriendFirst = document.getElementById('id-0');
       if (idFriendFirst === null) {
@@ -100,6 +106,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
       if (friend != null && this.iDUrl != friend.id) {
         this.sendFriendToProfile(friend.id);
         this.moveLink(friend.id);
+        
       }
     }
    
@@ -170,7 +177,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.friendsPageService.setLoading(true)
       }, 0);
-
       this.friends_list_2 = [];
       data.forEach((element) => {
         // lấy ra danh sách bạn bè
@@ -180,17 +186,18 @@ export class FriendsComponent implements OnInit, OnDestroy {
           );
           if (temp != null) this.friends_list_2.push(temp);
         }
-       
-       
       });
      
       // lấy số lượng bạn bè
       this.friendsPageService.setSizeFriends(this.friends_list_2.length)
        // lấy ra bạn chung của mỗi người
+      //  duyệt qua từng mã tài khoản bạn bè
       data.forEach(element => {
           let count = 0;
+          // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
           this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
             if(data_friends.val() != null) {
+              // kiểm tra có bao nhiêu bạn chung
               data_friends.forEach(element_f => {
                 this.friends_list_2.forEach(element => {
                   if(element_f.val().ton_tai == 0 && element_f.key != parseIDUser && element_f.key == element.id) {
@@ -198,15 +205,17 @@ export class FriendsComponent implements OnInit, OnDestroy {
                   }
                 })
               });
+              // thêm bạn chung vào bạn bè
               this.friends_list_2.forEach(element => {
                   if(element.id == data_friends.key)
                     element.mutualFriends = count;
               });
-              console.log(this.friends_list_2)
+              count = 0;
             }
           })
          
-      });
+      })
+     
     });
  // loading
     setTimeout(() => {
