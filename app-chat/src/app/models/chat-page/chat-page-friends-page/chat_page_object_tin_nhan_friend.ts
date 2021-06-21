@@ -6,7 +6,4 @@ export class ChatPageObjectTinNhanFriend {
     lan_cuoi_dang_nhap: number;
     ten: string;
 
-    // Selected
-    box_chat_dang_duoc_chon: boolean;
-
 }

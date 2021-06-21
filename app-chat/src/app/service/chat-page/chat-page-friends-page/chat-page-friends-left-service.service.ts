@@ -59,6 +59,37 @@ export class ChatPageFriendsLeftServiceService {
     }, 5000);
   }
 
+  // Get index đang được chọn
+  public getIndexSeleced(): number {
+    let index = -1;
+    if (this.allBoxData != null) {
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.allBoxData[i].box_chat_dang_duoc_chon) {
+          return i;
+        }
+      }
+    }
+    return index;
+  }
+
+  public updateSelected(ma_cuoc_tro_chuyen: string) {
+    for (let i = 0; i < this.allBoxData.length; i++) {
+      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
+        this.allBoxData[i].box_chat_dang_duoc_chon = true;
+      } else {
+        this.allBoxData[i].box_chat_dang_duoc_chon = false;
+      }
+    }
+  }
+
+  public checkUrl(ma_cuoc_tro_chuyen:string):boolean{
+    for (let i = 0; i < this.allBoxData.length; i++) {
+      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public dienTinNhanCuoiCung(key: string, value: object) {
     for (let i = 0; i < this.allBoxData.length; i++) {

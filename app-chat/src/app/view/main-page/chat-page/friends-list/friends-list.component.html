@@ -33,11 +33,11 @@
         <div class="content-friends">
 
             <div *ngFor="let item of this.chat_page_friend_left_service.allBoxData; let i = index"
-                class="container message_read" (click)="onSelectedFilter(i)"
-                [class.selected-container]="selectedUser === i"
-                [class.selected-prev]="i === (selectedUser -1) && (selectedUser!=-1)"
-                [class.selected-next]="i=== (selectedUser +1) && (selectedUser!=-1)"
-                [class.done-select]="selectedUser != i">
+                class="container message_read" (click)="onSelected(item.cuoc_tro_truyen.ma_cuoc_tro_chuyen)"
+                [class.selected-container]="this.chat_page_friend_left_service.getIndexSeleced() === i"
+                [class.selected-prev]="i === (this.chat_page_friend_left_service.getIndexSeleced() -1) && (this.chat_page_friend_left_service.getIndexSeleced()!=-1)"
+                [class.selected-next]="i=== (this.chat_page_friend_left_service.getIndexSeleced() +1) && (this.chat_page_friend_left_service.getIndexSeleced()!=-1)"
+                [class.done-select]="this.chat_page_friend_left_service.getIndexSeleced() != i">
 
                 <div class="content">
                     <div class="left">
@@ -66,10 +66,10 @@
             <!-- Tô trắng phần còn lại-->
             <div *ngIf="this.chat_page_friend_left_service.getLength() < 7" class="fillAll"
                 [ngStyle]="getStyleFillAll()"
-                [class.selected-next]="selectedUser === this.chat_page_friend_left_service.getLength()-1 && (selectedUser!=-1)">
+                [class.selected-next]="this.chat_page_friend_left_service.getIndexSeleced() === this.chat_page_friend_left_service.getLength()-1 && (this.chat_page_friend_left_service.getIndexSeleced()!=-1)">
             </div>
             <!-- Box shadown ở trên -->
-            <div *ngIf="selectedUser != 0" [ngStyle]="getStyleShadowTop()">
+            <div *ngIf="this.chat_page_friend_left_service.getIndexSeleced() != 0" [ngStyle]="getStyleShadowTop()">
             </div>
             <!-- Box shadow ớ dưới-->
             <div [ngStyle]="getStyleShadowBottom()">

@@ -15,8 +15,6 @@ import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-fr
 
 export class FriendsListComponent implements OnInit {
 
-  selectedUser: number = -1;
-
   constructor
     (
       private router: Router,
@@ -137,6 +135,16 @@ export class FriendsListComponent implements OnInit {
             });
           }
           this.chat_page_friend_left_service.allBoxData = allBoxData;
+          // ở đây ta sẽ update theo url
+          let id = this.route.snapshot.params['id'];
+          if (id != null) {
+            // check thử nhóm đó có trong all box ko, ko thì chuyển tới trang 404
+            if (this.chat_page_friend_left_service.checkUrl(id)) {
+              this.chat_page_friend_left_service.updateSelected(id);
+            } else {
+              this.router.navigate(['/**']);
+            }
+          }
           // Oke h lấy tin nhắn cuối cùng của từng cuộc nói chuyện ra
           this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
             let object = data.payload.toJSON();
@@ -163,17 +171,13 @@ export class FriendsListComponent implements OnInit {
     });
   }
 
-  // set trường hợp load lần đầu 
-  onSelectedFilter(index: number) {
-    if (index != this.selectedUser) {
-      this.onSelected(index);
+  onSelected(ma_cuoc_tro_chuyen: string): void {
+    // Lấy id thằng hiện tại
+    let id = this.route.snapshot.params['id'];
+    if (id != ma_cuoc_tro_chuyen) {
+      this.chat_page_friend_left_service.updateSelected(ma_cuoc_tro_chuyen);
+      this.router.navigate(['/bessenger/tin-nhan/' + ma_cuoc_tro_chuyen]);
     }
-  }
-
-  // chọn vào bạn bè thì tô màu background
-  onSelected(index: number): void {
-    // Cập nhập dữ liêu tại cha
-    this.setSelectedUser(index);
   }
 
   // chọn 1 đứa chat trong danh sách online
@@ -185,14 +189,10 @@ export class FriendsListComponent implements OnInit {
     }
   }
 
-  // Set index selected user
-  setSelectedUser(index: any) {
-    this.selectedUser = index;
-  }
   //  Shadow top
   getStyleShadowTop(): any {
     return {
-      'height': this.selectedUser * 76 + 'px',
+      'height': this.chat_page_friend_left_service.getIndexSeleced() * 76 + 'px',
       'position': 'absolute',
       'width': '281px',
       'top': '0px',
@@ -205,14 +205,14 @@ export class FriendsListComponent implements OnInit {
   //  Shadow bottom
   getStyleShadowBottom(): any {
     let pounds = 0;
-    if(this.chat_page_friend_left_service.getLength()<7){
+    if (this.chat_page_friend_left_service.getLength() < 7) {
       pounds = ((7 - this.chat_page_friend_left_service.getLength()) * 75 - (2 + this.chat_page_friend_left_service.getLength()));
     }
     return {
-      'height': ((this.chat_page_friend_left_service.getLength() - this.selectedUser - 1) * 76) + pounds + 'px',
+      'height': ((this.chat_page_friend_left_service.getLength() - this.chat_page_friend_left_service.getIndexSeleced() - 1) * 76) + pounds + 'px',
       'position': 'absolute',
       'width': '281px',
-      'top': (this.selectedUser + 1) * 76 + 'px',
+      'top': (this.chat_page_friend_left_service.getIndexSeleced() + 1) * 76 + 'px',
       'left': '0px',
       'border-top-right-radius': '27px',
       'box-shadow': '4px 8px 28px 0px #d3dceb'

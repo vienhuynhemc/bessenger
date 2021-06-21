@@ -14,6 +14,9 @@ export class ChatPageFriendsObjectLeft {
     ngay_tao_tin_nhan_cuoi_cung: number;
     ma_tai_khoan_tin_nhan_cuoi_cung: string;
 
+    // Selected
+    box_chat_dang_duoc_chon: boolean;
+
     public getLastTime(): number {
         let last_time: number = 0;
         if (this.ngay_tao_tin_nhan_cuoi_cung != null) {
