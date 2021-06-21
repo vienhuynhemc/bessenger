@@ -134,6 +134,12 @@ export class FriendsListComponent implements OnInit {
               }
             });
           }
+          // sort lại theo ngày gửi của tin nhắn cuối cùng
+          allBoxData = allBoxData.sort((boxData1, boxData2) => {
+            let last_time_boxData1 = boxData1.getLastTime();
+            let last_time_boxData2 = boxData2.getLastTime();
+            return last_time_boxData2 - last_time_boxData1;
+          });
           this.chat_page_friend_left_service.allBoxData = allBoxData;
           // ở đây ta sẽ update theo url
           let id = this.route.snapshot.params['id'];

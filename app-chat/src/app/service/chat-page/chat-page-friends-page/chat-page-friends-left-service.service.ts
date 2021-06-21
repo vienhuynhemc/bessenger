@@ -49,12 +49,6 @@ export class ChatPageFriendsLeftServiceService {
         }
         this.allBoxData[i].trang_thai_online = isOnline;
       }
-      // Kiểm tra online xong thì sort lại theo ngày gửi của tin nhắn cuối cùng
-      this.allBoxData = this.allBoxData.sort((boxData1, boxData2) => {
-        let last_time_boxData1 = boxData1.getLastTime();
-        let last_time_boxData2 = boxData2.getLastTime();
-        return last_time_boxData2 - last_time_boxData1;
-      });
       this.update();
     }, 5000);
   }
@@ -73,6 +67,7 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public updateSelected(ma_cuoc_tro_chuyen: string) {
+    // Select
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
         this.allBoxData[i].box_chat_dang_duoc_chon = true;
@@ -80,9 +75,12 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
     }
+    // cập nhật là bản thân đã xem tin này rồi
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    this.db.object("/thanh_vien_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen + "/" + ma_tai_khoan).update({ tai_khoan_da_xem_chua: "roi" });
   }
 
-  public checkUrl(ma_cuoc_tro_chuyen:string):boolean{
+  public checkUrl(ma_cuoc_tro_chuyen: string): boolean {
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
         return true;
