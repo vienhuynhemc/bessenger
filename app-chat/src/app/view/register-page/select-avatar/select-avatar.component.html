@@ -3,7 +3,7 @@
     <p class="noi-dung">Hãy để mọi người biết bạn đẹp như thế nào, đừng ngại ngùng :v</p>
     <div class="content">
         <div class="icon">
-            <img [src]="url_img_avatar" alt="">
+            <img [src]="url_img_avatar || 'assets/images/loading.gif'" alt="">
         </div>
     </div>
     <div class="update-file" (click)="chonHinhTuMay(input)">

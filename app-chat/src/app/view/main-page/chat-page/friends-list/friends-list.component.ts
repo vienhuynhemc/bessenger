@@ -29,7 +29,13 @@ export class FriendsListComponent implements OnInit {
       let id = params['id'];
       this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen = id;
       if (id != null) {
-        this.chat_page_friend_left_service.seen(id);
+        if (this.chat_page_friend_left_service.allBoxData != null) {
+          if (this.chat_page_friend_left_service.checkUrl(id)) {
+            this.chat_page_friend_left_service.seen(id);
+          } else {
+            this.router.navigate(["/**"]);
+          }
+        }
       }
       if (this.chat_page_friend_left_service.allBoxData != null) {
         this.chat_page_friend_left_service.updateSelected();
@@ -144,25 +150,25 @@ export class FriendsListComponent implements OnInit {
               }
             });
           }
-          // sort lại theo ngày gửi của tin nhắn cuối cùng
-          allBoxData = allBoxData.sort((boxData1, boxData2) => {
-            let last_time_boxData1 = boxData1.getLastTime();
-            let last_time_boxData2 = boxData2.getLastTime();
-            return last_time_boxData2 - last_time_boxData1;
-          });
           this.chat_page_friend_left_service.allBoxData = allBoxData;
-          // update select
-          if(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != null){
-            this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
-          }
           this.chat_page_friend_left_service.updateSelected();
-          // Oke h lấy tin nhắn cuối cùng của từng cuộc nói chuyện ra
+          // Oke h hết tin nhắn của từng cuộc nói chuyện ra
           this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
             let object = data.payload.toJSON();
             if (object != null) {
               Object.entries(object).forEach(([key, value]) => {
-                this.chat_page_friend_left_service.dienTinNhanCuoiCung(key, value);
+                this.chat_page_friend_left_service.dienTinNhan(key, value);
               });
+            }
+            // sort lại theo ngày gửi của tin nhắn cuối cùng
+            this.chat_page_friend_left_service.sort();
+            // update select
+            if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != null) {
+              if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
+                this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
+              } else {
+                this.router.navigate(["/**"]);
+              }
             }
             // Oke h điền hình và tên cho các thành viên của allboxdata
             this.chat_page_friend_left_service.getAllTaiKhoan().subscribe(data => {
