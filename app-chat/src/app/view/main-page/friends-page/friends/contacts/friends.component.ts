@@ -1,5 +1,13 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
@@ -11,65 +19,10 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent implements OnInit, OnDestroy {
-  str: string
-  public friends_list_2 : FriendInfor[]
-  public friends_list: FriendInfor[] = [
-    {
-      id: '111111',
-      img: 'assets/images/list-friends-chat-page/avt2.jpg',
-      name: 'Karlyn Carabello',
-      mutualFriends: 3,
-    },
-    {
-      id: '22222222',
-      img: 'assets/images/list-friends-chat-page/ol3.jpg',
-      name: 'Junior Sabine',
-      mutualFriends: 10,
-    },
-    {
-      id: '3333333333',
-      img: 'assets/images/list-friends-chat-page/avt3.jpg',
-      name: 'Melinie Sherk',
-      mutualFriends: 10,
-    },
-    {
-      id: '444444444',
-      img: 'assets/images/list-friends-chat-page/avt4.jpg',
-      name: 'Harrison Palmatier',
-      mutualFriends: 10,
-    },
-    {
-      id: '555555555555555',
-      img: 'assets/images/list-friends-chat-page/avt5.jpg',
-      name: 'Tressa Duhart',
-      mutualFriends: 10,
-    },
-    {
-      id: '66666666',
-      img: 'assets/images/list-friends-chat-page/avt6.jpg',
-      name: 'Erick Spiva',
-      mutualFriends: 10,
-    },
-    {
-      id: '77777777777',
-      img: 'assets/images/list-friends-chat-page/avt7.png',
-      name: 'Josefina Simpson',
-      mutualFriends: 10,
-    },
-    {
-      id: '888888888',
-      img: 'assets/images/list-friends-chat-page/avt8.jpg',
-      name: 'Yasuo Can 5',
-      mutualFriends: 10,
-    },
-    {
-      id: '9999999',
-      img: 'assets/images/list-friends-chat-page/avt9.jpg',
-      name: 'Kaisa Pentakill',
-      mutualFriends: 10,
-    },
-  ];
+  public friends_list_2: any[];
+  public friendFrist: FriendInfor;
 
+ 
   selectedIndex: string = '';
   indexOption: number = -1;
   optionClick: number = -1;
@@ -77,59 +30,76 @@ export class FriendsComponent implements OnInit, OnDestroy {
   yOption: number = -1;
   xIcon: number = -1;
   yIcon: number = -1;
-  iDUrl:any;
+  iDUrl: any;
   valueSub: Subscription;
-  idFriend;
+
   constructor(
     private contactsService: ContactsService,
     private friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
-    private router: Router,
-
+    private router: Router
   ) {}
   ngOnInit(): void {
+    
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.getListFriends();
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
-    this.settingRouletFriendsList();
+    this.getIDURLFriendsList();
+    
+    this.setFriendFirst();
     
   }
 
-  settingRouletFriendsList() {
-     // lấy ra idUrl
-    this.valueSub = this.route.paramMap.subscribe(params => {
-      this.iDUrl = +params.get('id');
-    })
-    // nếu === 0 thì trả về thằng đầu tiên trong danh sách
-    if(this.iDUrl == 0) {
-      this.onClickSelectedFriend(this.friends_list[0])
-    } else {
-      // idUrl = id người dùng => tìm thằng có id == idUrl
-      this.friends_list.forEach(element => {
-          if(element.id == this.iDUrl) {
-            this.onClickSelectedFriend(element)
-          }
-      });
-     
-    }
-  }  
-  moveLink(link: string) {
-    this.router.navigate(['/bessenger/ban-be/lien-lac/' + link])
+
+  // set link mặc đinh là bạn bè đầu tiên
+  setFriendFirst() {
+   
+    setTimeout(() => {
+      let idFriendFirst = document.getElementById('id-0');
+      if (idFriendFirst === null) {
+        // nếu chưa tìm được thì + 1,2s
+        setTimeout(() => {
+          idFriendFirst = document.getElementById('id-0');
+          // idurl == null => danh sách rỗng
+          if (this.iDUrl === null) {
+            try {
+              idFriendFirst.click();
+            } catch (err) {
+              this.sendFriendToProfile(this.iDUrl);
+            }
+          } else this.sendFriendToProfile(this.iDUrl);
+        }, 1500);
+      } else {
+        if (this.iDUrl === null) idFriendFirst.click();
+        else this.sendFriendToProfile(this.iDUrl);
+      }
+  
+    }, 0);
+  
   }
- 
+
+  // lấy ra idUrl
+  getIDURLFriendsList() {
+    this.valueSub = this.route.paramMap.subscribe((params) => {
+      this.iDUrl = params.get('id');
+    });
+  }
+
+  moveLink(link: string) {
+    this.router.navigate(['/bessenger/ban-be/lien-lac/' + link]);
+  }
 
   ngOnDestroy() {
-    this.valueSub.unsubscribe()
+    this.valueSub.unsubscribe();
   }
- 
+
   // Khi click vào bạn bè bất kì
-  onClickSelectedFriend(friend: FriendInfor) {
+  onClickSelectedFriend(friend: FriendInfor, iDURL: any) {
     if (this.optionClick == -1) {
-      if (this.selectedIndex != friend.id) {
-        this.selectedIndex = friend.id;
-        this.sendFriendToProfile(friend);
-        this.moveLink(friend.id)
+      if (friend != null && this.iDUrl != friend.id) {
+        this.sendFriendToProfile(friend.id);
+        this.moveLink(friend.id);
       }
     }
    
@@ -181,17 +151,39 @@ export class FriendsComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   // send object đén profile
-  sendFriendToProfile(friendInfor: FriendInfor) {
-    this.contactsService.setFriendInforService(friendInfor);
+  sendFriendToProfile(id: any) {
+    this.contactsService.setFriendInforService(id);
+     // loading
+    setTimeout(() => {
+      this.friendsPageService.setLoading(false)
+    }, 0);
   }
+
   // get data từ service
   getListFriends() {
-    this.friends_list_2 = this.contactsService.getListIDFriendsByIDUser()
-    
+    this.contactsService.getListIDFriendsByIDUser().on('value', (data) => {
+      // loading
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
+
+      this.friends_list_2 = [];
+      data.forEach((element) => {
+        if (element.val().ton_tai == 0) {
+          let temp = this.contactsService.getListFriendsInforByIDFriends(
+            element.key
+          );
+          if (temp != null) this.friends_list_2.push(temp);
+        }
+      });
+    });
+ // loading
+    setTimeout(() => {
+      this.friendsPageService.setLoading(false)
+    }, 0);
     
   }
-
+  
 }
-
-

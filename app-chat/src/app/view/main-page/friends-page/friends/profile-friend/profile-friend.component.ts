@@ -4,55 +4,51 @@ import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
 
 @Component({
   selector: 'app-profile-friend',
   templateUrl: './profile-friend.component.html',
-  styleUrls: ['./profile-friend.component.scss']
+  styleUrls: ['./profile-friend.component.scss'],
 })
 export class ProfileFriendComponent implements OnInit, OnDestroy {
- 
-  imgBackground: string = null;
+  listFiends: FriendInfor[];
   random: number = -1;
-  friendInfor: FriendInfor = null;
+  friendInfor: FriendInfor;
   private valueFromChildSubscription: Subscription;
+  iDUrl: any;
+  valueSub: Subscription;
+  constructor(
+    private contactsService: ContactsService,
+    private profileFriendService: ProfileFriendService,
+    private friendsPageService: FriendsPageService
+  ) {}
  
-  constructor(private contactsService: ContactsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    ) { }
-  randomImgBackground() {
-    let randomNew = 0;
-    do {
-      randomNew = Math.floor(Math.random() * 3);
-    }while(randomNew === this.random)
-    this.random = randomNew;
-    if(randomNew === 0) 
-      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend.jpg";
-    else if(randomNew === 1)
-      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg";
-    else
-      this.imgBackground = "assets/images/list-friends-friends-page/bg-profile-myfriend3.jpg";
-  }
   ngOnInit(): void {
     this.getFriendFromFriendsList();
-   
   }
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
-  
   }
- 
-   // đồng bộ dữ liệu với friends list
+
+  // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
-    let x
-    this.valueFromChildSubscription = this.contactsService.friendInforService.subscribe(friendInfor =>{
-      this.randomImgBackground(),
-      this.friendInfor = friendInfor
-     
-    
+    this.friendInfor = new FriendInfor();
+    this.friendInfor.id = 1;
+    this.valueFromChildSubscription =
+      this.contactsService.friendInforService.subscribe((id) => {
+          this.profileFriendService.getInforFriend(id).on('value', (data) => {
+            if (data.val() !== null) {
+              this.friendInfor.id = id;
+              this.friendInfor.img = data.val().link_hinh;
+              this.friendInfor.name = data.val().ten;
+            }
+          });
+           // loading
+          setTimeout(() => {
+            this.friendsPageService.setLoading(false)
+          }, 0);
+      });
       
-    });
-   
   }
 }

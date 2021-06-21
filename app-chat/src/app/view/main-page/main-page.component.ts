@@ -2,7 +2,6 @@ import { MainPageService } from './../../service/main-page/main-page.service';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './../../service/login/login.service';
-import { ConditionalExpr } from '@angular/compiler';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 
 
