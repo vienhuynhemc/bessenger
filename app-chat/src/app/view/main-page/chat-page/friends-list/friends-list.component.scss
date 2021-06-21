@@ -133,21 +133,21 @@ $color-bg-main: #f5f9fc;
           word-wrap: break-word;
         }
         .cover-online {
-          width: 15px;
-          height: 15px;
+          width: 13.5px;
+          height: 13.5px;
           position: absolute;
           background-color: white;
-          top: 28px;
-          right: 0px;
+          top: 26px;
+          display: flex;
+          right: 4px;
           border-radius: 50%;
+          justify-content: center;
+          align-items: center;
           .online {
-            position: absolute;
-            top: 2.5px;
-            left: 17%;
             width: 9.5px;
             height: 9.5px;
             border-radius: 50%;
-            background-color: $color-bg-online;
+            background-color: #31a24c;
           }
         }
       }
@@ -244,6 +244,7 @@ $color-bg-main: #f5f9fc;
       height: 541px;
       overflow: scroll;
       position: relative;
+
       .container {
         width: 281px;
         height: 75px;
@@ -318,40 +319,14 @@ $color-bg-main: #f5f9fc;
           }
         }
       }
-      // .a2,
-      // .a4 {
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         display: block;
-      //       }
-      //     }
-      //   }
-      // }
-      // .a9 {
-      //   border-bottom: none;
-      // }
+
       .selected-prev {
         border-bottom-right-radius: 27px;
-        //   border-bottom: #a8c9e7 solid 2px;
-        //   box-shadow: 23px 22px 41px -1px $color-bg-main;
       }
 
       .selected-next {
         border-top-right-radius: 27px;
-        //   border-top: #a8c9e7 solid 2px;
-        //   box-shadow: 23px -22px 29px -15px $color-bg-main;
       }
-      // .container:hover {
-      //   background-color: $color-bg-item;
-      //   .content {
-      //     .left {
-      //       .cover-online {
-      //         background-color: $color-bg-item;
-      //       }
-      //     }
-      //   }
-      // }
 
       .done-select {
         // box-shadow: 4px 8px 28px 0px #d3dceb;
@@ -380,6 +355,26 @@ $color-bg-main: #f5f9fc;
               background-color: transparent;
             }
           }
+        }
+      }
+
+      .online {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        background-color: #ffffff;
+        left: 54px;
+        bottom: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        .child {
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          background-color: #31a24c;
         }
       }
     }
