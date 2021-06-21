@@ -12,6 +12,7 @@ export class FriendsPageService {
   private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
   private isLoading: boolean;
+  private sizeFriends: number;
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -39,4 +40,11 @@ export class FriendsPageService {
   };
 
   animationCreated(animationItem: AnimationItem): void {}
+
+  getSizeFriends() {
+    return this.sizeFriends;
+  }
+  setSizeFriends(size: number) {
+    this.sizeFriends = size;
+  }
 }

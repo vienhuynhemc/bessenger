@@ -26,23 +26,24 @@ export class ContactsService {
     this.friendSource.next(id);
   }
   // get list id dựa vào id đang đăng nhập
-  getListIDFriendsByIDUser(): any {
-    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    return this.db.database.ref('ban_be').child(parseIDUser);
+  getListIDFriendsByIDUser(idUser: any): any {
+   
+    return this.db.database.ref('ban_be').child(idUser);
   }
 
   // lấy ra list object bạn bè dựa vào id của mỗi object
   getListFriendsInforByIDFriends(idUser: any) {
-    // setTimeout(() => {
-    //   this.friendsPageService.setLoading(true)
-    // }, 0);
     let friendInfor = new FriendInfor();
     const ref = this.db.database.ref('tai_khoan/' + idUser);
     ref.on('value', (data) => {
       friendInfor.id = idUser;
       friendInfor.img = data.val().link_hinh;
       friendInfor.name = data.val().ten;
+      setTimeout(() => {
+        this.friendsPageService.setLoading(false)
+      }, 0);
     });
+  
     return friendInfor;
   }
 }
