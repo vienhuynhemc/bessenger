@@ -77,6 +77,22 @@ export class ChatPageFriendsLeftServiceService {
     }
   }
 
+  public checkSeened(ma_cuoc_tro_chuyen: string): boolean {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    for (let i = 0; i < this.allBoxData.length; i++) {
+      if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == ma_cuoc_tro_chuyen) {
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == ma_tai_khoan) {
+            if(this.allBoxData[i].thong_tin_thanh_vien[j].tai_khoan_da_xem_chua == "chua"){
+              return false;
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
+
   public seen(ma_cuoc_tro_chuyen: string) {
     // cập nhật là bản thân đã xem tin này rồi
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
