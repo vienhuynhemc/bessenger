@@ -17,7 +17,6 @@ export class ContactsService {
   private friendSource = new BehaviorSubject<FriendInfor>(null);
   friendInforService = this.friendSource.asObservable();
   constructor(
-    private httpClient: HttpClient,
     private db: AngularFireDatabase,
     private friendsPageService: FriendsPageService
   ) {}
@@ -34,9 +33,9 @@ export class ContactsService {
 
   // lấy ra list object bạn bè dựa vào id của mỗi object
   getListFriendsInforByIDFriends(idUser: any) {
-    setTimeout(() => {
-      this.friendsPageService.setLoading(true)
-    }, 0);
+    // setTimeout(() => {
+    //   this.friendsPageService.setLoading(true)
+    // }, 0);
     let friendInfor = new FriendInfor();
     const ref = this.db.database.ref('tai_khoan/' + idUser);
     ref.on('value', (data) => {

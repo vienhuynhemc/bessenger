@@ -44,10 +44,11 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.name = data.val().ten;
             }
           });
+           // loading
           setTimeout(() => {
             this.friendsPageService.setLoading(false)
           }, 0);
       });
-    
+      
   }
 }

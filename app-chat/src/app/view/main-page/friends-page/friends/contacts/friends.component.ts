@@ -40,7 +40,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
   ngOnInit(): void {
-   
+    
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.getListFriends();
@@ -155,12 +155,20 @@ export class FriendsComponent implements OnInit, OnDestroy {
   // send object đén profile
   sendFriendToProfile(id: any) {
     this.contactsService.setFriendInforService(id);
- 
+     // loading
+    setTimeout(() => {
+      this.friendsPageService.setLoading(false)
+    }, 0);
   }
 
   // get data từ service
   getListFriends() {
     this.contactsService.getListIDFriendsByIDUser().on('value', (data) => {
+      // loading
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
+
       this.friends_list_2 = [];
       data.forEach((element) => {
         if (element.val().ton_tai == 0) {
@@ -171,6 +179,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         }
       });
     });
+ // loading
     setTimeout(() => {
       this.friendsPageService.setLoading(false)
     }, 0);
