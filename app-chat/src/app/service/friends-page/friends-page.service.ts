@@ -69,4 +69,5 @@ export class FriendsPageService {
   getFriendsList() {
     return this.friendsList;
   }
+ 
 }

@@ -44,6 +44,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
         if (id == null) {
+          // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
         } else {
           this.profileFriendService.getInforFriend(id).once('value', (data) => {
@@ -51,7 +52,10 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
+            } else {
+              this.friendInfor.id = 2;
             }
+           
           });
         }
         // loading

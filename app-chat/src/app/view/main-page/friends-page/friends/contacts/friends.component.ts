@@ -20,7 +20,6 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
 })
 export class FriendsComponent implements OnInit, OnDestroy {
   public friendFrist: FriendInfor;
-  selectedIndex: string = '';
   indexOption: number = -1;
   optionClick: number = -1;
   xOption: number = -1;
@@ -43,7 +42,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.getListFriends();
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
     this.getIDURLFriendsList();
-    
     this.setFriendFirst();
     
   }
@@ -52,8 +50,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.friendsPageService.setIDUnFriend(id)
     this.friendsPageService.setNameUnFriend(name);
     this.optionClick = -1;
-   
-    
+  
   }
 
   
