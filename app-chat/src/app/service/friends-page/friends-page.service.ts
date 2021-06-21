@@ -12,6 +12,12 @@ export class FriendsPageService {
   private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
   private isLoading: boolean;
+  private sizeFriends: number;
+  idUnfriend: string = '';
+  nameUnfriend: string = '';
+  // danh sách bạn bè
+  friendsList: any[];
+  friendInfor: FriendInfor;
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -39,4 +45,29 @@ export class FriendsPageService {
   };
 
   animationCreated(animationItem: AnimationItem): void {}
+  // số lượng bạn bè
+  getSizeFriends() {
+    return this.sizeFriends;
+  }
+  setSizeFriends(size: number) {
+    this.sizeFriends = size;
+  }
+  // id người bị hủy kết bạn
+  setIDUnFriend(id: string) {
+    this.idUnfriend = id;
+  }
+  getIDUnFriend() {
+    return this.idUnfriend
+  }
+  // tên người bị hủy kết bạn
+  setNameUnFriend(name: string) {
+    this.nameUnfriend = name;
+  }
+  getNameUnFriend() {
+    return this.nameUnfriend;
+  }
+  getFriendsList() {
+    return this.friendsList;
+  }
+ 
 }

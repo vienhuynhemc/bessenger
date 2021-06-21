@@ -9,7 +9,6 @@ export class ProfileFriendService {
 
   constructor( private db: AngularFireDatabase) { }
   getInforFriend(idUser: any) {
-   
     return this.db.database.ref('tai_khoan/' + idUser);
   }
 }

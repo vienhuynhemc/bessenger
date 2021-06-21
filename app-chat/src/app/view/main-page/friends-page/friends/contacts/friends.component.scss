@@ -1,4 +1,5 @@
 
+
 .friends-list {
   position: relative;
   top: 40px;
@@ -51,6 +52,9 @@
             font-weight: 600;
             margin-top: 27px;
           }
+          .non-mutual {
+            margin-top: 37px;
+          }
           .mutual-friends {
             color: gray;
             font-size: 13px;
@@ -93,6 +97,7 @@
         z-index: 0;
         right: 20px;
         opacity: 0;
+        
         i {
           font-size: 15px;
           color: #888585;
@@ -111,6 +116,7 @@
           margin: auto;
           position: relative;
           height: 35px;
+          display: none;
         }
         .option-detail:hover {
           background-color: #d4e6f3;
@@ -128,6 +134,9 @@
       .option-detail-block {
         opacity: 1;
         z-index: 10;
+        .option-detail {
+          display: block;
+        }
       }
       .detail-sub:hover {
         background-color: #9dcff5;
