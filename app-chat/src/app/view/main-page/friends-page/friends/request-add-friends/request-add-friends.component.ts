@@ -31,54 +31,72 @@ export class RequestAddFriendsComponent implements OnInit {
       img: 'assets/images/list-friends-chat-page/avt2.jpg',
       name: 'Karlyn Cara',
       mutualFriends: 3,
+      date: 1,
+      status: true
     },
     {
       id: 2,
       img: 'assets/images/list-friends-chat-page/avt1.jpg',
       name: 'Junior Sabine',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 3,
       img: 'assets/images/list-friends-chat-page/avt3.jpg',
       name: 'Melinie Sherk',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 4,
       img: 'assets/images/list-friends-chat-page/avt4.jpg',
       name: 'Harrison Palmatier',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 5,
       img: 'assets/images/list-friends-chat-page/avt5.jpg',
       name: 'Tressa Duhart',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 6,
       img: 'assets/images/list-friends-chat-page/avt6.jpg',
       name: 'Erick Spiva',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 7,
       img: 'assets/images/list-friends-chat-page/avt7.png',
       name: 'Josefina Simpson',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 8,
       img: 'assets/images/list-friends-chat-page/avt8.jpg',
       name: 'Yasuo Can 5',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
     {
       id: 9,
       img: 'assets/images/list-friends-chat-page/avt9.jpg',
       name: 'Kaisa Pentakill',
       mutualFriends: 10,
+      date: 1,
+      status: true
     },
   ];
   selectedIndex: string = '';
@@ -88,7 +106,7 @@ export class RequestAddFriendsComponent implements OnInit {
   settingRouletRequestList() {
     // lấy ra idUrl
    this.valueSub = this.route.paramMap.subscribe(params => {
-     this.iDUrl = +params.get('id');
+     this.iDUrl = params.get('id');
    })
    // nếu === 0 thì trả về thằng đầu tiên trong danh sách
    if(this.iDUrl == 0) {

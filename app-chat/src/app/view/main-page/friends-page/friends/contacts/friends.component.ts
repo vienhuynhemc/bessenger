@@ -67,6 +67,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
               });
             }
         });
+       
     })
   }
   onClickExitMutual() {

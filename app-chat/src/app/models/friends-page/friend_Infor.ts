@@ -3,5 +3,6 @@ export class FriendInfor {
     img: string;
     name: string;
     mutualFriends: number = 0;
-    
+    date: number;
+    status: boolean;
 }
