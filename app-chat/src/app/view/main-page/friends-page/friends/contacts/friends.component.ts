@@ -177,6 +177,10 @@ export class FriendsComponent implements OnInit, OnDestroy {
       this.friendsPageService.setLoading(false)
     }, 0);
   }
+  // lấy danh sách bạn chung
+  getMutualFriendsList(idFriend: string) {
+    
+  }
 
   // get data từ service
   getListFriends() {
