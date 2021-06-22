@@ -40,19 +40,21 @@ export class ChatPageFriendsLeftServiceService {
     setTimeout(() => {
       // Kiểm tra online
       let currentTime = Number(new Date());
-      for (let i = 0; i < this.allBoxData.length; i++) {
-        let isOnline = false;
-        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-            let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-            let overTime = currentTime - last_time;
-            if (overTime < 10000) {
-              isOnline = true;
-              break;
+      if (this.allBoxData != null) {
+        for (let i = 0; i < this.allBoxData.length; i++) {
+          let isOnline = false;
+          for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+            if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+              let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+              let overTime = currentTime - last_time;
+              if (overTime < 10000) {
+                isOnline = true;
+                break;
+              }
             }
           }
+          this.allBoxData[i].trang_thai_online = isOnline;
         }
-        this.allBoxData[i].trang_thai_online = isOnline;
       }
       this.update();
     }, 5000);
@@ -165,28 +167,30 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public dienTenVaHinhChoTaiKhoanTrongBoxData(key: string, value: object) {
-    for (let i = 0; i < this.allBoxData.length; i++) {
-      for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-        if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key) {
-          this.allBoxData[i].thong_tin_thanh_vien[j].ten = value['ten'];
-          this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
-          this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
-          break;
-        }
-      }
-      if (this.allBoxData[i].cuoc_tro_truyen.ma_tai_khoan_chu_so_huu == key) {
-        this.allBoxData[i].cuoc_tro_truyen.ten_nguoi_so_huu = value['ten'];
-      }
-      if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan != null) {
-        for (let j = 0; j < this.allBoxData[i].cuoc_tro_truyen.tin_nhan.length; j++) {
-          for (let k = 0; k < this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem.length; k++) {
-            if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ma_tai_khoan == key) {
-              this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ten = value['ten'];
-              this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].hinh =  value['link_hinh'];
-            }
+    if (this.allBoxData != null) {
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key) {
+            this.allBoxData[i].thong_tin_thanh_vien[j].ten = value['ten'];
+            this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
+            this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
+            break;
           }
-          if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ma_tai_khoan == key) {
-            this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ten = value['ten'];
+        }
+        if (this.allBoxData[i].cuoc_tro_truyen.ma_tai_khoan_chu_so_huu == key) {
+          this.allBoxData[i].cuoc_tro_truyen.ten_nguoi_so_huu = value['ten'];
+        }
+        if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan != null) {
+          for (let j = 0; j < this.allBoxData[i].cuoc_tro_truyen.tin_nhan.length; j++) {
+            for (let k = 0; k < this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem.length; k++) {
+              if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ma_tai_khoan == key) {
+                this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ten = value['ten'];
+                this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].hinh = value['link_hinh'];
+              }
+            }
+            if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ma_tai_khoan == key) {
+              this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ten = value['ten'];
+            }
           }
         }
       }
