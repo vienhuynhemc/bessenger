@@ -170,6 +170,8 @@ export class FriendsListComponent implements OnInit {
                 this.router.navigate(["/**"]);
               }
             }
+            // Sau khi có thông tin của tất cả các cuộc nói chuyện thì ta xem thử cái nào ta chưa nhận -> nhận
+            this.chat_page_friend_left_service.da_nhan();
             // Oke h điền hình và tên cho các thành viên của allboxdata
             this.chat_page_friend_left_service.getAllTaiKhoan().subscribe(data => {
               let object = data.payload.toJSON();

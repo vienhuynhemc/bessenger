@@ -90,6 +90,13 @@
                             <p>+{{item.getImgUserSeened().length - 3}}</p>
                         </div>
                     </div>
+                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && item.isDaNhan()"
+                        class="da_gui">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && !item.isDaNhan()" class="chua_nhan">
+                        <i class="fas fa-check"></i>
+                    </div>
                 </div>
             </div>
             <!-- Tô trắng phần còn lại-->
