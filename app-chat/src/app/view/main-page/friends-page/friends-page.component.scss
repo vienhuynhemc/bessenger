@@ -16,12 +16,14 @@ $color-bg-main: #f5f9fc;
     align-items: center;
     top: 0px;
     left: 0px;
-    box-shadow: 0px 0px 10px 0px #dfebf5;
+    
   
     .unfriend-content {
       width: 500px;
       height: 160px;
       background-color: white;
+      border-left: #3275f7 solid 5px;
+      border-right: #3275f7 solid 5px;
       border-radius: 10px;
       text-align: center;
       .title {
@@ -55,6 +57,7 @@ $color-bg-main: #f5f9fc;
     }
   
   }
+  
   .loading {
     width: 100vw;
     height: 100vh;

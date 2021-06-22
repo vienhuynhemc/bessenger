@@ -15,9 +15,11 @@ export class FriendsPageService {
   private sizeFriends: number;
   idUnfriend: string = '';
   nameUnfriend: string = '';
+ 
   // danh sách bạn bè
   friendsList: any[];
   friendInfor: FriendInfor;
+  
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -66,6 +68,8 @@ export class FriendsPageService {
   getNameUnFriend() {
     return this.nameUnfriend;
   }
+
+  // danh sách bạn bè
   getFriendsList() {
     return this.friendsList;
   }

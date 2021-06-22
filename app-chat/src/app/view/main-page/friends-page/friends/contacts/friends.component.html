@@ -6,9 +6,9 @@
                     <div class="detail-left">
                         <img [src]="item.img" alt="">
                     </div>
-                    <div  [attr.data-id]="item.id" class="detail-center">
+                    <div  class="detail-center">
                         <div [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
-                        <div *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                        <div (click)="onClickGetIDFriendMutual(item.id, this.friendsPageService.getFriendsList())" *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
                     </div>
                     <div class="detail-right">
                         <i class="fas fa-heart"></i>
@@ -21,5 +21,23 @@
                 </div>
         </div>
         
+    </div>
+</div>
+<div class="mutual-friends-list" [class.mutual-display]="idMutualFriend != ''">
+    <div class="content-mutual-friends">
+        <div class="header">
+            <div class="title">Bạn chung</div>
+            <div class="exit" (click)="onClickExitMutual()"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="content-scroll">
+            <div class="detail-mutual-friends" *ngFor="let item of  mutualFriendsList; let i = index">
+                    <div class="detail-left">
+                        <img [src]="item.img" alt="">
+                    </div>
+                    <div  class="detail-right">
+                        <div  class="name">{{item.name}}</div>
+                    </div>
+            </div>
+        </div>
     </div>
 </div>

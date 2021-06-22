@@ -16,6 +16,7 @@ import { FriendsPageService } from '../friends-page.service';
 export class ContactsService {
   private friendSource = new BehaviorSubject<FriendInfor>(null);
   friendInforService = this.friendSource.asObservable();
+ 
   constructor(
     private db: AngularFireDatabase,
     private friendsPageService: FriendsPageService
@@ -27,7 +28,6 @@ export class ContactsService {
   }
   // get list id dựa vào id đang đăng nhập
   getListIDFriendsByIDUser(idUser: any): any {
-   
     return this.db.database.ref('ban_be').child(idUser);
   }
 
@@ -50,4 +50,9 @@ export class ContactsService {
   
     return friendInfor;
   }
+  getFriendByID(idUser:any) {
+    return this.db.database.ref('tai_khoan/' + idUser);
+  }
+
+  
 }
