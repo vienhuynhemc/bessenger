@@ -83,8 +83,10 @@ export class FriendInfor {
     }
     // kiểm tra giới hạn tên danh sách bạn bè
     public checkLimitNameFriendsList() {
-        if(this.name.length > 20)
-            return true
+        if(this.name != undefined) {
+            if(this.name.length > 20)
+                return true
+        }
         return false;
     }
     // lấy ra tên đã được giới hạn danh sách bạn bè
@@ -99,7 +101,7 @@ export class FriendInfor {
 
     // kiểm tra giới hạn tên profile bạn bè
     public checkLimitNameFriendsProfile() {
-        if(this.name.length > 26)
+        if(this.name.length > 23)
             return true
         return false;
     }
@@ -107,8 +109,25 @@ export class FriendInfor {
       // lấy ra tên đã được giới hạn profile bạn bè
       public getNameLimitFriendsProfile() {
         let result = this.name;
-        if (result.length > 20) {
-            result = this.name.substring(0, 25).trim();
+        if (result.length > 23) {
+            result = this.name.substring(0, 22).trim();
+            result += "...";
+        }
+        return result;
+    }
+
+    // kiểm tra giới hạn tên bạn chung bạn bè
+    public checkLimitNameMutualFriends() {
+        if(this.name.length > 30)
+            return true
+        return false;
+    }
+
+      // lấy ra tên đã được giới hạn profile bạn bè
+      public getNameLimitMutualFriends() {
+        let result = this.name;
+        if (result.length > 30) {
+            result = this.name.substring(0, 29).trim();
             result += "...";
         }
         return result;
