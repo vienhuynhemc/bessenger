@@ -16,7 +16,7 @@ import { FriendsPageService } from '../friends-page.service';
 export class ContactsService {
   private friendSource = new BehaviorSubject<FriendInfor>(null);
   friendInforService = this.friendSource.asObservable();
-  idMutualFriend: string = '';
+ 
   constructor(
     private db: AngularFireDatabase,
     private friendsPageService: FriendsPageService
@@ -54,11 +54,5 @@ export class ContactsService {
     return this.db.database.ref('tai_khoan/' + idUser);
   }
 
-   // bạn chung
-   setIDMutualFriend(id: string) {
-    this.idMutualFriend = id;
-  }
-  getIDMutualFriend() {
-    return this.idMutualFriend
-  }
+  
 }

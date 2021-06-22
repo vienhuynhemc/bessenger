@@ -219,15 +219,16 @@
     }
     .content-scroll {
       overflow-y: scroll;
-      height: 83%;
+      height: 90%;
       width: 100%;
-      padding-top: 5%;
+      padding-top: 10px;
       .detail-mutual-friends {
-        width: 70%;
+        width: 80%;
         height: 60px;
-        margin-bottom: 10px;
+        
         display: flex;
         margin: auto;
+        margin-bottom: 10px;
         border: #3275f7 solid 1px;
         border-radius: 10px;
         .detail-left {
@@ -242,11 +243,10 @@
           }
         }
         .detail-right {
-          width: 50%;
-          margin-left: 10%;
+          width: 60%;
           .name {
             font-size: 15px;
-            margin-top: 20px;
+            margin-top: 22px;
           }
         }
       }

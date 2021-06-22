@@ -20,6 +20,8 @@ import { FriendsPageService } from 'src/app/service/friends-page/friends-page.se
 })
 export class FriendsComponent implements OnInit, OnDestroy {
   public friendFrist: FriendInfor;
+  // danh sách bạn bè chung
+  mutualFriendsList: any [];
   indexOption: number = -1;
   optionClick: number = -1;
   xOption: number = -1;
@@ -28,7 +30,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   yIcon: number = -1;
   iDUrl: any;
   valueSub: Subscription;
-
+  idMutualFriend: string = '';
   constructor(
     public contactsService: ContactsService,
     public friendsPageService: FriendsPageService,
@@ -45,11 +47,30 @@ export class FriendsComponent implements OnInit, OnDestroy {
     
   }
   // Lấy ra người muốn hiển thị danh sách bạn chung
-  onClickGetIDFriendMutual(id: string) {
-    this.contactsService.setIDMutualFriend(id);
+  onClickGetIDFriendMutual(id: string, listFriendsUser: FriendInfor[]) {
+    this.idMutualFriend = id;
+    this.mutualFriendsList = [];
+    // id user hiện tại
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // tìm ra danh sách bạn bè của id bạn bè vừa nhận vào
+    this.contactsService.getListIDFriendsByIDUser(this.idMutualFriend).on('value', (data) => {
+        this.mutualFriendsList = []
+        data.forEach(element => {
+          // id bạn bè != id đang đăng nhập
+            if(element.key != parseIDUser && element.val().ton_tai == 0) {
+              // duyệt qua danh sách bạn bè của id đang đăng nhập
+              listFriendsUser.forEach(itemF => {
+                // nếu trùng với id bạn bè của bạn vừa lấy ra
+                if(itemF.id == element.key) {
+                  this.mutualFriendsList.push(this.contactsService.getListFriendsInforByIDFriends(element.key))
+                }
+              });
+            }
+        });
+    })
   }
   onClickExitMutual() {
-    this.contactsService.setIDMutualFriend('');
+    this.idMutualFriend = '';
   }
   // lấy ra người muốn hủy kết bạn
   onClickUnFriend(id: string, name: string) {
@@ -176,10 +197,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.friendsPageService.setLoading(false)
     }, 0);
-  }
-  // lấy danh sách bạn chung
-  getMutualFriendsList(idFriend: string) {
-    
   }
 
   // get data từ service

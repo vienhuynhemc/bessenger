@@ -19,8 +19,7 @@ export class FriendsPageService {
   // danh sách bạn bè
   friendsList: any[];
   friendInfor: FriendInfor;
-  // danh sách bạn bè chung
-  mutualFriendsList: any [];
+  
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
