@@ -36,7 +36,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
   ngOnInit(): void {
-    
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.getListFriends();
@@ -52,33 +51,37 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.optionClick = -1;
   
   }
-
-  
-  // set link mặc đinh là bạn bè đầu tiên
+  // selected bạn bè đầu tiên trong danh sách
   setFriendFirst() {
-    setTimeout(() => {
-      let idFriendFirst = document.getElementById('id-0');
-      if (idFriendFirst === null) {
-        // nếu chưa tìm được thì + 1,2s
+    // nếu địa chỉ là /lien-lac
+    if(this.iDUrl == null) {
+      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.contactsService.getListIDFriendsByIDUser(parseIDUser).once('value', (data) => {
+        // loading
         setTimeout(() => {
-          idFriendFirst = document.getElementById('id-0');
-          // idurl == null => danh sách rỗng
-          if (this.iDUrl === null) {
-            try {
-              idFriendFirst.click();
-            } catch (err) {
-              this.sendFriendToProfile(this.iDUrl);
-            }
-          } else this.sendFriendToProfile(this.iDUrl);
-        }, 2000);
-      } else {
-        if (this.iDUrl === null) idFriendFirst.click();
-        else this.sendFriendToProfile(this.iDUrl);
-      }
-  
-    }, 0);
-  
+          this.friendsPageService.setLoading(true)
+        }, 0);
+        let loop = 0;
+        data.forEach((element) => {
+          // lấy ra danh sách bạn bè
+          if (element.val().ton_tai == 0) {
+            this.contactsService.getFriendFrist(element.key).once('value', (data) => {
+              if(loop == 0) {
+                if(this.iDUrl != data.key)
+                this.moveLink(data.key)
+                this.sendFriendToProfile(data.key);
+                loop++;
+              }
+            })
+          }
+        });
+      });
+  } else {
+    // nếu địa chỉ là /lien-lac/xxxxx
+    this.sendFriendToProfile(this.iDUrl);
   }
+  }
+  
 
   // lấy ra idUrl
   getIDURLFriendsList() {

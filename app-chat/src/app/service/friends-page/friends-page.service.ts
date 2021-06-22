@@ -69,5 +69,7 @@ export class FriendsPageService {
   getFriendsList() {
     return this.friendsList;
   }
- 
+  getFriendFirst() {
+    return this.friendsList[0];
+  }
 }

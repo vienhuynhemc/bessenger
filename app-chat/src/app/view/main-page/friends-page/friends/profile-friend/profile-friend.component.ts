@@ -23,7 +23,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     private contactsService: ContactsService,
     private profileFriendService: ProfileFriendService,
     public friendsPageService: FriendsPageService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -56,9 +56,8 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
               checkLoop++;
-            } 
-            if(checkLoop == 0) {
-              this.router.navigate(['/**']);
+            } else {
+              this.router.navigate(['/**'])
             }
           });
         }

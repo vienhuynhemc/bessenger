@@ -50,4 +50,7 @@ export class ContactsService {
   
     return friendInfor;
   }
+  getFriendFrist(idUser:any) {
+    return this.db.database.ref('tai_khoan/' + idUser);
+  }
 }
