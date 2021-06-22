@@ -63,14 +63,15 @@
 
             <div class="input_data" id="dn-email">
                 <i class="far fa-paper-plane"></i>
-                <input type="text" placeholder="Tài khoản" [(ngModel)]="userName"  (ngModelChange)="dnEmail($event)">
+                <input type="text" placeholder="Tài khoản" [(ngModel)]="userName" (ngModelChange)="dnEmail($event)">
             </div>
 
             <p class="error" id="dn-error-1">Email không thể thiếu</p>
 
             <div class="input_data" id="dn-mat-khau">
                 <i class="fab fa-keycdn"></i>
-                <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord"  (ngModelChange)="dnPassword($event)">
+                <input #password type="password" placeholder="Mật khẩu" [(ngModel)]="passWord"
+                    (ngModelChange)="dnPassword($event)">
                 <i #eye class="far fa-eye eye" (click)="hiddenAndShowPassword(password,eye)"></i>
             </div>
 

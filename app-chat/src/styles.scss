@@ -3,3 +3,17 @@
 @import url("./assets/font/fontawesome-free-5.15.3-web/css/all.css");
 // Font chữ releway
 @import url("./assets/font/releway/stylesheet.css");
+
+// Tooltip
+.tooltip {
+  font-size: 10px !important;
+  letter-spacing: 1px;
+  font-family: "Raleway";
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.734);
+  border-radius: 6px !important;
+  padding: 8px 10px !important;
+  box-shadow: 0px 2px 4px #828282;
+  line-height: 15px;
+  white-space: pre-line !important;
+}
