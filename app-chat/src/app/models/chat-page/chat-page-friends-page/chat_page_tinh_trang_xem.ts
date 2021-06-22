@@ -1,9 +1,10 @@
 export class ChatPageTinhTrangXem {
 
     ma_tai_khoan: string;
-    ten:string;
-    hinh:string;
+    ten: string;
+    hinh: string;
     ngay_xem: number;
     xem_chua: string;
+    ngay_nhan: number;
 
 }

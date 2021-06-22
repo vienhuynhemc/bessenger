@@ -84,10 +84,10 @@ $color-bg-main: #f5f9fc;
     position: absolute;
     z-index: 4;
     height: 265px;
-    width: 108px;
-    top: 0px;
+    width: 88px;
+    top: 9px;
     padding-left: 14px;
-    left: 86px;
+    left: 96px;
     overflow: scroll;
     transform: rotate(-90deg);
 
@@ -237,7 +237,7 @@ $color-bg-main: #f5f9fc;
     z-index: 3;
     overflow-y: hidden;
     position: relative;
-    height: 541px;
+    height: 536px;
     width: 320px;
 
     .content-friends {
@@ -426,6 +426,50 @@ $color-bg-main: #f5f9fc;
         }
       }
 
+      .chua_nhan {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        border: 1px solid #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: #bcc0c4;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .da_gui {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        background: #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: white;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
       .so_nguoi_da_xem {
         position: absolute;
         display: flex;
@@ -542,4 +586,8 @@ $color-bg-main: #f5f9fc;
     background-color: white;
     position: relative;
   }
+}
+
+.hidden {
+  display: none;
 }
