@@ -84,10 +84,10 @@ $color-bg-main: #f5f9fc;
     position: absolute;
     z-index: 4;
     height: 265px;
-    width: 108px;
-    top: 0px;
+    width: 88px;
+    top: 9px;
     padding-left: 14px;
-    left: 86px;
+    left: 96px;
     overflow: scroll;
     transform: rotate(-90deg);
 
@@ -237,7 +237,7 @@ $color-bg-main: #f5f9fc;
     z-index: 3;
     overflow-y: hidden;
     position: relative;
-    height: 541px;
+    height: 536px;
     width: 320px;
 
     .content-friends {
@@ -542,4 +542,9 @@ $color-bg-main: #f5f9fc;
     background-color: white;
     position: relative;
   }
+}
+
+
+.hidden{
+  display: none;
 }

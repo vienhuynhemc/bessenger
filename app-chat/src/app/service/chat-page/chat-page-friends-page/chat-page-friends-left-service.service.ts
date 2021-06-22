@@ -19,18 +19,46 @@ export class ChatPageFriendsLeftServiceService {
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
   // Danh sách các box chat để hiển thị ra
   public allBoxData: ChatPageFriendsObjectLeft[];
+  public search: string;
 
   constructor(
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceService
   ) {
+    this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
   }
 
+  public compareSearch(i: number): boolean {
+    if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+      if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+        return true;
+      }
+    } else if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+      let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+      for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+        if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].ten != null) {
+            if (this.allBoxData[i].thong_tin_thanh_vien[j].ten.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   public getLength(): number {
     if (this.allBoxData != null) {
-      return this.allBoxData.length;
+      let count = 0;
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.compareSearch(i)) {
+          count++;
+        }
+      }
+      return count;
     }
     return 0;
   }
@@ -62,6 +90,27 @@ export class ChatPageFriendsLeftServiceService {
 
   // Get index đang được chọn
   public getIndexSeleced(): number {
+    let index = -1;
+    if (this.allBoxData != null) {
+      let select = -1;
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.allBoxData[i].box_chat_dang_duoc_chon) {
+          select = i;
+          break;
+        }
+      }
+      let count = 0;
+      for (let i = 0; i <= select; i++) {
+        if (!this.compareSearch(i)) {
+          count++;
+        }
+      }
+      return select - count;
+    }
+    return index;
+  }
+
+  public getIndexSelecedNotSearch(): number {
     let index = -1;
     if (this.allBoxData != null) {
       for (let i = 0; i < this.allBoxData.length; i++) {
