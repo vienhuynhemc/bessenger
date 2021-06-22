@@ -30,7 +30,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   valueSub: Subscription;
 
   constructor(
-    private contactsService: ContactsService,
+    public contactsService: ContactsService,
     public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
     private router: Router
@@ -44,6 +44,13 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.setFriendFirst();
     
   }
+  // Lấy ra người muốn hiển thị danh sách bạn chung
+  onClickGetIDFriendMutual(id: string) {
+    this.contactsService.setIDMutualFriend(id);
+  }
+  onClickExitMutual() {
+    this.contactsService.setIDMutualFriend('');
+  }
   // lấy ra người muốn hủy kết bạn
   onClickUnFriend(id: string, name: string) {
     this.friendsPageService.setIDUnFriend(id)
@@ -53,6 +60,10 @@ export class FriendsComponent implements OnInit, OnDestroy {
   }
   // selected bạn bè đầu tiên trong danh sách
   setFriendFirst() {
+    setTimeout(() => {
+      this.friendsPageService.setLoading(true)
+    }, 0);
+
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
@@ -65,7 +76,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         data.forEach((element) => {
           // lấy ra danh sách bạn bè
           if (element.val().ton_tai == 0) {
-            this.contactsService.getFriendFrist(element.key).once('value', (data) => {
+            this.contactsService.getFriendByID(element.key).once('value', (data) => {
               if(loop == 0) {
                 if(this.iDUrl != data.key)
                 this.moveLink(data.key)
@@ -77,6 +88,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         });
       });
   } else {
+   
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfile(this.iDUrl);
   }
@@ -217,7 +229,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.friendsPageService.setLoading(false)
     }, 0);
-  
   }
   
 }
