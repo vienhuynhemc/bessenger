@@ -203,4 +203,47 @@ export class ChatPageFriendsObjectLeft {
         }
     }
 
+    // Tin nhắn cuối cùng là mình gửi thì mới xem được những người nào đã xem
+    public itMe(): boolean {
+        if (this.cuoc_tro_truyen.tin_nhan != null) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            if (this.cuoc_tro_truyen.tin_nhan[index].ma_tai_khoan == ma_tai_khoan) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //  Trả về danh sách những hình ảnh xem cuối cùng
+    public getImgUserSeened(): string[] {
+        let result: string[] = [];
+        if (this.cuoc_tro_truyen.tin_nhan != null) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].xem_chua == "roi") {
+                    if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
+                        result.push(this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].hinh);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }

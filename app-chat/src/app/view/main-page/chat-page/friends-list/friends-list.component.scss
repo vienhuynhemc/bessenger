@@ -425,6 +425,97 @@ $color-bg-main: #f5f9fc;
           background-color: #31a24c;
         }
       }
+
+      .so_nguoi_da_xem {
+        position: absolute;
+        display: flex;
+        right: -20px;
+        top: 37px;
+        width: 115px;
+        justify-content: center;
+        align-items: center;
+
+        .hinh_1 {
+          position: relative;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 5;
+          background-color: white;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_2 {
+          background-color: white;
+          transform: translateX(-7px);
+          position: relative;
+          z-index: 4;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_3 {
+          background-color: white;
+          position: relative;
+          transform: translateX(-14px);
+          z-index: 3;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_4 {
+          transform: translateX(-14px);
+          z-index: 2;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          p {
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            color: #65676b;
+            background-color: #e4e6eb;
+            font-family: "Raleway";
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
     }
 
     .hidden_error {
