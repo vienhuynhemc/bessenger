@@ -12,14 +12,18 @@ export class FriendsPageService {
   private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
   private isLoading: boolean;
-  private sizeFriends: number;
-  idUnfriend: string = '';
-  nameUnfriend: string = '';
- 
+  
+  // danh sách gửi yêu cầu
+  requestList: any[];
+  sizeRequest: number;
+  requestInfor: FriendInfor;
+
   // danh sách bạn bè
   friendsList: any[];
   friendInfor: FriendInfor;
-  
+  private sizeFriends: number;
+  idUnfriend: string = '';
+  nameUnfriend: string = '';
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -73,5 +77,15 @@ export class FriendsPageService {
   getFriendsList() {
     return this.friendsList;
   }
- 
+  
+  // danh sách gửi yêu cầu
+   getRequestList() {
+    return this.requestList;
+  }
+  getSizeRequest() {
+    return this.sizeRequest;
+  }
+  setSizeRequest(size: number) {
+    this.sizeRequest = size;
+  }
 }

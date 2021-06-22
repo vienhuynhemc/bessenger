@@ -78,6 +78,8 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
+              this.friendInfor.date = data.val().ngay_tao;
+             
               checkLoop++;
             } else {
               this.router.navigate(['/**'])

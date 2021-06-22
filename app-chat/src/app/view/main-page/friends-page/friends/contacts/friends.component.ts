@@ -48,7 +48,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.setFriendFirst();
     
   }
-  // Lấy ra người muốn hiển thị danh sách bạn chung
+  // Lấy ra danh sách bạn chung
   onClickGetIDFriendMutual(id: string, listFriendsUser: FriendInfor[]) {
     this.idMutualFriend = id;
     this.mutualFriendsList = [];

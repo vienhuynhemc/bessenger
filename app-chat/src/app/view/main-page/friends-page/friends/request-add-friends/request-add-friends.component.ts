@@ -15,7 +15,7 @@ export class RequestAddFriendsComponent implements OnInit {
 
   constructor(
     private contactsService: ContactsService,
-    private friendsPageService: FriendsPageService,
+    public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
     private router: Router,
     public requestListService: RequestAddFriendsService
@@ -27,7 +27,6 @@ export class RequestAddFriendsComponent implements OnInit {
   }
   iDUrl:any;
   valueSub: Subscription;
-  
   selectedIndex: string = '';
   indexOption: number = -1;
  
@@ -50,6 +49,19 @@ export class RequestAddFriendsComponent implements OnInit {
     
 //    }
 //  } 
+
+  // lấy ra danh sách bạn chung
+  onClickGetIDFriendMutual(id: string, listRequest: FriendInfor[]) {
+
+  }
+
+  // chọn người đầu tiên hiển thị trong danh sách request
+  setRequestFirst() {
+
+  }
+
+  // chuyển đến trang tin nhắn
+  
   moveLinkRequest(link: string) {
     this.router.navigate(['/bessenger/ban-be/loi-moi/' + link])
   }
