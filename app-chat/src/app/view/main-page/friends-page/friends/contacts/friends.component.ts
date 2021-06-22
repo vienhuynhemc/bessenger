@@ -70,7 +70,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
               this.sendFriendToProfile(this.iDUrl);
             }
           } else this.sendFriendToProfile(this.iDUrl);
-        }, 1500);
+        }, 2000);
       } else {
         if (this.iDUrl === null) idFriendFirst.click();
         else this.sendFriendToProfile(this.iDUrl);

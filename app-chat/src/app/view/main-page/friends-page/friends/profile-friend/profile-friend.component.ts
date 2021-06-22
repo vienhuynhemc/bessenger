@@ -23,6 +23,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     private contactsService: ContactsService,
     private profileFriendService: ProfileFriendService,
     public friendsPageService: FriendsPageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,9 +41,11 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   getFriendFromFriendsList() {
     this.friendInfor = new FriendInfor();
     this.friendInfor.id = 1;
-
+    let checkLoop = 0;
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
+        // kiểm tra 404
+        checkLoop = 0;
         if (id == null) {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
@@ -52,10 +55,11 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
-            } else {
-              this.friendInfor.id = 2;
+              checkLoop++;
+            } 
+            if(checkLoop == 0) {
+              this.router.navigate(['/**']);
             }
-           
           });
         }
         // loading
