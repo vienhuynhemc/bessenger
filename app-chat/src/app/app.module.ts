@@ -25,6 +25,8 @@ import { FriendsListComponent } from './view/main-page/chat-page/friends-list/fr
 import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
+// tooltip
+import {MatTooltipModule} from '@angular/material/tooltip';
 // firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -106,6 +108,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireStorageModule,
     FormsModule,
     BrowserAnimationsModule,
+    // tooltip
+    MatTooltipModule
   ],
   providers: [
     UserChatService,

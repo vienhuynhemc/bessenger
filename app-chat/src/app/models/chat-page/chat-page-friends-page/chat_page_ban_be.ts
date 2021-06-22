@@ -1,3 +1,4 @@
+import { ChatPageObjectTen } from './chat_page_object_ten';
 export class ChatPageBanBe {
 
     ma_tai_khoan: string;
@@ -7,11 +8,15 @@ export class ChatPageBanBe {
     trang_thai_online: boolean;
     ten: string;
 
-    public tenGioiHan() {
-        let result = this.ten;
-        if (result.length > 7) {
-            result = this.ten.substring(0, 6).trim();
-            result += "...";
+    public tenGioiHan(): ChatPageObjectTen {
+        let result = new ChatPageObjectTen();
+        result.noi_dung = this.ten;
+        result.noi_dung_goc = this.ten;
+        if (result.noi_dung.length > 7) {
+            result.noi_dung = this.ten.substring(0, 6).trim() + "...";
+            result.is_cut = true;
+        } else {
+            result.is_cut = false;
         }
         return result;
     }

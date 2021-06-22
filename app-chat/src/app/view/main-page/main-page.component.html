@@ -11,8 +11,8 @@
         </div>
         <div class="container-left-menu" id="container-left-menu">
 
-            <div *ngIf="!main_page_service.isSelectHomePage()" class="container-left-menu-icon"
-                (click)="moveToHomePage()">
+            <div *ngIf="!main_page_service.isSelectHomePage()" class="container-left-menu-icon" matTooltip="Trang chủ"
+                matTooltipClass="tooltip" (click)="moveToHomePage()">
                 <i class="fas fa-pager"></i>
             </div>
             <div *ngIf="main_page_service.isSelectHomePage()"
@@ -21,7 +21,7 @@
             </div>
 
             <div *ngIf="!main_page_service.isSelectPersonalPage()" class="container-left-menu-icon"
-                (click)="moveToPersonalPage()">
+                matTooltip="Thông tin tài khoản" matTooltipClass="tooltip" (click)="moveToPersonalPage()">
                 <i class="fas fa-user-cog"></i>
             </div>
             <div *ngIf="main_page_service.isSelectPersonalPage()"
@@ -29,8 +29,8 @@
                 <i class="fas fa-user-cog"></i>
             </div>
 
-            <div *ngIf="!main_page_service.isSelectFriendsPage()" class="container-left-menu-icon"
-                (click)="moveToFriendsPage()">
+            <div *ngIf="!main_page_service.isSelectFriendsPage()" class="container-left-menu-icon" matTooltip="Bạn bè"
+                matTooltipClass="tooltip" (click)="moveToFriendsPage()">
                 <i class="fas fa-user-friends"></i>
             </div>
             <div *ngIf="main_page_service.isSelectFriendsPage()"
@@ -38,8 +38,8 @@
                 <i class="fas fa-user-friends"></i>
             </div>
 
-            <div *ngIf="!main_page_service.isSelectChatPage()" class="container-left-menu-icon"
-                (click)="moveToChatPage()">
+            <div *ngIf="!main_page_service.isSelectChatPage()" class="container-left-menu-icon" matTooltip="Tin nhắn"
+                matTooltipClass="tooltip" (click)="moveToChatPage()">
                 <i class="fas fa-comment-alt"></i>
             </div>
             <div *ngIf="main_page_service.isSelectChatPage()"
@@ -48,7 +48,7 @@
             </div>
 
             <div *ngIf="!main_page_service.isSelectChatRequestPage()" class="container-left-menu-icon"
-                (click)="moveToChatRequestPage()">
+                matTooltip="Tin nhắn ẩn" matTooltipClass="tooltip" (click)="moveToChatRequestPage()">
                 <i class="fas fa-comment-dots"></i>
             </div>
             <div *ngIf="main_page_service.isSelectChatRequestPage()"
@@ -56,8 +56,8 @@
                 <i class="fas fa-comment-dots"></i>
             </div>
 
-            <div *ngIf="!main_page_service.isSelectSettingPage()" class="container-left-menu-icon"
-                (click)="moveToSettingPage()">
+            <div *ngIf="!main_page_service.isSelectSettingPage()" class="container-left-menu-icon" matTooltip="Cài đặt"
+                matTooltipClass="tooltip" (click)="moveToSettingPage()">
                 <i class="fas fa-cogs"></i>
             </div>
             <div *ngIf="main_page_service.isSelectSettingPage()"
@@ -65,7 +65,7 @@
                 <i class="fas fa-cogs"></i>
             </div>
 
-            <div class="container-left-menu-icon" (click)="logOut()">
+            <div class="container-left-menu-icon" (click)="logOut()" matTooltip="Đăng xuất" matTooltipClass="tooltip">
                 <i class="fas fa-sign-out-alt"></i>
             </div>
         </div>
