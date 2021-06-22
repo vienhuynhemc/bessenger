@@ -53,18 +53,21 @@
                         </div>
                     </div>
                     <div class="right">
-                        <div class="name" [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
+                        <div class="name" *ngIf="item.getNoiDungCuoiCung().length != 0" [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
                             {{item.getName()}}
                         </div>
-                        <div class="message" [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null">
-                            <span>Bạn: </span>
-                            {{"item.content"}}
+                        <div class="name2" *ngIf="item.getNoiDungCuoiCung().length == 0" [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
+                            {{item.getName()}}
+                        </div>
+                        <div class="message"  [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null">
+                            {{item.getNoiDungCuoiCung()}}
                         </div>
                         <div class="message-unread" [ngStyle]="!item.isReaded() ? getStylePointReadMessage() : null">
                         </div>
                     </div>
 
-                    <div class="timer">{{"item.timer"}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length != 0" class="timer">{{"item.timer"}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length == 0" class="timer2">{{"item.timer"}}</div>
                 </div>
 
                 <div *ngIf="item.trang_thai_online" class="online">

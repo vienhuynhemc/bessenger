@@ -339,9 +339,25 @@ $color-bg-main: #f5f9fc;
               color: grey;
               padding-top: 10px;
             }
+            .name2 {
+              font-family: "Raleway";
+              word-wrap: break-word;
+              font-size: 13px;
+              font-weight: 600;
+              margin-top: 13px;
+            }
           }
 
           .timer {
+            font-size: 11px;
+            color: grey;
+            padding-top: 3px;
+            position: absolute;
+            right: 0px;
+            top: 18px;
+          }
+          .timer2 {
+            margin-top: 10px;
             font-size: 11px;
             color: grey;
             padding-top: 3px;
