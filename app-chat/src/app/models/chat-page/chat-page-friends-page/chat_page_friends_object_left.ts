@@ -1,3 +1,4 @@
+import { last } from 'rxjs/operators';
 import { ChatPageCuocTroChuyen } from './chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from './chat_page_object_tin_nhan_friend';
 export class ChatPageFriendsObjectLeft {
@@ -101,6 +102,41 @@ export class ChatPageFriendsObjectLeft {
 
     public isNhom(): boolean {
         return this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom";
+    }
+
+    public getTime(): string {
+        let result = "";
+        if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let last_time: number = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
+            //  Lấy thời gian hiện tại
+            let currentTime = Number(new Date());
+            let over = currentTime - last_time;
+            let ONE_MINUTE_IN_MILLIS = 60000;
+            if (over < ONE_MINUTE_IN_MILLIS) {
+                result = parseInt((over / 1000) + "") + " giây";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60) {
+                result = parseInt((over / ONE_MINUTE_IN_MILLIS) + "") + " phút";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60)) + "") + " giờ";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 7) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24)) + "") + " ngày";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 30) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 7)) + "") + " tuần";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 365) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 30)) + "") + " tháng";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 365 * 100) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 365)) + "") + " năm";
+            }
+        }
+        return result;
     }
 
     public getNoiDungCuoiCung(): string {

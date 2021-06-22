@@ -66,8 +66,8 @@
                         </div>
                     </div>
 
-                    <div *ngIf="item.getNoiDungCuoiCung().length != 0" class="timer">{{"item.timer"}}</div>
-                    <div *ngIf="item.getNoiDungCuoiCung().length == 0" class="timer2">{{"item.timer"}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length != 0" class="timer">{{item.getTime()}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length == 0" class="timer2">{{item.getTime()}}</div>
                 </div>
 
                 <div *ngIf="item.trang_thai_online" class="online">
