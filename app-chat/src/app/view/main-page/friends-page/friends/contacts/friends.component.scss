@@ -186,60 +186,65 @@
   display: none;
   top: 0px;
   left: 0px;
-  box-shadow: 0px 0px 10px 0px #dfebf5;
+ 
   .content-mutual-friends {
-    width: 400px;
-    height: 400px;
+    width: 650px;
+    height: 460px;
     background-color: white;
     border-radius: 10px;
     margin: auto;
-    margin-top: 10%;
-    border-left: #3275f7 solid 5px;
-    border-right: #3275f7 solid 5px;
+    margin-top: 9%;
     .header {
       position: relative;
-      height: 30px;
+      height: 60px;
       .title {
         position: absolute;
-        width: 80px;
-        left: 20px;
-        top: 10px;
+        width: 85px;
+        left: 64px;
+        top: 25px;
+        font-weight: 500;
       }
       .exit {
         position: absolute;
-        right: 10px;
-        top: 10px;
+        right: 20px;
+        top: 20px;
         cursor: pointer;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: #e7e7e7 solid 0.5px;
         i {
+          position: absolute;
+          top: 5px;
           font-size: 20px;
+          left: 8px;
+          color: #a4afbf;
         }
       }
     }
     .content-scroll {
       overflow-y: scroll;
-      height: 90%;
+      height: 81%;
       width: 100%;
       padding-top: 10px;
       .detail-mutual-friends {
         width: 80%;
-        height: 60px;
-        
+        height: 80px;
+        background-color: white;
         display: flex;
         margin: auto;
-        margin-bottom: 10px;
-        border: #3275f7 solid 1px;
+        margin-bottom: 15px;
         border-radius: 10px;
+        box-shadow: 0px 0px 7px 0px #dee2e7;
         .detail-left {
-          width: 30%;
-          margin-left: 10%;
+          width: 17%;
+          margin-left: 3.8%;
           img {
             object-fit: cover;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            margin-top: 5px;
+            margin-top: 13px;
           }
         }
         .detail-right {
@@ -247,6 +252,24 @@
           .name {
             font-size: 15px;
             margin-top: 22px;
+            font-weight: 600;
+          }
+          .date {
+            font-size: 13px;
+            margin-top: 5px;
+            span {
+              font-weight: 500;
+              margin-right: 5px;
+            }
+          }
+        }
+        .right-date {
+          .gender {
+            font-size: 12px;
+            margin-top: 25px;
+            span {
+              font-weight: 500;
+            }
           }
         }
       }

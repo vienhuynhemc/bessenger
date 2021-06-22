@@ -25,7 +25,31 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     public friendsPageService: FriendsPageService,
     private router: Router,
   ) {}
-
+    // chuyển đến trang tin nhắn
+    onClickMessage(id: string) {
+      let countCheck = 0;
+      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.profileFriendService.getConversation().once('value', (data) => {
+        data.forEach(element_x => {
+            console.log(element_x.key)
+            if(countCheck != -1) {
+              element_x.forEach(element => {
+                  if(element.key == parseIDUser || element.key == id)
+                    countCheck++;
+              });
+              if(countCheck == 2) {
+                this.profileFriendService.getKindConversation(element_x.key).once('value',(data) => {
+                    if(data.val().loai_cuoc_tro_truyen == 'don') {
+                      this.router.navigate(['/bessenger/tin-nhan/' + element_x.key]);
+                      countCheck = -1;
+                    }
+                })
+              } else 
+              countCheck = 0;
+          }
+        });
+      })
+    }
   ngOnInit(): void {
     this.getFriendFromFriendsList();
   }

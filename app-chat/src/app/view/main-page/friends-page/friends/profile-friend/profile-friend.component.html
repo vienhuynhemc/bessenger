@@ -3,13 +3,13 @@
     <div *ngIf="friendInfor.id != 1 "  class="left">
         <div  class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
         <div class="name">{{friendInfor.name}}</div>
-        <button class="message btn"><i class="fas fa-comment"></i>Nhắn tin</button>
+        <button (click)="onClickMessage(friendInfor.id)" class="message btn"><i class="fas fa-comment" ></i>Nhắn tin</button>
         <button class="abort-friend btn" (click)="onClickUnFriend(friendInfor.id, friendInfor.name)"><i class="fas fa-user-times"></i>Hủy kết bạn</button>
     </div>
     <div *ngIf="friendInfor.id != 1 " class="right">
         <div class="cover"></div>
         <div class="avt">
-            <img [src]="friendInfor.img" alt="">
+            <img [src]="friendInfor.img || 'assets/images/loading.gif'" alt="">
         </div>
         <div class="line"></div>
     </div>
