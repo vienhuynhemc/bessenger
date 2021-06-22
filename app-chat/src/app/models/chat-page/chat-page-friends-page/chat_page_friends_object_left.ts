@@ -246,4 +246,27 @@ export class ChatPageFriendsObjectLeft {
         return result;
     }
 
+    // Xem thử có ông nào nhận chưa
+    public isDaNhan(): boolean {
+        if (this.cuoc_tro_truyen.tin_nhan != null) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].xem_chua == "dang") {
+                    if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

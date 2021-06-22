@@ -151,11 +151,40 @@ export class ChatPageFriendsLeftServiceService {
     }
   }
 
+  public da_nhan() {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    for (let i = 0; i < this.allBoxData.length; i++) {
+      if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan != null) {
+        let currentTime = Number(new Date());
+        for (let j = 0; j < this.allBoxData[i].cuoc_tro_truyen.tin_nhan.length; j++) {
+          if (this.isNhanChua(this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem)) {
+            let url = "/chi_tiet_cuoc_tro_chuyen/" + this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen + "/" + this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ma_tin_nhan + "/tinh_trang_xem/" + ma_tai_khoan;
+            this.db.database.ref(url).update({ xem_chua: "dang", ngay_nhan: currentTime });
+          }
+        }
+      }
+    }
+  }
+
   public isChuaXem(array: ChatPageTinhTrangXem[]): boolean {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     for (let i = 0; i < array.length; i++) {
       if (array[i].ma_tai_khoan == ma_tai_khoan) {
         if (array[i].xem_chua == "roi") {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public isNhanChua(array: ChatPageTinhTrangXem[]): boolean {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].ma_tai_khoan == ma_tai_khoan) {
+        if (array[i].xem_chua == "roi" || array[i].xem_chua == "dang") {
           return false;
         } else {
           return true;
@@ -195,6 +224,7 @@ export class ChatPageFriendsLeftServiceService {
             o.ma_tai_khoan = ma_tai_khoan;
             o.ngay_xem = data['ngay_xem'];
             o.xem_chua = data['xem_chua'];
+            o.ngay_nhan = data['ngay_nhan'];
             tinh_trang_xems.push(o);
           });
           tin_nhan.tinh_trang_xem = tinh_trang_xems;

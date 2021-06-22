@@ -426,6 +426,50 @@ $color-bg-main: #f5f9fc;
         }
       }
 
+      .chua_nhan {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        border: 1px solid #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: #bcc0c4;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .da_gui {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        background: #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: white;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
       .so_nguoi_da_xem {
         position: absolute;
         display: flex;
@@ -544,7 +588,6 @@ $color-bg-main: #f5f9fc;
   }
 }
 
-
-.hidden{
+.hidden {
   display: none;
 }
