@@ -24,13 +24,15 @@ export class ChatPageFriendsServiceService {
   public update(): void {
     setTimeout(() => {
       let currentTime = Number(new Date());
-      for (let i = 0; i < this.ban_bes.length; i++) {
-        let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
-        let overTime = currentTime - lan_cuoi_dang_nhap;
-        if (overTime > 10000) {
-          this.ban_bes[i].trang_thai_online = false;
-        } else {
-          this.ban_bes[i].trang_thai_online = true;
+      if (this.ban_bes != null) {
+        for (let i = 0; i < this.ban_bes.length; i++) {
+          let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
+          let overTime = currentTime - lan_cuoi_dang_nhap;
+          if (overTime > 10000) {
+            this.ban_bes[i].trang_thai_online = false;
+          } else {
+            this.ban_bes[i].trang_thai_online = true;
+          }
         }
       }
       this.update();
@@ -137,12 +139,14 @@ export class ChatPageFriendsServiceService {
   }
 
   public getHinhDaiDienVaLanCuoiDangNhapChoChatPageBanBe(key: string, value: object) {
-    for (let i = 0; i < this.ban_bes.length; i++) {
-      if (this.ban_bes[i].ma_tai_khoan == key) {
-        this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
-        this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
-        this.ban_bes[i].ten = value['ten'];
-        break;
+    if (this.ban_bes != null) {
+      for (let i = 0; i < this.ban_bes.length; i++) {
+        if (this.ban_bes[i].ma_tai_khoan == key) {
+          this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
+          this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
+          this.ban_bes[i].ten = value['ten'];
+          break;
+        }
       }
     }
   }

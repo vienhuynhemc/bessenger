@@ -66,10 +66,22 @@ export class ForgotPasswordComponent implements OnInit {
         nameNew = `hinh${1}`;
         this.countSlide = 0;
       }
-      document.getElementById(nameOld).style.opacity = '0';
-      document.getElementById(nameNew).style.opacity = '1';
-      document.getElementById("child").style.left = `${this.countSlide * 64}px`;
-      document.getElementById("content_child").innerText = `0${this.countSlide + 1}`;
+      let nameOldObject = document.getElementById(nameOld);
+      if (nameOldObject != null) {
+        nameOldObject.style.opacity = '0';
+      }
+      let nameNewObject = document.getElementById(nameNew);
+      if (nameNewObject != null) {
+        nameNewObject.style.opacity = '1';
+      }
+      let child = document.getElementById("child");
+      if (child != null) {
+        child.style.left = `${this.countSlide * 64}px`;
+      }
+      let content_child = document.getElementById("content_child");
+      if (content_child != null) {
+        content_child.innerText = `0${this.countSlide + 1}`;
+      }
       // repeate
       if (this.isRunningSlide) {
         this.setDelay(times);

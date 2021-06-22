@@ -1,8 +1,10 @@
-import { MainPageService } from './../../service/main-page/main-page.service';
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ChatPageFriendsServiceService } from './../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from './../../service/login/login.service';
+import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+import { LoginService } from './../../service/login/login.service';
+import { MainPageService } from './../../service/main-page/main-page.service';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class MainPageComponent implements OnInit {
     private router: Router,
     private login_service: LoginService,
     public main_page_service: MainPageService,
-    public friendsPageService: FriendsPageService
+    public friendsPageService: FriendsPageService,
+    private chat_page_friends_object_left_service: ChatPageFriendsLeftServiceService,
+    private chat_page_firends_service: ChatPageFriendsServiceService
   ) {
   }
 
@@ -31,6 +35,8 @@ export class MainPageComponent implements OnInit {
   logOut(): void {
     this.login_service.logOut();
     this.main_page_service.reset();
+    this.chat_page_friends_object_left_service.allBoxData = null;
+    this.chat_page_firends_service.ban_bes = null;
     this.router.navigate(['/dang-nhap']);
   }
 
@@ -39,7 +45,7 @@ export class MainPageComponent implements OnInit {
   moveToHomePage(): void {
     this.router.navigate(['trang-chu'], { relativeTo: this.route });
   }
-  moveToPersonalPage(): void {  
+  moveToPersonalPage(): void {
     this.router.navigate(['thong-tin-ca-nhan'], { relativeTo: this.route });
   }
   moveToFriendsPage(): void {
