@@ -53,22 +53,39 @@
                         </div>
                     </div>
                     <div class="right">
-                        <div class="name" [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
+                        <div class="name" *ngIf="item.getNoiDungCuoiCung().length != 0"
+                            [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
+                            {{item.getName()}}
+                        </div>
+                        <div class="name2" *ngIf="item.getNoiDungCuoiCung().length == 0"
+                            [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
                             {{item.getName()}}
                         </div>
                         <div class="message" [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null">
-                            <span>Bạn: </span>
-                            {{"item.content"}}
+                            {{item.getNoiDungCuoiCung()}}
                         </div>
                         <div class="message-unread" [ngStyle]="!item.isReaded() ? getStylePointReadMessage() : null">
                         </div>
                     </div>
 
-                    <div class="timer">{{"item.timer"}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length != 0" class="timer">{{item.getTime()}}</div>
+                    <div *ngIf="item.getNoiDungCuoiCung().length == 0" class="timer2">{{item.getTime()}}</div>
                 </div>
 
                 <div *ngIf="item.trang_thai_online" class="online">
                     <div class="child"></div>
+                </div>
+
+                <div *ngIf="item.itMe()" class="so_nguoi_da_xem">
+                    <div class="hinh_1" *ngIf="item.getImgUserSeened().length>0"><img
+                            [src]="item.getImgUserSeened()[0] ||  'assets/images/loading.gif'" alt=""></div>
+                    <div class="hinh_2" *ngIf="item.getImgUserSeened().length>1"><img
+                            [src]="item.getImgUserSeened()[1] ||  'assets/images/loading.gif'" alt=""></div>
+                    <div class="hinh_3" *ngIf="item.getImgUserSeened().length>2"><img
+                            [src]="item.getImgUserSeened()[2] ||  'assets/images/loading.gif'" alt=""></div>
+                    <div class="hinh_4" *ngIf="item.getImgUserSeened().length>3">
+                        <p>+{{item.getImgUserSeened().length - 3}}</p>
+                    </div>
                 </div>
             </div>
             <!-- Tô trắng phần còn lại-->

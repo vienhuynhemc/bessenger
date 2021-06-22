@@ -1,3 +1,4 @@
+import { last } from 'rxjs/operators';
 import { ChatPageCuocTroChuyen } from './chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from './chat_page_object_tin_nhan_friend';
 export class ChatPageFriendsObjectLeft {
@@ -101,6 +102,148 @@ export class ChatPageFriendsObjectLeft {
 
     public isNhom(): boolean {
         return this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom";
+    }
+
+    public getTime(): string {
+        let result = "";
+        if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let last_time: number = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
+            //  Lấy thời gian hiện tại
+            let currentTime = Number(new Date());
+            let over = currentTime - last_time;
+            let ONE_MINUTE_IN_MILLIS = 60000;
+            if (over < ONE_MINUTE_IN_MILLIS) {
+                result = parseInt((over / 1000) + "") + " giây";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60) {
+                result = parseInt((over / ONE_MINUTE_IN_MILLIS) + "") + " phút";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60)) + "") + " giờ";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 7) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24)) + "") + " ngày";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 30) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 7)) + "") + " tuần";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 365) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 30)) + "") + " tháng";
+            } else if (over < ONE_MINUTE_IN_MILLIS * 60 * 24 * 365 * 100) {
+                result = parseInt((over / (ONE_MINUTE_IN_MILLIS * 60 * 24 * 365)) + "") + " năm";
+            }
+        }
+        return result;
+    }
+
+    public getNoiDungCuoiCung(): string {
+        let result = "";
+        if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ten = this.getTenNguoiGui(index);
+            switch (this.cuoc_tro_truyen.tin_nhan[index].loai_tin_nhan) {
+                case "gui_text":
+                    if (ten == "Bạn") {
+                        result = this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                    } else {
+                        result = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                    }
+                    break;
+                case "thong_bao":
+                    result = ten + " " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                    break;
+                case "gui_hinh":
+                    result = ten + " gửi một hình ảnh";
+                    break;
+                case "gui_video":
+                    result = ten + " gửi một video";
+                    break;
+                case "gui_ghi_am":
+                    result = ten + " gửi một tin nhắn thoại";
+                    break;
+                case "gui_file":
+                    result = ten + " gửi một tệp";
+                    break;
+                case "thu_hoi":
+                    result = ten + " thu hồi một tin nhắn";
+                    break;
+                case "phan_hoi":
+                    result = ten + " phản hồi một tin nhắn";
+                    break;
+            }
+        }
+        if (result.length > 25) {
+            result = result.substring(0, 22) + "...";
+        }
+        return result;
+    }
+
+    public getTenNguoiGui(index: number): string {
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        if (this.cuoc_tro_truyen.tin_nhan[index].ma_tai_khoan == ma_tai_khoan) {
+            return "Bạn";
+        } else {
+            if (this.cuoc_tro_truyen.tin_nhan[index].ten != null) {
+                let ten: string = this.cuoc_tro_truyen.tin_nhan[index].ten.trim();
+                let array: string[] = ten.split(" ");
+                return array[array.length - 1];
+            } else {
+                return "";
+            }
+        }
+    }
+
+    // Tin nhắn cuối cùng là mình gửi thì mới xem được những người nào đã xem
+    public itMe(): boolean {
+        if (this.cuoc_tro_truyen.tin_nhan != null) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            if (this.cuoc_tro_truyen.tin_nhan[index].ma_tai_khoan == ma_tai_khoan) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //  Trả về danh sách những hình ảnh xem cuối cùng
+    public getImgUserSeened(): string[] {
+        let result: string[] = [];
+        if (this.cuoc_tro_truyen.tin_nhan != null) {
+            let index = 0;
+            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+            let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].xem_chua == "roi") {
+                    if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
+                        result.push(this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].hinh);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 }
