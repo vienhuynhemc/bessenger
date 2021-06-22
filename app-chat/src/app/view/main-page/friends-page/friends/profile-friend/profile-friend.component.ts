@@ -31,7 +31,6 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
       this.profileFriendService.getConversation().once('value', (data) => {
         data.forEach(element_x => {
-            console.log(element_x.key)
             if(countCheck != -1) {
               element_x.forEach(element => {
                   if(element.key == parseIDUser || element.key == id)

@@ -43,6 +43,8 @@ export class ContactsService {
       friendInfor.id = idUser;
       friendInfor.img = data.val().link_hinh;
       friendInfor.name = data.val().ten;
+      friendInfor.sex = data.val().gioi_tinh;
+      friendInfor.date = data.val().ngay_tao;
       setTimeout(() => {
         this.friendsPageService.setLoading(false)
       }, 0);

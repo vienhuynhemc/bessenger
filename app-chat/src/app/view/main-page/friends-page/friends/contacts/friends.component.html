@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div id="option-{{i}}" class="option" [class.option-detail-block]="i === optionClick">
-                    <div class="option-profile option-detail"><i class="fas fa-comment"></i><span>Nhắn tin</span></div>
+                    <div (click)="onClickMessage(item.id)" class="option-profile option-detail"><i class="fas fa-comment"></i><span>Nhắn tin</span></div>
                     <div class="option-abord option-detail" (click)="onClickUnFriend(item.id, item.name)"><i class="fas fa-user-times"></i><span>Hủy kết bạn</span></div>
                 </div>
         </div>
