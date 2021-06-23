@@ -32,17 +32,19 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public compareSearch(i: number): boolean {
-    if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-      if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-        return true;
-      }
-    } else if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-      let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-      for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-        if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-          if (this.allBoxData[i].thong_tin_thanh_vien[j].ten != null) {
-            if (this.allBoxData[i].thong_tin_thanh_vien[j].ten.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-              return true;
+    if (this.allBoxData[i] != null) {
+      if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+        if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+          return true;
+        }
+      } else if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+            if (this.allBoxData[i].thong_tin_thanh_vien[j].ten != null) {
+              if (this.allBoxData[i].thong_tin_thanh_vien[j].ten.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+                return true;
+              }
             }
           }
         }
@@ -100,6 +102,9 @@ export class ChatPageFriendsLeftServiceService {
           break;
         }
       }
+      if (!this.compareSearch(select)) {
+        return -1;
+      }
       let count = 0;
       for (let i = 0; i <= select; i++) {
         if (!this.compareSearch(i)) {
@@ -107,6 +112,51 @@ export class ChatPageFriendsLeftServiceService {
         }
       }
       return select - count;
+    }
+    return index;
+  }
+
+  public getIndexPre(): number {
+    let index = -1;
+    if (this.allBoxData != null) {
+      let select = -1;
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.allBoxData[i].box_chat_dang_duoc_chon) {
+          select = i;
+          break;
+        }
+      }
+      let count = -1;
+      for (let i = select - 1; i > -1; i--) {
+        if (this.compareSearch(i)) {
+          count = i;
+          break;
+        }
+      }
+      index = count;
+    }
+    return index;
+  }
+
+
+  public getIndexNext(): number {
+    let index = -1;
+    if (this.allBoxData != null) {
+      let select = -1;
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.allBoxData[i].box_chat_dang_duoc_chon) {
+          select = i;
+          break;
+        }
+      }
+      let count = -1;
+      for (let i = select + 1; i < this.allBoxData.length; i++) {
+        if (this.compareSearch(i)) {
+          count = i;
+          break;
+        }
+      }
+      index = count;
     }
     return index;
   }
