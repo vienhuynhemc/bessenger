@@ -25,6 +25,8 @@ import { FriendsListComponent } from './view/main-page/chat-page/friends-list/fr
 import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
+// tooltip
+import {MatTooltipModule} from '@angular/material/tooltip';
 // firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -54,6 +56,7 @@ import { ProfileSendComponent } from './view/main-page/friends-page/friends/prof
 import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
 import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-pass
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     FormsModule,
+    BrowserAnimationsModule,
+    // tooltip
+    MatTooltipModule
   ],
   providers: [
     UserChatService,

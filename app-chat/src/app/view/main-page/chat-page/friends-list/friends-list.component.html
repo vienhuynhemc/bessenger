@@ -3,7 +3,7 @@
     <div class="header">
         <div class="title">
             <h3>Bensenger</h3>
-            <div class="new-message">
+            <div class="new-message" matTooltip="Tạo nhóm chat mới" matTooltipClass="tooltip">
                 <i class="far fa-edit"></i>
             </div>
         </div>
@@ -16,7 +16,10 @@
         <div class="myContent" *ngFor="let element of this.chat_page_friends_service.ban_bes">
             <div *ngIf="element.trang_thai_online" (click)="selectChat(element.ma_cuoc_tro_chuyen)">
                 <img [src]="element.link_hinh_dai_dien || 'assets/images/loading.gif'" alt="">
-                <div class="name">{{element.tenGioiHan()}}</div>
+                <div class="name" [matTooltip]="element.tenGioiHan().noi_dung_goc" matTooltipClass="tooltip"
+                    [matTooltipDisabled]="!element.tenGioiHan().is_cut">
+                    {{element.tenGioiHan().noi_dung}}
+                </div>
                 <div class="cover-online">
                     <div class="online"></div>
                 </div>
@@ -55,24 +58,33 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div class="name" *ngIf="item.getNoiDungCuoiCung().length != 0"
-                                [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
-                                {{item.getName()}}
+                            <div class="name" *ngIf="item.getNoiDungCuoiCung().noi_dung.length != 0"
+                                [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null"
+                                [matTooltip]="item.getName().noi_dung_goc" matTooltipClass="tooltip"
+                                [matTooltipDisabled]="!item.getName().is_cut">
+                                {{item.getName().noi_dung}}
                             </div>
-                            <div class="name2" *ngIf="item.getNoiDungCuoiCung().length == 0"
-                                [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null">
-                                {{item.getName()}}
+                            <div class="name2" *ngIf="item.getNoiDungCuoiCung().noi_dung.length == 0"
+                                [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null"
+                                [ngStyle]="!item.isReaded() ? getStyleNameReadMessage() : null"
+                                [matTooltip]="item.getName().noi_dung_goc" matTooltipClass="tooltip"
+                                [matTooltipDisabled]="!item.getName().is_cut">
+                                {{item.getName().noi_dung}}
                             </div>
-                            <div class="message" [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null">
-                                {{item.getNoiDungCuoiCung()}}
+                            <div class="message" [ngStyle]="!item.isReaded()? getStyleMessageReadMessage() : null"
+                                [matTooltip]="item.getNoiDungCuoiCung().noi_dung_goc" matTooltipClass="tooltip"
+                                [matTooltipDisabled]="!item.getNoiDungCuoiCung().is_cut">
+                                {{item.getNoiDungCuoiCung().noi_dung}}
                             </div>
                             <div class="message-unread"
                                 [ngStyle]="!item.isReaded() ? getStylePointReadMessage() : null">
                             </div>
                         </div>
 
-                        <div *ngIf="item.getNoiDungCuoiCung().length != 0" class="timer">{{item.getTime()}}</div>
-                        <div *ngIf="item.getNoiDungCuoiCung().length == 0" class="timer2">{{item.getTime()}}</div>
+                        <div *ngIf="item.getNoiDungCuoiCung().noi_dung.length != 0" class="timer">{{item.getTime()}}
+                        </div>
+                        <div *ngIf="item.getNoiDungCuoiCung().noi_dung.length == 0" class="timer2">{{item.getTime()}}
+                        </div>
                     </div>
 
                     <div *ngIf="item.trang_thai_online" class="online">
@@ -80,21 +92,26 @@
                     </div>
 
                     <div *ngIf="item.itMe()" class="so_nguoi_da_xem">
-                        <div class="hinh_1" *ngIf="item.getImgUserSeened().length>0"><img
-                                [src]="item.getImgUserSeened()[0] ||  'assets/images/loading.gif'" alt=""></div>
-                        <div class="hinh_2" *ngIf="item.getImgUserSeened().length>1"><img
-                                [src]="item.getImgUserSeened()[1] ||  'assets/images/loading.gif'" alt=""></div>
-                        <div class="hinh_3" *ngIf="item.getImgUserSeened().length>2"><img
-                                [src]="item.getImgUserSeened()[2] ||  'assets/images/loading.gif'" alt=""></div>
-                        <div class="hinh_4" *ngIf="item.getImgUserSeened().length>3">
-                            <p>+{{item.getImgUserSeened().length - 3}}</p>
+                        <div class="hinh_1" *ngIf="item.getImgUserSeened().length>0"
+                            [matTooltip]="item.getImgUserSeened()[0].noi_dung" matTooltipClass="tooltip"><img
+                                [src]="item.getImgUserSeened()[0].url ||  'assets/images/loading.gif'" alt=""></div>
+                        <div class="hinh_2" *ngIf="item.getImgUserSeened().length>1"
+                            [matTooltip]="item.getImgUserSeened()[1].noi_dung" matTooltipClass="tooltip"><img
+                                [src]="item.getImgUserSeened()[1].url ||  'assets/images/loading.gif'" alt=""></div>
+                        <div class="hinh_3" *ngIf="item.getImgUserSeened().length>2"
+                            [matTooltip]="item.getImgUserSeened()[2].noi_dung" matTooltipClass="tooltip"><img
+                                [src]="item.getImgUserSeened()[2].url ||  'assets/images/loading.gif'" alt=""></div>
+                        <div class="hinh_4" *ngIf="item.getImgUserSeened().length>3"
+                            [matTooltip]="item.getImgUserSeened()[3].noi_dung" matTooltipClass="tooltip">
+                            <p>+{{item.getImgUserSeened()[3].so_thanh_vien}}</p>
                         </div>
                     </div>
-                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && item.isDaNhan()"
-                        class="da_gui">
+                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && item.isDaNhan()" class="da_gui"
+                        matTooltip="Đã chuyển" matTooltipClass="tooltip">
                         <i class="fas fa-check"></i>
                     </div>
-                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && !item.isDaNhan()" class="chua_nhan">
+                    <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && !item.isDaNhan()" class="chua_nhan"
+                        matTooltip="Đã gửi" matTooltipClass="tooltip">
                         <i class="fas fa-check"></i>
                     </div>
                 </div>
