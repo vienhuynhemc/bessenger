@@ -18,10 +18,19 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+            let vi_tri_ban_than = this.getViTriBanThan()
             for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+                if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                        this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
+                } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             last_time = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
@@ -86,10 +95,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
@@ -115,10 +142,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let last_time: number = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
@@ -143,6 +188,16 @@ export class ChatPageFriendsObjectLeft {
         return result;
     }
 
+    public getViTriBanThan(): number {
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        for (let i = 0; i < this.thong_tin_thanh_vien.length; i++) {
+            if (this.thong_tin_thanh_vien[i].ma_tai_khoan == ma_tai_khoan) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public getNoiDungCuoiCung(): ChatPageObjectTen {
         let result = new ChatPageObjectTen();
         result.noi_dung = "";
@@ -150,10 +205,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let ten = this.getTenNguoiGui(index);
@@ -218,10 +291,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
@@ -238,10 +329,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
@@ -252,10 +361,10 @@ export class ChatPageFriendsObjectLeft {
                             let object = new ChatPageObjectImg();
                             object.url = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].hinh
                             let ngay_thang: string = "";
-                            let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ngay_xem ;
+                            let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ngay_xem;
                             let date = new Date(ngay_thang_number);
                             let year = date.getFullYear();
-                            let thang = date.getMonth()+1;
+                            let thang = date.getMonth() + 1;
                             let ngay = date.getDate();
                             let gio = date.getHours();
                             let phut = date.getMinutes();
@@ -289,10 +398,28 @@ export class ChatPageFriendsObjectLeft {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let index = 0;
             let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                    index = i;
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+                let vi_tri_ban_than = this.getViTriBanThan()
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                            index = i;
+                        }
+                    }
+                }
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
                 }
             }
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
