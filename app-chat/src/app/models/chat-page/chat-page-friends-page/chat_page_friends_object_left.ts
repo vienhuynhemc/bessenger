@@ -1,7 +1,6 @@
+import { ChatPageCuocTroChuyen } from './chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectImg } from './chat_page_object_img';
 import { ChatPageObjectTen } from './chat_page_object_ten';
-import { last } from 'rxjs/operators';
-import { ChatPageCuocTroChuyen } from './chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from './chat_page_object_tin_nhan_friend';
 export class ChatPageFriendsObjectLeft {
 
@@ -253,19 +252,19 @@ export class ChatPageFriendsObjectLeft {
                             let object = new ChatPageObjectImg();
                             object.url = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].hinh
                             let ngay_thang: string = "";
-                            let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ngay_xem + 60000 * 60 * 7;
-                            let year: number = parseInt(ngay_thang_number / (60000 * 60 * 24 * 365) + "");
-                            let thang_number = ngay_thang_number - (year * (60000 * 60 * 24 * 365));
-                            let thang = parseInt(thang_number / (60000 * 60 * 24 * 30) + "");
-                            let ngay_number = thang_number - (thang * (60000 * 60 * 24 * 30));
-                            let ngay = parseInt(ngay_number / (60000 * 60 * 24) + "");
-                            let gio_number = ngay_number - (ngay * (60000 * 60 * 24));
-                            let gio = parseInt(gio_number / (60000 * 60) + "");
-                            let phut_number = gio_number - (gio * (60000 * 60));
-                            let phut = parseInt(phut_number / 60000 + "");
-                            let giay_number = parseInt((phut_number - phut * 60000) / 1000 + "");
-                            ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay_number.toString().length > 1 ? giay_number : "0" + giay_number} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${(year + 1970)}`;
-                            let array = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ten.split(" ");
+                            let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ngay_xem ;
+                            let date = new Date(ngay_thang_number);
+                            let year = date.getFullYear();
+                            let thang = date.getMonth()+1;
+                            let ngay = date.getDate();
+                            let gio = date.getHours();
+                            let phut = date.getMinutes();
+                            let giay = date.getSeconds();
+                            ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
+                            let array: string[] = [""];
+                            if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ten != null) {
+                                array = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ten.split(" ");
+                            }
                             object.noi_dung = array[array.length - 1] + " đã xem lúc " + ngay_thang;
                             result.push(object);
                         } else if (result.length == 3) {

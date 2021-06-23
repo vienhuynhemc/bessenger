@@ -245,6 +245,7 @@ $color-bg-main: #f5f9fc;
       height: 541px;
       overflow: scroll;
       position: relative;
+      scroll-behavior: smooth;
 
       .container {
         width: 281px;
