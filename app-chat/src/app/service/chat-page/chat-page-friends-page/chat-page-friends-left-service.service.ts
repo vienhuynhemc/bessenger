@@ -87,6 +87,7 @@ export class ChatPageFriendsLeftServiceService {
           this.allBoxData[i].trang_thai_online = isOnline;
         }
       }
+      console.log(this.allBoxData);
       this.update();
     }, 5000);
   }
@@ -380,6 +381,8 @@ export class ChatPageFriendsLeftServiceService {
           let chat_page_object_tin_nhan_friend = new ChatPageObjectTinNhanFriend();
           chat_page_object_tin_nhan_friend.ma_tai_khoan = key2;
           chat_page_object_tin_nhan_friend.ngay_tham_gia = value2['ngay_tham_gia'];
+          chat_page_object_tin_nhan_friend.ngay_roi_di = value2['ngay_roi_di'];
+          chat_page_object_tin_nhan_friend.roi_chua = value2['roi_chua'];
           thong_tin_thanh_vien.push(chat_page_object_tin_nhan_friend);
           if (!isOke) {
             if (key2 == ma_tai_khoan) {
