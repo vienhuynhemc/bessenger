@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges, AfterViewChecked , AfterContentChecked} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
   templateUrl: './friends-page.component.html',
   styleUrls: ['./friends-page.component.scss'],
 })
-export class FriendsPageComponent implements OnInit, OnDestroy  {
+export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked  {
   friendsPageDefautl: number;
   private valueFromChildSubscription: Subscription;
   idFriendFrist: any;
@@ -27,6 +27,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
     public contactsService: ContactsService,
     public requestListService: RequestAddFriendsService
   ) {}
+  ngAfterViewChecked(): void {
+    
+    this.cdr.detectChanges()
+  }
 
   
   
@@ -39,14 +43,9 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
       this.main_page_service.selectFriendsPage();
     }, 0);
     this.getSelectedFriendsPage();
-   
+    
   }
-
-  ngAfterViewChecked(){
-   this.cdr.detectChanges();
   
-  }
-
   // get về trạng thái page
   getSelectedFriendsPage() {
     this.valueFromChildSubscription = this.friendsPageService.friendsDefault.subscribe(friendsDefault => 

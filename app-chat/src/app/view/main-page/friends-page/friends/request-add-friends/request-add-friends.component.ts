@@ -1,5 +1,5 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
@@ -19,14 +19,16 @@ export class RequestAddFriendsComponent implements OnInit {
     public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
     private router: Router,
-    public requestListService: RequestAddFriendsService
+    public requestListService: RequestAddFriendsService,
   ) {}
+  
 
   ngOnInit(): void {
     this.getRequestList();
     this.friendsPageService.selectedRequestService();
     this.getIDURLRequestList()
     this.setRequestFirst();
+   
   }
   iDUrl:any;
   valueSub: Subscription;
@@ -42,17 +44,12 @@ export class RequestAddFriendsComponent implements OnInit {
 
   // chọn người đầu tiên hiển thị trong danh sách request
   setRequestFirst() {
-
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
-      let loop = 0;
-      // nếu k có list request
-      if(this.friendsPageService.requestList == undefined) {
         this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+         
           this.friendsPageService.requestFirstList = []
-          this.friendsPageService.setLoading(true)
           if(data.val() != null) {
               let temp
               data.forEach(element => {
@@ -77,30 +74,30 @@ export class RequestAddFriendsComponent implements OnInit {
             this.moveLinkRequest('')
             this.sendFriendToProfileRequest(null);
           }
-          this.friendsPageService.setLoading(false)
+        
         })
-       
-        // nếu có list request
-      }else {
-          this.friendsPageService.setLoading(true)
-          this.friendsPageService.requestList.forEach(element => {
-            this.contactsService.getFriendByID(element.id).once('value', (data) => {
-              if(loop == 0) {
-                if(this.iDUrl != data.key)
-                this.moveLinkRequest(data.key)
-                this.sendFriendToProfileRequest(data.key);
-                loop++;
-              }
-            })
-
-          });
-          this.friendsPageService.setLoading(false)
-      }
+      
 
   } else {
     // nếu địa chỉ là /lien-lac/xxxxx kiểm tra xem id có trong danh sách lời mời hay không
-    this.friendsPageService.setLoading(true)
-    this.sendFriendToProfileRequest(this.iDUrl)
+    this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+      let check = true
+        if(data.val() != null) {
+          data.forEach(element => {
+              if(element.val().ton_tai == 0) {
+                if(element.key == this.iDUrl){
+                  this.moveLinkRequest(element.key)
+                  this.sendFriendToProfileRequest(element.key)
+                  check = false;
+              }
+              }
+          });
+          if(check) 
+          this.router.navigate(['/**'])
+        } else 
+          this.router.navigate(['/**'])
+    })
+  
   }
   }
   
@@ -136,7 +133,7 @@ export class RequestAddFriendsComponent implements OnInit {
   sendFriendToProfileRequest(id : any) {
       this.contactsService.setFriendInforService(id);
         // loading
-        this.friendsPageService.setLoading(false)
+       
      
   }
 
@@ -146,9 +143,10 @@ export class RequestAddFriendsComponent implements OnInit {
     let friendsTempOfUser = []
     this.friendsPageService.requestList = []
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+   
     this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
        // lấy ra danh sách id bạn bè của id đang đăng nhập
-        this.friendsPageService.setLoading(true)
+      
        if(data.val() != null) {
           this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend_l) => {
             friendsTempOfUser = []
@@ -157,6 +155,7 @@ export class RequestAddFriendsComponent implements OnInit {
                 friendsTempOfUser.push(element.key)
             });
         })
+        
           // loading
           this.friendsPageService.requestList = []
           data.forEach((element) => {
@@ -168,6 +167,10 @@ export class RequestAddFriendsComponent implements OnInit {
                 // tìm ra danh sách bạn của id request
                 this.contactsService.getListIDFriendsByIDUser(element.key).on('value',(data) => {
                     // tìm ra bạn chung với id đang đăng nhập
+                    setTimeout(() => {
+                      this.friendsPageService.setLoading(true)
+                    }, 0);
+                    
                     data.forEach(element => {
                       friendsTempOfUser.forEach(val => {
                           if(element.val().ton_tai == 0 && element.key == val) 
@@ -177,6 +180,10 @@ export class RequestAddFriendsComponent implements OnInit {
                     temp.mutualFriends = count;
                     count = 0
                     this.friendsPageService.sortRequestListDate();
+                   
+                    setTimeout(() => {
+                      this.friendsPageService.setLoading(false)
+                    }, 0);
                 })
                 this.friendsPageService.requestList.push(temp);
                 this.friendsPageService.sortRequestListDate();
@@ -192,7 +199,8 @@ export class RequestAddFriendsComponent implements OnInit {
               this.friendsPageService.setSizeRequest(0)
               this.sendFriendToProfileRequest(null)
             }
-        this.friendsPageService.setLoading(false)
+           
+     
     })
     
   }

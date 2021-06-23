@@ -17,12 +17,12 @@ export class FriendsPageService {
   // danh sách gửi yêu cầu
   requestList: any[];
   sizeRequest: number;
-
   requestInfor: RequestInfor;
   requestFirstList: any[];
 
   // danh sách bạn bè
   friendsList: any[];
+  friendFirstList: any[];
   friendInfor: FriendInfor;
   private sizeFriends: number;
   idUnfriend: string = '';
@@ -113,10 +113,18 @@ export class FriendsPageService {
   // sort date A,B,C
   public sortFriendsListNameABC() {
     this.friendsList = this.friendsList.sort((nameIn1, nameIn2) => {
-      let name_1 = nameIn1.name;
-      let name_2 = nameIn2.name;
-      return name_2 - name_1;
+      var x = nameIn1.getNameLast();
+      var y = nameIn2.getNameLast();
+      return x < y ? -1 : x > y ? 1 : 0;
     });
   }
 
+  // sort date A,B,C
+  public sortFriendsFirstListNameABC() {
+    this.friendFirstList = this.friendFirstList.sort((nameIn1, nameIn2) => {
+      var x = nameIn1.getNameLast();
+      var y = nameIn2.getNameLast();
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+  }
 }
