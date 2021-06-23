@@ -65,6 +65,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     this.friendInfor.id = 1;
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
+       
         // kiểm tra 404
         if (id == null) {
           // id == 1 là đường dẫn không có id
@@ -82,10 +83,8 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
             }
           });
         }
-        // loading
-        setTimeout(() => {
-          this.friendsPageService.setLoading(false);
-        }, 0);
+        
+       
       });
   }
 }

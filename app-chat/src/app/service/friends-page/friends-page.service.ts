@@ -17,12 +17,12 @@ export class FriendsPageService {
   // danh sách gửi yêu cầu
   requestList: any[];
   sizeRequest: number;
-
   requestInfor: RequestInfor;
   requestFirstList: any[];
 
   // danh sách bạn bè
   friendsList: any[];
+  friendFirstList: any[];
   friendInfor: FriendInfor;
   private sizeFriends: number;
   idUnfriend: string = '';
@@ -93,9 +93,18 @@ export class FriendsPageService {
   }
 
 
-  // sort date từ gần nhất đến xa nhất
+   // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra danh sách request
   public sortRequestListDate() {
     this.requestList = this.requestList.sort((dateIn1, dateIn2) => {
+      let date_1 = dateIn1.dateRequest;
+      let date_2 = dateIn2.dateRequest;
+      return date_2 - date_1;
+    });
+  }
+
+   // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra request đầu tiên
+  public sortRequestFrist() {
+    this.requestFirstList = this.requestFirstList.sort((dateIn1, dateIn2) => {
       let date_1 = dateIn1.dateRequest;
       let date_2 = dateIn2.dateRequest;
       return date_2 - date_1;
@@ -104,10 +113,18 @@ export class FriendsPageService {
   // sort date A,B,C
   public sortFriendsListNameABC() {
     this.friendsList = this.friendsList.sort((nameIn1, nameIn2) => {
-      let name_1 = nameIn1.name;
-      let name_2 = nameIn2.name;
-      return name_2 - name_1;
+      var x = nameIn1.getNameLast();
+      var y = nameIn2.getNameLast();
+      return x < y ? -1 : x > y ? 1 : 0;
     });
   }
 
+  // sort date A,B,C
+  public sortFriendsFirstListNameABC() {
+    this.friendFirstList = this.friendFirstList.sort((nameIn1, nameIn2) => {
+      var x = nameIn1.getNameLast();
+      var y = nameIn2.getNameLast();
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+  }
 }

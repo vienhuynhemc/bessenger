@@ -25,9 +25,7 @@ export class RequestAddFriendsService {
       requestInfor.name = data.val().ten;
       requestInfor.sex = data.val().gioi_tinh;
       requestInfor.date = data.val().ngay_tao;
-      setTimeout(() => {
-        this.friendsPageService.setLoading(false)
-      }, 0);
+    
     });
     return requestInfor
   }

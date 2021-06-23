@@ -19,7 +19,6 @@ export class ContactsService {
  
   constructor(
     private db: AngularFireDatabase,
-    private friendsPageService: FriendsPageService
   ) {}
 
   // thay đổi thông tin
@@ -28,6 +27,7 @@ export class ContactsService {
   }
   // get list id dựa vào id đang đăng nhập
   getListIDFriendsByIDUser(idUser: any): any {
+    
     return this.db.database.ref('ban_be').child(idUser);
   }
 
@@ -45,9 +45,7 @@ export class ContactsService {
       friendInfor.name = data.val().ten;
       friendInfor.sex = data.val().gioi_tinh;
       friendInfor.date = data.val().ngay_tao;
-      setTimeout(() => {
-        this.friendsPageService.setLoading(false)
-      }, 0);
+      
     });
   
     return friendInfor;

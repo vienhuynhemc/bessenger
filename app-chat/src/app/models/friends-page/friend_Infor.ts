@@ -111,5 +111,14 @@ export class FriendInfor {
         }
         return result;
     }
-
+    public getNameLast() {
+        if(this.name != undefined) {
+            let nameSplit = this.name.trim().split(' '); 
+            if(nameSplit.length == 0)
+                return nameSplit[0].toLowerCase()
+            else
+                return nameSplit[nameSplit.length - 1].toLowerCase()
+        }
+        return ''
+    }
 }
