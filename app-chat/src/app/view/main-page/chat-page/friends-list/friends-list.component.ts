@@ -24,6 +24,7 @@ export class FriendsListComponent implements OnInit {
       public chat_page_friend_left_service: ChatPageFriendsLeftServiceService
     ) { }
 
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let id = params['id'];
@@ -162,7 +163,7 @@ export class FriendsListComponent implements OnInit {
             }
             // sort lại theo ngày gửi của tin nhắn cuối cùng
             this.chat_page_friend_left_service.sort();
-            // update select
+            // seen
             if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != null) {
               if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
                 this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
@@ -179,6 +180,11 @@ export class FriendsListComponent implements OnInit {
                 Object.entries(object).forEach(([key, value]) => {
                   this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
                 });
+              }
+              // di chuyển dúng vị trí
+              if (this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri == null ||
+                this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri < 2) {
+                this.chat_page_friend_left_service.updateScrollFirst();
               }
               setTimeout(() => {
                 this.main_page_process_service.setLoading(false);

@@ -14,6 +14,7 @@ export class ChatPageFriendsLeftServiceService {
 
   // ma_cuoc_tro_chuyen hien hien tai
   public now_ma_cuoc_tro_chuyen: string;
+  public is_di_chuyen_dung_vi_tri: number;
 
   // Danh sách all cuộc trò truyện
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
@@ -130,6 +131,35 @@ export class ChatPageFriendsLeftServiceService {
       } else {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
+    }
+    this.updateScroll();
+  }
+
+  public updateScroll() {
+    let danh_sach_ban_ben_duoi = document.getElementById("danh_sach_ban_be_ben_duoi");
+    if (danh_sach_ban_ben_duoi != null) {
+      let i = this.getIndexSelecedNotSearch();
+      if (i < 3) {
+        danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
+      }
+    }
+  }
+
+  public updateScrollFirst() {
+    let danh_sach_ban_ben_duoi = document.getElementById("danh_sach_ban_be_ben_duoi");
+    if (danh_sach_ban_ben_duoi != null) {
+      let i = this.getIndexSeleced();
+      if (i < 3) {
+        danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
+      }
+      if (this.is_di_chuyen_dung_vi_tri == null) {
+        this.is_di_chuyen_dung_vi_tri = 0;
+      }
+      this.is_di_chuyen_dung_vi_tri++;
     }
   }
 
