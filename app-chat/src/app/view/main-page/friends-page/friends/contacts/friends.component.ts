@@ -71,10 +71,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                 }
               });
             }
-           
-            
         });
-       
     })
   }
   onClickExitMutual() {
@@ -89,38 +86,38 @@ export class FriendsComponent implements OnInit, OnDestroy {
   }
   // selected bạn bè đầu tiên trong danh sách
   setFriendFirst() {
-    setTimeout(() => {
-      this.friendsPageService.setLoading(true)
-    }, 0);
-
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
-      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
       this.contactsService.getListIDFriendsByIDUser(parseIDUser).once('value', (data) => {
         // loading
-        setTimeout(() => {
           this.friendsPageService.setLoading(true)
-        }, 0);
-        let loop = 0;
-        data.forEach((element) => {
-          // lấy ra danh sách bạn bè
-          if (element.val().ton_tai == 0) {
-            this.contactsService.getFriendByID(element.key).once('value', (data) => {
-              if(loop == 0) {
-                if(this.iDUrl != data.key)
-                this.moveLink(data.key)
-                this.sendFriendToProfile(data.key);
-                loop++;
+          let loop = 0;
+          if(data.val() != null) {
+            data.forEach((element) => {
+              if (element.val().ton_tai == 0) {
+                  if(loop == 0) {
+                      this.moveLink(element.key)
+                      this.sendFriendToProfile(element.key);
+                      loop++;
+                  }
               }
-            })
+            });
+            
+          } else {
+            this.moveLink('')
+            this.sendFriendToProfile(null);
           }
-        });
+            // loading
+          this.friendsPageService.setLoading(false)
       });
   } else {
-  
+    this.friendsPageService.setLoading(true)
+    this.sendFriendToProfile(this.iDUrl)
     // nếu địa chỉ là /lien-lac/xxxxx
-    this.sendFriendToProfile(this.iDUrl);
+  
   }
+ 
   }
   
    // chuyển đến trang tin nhắn
@@ -226,9 +223,9 @@ export class FriendsComponent implements OnInit, OnDestroy {
   sendFriendToProfile(id: any) {
     this.contactsService.setFriendInforService(id);
      // loading
-    setTimeout(() => {
+  
       this.friendsPageService.setLoading(false)
-    }, 0);
+  
   }
 
   // get data từ service
@@ -236,57 +233,59 @@ export class FriendsComponent implements OnInit, OnDestroy {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
       // loading
-      setTimeout(() => {
-        this.friendsPageService.setLoading(true)
-      }, 0);
       this.friendsPageService.friendsList = [];
-      data.forEach((element) => {
-        // lấy ra danh sách bạn bè
-        if (element.val().ton_tai == 0) {
-          let temp = this.contactsService.getListFriendsInforByIDFriends(
-            element.key
-          );
-          if (temp != null) { 
-          this.friendsPageService.friendsList.push(temp);
-         
-        }
-        }
-      });
-      
-      // lấy số lượng bạn bè
-      this.friendsPageService.setSizeFriends(this.friendsPageService.friendsList.length)
-       // lấy ra bạn chung của mỗi người
-      //  duyệt qua từng mã tài khoản bạn bè
-      data.forEach(element => {
-          let count = 0;
-          // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
-          this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
+      this.friendsPageService.setLoading(true)
+      if(data.val() != null) {
+            data.forEach((element) => {
+              // lấy ra danh sách bạn bè
+              if (element.val().ton_tai == 0) {
+                let temp = this.contactsService.getListFriendsInforByIDFriends(
+                  element.key
+                );
+                if (temp != null) { 
+                this.friendsPageService.friendsList.push(temp);
+              
+              }
+              }
+            });
+          
+            // lấy số lượng bạn bè
             
-            if(data_friends.val() != null) {
-              // kiểm tra có bao nhiêu bạn chung
-              data_friends.forEach(element_f => {
-                this.friendsPageService.friendsList.forEach(element => {
-                  if(element_f.val().ton_tai == 0 && element_f.key != parseIDUser && element_f.key == element.id) {
-                    count++;
+            this.friendsPageService.setSizeFriends(this.friendsPageService.friendsList.length)
+            // lấy ra bạn chung của mỗi người
+            //  duyệt qua từng mã tài khoản bạn bè
+            data.forEach(element => {
+                let count = 0;
+                // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
+                this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
+                  
+                  if(data_friends.val() != null) {
+                    // kiểm tra có bao nhiêu bạn chung
+                    data_friends.forEach(element_f => {
+                      this.friendsPageService.friendsList.forEach(element => {
+                        if(element_f.val().ton_tai == 0 && element_f.key != parseIDUser && element_f.key == element.id) {
+                          count++;
+                        }
+                      })
+                    });
+                    // thêm bạn chung vào bạn bè
+                    this.friendsPageService.friendsList.forEach(element => {
+                        if(element.id == data_friends.key)
+                          element.mutualFriends = count;
+                    });
+                    count = 0;
                   }
                 })
-              });
-              // thêm bạn chung vào bạn bè
-              this.friendsPageService.friendsList.forEach(element => {
-                  if(element.id == data_friends.key)
-                    element.mutualFriends = count;
-              });
-              count = 0;
-            }
-          })
-         
-      })
-     
+              
+            })
+      }
+      // nếu danh sách rỗng thì thêm size = 0
+      if(this.friendsPageService.friendsList.length == 0)
+        this.friendsPageService.setSizeFriends(0)
+       // loading
+       this.friendsPageService.setLoading(false)
     });
- // loading
-    setTimeout(() => {
-      this.friendsPageService.setLoading(false)
-    }, 0);
+ 
   }
   
 }

@@ -58,12 +58,10 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
               this.router.navigate(['/**'])
               this.contactsService.setFriendInforService(null);
             }
+           
           });
         }
-        // loading
-        setTimeout(() => {
-          this.friendsPageService.setLoading(false);
-        }, 0);
+        this.friendsPageService.setLoading(false)
       });
   }
 

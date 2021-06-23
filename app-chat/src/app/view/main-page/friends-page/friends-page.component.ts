@@ -103,13 +103,13 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
   
       this.router.navigate(['lien-lac/'], { relativeTo: this.route});
       this.friendsPageService.selectedFriendsPageDefaultSerivce();
-   
+      this.contactsService.setFriendInforService(null);
   }
   moveToRequest(): void {
 
       this.router.navigate(['loi-moi/'], { relativeTo: this.route});
       this.friendsPageService.selectedRequestService()
- 
+      this.contactsService.setFriendInforService(null);
    
   
   }
@@ -117,7 +117,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
    
     this.router.navigate(['da-gui/0'], { relativeTo: this.route});
     this.friendsPageService.selectedSendService()
-    
+    this.contactsService.setFriendInforService(null);
   }
 
   // xoa ban be
@@ -210,9 +210,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
         });
     })
       // loading
-      setTimeout(() => {
-        this.friendsPageService.setLoading(true)
-      }, 0);
+     
       this.friendsPageService.requestList = []
       data.forEach((element) => {
          // lấy ra danh sách request

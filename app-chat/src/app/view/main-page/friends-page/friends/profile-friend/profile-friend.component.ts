@@ -82,10 +82,8 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
             }
           });
         }
-        // loading
-        setTimeout(() => {
           this.friendsPageService.setLoading(false);
-        }, 0);
+       
       });
   }
 }

@@ -93,9 +93,18 @@ export class FriendsPageService {
   }
 
 
-  // sort date từ gần nhất đến xa nhất
+   // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra danh sách request
   public sortRequestListDate() {
     this.requestList = this.requestList.sort((dateIn1, dateIn2) => {
+      let date_1 = dateIn1.dateRequest;
+      let date_2 = dateIn2.dateRequest;
+      return date_2 - date_1;
+    });
+  }
+
+   // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra request đầu tiên
+  public sortRequestFrist() {
+    this.requestFirstList = this.requestFirstList.sort((dateIn1, dateIn2) => {
       let date_1 = dateIn1.dateRequest;
       let date_2 = dateIn2.dateRequest;
       return date_2 - date_1;
