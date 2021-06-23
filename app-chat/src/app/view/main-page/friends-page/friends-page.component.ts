@@ -216,31 +216,31 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
       data.forEach((element) => {
          // lấy ra danh sách request
         if(element.val().ton_tai == 0) {
-          let temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
+          let temp = this.requestListService.getListRequestInforByIDRequest(element.key)
+          temp.dateRequest = element.val().ngay_tao
           if(temp != null && temp.name.toLowerCase().trim().includes(searchValue.toLowerCase().trim())) {
             // tìm ra danh sách bạn của id request
             this.contactsService.getListIDFriendsByIDUser(element.key).on('value',(data) => {
-              // tìm ra bạn chung với id đang đăng nhập
+                // tìm ra bạn chung với id đang đăng nhập
                 data.forEach(element => {
                   friendsTempOfUser.forEach(val => {
                       if(element.val().ton_tai == 0 && element.key == val) 
                         count++;
                   });
-                  this.friendsPageService.sortRequestListDate();
                 });
                 temp.mutualFriends = count;
                 count = 0
+                this.friendsPageService.sortRequestListDate();
             })
             this.friendsPageService.requestList.push(temp);
+             this.friendsPageService.sortRequestListDate();
           }
         }
       })
-     
       // lấy số lượng request
       this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
       // lấy ra bạn chung
       
     })
-
   }
 }
