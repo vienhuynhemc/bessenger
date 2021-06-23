@@ -9,77 +9,55 @@ export class FriendInfor {
 
     // định dạng ngày tháng VD: 27 Tháng Tám 2020 - 10:04:02
     public dateAddFormatMutualFriends() {
-        let dateAdd = new Date(this.date);
-        let day = dateAdd.getDate();
-        let month = dateAdd.getMonth();
-        let year = dateAdd.getUTCFullYear();
-        let hour = dateAdd.getUTCHours();
-        let minutes = dateAdd.getUTCMinutes();
-        let seconds = dateAdd.getUTCSeconds();
+        let dateFrist = new Date(this.date)
+        let dateConvert = dateFrist.toString();
+        let dateAdd = dateConvert.split(' ');
+        let day = dateAdd[2];
+        let month = dateAdd[1];
+        let year = dateAdd[3];
+        let time = dateAdd[4]
         let monthFormat;
         let dayFormat;
-        let hourFormat;
-        let minutesFormat;
-        let secondsFormat;
         switch(month) {
-            case 1:
+            case 'Jan':
               monthFormat = 'Một';
               break;
-            case 2:
+            case 'Feb':
                 monthFormat = 'Hai';
                 break;
-            case 3:
+            case 'Mar':
                 monthFormat = 'Ba';
                 break;
-            case 4:
+            case 'Apr':
                 monthFormat = 'Bốn';
                 break;
-            case 5:
+            case 'May':
                 monthFormat = 'Năm';
                 break;
-            case 6:
+            case 'Jun':
                 monthFormat = 'Sáu';
                 break;
-            case 7:
+            case 'Jul':
                 monthFormat = 'Bảy';
                 break;
-            case 8:
+            case 'Aug':
                 monthFormat = 'Tám';
                 break;
-            case 9:
+            case 'Sep':
                 monthFormat = 'Chín';
                 break;
-            case 10:
+            case 'Oct':
                 monthFormat = 'Mười';
                 break;
-            case 11:
+            case 'Nov':
                 monthFormat = 'Mười Một';
                 break;
-            case 12:
+            case 'Dec':
                 monthFormat = 'Mười Hai';
                 break;
         }
-        if(day < 10) {
-            dayFormat = '0' + day;
-        }
-        else 
-            dayFormat =  day;
-        if(hour < 10) {
-            hourFormat = '0' + hour;
-        }
-        else 
-            hourFormat = hour;
-        if(minutes < 10) {
-            minutesFormat = '0' + minutes;
-        }
-        else
-            minutesFormat =  minutes;
-        if(seconds < 10) {
-            secondsFormat = '0' + seconds;
-        }
-        else
-            secondsFormat = seconds;
-        return dayFormat + ' Tháng ' + monthFormat+ ' ' + year + ' - ' + hourFormat + ':' + minutesFormat + ':' + secondsFormat;
+       
+        return day + ' Tháng ' + monthFormat+ ' ' + year + ' - '+ time;
     }
     // kiểm tra giới hạn tên danh sách bạn bè
     public checkLimitNameFriendsList() {

@@ -2,7 +2,7 @@
     <img class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
     <div *ngIf="friendInfor.id != 1 "  class="left">
         <div  class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
-        <div class="name" *ngIf="friendInfor.checkLimitNameFriendsProfile()">{{friendInfor.getNameLimitFriendsProfile()}}<div class="tool-tip"><span>{{friendInfor.name}}</span><i class="fas fa-caret-down"></i></div></div>
+        <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInfor.name}}" *ngIf="friendInfor.checkLimitNameFriendsProfile()">{{friendInfor.getNameLimitFriendsProfile()}}</div>
         <div class="name" *ngIf="!friendInfor.checkLimitNameFriendsProfile()">{{friendInfor.name}}</div>
         <button (click)="onClickMessage(friendInfor.id)" class="message btn"><i class="fas fa-comment" ></i>Nhắn tin</button>
         <button class="abort-friend btn" (click)="onClickUnFriend(friendInfor.id, friendInfor.name)"><i class="fas fa-user-times"></i>Hủy kết bạn</button>

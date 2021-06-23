@@ -49,35 +49,7 @@
             font-size: 15px;
             font-weight: 600;
             margin-top: 27px;
-            // tool-tip
-            .tool-tip {
-             position: absolute;
-              top: -20px;
-              right: 10px;
-              visibility: hidden;
-              background-color: white;
-              box-shadow: 0px 0px 3px 0px #adaeb1;
-              border-radius: 10px;
-              height: 30px;
-              padding: 10px 10px 0px 10px;
-              span {
-                font-size: 15px;
-                color: rgb(27, 24, 24);
-              }
-              i {
-                position: absolute;
-                bottom: -17px;
-                right: 135px;
-                color: white;
-                font-size: 30px;
-              }
-            }
-           
-          }
-          .name:hover {
-            .tool-tip {
-              visibility: visible;
-            }
+            
           }
           .non-mutual {
             margin-top: 37px;

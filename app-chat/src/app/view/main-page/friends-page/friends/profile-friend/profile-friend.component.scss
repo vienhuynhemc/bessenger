@@ -39,38 +39,10 @@
       left: 10px;
       word-wrap: break-word;
       text-shadow: 2px 2px #3275f7;
-      .tool-tip {
-        position: absolute;
-        top: -40px;
-        right: -100px;
-        font-size: 0 !important;
-         visibility: hidden;
-         background-color: white;
-         box-shadow: 0px 0px 3px 0px #adaeb1;
-         border-radius: 10px;
-         height: 30px;
-         padding: 10px 10px 0px 10px;
-         text-shadow: none;
-         span {
-           word-wrap: normal;
-           font-size: 15px !important;
-           color: rgb(27, 24, 24);
-         }
-         i {
-           position: absolute;
-           bottom: -17px;
-           left: 30px;
-           color: white;
-           font-size: 30px;
-         }
-       }
+      
       
     }
-    .name:hover {
-      .tool-tip {
-        visibility: visible;
-      }
-    }
+    
     .btn {
       color: white;
       outline: none;
