@@ -4,6 +4,7 @@ import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
 
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 
@@ -23,7 +24,8 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
     private router: Router,
     public friendsPageService: FriendsPageService,
     private cdr: ChangeDetectorRef,
-    public contactsService: ContactsService
+    public contactsService: ContactsService,
+    public requestListService: RequestAddFriendsService
   ) {}
 
   
@@ -37,7 +39,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
       this.main_page_service.selectFriendsPage();
     }, 0);
     this.getSelectedFriendsPage();
-
+    console.log(this.router.url)
   }
 
   ngAfterViewChecked(){
@@ -98,24 +100,23 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
 
  // chuyển trang
   moveToFriends(): void {
-    if(this.friendsPageDefautl != 0) {
+  
       this.router.navigate(['lien-lac/'], { relativeTo: this.route});
       this.friendsPageService.selectedFriendsPageDefaultSerivce();
-    }
+   
   }
   moveToRequest(): void {
-    if(this.friendsPageDefautl != 1) {
       this.router.navigate(['loi-moi/'], { relativeTo: this.route});
       this.friendsPageService.selectedRequestService()
-    }
+ 
    
   
   }
   moveToSend(): void {
-    if(this.friendsPageDefautl != 2) {
+   
     this.router.navigate(['da-gui/0'], { relativeTo: this.route});
     this.friendsPageService.selectedSendService()
-    }
+    
   }
 
   // xoa ban be
@@ -191,6 +192,54 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
             })
         })
       });
-  
-}
+  }
+
+  // tìm kiếm danh sách lời mời kết bạn
+  searchRequest(searchValue: string) {
+    let count = 0
+    let friendsTempOfUser = []
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+       // lấy ra danh sách id bạn bè của id đang đăng nhập
+       this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend_l) => {
+        friendsTempOfUser = []
+        friend_l.forEach(element => {
+          if(element.val().ton_tai == 0)
+            friendsTempOfUser.push(element.key)
+        });
+    })
+      // loading
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
+      this.friendsPageService.requestList = []
+      data.forEach((element) => {
+         // lấy ra danh sách request
+        if(element.val().ton_tai == 0) {
+          let temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
+          if(temp != null && temp.name.toLowerCase().trim().includes(searchValue.toLowerCase().trim())) {
+            // tìm ra danh sách bạn của id request
+            this.contactsService.getListIDFriendsByIDUser(element.key).on('value',(data) => {
+              // tìm ra bạn chung với id đang đăng nhập
+                data.forEach(element => {
+                  friendsTempOfUser.forEach(val => {
+                      if(element.val().ton_tai == 0 && element.key == val) 
+                        count++;
+                  });
+                });
+                temp.mutualFriends = count;
+                count = 0
+            })
+            this.friendsPageService.requestList.push(temp);
+          }
+        }
+      })
+     
+      // lấy số lượng request
+      this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
+      // lấy ra bạn chung
+      
+    })
+
+  }
 }

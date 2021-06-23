@@ -110,4 +110,21 @@ export class FriendInfor {
         }
         return result;
     }
+
+     // kiểm tra giới hạn tên lời mời kết bạn
+     public checkLimitNameRequestList() {
+        if(this.name.length > 16)
+            return true
+        return false;
+    }
+
+    // lấy ra tên đã được giới hạn lời mời kết bạn
+    public getNameLimitRequestList() {
+        let result = this.name;
+        if (result.length > 16) {
+            result = this.name.substring(0, 16).trim();
+            result += "...";
+        }
+        return result;
+    }
 }

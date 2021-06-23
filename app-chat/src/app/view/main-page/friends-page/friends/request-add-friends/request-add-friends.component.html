@@ -1,13 +1,14 @@
 <div class="friends-list">
     <div class="friends-list-content">
-        <div [class.detail-selected]="item.id == selectedIndex" class="detail-friend"  *ngFor="let item of this.friendsPageService.getRequestList(); let i = index" (click)="onClickSelectedFriend(item)">
+        <div [class.detail-selected]="item.id === iDUrl" class="detail-friend"  *ngFor="let item of this.friendsPageService.getRequestList(); let i = index" (click)="onClickSelectedFriend(item, iDUrl)">
                 <div class="detail-sub">
                     <div class="detail-left">
                         <img [src]="item.img" alt="">
                     </div>
                     <div class="detail-center">
-                        <div class="name">{{item.name}}</div>
-                        <div class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                        <div *ngIf="item.checkLimitNameRequestList()" [class.non-mutual]="item.mutualFriends == 0"  matTooltip="{{item.name}}" class="name" matTooltipClass="tooltip">{{item.getNameLimitRequestList()}}</div>
+                        <div *ngIf="!item.checkLimitNameRequestList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
+                        <div (click)="onClickGetIDFriendMutual(item.id, this.friendsPageService.getFriendsList())" *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
                     </div>
                     <div class="detail-right">
                        <div class="stick detail-btn" title="Chấp nhận" ><i class="fas fa-check"></i></div>

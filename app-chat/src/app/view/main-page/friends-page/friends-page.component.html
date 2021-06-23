@@ -7,7 +7,7 @@
     <div class="left">
         <div class="search">
             <input *ngIf="friendsPageDefautl === 0" type="text" placeholder="Tìm kiếm" (input)="searchFriends(myinput.value)" #myinput>
-            <input *ngIf="friendsPageDefautl === 1" type="text" placeholder="Tìm kiếm" >
+            <input *ngIf="friendsPageDefautl === 1" type="text" placeholder="Tìm kiếm" (input)="searchRequest(myNameRequest.value)" #myNameRequest>
             <input *ngIf="friendsPageDefautl === 2" type="text" placeholder="Tìm kiếm" >
             <i class="fas fa-search"></i>
         </div>

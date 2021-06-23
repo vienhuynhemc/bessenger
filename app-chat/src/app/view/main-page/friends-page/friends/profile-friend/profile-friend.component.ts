@@ -13,8 +13,6 @@ import { FriendsComponent } from '../contacts/friends.component';
   styleUrls: ['./profile-friend.component.scss'],
 })
 export class ProfileFriendComponent implements OnInit, OnDestroy {
-  listFiends: FriendInfor[];
-  random: number = -1;
   friendInfor: FriendInfor;
   private valueFromChildSubscription: Subscription;
   iDUrl: any;
@@ -60,15 +58,14 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
     this.friendsPageService.setIDUnFriend(id);
     this.friendsPageService.setNameUnFriend(name)
   }
+ 
   // đồng bộ dữ liệu với friends list
   getFriendFromFriendsList() {
     this.friendInfor = new FriendInfor();
     this.friendInfor.id = 1;
-    let checkLoop = 0;
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
         // kiểm tra 404
-        checkLoop = 0;
         if (id == null) {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
@@ -78,11 +75,9 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
-              this.friendInfor.date = data.val().ngay_tao;
-             
-              checkLoop++;
             } else {
               this.router.navigate(['/**'])
+              this.contactsService.setFriendInforService(null);
             }
           });
         }

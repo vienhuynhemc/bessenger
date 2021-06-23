@@ -117,7 +117,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         });
       });
   } else {
-   
+  
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfile(this.iDUrl);
   }

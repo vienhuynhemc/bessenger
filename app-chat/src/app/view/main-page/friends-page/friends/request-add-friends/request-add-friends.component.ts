@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -22,36 +23,18 @@ export class RequestAddFriendsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.friendsPageService.selectedRequestService();
-    this.setRequestFirst();
     this.getRequestList();
+    this.friendsPageService.selectedRequestService();
+    this.getIDURLRequestList()
+    this.setRequestFirst();
    
     // this.settingRouletRequestList();
   }
   iDUrl:any;
   valueSub: Subscription;
-  selectedIndex: string = '';
-  indexOption: number = -1;
+
+
  
- 
-//   settingRouletRequestList() {
-//     // lấy ra idUrl
-//    this.valueSub = this.route.paramMap.subscribe(params => {
-//      this.iDUrl = params.get('id');
-//    })
-//    // nếu === 0 thì trả về thằng đầu tiên trong danh sách
-//    if(this.iDUrl == 0) {
-//      this.onClickSelectedFriend(this.friends_list[0])
-//    } else {
-//      // idUrl = id người dùng => tìm thằng có id == idUrl
-//      this.friends_list.forEach(element => {
-//          if(element.id == this.iDUrl) {
-//            this.onClickSelectedFriend(element)
-//          }
-//      });
-    
-//    }
-//  } 
 
   // lấy ra danh sách bạn chung
   onClickGetIDFriendMutual(id: string, listRequest: FriendInfor[]) {
@@ -87,15 +70,12 @@ export class RequestAddFriendsComponent implements OnInit {
         });
       });
   } else {
+    console.log(this.iDUrl)
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfileRequest(this.iDUrl);
   }
   }
   
-  // chuyển đến trang tin nhắn
-  onClickMessage(id: string) {
-
-  }
 
    // lấy ra idUrl
    getIDURLRequestList() {
@@ -105,19 +85,19 @@ export class RequestAddFriendsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // this.valueSub.unsubscribe();
+    this.valueSub.unsubscribe();
   }
 
   moveLinkRequest(link: string) {
     this.router.navigate(['/bessenger/ban-be/loi-moi/' + link])
   }
   // Khi click vào bạn bè bất kì
-  onClickSelectedFriend(friend: FriendInfor) {
-    if (this.selectedIndex != friend.id) {
-        this.selectedIndex = friend.id;
-        this.sendFriendToProfileRequest(this.selectedIndex);
-        this.moveLinkRequest(friend.id)
-      }
+  onClickSelectedFriend(friend: FriendInfor, iDURL: any) {
+    if (friend != null && this.iDUrl != friend.id) {
+      this.sendFriendToProfileRequest(friend.id);
+      this.moveLinkRequest(friend.id);
+      
+    }
   }
 
  
@@ -129,6 +109,7 @@ export class RequestAddFriendsComponent implements OnInit {
         this.friendsPageService.setLoading(false)
       }, 0);
   }
+
   // get data từ service
   getRequestList() {
     let count = 0
@@ -152,8 +133,21 @@ export class RequestAddFriendsComponent implements OnInit {
          // lấy ra danh sách request
         if(element.val().ton_tai == 0) {
           let temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
-          if(temp != null) 
+          if(temp != null) {
+            // tìm ra danh sách bạn của id request
+            this.contactsService.getListIDFriendsByIDUser(element.key).on('value',(data) => {
+              // tìm ra bạn chung với id đang đăng nhập
+                data.forEach(element => {
+                  friendsTempOfUser.forEach(val => {
+                      if(element.val().ton_tai == 0 && element.key == val) 
+                        count++;
+                  });
+                });
+                temp.mutualFriends = count;
+                count = 0
+            })
             this.friendsPageService.requestList.push(temp);
+          }
         }
       })
      
