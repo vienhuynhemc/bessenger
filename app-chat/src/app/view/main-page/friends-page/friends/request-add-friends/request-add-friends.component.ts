@@ -23,6 +23,9 @@ export class RequestAddFriendsComponent implements OnInit {
 
   ngOnInit(): void {
     this.friendsPageService.selectedRequestService();
+    this.setRequestFirst();
+    this.getRequestList();
+   
     // this.settingRouletRequestList();
   }
   iDUrl:any;
@@ -57,11 +60,54 @@ export class RequestAddFriendsComponent implements OnInit {
 
   // chọn người đầu tiên hiển thị trong danh sách request
   setRequestFirst() {
+    setTimeout(() => {
+      this.friendsPageService.setLoading(true)
+    }, 0);
+    // nếu địa chỉ là /lien-lac
+    if(this.iDUrl == null) {
+      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.requestListService.getRequestInforByIDUser(parseIDUser).once('value', (data) => {
+        // loading
+        setTimeout(() => {
+          this.friendsPageService.setLoading(true)
+        }, 0);
+        let loop = 0;
+        data.forEach((element) => {
+          // lấy ra danh sách bạn bè
+          if (element.val().ton_tai == 0) {
+            this.contactsService.getFriendByID(element.key).once('value', (data) => {
+              if(loop == 0) {
+                if(this.iDUrl != data.key)
+                this.moveLinkRequest(data.key)
+                this.sendFriendToProfileRequest(data.key);
+                loop++;
+              }
+            })
+          }
+        });
+      });
+  } else {
+    // nếu địa chỉ là /lien-lac/xxxxx
+    this.sendFriendToProfileRequest(this.iDUrl);
+  }
+  }
+  
+  // chuyển đến trang tin nhắn
+  onClickMessage(id: string) {
 
   }
 
-  // chuyển đến trang tin nhắn
-  
+   // lấy ra idUrl
+   getIDURLRequestList() {
+    this.valueSub = this.route.paramMap.subscribe((params) => {
+      this.iDUrl = params.get('id');
+    });
+  }
+
+  ngOnDestroy() {
+    // this.valueSub.unsubscribe();
+  }
+
   moveLinkRequest(link: string) {
     this.router.navigate(['/bessenger/ban-be/loi-moi/' + link])
   }
@@ -78,7 +124,43 @@ export class RequestAddFriendsComponent implements OnInit {
   // send object đén profile
   sendFriendToProfileRequest(id : any) {
       this.contactsService.setFriendInforService(id);
+        // loading
+      setTimeout(() => {
+        this.friendsPageService.setLoading(false)
+      }, 0);
   }
   // get data từ service
-  getListFriends() {}
+  getRequestList() {
+    let count = 0
+    let friendsTempOfUser = []
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+       // lấy ra danh sách id bạn bè của id đang đăng nhập
+       this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend_l) => {
+        friendsTempOfUser = []
+        friend_l.forEach(element => {
+          if(element.val().ton_tai == 0)
+            friendsTempOfUser.push(element.key)
+        });
+    })
+      // loading
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
+      this.friendsPageService.requestList = []
+      data.forEach((element) => {
+         // lấy ra danh sách request
+        if(element.val().ton_tai == 0) {
+          let temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
+          if(temp != null) 
+            this.friendsPageService.requestList.push(temp);
+        }
+      })
+     
+      // lấy số lượng request
+      this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
+      // lấy ra bạn chung
+      
+    })
+  }
 }

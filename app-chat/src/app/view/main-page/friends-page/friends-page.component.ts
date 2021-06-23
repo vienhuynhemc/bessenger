@@ -105,7 +105,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
   }
   moveToRequest(): void {
     if(this.friendsPageDefautl != 1) {
-      this.router.navigate(['loi-moi/0'], { relativeTo: this.route});
+      this.router.navigate(['loi-moi/'], { relativeTo: this.route});
       this.friendsPageService.selectedRequestService()
     }
    

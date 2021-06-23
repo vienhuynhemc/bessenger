@@ -241,9 +241,13 @@ export class FriendsComponent implements OnInit, OnDestroy {
           let temp = this.contactsService.getListFriendsInforByIDFriends(
             element.key
           );
-          if (temp != null) this.friendsPageService.friendsList.push(temp);
+          if (temp != null) { 
+          this.friendsPageService.friendsList.push(temp);
+         
+        }
         }
       });
+      
       // lấy số lượng bạn bè
       this.friendsPageService.setSizeFriends(this.friendsPageService.friendsList.length)
        // lấy ra bạn chung của mỗi người
@@ -252,6 +256,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
           let count = 0;
           // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
           this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
+            
             if(data_friends.val() != null) {
               // kiểm tra có bao nhiêu bạn chung
               data_friends.forEach(element_f => {

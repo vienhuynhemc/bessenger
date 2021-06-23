@@ -88,4 +88,5 @@ export class FriendsPageService {
   setSizeRequest(size: number) {
     this.sizeRequest = size;
   }
+  
 }
