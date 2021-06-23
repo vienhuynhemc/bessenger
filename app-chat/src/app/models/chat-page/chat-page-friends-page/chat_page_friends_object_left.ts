@@ -263,7 +263,8 @@ export class ChatPageFriendsObjectLeft {
                             let gio = parseInt(gio_number / (60000 * 60) + "");
                             let phut_number = gio_number - (gio * (60000 * 60));
                             let phut = parseInt(phut_number / 60000 + "");
-                            ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${(year + 1970)}`;
+                            let giay_number = parseInt((phut_number - phut * 60000) / 1000 + "");
+                            ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay_number.toString().length > 1 ? giay_number : "0" + giay_number} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${(year + 1970)}`;
                             let array = this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ten.split(" ");
                             object.noi_dung = array[array.length - 1] + " đã xem lúc " + ngay_thang;
                             result.push(object);
