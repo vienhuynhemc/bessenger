@@ -57,7 +57,6 @@ const routes: Routes = [
         path: 'tin-nhan',
         component: ChatPageComponent,
         children: [
-          { path: '', component: FriendsListComponent },
           {
             path: ':id',
             component: FriendsListComponent,
@@ -109,4 +108,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

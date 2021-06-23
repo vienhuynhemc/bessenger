@@ -139,10 +139,12 @@ export class ChatPageFriendsLeftServiceService {
     let danh_sach_ban_ben_duoi = document.getElementById("danh_sach_ban_be_ben_duoi");
     if (danh_sach_ban_ben_duoi != null) {
       let i = this.getIndexSelecedNotSearch();
-      if (i < 3) {
-        danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
+      if (i != -1) {
+        if (i < 3) {
+          danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
+        }
       }
     }
   }

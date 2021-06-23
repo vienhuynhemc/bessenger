@@ -29,7 +29,7 @@ export class FriendsListComponent implements OnInit {
     this.route.params.subscribe(params => {
       let id = params['id'];
       this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen = id;
-      if (id != null) {
+      if (id != 'danh-sach') {
         if (this.chat_page_friend_left_service.allBoxData != null) {
           if (this.chat_page_friend_left_service.checkUrl(id)) {
             this.chat_page_friend_left_service.seen(id);
@@ -164,7 +164,7 @@ export class FriendsListComponent implements OnInit {
             // sort lại theo ngày gửi của tin nhắn cuối cùng
             this.chat_page_friend_left_service.sort();
             // seen
-            if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != null) {
+            if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != 'danh-sach') {
               if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
                 this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
               } else {
