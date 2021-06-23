@@ -87,7 +87,6 @@ export class ChatPageFriendsLeftServiceService {
           this.allBoxData[i].trang_thai_online = isOnline;
         }
       }
-      console.log(this.allBoxData);
       this.update();
     }, 5000);
   }

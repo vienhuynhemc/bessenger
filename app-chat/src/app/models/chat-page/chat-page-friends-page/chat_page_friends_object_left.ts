@@ -93,32 +93,7 @@ export class ChatPageFriendsObjectLeft {
 
     public isReaded(): boolean {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
                 if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].ma_tai_khoan == ma_tai_khoan) {
@@ -133,6 +108,35 @@ export class ChatPageFriendsObjectLeft {
         }
     }
 
+    public getIndexTinNhanCuoiCung(): number {
+        let index = 0;
+        let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
+        if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
+            let vi_tri_ban_than = this.getViTriBanThan()
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
+                        this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
+                } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
+                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                        index = i;
+                    }
+                }
+            }
+        } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
+            for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
+                if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
+                    ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+                    index = i;
+                }
+            }
+        } return index;
+    }
+
     public isNhom(): boolean {
         return this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom";
     }
@@ -140,32 +144,7 @@ export class ChatPageFriendsObjectLeft {
     public getTime(): string {
         let result = "";
         if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let last_time: number = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
             //  Lấy thời gian hiện tại
             let currentTime = Number(new Date());
@@ -203,32 +182,7 @@ export class ChatPageFriendsObjectLeft {
         result.noi_dung = "";
         result.noi_dung_goc = "";
         if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let ten = this.getTenNguoiGui(index);
             switch (this.cuoc_tro_truyen.tin_nhan[index].loai_tin_nhan) {
                 case "gui_text":
@@ -289,32 +243,7 @@ export class ChatPageFriendsObjectLeft {
     // Tin nhắn cuối cùng là mình gửi thì mới xem được những người nào đã xem
     public itMe(): boolean {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             if (this.cuoc_tro_truyen.tin_nhan[index].ma_tai_khoan == ma_tai_khoan) {
                 return true;
@@ -327,32 +256,7 @@ export class ChatPageFriendsObjectLeft {
     public getImgUserSeened(): ChatPageObjectImg[] {
         let result: ChatPageObjectImg[] = [];
         if (this.cuoc_tro_truyen.tin_nhan != null) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
                 if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].xem_chua == "roi") {
@@ -396,32 +300,7 @@ export class ChatPageFriendsObjectLeft {
     // Xem thử có ông nào nhận chưa
     public isDaNhan(): boolean {
         if (this.cuoc_tro_truyen.tin_nhan != null) {
-            let index = 0;
-            let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-                let vi_tri_ban_than = this.getViTriBanThan()
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[vi_tri_ban_than].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[vi_tri_ban_than].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-            }
+            let index = this.getIndexTinNhanCuoiCung();
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem.length; i++) {
                 if (this.cuoc_tro_truyen.tin_nhan[index].tinh_trang_xem[i].xem_chua == "dang") {
