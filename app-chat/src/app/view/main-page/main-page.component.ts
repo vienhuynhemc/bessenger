@@ -54,7 +54,7 @@ export class MainPageComponent implements OnInit {
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
   }
   moveToChatPage(): void {
-    this.router.navigate(['tin-nhan'], { relativeTo: this.route });
+    this.router.navigate(['tin-nhan/danh-sach'], { relativeTo: this.route });
   }
   moveToChatRequestPage(): void {
     this.router.navigate(['tin-nhan-an'], { relativeTo: this.route });

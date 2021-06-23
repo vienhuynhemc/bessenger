@@ -17,8 +17,10 @@ export class FriendsPageService {
   // danh sách gửi yêu cầu
   requestList: any[];
   sizeRequest: number;
+
   requestInfor: RequestInfor;
   requestFirstList: any[];
+
   // danh sách bạn bè
   friendsList: any[];
   friendInfor: FriendInfor;
@@ -90,6 +92,7 @@ export class FriendsPageService {
     this.sizeRequest = size;
   }
 
+
   // sort date từ gần nhất đến xa nhất
   public sortRequestListDate() {
     this.requestList = this.requestList.sort((dateIn1, dateIn2) => {
@@ -106,4 +109,5 @@ export class FriendsPageService {
       return name_2 - name_1;
     });
   }
+
 }

@@ -25,6 +25,7 @@ export class RequestAddFriendsComponent implements OnInit {
   ngOnInit(): void {
     this.getRequestList();
     this.friendsPageService.selectedRequestService();
+
     this.getIDURLRequestList()
     this.setRequestFirst();
   }
@@ -34,6 +35,7 @@ export class RequestAddFriendsComponent implements OnInit {
 
  
 
+
   // lấy ra danh sách bạn chung
   onClickGetIDFriendMutual(id: string, listRequest: FriendInfor[]) {
 
@@ -41,12 +43,15 @@ export class RequestAddFriendsComponent implements OnInit {
 
   // chọn người đầu tiên hiển thị trong danh sách request
   setRequestFirst() {
+
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+
     setTimeout(() => {
       this.friendsPageService.setLoading(true)
     }, 0);
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
+
       let loop = 0;
       // nếu k có list request
       if(this.friendsPageService.requestList == undefined) {
@@ -76,14 +81,18 @@ export class RequestAddFriendsComponent implements OnInit {
                 loop++;
               }
             })
+
           });
       }
+
   } else {
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfileRequest(this.iDUrl);
   }
   }
   
+
+
 
    // lấy ra idUrl
    getIDURLRequestList() {
@@ -94,6 +103,7 @@ export class RequestAddFriendsComponent implements OnInit {
 
   ngOnDestroy() {
     this.valueSub.unsubscribe();
+
   }
 
   moveLinkRequest(link: string) {
@@ -140,6 +150,7 @@ export class RequestAddFriendsComponent implements OnInit {
       data.forEach((element) => {
          // lấy ra danh sách request
         if(element.val().ton_tai == 0) {
+
           let temp = this.requestListService.getListRequestInforByIDRequest(element.key)
           temp.dateRequest = element.val().ngay_tao
           if(temp != null) {
@@ -161,6 +172,8 @@ export class RequestAddFriendsComponent implements OnInit {
           }
         }
       })
+
+
       // lấy số lượng request
       this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
       // lấy ra bạn chung

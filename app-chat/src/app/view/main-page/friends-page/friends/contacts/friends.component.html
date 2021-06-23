@@ -7,7 +7,9 @@
                         <img [src]="item.img || 'assets/images/loading.gif'" alt="">
                     </div>
                     <div  class="detail-center">
+
                         <div *ngIf="item.checkLimitNameFriendsList()" [class.non-mutual]="item.mutualFriends == 0"  matTooltip="{{item.name}}" class="name" matTooltipClass="tooltip">{{item.getNameLimitFriendsList()}}</div>
+
                         <div *ngIf="!item.checkLimitNameFriendsList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
                         <div (click)="onClickGetIDFriendMutual(item.id, this.friendsPageService.getFriendsList())" *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
                     </div>

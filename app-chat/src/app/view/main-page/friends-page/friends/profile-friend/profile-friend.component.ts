@@ -75,6 +75,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
               this.friendInfor.id = id;
               this.friendInfor.img = data.val().link_hinh;
               this.friendInfor.name = data.val().ten;
+
             } else {
               this.router.navigate(['/**'])
               this.contactsService.setFriendInforService(null);
