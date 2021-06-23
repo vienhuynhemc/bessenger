@@ -3,6 +3,7 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
+import { RequestInfor } from 'src/app/models/friends-page/request_infor';
 import { ContactsService } from './contacts/contacts.service';
 
 @Injectable({
@@ -16,8 +17,8 @@ export class FriendsPageService {
   // danh sách gửi yêu cầu
   requestList: any[];
   sizeRequest: number;
-  requestInfor: FriendInfor;
-
+  requestInfor: RequestInfor;
+  requestFirstList: any[];
   // danh sách bạn bè
   friendsList: any[];
   friendInfor: FriendInfor;
@@ -88,5 +89,21 @@ export class FriendsPageService {
   setSizeRequest(size: number) {
     this.sizeRequest = size;
   }
-  
+
+  // sort date từ gần nhất đến xa nhất
+  public sortRequestListDate() {
+    this.requestList = this.requestList.sort((dateIn1, dateIn2) => {
+      let date_1 = dateIn1.dateRequest;
+      let date_2 = dateIn2.dateRequest;
+      return date_2 - date_1;
+    });
+  }
+  // sort date A,B,C
+  public sortFriendsListNameABC() {
+    this.friendsList = this.friendsList.sort((nameIn1, nameIn2) => {
+      let name_1 = nameIn1.name;
+      let name_2 = nameIn2.name;
+      return name_2 - name_1;
+    });
+  }
 }

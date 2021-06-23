@@ -27,8 +27,6 @@ export class RequestAddFriendsComponent implements OnInit {
     this.friendsPageService.selectedRequestService();
     this.getIDURLRequestList()
     this.setRequestFirst();
-   
-    // this.settingRouletRequestList();
   }
   iDUrl:any;
   valueSub: Subscription;
@@ -43,22 +41,34 @@ export class RequestAddFriendsComponent implements OnInit {
 
   // chọn người đầu tiên hiển thị trong danh sách request
   setRequestFirst() {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     setTimeout(() => {
       this.friendsPageService.setLoading(true)
     }, 0);
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
-      let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-      this.requestListService.getRequestInforByIDUser(parseIDUser).once('value', (data) => {
-        // loading
-        setTimeout(() => {
-          this.friendsPageService.setLoading(true)
-        }, 0);
-        let loop = 0;
-        data.forEach((element) => {
-          // lấy ra danh sách bạn bè
-          if (element.val().ton_tai == 0) {
-            this.contactsService.getFriendByID(element.key).once('value', (data) => {
+      let loop = 0;
+      // nếu k có list request
+      if(this.friendsPageService.requestList == undefined) {
+        this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+          this.friendsPageService.requestFirstList = []
+            let temp
+            data.forEach(element => {
+             temp = this.requestListService.getListRequestInforByIDRequest(element.key);
+             temp.dateRequest = element.val().ngay_tao
+             temp.id = element.key
+             if(temp != null) {
+                this.friendsPageService.requestFirstList.push(temp)
+                this.friendsPageService.sortRequestListDate()
+            }
+            });
+            this.moveLinkRequest(this.friendsPageService.requestFirstList[0].id)
+            this.sendFriendToProfileRequest(this.friendsPageService.requestFirstList[0].id);
+        })
+        // nếu có list request
+      }else {
+          this.friendsPageService.requestList.forEach(element => {
+            this.contactsService.getFriendByID(element.id).once('value', (data) => {
               if(loop == 0) {
                 if(this.iDUrl != data.key)
                 this.moveLinkRequest(data.key)
@@ -66,11 +76,9 @@ export class RequestAddFriendsComponent implements OnInit {
                 loop++;
               }
             })
-          }
-        });
-      });
+          });
+      }
   } else {
-    console.log(this.iDUrl)
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfileRequest(this.iDUrl);
   }
@@ -132,11 +140,12 @@ export class RequestAddFriendsComponent implements OnInit {
       data.forEach((element) => {
          // lấy ra danh sách request
         if(element.val().ton_tai == 0) {
-          let temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
+          let temp = this.requestListService.getListRequestInforByIDRequest(element.key)
+          temp.dateRequest = element.val().ngay_tao
           if(temp != null) {
             // tìm ra danh sách bạn của id request
             this.contactsService.getListIDFriendsByIDUser(element.key).on('value',(data) => {
-              // tìm ra bạn chung với id đang đăng nhập
+                // tìm ra bạn chung với id đang đăng nhập
                 data.forEach(element => {
                   friendsTempOfUser.forEach(val => {
                       if(element.val().ton_tai == 0 && element.key == val) 
@@ -145,12 +154,13 @@ export class RequestAddFriendsComponent implements OnInit {
                 });
                 temp.mutualFriends = count;
                 count = 0
+                this.friendsPageService.sortRequestListDate();
             })
             this.friendsPageService.requestList.push(temp);
+             this.friendsPageService.sortRequestListDate();
           }
         }
       })
-     
       // lấy số lượng request
       this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
       // lấy ra bạn chung

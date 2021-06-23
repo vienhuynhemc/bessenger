@@ -15,7 +15,7 @@
     .detail-friend {
       position: relative;
       border: rgb(231, 231, 231) solid 0.5px;
-      height: 90px;
+      height: 110px;
       width: 350px;
       box-shadow: 4px 4px 28px 0px #d3dceb;
       background-color: white;
@@ -36,11 +36,11 @@
 
           img {
             object-fit: cover;
-            height: 70px;
+            height: 77px;
             width: 70px;
             border-radius: 5px;
-            margin-top: 10px;
-            margin-left: 10px;
+            margin-top: 16px;
+            margin-left: 20px;
           }
         }
         .detail-center {
@@ -48,7 +48,7 @@
           .name {
             font-size: 15px;
             font-weight: 600;
-            margin-top: 27px;
+            margin-top: 16px;
           }
           .non-mutual {
             margin-top: 37px;
@@ -58,55 +58,63 @@
             font-size: 13px;
             margin-top: 5px;
           }
+          .detail-center-sub {
+            margin-top: 10px;
+            display: flex;
+            .detail-btn {
+              width: 100px;
+              height: 27px;
+              background-color: rgb(230, 217, 217);
+              border-radius: 10px;
+              
+            }
+            i {
+              color: white;
+            }
+            .stick {
+              border-radius: 5px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-right: 10px;
+              background-color: rgb(50, 117, 247);
+              border: rgb(50, 117, 247) solid 1px;
+              transition: all 0.5s;
+  
+              i {
+                font-size: 12px;
+              }
+            }
+           
+            .abort {
+              border-radius: 5px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+              border: rgb(50, 117, 247) solid 1px;
+              i {
+                color: rgb(50, 117, 247);
+                font-size: 13px;
+              }
+            }
+          }
         }
         .detail-right {
           position: absolute;
-          width: 70px;
+          width: 60px;
           height: 20px;
-          right: 10px;
-          top: 33px;
+          right: 0px;
+          top: 18px;
           text-align: center;
           cursor: pointer;
           display: flex;
-          .detail-btn {
-            width: 27px;
-            height: 27px;
-            background-color: rgb(230, 217, 217);
-            border-radius: 10px;
+          .time {
+            color: #5a5a5a;
+            font-size: 13px;
           }
-          i {
-            color: white;
-          }
-          .stick {
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 10px;
-            background-color: rgb(50, 117, 247);
-            border: rgb(50, 117, 247) solid 1px;
-            transition: all 0.5s;
-
-            i {
-              font-size: 12px;
-            }
-          }
-          .stick:hover {
-          }
-          .abort {
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            border: rgb(50, 117, 247) solid 1px;
-            i {
-              color: rgb(50, 117, 247);
-              font-size: 12px;
-            }
-          }
-          .abort:hover {
-          }
+          
+         
         }
       }
 

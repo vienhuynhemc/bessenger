@@ -39,7 +39,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
       this.main_page_service.selectFriendsPage();
     }, 0);
     this.getSelectedFriendsPage();
-    console.log(this.router.url)
+   
   }
 
   ngAfterViewChecked(){
@@ -226,6 +226,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy  {
                       if(element.val().ton_tai == 0 && element.key == val) 
                         count++;
                   });
+                  this.friendsPageService.sortRequestListDate();
                 });
                 temp.mutualFriends = count;
                 count = 0

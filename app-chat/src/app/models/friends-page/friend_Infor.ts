@@ -113,8 +113,10 @@ export class FriendInfor {
 
      // kiểm tra giới hạn tên lời mời kết bạn
      public checkLimitNameRequestList() {
-        if(this.name.length > 16)
-            return true
+        if(this.name != undefined) {
+            if(this.name.length > 16)
+                return true
+        }
         return false;
     }
 
@@ -127,4 +129,8 @@ export class FriendInfor {
         }
         return result;
     }
+
+    
+
+    
 }
