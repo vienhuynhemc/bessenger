@@ -52,6 +52,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   onClickGetIDFriendMutual(id: string, listFriendsUser: FriendInfor[]) {
     this.idMutualFriend = id;
     this.mutualFriendsList = [];
+    let temp
     // id user hiện tại
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // tìm ra danh sách bạn bè của id bạn bè vừa nhận vào
@@ -64,10 +65,14 @@ export class FriendsComponent implements OnInit, OnDestroy {
               listFriendsUser.forEach(itemF => {
                 // nếu trùng với id bạn bè của bạn vừa lấy ra
                 if(itemF.id == element.key) {
-                  this.mutualFriendsList.push(this.contactsService.getListFriendsInforByIDFriends(element.key))
+                  temp = this.contactsService.getListFriendsInforByIDFriends(element.key)
+                  temp.date = element.val().ngay_tao
+                  this.mutualFriendsList.push(temp)
                 }
               });
             }
+           
+            
         });
        
     })
@@ -112,7 +117,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         });
       });
   } else {
-   
+  
     // nếu địa chỉ là /lien-lac/xxxxx
     this.sendFriendToProfile(this.iDUrl);
   }

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="friendInfor != null">
+<div class="container" *ngIf="friendInfor.id != 1">
     <img class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
     <div class="cover-circle">
         <div class="circle">
@@ -9,9 +9,9 @@
         <img  class="avt" src="{{friendInfor.img}}" alt="">
     </div>
     
-    <div class="message circle-small">
+    <div (click)="onClickMessage(friendInfor.id)" class="message circle-small">
         <div class="fill-img"></div>
-        <div class="content"><span class="sp-message">Nhắn tin</span></div>
+        <div  class="content"><span class="sp-message">Nhắn tin</span></div>
       
         <div class="cover-icon">
             <i class="fas fa-comment"></i>
@@ -38,9 +38,10 @@
         </div>
     </div>
     <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
-    <div class="name">{{friendInfor.name}}</div>
+    <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInfor.name}}" *ngIf="friendInfor.checkLimitNameRequestProfile()">{{friendInfor.getNameLimitRequestProfile()}}</div>
+    <div class="name"*ngIf="!friendInfor.checkLimitNameRequestProfile()">{{friendInfor.name}}</div>
    
 </div>
-<div class="container" *ngIf="friendInfor == null">
+<div class="container" *ngIf="friendInfor.id == 1">
     <img class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
 </div>
