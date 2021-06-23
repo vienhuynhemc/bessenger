@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
 
 @Component({
   selector: 'app-friends',
@@ -35,7 +36,8 @@ export class FriendsComponent implements OnInit, OnDestroy {
     public contactsService: ContactsService,
     public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private profileFriendService: ProfileFriendService
   ) {}
   ngOnInit(): void {
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
@@ -46,7 +48,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.setFriendFirst();
     
   }
-  // Lấy ra người muốn hiển thị danh sách bạn chung
+  // Lấy ra danh sách bạn chung
   onClickGetIDFriendMutual(id: string, listFriendsUser: FriendInfor[]) {
     this.idMutualFriend = id;
     this.mutualFriendsList = [];
@@ -116,6 +118,30 @@ export class FriendsComponent implements OnInit, OnDestroy {
   }
   }
   
+   // chuyển đến trang tin nhắn
+   onClickMessage(id: string) {
+    let countCheck = 0;
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.profileFriendService.getConversation().once('value', (data) => {
+      data.forEach(element_x => {
+          if(countCheck != -1) {
+            element_x.forEach(element => {
+                if(element.key == parseIDUser || element.key == id)
+                  countCheck++;
+            });
+            if(countCheck == 2) {
+              this.profileFriendService.getKindConversation(element_x.key).once('value',(data) => {
+                  if(data.val().loai_cuoc_tro_truyen == 'don') {
+                    this.router.navigate(['/bessenger/tin-nhan/' + element_x.key]);
+                    countCheck = -1;
+                  }
+              })
+            } else 
+            countCheck = 0;
+        }
+      });
+    })
+  }
 
   // lấy ra idUrl
   getIDURLFriendsList() {
@@ -215,9 +241,13 @@ export class FriendsComponent implements OnInit, OnDestroy {
           let temp = this.contactsService.getListFriendsInforByIDFriends(
             element.key
           );
-          if (temp != null) this.friendsPageService.friendsList.push(temp);
+          if (temp != null) { 
+          this.friendsPageService.friendsList.push(temp);
+         
+        }
         }
       });
+      
       // lấy số lượng bạn bè
       this.friendsPageService.setSizeFriends(this.friendsPageService.friendsList.length)
        // lấy ra bạn chung của mỗi người
@@ -226,6 +256,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
           let count = 0;
           // lấy ra danh sách bạn bè của mỗi mã tài khoản bạn bè
           this.contactsService.getListIDFriendsByIDUser(element.key).on('value', (data_friends) => {
+            
             if(data_friends.val() != null) {
               // kiểm tra có bao nhiêu bạn chung
               data_friends.forEach(element_f => {

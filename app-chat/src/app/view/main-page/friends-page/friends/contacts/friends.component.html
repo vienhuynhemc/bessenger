@@ -7,7 +7,8 @@
                         <img [src]="item.img || 'assets/images/loading.gif'" alt="">
                     </div>
                     <div  class="detail-center">
-                        <div [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
+                        <div *ngIf="item.checkLimitNameFriendsList()" [class.non-mutual]="item.mutualFriends == 0" tool class="name">{{item.getNameLimitFriendsList()}}<div class="tool-tip"><span>{{item.name}}</span><i class="fas fa-caret-down"></i></div></div>
+                        <div *ngIf="!item.checkLimitNameFriendsList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
                         <div (click)="onClickGetIDFriendMutual(item.id, this.friendsPageService.getFriendsList())" *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
                     </div>
                     <div class="detail-right">
@@ -16,7 +17,7 @@
                     </div>
                 </div>
                 <div id="option-{{i}}" class="option" [class.option-detail-block]="i === optionClick">
-                    <div class="option-profile option-detail"><i class="fas fa-comment"></i><span>Nhắn tin</span></div>
+                    <div (click)="onClickMessage(item.id)" class="option-profile option-detail"><i class="fas fa-comment"></i><span>Nhắn tin</span></div>
                     <div class="option-abord option-detail" (click)="onClickUnFriend(item.id, item.name)"><i class="fas fa-user-times"></i><span>Hủy kết bạn</span></div>
                 </div>
         </div>
@@ -36,8 +37,9 @@
                        
                     </div>
                     <div  class="detail-right">
-                        <div  class="name">{{item.name}}</div>
-                        <div class="date"><span>Ngày kết bạn:</span> 28 Tháng 10 2020 - 10:40:23</div>
+                        <div *ngIf="item.checkLimitNameMutualFriends()" class="name">{{item.getNameLimitMutualFriends()}}</div>
+                        <div *ngIf="!item.checkLimitNameMutualFriends()" class="name">{{item.name}}</div>
+                        <div class="date"><span>Ngày kết bạn:</span> {{item.dateAddFormatMutualFriends()}}</div>
                     </div>
                     <div class="right-date">
                         <div class="gender"><span>Giới tính:</span> Nam</div>
