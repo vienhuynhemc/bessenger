@@ -54,6 +54,22 @@ export class ContactsService {
   
     return friendInfor;
   }
+
+  getListFriendsInforByIDFriendsOneShot(idUser: any) {
+    let friendInfor = new FriendInfor();
+    const ref = this.db.database.ref('tai_khoan/' + idUser);
+    ref.once('value', (data) => {
+      friendInfor.id = idUser;
+      friendInfor.img = data.val().link_hinh;
+      friendInfor.name = data.val().ten;
+      friendInfor.sex = data.val().gioi_tinh;
+      friendInfor.date = data.val().ngay_tao;
+      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
+      
+    });
+  
+    return friendInfor;
+  }
   getFriendByID(idUser:any) {
     return this.db.database.ref('tai_khoan/' + idUser);
   }

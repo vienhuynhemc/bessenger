@@ -25,9 +25,9 @@ export class RequestAddFriendsComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getRequestList();
     this.friendsPageService.selectedRequestService();
     this.getIDURLRequestList()
+    this.getRequestList();
     this.setRequestFirst();
    
   }
@@ -52,41 +52,37 @@ export class RequestAddFriendsComponent implements OnInit {
   // lấy ra danh sách bạn chung
   onClickGetIDFriendMutual(id: string) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    this.mutualRequestList = []
     let listFriends = []
-    this.idMutualRequest = id
-    let temp
-    // lấy ra danh sách bạn bè của user hiện tại
-    this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
-          listFriends = []
-          data.forEach(element => {
-              if(element.val().ton_tai == 0) 
-                listFriends.push(element.key)
-                
-          }); 
-          // lấy ra danh sách bạn bè của id request đang được chọn
-              this.contactsService.getListIDFriendsByIDUser(id).on('value', (request) => {
-                  this.mutualRequestList = []
-                  // tìm kiếm bạn chung
-                  request.forEach(request_sub => {
-                      listFriends.forEach(element => {
-                        if(request_sub.val().ton_tai == 0 && request_sub.key == element) {
-                          temp = new  RequestInfor()
-                          // lấy ra thông tin bạn chung
-                          this.requestListService.getInforRequest(request_sub.key).on('value',(data) =>{
-                              temp.id = data.key
-                              temp.name = data.val().ten
-                              temp.img = data.val().link_hinh
-                              temp.sex = data.val().gioi_tinh
-                              temp.date = request_sub.val().ngay_tao
-                          } );
-                            // thêm vào danh sách sau đó sắp xếp theo ABCD
-                          this.mutualRequestList.push(temp)
-                          this.sortMututalRequest()
-                        }
-                      });
-                  });
-              })
+    this.idMutualRequest = id;
+    let req
+    this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend) => {
+      listFriends = []
+        friend.forEach(element => {
+            if(element.val().ton_tai == 0)
+              listFriends.push(element.key)
+        });
+        // lấy ra danh sách bạn bè của id request
+        this.contactsService.getListIDFriendsByIDUser(id).on('value', (friend_in)=> {
+          this.mutualRequestList = []
+          friend_in.forEach(friend_i=> {
+            listFriends.forEach(lfriends => {
+              // kiểm tra có là bạn chung hay không
+                if(friend_i.val().ton_tai == 0 && friend_i.key == lfriends) {
+                    this.requestListService.getInforRequest(friend_i.key).on('value', (result) => {
+                      req = new RequestInfor()
+                      req.id = result.key
+                      req.img = result.val().link_hinh
+                      req.name = result.val().ten
+                      req.sex = result.val().gioi_tinh
+                      req.date = friend_i.val().ngay_tao
+                      this.mutualRequestList.push(req)
+                      this.sortMututalRequest()
+                    })
+                    // thêm vào danh sách sau đó sắp xếp theo ABCD
+                }
+            });
+          });
+        })
     })
   }
   // chọn người đầu tiên hiển thị trong danh sách request
@@ -99,13 +95,15 @@ export class RequestAddFriendsComponent implements OnInit {
           if(data.val() != null) {
               let temp
               data.forEach(element => {
-              temp = this.requestListService.getListRequestInforByIDRequestOneShot(element.key);
-              temp.dateRequest = element.val().ngay_tao
-              temp.id = element.key
-              if(temp != null && element.val().ton_tai == 0) {
-                  this.friendsPageService.requestFirstList.push(temp)
-                  // sắp xếp
-                  this.friendsPageService.sortRequestFrist()
+              if(element.val().ton_tai == 0) {
+                temp = this.requestListService.getListRequestInforByIDRequestOneShot(element.key);
+                temp.dateRequest = element.val().ngay_tao
+                temp.id = element.key
+                if(temp != null) {
+                    this.friendsPageService.requestFirstList.push(temp)
+                    // sắp xếp
+                    this.friendsPageService.sortRequestFrist()
+                }
               }
               });
               // chuyển đến thằng đầu tiên
@@ -165,8 +163,9 @@ export class RequestAddFriendsComponent implements OnInit {
   moveLinkRequest(link: string) {
     this.router.navigate(['/bessenger/ban-be/loi-moi/' + link])
   }
+  
   // Khi click vào bạn bè bất kì
-  onClickSelectedFriend(friend: FriendInfor, iDURL: any) {
+  onClickSelectedFriend(friend: RequestInfor, iDURL: any) {
     if (friend != null && this.iDUrl != friend.id) {
       this.sendFriendToProfileRequest(friend.id);
       this.moveLinkRequest(friend.id);

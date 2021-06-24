@@ -4,6 +4,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { RequestInfor } from 'src/app/models/friends-page/request_infor';
+import { SendInfor } from 'src/app/models/friends-page/send_infor';
 import { ContactsService } from './contacts/contacts.service';
 
 @Injectable({
@@ -13,8 +14,13 @@ export class FriendsPageService {
   private source = new BehaviorSubject(-1);
   public friendsDefault = this.source.asObservable();
   private isLoading: boolean;
-  
-  // danh sách gửi yêu cầu
+  // danh sách yêu cầu đã gửi
+  sendstList: any[];
+  sizeSends: number;
+  sendtInfor: SendInfor;
+  sendFirstList: any[];
+
+  // danh sách lời mời nhận được
   requestList: any[];
   sizeRequest: number;
   requestInfor: RequestInfor;
@@ -92,7 +98,17 @@ export class FriendsPageService {
   setSizeRequest(size: number) {
     this.sizeRequest = size;
   }
-
+  
+  // danh sach gửi yêu cầu kết bạn
+  getSendsList() {
+    return this.sendstList;
+  }
+  getSizeSends() {
+    return this.sizeSends;
+  }
+  setSizeSends(size: number) {
+    this.sizeSends = size;
+  }
 
    // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra danh sách request
   public sortRequestListDate() {
@@ -111,6 +127,26 @@ export class FriendsPageService {
       return date_2 - date_1;
     });
   }
+
+
+   // sort thời gian mình gửi yêu cầu kết bạn từ gần nhất đến xa nhất dùng trong lấy ra danh sách send
+   public sortSendListDate() {
+    this.sendstList = this.sendstList.sort((dateIn1, dateIn2) => {
+      let date_1 = dateIn1.dateSend;
+      let date_2 = dateIn2.dateSend;
+      return date_2 - date_1;
+    });
+  }
+
+   // sort thời gian mình gửi yêu cầu kết bạn từ gần nhất đến xa nhất dùng trong lấy ra send đầu tiên
+   public sortSendsFrist() {
+    this.sendFirstList = this.sendFirstList.sort((dateIn1, dateIn2) => {
+      let date_1 = dateIn1.dateSend;
+      let date_2 = dateIn2.dateSend;
+      return date_2 - date_1;
+    });
+  }
+
   // sort date A,B,C
   public sortFriendsListNameABC() {
     this.friendsList = this.friendsList.sort((nameIn1, nameIn2) => {
@@ -120,7 +156,7 @@ export class FriendsPageService {
     });
   }
 
-  // sort date A,B,C
+  // sort date A,B,C danh sách tìm ra bạn bè đầu tiên
   public sortFriendsFirstListNameABC() {
     this.friendFirstList = this.friendFirstList.sort((nameIn1, nameIn2) => {
       var x = nameIn1.getNameLast();
@@ -128,6 +164,7 @@ export class FriendsPageService {
       return x < y ? -1 : x > y ? 1 : 0;
     });
   }
+
   public update(): void {
     setTimeout(() => {
       let currentTime = Number(new Date());
