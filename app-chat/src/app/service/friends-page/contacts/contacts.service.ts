@@ -19,7 +19,10 @@ export class ContactsService {
  
   constructor(
     private db: AngularFireDatabase,
-  ) {}
+    
+  ) {
+    
+  }
 
   // thay đổi thông tin
   setFriendInforService(id: any) {
@@ -45,6 +48,23 @@ export class ContactsService {
       friendInfor.name = data.val().ten;
       friendInfor.sex = data.val().gioi_tinh;
       friendInfor.date = data.val().ngay_tao;
+      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
+      
+    });
+  
+    return friendInfor;
+  }
+
+  getListFriendsInforByIDFriendsOneShot(idUser: any) {
+    let friendInfor = new FriendInfor();
+    const ref = this.db.database.ref('tai_khoan/' + idUser);
+    ref.once('value', (data) => {
+      friendInfor.id = idUser;
+      friendInfor.img = data.val().link_hinh;
+      friendInfor.name = data.val().ten;
+      friendInfor.sex = data.val().gioi_tinh;
+      friendInfor.date = data.val().ngay_tao;
+      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
       
     });
   

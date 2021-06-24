@@ -5,6 +5,9 @@
                 <div class="detail-sub">
                     <div class="detail-left">
                         <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                        <div *ngIf="item.status == true" class="cover-online">
+                            <div class="online"></div>
+                        </div>
                     </div>
                     <div  class="detail-center">
 

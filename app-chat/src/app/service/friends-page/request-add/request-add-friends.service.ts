@@ -30,6 +30,21 @@ export class RequestAddFriendsService {
     return requestInfor
   }
 
+  // lấy ra list object bạn bè dựa vào id của mỗi object chỉ lấy 1 lần
+  getListRequestInforByIDRequestOneShot(idUser: any) {
+    let requestInfor = new RequestInfor();
+    const ref = this.db.database.ref('tai_khoan/' + idUser);
+    ref.on('value', (data) => {
+      requestInfor.id = idUser;
+      requestInfor.img = data.val().link_hinh;
+      requestInfor.name = data.val().ten;
+      requestInfor.sex = data.val().gioi_tinh;
+      requestInfor.date = data.val().ngay_tao;
+    
+    });
+    return requestInfor
+  }
+
   getInforRequest(idUser: any) {
     return this.db.database.ref('tai_khoan/' + idUser);
   }
