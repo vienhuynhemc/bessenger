@@ -48,36 +48,52 @@ export class FriendsComponent implements OnInit, OnDestroy {
     this.getIDURLFriendsList();
     this.setFriendFirst();
   }
-  // Lấy ra danh sách bạn chung
-  onClickGetIDFriendMutual(id: string, listFriendsUser: FriendInfor[]) {
-    this.idMutualFriend = id;
-    this.mutualFriendsList = [];
-    let temp;
-    // id user hiện tại
-    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    // tìm ra danh sách bạn bè của id bạn bè vừa nhận vào
-    this.contactsService
-      .getListIDFriendsByIDUser(this.idMutualFriend)
-      .on('value', (data) => {
-        this.mutualFriendsList = [];
-        data.forEach((element) => {
-          // id bạn bè != id đang đăng nhập
-          if (element.key != parseIDUser && element.val().ton_tai == 0) {
-            // duyệt qua danh sách bạn bè của id đang đăng nhập
-            listFriendsUser.forEach((itemF) => {
-              // nếu trùng với id bạn bè của bạn vừa lấy ra
-              if (itemF.id == element.key) {
-                temp = this.contactsService.getListFriendsInforByIDFriends(
-                  element.key
-                );
-                temp.date = element.val().ngay_tao;
-                this.mutualFriendsList.push(temp);
-              }
-            });
-          }
-        });
-      });
+  // sắp xếp danh danh bạn chung
+  sortMututalFriends() {
+    this.mutualFriendsList = this.mutualFriendsList.sort((nameIn1, nameIn2) => {
+      var x = nameIn1.getNameLast();
+      var y = nameIn2.getNameLast();
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
   }
+  // Lấy ra danh sách bạn chung
+
+  onClickGetIDFriendMutual(id: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    let listFriends = []
+    this.idMutualFriend = id;
+    let temp
+    this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend) => {
+      listFriends = []
+        friend.forEach(element => {
+            if(element.val().ton_tai == 0)
+              listFriends.push(element.key)
+        });
+        // lấy ra danh sách bạn bè của id request
+        this.contactsService.getListIDFriendsByIDUser(id).on('value', (friend_in)=> {
+          this.mutualFriendsList = []
+          friend_in.forEach(friend_i=> {
+            listFriends.forEach(lfriends => {
+              // kiểm tra có là bạn chung hay không
+                if(friend_i.val().ton_tai == 0 && friend_i.key != parseIDUser && friend_i.key == lfriends) {
+                    temp = new FriendInfor()
+                    this.contactsService.getFriendByID(friend_i.key).on('value', (result) => {
+                      temp.id = result.key
+                      temp.name = result.val().ten
+                      temp.img = result.val().link_hinh
+                      temp.sex = result.val().gioi_tinh
+                      temp.date = friend_i.val().ngay_tao
+                    })
+                    // thêm vào danh sách sau đó sắp xếp theo ABCD
+                    this.mutualFriendsList.push(temp)
+                    this.sortMututalFriends()
+                }
+            });
+          });
+        })
+    })
+  }
+ 
   onClickExitMutual() {
     this.idMutualFriend = '';
   }
@@ -97,9 +113,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         .getListIDFriendsByIDUser(parseIDUser)
         .once('value', (data) => {
           // loading
-          
           this.friendsPageService.friendFirstList = [];
-         
           let temp;
           if (data.val() != null) {
             data.forEach((element) => {
@@ -139,9 +153,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
      
     } else {
       // nếu địa chỉ là /lien-lac/xxxxx kiểm tra có trong danh sách bạn bè hay nếu không có
-     
       this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
-       
           let check = true;
           if(data.val() != null) {
             data.forEach(element => {
