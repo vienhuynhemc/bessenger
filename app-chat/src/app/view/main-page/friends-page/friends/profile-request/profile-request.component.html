@@ -39,7 +39,7 @@
     </div>
     <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
     <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInfor.name}}" *ngIf="friendInfor.checkLimitNameRequestProfile()">{{friendInfor.getNameLimitRequestProfile()}}</div>
-    <div class="name"*ngIf="!friendInfor.checkLimitNameRequestProfile()">{{friendInfor.name}}</div>
+    <div class="name" *ngIf="!friendInfor.checkLimitNameRequestProfile()">{{friendInfor.name}}</div>
    
 </div>
 <div class="container" *ngIf="friendInfor.id == 1">

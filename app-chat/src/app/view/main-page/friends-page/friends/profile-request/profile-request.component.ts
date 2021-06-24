@@ -38,13 +38,12 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
    
   }
 
-   // đồng bộ dữ liệu với friends list
+   // đồng bộ dữ liệu với request list
    getFriendFromFriendsRequestAdd() {
     this.friendInfor = new RequestInfor();
     this.friendInfor.id = 1;
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
-        
         // kiểm tra 404
         if (id == null) {
           // id == 1 là đường dẫn không có id

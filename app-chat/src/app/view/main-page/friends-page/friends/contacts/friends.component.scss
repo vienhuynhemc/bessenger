@@ -33,7 +33,7 @@
         transition: all 0.5s;
         .detail-left {
           height: 100%;
-
+          position: relative;
           img {
             object-fit: cover;
             height: 70px;
@@ -41,6 +41,25 @@
             border-radius: 5px;
             margin-top: 10px;
             margin-left: 10px;
+          }
+          .cover-online {
+            background-color: white;
+            border-radius: 50%;
+            right: -1px;
+            bottom: 9px;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            .online {
+              position: absolute;
+              background-color: #31a24c;
+              border-radius: 50%;
+              width: 11px;
+              height: 11px;
+            }
           }
         }
         .detail-center {
@@ -58,7 +77,7 @@
             color: gray;
             font-size: 13px;
             margin-top: 5px;
-            width: 80px;
+            width: 100px;
           }
         }
         .detail-right {
@@ -188,7 +207,7 @@
 
   .content-mutual-friends {
     width: 650px;
-    height: 460px;
+    height: 480px;
     background-color: white;
     border-radius: 10px;
     margin: auto;
@@ -227,7 +246,7 @@
     }
     .content-scroll {
       overflow-y: scroll;
-      height: 73%;
+      height: 80%;
       width: 100%;
       margin-top: 16px;
       padding-top: 5px;
@@ -251,6 +270,8 @@
             border-radius: 50%;
             margin-top: 13px;
           }
+        
+        
         }
         .detail-right {
           width: 60%;
