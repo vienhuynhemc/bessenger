@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ChatPageProcessServiceService } from '../chat-page-process-service.service';
 import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
+import { ChatPageBanBe } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_ban_be';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class ChatPageFriendsLeftServiceService {
   // ma_cuoc_tro_chuyen hien hien tai
   public now_ma_cuoc_tro_chuyen: string;
   public is_di_chuyen_dung_vi_tri: number;
+  // Danh sách bạn bè 
+  public ban_bes: ChatPageBanBe[];
 
   // Danh sách all cuộc trò truyện
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
@@ -29,6 +32,14 @@ export class ChatPageFriendsLeftServiceService {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
+  }
+
+  public getListFriend() {
+    setTimeout(() => {
+      this.main_page_process_service.setLoading(true);
+    }, 0);
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    return this.db.object("/ban_be/" + ma_tai_khoan).snapshotChanges();
   }
 
   public compareSearch(i: number): boolean {
@@ -389,6 +400,28 @@ export class ChatPageFriendsLeftServiceService {
             }
           }
         });
+        let isOkeBanBe = false;
+        // Check thử nếu cuộc trò truyện là đơn thì xem thử có còn là bạn bè hay không
+        if (chatPageCuocTroChuyen.loai_cuoc_tro_truyen == "don") {
+          Object.entries(value).forEach(([key2, value2]) => {
+            for (let j = 0; j < this.ban_bes.length; j++) {
+              if (isOkeBanBe) {
+                break;
+              }
+              if (key2 == this.ban_bes[j].ma_tai_khoan) {
+                isOkeBanBe = true;
+                break;
+              }
+            }
+          });
+        }
+        if(chatPageCuocTroChuyen.loai_cuoc_tro_truyen == "don"){
+          if(isOke){
+            if(!isOkeBanBe){
+              return null;
+            }
+          }
+        }
         if (!isOke) return null;
         boxData.thong_tin_thanh_vien = thong_tin_thanh_vien;
         boxData.box_chat_dang_duoc_chon = false;
