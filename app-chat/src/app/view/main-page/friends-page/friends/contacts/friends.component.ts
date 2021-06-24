@@ -43,10 +43,11 @@ export class FriendsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
-    this.getListFriends();
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
     this.getIDURLFriendsList();
+    this.getListFriends();
     this.setFriendFirst();
+   
   }
   // sắp xếp danh danh bạn chung
   sortMututalFriends() {
@@ -83,6 +84,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       temp.img = result.val().link_hinh
                       temp.sex = result.val().gioi_tinh
                       temp.date = friend_i.val().ngay_tao
+                      temp.lastOnline = friend_i.val().lan_cuoi_dang_nhap;
                     })
                     // thêm vào danh sách sau đó sắp xếp theo ABCD
                     this.mutualFriendsList.push(temp)
@@ -113,6 +115,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
         .getListIDFriendsByIDUser(parseIDUser)
         .once('value', (data) => {
           // loading
+         
           this.friendsPageService.friendFirstList = [];
           let temp;
           if (data.val() != null) {
@@ -121,7 +124,8 @@ export class FriendsComponent implements OnInit, OnDestroy {
                   temp = new FriendInfor();
                   this.contactsService
                     .getFriendByID(element.key)
-                    .on('value', (result) => {
+                    .once('value', (result) => {
+                    
                       if (result.val() != null) {
                         temp.id = result.key;
                         temp.name = result.val().ten;
@@ -153,7 +157,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
      
     } else {
       // nếu địa chỉ là /lien-lac/xxxxx kiểm tra có trong danh sách bạn bè hay nếu không có
-      this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
+      this.contactsService.getListIDFriendsByIDUser(parseIDUser).once('value', (data) => {
           let check = true;
           if(data.val() != null) {
             data.forEach(element => {
@@ -292,9 +296,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
       .getListIDFriendsByIDUser(parseIDUser)
       .on('value', (data) => {
         // loading
-       
         this.friendsPageService.friendsList = [];
-        
         if (data.val() != null) {
           data.forEach((element) => {
            
@@ -303,7 +305,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
               let temp = this.contactsService.getListFriendsInforByIDFriends(
                 element.key
               );
-
+            
               if (temp != null) {
                 this.friendsPageService.friendsList.push(temp);
               }
@@ -359,7 +361,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
           this.friendsPageService.setSizeFriends(0);
           this.sendFriendToProfile(null);
         }
-       
       });
   }
 }

@@ -19,7 +19,10 @@ export class ContactsService {
  
   constructor(
     private db: AngularFireDatabase,
-  ) {}
+    
+  ) {
+    
+  }
 
   // thay đổi thông tin
   setFriendInforService(id: any) {
@@ -45,6 +48,7 @@ export class ContactsService {
       friendInfor.name = data.val().ten;
       friendInfor.sex = data.val().gioi_tinh;
       friendInfor.date = data.val().ngay_tao;
+      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
       
     });
   

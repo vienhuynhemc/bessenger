@@ -33,6 +33,7 @@ export class FriendsPageService {
   };
   constructor(
   ) {
+    this.update()
   }
   selectedFriendsPageDefaultSerivce():void {
     this.source.next(0);
@@ -127,4 +128,22 @@ export class FriendsPageService {
       return x < y ? -1 : x > y ? 1 : 0;
     });
   }
+  public update(): void {
+    setTimeout(() => {
+      let currentTime = Number(new Date());
+      if (this.friendsList != null) {
+        for (let i = 0; i < this.friendsList.length; i++) {
+          let lan_cuoi_dang_nhap = this.friendsList[i].lastOnline;
+          let overTime = currentTime - lan_cuoi_dang_nhap;
+          if (overTime > 10000) {
+            this.friendsList[i].status = false; 
+          } else {
+            this.friendsList[i].status = true;
+          }
+        }
+      }
+      this.update();
+    }, 5000);
+  }
+
 }

@@ -94,13 +94,12 @@ export class RequestAddFriendsComponent implements OnInit {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // nếu địa chỉ là /lien-lac
     if(this.iDUrl == null) {
-        this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
-         
+        this.requestListService.getRequestInforByIDUser(parseIDUser).once('value', (data) => {
           this.friendsPageService.requestFirstList = []
           if(data.val() != null) {
               let temp
               data.forEach(element => {
-              temp = this.requestListService.getListRequestInforByIDRequest(element.key);
+              temp = this.requestListService.getListRequestInforByIDRequestOneShot(element.key);
               temp.dateRequest = element.val().ngay_tao
               temp.id = element.key
               if(temp != null && element.val().ton_tai == 0) {
@@ -127,7 +126,7 @@ export class RequestAddFriendsComponent implements OnInit {
 
   } else {
     // nếu địa chỉ là /lien-lac/xxxxx kiểm tra xem id có trong danh sách lời mời hay không
-    this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+    this.requestListService.getRequestInforByIDUser(parseIDUser).once('value', (data) => {
       let check = true
         if(data.val() != null) {
           data.forEach(element => {
