@@ -3,6 +3,14 @@
     (animationCreated)="this.chat_page_process_service.animationCreated($event)" class="anim"></main>
 </div>
 
+<!-- Tạo nhóm mới -->
+<div class="tao-nhom-moi" *ngIf="this.chat_page_create_ground.isshow">
+  <div class="content">
+    <p class="title">Tạo nhóm chat mới</p>
+    <div class="exit" (click)="closeTaoNhom()"><i class="fas fa-times"></i></div>
+  </div>
+</div>
+
 
 <!-- Trang chat với bạn bè -->
 <div class="container">
