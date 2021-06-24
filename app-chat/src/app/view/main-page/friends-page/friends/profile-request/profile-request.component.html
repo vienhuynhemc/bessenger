@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="cover-avt">
-        <img  class="avt" src="{{friendInfor.img}}" alt="">
+        <img  class="avt" src="{{friendInfor.img}} || 'assets/images/loading.gif'" alt="">
     </div>
     
     <div (click)="onClickMessage(friendInfor.id)" class="message circle-small">

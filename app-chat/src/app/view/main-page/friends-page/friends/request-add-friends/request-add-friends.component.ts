@@ -1,8 +1,9 @@
-import { ThrowStmt } from '@angular/compiler';
+import { ThrowStmt, TmplAstTemplate } from '@angular/compiler';
 import { AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
+import { RequestInfor } from 'src/app/models/friends-page/request_infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
@@ -32,16 +33,62 @@ export class RequestAddFriendsComponent implements OnInit {
   }
   iDUrl:any;
   valueSub: Subscription;
-
-
+  mutualRequestList: any[];
+  idMutualRequest: string = '';
  
-
+  // đóng danh sách bạn chung
+  onClickExitMutual() {
+    this.idMutualRequest = '';
+  }
+ // sắp xếp danh danh bạn chung
+ sortMututalRequest() {
+  this.mutualRequestList = this.mutualRequestList.sort((nameIn1, nameIn2) => {
+    var x = nameIn1.getNameLast();
+    var y = nameIn2.getNameLast();
+    return x < y ? -1 : x > y ? 1 : 0;
+  });
+}
 
   // lấy ra danh sách bạn chung
-  onClickGetIDFriendMutual(id: string, listRequest: FriendInfor[]) {
-
+  onClickGetIDFriendMutual(id: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.mutualRequestList = []
+    let listFriends = []
+    this.idMutualRequest = id
+    let temp
+    // lấy ra danh sách bạn bè của user hiện tại
+    this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (data) => {
+          listFriends = []
+          data.forEach(element => {
+              if(element.val().ton_tai == 0) 
+                listFriends.push(element.key)
+                
+          }); 
+          // lấy ra danh sách bạn bè của id request đang được chọn
+              this.contactsService.getListIDFriendsByIDUser(id).on('value', (request) => {
+                  this.mutualRequestList = []
+                  // tìm kiếm bạn chung
+                  request.forEach(request_sub => {
+                      listFriends.forEach(element => {
+                        if(request_sub.val().ton_tai == 0 && request_sub.key == element) {
+                          temp = new  RequestInfor()
+                          // lấy ra thông tin bạn chung
+                          this.requestListService.getInforRequest(request_sub.key).on('value',(data) =>{
+                              temp.id = data.key
+                              temp.name = data.val().ten
+                              temp.img = data.val().link_hinh
+                              temp.sex = data.val().gioi_tinh
+                              temp.date = request_sub.val().ngay_tao
+                          } );
+                            // thêm vào danh sách sau đó sắp xếp theo ABCD
+                          this.mutualRequestList.push(temp)
+                          this.sortMututalRequest()
+                        }
+                      });
+                  });
+              })
+    })
   }
-
   // chọn người đầu tiên hiển thị trong danh sách request
   setRequestFirst() {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
