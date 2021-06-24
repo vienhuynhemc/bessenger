@@ -6,7 +6,7 @@ export class FriendInfor {
   date: number;
   status: boolean;
   sex: string;
-
+  lastOnline: number;
   // định dạng ngày tháng VD: 27 Tháng Tám 2020 - 10:04:02
   public dateAddFormatMutualFriends() {
     if (this.date != undefined) {
@@ -18,7 +18,7 @@ export class FriendInfor {
       let year = dateAdd[3];
       let time = dateAdd[4];
       let monthFormat;
-      let dayFormat;
+     
       switch (month) {
         case 'Jan':
           monthFormat = 'Một';
