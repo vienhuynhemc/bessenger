@@ -45,7 +45,7 @@
 
   .content {
     background: white;
-    box-shadow: 0 0 47px 0px #bbb7b7;
+    box-shadow: 17px 20px 14px 4px #dbdae4;
     width: 500px;
     position: relative;
     border-radius: 10px;
@@ -76,6 +76,53 @@
         font-size: 16px;
         left: 8px;
         color: #a4afbf;
+      }
+    }
+
+    .main {
+      width: 100%;
+      height: 400px;
+      overflow: scroll;
+      .danh-sach {
+      }
+      .auto {
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    .end {
+      margin-top: 40px;
+      width: 100%;
+
+      .confirm {
+        border: none;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 12px 24px;
+        margin-bottom: 40px;
+        background: #3275f7;
+
+        p {
+          color: white;
+          font-family: "Raleway";
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 1px;
+          margin-left: 10px;
+        }
+
+        i {
+          color: white;
+        }
       }
     }
   }
