@@ -7,6 +7,7 @@ import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
 import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
+import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';
 
 @Component({
   selector: 'app-profile-request',
@@ -23,7 +24,8 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
     private router: Router,
     private profileFriendService: ProfileFriendService,
     public friendsPageService: FriendsPageService,
-    private requestAddService: RequestAddFriendsService
+    private requestAddService: RequestAddFriendsService,
+    private sendsListService: SendAddFriendService
   ) { }
 
   ngOnInit(): void {
@@ -68,4 +70,41 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
       });
   }
 
+  // chấp nhận kết bạn
+  acceptRequest(id : string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // cập nhật bảng yêu cầu kết bạn
+    this.requestAddService.acceptRequestService(parseIDUser, id).update({
+      ton_tai: 1
+    })
+    // cập nhật bảng đã gửi
+    this.sendsListService.editSendService(parseIDUser,id).update({
+      ton_tai: 1
+    })
+    // Thêm vào bạn bè của user đang đăng nhập
+    this.contactsService.addFriend(parseIDUser,id).set({
+      ngay_tao: Number(new Date()),
+      ton_tai: 0
+    })
+    // thêm vào user gửi lời mời kết bạn
+    this.contactsService.addFriend(id,parseIDUser).set({
+      ngay_tao: Number(new Date()),
+      ton_tai: 0
+    })
+    
+  }
+
+  // từ chối kết bạn
+  refuseRequest(id: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // cập nhật bảng yêu cầu kết bạn
+    this.requestAddService.acceptRequestService(parseIDUser, id).update({
+      ton_tai: 1
+    })
+    // cập nhật bảng đã gửi
+    this.sendsListService.editSendService(parseIDUser,id).update({
+      ton_tai: 1
+    })
+    
+  }
 }

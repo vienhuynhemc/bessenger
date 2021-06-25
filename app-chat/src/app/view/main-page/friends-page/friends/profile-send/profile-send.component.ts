@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { SendInfor } from 'src/app/models/friends-page/send_infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
+import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
 import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
   constructor(
     private contactsService: ContactsService,
     private sendAddService: SendAddFriendService,
-    private router: Router
+    private router: Router,
+    private requestListService: RequestAddFriendsService
   ) { }
 
   ngOnInit(): void {
@@ -63,4 +65,15 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
       });
   }
 
+  undoSendRequest(id: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // cập nhật bảng yêu cầu kết bạn
+    this.requestListService.acceptRequestService(id, parseIDUser).update({
+      ton_tai: 1
+    })
+    // cập nhật bảng đã gửi
+    this.sendAddService.editSendService(id,parseIDUser).update({
+      ton_tai: 1
+    })
+  }
 }

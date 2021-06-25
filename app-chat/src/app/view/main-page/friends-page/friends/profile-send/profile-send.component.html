@@ -22,7 +22,7 @@ alt=""
        <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInfor.name}}" *ngIf="friendInfor.checkLimitNameSendProfile()">{{friendInfor.getNameLimitSendProfile()}}</div>
     <div class="name" *ngIf="!friendInfor.checkLimitNameSendProfile()">{{friendInfor.name}}</div>
      
-      <button class="abort-friend btn">
+      <button (click)="undoSendRequest(friendInfor.id)" class="abort-friend btn">
         <i class="fas fa-undo"></i>Hủy yêu cầu
       </button>
       <button class="accept btn">
