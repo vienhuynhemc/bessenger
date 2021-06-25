@@ -118,97 +118,79 @@ export class FriendsListComponent implements OnInit {
   }
 
   public getDataLeft(): void {
-    // lấy danh sách ma_tai_khoan bạn bè của tài khoản này
-    this.chat_page_friend_left_service.getListFriend().subscribe(data => {
+    // lấy all ma_cuoc_tro_chuyen luon
+    this.chat_page_friend_left_service.getAllCuocTroChuyen().subscribe(data => {
       let object = data.payload.toJSON();
-      let banBes: ChatPageBanBe[] = [];
+      let allCuocTroTruyen: ChatPageCuocTroChuyen[] = [];
       if (object != null) {
         Object.entries(object).forEach(([key, value]) => {
-          if (value['ton_tai'] == "0") {
-            let cpbb: ChatPageBanBe = new ChatPageBanBe();
-            cpbb.ma_tai_khoan = key;
-            banBes.push(cpbb);
-          }
+          let chatPageCuocTroChuyen = new ChatPageCuocTroChuyen();
+          chatPageCuocTroChuyen.ma_cuoc_tro_chuyen = key;
+          chatPageCuocTroChuyen.loai_cuoc_tro_truyen = value['loai_cuoc_tro_truyen'];
+          allCuocTroTruyen.push(chatPageCuocTroChuyen);
         });
       }
-       this.chat_page_friend_left_service.ban_bes = banBes;
-      setTimeout(() => {
-        this.main_page_process_service.setLoading(false);
-      }, 0);
-      // lấy all ma_cuoc_tro_chuyen luon
-      this.chat_page_friend_left_service.getAllCuocTroChuyen().subscribe(data => {
+      this.chat_page_friend_left_service.allCuocTroTruyen = allCuocTroTruyen;
+      // Có được danh sách các cuộc trò truyện
+      // Ta hãy fill tên và ngày tạo cho các nhóm có loai là nhóm
+      this.chat_page_friend_left_service.getAllCuocTroChuyenNhom().subscribe(data => {
         let object = data.payload.toJSON();
-        let allCuocTroTruyen: ChatPageCuocTroChuyen[] = [];
         if (object != null) {
           Object.entries(object).forEach(([key, value]) => {
-            let chatPageCuocTroChuyen = new ChatPageCuocTroChuyen();
-            chatPageCuocTroChuyen.ma_cuoc_tro_chuyen = key;
-            chatPageCuocTroChuyen.loai_cuoc_tro_truyen = value['loai_cuoc_tro_truyen'];
-            allCuocTroTruyen.push(chatPageCuocTroChuyen);
+            this.chat_page_friend_left_service.dienThongTinNhom(key, value);
           });
         }
-        this.chat_page_friend_left_service.allCuocTroTruyen = allCuocTroTruyen;
-        // Có được danh sách các cuộc trò truyện
-        // Ta hãy fill tên và ngày tạo cho các nhóm có loai là nhóm
-        this.chat_page_friend_left_service.getAllCuocTroChuyenNhom().subscribe(data => {
+        // Fill xong thông tin nhóm giờ điền thành viên cho nó :v
+        // Những ông nào có chứa bản thân thì mới lấy
+        this.chat_page_friend_left_service.getThanhVienCuocTroTruyen().subscribe(data => {
           let object = data.payload.toJSON();
+          let allBoxData: ChatPageFriendsObjectLeft[] = [];
           if (object != null) {
             Object.entries(object).forEach(([key, value]) => {
-              this.chat_page_friend_left_service.dienThongTinNhom(key, value);
+              let boxData = this.chat_page_friend_left_service.getBoxData(key, value);
+              if (boxData != null) {
+                allBoxData.push(boxData);
+              }
             });
           }
-          // Fill xong thông tin nhóm giờ điền thành viên cho nó :v
-          // Những ông nào có chứa bản thân thì mới lấy
-          this.chat_page_friend_left_service.getThanhVienCuocTroTruyen().subscribe(data => {
+          this.chat_page_friend_left_service.allBoxData = allBoxData;
+          this.chat_page_friend_left_service.updateSelected();
+          // Oke h hết tin nhắn của từng cuộc nói chuyện ra
+          this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
             let object = data.payload.toJSON();
-            let allBoxData: ChatPageFriendsObjectLeft[] = [];
             if (object != null) {
               Object.entries(object).forEach(([key, value]) => {
-                let boxData = this.chat_page_friend_left_service.getBoxData(key, value);
-                if (boxData != null) {
-                  allBoxData.push(boxData);
-                }
+                this.chat_page_friend_left_service.dienTinNhan(key, value);
               });
             }
-            this.chat_page_friend_left_service.allBoxData = allBoxData;
-            this.chat_page_friend_left_service.updateSelected();
-            // Oke h hết tin nhắn của từng cuộc nói chuyện ra
-            this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
+            // sort lại theo ngày gửi của tin nhắn cuối cùng
+            this.chat_page_friend_left_service.sort();
+            // seen
+            if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != 'danh-sach') {
+              if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
+                this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
+              } else {
+                this.router.navigate(["/**"]);
+              }
+            }
+            // Sau khi có thông tin của tất cả các cuộc nói chuyện thì ta xem thử cái nào ta chưa nhận -> nhận
+            this.chat_page_friend_left_service.da_nhan();
+            // Oke h điền hình và tên cho các thành viên của allboxdata
+            this.chat_page_friend_left_service.getAllTaiKhoan().subscribe(data => {
               let object = data.payload.toJSON();
               if (object != null) {
                 Object.entries(object).forEach(([key, value]) => {
-                  this.chat_page_friend_left_service.dienTinNhan(key, value);
+                  this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
                 });
               }
-              // sort lại theo ngày gửi của tin nhắn cuối cùng
-              this.chat_page_friend_left_service.sort();
-              // seen
-              if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != 'danh-sach') {
-                if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
-                  this.chat_page_friend_left_service.seen(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen);
-                } else {
-                  this.router.navigate(["/**"]);
-                }
+              // di chuyển dúng vị trí
+              if (this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri == null ||
+                this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri < 2) {
+                this.chat_page_friend_left_service.updateScrollFirst();
               }
-              // Sau khi có thông tin của tất cả các cuộc nói chuyện thì ta xem thử cái nào ta chưa nhận -> nhận
-              this.chat_page_friend_left_service.da_nhan();
-              // Oke h điền hình và tên cho các thành viên của allboxdata
-              this.chat_page_friend_left_service.getAllTaiKhoan().subscribe(data => {
-                let object = data.payload.toJSON();
-                if (object != null) {
-                  Object.entries(object).forEach(([key, value]) => {
-                    this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
-                  });
-                }
-                // di chuyển dúng vị trí
-                if (this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri == null ||
-                  this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri < 2) {
-                  this.chat_page_friend_left_service.updateScrollFirst();
-                }
-                setTimeout(() => {
-                  this.main_page_process_service.setLoading(false);
-                }, 0);
-              });
+              setTimeout(() => {
+                this.main_page_process_service.setLoading(false);
+              }, 0);
             });
           });
         });
