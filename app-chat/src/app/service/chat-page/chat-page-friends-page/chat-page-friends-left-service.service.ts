@@ -16,8 +16,6 @@ export class ChatPageFriendsLeftServiceService {
   // ma_cuoc_tro_chuyen hien hien tai
   public now_ma_cuoc_tro_chuyen: string;
   public is_di_chuyen_dung_vi_tri: number;
-  // Danh sách bạn bè 
-  public ban_bes: ChatPageBanBe[];
 
   // Danh sách all cuộc trò truyện
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
@@ -32,14 +30,6 @@ export class ChatPageFriendsLeftServiceService {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
-  }
-
-  public getListFriend() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
-    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-    return this.db.object("/ban_be/" + ma_tai_khoan).snapshotChanges();
   }
 
   public compareSearch(i: number): boolean {
@@ -386,6 +376,7 @@ export class ChatPageFriendsLeftServiceService {
         boxData.cuoc_tro_truyen = chatPageCuocTroChuyen;
         // Điền các thông tin đầu tiên cho các thành viên
         let thong_tin_thanh_vien: ChatPageObjectTinNhanFriend[] = [];
+        // oke khi có bản thân và bản thân phải ko chờ
         let isOke = false;
         Object.entries(value).forEach(([key2, value2]) => {
           let chat_page_object_tin_nhan_friend = new ChatPageObjectTinNhanFriend();
@@ -396,32 +387,12 @@ export class ChatPageFriendsLeftServiceService {
           thong_tin_thanh_vien.push(chat_page_object_tin_nhan_friend);
           if (!isOke) {
             if (key2 == ma_tai_khoan) {
-              isOke = true;
+              if (value2['trang_thai'] == 'khong_cho') {
+                isOke = true;
+              }
             }
           }
         });
-        let isOkeBanBe = false;
-        // Check thử nếu cuộc trò truyện là đơn thì xem thử có còn là bạn bè hay không
-        if (chatPageCuocTroChuyen.loai_cuoc_tro_truyen == "don") {
-          Object.entries(value).forEach(([key2, value2]) => {
-            for (let j = 0; j < this.ban_bes.length; j++) {
-              if (isOkeBanBe) {
-                break;
-              }
-              if (key2 == this.ban_bes[j].ma_tai_khoan) {
-                isOkeBanBe = true;
-                break;
-              }
-            }
-          });
-        }
-        if(chatPageCuocTroChuyen.loai_cuoc_tro_truyen == "don"){
-          if(isOke){
-            if(!isOkeBanBe){
-              return null;
-            }
-          }
-        }
         if (!isOke) return null;
         boxData.thong_tin_thanh_vien = thong_tin_thanh_vien;
         boxData.box_chat_dang_duoc_chon = false;

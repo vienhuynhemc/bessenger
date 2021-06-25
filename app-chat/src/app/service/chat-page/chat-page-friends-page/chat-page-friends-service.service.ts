@@ -121,8 +121,8 @@ export class ChatPageFriendsServiceService {
     for (let i = 0; i < this.ban_bes.length; i++) {
       if (this.ban_bes[i].ma_cuoc_tro_chuyen == null) {
         let object = this.db.list("/cuoc_tro_chuyen").push({ loai_cuoc_tro_truyen: "don" });
-        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + ma_tai_khoan).update({ ngay_tham_gia: currentTime });
-        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + this.ban_bes[i].ma_tai_khoan).update({ ngay_tham_gia: currentTime });
+        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + ma_tai_khoan).update({ ngay_tham_gia: currentTime, trang_thai: "khong_cho" });
+        this.db.object("/thanh_vien_cuoc_tro_chuyen/" + object.key + "/" + this.ban_bes[i].ma_tai_khoan).update({ ngay_tham_gia: currentTime, trang_thai: "khong_cho" });
         this.ban_bes[i].ma_cuoc_tro_chuyen = object.key;
       }
     }
