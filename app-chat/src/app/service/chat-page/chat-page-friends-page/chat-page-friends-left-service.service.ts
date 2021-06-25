@@ -35,8 +35,10 @@ export class ChatPageFriendsLeftServiceService {
   public compareSearch(i: number): boolean {
     if (this.allBoxData[i] != null) {
       if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-        if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-          return true;
+        if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom != null) {
+          if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+            return true;
+          }
         }
       } else if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
