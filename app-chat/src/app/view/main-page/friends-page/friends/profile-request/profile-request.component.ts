@@ -42,6 +42,7 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
    getFriendFromFriendsRequestAdd() {
     this.friendInfor = new RequestInfor();
     this.friendInfor.id = 1;
+    let idCheck
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
         // kiểm tra 404
@@ -49,16 +50,18 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
         } else {
+          idCheck = id;
           this.requestAddService.getInforRequest(id).once('value', (data) => {
-            if (data.val() != null) {
-              this.friendInfor.id = id;
-              this.friendInfor.img = data.val().link_hinh;
-              this.friendInfor.name = data.val().ten;
-            } else {
-              this.router.navigate(['/**'])
-              this.contactsService.setFriendInforService(null);
+            if(idCheck == data.key) {
+              if (data.val() != null) {
+                this.friendInfor.id = id;
+                this.friendInfor.img = data.val().link_hinh;
+                this.friendInfor.name = data.val().ten;
+              } else {
+                this.router.navigate(['/**'])
+                this.contactsService.setFriendInforService(null);
+              }
             }
-           
           });
         }
       

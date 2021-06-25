@@ -63,6 +63,7 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
   getFriendFromFriendsList() {
     this.friendInfor = new FriendInfor();
     this.friendInfor.id = 1;
+    let idCheck
     this.valueFromChildSubscription =
       this.contactsService.friendInforService.subscribe((id) => {
        
@@ -71,16 +72,20 @@ export class ProfileFriendComponent implements OnInit, OnDestroy {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
         } else {
-          this.profileFriendService.getInforFriend(id).once('value', (data) => {
-            if (data.val() != null) {
-              this.friendInfor.id = id;
-              this.friendInfor.img = data.val().link_hinh;
-              this.friendInfor.name = data.val().ten;
+          idCheck = id;
+          this.profileFriendService.getInforFriend(id).on('value', (data) => {
+            
+            if(idCheck == data.key) {
+              if (data.val() != null) {
+                this.friendInfor.id = id;
+                this.friendInfor.img = data.val().link_hinh;
+                this.friendInfor.name = data.val().ten;
 
-            } else {
-              this.router.navigate(['/**'])
-              this.contactsService.setFriendInforService(null);
-            }
+              } else {
+                this.router.navigate(['/**'])
+                this.contactsService.setFriendInforService(null);
+              }
+           }
           });
         }
         

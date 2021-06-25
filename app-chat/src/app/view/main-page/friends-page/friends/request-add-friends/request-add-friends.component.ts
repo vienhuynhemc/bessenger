@@ -69,13 +69,33 @@ export class RequestAddFriendsComponent implements OnInit {
               // kiểm tra có là bạn chung hay không
                 if(friend_i.val().ton_tai == 0 && friend_i.key == lfriends) {
                     this.requestListService.getInforRequest(friend_i.key).on('value', (result) => {
+                      
                       req = new RequestInfor()
+                      let checkAdd = true;
                       req.id = result.key
                       req.img = result.val().link_hinh
                       req.name = result.val().ten
                       req.sex = result.val().gioi_tinh
                       req.date = friend_i.val().ngay_tao
-                      this.mutualRequestList.push(req)
+                      req.lastOnline = result.val().lan_cuoi_dang_nhap 
+                      // kiểm tra có nên thêm vào dnah sách hay không
+                      this.mutualRequestList.forEach(element => {
+                          if(element.id == req.id)
+                              checkAdd = false;
+                      });
+                      
+                      if(checkAdd) {
+                        this.mutualRequestList.push(req)
+                      } else {
+                        this.mutualRequestList.forEach((element,index) => {
+                            if(element.id == req.id) {
+                              if(element.img != req.img || element.name != req.img || element.sex != req.sex || element.date != req.date) {
+                                this.mutualRequestList[index] = req
+                              }
+                            }
+                        });
+                      }
+                      
                       this.sortMututalRequest()
                     })
                     // thêm vào danh sách sau đó sắp xếp theo ABCD
