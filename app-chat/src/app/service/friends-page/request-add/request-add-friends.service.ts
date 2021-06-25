@@ -44,7 +44,12 @@ export class RequestAddFriendsService {
     });
     return requestInfor
   }
-
+  
+  // chấp nhận lời mời kết bạn
+  acceptRequestService(idUser: string, idRequest: string) {
+    return this.db.database.ref('loi_moi_ket_ban/').child(idUser).child(idRequest);
+  }
+  
   getInforRequest(idUser: any) {
     return this.db.database.ref('tai_khoan/' + idUser);
   }

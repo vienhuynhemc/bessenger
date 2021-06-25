@@ -47,4 +47,9 @@ export class SendAddFriendService {
   getInforSend(idUser: any) {
     return this.db.database.ref('tai_khoan/' + idUser);
   }
+
+  // chấp nhận lời mời kết bạn
+  editSendService(idUser: string, idSend: string) {
+    return this.db.database.ref('da_gui_ket_ban/').child(idSend).child(idUser);
+  }
 }

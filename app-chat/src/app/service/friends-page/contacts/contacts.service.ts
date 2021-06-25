@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+
 import {
   AngularFireDatabase,
   AngularFireList,
   snapshotChanges,
 } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
-import { FriendsPageService } from '../friends-page.service';
 
 @Injectable({
   providedIn: 'root',
@@ -75,4 +73,7 @@ export class ContactsService {
   }
 
   
+  addFriend(idUser: string, idSend: string) {
+    return this.db.database.ref('ban_be/'+ idUser + '/' +idSend)
+  }
 }
