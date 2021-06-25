@@ -153,8 +153,10 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       this.friendsPageService.sortFriendsFirstListNameABC();
                     }
                     // sau khi duyệt qua tất cả thì sắp xếp và lấy ra người đầu tiên
+                   
                     if (count == listFriendsTemp.length) {
                       if (this.friendsPageService.friendFirstList.length > 0) {
+                        console.log( this.friendsPageService.friendFirstList[0].id)
                         this.moveLink(
                           this.friendsPageService.friendFirstList[0].id
                         );
@@ -169,6 +171,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                   });
               }
             });
+           
           } else {
             this.moveLink('');
             this.sendFriendToProfile(null);
