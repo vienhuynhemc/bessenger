@@ -101,24 +101,26 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
  // chuyển trang
   moveToFriends(): void {
-  
-      this.router.navigate(['lien-lac/'], { relativeTo: this.route});
-      this.friendsPageService.selectedFriendsPageDefaultSerivce();
-      this.contactsService.setFriendInforService(null);
+      if(this.friendsPageDefautl != 0) {
+        this.router.navigate(['lien-lac/'], { relativeTo: this.route});
+        this.friendsPageService.selectedFriendsPageDefaultSerivce();
+        this.contactsService.setFriendInforService(null);
+      }
   }
   moveToRequest(): void {
-
+    if(this.friendsPageDefautl != 1) {
       this.router.navigate(['loi-moi/'], { relativeTo: this.route});
       this.friendsPageService.selectedRequestService()
       this.contactsService.setFriendInforService(null);
-   
+    }
   
   }
   moveToSend(): void {
-   
-    this.router.navigate(['da-gui/'], { relativeTo: this.route});
-    this.friendsPageService.selectedSendService()
-    this.contactsService.setFriendInforService(null);
+    if(this.friendsPageDefautl != 2) {
+      this.router.navigate(['da-gui/'], { relativeTo: this.route});
+      this.friendsPageService.selectedSendService()
+      this.contactsService.setFriendInforService(null);
+    }
   }
 
   // xoa ban be

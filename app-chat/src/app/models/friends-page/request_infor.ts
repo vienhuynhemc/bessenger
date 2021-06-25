@@ -7,7 +7,7 @@ export class RequestInfor {
   status: boolean;
   sex: string;
   dateRequest: number;
-
+  lastOnline: number;
   // định dang thời gian lời mời kết bạn
   public getFormatTimeRequest() {
     let result = '';

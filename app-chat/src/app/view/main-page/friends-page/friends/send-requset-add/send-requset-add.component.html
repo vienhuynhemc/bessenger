@@ -9,7 +9,7 @@
                         <div *ngIf="item.checkLimitNameSendList()" [class.non-mutual]="item.mutualFriends == 0"  matTooltip="{{item.name}}" class="name" matTooltipClass="tooltip">{{item.getNameLimitSendList()}}</div>
                         <div *ngIf="!item.checkLimitNameSendList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
                         <div (click)="onClickGetIDFriendMutual(item.id)" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
-                        <div class="abort detail-btn"><i class="fas fa-undo"></i><span>Hủy yêu cầu</span></div>
+                        <div (click)="undoSendRequest(item.id)" class="abort detail-btn"><i class="fas fa-undo"></i><span>Hủy yêu cầu</span></div>
                     </div>
                     <div class="detail-right">
                         <div class="time" >{{item.getFormatTimeSend()}}</div>

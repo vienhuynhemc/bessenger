@@ -12,8 +12,8 @@
                         <div *ngIf="!item.checkLimitNameRequestList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
                         <div (click)="onClickGetIDFriendMutual(item.id)" *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
                         <div class="detail-center-sub">
-                            <div class="stick detail-btn" matTooltip="Chấp nhận" matTooltipClass="tooltip"><i class="fas fa-check"></i></div>
-                            <div class="abort detail-btn" matTooltip="Từ chối" matTooltipClass="tooltip"><i class="fas fa-times"></i></div>
+                            <div (click)="acceptRequest(item.id)" class="stick detail-btn" matTooltip="Chấp nhận" matTooltipClass="tooltip"><i class="fas fa-check"></i></div>
+                            <div (click)="refuseRequest(item.id)" class="abort detail-btn" matTooltip="Từ chối" matTooltipClass="tooltip"><i class="fas fa-times"></i></div>
                         </div>
                     </div>
                     <div class="detail-right" [class.non-mutual-time]="item.mutualFriends == 0">

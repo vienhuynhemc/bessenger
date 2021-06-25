@@ -7,7 +7,7 @@ export class SendInfor {
     status: boolean;
     sex: string;
     dateSend: number;
-
+    lastOnline: number;
     // định dang thời gian gửi yêu cầu
   public getFormatTimeSend() {
     let result = '';

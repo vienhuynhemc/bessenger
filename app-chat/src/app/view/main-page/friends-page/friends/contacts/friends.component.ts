@@ -94,7 +94,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       temp.date = friend_i.val().ngay_tao;
                       temp.lastOnline = friend_i.val().lan_cuoi_dang_nhap;
                     });
-                 
+
                   // thêm vào danh sách sau đó sắp xếp theo ABCD
                   this.mutualFriendsList.push(temp);
                   this.sortMututalFriends();
@@ -119,60 +119,67 @@ export class FriendsComponent implements OnInit, OnDestroy {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // nếu địa chỉ là /lien-lac
     this.friendsPageService.friendFirstList = [];
-    let listFriendsTemp = [];
+    let friendsListTemp = [];
     if (this.iDUrl == null) {
-      // lấy ra danh sách id bạn bè của người dùng đang đăng nhập
-      this.contactsService
-        .getListIDFriendsByIDUser(parseIDUser)
-        .once('value', (data) => {
-          listFriendsTemp = [];
-          // loadinng
-          // thêm vào mảng để kiểm làm điều kiện kiểm tra sắp xếp
-          if (data.val() != null) {
-            data.forEach((element) => {
-              if(element.val().ton_tai == 0)
-                  listFriendsTemp.push(element.key);
-            });
-          }
-          this.friendsPageService.friendFirstList = [];
-          let temp;
-          if (data.val() != null) {
+      // lấy ra danh sách id bạn bè để làm điều kiện chọn bạn bè đầu tiên
+      this.contactsService.getListIDFriendsByIDUser(parseIDUser).once(
+        'value',
+        (data) => {
+          data.forEach((element) => {
+            if (element.val() != null && element.val().ton_tai == 0)
+              friendsListTemp.push(element.key);
+          });
+        // lấy ra danh sách id bạn bè để lấy ra thông tin cá nhân mỗi ng
+        this.contactsService
+          .getListIDFriendsByIDUser(parseIDUser)
+          .once('value', (data) => {
+            this.friendsPageService.friendFirstList = [];
             let count = 0;
-            // duyệt qua từng id bạn bè để lấy ra thông tin
-            data.forEach((element) => {
-              if (element.val().ton_tai == 0) {
-                count++;
-                this.contactsService
-                  .getFriendByID(element.key)
-                  .once('value', (result) => {
-                    if (result.val() != null) {
-                      temp = new FriendInfor();
+            if (data.val() != null) {
+              data.forEach((element) => {
+                if (element.val().ton_tai == 0) {
+                  // lấy ra thông tin cá nhân
+                  this.contactsService
+                    .getFriendByID(element.key)
+                    .once('value', (result) => {
+                      count++;
+                      let temp = new FriendInfor();
                       temp.id = result.key;
+                      temp.img = result.val().link_hinh;
                       temp.name = result.val().ten;
-                      this.friendsPageService.friendFirstList.push(temp);
-                      this.friendsPageService.sortFriendsFirstListNameABC();
-                    }
-                    // sau khi duyệt qua tất cả thì sắp xếp và lấy ra người đầu tiên
-                    if (count == listFriendsTemp.length) {
-                      if (this.friendsPageService.friendFirstList.length > 0) {
-                        this.moveLink(
-                          this.friendsPageService.friendFirstList[0].id
-                        );
-                        this.sendFriendToProfile(
-                          this.friendsPageService.friendFirstList[0].id
-                        );
-                      } else {
-                        this.moveLink('');
-                        this.sendFriendToProfile(null);
+                      temp.sex = result.val().gioi_tinh;
+                      temp.date = result.val().ngay_tao;
+                      temp.lastOnline = result.val().lan_cuoi_dang_nhap;
+                      if (temp != null) {
+                        this.friendsPageService.friendFirstList.push(temp);
+                        // sắp xếp
                       }
-                    }
-                  });
-              }
-            });
-          } else {
-            this.moveLink('');
-            this.sendFriendToProfile(null);
-          }
+                      // lặp qua đủ các bạn bè thì chọn bạn bè đầu tiên
+                      if (count == friendsListTemp.length) {
+                        this.friendsPageService.sortFriendsFirstListNameABC();
+                        // chuyển đến thằng đầu tiên
+                        if (
+                          this.friendsPageService.friendFirstList.length > 0
+                        ) {
+                          this.moveLink(
+                            this.friendsPageService.friendFirstList[0].id
+                          );
+                          this.sendFriendToProfile(
+                            this.friendsPageService.friendFirstList[0].id
+                          );
+                        } else {
+                          this.moveLink('');
+                          this.sendFriendToProfile(null);
+                        }
+                      }
+                    });
+                }
+              });
+            } else {
+              this.moveLink('');
+              this.sendFriendToProfile(null);
+            }
+          })
         });
     } else {
       // nếu địa chỉ là /lien-lac/xxxxx kiểm tra có trong danh sách bạn bè hay nếu không có
