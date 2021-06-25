@@ -307,5 +307,6 @@ export class RequestAddFriendsComponent implements OnInit {
     this.sendsListService.editSendService(parseIDUser,id).update({
       ton_tai: 1
     })
+    
   }
 }

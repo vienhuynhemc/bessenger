@@ -6,6 +6,7 @@ import { RequestInfor } from 'src/app/models/friends-page/request_infor';
 import { SendInfor } from 'src/app/models/friends-page/send_infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
+import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
 import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class SendRequsetAddComponent implements OnInit, OnDestroy {
     public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
     private router: Router,
-    private sendListService: SendAddFriendService
+    private sendListService: SendAddFriendService,
+    private requestListService: RequestAddFriendsService
   ) {}
   iDUrl: any;
   valueSub: Subscription;
@@ -268,5 +270,15 @@ export class SendRequsetAddComponent implements OnInit, OnDestroy {
     })
     
   }
-  
+  undoSendRequest(id: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // cập nhật bảng yêu cầu kết bạn
+    this.requestListService.acceptRequestService(id, parseIDUser).update({
+      ton_tai: 1
+    })
+    // cập nhật bảng đã gửi
+    this.sendListService.editSendService(id,parseIDUser).update({
+      ton_tai: 1
+    })
+  }
 }
