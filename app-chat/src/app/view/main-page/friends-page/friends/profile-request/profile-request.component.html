@@ -20,16 +20,16 @@
     </div>
  
     
-    <div class="accept circle-small">
+    <div class="accept circle-small" (click)="acceptRequest(friendInfor.id)">
         <div class="fill-img"></div>
-        <div class="content"><span class="sp-accept">Chấp nhận</span></div>
+        <div class="content" ><span class="sp-accept">Chấp nhận</span></div>
         <div class="cover-icon">
             <i class="fas fa-user-check"></i>
         </div>
     </div>
   
     
-    <div class="cancel circle-small">
+    <div class="cancel circle-small" (click)="refuseRequest(friendInfor.id)">
       
         <div class="fill-img"></div>
         <div class="content"><span class="sp-cancel">Từ chối</span></div>
