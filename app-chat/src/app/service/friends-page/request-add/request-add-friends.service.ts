@@ -50,8 +50,27 @@ export class RequestAddFriendsService {
     return this.db.database.ref('loi_moi_ket_ban/').child(idUser).child(idRequest);
   }
   
+  // lấy ra thông tin người dùng theo id
   getInforRequest(idUser: any) {
     return this.db.database.ref('tai_khoan/' + idUser);
   }
 
+  // lấy ra thanh viên cuộc trò chuyện
+  getMembersConversation() {
+    return this.db.database.ref('thanh_vien_cuoc_tro_chuyen/');
+  }
+
+  // lấy ra nhóm chat
+  getGroupChat() {
+    return this.db.database.ref('thong_tin_tro_chuyen_nhom/');
+  }
+  // cập nhật cuộc trò chuyện
+  updateMembersConversation(idConver: string, idUser: string) {
+    return this.db.database.ref('thanh_vien_cuoc_tro_chuyen/').child(idConver).child(idUser)
+  }
+  
+  // loại cuộc trò chuyện
+  getKindConversation() {
+    return this.db.database.ref('cuoc_tro_chuyen/');
+  }
 }
