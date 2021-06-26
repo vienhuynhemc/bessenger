@@ -25,7 +25,7 @@ alt=""
       <button (click)="undoSendRequest(friendInfor.id)" class="abort-friend btn">
         <i class="fas fa-undo"></i>Hủy yêu cầu
       </button>
-      <button class="accept btn">
+      <button (click)="onClickMessage(friendInfor.id)" class="accept btn">
         <i class="fas fa-comment"></i>Nhắn tin
       </button>
     </div>

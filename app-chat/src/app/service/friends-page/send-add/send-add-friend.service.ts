@@ -52,26 +52,34 @@ export class SendAddFriendService {
   editSendService(idUser: string, idSend: string) {
     return this.db.database.ref('da_gui_ket_ban/').child(idSend).child(idUser);
   }
-  add() {
-    return this.db.database.ref('tai_khoan/' + '-McTnz0jyH2Tyl6SFLjc').set({
-      email: 
-"czeus305@gmail.com",
-gioi_tinh: 
-"Nam",
-hinh: 
-"/tai_khoan/-McjcqZczX5DbFif_J7d.png",
-lan_cuoi_dang_nhap: 
-1624590208842,
-link_hinh: 
-"https://firebasestorage.googleapis.com/v0/b/bessenger-6b25f.appspot.com/o/tai_khoan%2F-McjcqZczX5DbFif_J7d.png?alt=media&token=f6cf66ae-c9cb-4aec-aa53-ef8e36148363",
-mat_khau: 
-"12345",
-ngay_tao: 
-1624296876363,
-ten: 
-"Husky Cỏ",
-
-    });
+  // chấp nhận lời mời kết bạn
+  acceptRequestService(idUser: string, idRequest: string) {
+    return this.db.database.ref('loi_moi_ket_ban/').child(idUser).child(idRequest);
   }
+  
+  // lấy ra thông tin người dùng theo id
+  getInforRequest(idUser: any) {
+    return this.db.database.ref('tai_khoan/' + idUser);
+  }
+
+  // lấy ra thanh viên cuộc trò chuyện
+  getMembersConversation() {
+    return this.db.database.ref('thanh_vien_cuoc_tro_chuyen/');
+  }
+
+  // lấy ra nhóm chat
+  getGroupChat() {
+    return this.db.database.ref('thong_tin_tro_chuyen_nhom/');
+  }
+  // cập nhật cuộc trò chuyện
+  updateMembersConversation(idConver: string, idUser: string) {
+    return this.db.database.ref('thanh_vien_cuoc_tro_chuyen/').child(idConver).child(idUser)
+  }
+  
+  // loại cuộc trò chuyện
+  getKindConversation() {
+    return this.db.database.ref('cuoc_tro_chuyen/');
+  }
+  
   
 }
