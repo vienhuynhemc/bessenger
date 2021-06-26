@@ -359,7 +359,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
   searchAddFriends(searchValue: string) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
-    
+    if(searchValue.trim() != '') {
     this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
       let listFriendsMe = [];
       if(friends.val() != null) {
@@ -439,6 +439,9 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
         })
       }
     })
+    } else {
+      this.friendsPageService.addList = []
+    }
   }
   
 }
