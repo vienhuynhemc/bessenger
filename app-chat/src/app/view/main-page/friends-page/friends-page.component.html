@@ -13,6 +13,9 @@
             <input *ngIf="friendsPageDefautl === 2" type="text" placeholder="Tìm kiếm"
                 (input)="searchSends(myNameSends.value)" #myNameSends>
             <i class="fas fa-search"></i>
+            <input *ngIf="friendsPageDefautl === 3" type="text" placeholder="Tìm kiếm"
+                (input)="searchAddFriends(myNameAddFriends.value)" #myNameAddFriends>
+            <i class="fas fa-search"></i>
         </div>
         <div class="menu">
             <div (click)="moveToFriends()" id="btn-friends" class="btn-friends btn-menu " (click)="onClickMenu(0)">
@@ -41,8 +44,8 @@
             </div>
              <div class="title" *ngIf="friendsPageDefautl === 2">{{this.friendsPageService.getSizeSends()}} kết quả
             </div>
-            <div class="next btn-offer" title="Đề xuất kết bạn"><i class="fas fa-lightbulb"></i></div>
-            <div class="next btn-result" title="Thêm bạn"><i class="fas fa-user-plus"></i></div>
+            <div  class="next btn-offer" title="Đề xuất kết bạn"><i  class="fas fa-lightbulb"></i></div>
+            <div (click)="moveToAddFriends()" (click)="onClickMenu(3)"  id="btn-add-friends" class="next btn-result" title="Thêm bạn"><i id="icon_add" class="fas fa-user-plus"></i></div>
         </div>
         <router-outlet></router-outlet>
     </div>

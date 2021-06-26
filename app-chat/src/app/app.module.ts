@@ -57,6 +57,9 @@ import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.
 import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
+
+
 
 @NgModule({
   declarations: [
@@ -93,6 +96,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ForgotPasswordComponent,
     FpVerifyEmailComponent,
     FpSelectPasswordComponent,
+    AddFriendsComponent,
+
+ 
 
   ],
   imports: [

@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, Afte
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
+import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
+import { AddFriendsService } from 'src/app/service/friends-page/add-friends/add-friends.service';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
@@ -27,7 +29,8 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     private cdr: ChangeDetectorRef,
     public contactsService: ContactsService,
     public requestListService: RequestAddFriendsService,
-    public sendsListService: SendAddFriendService
+    public sendsListService: SendAddFriendService,
+    public addListService: AddFriendsService
   ) {}
   ngAfterViewChecked(): void {
     
@@ -64,9 +67,11 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
    
     const request = document.getElementById('btn-request');
     const send = document.getElementById('btn-send');
+    const add = document.getElementById('btn-add-friends')
     const iconFriends = document.getElementById('icon_f');
     const iconRequest = document.getElementById('icon_r');
     const iconSend = document.getElementById('icon_s');
+    const iconAdd= document.getElementById('icon_add');
     if (index === 0) {
       friends.style.cssText = 'background-color: #3275f7;color: white;';
       iconFriends.style.color = 'white';
@@ -76,6 +81,9 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
       send.style.cssText = 'background-color: white;color: black;';
       iconSend.style.color = 'rgb(136, 133, 133)';
+
+      add.style.backgroundColor = 'white';
+      iconAdd.style.color = '#888585'
     } else if (index === 1) {
       friends.style.cssText = 'background-color: white;color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
@@ -85,7 +93,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
       send.style.cssText = 'background-color: white; color: black;';
       iconSend.style.color = 'rgb(136, 133, 133)';
-    } else {
+
+      add.style.backgroundColor = 'white';
+      iconAdd.style.color = '#888585'
+    } else if(index == 2) {
       friends.style.cssText = 'background-color: white; color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
 
@@ -94,6 +105,22 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
       send.style.cssText = 'background-color: #3275f7; color: white;';
       iconSend.style.color = 'white';
+
+      add.style.backgroundColor = 'white';
+      iconAdd.style.color = '#888585'
+    } else if(index == 3) {
+      friends.style.cssText = 'background-color: white; color: black;';
+      iconFriends.style.color = 'rgb(136, 133, 133)';
+
+      request.style.cssText = 'background-color: white; color: black;';
+      iconRequest.style.color = 'rgb(136, 133, 133)';
+
+      send.style.cssText = 'background-color: white; color: black;';
+      iconSend.style.color = 'rgb(136, 133, 133)';
+
+      add.style.backgroundColor = '#3275f7';
+      iconAdd.style.color = 'white'
+
     }
   }
   
@@ -122,7 +149,13 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       this.contactsService.setFriendInforService(null);
     }
   }
-
+  moveToAddFriends() {
+    if(this.friendsPageDefautl != 3) {
+      this.router.navigate(['them-ban/'], { relativeTo: this.route});
+      this.friendsPageService.selectedAddFriendsService()
+      this.contactsService.setFriendInforService(null);
+    }
+  }
   // xoa ban be
 
    // không xóa 
@@ -280,7 +313,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     let count = 0
     let friendsTempOfUser = []
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    this.requestListService.getRequestInforByIDUser(parseIDUser).on('value', (data) => {
+    this.sendsListService.getSendInforByIDUser(parseIDUser).on('value', (data) => {
        // lấy ra danh sách id bạn bè của id đang đăng nhập
        this.contactsService.getListIDFriendsByIDUser(parseIDUser).on('value', (friend_l) => {
         friendsTempOfUser = []
@@ -316,9 +349,96 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
         }
       })
       // lấy số lượng request
-      this.friendsPageService.setSizeRequest(this.friendsPageService.requestList.length)
+      this.friendsPageService.setSizeSends(this.friendsPageService.sendstList.length)
       // lấy ra bạn chung
       
     })
   }
+
+  // danh sách bạn vừa tìm
+  searchAddFriends(searchValue: string) {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // danh sách bạn bè của id đang đăng nhập
+    
+    this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
+      let listFriendsMe = [];
+      if(friends.val() != null) {
+        // lấy ra danh sách bạn bè
+        friends.forEach(f_item => {
+            if(f_item.val().ton_tai == 0)
+              listFriendsMe.push(f_item.key)
+        });
+        // lấy ra danh sách người dùng đang đăng nhập nhận yêu cầu
+        this.addListService.getRequestInforByIDUser(parseIDUser).on('value', (request) => {
+          let listMeRequest = []
+          if(request.val() != null) {
+            request.forEach(r_item => {
+              if(r_item.val().ton_tai == 0) 
+                listMeRequest.push(r_item.key)
+            });
+          }
+          
+          // lấy ra danh sách người dùng đang đăng nhập đã gửi yeu cầu
+          this.addListService.getSendInforByIDUser(parseIDUser).on('value', (sends) => {
+            let listMeSends = []
+            if(sends.val() != null) {
+              sends.forEach(s_item => {
+                if(s_item.val().ton_tai == 0) 
+                  listMeSends.push(s_item.key)
+              });
+            }
+         
+            // lấy ra danh sách tài khoản trên server
+            this.addListService.getAllAccount().on('value', (account) => {
+                if(account.val() != null) {
+                  this.friendsPageService.addList = []
+                  account.forEach(a_item => {
+                    console.log(searchValue)
+                    // nếu id != id người đang đăng nhập và có ký tự nhập vào, không nằm trong danh sách bạn bè, không nằm trong danh sách gửi yêu cầu, không nằm trong danh sách nhận yêu cầu
+                      if(a_item.key != parseIDUser 
+                        && a_item.val().ten.toLowerCase().trim().includes(searchValue.toLowerCase().trim()) 
+                        && !listFriendsMe.includes(a_item.key)
+                        && !listMeRequest.includes(a_item.key)
+                        && !listMeSends.includes(a_item.key)) {
+                          let accountTemp = new AddFriendsInfor();
+                          accountTemp.id = a_item.key;
+                          accountTemp.name = a_item.val().ten;
+                          accountTemp.img = a_item.val().link_hinh;
+                          accountTemp.checkAddOrUndo = 'them';
+                          this.friendsPageService.addList.push(accountTemp)
+                      }
+                  });
+                  // duyệt qua danh sách từng thằng trong danh sách tìm kiếm
+                  this.friendsPageService.addList.forEach(AddFriends => {
+                  // tìm ra danh sách bạn bè của từng thằng đó
+                      this.addListService.getListFriendsByIDUser(AddFriends.id).on('value', (Add_item) => {
+                        let countMutual = 0;
+                        // nếu thằng đó có bạn bè
+                        if(Add_item.val() != null) {
+                          // duyệt qua danh sách bạn bè
+                          Add_item.forEach(f_of_Add => {
+                            // duyệt qua danh sách bạn bè của thằng đang đăng nhập
+                              listFriendsMe.forEach(friends_me => {
+                                  if(f_of_Add.key == friends_me && f_of_Add.val().ton_tai == 0) {
+                                    countMutual++;
+                                  }
+                              });
+                          });
+                          if(countMutual != 0) {
+                            AddFriends.mutualFriends = countMutual;
+                          }
+                        }
+                      })
+                  });
+                  this.friendsPageService.sortMutualFriendsAdd();
+                  this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
+                  console.log(this.friendsPageService.addList)
+                }
+            })
+          })
+        })
+      }
+    })
+  }
+  
 }

@@ -17,22 +17,24 @@ export class FriendsPageService {
   // danh sách yêu cầu đã gửi
   sendstList: any[];
   sizeSends: number;
-  sendtInfor: SendInfor;
   sendFirstList: any[];
 
   // danh sách lời mời nhận được
   requestList: any[];
   sizeRequest: number;
-  requestInfor: RequestInfor;
   requestFirstList: any[];
 
   // danh sách bạn bè
   friendsList: any[];
   friendFirstList: any[];
-  friendInfor: FriendInfor;
-  private sizeFriends: number;
+  sizeFriends: number;
   idUnfriend: string = '';
   nameUnfriend: string = '';
+
+  // danh sách thêm bạn bè
+  addList: any[];
+  sizeAdd: number;
+
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -52,6 +54,11 @@ export class FriendsPageService {
   selectedSendService() {
     this.source.next(2);
   }
+
+  selectedAddFriendsService() {
+    this.source.next(3);
+  }
+
   public isLoadingProcess(): boolean {
     return this.isLoading;
   }
@@ -109,7 +116,22 @@ export class FriendsPageService {
   setSizeSends(size: number) {
     this.sizeSends = size;
   }
-
+  // danh sách thêm bạn
+  setSizeAdd(size:number) {
+    this.sizeAdd = size;
+  }
+  getSizeAdd() {
+    return this.sizeAdd;
+  }
+  // sắp xếp danh sách thêm bạn theo thứ tự bạn chung từ nhiều nhất đến ít nhất
+  public sortMutualFriendsAdd() {
+    this.addList = this.addList.sort((mutual1, mutual2) => {
+      let mutualResult_1 = mutual1.mutualFriends;
+      let mutualResult_2 = mutual2.mutualFriends;
+      return mutualResult_2 - mutualResult_1;
+    });
+  }
+  
    // sort thời gian gửi lời mời kết bạn từ gần nhất đến xa nhất dùng trong lấy ra danh sách request
   public sortRequestListDate() {
     this.requestList = this.requestList.sort((dateIn1, dateIn2) => {
@@ -165,6 +187,7 @@ export class FriendsPageService {
     });
   }
 
+  // cập nhật trạng thái on - off
   public update(): void {
     setTimeout(() => {
       let currentTime = Number(new Date());
