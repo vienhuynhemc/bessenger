@@ -21,13 +21,76 @@ export class ChatPageCreateGroupService {
     this.init();
   }
 
+  public createGroup(ten_nhom: string) {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let currentTime = Number(new Date());
+    // Cuộc trò chuyện
+    let cuoc_tro_chuyen = this.db.list("/cuoc_tro_chuyen").push({ loai_cuoc_tro_truyen: "nhom" });
+    // Thông tin trò chuyện nhóm
+    this.db.object("/thong_tin_tro_chuyen_nhom/" + cuoc_tro_chuyen.key).update(
+      {
+        chu_so_huu: ma_tai_khoan,
+        ngay_tao: currentTime,
+        ["ten-nhom"]: ten_nhom,
+        ton_tai: 0
+      }
+    );
+    // Thành viên cuộc trò chuyện
+    this.db.object("/thanh_vien_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key + "/" + ma_tai_khoan).update(
+      {
+        ngay_roi_di: 0,
+        ngay_tham_gia: currentTime,
+        roi_chua: "chua",
+        trang_thai: "khong_cho"
+      }
+    );
+    let array: Object[] = [];
+    array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi" });
+    for (let i = 0; i < this.user_added.length; i++) {
+      this.db.object("/thanh_vien_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key + "/" + this.user_added[i].ma_tai_khoan).update(
+        {
+          ngay_roi_di: 0,
+          ngay_tham_gia: currentTime,
+          roi_chua: "chua",
+          trang_thai: "khong_cho"
+        }
+      );
+      array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua" });
+    }
+    // Tin nhắn đầu tiên
+    this.db.list("/chi_tiet_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key).push(
+      {
+        dia_chi_file: "",
+        link_file: "",
+        loai_tin_nhan: "thong_bao",
+        ["ma_tai_khoan"]: ma_tai_khoan,
+        ma_tin_nhan_phan_hoi: "",
+        ngay_gui: currentTime,
+        noi_dung: "đã tạo nhóm"
+      }
+    ).then((ref) => {
+      for (let i = 0; i < array.length; i++) {
+        this.db.object("/chi_tiet_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
+          {
+            ngay_nhan: array[i]['ngay_nhan'],
+            ngay_xem: array[i]['ngay_xem'],
+            xem_chua: array[i]['xem_chua']
+          }
+        )
+      };
+    });
+  }
+
   public fillter(value: string) {
     this.user_search = [];
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     if (value.length > 0) {
       for (let i = 0; i < this.all_user.length; i++) {
-        if (this.all_user[i].ten.trim().toLowerCase().includes(value.trim().toLowerCase())) {
-          if (this.isNotInAdded(this.all_user[i].ma_tai_khoan)) {
-            this.user_search.push(new ChatPageObjectGroup(this.all_user[i].ten, this.all_user[i].ma_tai_khoan, this.all_user[i].hinh));
+        if (this.all_user[i].ma_tai_khoan != ma_tai_khoan) {
+          if (this.all_user[i].ten.trim().toLowerCase().includes(value.trim().toLowerCase())) {
+            if (this.isNotInAdded(this.all_user[i].ma_tai_khoan)) {
+              this.user_search.push(new ChatPageObjectGroup(this.all_user[i].ten, this.all_user[i].ma_tai_khoan, this.all_user[i].hinh));
+            }
           }
         }
       }
@@ -48,14 +111,17 @@ export class ChatPageCreateGroupService {
   }
 
   public updateSearch(ten_hien_tai: string, ma_tai_khoan: string) {
+    let ma_tai_khoan_dn = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     if (ten_hien_tai.trim().length > 0) {
       for (let i = 0; i < this.all_user.length; i++) {
-        if (this.all_user[i].ma_tai_khoan == ma_tai_khoan) {
-          let ten = this.all_user[i].ten;
-          if (ten.trim().toLowerCase().includes(ten_hien_tai.trim().toLowerCase())) {
-            this.user_search.push(new ChatPageObjectGroup(this.all_user[i].ten, this.all_user[i].ma_tai_khoan, this.all_user[i].hinh));
+        if (this.all_user[i].ma_tai_khoan != ma_tai_khoan_dn) {
+          if (this.all_user[i].ma_tai_khoan == ma_tai_khoan) {
+            let ten = this.all_user[i].ten;
+            if (ten.trim().toLowerCase().includes(ten_hien_tai.trim().toLowerCase())) {
+              this.user_search.push(new ChatPageObjectGroup(this.all_user[i].ten, this.all_user[i].ma_tai_khoan, this.all_user[i].hinh));
+            }
+            return;
           }
-          return;
         }
       }
     }

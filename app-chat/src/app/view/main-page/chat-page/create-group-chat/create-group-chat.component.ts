@@ -1,6 +1,7 @@
 import { ChatPageObjectGroup } from './../../../../models/chat-page/chat-page-friends-page/chat_page_object_group';
 import { Component, OnInit } from '@angular/core';
 import { ChatPageCreateGroupService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-create-group.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-group-chat',
@@ -13,7 +14,8 @@ export class CreateGroupChatComponent implements OnInit {
   public ten_nhom: string;
   public ten_hien_tai: string;
 
-  constructor(public chat_page_create_ground: ChatPageCreateGroupService) { }
+  constructor(public chat_page_create_ground: ChatPageCreateGroupService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.chat_page_create_ground.getAllUser().subscribe(data => {
@@ -47,6 +49,10 @@ export class CreateGroupChatComponent implements OnInit {
     if (countOK == 0) {
       document.getElementById("tao-nhom-error-1").style.display = "none";
       document.getElementById("tao-nhom-error-2").style.display = "none";
+      this.chat_page_create_ground.createGroup(this.ten_nhom);
+      this.ten_nhom = "";
+      this.closeTaoNhom();
+      this.router.navigate(['bessenger/tin-nhan/danh-sach']);
     }
   }
 
@@ -65,11 +71,15 @@ export class CreateGroupChatComponent implements OnInit {
   public selectUser(ma_tai_khoan: string) {
     this.chat_page_create_ground.selectUser(ma_tai_khoan);
     this.ten_hien_tai = "";
+    document.getElementById("tao-nhom-error-2").style.display = "none";
   }
 
-  public clearAdded(value:string){
+  public clearAdded(value: string) {
     this.chat_page_create_ground.clearAdded(value);
-    this.chat_page_create_ground.updateSearch(this.ten_hien_tai,value);
+    this.chat_page_create_ground.updateSearch(this.ten_hien_tai, value);
+    if (this.chat_page_create_ground.user_added.length == 0) {
+      document.getElementById("tao-nhom-error-2").style.display = "block";
+    }
   }
 
 }

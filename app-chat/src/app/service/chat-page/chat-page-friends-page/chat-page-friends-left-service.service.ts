@@ -304,16 +304,18 @@ export class ChatPageFriendsLeftServiceService {
           tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
           let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
           let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
-          Object.entries(tinhTrangXem).forEach(([ma_tai_khoan, data]) => {
-            let o = new ChatPageTinhTrangXem();
-            o.ma_tai_khoan = ma_tai_khoan;
-            o.ngay_xem = data['ngay_xem'];
-            o.xem_chua = data['xem_chua'];
-            o.ngay_nhan = data['ngay_nhan'];
-            tinh_trang_xems.push(o);
-          });
-          tin_nhan.tinh_trang_xem = tinh_trang_xems;
-          tin_nhans.push(tin_nhan);
+          if (tinhTrangXem != null) {
+            Object.entries(tinhTrangXem).forEach(([ma_tai_khoan, data]) => {
+              let o = new ChatPageTinhTrangXem();
+              o.ma_tai_khoan = ma_tai_khoan;
+              o.ngay_xem = data['ngay_xem'];
+              o.xem_chua = data['xem_chua'];
+              o.ngay_nhan = data['ngay_nhan'];
+              tinh_trang_xems.push(o);
+            });
+            tin_nhan.tinh_trang_xem = tinh_trang_xems;
+            tin_nhans.push(tin_nhan);
+          }
         });
         this.allBoxData[i].cuoc_tro_truyen.tin_nhan = tin_nhans;
         return;
