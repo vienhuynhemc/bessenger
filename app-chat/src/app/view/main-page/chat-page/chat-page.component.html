@@ -1,33 +1,10 @@
+<!-- Tạo nhóm chat -->
+<app-create-group-chat></app-create-group-chat>
+
 <div class="loading" *ngIf="this.chat_page_process_service.isLoadingProcess()">
   <main lottie [options]="this.chat_page_process_service.options"
     (animationCreated)="this.chat_page_process_service.animationCreated($event)" class="anim"></main>
 </div>
-
-<!-- Tạo nhóm mới -->
-<div class="tao-nhom-moi" *ngIf="this.chat_page_create_ground.isshow">
-  <div class="content">
-    <p class="title">Tạo nhóm chat mới</p>
-    <div class="exit" (click)="closeTaoNhom()"><i class="fas fa-times"></i></div>
-    <div class="main">
-      <!-- Chứ nội dung -->
-      <div class="danh-sach">
-
-      </div>
-      <!-- Chứa gợi ý -->
-      <div class="auto">
-
-      </div>
-    </div>
-    <!-- Kết tạo-->
-    <div class="end">
-      <button class="confirm">
-        <i class="fab fa-cloudversify"></i>
-        <p>Tạo nhóm</p>
-      </button>
-    </div>
-  </div>
-</div>
-
 
 <!-- Trang chat với bạn bè -->
 <div class="container">

@@ -26,7 +26,7 @@ import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // tooltip
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 // firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -57,6 +57,7 @@ import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.
 import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ForgotPasswordComponent,
     FpVerifyEmailComponent,
     FpSelectPasswordComponent,
-
+    CreateGroupChatComponent,
   ],
   imports: [
     BrowserModule,
