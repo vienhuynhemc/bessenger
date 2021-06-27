@@ -60,6 +60,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
 import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
+import { MessengerHeaderComponent } from './view/main-page/chat-page/messenger/messenger-header/messenger-header.component';
+import { MessengerContentComponent } from './view/main-page/chat-page/messenger/messenger-content/messenger-content.component';
+import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
 import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
 
 
@@ -100,8 +103,10 @@ import { ProfileAddComponent } from './view/main-page/friends-page/friends/profi
     FpSelectPasswordComponent,
     AddFriendsComponent,
     CreateGroupChatComponent,
+    MessengerHeaderComponent,
+    MessengerContentComponent,
+    MessengerFooterComponent,
     ProfileAddComponent,
-
   ],
   imports: [
     BrowserModule,

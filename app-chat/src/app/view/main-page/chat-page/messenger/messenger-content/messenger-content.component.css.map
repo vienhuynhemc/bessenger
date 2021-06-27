@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "messenger-content.component.scss"
+    ],
+    "names": [],
+    "file": "messenger-content.component.css"
+}

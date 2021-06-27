@@ -1,0 +1,208 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-family: "Raleway";
+  border-radius: 40px;
+  box-shadow: 4px 8px 28px 0px #d3dceb;
+  position: relative;
+  overflow: hidden;
+}
+
+.container .cover-circle {
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background-color: white;
+  top: -100px;
+  right: -200px;
+}
+
+.container .cover-circle .circle {
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.container .cover-circle .circle img {
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  left: 00px;
+}
+
+.container .cover-avt {
+  width: 510px;
+  height: 510px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: -100px;
+}
+
+.container .cover-avt .avt {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  object-fit: cover;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+}
+
+.container .circle-small {
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.container .circle-small .cover-icon {
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 37.5px;
+  left: 37.5px;
+}
+
+.container .circle-small .cover-icon i {
+  color: #3274f7af;
+  position: absolute;
+  top: 8px;
+  left: 9px;
+}
+
+.container .circle-small .content {
+  width: 120px;
+  height: 45px;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  position: absolute;
+  left: -125px;
+  top: 32px;
+  border-left: #3274f7af solid 10px;
+}
+
+.container .circle-small .content span {
+  position: absolute;
+  top: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  display: block;
+}
+
+.container .circle-small .content .sp-cancel {
+  left: 33px;
+}
+
+.container .circle-small .content .sp-message {
+  left: 30px;
+}
+
+.container .circle-small .content .sp-accept {
+  left: 22px;
+}
+
+.container .circle-small .fill-img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  background-color: #3274f7af;
+}
+
+.container .circle-small img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  opacity: 0.5;
+}
+
+.container .message {
+  left: 190px;
+  top: 40px;
+}
+
+.container .message .cover-icon i {
+  top: 10px;
+}
+
+.container .accept {
+  left: 140px;
+  top: 193px;
+  width: 140px;
+  height: 140px;
+}
+
+.container .accept .content {
+  top: 52px;
+}
+
+.container .accept .cover-icon {
+  top: 52.5px;
+  left: 52.5px;
+}
+
+.container .accept .fill-img {
+  width: 130px;
+  height: 130px;
+}
+
+.container .accept img {
+  width: 150px;
+  height: 150px;
+}
+
+.container .cancel {
+  left: 200px;
+  top: 380px;
+}
+
+.container .cancel .content {
+  top: 34px;
+}
+
+.container .ins {
+  width: 350px;
+  position: absolute;
+  font-size: 25px;
+  font-weight: bold;
+  bottom: 210px;
+  left: 20px;
+}
+
+.container .ins span {
+  color: #3275f7;
+}
+
+.container .name {
+  width: 450px;
+  height: 80px;
+  bottom: 130px;
+  position: absolute;
+  font-size: 60px;
+  font-weight: bold;
+  z-index: 5;
+  left: 20px;
+  word-wrap: break-word;
+  text-shadow: 3px 3px #3275f7;
+}
+/*# sourceMappingURL=profile-request.component.css.map */

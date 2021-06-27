@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  border-radius: 20px;
+  box-shadow: 4px 8px 28px 0px #d3dceb;
+  display: flex;
+  align-items: center;
+}
+
+.container .icon {
+  display: flex;
+}
+
+.container .icon .child {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.container .icon .child i {
+  font-size: 18px;
+  margin-top: 1px;
+}
+
+.container .khung-chat {
+  display: flex;
+  align-items: center;
+}
+/*# sourceMappingURL=messenger-footer.component.css.map */
