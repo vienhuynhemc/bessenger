@@ -18,32 +18,19 @@
   margin-top: 40px;
   width: 66px;
   height: 66px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   border: 2px solid #eef2fb;
   border-radius: 50%;
   margin-left: 100px;
 }
 
 .container .right-avatar .avatar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-shadow: 0px 8px 20px #d9f0f3;
-          box-shadow: 0px 8px 20px #d9f0f3;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 8px 20px #d9f0f3;
   width: 60px;
   height: 60px;
   overflow: hidden;
@@ -52,8 +39,7 @@
 
 .container .right-avatar .avatar img {
   width: 60px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -76,8 +62,6 @@
 
 .container .maindropdown-start {
   margin-top: 25px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 14px;
@@ -87,8 +71,6 @@
 .container .maindropdown-start .startMessages {
   width: 85%;
   margin-top: 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   background-color: rgba(255, 242, 225, 0.644);
@@ -126,8 +108,7 @@
   position: absolute;
   background-color: rgba(255, 242, 225, 0.644);
   min-width: 189px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 50px 14px 15px 15px;
   z-index: 1;
   margin-top: 73px;
@@ -138,8 +119,6 @@
 
 .container .maindropdown-media {
   margin-top: 22px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 14px;
@@ -149,8 +128,6 @@
 .container .maindropdown-media .media {
   width: 85%;
   margin-top: 22px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   background-color: #ffc0cb80;
@@ -163,8 +140,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
 }
@@ -190,8 +166,7 @@
   position: absolute;
   background-color: #ffc0cb80;
   min-width: 189px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 50px 14px 15px 15px;
   z-index: 1;
   margin-top: 83px;
@@ -203,8 +178,6 @@
 .container .maindropdown-media .dropdown-content .filesMedia {
   width: 95%;
   margin-top: -40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 27px;
@@ -215,8 +188,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -243,8 +215,6 @@
 .container .maindropdown {
   width: 80%;
   margin-top: 45px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 14px;
@@ -257,8 +227,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
 }
@@ -296,8 +265,7 @@
   position: absolute;
   background-color: #d9f0f3c0;
   min-width: 193px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 50px 14px 15px 15px;
   z-index: 1;
   margin-top: 60px;
@@ -309,8 +277,6 @@
 .container .maindropdown .dropdown-content .filesZip {
   width: 95%;
   margin-top: -40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 27px;
@@ -321,8 +287,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -349,8 +314,6 @@
 .container .maindropdown .dropdown-content .filesDocx {
   width: 95%;
   margin-top: -12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 27px;
@@ -361,8 +324,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -388,8 +350,6 @@
 .container .maindropdown .dropdown-content .filesTxt {
   width: 95%;
   margin-top: -12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 27px;
@@ -400,8 +360,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -427,8 +386,6 @@
 .container .maindropdown .dropdown-content .filesPdf {
   width: 95%;
   margin-top: -12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 27px;
@@ -439,8 +396,7 @@
   width: 35px;
   height: 35px;
   margin: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -469,8 +425,6 @@
 
 .container .maindropdown-infor {
   margin-top: 22px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   border-radius: 14px;
@@ -480,16 +434,13 @@
 .container .maindropdown-infor .information {
   width: 85%;
   margin-top: 22px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   background-color: rgba(247, 214, 154, 0.356);
   border-radius: 14px;
   margin-left: 10px;
   cursor: pointer;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .container .maindropdown-infor .information .includes {
@@ -521,8 +472,7 @@
   position: absolute;
   background-color: rgba(247, 214, 154, 0.356);
   min-width: 193px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 50px 14px 15px 15px;
   z-index: 1;
   margin-top: 82px;

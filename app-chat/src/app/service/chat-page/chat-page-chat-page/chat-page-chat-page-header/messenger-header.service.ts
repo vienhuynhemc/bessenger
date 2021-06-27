@@ -1,7 +1,7 @@
-import { ObjectChatThanhVien } from './../../../../models/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
-import { snapshotChanges, AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { ObjectChat } from 'src/app/models/chat-page/chat-page-chat-page/header/object_chat';
+import { ObjectChatThanhVien } from './../../../../models/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +26,15 @@ export class MessengerHeaderService {
       let currentTime = Number(new Date());
       if (this.object_chat != null) {
         let isOnline = false;
-        for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
-          if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-            let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
-            let overTime = currentTime - last_time;
-            if (overTime < 10000) {
-              isOnline = true;
-              break;
+        if (this.object_chat.thanh_vien != null) {
+          for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
+            if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+              let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
+              let overTime = currentTime - last_time;
+              if (overTime < 10000) {
+                isOnline = true;
+                break;
+              }
             }
           }
         }

@@ -1,3 +1,4 @@
+import { MessengerFooterService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessengerFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public messenger_footer_service:MessengerFooterService
+  ) { }
 
   ngOnInit(): void {
   }
