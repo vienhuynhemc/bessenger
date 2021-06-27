@@ -25,6 +25,7 @@ import { SelectAvatarComponent } from './view/register-page/select-avatar/select
 import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
 import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
 import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
+import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dang-nhap', pathMatch: 'full' },
@@ -95,9 +96,14 @@ const routes: Routes = [
           { path: '', redirectTo: 'da-gui', pathMatch: 'full' },
           { path: 'da-gui', component: SendRequsetAddComponent },
           { path: 'da-gui/:id', component: SendRequsetAddComponent },
+
           { path: '', redirectTo: 'them-ban', pathMatch: 'full' },
           { path: 'them-ban', component: AddFriendsComponent},
           { path: 'them-ban/:id', component: AddFriendsComponent},
+
+          {path: '', redirectTo: 'de-xuat', pathMatch: 'full'},
+          {path: 'de-xuat', component: OfferFriendsComponent},
+          {path: 'de-xuat/:id', component: OfferFriendsComponent},
         ],
       },
 

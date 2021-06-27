@@ -61,6 +61,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
 import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
 import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
+import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
+import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 
 
 @NgModule({
@@ -101,6 +103,8 @@ import { ProfileAddComponent } from './view/main-page/friends-page/friends/profi
     AddFriendsComponent,
     CreateGroupChatComponent,
     ProfileAddComponent,
+    ProfileOfferComponent,
+    OfferFriendsComponent,
 
   ],
   imports: [

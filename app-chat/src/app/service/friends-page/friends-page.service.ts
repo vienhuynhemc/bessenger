@@ -60,6 +60,10 @@ export class FriendsPageService {
     this.source.next(3);
   }
 
+  selectedOffersFriendsService() {
+    this.source.next(4);
+  }
+
   public isLoadingProcess(): boolean {
     return this.isLoading;
   }
