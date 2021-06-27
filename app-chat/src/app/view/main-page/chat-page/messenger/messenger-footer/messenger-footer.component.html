@@ -1,6 +1,6 @@
 <div class="container">
     <div class="icon">
-        <div class="child">
+        <div class="child" matTooltip="Đính kèm một ảnh hoặc video" matTooltipClass="tooltip">
             <svg viewBox="0 -1 17 17" height="20px" width="20px" class="a8c37x1j ms05siws hr662l2t b7h9ocf4">
                 <g fill="none" fill-rule="evenodd">
                     <path
@@ -16,7 +16,7 @@
                 </g>
             </svg>
         </div>
-        <div class="child">
+        <div class="child" matTooltip="Chọn nhãn dán" matTooltipClass="tooltip">
             <svg x="0px" y="0px" viewBox="0 0 17 16" height="20px" width="20px"
                 class="a8c37x1j ms05siws hr662l2t b7h9ocf4 crt8y2ji">
                 <g fill-rule="evenodd">
@@ -34,7 +34,7 @@
                 </g>
             </svg>
         </div>
-        <div class="child">
+        <div class="child" matTooltip="Chọn file gif" matTooltipClass="tooltip">
             <svg x="0px" y="0px" viewBox="0 0 16 16" height="20px" width="20px"
                 class="a8c37x1j ms05siws hr662l2t b7h9ocf4 crt8y2ji">
                 <path
@@ -42,21 +42,25 @@
                     fill="fff" fill-rule="nonzero"></path>
             </svg>
         </div>
-        <div class="child">
+        <div class="child" matTooltip="Đính kèm file" matTooltipClass="tooltip">
             <i class="fas fa-paperclip"></i>
         </div>
-        <div class="child">
+        <div class="child" matTooltip="Tạo cuộc thăm dò ý kiến" matTooltipClass="tooltip">
             <i class="fas fa-poll"></i>
         </div>
-        <div class="child">
+        <div class="child" matTooltip="Gửi clip âm thanh" matTooltipClass="tooltip">
             <i class="fas fa-microphone"></i>
         </div>
     </div>
     <div class="khung-chat">
-        <textarea placeholder="Aa"></textarea>
-        <i class="fas fa-smile"></i>
+        <div class="parent-input" id="parent_input">
+            <div contenteditable="true" #input class="input" (input)="inputMessenger(input.innerText)">
+            </div>
+        </div>
+        <p class="place" *ngIf="this.tin_nhan == null || this.tin_nhan.length == 0">Aa</p>
+        <i class="fas fa-smile c-btcx" matTooltip="Chọn biểu tượng cảm xúc" matTooltipClass="tooltip"></i>
     </div>
-    <div class="bieu-tuong-cam-xuc-chat">
+    <div class="bieu-tuong-cam-xuc-chat" matTooltip="Gửi lượt thích" matTooltipClass="tooltip">
         <svg viewBox="0 0 16 16" height="20" width="20" class="crt8y2ji">
             <path fill="#0084FF"
                 d="M16,9.1c0-0.8-0.3-1.1-0.6-1.3c0.2-0.3,0.3-0.7,0.3-1.2c0-1-0.8-1.7-2.1-1.7h-3.1c0.1-0.5,0.2-1.3,0.2-1.8 c0-1.1-0.3-2.4-1.2-3C9.3,0.1,9,0,8.7,0C8.1,0,7.7,0.2,7.6,0.4C7.5,0.5,7.5,0.6,7.5,0.7L7.6,3c0,0.2,0,0.4-0.1,0.5L5.7,6.6 c0,0-0.1,0.1-0.1,0.1l0,0l0,0L5.3,6.8C5.1,7,5,7.2,5,7.4v6.1c0,0.2,0.1,0.4,0.2,0.5c0.1,0.1,1,1,2,1h5.2c0.9,0,1.4-0.3,1.8-0.9 c0.3-0.5,0.2-1,0.1-1.4c0.5-0.2,0.9-0.5,1.1-1.2c0.1-0.4,0-0.8-0.2-1C15.6,10.3,16,9.9,16,9.1z">

@@ -8,11 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessengerFooterComponent implements OnInit {
 
+  // Nội dung tin nhắn
+  public tin_nhan: string;
+
   constructor(
-    public messenger_footer_service:MessengerFooterService
+    public messenger_footer_service: MessengerFooterService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  public inputMessenger(value: string) {
+    this.tin_nhan = value.trim();
+
+    let parent_input = document.getElementById("parent_input");
+    if (parent_input.offsetHeight) {
+      if (parent_input.offsetHeight > 22) {
+        parent_input.style.marginBottom = "10px";
+      } else {
+        parent_input.style.marginBottom = "5px";
+      }
+    }
   }
 
 }
