@@ -7,6 +7,7 @@ import {
   AngularFireList,
   snapshotChanges,
 } from '@angular/fire/database';
+import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +15,20 @@ import {
 export class ContactsService {
   private friendSource = new BehaviorSubject<FriendInfor>(null);
   friendInforService = this.friendSource.asObservable();
- 
+  private addSource = new BehaviorSubject<any>(null);
+  addInforService = this.addSource.asObservable();
   constructor(
     private db: AngularFireDatabase,
     
   ) {
     
   }
-
+  setAddInforService(id: string, addOrUndo: string) {
+    this.addSource.next({
+      id: id,
+      addOrUndo: addOrUndo
+    })
+  }
   // thay đổi thông tin
   setFriendInforService(id: any) {
     this.friendSource.next(id);

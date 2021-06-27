@@ -1,0 +1,51 @@
+<div class="friends-list">
+    <div class="friends-list-content">
+        <div id="id-{{i}}"  [class.detail-selected]="item.id === iDUrl"  class="detail-friend"  *ngFor="let item of this.friendsPageService.addList; let i = index"  >
+                <div class="detail-sub" (click)="onClickSelectedFriend(item, iDUrl)">
+                    <div class="detail-left">
+                        <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                    </div>
+                    <div  class="detail-center">
+                        <div *ngIf="item.checkLimitNameAddList()"  matTooltip="{{item.name}}" matTooltipClass="tooltip" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.getNameLimitAddList()}}</div>
+                        <div *ngIf="!item.checkLimitNameAddList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
+                       
+                    </div>
+                    
+                </div>
+                <div (click)="onClickGetIDFriendMutual(item.id)"  *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                <div class="detail-right">
+                    <div *ngIf="item.checkAddOrUndo == 'them'" class="add-f btn" (click)="onClickAddFriends(item, i)">
+                        <i class="fas fa-plus"></i>
+                        <span>Thêm bạn bè</span>
+                    </div>
+                    <div *ngIf="item.checkAddOrUndo == 'thu_hoi'" class="add-f btn" (click)="onClickUndoAddFriends(item, i)">
+                        <i class="fas fa-undo"></i>
+                        <span>Thu hồi</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="mutual-friends-list" [class.mutual-display]="idMutualAdd!= ''">
+    <div class="content-mutual-friends">
+        <div class="header">
+            <div class="title">Bạn chung</div>
+            <div class="exit" (click)="onClickExitMutual()"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="content-scroll">
+            <div class="detail-mutual-friends" *ngFor="let item of  mutualAddList; let i = index">
+                    <div class="detail-left">
+                        <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                    </div>
+                    <div  class="detail-right">
+                        <div *ngIf="item.checkLimitNameMutualAdd()" class="name">{{item.getNameLimitMutualAdd()}}</div>
+                        <div *ngIf="!item.checkLimitNameMutualAdd()" class="name">{{item.name}}</div>
+                        <div class="date"><span>Ngày kết bạn:</span> {{item.dateAddFormatMutualAdd()}}</div>
+                    </div>
+                    <div class="right-date">
+                        <div class="gender"><span>Giới tính:</span> {{item.sex}}</div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

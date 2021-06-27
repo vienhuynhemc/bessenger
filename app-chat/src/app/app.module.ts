@@ -57,10 +57,14 @@ import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.
 import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
 import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
 import { MessengerHeaderComponent } from './view/main-page/chat-page/messenger/messenger-header/messenger-header.component';
 import { MessengerContentComponent } from './view/main-page/chat-page/messenger/messenger-content/messenger-content.component';
 import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
+import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
+
 
 @NgModule({
   declarations: [
@@ -97,10 +101,12 @@ import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/m
     ForgotPasswordComponent,
     FpVerifyEmailComponent,
     FpSelectPasswordComponent,
+    AddFriendsComponent,
     CreateGroupChatComponent,
     MessengerHeaderComponent,
     MessengerContentComponent,
     MessengerFooterComponent,
+    ProfileAddComponent,
   ],
   imports: [
     BrowserModule,

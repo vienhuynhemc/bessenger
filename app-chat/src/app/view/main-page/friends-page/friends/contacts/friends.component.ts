@@ -87,17 +87,31 @@ export class FriendsComponent implements OnInit, OnDestroy {
                     .getFriendByID(friend_i.key)
                     .on('value', (result) => {
                       temp = new FriendInfor();
+                      let checkAdd = true;
                       temp.id = result.key;
                       temp.name = result.val().ten;
                       temp.img = result.val().link_hinh;
                       temp.sex = result.val().gioi_tinh;
                       temp.date = friend_i.val().ngay_tao;
                       temp.lastOnline = friend_i.val().lan_cuoi_dang_nhap;
+                      this.mutualFriendsList.forEach(element => {
+                        if(element.id == temp.id)
+                            checkAdd = false;
                     });
-
-                  // thêm vào danh sách sau đó sắp xếp theo ABCD
-                  this.mutualFriendsList.push(temp);
-                  this.sortMututalFriends();
+                    if(checkAdd) {
+                      this.mutualFriendsList.push(temp)
+                    } else {
+                      this.mutualFriendsList.forEach((element,index) => {
+                          if(element.id == temp.id) {
+                            if(element.img != temp.img || element.name != temp.img || element.sex != temp.sex || element.date != temp.date) {
+                              this.mutualFriendsList[index] = temp
+                            }
+                          }
+                      });
+                    }
+                     // thêm vào danh sách sau đó sắp xếp theo ABCD
+                      this.sortMututalFriends();
+                    });
                 }
               });
             });
