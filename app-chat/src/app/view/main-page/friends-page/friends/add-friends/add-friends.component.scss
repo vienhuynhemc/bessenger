@@ -72,37 +72,43 @@
             .non-mutual {
               margin-top: 37px;
             }
-            .mutual-friends {
-              color: gray;
-              font-size: 13px;
-              margin-top: 5px;
-              width: 100px;
-            }
+            
           }
-          .detail-right {
-            position: absolute;
-            right: 10px;
-            top: 28px;
-            .add-f {
-              cursor: pointer;
-              width: 120px;
-              height: 35px;
-              background-color: white;
-              border: #3275f7 solid 2px;
-              border-radius: 5px;
-              color: #3275f7;
-              font-size: 12px;
-              display: flex;
-              font-family: "Raleway";
-              font-weight: 600;
-              justify-content: center;
-              align-items: center;
-              i { 
-                margin-right: 5px;
-              }
+          
+          
+        }
+        .mutual-friends {
+          position: absolute;
+          top: 50px;
+          left: 105px;
+          color: gray;
+          font-size: 13px;
+          width: 100px;
+        }
+        .detail-right {
+          position: absolute;
+          right: 10px;
+          top: 28px;
+          .btn {
+            cursor: pointer;
+            width: 120px;
+            height: 35px;
+            background-color: white;
+            border: #3275f7 solid 2px;
+            border-radius: 5px;
+            color: #3275f7;
+            font-size: 12px;
+            display: flex;
+            font-family: "Raleway";
+            font-weight: 600;
+            justify-content: center;
+            align-items: center;
+            i { 
+              margin-right: 8px;
             }
           }
         }
+        
       }
   
       .detail-selected {

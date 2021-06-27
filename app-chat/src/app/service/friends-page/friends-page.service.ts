@@ -34,7 +34,8 @@ export class FriendsPageService {
   // danh sách thêm bạn bè
   addList: any[];
   sizeAdd: number;
-
+  searchVal: string ='';
+  saveAddList: any[]
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',

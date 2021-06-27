@@ -48,7 +48,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       this.main_page_service.selectFriendsPage();
     }, 0);
     this.getSelectedFriendsPage();
-    
+    this.friendsPageService.saveAddList = []
   }
   
   // get về trạng thái page
@@ -154,6 +154,8 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       this.router.navigate(['them-ban/'], { relativeTo: this.route});
       this.friendsPageService.selectedAddFriendsService()
       this.contactsService.setFriendInforService(null);
+      // gọi hàm để tránh tình trạng hiển thị lại giá trị cũ do firebase tự update ban_be
+      this.searchAddFriends('')
     }
   }
   // xoa ban be
@@ -357,9 +359,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
   // danh sách bạn vừa tìm
   searchAddFriends(searchValue: string) {
+    this.friendsPageService.saveAddList = []
+    this.friendsPageService.searchVal = searchValue
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
-    if(searchValue.trim() != '') {
     this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
       let listFriendsMe = [];
       if(friends.val() != null) {
@@ -369,7 +372,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
               listFriendsMe.push(f_item.key)
         });
         // lấy ra danh sách người dùng đang đăng nhập nhận yêu cầu
-        this.addListService.getRequestInforByIDUser(parseIDUser).on('value', (request) => {
+        this.addListService.getRequestInforByIDUser(parseIDUser).once('value', (request) => {
           let listMeRequest = []
           if(request.val() != null) {
             request.forEach(r_item => {
@@ -379,7 +382,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
           }
           
           // lấy ra danh sách người dùng đang đăng nhập đã gửi yeu cầu
-          this.addListService.getSendInforByIDUser(parseIDUser).on('value', (sends) => {
+          this.addListService.getSendInforByIDUser(parseIDUser).once('value', (sends) => {
             let listMeSends = []
             if(sends.val() != null) {
               sends.forEach(s_item => {
@@ -393,19 +396,30 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
                 if(account.val() != null) {
                   this.friendsPageService.addList = []
                   account.forEach(a_item => {
-                    console.log(searchValue)
                     // nếu id != id người đang đăng nhập và có ký tự nhập vào, không nằm trong danh sách bạn bè, không nằm trong danh sách gửi yêu cầu, không nằm trong danh sách nhận yêu cầu
                       if(a_item.key != parseIDUser 
-                        && a_item.val().ten.toLowerCase().trim().includes(searchValue.toLowerCase().trim()) 
+                        && a_item.val().ten.toLowerCase().trim().includes(this.friendsPageService.searchVal.toLowerCase().trim()) 
                         && !listFriendsMe.includes(a_item.key)
                         && !listMeRequest.includes(a_item.key)
-                        && !listMeSends.includes(a_item.key)) {
+                        && !listMeSends.includes(a_item.key) && this.friendsPageService.searchVal.trim() != '') {
                           let accountTemp = new AddFriendsInfor();
                           accountTemp.id = a_item.key;
                           accountTemp.name = a_item.val().ten;
                           accountTemp.img = a_item.val().link_hinh;
+                          accountTemp.lastOnline = a_item.val().lan_cuoi_dang_nhap;
                           accountTemp.checkAddOrUndo = 'them';
+                          
+                          if(this.friendsPageService.saveAddList.length != 0) {
+                            this.friendsPageService.saveAddList.forEach(element => {
+                                if(element.id == accountTemp.id)
+                                  accountTemp.checkAddOrUndo = element.checkAddOrUndo;
+                            });
+                            
+                          } else {
+                            accountTemp.checkAddOrUndo = 'them';
+                          }
                           this.friendsPageService.addList.push(accountTemp)
+                         
                       }
                   });
                   // duyệt qua danh sách từng thằng trong danh sách tìm kiếm
@@ -432,16 +446,14 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
                   });
                   this.friendsPageService.sortMutualFriendsAdd();
                   this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
-                  console.log(this.friendsPageService.addList)
+                  
                 }
             })
           })
         })
       }
     })
-    } else {
-      this.friendsPageService.addList = []
-    }
+  
   }
   
 }
