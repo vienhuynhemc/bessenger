@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: white;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 4px 8px 28px 0px #d3dceb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 633px;
+  margin-bottom: 10px;
+  z-index: 0;
+  position: relative;
+}
