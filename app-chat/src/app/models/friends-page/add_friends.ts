@@ -108,10 +108,49 @@ export class AddFriendsInfor {
    public getNameLast() {
     if (this.name != undefined) {
       let nameSplit = this.name.trim().split(' ');
-      if (nameSplit.length == 0) return nameSplit[0].toLowerCase();
-      else return nameSplit[nameSplit.length - 1].toLowerCase();
+      if (nameSplit.length == 0) return nameSplit[0];
+      else return nameSplit[nameSplit.length - 1].toUpperCase();
+    }
+    return '';
+  }
+  // chỉ lấy ra họ
+  public getFirstName() {
+    if (this.name != undefined) {
+      let nameSplit = this.name.trim().split(' ');
+      return nameSplit[0].toUpperCase();
+    }
+    return '';
+  }
+  // lấy ra tất cả trừ tên
+  public getAllNotName() {
+    if (this.name != undefined) {
+      let nameSplit = this.name.trim().split(' ');
+      let result = '';
+      for(let index = 0; index < nameSplit.length - 1; index++) {
+        result += nameSplit[index]
+      }
+      return result.toUpperCase();
     }
     return '';
   }
 
+  // kiểm tra giới hạn tên profile bạn bè
+  public checkLimitNameAddProfile() {
+    if (this.name != undefined) {
+      if (this.name.length > 13) return true;
+    }
+    return false;
+  }
+
+  // lấy ra tên đã được giới hạn profile bạn bè
+  public getNameLimitAddProfile() {
+    if (this.name != undefined) {
+      let result = this.name;
+      if (result.length > 13) {
+        result = this.name.substring(0, 12).trim();
+        result += '...';
+      }
+      return result;
+    } else return '';
+  }
 }

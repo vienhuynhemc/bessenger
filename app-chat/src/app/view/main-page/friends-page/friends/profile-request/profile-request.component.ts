@@ -22,7 +22,6 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
   constructor(
     private contactsService: ContactsService,
     private router: Router,
-    private profileFriendService: ProfileFriendService,
     public friendsPageService: FriendsPageService,
     private requestAddService: RequestAddFriendsService,
     private sendsListService: SendAddFriendService
@@ -30,7 +29,6 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getFriendFromFriendsRequestAdd();
-   
   }
   ngOnDestroy(): void {
     this.valueFromChildSubscription.unsubscribe();
@@ -113,7 +111,7 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
           this.friendInfor.id = 1;
         } else {
           idCheck = id;
-          this.requestAddService.getInforRequest(id).once('value', (data) => {
+          this.requestAddService.getInforRequest(id).on('value', (data) => {
             if(idCheck == data.key) {
               if (data.val() != null) {
                 this.friendInfor.id = id;

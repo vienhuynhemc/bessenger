@@ -1,0 +1,41 @@
+<div class="container">
+    <img *ngIf="addInfor.id == 1 " class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
+    <div class="top" *ngIf="addInfor.id != 1 " >
+        <img class="bg-top" [src]="addInfor.img || 'assets/images/loading.gif'" alt="">
+        <div class="name-opacity">{{addInfor.getFirstName()}}</div>
+        <div class="name-bg-1">{{addInfor.getFirstName()}}</div>
+        <div class="name-bg-2">{{addInfor.getNameLast()}}</div>
+        <div class="left-circle tai-tho">
+            <i class="fas fa-caret-up"></i>
+        </div>
+        <div class="right-circle tai-tho">
+            <i class="fas fa-caret-up"></i>
+        </div>
+        <div class="circle-1">
+            <div class="circle-2">
+                <div class="circle-3">
+                    <img class="avt" [src]="addInfor.img || 'assets/images/loading.gif'" alt="">
+                    <div *ngIf="!addInfor.checkLimitNameAddProfile()" class="name"><span>{{addInfor.getAllNotName()}} <span class="ten">{{addInfor.getNameLast()}}</span></span></div>
+                    <div *ngIf="addInfor.checkLimitNameAddProfile()" matTooltip="{{addInfor.name}}" matTooltipClass="tooltip" class="name"><span>{{addInfor.getNameLimitAddProfile()}} </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom" *ngIf="addInfor.id != 1 " >
+        <div (click)="onClickUndoAddFriends(addInfor, 0)" *ngIf="addInfor.checkAddOrUndo == 'thu_hoi'" matTooltip="Thu hồi" matTooltipClass="tooltip" class="add-f bot-circle">
+            <div class="content-add circle">
+                <i class="fas fa-undo"></i>
+            </div>
+        </div>
+        <div (click)="onClickAddFriends(addInfor, 0)" *ngIf="addInfor.checkAddOrUndo == 'them'" matTooltip="Thêm bạn" matTooltipClass="tooltip" class="add-f bot-circle">
+            <div class="content-add circle">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+        <div  (click)="onClickMessage(addInfor.id)" matTooltip="Nhắn tin" matTooltipClass="tooltip" class="message bot-circle">
+            <div class="content-message circle">
+                <i class="fas fa-comment" ></i>
+            </div>
+        </div>
+    </div>
+</div>

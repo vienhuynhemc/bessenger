@@ -21,7 +21,7 @@ export class AddFriendsComponent implements OnInit {
   iDUrl: any;
   mutualAddList: any[];
   idMutualAdd: string = '';
-  
+ 
   constructor(
     public friendsPageService: FriendsPageService,
     private router: Router,
@@ -35,7 +35,6 @@ export class AddFriendsComponent implements OnInit {
   ngOnInit(): void {
     this.friendsPageService.selectedAddFriendsService();
     this.getIDURLFriendsList()
-    
     this.getListAdd()
   }
   onClickExitMutual() {
@@ -113,18 +112,19 @@ export class AddFriendsComponent implements OnInit {
 
   ngOnDestroy() {
     this.valueSub.unsubscribe();
+    
   }
 
   // send object đén profile
-  sendFriendToProfile(id: any) {
-    this.contactsService.setFriendInforService(id);
+  sendFriendToProfile(id: any, addOrUndor: any) {
+    this.contactsService.setAddInforService(id,addOrUndor);
     // loading
   }
 
   // click vào bất kì người nào
   onClickSelectedFriend(friend: AddFriendsInfor, iDURL: any) {
       if (friend != null && this.iDUrl != friend.id) {
-        this.sendFriendToProfile(friend.id);
+        this.sendFriendToProfile(friend.id, friend.checkAddOrUndo);
         this.moveLink(friend.id);
       }
   }
@@ -220,7 +220,11 @@ export class AddFriendsComponent implements OnInit {
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
-                      this.friendsPageService.searchVal = this.friendsPageService.addList[0].name;
+                      // this.friendsPageService.searchVal = this.friendsPageService.addList[0].name;
+                      this.contactsService.setAddInforService(
+                       this.friendsPageService.addList[0].id,
+                        this.friendsPageService.addList[0].checkAddOrUndo
+                      );
                       check = false
                     } else {
                       this.router.navigate(['/**']);
@@ -232,8 +236,10 @@ export class AddFriendsComponent implements OnInit {
           })
         })
       }
+     
     })
     } else {
+      this.contactsService.setAddInforService(null,null);
       this.friendsPageService.saveAddList = []
       this.friendsPageService.addList = []
       this.friendsPageService.setSizeAdd(0);
@@ -251,12 +257,24 @@ export class AddFriendsComponent implements OnInit {
       })
        // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
+      ngay_tao: Number(new Date()),
       ton_tai: 0
+
     })
     // cập nhật bảng đã gửi
     this.sendsListService.editSendService(item.id,parseIDUser).update({
+      ngay_tao: Number(new Date()),
       ton_tai: 0
     })
+    // thêm bạn nhưng không chuyển trang profile
+    if(this.iDUrl == item.id) {
+      this.contactsService.setAddInforService(
+            item.id,
+            item.checkAddOrUndo
+      );
+    }
+    
+    
   }
 
   // thu hồi yêu cầu kết bạn
@@ -275,5 +293,16 @@ export class AddFriendsComponent implements OnInit {
     this.sendsListService.editSendService(item.id,parseIDUser).update({
       ton_tai: 1
     })
+    // hủy thêm bạn nhưng không chuyển trang profile
+      if(this.iDUrl == item.id) {
+        this.contactsService.setAddInforService(
+              item.id,
+              item.checkAddOrUndo
+        );
+      }
+   
+    
+     
+    
 }
 }

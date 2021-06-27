@@ -60,6 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
 import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
+import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { CreateGroupChatComponent } from './view/main-page/chat-page/create-grou
     FpSelectPasswordComponent,
     AddFriendsComponent,
     CreateGroupChatComponent,
+    ProfileAddComponent,
 
   ],
   imports: [
