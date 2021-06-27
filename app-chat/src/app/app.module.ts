@@ -58,6 +58,9 @@ import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/f
 import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
+import { MessengerHeaderComponent } from './view/main-page/chat-page/messenger/messenger-header/messenger-header.component';
+import { MessengerContentComponent } from './view/main-page/chat-page/messenger/messenger-content/messenger-content.component';
+import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +98,9 @@ import { CreateGroupChatComponent } from './view/main-page/chat-page/create-grou
     FpVerifyEmailComponent,
     FpSelectPasswordComponent,
     CreateGroupChatComponent,
+    MessengerHeaderComponent,
+    MessengerContentComponent,
+    MessengerFooterComponent,
   ],
   imports: [
     BrowserModule,

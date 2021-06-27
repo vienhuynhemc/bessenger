@@ -1,0 +1,46 @@
+<div class="header">
+
+    <div class="hinh-dai-dien">
+        <div class="nhom" *ngIf="this.header_service.object_chat.loai == 'nhom'">
+            <img [src]="this.header_service.object_chat.getImg()[0] ||'assets/images/loading.gif'" class="hinh-1"
+                alt="">
+            <img [src]="this.header_service.object_chat.getImg()[1] ||'assets/images/loading.gif'" alt=""
+                class="hinh-2">
+        </div>
+        <div class="don" *ngIf="this.header_service.object_chat.loai == 'don'">
+            <img [src]="this.header_service.object_chat.getImg()[0] ||'assets/images/loading.gif'" alt="">
+        </div>
+        <div *ngIf="this.header_service.object_chat.is_online" class="online">
+            <div class="child"></div>
+        </div>
+    </div>
+
+    <div class="thong-tin">
+        <div class="ten" [matTooltip]="this.header_service.object_chat.getName().noi_dung_goc" matTooltipClass="tooltip"
+            [matTooltipDisabled]="!this.header_service.object_chat.getName().is_cut">
+            {{this.header_service.object_chat.getName().noi_dung}}
+        </div>
+        <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online">Online</p>
+        <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online">
+            {{this.header_service.object_chat.getTime()}}</p>
+    </div>
+
+    <div class="icon">
+        <div class="child" matTooltip="Bắt đầu gọi thoại" matTooltipClass="tooltip">
+            <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="child" matTooltip="Bắt đầu gọi video" matTooltipClass="tooltip">
+            <i class="fas fa-video"></i>
+        </div>
+        <div *ngIf="this.header_service.object_chat.loai == 'nhom'" class="child" matTooltip="Những lựa chọn thêm"
+            matTooltipClass="tooltip"
+            (click)="openMenu(boxSelect)"
+            >
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="box-select hidden" #boxSelect>
+            <button> <i class="fas fa-running"></i>Rời khỏi nhóm</button>
+        </div>
+    </div>
+
+</div>
