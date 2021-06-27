@@ -47,7 +47,7 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
           this.friendInfor.id = 1;
         } else {
           idCheck = id;
-          this.sendAddService.getInforSend(id).once('value', (data) => {
+          this.sendAddService.getInforSend(id).on('value', (data) => {
             if(idCheck == data.key) {
               if (data.val() != null) {
                 this.friendInfor.id = id;
