@@ -66,6 +66,7 @@ import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/m
 import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
 import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
+import { EmojiComponent } from './view/emoji/emoji.component';
 
 
 @NgModule({
@@ -112,6 +113,7 @@ import { OfferFriendsComponent } from './view/main-page/friends-page/friends/off
 
     ProfileOfferComponent,
     OfferFriendsComponent,
+    EmojiComponent,
 
 
   ],

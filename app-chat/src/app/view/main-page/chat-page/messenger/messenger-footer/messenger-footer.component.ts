@@ -53,12 +53,28 @@ export class MessengerFooterComponent implements OnInit {
             window.scrollTo(0, window.pageYOffset + (parent_input.offsetHeight - this.last_height));
           }
           this.last_height = parent_input.offsetHeight
+          // move box cbtcx
+          if (parent_input.offsetHeight == 32) {
+            document.getElementById("box-btcx").style.top = "-301px";
+          } else if (parent_input.offsetHeight == 48) {
+            document.getElementById("box-btcx").style.top = "-293px";
+          }
+          else if (parent_input.offsetHeight == 64) {
+            document.getElementById("box-btcx").style.top = "-285px";
+          }
+          else if (parent_input.offsetHeight == 80) {
+            document.getElementById("box-btcx").style.top = "-277px";
+          }
+          else if (parent_input.offsetHeight == 83) {
+            document.getElementById("box-btcx").style.top = "-276px";
+          }
         }
       } else {
         if (this.last_height != 22) {
           this.last_height = 22;
           parent_input.style.marginBottom = "5px";
           this.messenger_footer_service.chenh_lech_height = 0;
+          document.getElementById("box-btcx").style.top = "-309px";
         }
       }
     }
