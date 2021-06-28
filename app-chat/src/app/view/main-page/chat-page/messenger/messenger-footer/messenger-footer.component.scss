@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: white;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 4px 8px 28px 0px #d3dceb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon {
+    margin-left: 15px;
+    display: flex;
+    .child {
+      margin-left: 5px;
+      margin-right: 5px;
+      i {
+        font-size: 18px;
+        margin-top: 1px;
+      }
+    }
+  }
+
+  .khung-chat {
+    display: flex;
+    width: 273px;
+    border-radius: 50px;
+    background-color: #f0f2f5;
+    align-items: center;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+
+    textarea {
+      color: #050505;
+      width: 238px;
+      margin-left: 10px;
+      height: 22px;
+      border: none;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      outline: none;
+      font-family: "Raleway";
+      background: #f0f2f5;
+      font-weight: 500;
+    }
+  }
+
+  .bieu-tuong-cam-xuc-chat {
+    margin-right: 15px;
+  }
+}

@@ -3,18 +3,32 @@
   padding: 0;
 }
 
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #e8a2a224;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+}
+
+.loading .anim {
+  border: 4px solid #da9696;
+  border-radius: 50%;
+  background: white;
+  width: 300px;
+  height: 300px;
+}
+
 .container {
   position: relative;
   background-color: #f5f9fc;
   border-radius: 40px;
   height: 100%;
   width: 1144px;
-}
-
-.container app-friends-list {
-  height: 100%;
-  position: absolute;
-  top: 20px;
-  left: 20px;
 }
 /*# sourceMappingURL=chat-page.component.css.map */

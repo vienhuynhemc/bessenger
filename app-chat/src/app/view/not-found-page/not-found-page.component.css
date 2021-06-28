@@ -5,21 +5,18 @@
 
 .container {
   width: 1244px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 800px;
   background-color: #03294e;
-  -webkit-box-shadow: 0 0 73px 10px #d7e2edd6;
-          box-shadow: 0 0 73px 10px #d7e2edd6;
+  box-shadow: 0 0 73px 10px #d7e2edd6;
   border-radius: 30px;
   margin: 50px;
   position: relative;
 }
 
 .container .anim {
-  -webkit-transform: translateX(-100px);
-          transform: translateX(-100px);
+  transform: translateX(-100px);
+  width: 725px;
 }
 
 .container .title {
@@ -52,6 +49,7 @@
 }
 
 .container .go-to-home-page {
+  cursor: pointer;
   position: absolute;
   font-family: sans-serif;
   color: white;

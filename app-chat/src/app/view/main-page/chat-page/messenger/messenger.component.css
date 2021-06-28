@@ -6,9 +6,15 @@
 .container {
   position: absolute;
   width: 502px;
-  background-color: red;
   height: 760px;
   left: 321px;
   top: 20px;
+}
+
+.container .content {
+  display: flex;
+  height: 92%;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 /*# sourceMappingURL=messenger.component.css.map */

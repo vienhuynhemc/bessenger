@@ -9,5 +9,37 @@
   border-radius: 40px;
   height: 100%;
   width: 1144px;
+  display: flex;
+}
+
+.container .avatar, .container .profile, .container .change-pass {
+  position: absolute;
+  height: 100%;
+  top: 80px;
+  left: 20px;
+}
+
+.container .profile {
+  left: 321px;
+}
+
+.container .change-pass {
+  top: 410px;
+  left: 321px;
+}
+
+.container .title {
+  position: absolute;
+  left: 30px;
+  top: 25px;
+  font-family: 'Raleway';
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.container .title i {
+  font-size: 25px;
+  padding-right: 10px;
+  color: gray;
 }
 /*# sourceMappingURL=personal-page.component.css.map */

@@ -1,12 +1,13 @@
-<div class="container" *ngIf="this.ma_cuoc_tro_chuyen != 'danh-sach'">
-    <div class="header">
-        {{this.ma_cuoc_tro_chuyen}}
-    </div>
+<div class="container" *ngIf="this.messenger_main_service.ma_cuoc_tro_chuyen != 'danh-sach'">
+
+    <!-- Header -->
+    <app-messenger-header></app-messenger-header>
 
     <div class="content">
-    </div>
-
-    <div class="footer">
+        <!-- Content -->
+        <app-messenger-content></app-messenger-content>
+        <!-- Footer -->
+        <app-messenger-footer></app-messenger-footer>
     </div>
 </div>
 

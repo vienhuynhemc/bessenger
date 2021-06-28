@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 
 @Component({
   selector: 'app-messenger',
@@ -8,15 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MessengerComponent implements OnInit {
 
-  ma_cuoc_tro_chuyen: string;
-
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public messenger_main_service: MessengerMainService,
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.ma_cuoc_tro_chuyen = params['id'];
+      this.messenger_main_service.ma_cuoc_tro_chuyen = params['id'];
     });
   }
 
