@@ -68,17 +68,20 @@ export class ProfileAddComponent implements OnInit {
   onClickAddFriends(item: AddFriendsInfor, index: number) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     let indexCheck;
-    this.friendsPageService.addList.forEach((element, indexT) => {
-      if (element.id == item.id) {
-        indexCheck = indexT;
-        element.checkAddOrUndo = 'thu_hoi';
-      }
-    });
-    this.friendsPageService.saveAddList.push({
-      id: item.id,
-      checkAddOrUndo:
-        this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-    });
+    if(this.friendsPageService.addList.length > 0) {
+      this.friendsPageService.addList.forEach((element, indexT) => {
+        if (element.id == item.id) {
+          indexCheck = indexT;
+          element.checkAddOrUndo = 'thu_hoi';
+        }
+      });
+      this.friendsPageService.saveAddList.push({
+        id: item.id,
+        checkAddOrUndo:
+          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+      });
+    }
+   
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ngay_tao: Number(new Date()),
@@ -94,20 +97,21 @@ export class ProfileAddComponent implements OnInit {
 
   // thu hồi yêu cầu kết bạn
   onClickUndoAddFriends(item: AddFriendsInfor, index: number) {
-    this.friendsPageService.addList[index].checkAddOrUndo = 'them';
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     let indexCheck;
-    this.friendsPageService.addList.forEach((element, indexT) => {
-      if (element.id == item.id) {
-        indexCheck = indexT;
-        element.checkAddOrUndo = 'them';
-      }
-    });
-    this.friendsPageService.saveAddList.push({
-      id: item.id,
-      checkAddOrUndo:
-        this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-    });
+    if(this.friendsPageService.addList.length > 0) {
+      this.friendsPageService.addList.forEach((element, indexT) => {
+        if (element.id == item.id) {
+          indexCheck = indexT;
+          element.checkAddOrUndo = 'them';
+        }
+      });
+      this.friendsPageService.saveAddList.push({
+        id: item.id,
+        checkAddOrUndo:
+          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+      });
+    }
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ton_tai: 1,
