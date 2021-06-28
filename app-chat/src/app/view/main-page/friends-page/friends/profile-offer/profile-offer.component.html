@@ -1,21 +1,30 @@
-<div class="container">
-    <img class="bg" src="assets/images/list-friends-chat-page/avt5.jpg" alt="">
+<div *ngIf="offerInfor.id == 1" class="container">
+    <img  class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
+</div>
+<div  *ngIf="offerInfor.id != 1" class="container">
+    <img class="bg" [src]="offerInfor.img || 'assets/images/loading.gif'" alt="">
     <div class="profile">
-        <span>Xin Chào ! Husky Cỏ</span>
+        <span>Xin Chào !</span>
     </div>
     <div class="circle-top circle">
         <div class="content-circle-top circle-content"></div>
     </div>
     <div class="line"></div>
-    <div class="name-line">MOMO IGHIGO</div>
+    <div class="name-line">Bessenger</div>
     <img class="icon-bess" src="assets/images/icon.ico" alt="">
-    <div class="name"><span class="name-content">MOMO IGHIGO</span></div>
-    <div class="circle-add circle-event">
+    <div *ngIf="!offerInfor.checkLimitNameOfferProfile()" class="name"><span class="name-content">{{offerInfor.name}}</span></div>
+    <div *ngIf="offerInfor.checkLimitNameOfferProfile()" matTooltip="{{offerInfor.name}}" matTooltipClass="tooltip" class="name"><span class="name-content">{{offerInfor.getNameLimitOfferProfile()}}</span></div>
+    <div (click)="onClickAddFriends(offerInfor, 0)" *ngIf="offerInfor.checkAddOrUndo == 'them'" matTooltip="Thêm bạn" matTooltipClass="tooltip" class="circle-add circle-event">
         <div class="add event">
             <i class="fas fa-plus"></i>
         </div>
     </div>
-    <div class="circle-message circle-event">
+    <div (click)="onClickUndoAddFriends(offerInfor, 0)"  *ngIf="offerInfor.checkAddOrUndo == 'thu_hoi'" matTooltip="Thu hồi" matTooltipClass="tooltip" class="circle-add circle-event">
+        <div class="add event">
+            <i class="fas fa-undo"></i>
+        </div>
+    </div>
+    <div (click)="onClickMessage(offerInfor.id)" matTooltip="Nhắn tin" matTooltipClass="tooltip" class="circle-message circle-event">
         <div class="message event">
             <i class="fas fa-comment" ></i>
         </div>

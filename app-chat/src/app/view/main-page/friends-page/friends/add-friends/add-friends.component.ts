@@ -134,6 +134,7 @@ export class AddFriendsComponent implements OnInit {
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
     this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
+      let checkScroll = false;
       let listFriendsMe = [];
       if(friends.val() != null) {
         let check = true;
@@ -168,9 +169,7 @@ export class AddFriendsComponent implements OnInit {
                   this.friendsPageService.addList = []
                   account.forEach(a_item => {
                     // nếu id != id người đang đăng nhập và có ký tự nhập vào, không nằm trong danh sách bạn bè, không nằm trong danh sách gửi yêu cầu, không nằm trong danh sách nhận yêu cầu
-                    // nếu đang chưa load trang thì để danh sách đã gửi rỗng để không mất người mình vừa gửi
-                    if(this.friendsPageService.saveAddList.length != 0)
-                    listMeSends = []
+                    
                     if(a_item.key != parseIDUser 
                         && a_item.key == this.iDUrl 
                         && !listMeSends.includes(a_item.key)
@@ -192,6 +191,23 @@ export class AddFriendsComponent implements OnInit {
                             accountTemp.checkAddOrUndo = 'them';
                           }
                           this.friendsPageService.addList.push(accountTemp)
+                      } else {
+                        if(this.friendsPageService.saveAddList.length >0) {
+                          this.friendsPageService.saveAddList.forEach(element => {
+                              if(element.id == a_item.key) {
+                                let accountTemp = new AddFriendsInfor();
+                                accountTemp.id = a_item.key;
+                                accountTemp.name = a_item.val().ten;
+                                accountTemp.img = a_item.val().link_hinh;
+                                accountTemp.checkAddOrUndo = 'them';
+                                this.friendsPageService.saveAddList.forEach(element => {
+                                      if(element.id == accountTemp.id)
+                                        accountTemp.checkAddOrUndo = element.checkAddOrUndo;
+                                });
+                                this.friendsPageService.addList.push(accountTemp)
+                              }
+                          });
+                        }
                       }
                    
                   });
@@ -217,16 +233,17 @@ export class AddFriendsComponent implements OnInit {
                         }
                       })
                   });
+                 
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
-                      // this.friendsPageService.searchVal = this.friendsPageService.addList[0].name;
                       this.contactsService.setAddInforService(
                        this.friendsPageService.addList[0].id,
                         this.friendsPageService.addList[0].checkAddOrUndo
                       );
                       check = false
                     } else {
+                      
                       this.router.navigate(['/**']);
                       check = false
                     }

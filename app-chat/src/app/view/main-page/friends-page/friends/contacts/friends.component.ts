@@ -202,12 +202,17 @@ export class FriendsComponent implements OnInit, OnDestroy {
         .once('value', (data) => {
           let check = true;
           if (data.val() != null) {
-            data.forEach((element) => {
+            data.forEach((element,index) => {
               if (element.val().ton_tai == 0) {
                 if (element.key == this.iDUrl) {
                   this.moveLink(element.key);
                   this.sendFriendToProfile(element.key);
                   check = false;
+                  // scroll tới người được chọn
+                  if(element.key == this.iDUrl && index > 4) {
+                    const scroll = document.getElementById('scroll-content');
+                    scroll.scrollTo({ top: index*23, behavior: "smooth" })
+                  }
                 }
               }
             });
@@ -229,6 +234,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
           element_x.forEach((element) => {
             if (element.key == parseIDUser || element.key == id) countCheck++;
           });
+        
           if (countCheck == 2) {
             this.profileFriendService
               .getKindConversation(element_x.key)

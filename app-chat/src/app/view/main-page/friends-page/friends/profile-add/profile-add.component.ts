@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
@@ -13,7 +13,7 @@ import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send
   templateUrl: './profile-add.component.html',
   styleUrls: ['./profile-add.component.scss'],
 })
-export class ProfileAddComponent implements OnInit {
+export class ProfileAddComponent implements OnInit, OnDestroy {
   addInfor: AddFriendsInfor;
   private valueFromChildSubscription: Subscription;
   iDUrl: any;
@@ -68,17 +68,20 @@ export class ProfileAddComponent implements OnInit {
   onClickAddFriends(item: AddFriendsInfor, index: number) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     let indexCheck;
-    this.friendsPageService.addList.forEach((element, indexT) => {
-      if (element.id == item.id) {
-        indexCheck = indexT;
-        element.checkAddOrUndo = 'thu_hoi';
-      }
-    });
-    this.friendsPageService.saveAddList.push({
-      id: item.id,
-      checkAddOrUndo:
-        this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-    });
+    if(this.friendsPageService.addList.length > 0) {
+      this.friendsPageService.addList.forEach((element, indexT) => {
+        if (element.id == item.id) {
+          indexCheck = indexT;
+          element.checkAddOrUndo = 'thu_hoi';
+        }
+      });
+      this.friendsPageService.saveAddList.push({
+        id: item.id,
+        checkAddOrUndo:
+          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+      });
+    }
+   
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ngay_tao: Number(new Date()),
@@ -94,20 +97,21 @@ export class ProfileAddComponent implements OnInit {
 
   // thu hồi yêu cầu kết bạn
   onClickUndoAddFriends(item: AddFriendsInfor, index: number) {
-    this.friendsPageService.addList[index].checkAddOrUndo = 'them';
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     let indexCheck;
-    this.friendsPageService.addList.forEach((element, indexT) => {
-      if (element.id == item.id) {
-        indexCheck = indexT;
-        element.checkAddOrUndo = 'them';
-      }
-    });
-    this.friendsPageService.saveAddList.push({
-      id: item.id,
-      checkAddOrUndo:
-        this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-    });
+    if(this.friendsPageService.addList.length > 0) {
+      this.friendsPageService.addList.forEach((element, indexT) => {
+        if (element.id == item.id) {
+          indexCheck = indexT;
+          element.checkAddOrUndo = 'them';
+        }
+      });
+      this.friendsPageService.saveAddList.push({
+        id: item.id,
+        checkAddOrUndo:
+          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+      });
+    }
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ton_tai: 1,
@@ -173,7 +177,9 @@ export class ProfileAddComponent implements OnInit {
               .getKindConversation()
               .push();
             keyConverNew.update({
-              loai_cuoc_tro_truyen: 'don',
+              bieu_tuong_cam_xuc: "khong",
+              loai_cuoc_tro_truyen: "don",
+              mau: "#3275f7"
             });
             // thêm thành viên cuộc trò chuyện
             this.requestListService

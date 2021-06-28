@@ -36,6 +36,12 @@ export class FriendsPageService {
   sizeAdd: number;
   searchVal: string ='';
   saveAddList: any[]
+
+  // đề xuất
+  offerList: any[];
+  sizeOffer: number;
+  searchValOffer: string ='';
+  saveOfferList: any[]
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
@@ -128,9 +134,27 @@ export class FriendsPageService {
   getSizeAdd() {
     return this.sizeAdd;
   }
+
+   // danh sách de xuat
+   setSizeOffer(size:number) {
+    this.sizeOffer = size;
+  }
+    getSizeOffer() {
+    return this.sizeOffer;
+  }
+
   // sắp xếp danh sách thêm bạn theo thứ tự bạn chung từ nhiều nhất đến ít nhất
   public sortMutualFriendsAdd() {
     this.addList = this.addList.sort((mutual1, mutual2) => {
+      let mutualResult_1 = mutual1.mutualFriends;
+      let mutualResult_2 = mutual2.mutualFriends;
+      return mutualResult_2 - mutualResult_1;
+    });
+  }
+
+   // sắp xếp danh sách thêm bạn theo thứ tự bạn chung từ nhiều nhất đến ít nhất
+   public sortMutualFriendsOffer() {
+    this.offerList = this.offerList.sort((mutual1, mutual2) => {
       let mutualResult_1 = mutual1.mutualFriends;
       let mutualResult_2 = mutual2.mutualFriends;
       return mutualResult_2 - mutualResult_1;
@@ -211,4 +235,5 @@ export class FriendsPageService {
     }, 5000);
   }
 
+ 
 }

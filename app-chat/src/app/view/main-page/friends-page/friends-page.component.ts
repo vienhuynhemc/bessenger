@@ -49,6 +49,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     }, 0);
     this.getSelectedFriendsPage();
     this.friendsPageService.saveAddList = []
+    this.friendsPageService.saveOfferList = []
   }
   
   // get về trạng thái page
@@ -182,7 +183,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     if(this.friendsPageDefautl != 3) {
       this.router.navigate(['them-ban/'], { relativeTo: this.route});
       this.friendsPageService.selectedAddFriendsService()
-      this.contactsService.setFriendInforService(null);
+      this.contactsService.setAddInforService(null,null);
       // gọi hàm để tránh tình trạng hiển thị lại giá trị cũ do firebase tự update ban_be
       this.searchAddFriends('')
     }
@@ -192,7 +193,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     if(this.friendsPageDefautl != 4) {
       this.router.navigate(['de-xuat/'], { relativeTo: this.route});
       this.friendsPageService.selectedOffersFriendsService();
-      this.contactsService.setFriendInforService(null);
+      this.contactsService.setOfferInforService(null,null);
      
     }
   }
