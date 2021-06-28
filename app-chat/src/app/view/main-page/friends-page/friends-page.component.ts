@@ -67,11 +67,13 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
    
     const request = document.getElementById('btn-request');
     const send = document.getElementById('btn-send');
-    const add = document.getElementById('btn-add-friends')
+    const add = document.getElementById('btn-add-friends');
+    const offer = document.getElementById('btn-offers');
     const iconFriends = document.getElementById('icon_f');
     const iconRequest = document.getElementById('icon_r');
     const iconSend = document.getElementById('icon_s');
     const iconAdd= document.getElementById('icon_add');
+    const iconOffer = document.getElementById('icon_offers')
     if (index === 0) {
       friends.style.cssText = 'background-color: #3275f7;color: white;';
       iconFriends.style.color = 'white';
@@ -83,7 +85,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       iconSend.style.color = 'rgb(136, 133, 133)';
 
       add.style.backgroundColor = 'white';
-      iconAdd.style.color = '#888585'
+      iconAdd.style.color = '#888585';
+
+      offer.style.backgroundColor = 'white';
+      iconOffer.style.color = '#888585';
     } else if (index === 1) {
       friends.style.cssText = 'background-color: white;color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
@@ -95,7 +100,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       iconSend.style.color = 'rgb(136, 133, 133)';
 
       add.style.backgroundColor = 'white';
-      iconAdd.style.color = '#888585'
+      iconAdd.style.color = '#888585';
+
+      offer.style.backgroundColor = 'white';
+      iconOffer.style.color = '#888585';
     } else if(index == 2) {
       friends.style.cssText = 'background-color: white; color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
@@ -107,7 +115,10 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       iconSend.style.color = 'white';
 
       add.style.backgroundColor = 'white';
-      iconAdd.style.color = '#888585'
+      iconAdd.style.color = '#888585';
+
+      offer.style.backgroundColor = 'white';
+      iconOffer.style.color = '#888585';
     } else if(index == 3) {
       friends.style.cssText = 'background-color: white; color: black;';
       iconFriends.style.color = 'rgb(136, 133, 133)';
@@ -119,8 +130,26 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       iconSend.style.color = 'rgb(136, 133, 133)';
 
       add.style.backgroundColor = '#3275f7';
-      iconAdd.style.color = 'white'
+      iconAdd.style.color = 'white';
 
+      offer.style.backgroundColor = 'white';
+      iconOffer.style.color = '#888585';
+
+    } else {
+      friends.style.cssText = 'background-color: white; color: black;';
+      iconFriends.style.color = 'rgb(136, 133, 133)';
+
+      request.style.cssText = 'background-color: white; color: black;';
+      iconRequest.style.color = 'rgb(136, 133, 133)';
+
+      send.style.cssText = 'background-color: white; color: black;';
+      iconSend.style.color = 'rgb(136, 133, 133)';
+
+      add.style.backgroundColor = 'white';
+      iconAdd.style.color = '#888585';
+
+      offer.style.backgroundColor = '#3275f7';
+      iconOffer.style.color = 'white';
     }
   }
   
@@ -156,6 +185,15 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       this.contactsService.setFriendInforService(null);
       // gọi hàm để tránh tình trạng hiển thị lại giá trị cũ do firebase tự update ban_be
       this.searchAddFriends('')
+    }
+  }
+
+  moveToOfferFriends() {
+    if(this.friendsPageDefautl != 4) {
+      this.router.navigate(['de-xuat/'], { relativeTo: this.route});
+      this.friendsPageService.selectedOffersFriendsService();
+      this.contactsService.setFriendInforService(null);
+     
     }
   }
   // xoa ban be

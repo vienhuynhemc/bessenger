@@ -64,6 +64,8 @@ import { MessengerHeaderComponent } from './view/main-page/chat-page/messenger/m
 import { MessengerContentComponent } from './view/main-page/chat-page/messenger/messenger-content/messenger-content.component';
 import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
 import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
+import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
+import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 
 
 @NgModule({
@@ -107,6 +109,11 @@ import { ProfileAddComponent } from './view/main-page/friends-page/friends/profi
     MessengerContentComponent,
     MessengerFooterComponent,
     ProfileAddComponent,
+
+    ProfileOfferComponent,
+    OfferFriendsComponent,
+
+
   ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@
             </div>
             <div class="title" *ngIf="friendsPageDefautl === 3">{{this.friendsPageService.getSizeAdd()}} kết quả
             </div>
-            <div matTooltip="Đề xuất kết bạn" class="next btn-offer" matTooltipClass="tooltip"><i  class="fas fa-lightbulb"></i></div>
+            <div (click)="moveToOfferFriends()" (click)="onClickMenu(4)" id="btn-offers" matTooltip="Đề xuất kết bạn" class="next btn-offer" matTooltipClass="tooltip"><i id="icon_offers"  class="fas fa-lightbulb"></i></div>
             <div (click)="moveToAddFriends()" (click)="onClickMenu(3)"  id="btn-add-friends" class="next btn-result" matTooltipClass="tooltip" matTooltip="Thêm bạn"><i id="icon_add" class="fas fa-user-plus"></i></div>
         </div>
         <router-outlet></router-outlet>
@@ -56,6 +56,7 @@
         <app-profile-request *ngIf="friendsPageDefautl === 1"></app-profile-request>
         <app-profile-send *ngIf="friendsPageDefautl === 2"></app-profile-send>
         <app-profile-add *ngIf="friendsPageDefautl === 3"></app-profile-add>
+        <app-profile-offer *ngIf="friendsPageDefautl === 4"></app-profile-offer>
     </div>
 </div>
 
