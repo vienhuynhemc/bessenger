@@ -49,6 +49,7 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
     }, 0);
     this.getSelectedFriendsPage();
     this.friendsPageService.saveAddList = []
+    this.friendsPageService.saveOfferList = []
   }
   
   // get về trạng thái page

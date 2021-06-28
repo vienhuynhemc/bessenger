@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="left">
-        <div class="search">
+        <div class="search" [class.search-none]="friendsPageDefautl === 4">
             <input *ngIf="friendsPageDefautl === 0" type="text" placeholder="Tìm kiếm"
                 (input)="searchFriends(myinput.value)" #myinput>
             <input *ngIf="friendsPageDefautl === 1" type="text" placeholder="Tìm kiếm"
@@ -45,6 +45,8 @@
              <div class="title" *ngIf="friendsPageDefautl === 2">{{this.friendsPageService.getSizeSends()}} kết quả
             </div>
             <div class="title" *ngIf="friendsPageDefautl === 3">{{this.friendsPageService.getSizeAdd()}} kết quả
+            </div>
+            <div class="title" *ngIf="friendsPageDefautl === 4">{{this.friendsPageService.getSizeOffer()}} kết quả
             </div>
             <div (click)="moveToOfferFriends()" (click)="onClickMenu(4)" id="btn-offers" matTooltip="Đề xuất kết bạn" class="next btn-offer" matTooltipClass="tooltip"><i id="icon_offers"  class="fas fa-lightbulb"></i></div>
             <div (click)="moveToAddFriends()" (click)="onClickMenu(3)"  id="btn-add-friends" class="next btn-result" matTooltipClass="tooltip" matTooltip="Thêm bạn"><i id="icon_add" class="fas fa-user-plus"></i></div>

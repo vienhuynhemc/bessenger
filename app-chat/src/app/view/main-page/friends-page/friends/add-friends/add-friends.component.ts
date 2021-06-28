@@ -168,9 +168,7 @@ export class AddFriendsComponent implements OnInit {
                   this.friendsPageService.addList = []
                   account.forEach(a_item => {
                     // nếu id != id người đang đăng nhập và có ký tự nhập vào, không nằm trong danh sách bạn bè, không nằm trong danh sách gửi yêu cầu, không nằm trong danh sách nhận yêu cầu
-                    // nếu đang chưa load trang thì để danh sách đã gửi rỗng để không mất người mình vừa gửi
-                    if(this.friendsPageService.saveAddList.length != 0)
-                    listMeSends = []
+                    
                     if(a_item.key != parseIDUser 
                         && a_item.key == this.iDUrl 
                         && !listMeSends.includes(a_item.key)

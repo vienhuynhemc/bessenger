@@ -1,1 +1,27 @@
-<p>offer-friends works!</p>
+<div class="friends-list">
+    <div class="friends-list-content">
+        <div id="id-{{i}}"    class="detail-friend"  *ngFor="let item of this.friendsPageService.offerList; let i = index"  >
+                <div class="detail-sub" (click)="onClickSelectedFriend(item, iDUrl)">
+                    <div class="detail-left">
+                        <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                    </div>
+                    <div  class="detail-center">
+                        <div *ngIf="item.checkLimitNameOfferList()"  matTooltip="{{item.name}}" matTooltipClass="tooltip" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.getNameLimitOfferList()}}</div>
+                        <div *ngIf="!item.checkLimitNameOfferList()" [class.non-mutual]="item.mutualFriends == 0" class="name">{{item.name}}</div>
+                    </div>
+                    
+                </div>
+                <div (click)="onClickGetIDFriendMutual(item.id)"  *ngIf="item.mutualFriends != 0" class="mutual-friends">{{item.mutualFriends}} bạn chung</div>
+                <div class="detail-right">
+                    <div *ngIf="item.checkAddOrUndo == 'them'" class="add-f btn" (click)="onClickAddFriends(item, i)">
+                        <i class="fas fa-plus"></i>
+                        <span>Thêm bạn bè</span>
+                    </div>
+                    <div *ngIf="item.checkAddOrUndo == 'thu_hoi'" class="add-f btn" (click)="onClickUndoAddFriends(item, i)">
+                        <i class="fas fa-undo"></i>
+                        <span>Thu hồi</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
