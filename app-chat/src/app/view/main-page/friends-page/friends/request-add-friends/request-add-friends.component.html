@@ -1,5 +1,5 @@
 <div class="friends-list">
-    <div class="friends-list-content">
+    <div class="friends-list-content" id="scroll-content">
 
         <div [class.detail-selected]="item.id === iDUrl" class="detail-friend"  *ngFor="let item of this.friendsPageService.getRequestList(); let i = index" (click)="onClickSelectedFriend(item, iDUrl)">
 

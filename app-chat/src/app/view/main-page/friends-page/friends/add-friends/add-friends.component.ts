@@ -134,6 +134,7 @@ export class AddFriendsComponent implements OnInit {
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
     this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
+      let checkScroll = false;
       let listFriendsMe = [];
       if(friends.val() != null) {
         let check = true;
@@ -232,7 +233,7 @@ export class AddFriendsComponent implements OnInit {
                         }
                       })
                   });
-                  
+                 
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);

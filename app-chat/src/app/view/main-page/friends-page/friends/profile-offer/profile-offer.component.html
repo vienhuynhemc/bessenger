@@ -10,7 +10,7 @@
         <div class="content-circle-top circle-content"></div>
     </div>
     <div class="line"></div>
-    <div class="name-line">{{offerInfor.name}}</div>
+    <div class="name-line">Bessenger</div>
     <img class="icon-bess" src="assets/images/icon.ico" alt="">
     <div *ngIf="!offerInfor.checkLimitNameOfferProfile()" class="name"><span class="name-content">{{offerInfor.name}}</span></div>
     <div *ngIf="offerInfor.checkLimitNameOfferProfile()" matTooltip="{{offerInfor.name}}" matTooltipClass="tooltip" class="name"><span class="name-content">{{offerInfor.getNameLimitOfferProfile()}}</span></div>

@@ -149,13 +149,20 @@ export class RequestAddFriendsComponent implements OnInit {
     this.requestListService.getRequestInforByIDUser(parseIDUser).once('value', (data) => {
       let check = true
         if(data.val() != null) {
+          let index = 0;
           data.forEach(element => {
               if(element.val().ton_tai == 0) {
                 if(element.key == this.iDUrl){
                   this.moveLinkRequest(element.key)
                   this.sendFriendToProfileRequest(element.key)
                   check = false;
+                   // scroll tới người được chọn
+                   if(element.key == this.iDUrl && index > 4) {
+                    const scroll = document.getElementById('scroll-content');
+                    scroll.scrollTo({ top: index*23, behavior: "smooth" })
+                  }
               }
+              index++;
               }
           });
           if(check) 
