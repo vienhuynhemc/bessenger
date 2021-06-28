@@ -44,6 +44,12 @@ export class MessengerHeaderService {
     }, 5000);
   }
 
+  public dienThongTinCoBan(object: Object): void {
+    this.object_chat.loai = object['loai_cuoc_tro_truyen'];
+    this.object_chat.mau = object['mau'];
+    this.object_chat.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+  }
+
   public getObjectChat(ma_cuoc_tro_chuyen: string) {
     return this.db.object("/cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen).snapshotChanges();
   }
