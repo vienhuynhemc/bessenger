@@ -20,7 +20,7 @@ export class MessengerHeaderComponent implements OnInit {
     this.route.params.subscribe(params => {
       // Lấy loại cuộc trò chuyện
       this.header_service.getObjectChat(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-        this.header_service.object_chat.loai = data.payload.toJSON()['loai_cuoc_tro_truyen'];
+        this.header_service.dienThongTinCoBan(data.payload.toJSON());
         // Lấy thông tin nhóm của nó nếu có
         this.header_service.getThongTinTroChuyenNhom(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
           this.header_service.dienThongTinNhom(data.payload.toJSON());

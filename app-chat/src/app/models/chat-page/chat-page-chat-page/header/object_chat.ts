@@ -4,6 +4,8 @@ export class ObjectChat {
 
     ma_tai_khoan_so_huu: string;
     loai: string;
+    mau: string;
+    bieu_tuong_cam_xuc: string;
     ten_nhom: string;
     is_online: boolean;
     thanh_vien: ObjectChatThanhVien[];
