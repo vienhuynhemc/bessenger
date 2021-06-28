@@ -25,7 +25,7 @@ export class ChatPageCreateGroupService {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Cuộc trò chuyện
-    let cuoc_tro_chuyen = this.db.list("/cuoc_tro_chuyen").push({ loai_cuoc_tro_truyen: "nhom" });
+    let cuoc_tro_chuyen = this.db.list("/cuoc_tro_chuyen").push({ loai_cuoc_tro_truyen: "nhom", bieu_tuong_cam_xuc: "khong", mau: "#3275f7" });
     // Thông tin trò chuyện nhóm
     this.db.object("/thong_tin_tro_chuyen_nhom/" + cuoc_tro_chuyen.key).update(
       {
