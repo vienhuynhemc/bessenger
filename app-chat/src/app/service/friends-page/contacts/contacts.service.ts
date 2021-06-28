@@ -15,16 +15,28 @@ import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
 export class ContactsService {
   private friendSource = new BehaviorSubject<FriendInfor>(null);
   friendInforService = this.friendSource.asObservable();
+  // add
   private addSource = new BehaviorSubject<any>(null);
   addInforService = this.addSource.asObservable();
+  // de xuat
+  private offerSource = new BehaviorSubject<any>(null);
+  offerInforService = this.offerSource.asObservable();
   constructor(
     private db: AngularFireDatabase,
     
   ) {
     
   }
+  // add
   setAddInforService(id: string, addOrUndo: string) {
     this.addSource.next({
+      id: id,
+      addOrUndo: addOrUndo
+    })
+  }
+// offer
+  setOfferInforService(id: string, addOrUndo: string) {
+    this.offerSource.next({
       id: id,
       addOrUndo: addOrUndo
     })

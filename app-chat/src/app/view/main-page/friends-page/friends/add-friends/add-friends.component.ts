@@ -190,6 +190,23 @@ export class AddFriendsComponent implements OnInit {
                             accountTemp.checkAddOrUndo = 'them';
                           }
                           this.friendsPageService.addList.push(accountTemp)
+                      } else {
+                        if(this.friendsPageService.saveAddList.length >0) {
+                          this.friendsPageService.saveAddList.forEach(element => {
+                              if(element.id == a_item.key) {
+                                let accountTemp = new AddFriendsInfor();
+                                accountTemp.id = a_item.key;
+                                accountTemp.name = a_item.val().ten;
+                                accountTemp.img = a_item.val().link_hinh;
+                                accountTemp.checkAddOrUndo = 'them';
+                                this.friendsPageService.saveAddList.forEach(element => {
+                                      if(element.id == accountTemp.id)
+                                        accountTemp.checkAddOrUndo = element.checkAddOrUndo;
+                                });
+                                this.friendsPageService.addList.push(accountTemp)
+                              }
+                          });
+                        }
                       }
                    
                   });
@@ -215,16 +232,17 @@ export class AddFriendsComponent implements OnInit {
                         }
                       })
                   });
+                  
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
-                      // this.friendsPageService.searchVal = this.friendsPageService.addList[0].name;
                       this.contactsService.setAddInforService(
                        this.friendsPageService.addList[0].id,
                         this.friendsPageService.addList[0].checkAddOrUndo
                       );
                       check = false
                     } else {
+                      
                       this.router.navigate(['/**']);
                       check = false
                     }

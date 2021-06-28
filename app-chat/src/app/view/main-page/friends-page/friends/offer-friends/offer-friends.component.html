@@ -1,6 +1,6 @@
 <div class="friends-list">
     <div class="friends-list-content">
-        <div id="id-{{i}}"    class="detail-friend"  *ngFor="let item of this.friendsPageService.offerList; let i = index"  >
+        <div id="id-{{i}}"  [class.detail-selected]="item.id === iDUrl"  class="detail-friend"  *ngFor="let item of this.friendsPageService.offerList; let i = index"  >
                 <div class="detail-sub" (click)="onClickSelectedFriend(item, iDUrl)">
                     <div class="detail-left">
                         <img [src]="item.img || 'assets/images/loading.gif'" alt="">
@@ -22,6 +22,29 @@
                         <span>Thu hồi</span>
                     </div>
                 </div>
+        </div>
+    </div>
+</div>
+<div class="mutual-friends-list" [class.mutual-display]="idMutualOffer!= ''">
+    <div class="content-mutual-friends">
+        <div class="header">
+            <div class="title">Bạn chung</div>
+            <div class="exit" (click)="onClickExitMutual()"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="content-scroll">
+            <div class="detail-mutual-friends" *ngFor="let item of  mutualOfferList; let i = index">
+                    <div class="detail-left">
+                        <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                    </div>
+                    <div  class="detail-right">
+                        <div *ngIf="item.checkLimitNameMutualOffer()" class="name">{{item.getNameLimitMutualOffer()}}</div>
+                        <div *ngIf="!item.checkLimitNameMutualOffer()" class="name">{{item.name}}</div>
+                        <div class="date"><span>Ngày kết bạn:</span> {{item.dateAddFormatMutualOffer()}}</div>
+                    </div>
+                    <div class="right-date">
+                        <div class="gender"><span>Giới tính:</span> {{item.sex}}</div>
+                    </div>
+            </div>
         </div>
     </div>
 </div>

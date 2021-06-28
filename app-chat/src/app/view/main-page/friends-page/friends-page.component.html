@@ -46,7 +46,7 @@
             </div>
             <div class="title" *ngIf="friendsPageDefautl === 3">{{this.friendsPageService.getSizeAdd()}} kết quả
             </div>
-            <div class="title" *ngIf="friendsPageDefautl === 4">{{this.friendsPageService.getSizeOffer()}} kết quả
+            <div class="title" *ngIf="friendsPageDefautl === 4">{{this.friendsPageService.getSizeOffer()}} đề xuất
             </div>
             <div (click)="moveToOfferFriends()" (click)="onClickMenu(4)" id="btn-offers" matTooltip="Đề xuất kết bạn" class="next btn-offer" matTooltipClass="tooltip"><i id="icon_offers"  class="fas fa-lightbulb"></i></div>
             <div (click)="moveToAddFriends()" (click)="onClickMenu(3)"  id="btn-add-friends" class="next btn-result" matTooltipClass="tooltip" matTooltip="Thêm bạn"><i id="icon_add" class="fas fa-user-plus"></i></div>

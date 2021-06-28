@@ -119,7 +119,9 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
                // thêm loại cuộc trò chuyện vào cuộc trò chuyện
               let keyConverNew = this.sendAddService.getKindConversation().push();
               keyConverNew.update({
-                loai_cuoc_tro_truyen: "don"
+                bieu_tuong_cam_xuc: "khong",
+                loai_cuoc_tro_truyen: "don",
+                mau: "#3275f7"
               })
                // thêm thành viên cuộc trò chuyện
               this.sendAddService.getMembersConversation().child(keyConverNew.key).child(parseIDUser).update({

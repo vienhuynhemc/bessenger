@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
@@ -13,7 +13,7 @@ import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send
   templateUrl: './profile-add.component.html',
   styleUrls: ['./profile-add.component.scss'],
 })
-export class ProfileAddComponent implements OnInit {
+export class ProfileAddComponent implements OnInit, OnDestroy {
   addInfor: AddFriendsInfor;
   private valueFromChildSubscription: Subscription;
   iDUrl: any;
@@ -177,7 +177,9 @@ export class ProfileAddComponent implements OnInit {
               .getKindConversation()
               .push();
             keyConverNew.update({
-              loai_cuoc_tro_truyen: 'don',
+              bieu_tuong_cam_xuc: "khong",
+              loai_cuoc_tro_truyen: "don",
+              mau: "#3275f7"
             });
             // thêm thành viên cuộc trò chuyện
             this.requestListService

@@ -72,11 +72,12 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
             });
             // nếu không có sẵn cuộc trò truyện thì tự tạo
             if(!check) {
-             
                // thêm loại cuộc trò chuyện vào cuộc trò chuyện
               let keyConverNew = this.requestAddService.getKindConversation().push();
               keyConverNew.update({
-                loai_cuoc_tro_truyen: "don"
+                bieu_tuong_cam_xuc: "khong",
+                loai_cuoc_tro_truyen: "don",
+                mau: "#3275f7"
               })
                // thêm thành viên cuộc trò chuyện
               this.requestAddService.getMembersConversation().child(keyConverNew.key).child(parseIDUser).update({
@@ -87,7 +88,6 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
                 ngay_tham_gia: Number(new Date()),
                 trang_thai: "cho"
               })
-             
               setTimeout(() => {
                 this.router.navigate(['/bessenger/tin-nhan/' + keyConverNew.key]);
               }, 500);
