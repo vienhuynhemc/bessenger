@@ -131,6 +131,8 @@ export class FriendsListComponent implements OnInit {
         });
       }
       this.chat_page_friend_left_service.allCuocTroTruyen = allCuocTroTruyen;
+      // Vì làm lại nên có di chuyển lại
+      this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri = null;
       // Có được danh sách các cuộc trò truyện
       // Ta hãy fill tên và ngày tạo cho các nhóm có loai là nhóm
       this.chat_page_friend_left_service.getAllCuocTroChuyenNhom().subscribe(data => {
