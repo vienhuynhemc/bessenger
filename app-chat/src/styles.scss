@@ -19,7 +19,15 @@
 }
 
 // Contenteditable
-.data-block-messenger {
-  min-height: 19px;
-  display: block;
+.span-image-box-chat {
+  image-rendering: webkit-optimize-contrast;
+  background-size: 16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  span {
+    color: transparent;
+    caret-color: #050505;
+  }
 }
