@@ -1,2 +1,29 @@
 <div class="container" [style.height]="this.messenger_footer_service.getHeight()">
+    <div class="content">
+        <!-- Thằng đầu tiên thằng nào cũng phải có -->
+        <!-- Đó là thông tin cơ bản của cuộc trò chuyện -->
+        <div class="first">
+            <!-- 1.Hình -->
+            <div class="hinh-dai-dien">
+
+                <div class="nhom" *ngIf="this.content_service.object_chat.loai == 'nhom'">
+                    <img [src]="this.content_service.object_chat.getImg()[0] ||'assets/images/loading.gif'"
+                        class="hinh-1" alt="">
+                    <img [src]="this.content_service.object_chat.getImg()[1] ||'assets/images/loading.gif'" alt=""
+                        class="hinh-2">
+                </div>
+                <div class="don" *ngIf="this.content_service.object_chat.loai == 'don'">
+                    <img [src]="this.content_service.object_chat.getImg()[0] ||'assets/images/loading.gif'" alt="">
+                </div>
+                <div *ngIf="this.content_service.object_chat.is_online" class="online">
+                    <div class="child"></div>
+                </div>
+            </div>
+            <!-- 2. Thông tin-->
+            <p class="create">Bessenger</p>
+            <p class="create" *ngIf="this.content_service.getCreateFriends().length != 0 ">
+                {{this.content_service.getCreateFriends()}}</p>
+        </div>
+        <!------------------------------------------------->
+    </div>
 </div>
