@@ -287,5 +287,7 @@ export class SendRequsetAddComponent implements OnInit, OnDestroy {
     this.sendListService.editSendService(id,parseIDUser).update({
       ton_tai: 1
     })
+    // trở về đường dẫn mặc định không có id
+    this.moveLinkSends('')
   }
 }

@@ -1,5 +1,9 @@
 <div *ngIf="offerInfor.id == 1" class="container">
-    <img  class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
+    <div class="content">
+        <img class="bg-hands" src="assets/images/list-friends-friends-page/holdhands.jpg" alt="">
+            <div class="icon"><i class="far fa-user-circle"></i></div>
+            <div class="title"><span>Hãy chọn tên của người mà bạn muốn xem trang cá nhân.</span></div>
+    </div>
 </div>
 <div  *ngIf="offerInfor.id != 1" class="container">
     <img class="bg" [src]="offerInfor.img || 'assets/images/loading.gif'" alt="">

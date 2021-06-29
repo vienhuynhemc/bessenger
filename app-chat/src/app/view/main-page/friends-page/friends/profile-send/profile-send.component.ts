@@ -45,6 +45,7 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
         if (id == null) {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
+          idCheck = -1
         } else {
           idCheck = id;
           this.sendAddService.getInforSend(id).on('value', (data) => {
@@ -64,6 +65,11 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
       });
   }
 
+  //  chuyển đường dẫn
+  moveLinkSends(link: string) {
+    this.router.navigate(['/bessenger/ban-be/da-gui/' + link]);
+  }
+
   undoSendRequest(id: string) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // cập nhật bảng yêu cầu kết bạn
@@ -74,6 +80,7 @@ export class ProfileSendComponent implements OnInit, OnDestroy {
     this.sendAddService.editSendService(id,parseIDUser).update({
       ton_tai: 1
     })
+    this.moveLinkSends('')
   }
 
   // chuyển đến trang tin nhắn

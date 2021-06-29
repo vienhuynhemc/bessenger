@@ -300,7 +300,7 @@ export class RequestAddFriendsComponent implements OnInit {
       ngay_tao: Number(new Date()),
       ton_tai: 0
     })
-    
+    this.moveLinkRequest('')
   }
 
   // từ chối kết bạn
@@ -314,6 +314,6 @@ export class RequestAddFriendsComponent implements OnInit {
     this.sendsListService.editSendService(parseIDUser,id).update({
       ton_tai: 1
     })
-    
+    this.moveLinkRequest('')
   }
 }

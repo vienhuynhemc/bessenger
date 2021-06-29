@@ -145,6 +145,9 @@ export class OfferFriendsComponent implements OnInit {
     this.offerListService
       .getListFriendsByIDUser(parseIDUser)
       .on('value', (friends) => {
+        setTimeout(() => {
+          this.friendsPageService.setLoading(true)
+        }, 0);
         let checkScroll = false;
         let listFriendsMe = [];
         // kiểm tra scroll
@@ -234,6 +237,7 @@ export class OfferFriendsComponent implements OnInit {
                             }
                           }
                         });
+                        
                         // duyệt qua danh sách từng thằng trong danh sách tìm kiếm nếu có phần tử
                         if (offerFriendsTemp.length > 0) {
                           let checkIDURL = 0;
@@ -377,8 +381,6 @@ export class OfferFriendsComponent implements OnInit {
                                 }
                             });
                           }
-                          
-
                           this.friendsPageService.setSizeOffer(
                             this.friendsPageService.offerList.length
                           );
@@ -400,9 +402,9 @@ export class OfferFriendsComponent implements OnInit {
                             check = true;
                           }
                         } else {
+                          this.friendsPageService.setSizeOffer(0);
                           if (!check) {
                             this.router.navigate(['/bessenger/ban-be/de-xuat']);
-                            this.friendsPageService.setSizeOffer(0);
                             this.sendFriendToProfile(null, null);
                             this.friendsPageService.saveOfferList = [];
                             check = true;
@@ -414,6 +416,9 @@ export class OfferFriendsComponent implements OnInit {
                 });
             });
         }
+        setTimeout(() => {
+          this.friendsPageService.setLoading(false)
+        }, 0);
       });
       
   }

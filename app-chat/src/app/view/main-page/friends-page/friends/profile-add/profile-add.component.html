@@ -1,6 +1,13 @@
-<div class="container">
-    <img *ngIf="addInfor.id == 1 " class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
-    <div class="top" *ngIf="addInfor.id != 1 " >
+<div *ngIf="addInfor.id == 1" class="container">
+        <img class="bg-hands" src="assets/images/list-friends-friends-page/add-friends.jpg" alt="">
+        <div class="bg-title">
+           
+            <div class="icon"><i class="fas fa-user-plus"></i></div>
+            <div class="title"><span>Hãy kết bạn để có thêm nhiều niềm vui.</span></div>
+        </div>
+</div>
+<div *ngIf="addInfor.id != 1"class="container">
+    <div class="top"  >
         <img class="bg-top" [src]="addInfor.img || 'assets/images/loading.gif'" alt="">
         <div class="name-opacity">{{addInfor.getFirstName()}}</div>
         <div class="name-bg-1">{{addInfor.getFirstName()}}</div>
@@ -21,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="bottom" *ngIf="addInfor.id != 1 " >
+    <div class="bottom">
         <div (click)="onClickUndoAddFriends(addInfor, 0)" *ngIf="addInfor.checkAddOrUndo == 'thu_hoi'" matTooltip="Thu hồi" matTooltipClass="tooltip" class="add-f bot-circle">
             <div class="content-add circle">
                 <i class="fas fa-undo"></i>
