@@ -16,15 +16,6 @@ export class EmojiComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.emoji_service.getMatCuoi().subscribe(data => this.emoji_service.dienMatCuoi(data.payload.toJSON()));
-    this.emoji_service.getDongVat().subscribe(data => this.emoji_service.dienDongVat(data.payload.toJSON()));
-    this.emoji_service.getRauCu().subscribe(data => this.emoji_service.dienRauCu(data.payload.toJSON()));
-    this.emoji_service.getDoChoi().subscribe(data => this.emoji_service.dienDoChoi(data.payload.toJSON()));
-    this.emoji_service.getDuLich().subscribe(data => this.emoji_service.dienDuLich(data.payload.toJSON()));
-    this.emoji_service.getBongDen().subscribe(data => this.emoji_service.dienBongDen(data.payload.toJSON()));
-    this.emoji_service.getDinhKem().subscribe(data => this.emoji_service.dienDinhKem(data.payload.toJSON()));
-    this.emoji_service.getCo().subscribe(data => this.emoji_service.dienCo(data.payload.toJSON()));
-    this.emoji_service.getLichSu().subscribe(data => this.emoji_service.dienLichSu(data.payload.toJSON()));
     this.eventScroll();
   }
 
