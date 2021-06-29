@@ -1,11 +1,4 @@
-.bg-big {
-  width: 724px;
-  height: 760px;
-  border-bottom-left-radius: 40px;
-  border-top-right-radius: 40px;
-  border-bottom-right-radius: 40px;
-  
-}
+
 .container {
   width: 100%;
   height: 100%;
@@ -15,6 +8,44 @@
   border-radius: 40px;
   box-shadow: 4px 8px 28px 0px #d3dceb;
   position: relative;
+
+  .content-non {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    .bg-hands {
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        object-fit: cover;
+    }
+    .bg-title{
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        .icon {
+            position: absolute;
+            left: 285px;
+            top: 260px;
+            i {
+                font-size: 140px;
+                color: white;
+                text-shadow: 2px 2px black;
+            }
+        }
+        .title {
+            position: absolute;
+            top: 430px;
+            left: 160px;
+            text-align: center;
+            span{
+                font-weight: bold;
+                font-size: 25px;
+                color: white;
+            }
+        }
+    }
+}
   .bg {
     object-fit: cover;
     width: 100%;

@@ -134,6 +134,9 @@ export class AddFriendsComponent implements OnInit {
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
     this.addListService.getListFriendsByIDUser(parseIDUser).on('value', (friends) => {
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
       let checkScroll = false;
       let listFriendsMe = [];
       if(friends.val() != null) {
@@ -253,14 +256,22 @@ export class AddFriendsComponent implements OnInit {
           })
         })
       }
-     
+      setTimeout(() => {
+        this.friendsPageService.setLoading(false)
+      }, 0);
     })
     } else {
+      setTimeout(() => {
+        this.friendsPageService.setLoading(true)
+      }, 0);
       this.contactsService.setAddInforService(null,null);
       this.friendsPageService.saveAddList = []
       this.friendsPageService.addList = []
       this.friendsPageService.setSizeAdd(0);
       this.friendsPageService.searchVal = '';
+      setTimeout(() => {
+        this.friendsPageService.setLoading(false)
+      }, 0);
     }
   }
   

@@ -1,8 +1,13 @@
-<img  *ngIf="friendInfor.id == 1"
-class="bg-big"
-src="assets/images/list-friends-friends-page/bg-profile-myfriend7.jpg"
-alt=""
-/>
+<div class="container" *ngIf="friendInfor.id == 1">
+    <div class="content-non">
+        <img class="bg-hands" src="assets/images/list-friends-friends-page/sends.jpg" alt="">
+        <div class="bg-title">
+           
+            <div class="icon"><i id="icon_s" class="icon_s fas fa-paper-plane"></i></div>
+            <div class="title"><span>Bạn chưa gửi yêu cầu kết bạn nào.</span></div>
+        </div>
+    </div>
+</div>
 <div class="container" *ngIf="friendInfor.id != 1">
   <img  class="bg" src="{{ friendInfor.img }}" alt="" />
   <div class="cover-bg"></div>

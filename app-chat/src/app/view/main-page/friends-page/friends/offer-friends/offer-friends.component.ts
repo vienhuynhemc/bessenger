@@ -145,6 +145,9 @@ export class OfferFriendsComponent implements OnInit {
     this.offerListService
       .getListFriendsByIDUser(parseIDUser)
       .on('value', (friends) => {
+        setTimeout(() => {
+          this.friendsPageService.setLoading(true)
+        }, 0);
         let checkScroll = false;
         let listFriendsMe = [];
         // kiểm tra scroll
@@ -414,6 +417,9 @@ export class OfferFriendsComponent implements OnInit {
                 });
             });
         }
+        setTimeout(() => {
+          this.friendsPageService.setLoading(false)
+        }, 0);
       });
       
   }
