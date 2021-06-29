@@ -398,7 +398,6 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
 
   // danh sách bạn vừa tìm
   searchAddFriends(searchValue: string) {
-    this.friendsPageService.saveAddList = []
     this.friendsPageService.searchVal = searchValue
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập

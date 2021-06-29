@@ -56,7 +56,7 @@ export class RequestInfor {
   // kiểm tra giới hạn tên profile bạn bè
   public checkLimitNameRequestProfile() {
     if (this.name != undefined) {
-      if (this.name.length > 23) return true;
+      if (this.name.length > 13) return true;
     }
     return false;
   }
@@ -65,8 +65,8 @@ export class RequestInfor {
   public getNameLimitRequestProfile() {
     if (this.name != undefined) {
       let result = this.name;
-      if (result.length > 23) {
-        result = this.name.substring(0, 22).trim();
+      if (result.length > 13) {
+        result = this.name.substring(0, 12).trim();
         result += '...';
       }
       return result;

@@ -230,7 +230,7 @@
           }
       }
       .name {
-        width: 450px;
+        width: 500px;
         height: 80px;
         bottom: 130px;
         position: absolute;
@@ -238,7 +238,14 @@
         font-weight: bold;
         z-index: 5;
         left: 20px;
-        word-wrap: break-word;
         text-shadow: 3px 3px #3275f7;
+        i {
+            position: absolute;
+            right: -80px;
+            top: -30px;
+            font-size: 100px;
+            text-shadow: 3px 3px yellow;
+        }
       }
+      
 }

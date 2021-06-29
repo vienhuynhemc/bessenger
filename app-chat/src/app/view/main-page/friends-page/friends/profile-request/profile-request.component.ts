@@ -109,6 +109,7 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
         if (id == null) {
           // id == 1 là đường dẫn không có id
           this.friendInfor.id = 1;
+          idCheck = -1;
         } else {
           idCheck = id;
           this.requestAddService.getInforRequest(id).on('value', (data) => {
@@ -126,6 +127,10 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
         }
       
       });
+  }
+
+  moveLinkRequest(link: string) {
+    this.router.navigate(['/bessenger/ban-be/loi-moi/' + link])
   }
 
   // chấp nhận kết bạn
@@ -149,7 +154,8 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
       ngay_tao: Number(new Date()),
       ton_tai: 0
     })
-    
+    // di chuyển đến đường dẫn mặc định không có id
+    this.moveLinkRequest('')
   }
 
   // từ chối kết bạn
@@ -163,6 +169,7 @@ export class ProfileRequestComponent implements OnInit, OnDestroy {
     this.sendsListService.editSendService(parseIDUser,id).update({
       ton_tai: 1
     })
-    
+     // di chuyển đến đường dẫn mặc định không có id
+    this.moveLinkRequest('')
   }
 }
