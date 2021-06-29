@@ -61,11 +61,11 @@
             </div>
         </div>
         <p class="place" *ngIf="this.tin_nhan == null || this.tin_nhan.length == 0">Aa</p>
-        <i [style.color]="this.messenger_footer_service.object_chat_footer.mau" class="fas fa-smile c-btcx"
+        <i [style.color]="this.messenger_footer_service.object_chat_footer.mau" class="fas fa-smile c-btcx" (click)="openBoxBtcx()"
             matTooltip="Chọn biểu tượng cảm xúc" matTooltipClass="tooltip"></i>
         <!-- Khung để hiện chọn biểu tượng cảm xúc -->
-        <div class="box-bieu-tuong-cam-xuc" id="box-btcx">
-            <app-emoji></app-emoji>
+        <div class="box-bieu-tuong-cam-xuc" id="box-btcx" *ngIf="isShowBtcxBox">
+            <app-emoji (icon)="getIcon($event)"></app-emoji>
             <div class="mui-ten"></div>
         </div>
         <!--------->

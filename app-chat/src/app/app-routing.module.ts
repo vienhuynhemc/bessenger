@@ -1,3 +1,4 @@
+import { EmojiComponent } from './view/emoji/emoji.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
@@ -98,12 +99,12 @@ const routes: Routes = [
           { path: 'da-gui/:id', component: SendRequsetAddComponent },
 
           { path: '', redirectTo: 'them-ban', pathMatch: 'full' },
-          { path: 'them-ban', component: AddFriendsComponent},
-          { path: 'them-ban/:id', component: AddFriendsComponent},
+          { path: 'them-ban', component: AddFriendsComponent },
+          { path: 'them-ban/:id', component: AddFriendsComponent },
 
-          {path: '', redirectTo: 'de-xuat', pathMatch: 'full'},
-          {path: 'de-xuat', component: OfferFriendsComponent},
-          {path: 'de-xuat/:id', component: OfferFriendsComponent},
+          { path: '', redirectTo: 'de-xuat', pathMatch: 'full' },
+          { path: 'de-xuat', component: OfferFriendsComponent },
+          { path: 'de-xuat/:id', component: OfferFriendsComponent },
         ],
       },
 

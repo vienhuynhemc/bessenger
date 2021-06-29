@@ -12,11 +12,13 @@ export class ChatPageBanBe {
         let result = new ChatPageObjectTen();
         result.noi_dung = this.ten;
         result.noi_dung_goc = this.ten;
-        if (result.noi_dung.length > 7) {
-            result.noi_dung = this.ten.substring(0, 6).trim() + "...";
-            result.is_cut = true;
-        } else {
-            result.is_cut = false;
+        if (result.noi_dung != null) {
+            if (result.noi_dung.length > 7) {
+                result.noi_dung = this.ten.substring(0, 6).trim() + "...";
+                result.is_cut = true;
+            } else {
+                result.is_cut = false;
+            }
         }
         return result;
     }

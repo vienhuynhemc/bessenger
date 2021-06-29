@@ -1,3 +1,4 @@
+import { EmojiObject } from './../../../../../models/emoji/emoji_object';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +15,8 @@ export class MessengerFooterComponent implements OnInit {
   public tin_nhan: string;
   // Kích thước trc thay đổi
   public last_height: number;
+  // Có hiện hộp btcx
+  public isShowBtcxBox: boolean;
 
   constructor(
     public messenger_footer_service: MessengerFooterService,
@@ -37,6 +40,9 @@ export class MessengerFooterComponent implements OnInit {
     this.messenger_footer_service.chenh_lech_height = 0;
     document.getElementById("parent_input").style.marginBottom = "5px";
     this.tin_nhan = "";
+  }
+
+  public getIcon(item: EmojiObject) {
   }
 
   public inputMessenger(value: string) {
@@ -78,6 +84,10 @@ export class MessengerFooterComponent implements OnInit {
         }
       }
     }
+  }
+
+  public openBoxBtcx() {
+    this.isShowBtcxBox = !this.isShowBtcxBox;
   }
 
 }
