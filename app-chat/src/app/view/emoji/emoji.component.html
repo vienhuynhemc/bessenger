@@ -107,3 +107,7 @@
         </div>
     </div>
 </div>
+
+<div class="loading" *ngIf="!this.emoji_service.isOKe()">
+    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+</div>

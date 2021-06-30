@@ -1,13 +1,20 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EmojiObject } from './../../models/emoji/emoji_object';
 import { EmojiService } from './../../service/emoji/emoji.service';
-
+// lottie
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 @Component({
   selector: 'app-emoji',
   templateUrl: './emoji.component.html',
   styleUrls: ['./emoji.component.scss']
 })
 export class EmojiComponent implements OnInit {
+
+    // lottie
+    options: AnimationOptions = {
+      path: '/assets/json/lottie/loading2.json',
+    };
 
   @Output() icon = new EventEmitter();
 
@@ -17,6 +24,9 @@ export class EmojiComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventScroll();
+  }
+
+  animationCreated(animationItem: AnimationItem): void {
   }
 
   public selectIconNonHistory(item: EmojiObject) {

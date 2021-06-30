@@ -36,7 +36,7 @@ export class MessengerFooterComponent implements OnInit {
 
   public reset(): void {
     this.last_height = 22;
-    document.getElementById("input").innerHTML = '<div class="data-block-messenger"></div>';
+    document.getElementById("input").innerHTML = '';
     this.messenger_footer_service.chenh_lech_height = 0;
     document.getElementById("parent_input").style.marginBottom = "5px";
     this.tin_nhan = "";
@@ -44,24 +44,127 @@ export class MessengerFooterComponent implements OnInit {
 
   public getIcon(item: EmojiObject) {
     let span = document.createElement("span");
+    span.classList.add("span-image-box-chat");
     span.style.backgroundImage = `url("${item.src}")`;
-    span.style.backgroundSize = "16px 16px";
-    span.style.imageRendering = "-webkit-optimize-contrast";
     let spanContent = document.createElement("span");
-    spanContent.innerText = "😄";
-    spanContent.style.display = "inline-block";
-    spanContent.style.width = "16px";
-    spanContent.style.height = "16px";
-    spanContent.style.color = "transparent";
-    spanContent.style.caretColor = "#050505";
+    spanContent.innerText = item.alt;
     span.appendChild(spanContent);
+    span.setAttribute("contenteditable", "false");
     let input = document.getElementById("input");
-    input.appendChild(span);
+    // xóa br nếu trc nó là br
+    let beforeElement = null;
+    let posNow = null;
+    if (window.getSelection) {
+      let sel = window.getSelection();
+      if (sel.rangeCount) {
+        let range = sel.getRangeAt(0);
+        var container = range.commonAncestorContainer;
+        var nodeParent = container.parentNode;
+        let pos = range.endOffset;
+        posNow = pos;
+        let nodes = input.childNodes;
+        beforeElement = nodes[pos];
+        if (container.nodeType == Node.TEXT_NODE) {
+          // lấy vị trí ông text đang caret
+          let index = 0;
+          for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i] == container) {
+              index = i;
+              break;
+            }
+          }
+          //  Tách
+          let text1 = nodes[index].textContent.substring(0, pos);
+          let text2 = nodes[index].textContent.substring(pos, nodes[index].textContent.length);
+          let node1 = document.createTextNode(text1);
+          let node2 = document.createTextNode(text2);
+          input.removeChild(nodes[index]);
+          let newpos = index;
+          let nodeAfter = nodes[index];
+          if (text1.length == 0) {
+            if (nodeAfter == null) {
+              input.appendChild(span);
+              input.appendChild(node2);
+            } else {
+              input.insertBefore(node2, nodeAfter);
+              input.insertBefore(span, node2);
+            }
+            newpos += 1;
+          } else if (text2.length == 0) {
+            if (nodeAfter == null) {
+              input.appendChild(node1);
+              input.appendChild(span);
+            } else {
+              input.insertBefore(span, nodeAfter);
+              input.insertBefore(node1, span);
+            }
+            newpos += 2;
+          } else {
+            if (nodeAfter == null) {
+              input.appendChild(node1);
+              input.appendChild(span);
+              input.appendChild(node2);
+            } else {
+              input.insertBefore(node2, nodeAfter);
+              input.insertBefore(span, node2);
+              input.insertBefore(node1, span);
+            }
+            newpos += 2;
+          }
+          console.log(newpos);
+          let range = document.createRange();
+          let sel = window.getSelection();
+          range.setStart(input, newpos);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+          // Cập nhật dữ liệu tin nhắn
+          this.tin_nhan = input.innerHTML.trim();
+          this.xuLyCss();
+        } else {
+          if (nodes.length > 0) {
+            // Lúc bắt đầu
+            if (pos == 0) {
+              if (nodes[0].isEqualNode(document.createElement("br"))) {
+                input.removeChild(nodes[0]);
+                posNow = 0;
+                beforeElement = null;
+              }
+            } else {
+              if (nodes[pos - 1].isEqualNode(document.createElement("br"))) {
+                input.removeChild(nodes[pos - 1]);
+                beforeElement = input.childNodes[posNow];
+              }
+            }
+          }
+          // add icon
+          if (beforeElement != null) {
+            input.insertBefore(span, beforeElement);
+          } else {
+            input.appendChild(span);
+          }
+          // add xong icon move qua ben phai cua no
+          let range = document.createRange();
+          let sel = window.getSelection();
+          range.setStart(input, posNow + 1);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+          // Cập nhật dữ liệu tin nhắn
+          this.tin_nhan = input.innerHTML.trim();
+          this.xuLyCss();
+        }
+      }
+    }
   }
 
   public inputMessenger(value: string) {
     this.tin_nhan = value.trim();
     // Xử lý css và scroll
+    this.xuLyCss();
+  }
+
+  public xuLyCss() {
     let parent_input = document.getElementById("parent_input");
     if (parent_input.offsetHeight) {
       if (parent_input.offsetHeight > 22) {
@@ -92,77 +195,16 @@ export class MessengerFooterComponent implements OnInit {
       if (event.shiftKey) {
         // Ko tự động xuống dòng
         event.preventDefault();
-        // Thêm dòng mới
-        let div = document.createElement("div");
-        div.classList.add("data-block-messenger");
-        input.appendChild(div);
+        // Thêm dòng mới bỏ qua div
+        document.execCommand('insertHTML', false, '<br><br>');
       } else {
         // Ko tự động xuống dòng
         event.preventDefault();
         // submit
         // to do submit
         // làm rỗng ô nhập
-        document.getElementById("input").innerHTML = '<div class="data-block-messenger"></div>';
+        input.innerHTML = '';
       }
-    }
-    // Backspace + delete
-    else if (event.keyCode == 8 || event.keyCode == 46) {
-      let childrens = input.children;
-      // Xạch bách thì ko làm gì nữa
-
-      // Lấy vị trí carot hiện tại
-      if (window.getSelection) {
-        let sel = window.getSelection();
-        if (sel.rangeCount) {
-          let range = sel.getRangeAt(0);
-          for (let i = 0; i < childrens.length; i++) {
-            if (range.commonAncestorContainer.parentNode == childrens[i]) {
-              let caretPos = range.endOffset;
-              // Biết được thằng thằng nào đang làm nè
-              // Nếu ở ngày vị trí đầu đoạn chat thì ko làm gì cả
-              if (caretPos == 0 && i == 0) {
-                event.preventDefault();
-              } else {
-                let con_cua_phan_tu = childrens[i].children;
-                // Nếu ở vị trí đầu của phần tử đang chọn và còn con của nó
-                // Ta di chuyển con của đó dắp vào đuôi thằng trước xong xóa nó
-                if (caretPos == 0) {
-                  if (con_cua_phan_tu.length != 0) {
-
-                  }
-                  // Ko còn con thì xóa nó thôi
-                  else if (con_cua_phan_tu.length == 0) {
-                    input.removeChild(childrens[i]);
-                  }
-                  // di chuyển chuột lên thằng trước nó
-                  let before = childrens[i - 1];
-                  let childrenBefore = before.children;
-                  // Nếu thằng trc nó có con thì di chuyển tới vị cuối của con nó
-                  if (childrenBefore.length > 0) {
-                    range.setStart(childrenBefore[childrenBefore.length - 1],
-                      childrenBefore[childrenBefore.length - 1].childNodes.length)
-                  } else {
-                    range.setStart(before, 0);
-                  }
-                  range.collapse(true)
-                  sel.removeAllRanges()
-                  sel.addRange(range);
-                  event.preventDefault();
-                }
-              }
-              break;
-            }
-          }
-        }
-      }
-
-      // Di chuyển tới vị trí mong muốn
-      // let range = document.createRange();
-      // let sel = window.getSelection();
-      // range.setStart(input.children[0], 0);
-      // range.collapse(true)
-      // sel.removeAllRanges()
-      // sel.addRange(range)
     }
   }
 
