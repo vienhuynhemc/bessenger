@@ -36,9 +36,7 @@ import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
 import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
-import { AvatarComponent } from './view/main-page/personal-page/avatar/avatar.component';
-import { ProfileComponent } from './view/main-page/personal-page/profile/profile.component';
-import { ChangepassComponent } from './view/main-page/personal-page/changepass/changepass.component';
+
 
 
 import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
@@ -86,10 +84,7 @@ import { EmojiComponent } from './view/emoji/emoji.component';
     FriendsListComponent,
     MessengerComponent,
     FileSendComponent,
-    AvatarComponent,
-    ProfileComponent,
-    ChangepassComponent,
-
+ 
     FriendsComponent,
     ProfileFriendComponent,
 

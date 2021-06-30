@@ -29,7 +29,7 @@ export class OfferFriendsComponent implements OnInit {
     private sendsListService: SendAddFriendService,
     private offerListService: OfferFriendsService
   ) {}
-    
+
   ngOnInit(): void {
     this.friendsPageService.selectedOffersFriendsService();
     this.getIDURLFriendsList();
@@ -52,8 +52,6 @@ export class OfferFriendsComponent implements OnInit {
       this.moveLink(friend.id);
     }
   }
- 
-
 
   sendFriendToProfile(id: any, addOrUndor: any) {
     this.contactsService.setOfferInforService(id, addOrUndor);
@@ -139,19 +137,18 @@ export class OfferFriendsComponent implements OnInit {
   getDataOfferFriends(sizeGet: number) {
     //  nếu link không có id
     let check = false;
-   
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     // danh sách bạn bè của id đang đăng nhập
     this.offerListService
       .getListFriendsByIDUser(parseIDUser)
       .on('value', (friends) => {
         setTimeout(() => {
-          this.friendsPageService.setLoading(true)
+          this.friendsPageService.setLoading(true);
         }, 0);
         let checkScroll = false;
         let listFriendsMe = [];
         // kiểm tra scroll
-        
+
         if (friends.val() != null) {
           // lấy ra danh sách bạn bè
           friends.forEach((f_item) => {
@@ -186,7 +183,6 @@ export class OfferFriendsComponent implements OnInit {
                     .getAllAccount()
                     .on('value', (account) => {
                       if (account.val() != null) {
-                       
                         this.friendsPageService.offerList = [];
                         let offerFriendsTemp = [];
                         account.forEach((a_item) => {
@@ -219,25 +215,32 @@ export class OfferFriendsComponent implements OnInit {
                             offerFriendsTemp.push(accountTemp);
                           } else {
                             // xét xem có nằm trong danh sách vừa kết bạn không để k bị 404
-                            if(this.friendsPageService.saveOfferList.length >0) {
-                              this.friendsPageService.saveOfferList.forEach(element => {
-                                  if(element.id == a_item.key) {
+                            if (
+                              this.friendsPageService.saveOfferList.length > 0
+                            ) {
+                              this.friendsPageService.saveOfferList.forEach(
+                                (element) => {
+                                  if (element.id == a_item.key) {
                                     let accountTemp = new OfferFriendsInfor();
                                     accountTemp.id = a_item.key;
                                     accountTemp.name = a_item.val().ten;
                                     accountTemp.img = a_item.val().link_hinh;
                                     accountTemp.checkAddOrUndo = 'them';
-                                    this.friendsPageService.saveOfferList.forEach(element => {
-                                          if(element.id == accountTemp.id)
-                                            accountTemp.checkAddOrUndo = element.checkAddOrUndo;
-                                    });
+                                    this.friendsPageService.saveOfferList.forEach(
+                                      (element) => {
+                                        if (element.id == accountTemp.id)
+                                          accountTemp.checkAddOrUndo =
+                                            element.checkAddOrUndo;
+                                      }
+                                    );
                                     offerFriendsTemp.push(accountTemp);
                                   }
-                              });
+                                }
+                              );
                             }
                           }
                         });
-                        
+
                         // duyệt qua danh sách từng thằng trong danh sách tìm kiếm nếu có phần tử
                         if (offerFriendsTemp.length > 0) {
                           let checkIDURL = 0;
@@ -280,45 +283,45 @@ export class OfferFriendsComponent implements OnInit {
                                 );
                             }
                             // kiểm tra đường dẫn, nếu đã có id thì kiểm tra id có trong danh sách đề xuất hay k
-                              if (this.iDUrl != null) {
-                                let checkEmpty = false;
-                                // nếu danh sách đề xuất đã tồn tại id trùng với id trong url
-                                this.friendsPageService.offerList.forEach(
-                                  (element) => {
-                                    if (element.id == this.iDUrl) {
-                                      checkEmpty = true;
-                                      checkIDURL = 1;
-                                      if(!check) {
-                                        this.sendFriendToProfile(
-                                          element.id,
-                                          element.checkAddOrUndo
-                                        );
-                                      }
+                            if (this.iDUrl != null) {
+                              let checkEmpty = false;
+                              // nếu danh sách đề xuất đã tồn tại id trùng với id trong url
+                              this.friendsPageService.offerList.forEach(
+                                (element) => {
+                                  if (element.id == this.iDUrl) {
+                                    checkEmpty = true;
+                                    checkIDURL = 1;
+                                    if (!check) {
+                                      this.sendFriendToProfile(
+                                        element.id,
+                                        element.checkAddOrUndo
+                                      );
                                     }
                                   }
-                                );
-                                // nếu danh sách đề xuất không tồn tại id trùng với id trong url
-                                if (!checkEmpty) {
-                                  // duyệt qua danh sách tạm để tìm bổ sung
-                                  offerFriendsTemp.forEach((element) => {
-                                    if (element.id == this.iDUrl) {
-                                      this.friendsPageService.offerList.push(
-                                        element
-                                      );
-                                      checkEmpty = true
-                                      checkIDURL = 1;
-                                      if(!check) {
-                                        this.sendFriendToProfile(
-                                          element.id,
-                                          element.checkAddOrUndo
-                                        );
-                                      }
-                                    }
-                                  });
                                 }
-                              } else {
-                                checkIDURL = 2;
+                              );
+                              // nếu danh sách đề xuất không tồn tại id trùng với id trong url
+                              if (!checkEmpty) {
+                                // duyệt qua danh sách tạm để tìm bổ sung
+                                offerFriendsTemp.forEach((element) => {
+                                  if (element.id == this.iDUrl) {
+                                    this.friendsPageService.offerList.push(
+                                      element
+                                    );
+                                    checkEmpty = true;
+                                    checkIDURL = 1;
+                                    if (!check) {
+                                      this.sendFriendToProfile(
+                                        element.id,
+                                        element.checkAddOrUndo
+                                      );
+                                    }
+                                  }
+                                });
                               }
+                            } else {
+                              checkIDURL = 2;
+                            }
                           } else {
                             offerFriendsTemp.forEach((element) => {
                               if (
@@ -329,57 +332,67 @@ export class OfferFriendsComponent implements OnInit {
                                 this.friendsPageService.offerList.push(element);
                             });
                             // kiểm tra đường dẫn, nếu đã có id thì kiểm tra id có trong danh sách đề xuất hay k
-                              if (this.iDUrl != null) {
-                                let checkEmpty = false;
-                                // nếu danh sách đề xuất đã tồn tại id trùng với id trong url
-                                this.friendsPageService.offerList.forEach(
-                                  (element) => {
-                                    if (element.id == this.iDUrl) {
-                                      checkEmpty = true;
-                                      checkIDURL = 1;
-                                      if(!check) {
-                                        this.sendFriendToProfile(
-                                          element.id,
-                                          element.checkAddOrUndo
-                                        );
-                                      }
+                            if (this.iDUrl != null) {
+                              let checkEmpty = false;
+                              // nếu danh sách đề xuất đã tồn tại id trùng với id trong url
+                              this.friendsPageService.offerList.forEach(
+                                (element) => {
+                                  if (element.id == this.iDUrl) {
+                                    checkEmpty = true;
+                                    checkIDURL = 1;
+                                    if (!check) {
+                                      this.sendFriendToProfile(
+                                        element.id,
+                                        element.checkAddOrUndo
+                                      );
                                     }
                                   }
-                                );
-                                // nếu danh sách đề xuất không tồn tại id trùng với id trong url
-                                if (!checkEmpty) {
-                                  // duyệt qua danh sách tạm để tìm bổ sung
-                                  offerFriendsTemp.forEach((element) => {
-                                    if (element.id == this.iDUrl) {
-                                      this.friendsPageService.offerList.push(
-                                        element
-                                      );
-                                      checkIDURL = 1;
-                                      if(!check) {
-                                        this.sendFriendToProfile(
-                                          element.id,
-                                          element.checkAddOrUndo
-                                        );
-                                      }
-                                    }
-                                  });
                                 }
-                              } else {
-                                checkIDURL = 2;
+                              );
+                              // nếu danh sách đề xuất không tồn tại id trùng với id trong url
+                              if (!checkEmpty) {
+                                // duyệt qua danh sách tạm để tìm bổ sung
+                                offerFriendsTemp.forEach((element) => {
+                                  if (element.id == this.iDUrl) {
+                                    this.friendsPageService.offerList.push(
+                                      element
+                                    );
+                                    checkIDURL = 1;
+                                    if (!check) {
+                                      this.sendFriendToProfile(
+                                        element.id,
+                                        element.checkAddOrUndo
+                                      );
+                                    }
+                                  }
+                                });
                               }
+                            } else {
+                              checkIDURL = 2;
+                            }
                           }
                           this.friendsPageService.sortMutualFriendsOffer();
                           // scroll lớn hơn 5 thì dùng scroll
-                          if (this.friendsPageService.offerList.length > 5 && this.iDUrl != null && !checkScroll) {
-                            this.friendsPageService.offerList.forEach((element,index) => {
-                                if(element.id == this.iDUrl && index > 4) {
-                                  const scroll = document.getElementById('scroll-content');
-                                  scroll.scrollTo({ top: index*23, behavior: "smooth" })
+                          if (
+                            this.friendsPageService.offerList.length > 5 &&
+                            this.iDUrl != null &&
+                            !checkScroll
+                          ) {
+                            this.friendsPageService.offerList.forEach(
+                              (element, index) => {
+                                if (element.id == this.iDUrl && index > 4) {
+                                  const scroll =
+                                    document.getElementById('scroll-content');
+                                  scroll.scrollTo({
+                                    top: index * 23,
+                                    behavior: 'smooth',
+                                  });
                                   // kiểm tra sợ bị lặp scroll nhiều lần
-                                  if(scroll.scrollTop >= index*20)
-                                    checkScroll = true
+                                  if (scroll.scrollTop >= index * 20)
+                                    checkScroll = true;
                                 }
-                            });
+                              }
+                            );
                           }
                           this.friendsPageService.setSizeOffer(
                             this.friendsPageService.offerList.length
@@ -410,77 +423,79 @@ export class OfferFriendsComponent implements OnInit {
                             check = true;
                           }
                         }
-                       
                       }
                     });
                 });
             });
         }
         setTimeout(() => {
-          this.friendsPageService.setLoading(false)
+          this.friendsPageService.setLoading(false);
         }, 0);
       });
-      
   }
-
-  
 
   // thêm bạn
   onClickAddFriends(item: OfferFriendsInfor, index: number) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-      this.friendsPageService.offerList[index].checkAddOrUndo = 'thu_hoi';
+    this.friendsPageService.offerList[index].checkAddOrUndo = 'thu_hoi';
+    let checkAdd = false;
+    this.friendsPageService.saveOfferList.forEach((element) => {
+      if (element.id == item.id) {
+        element.checkAddOrUndo = this.friendsPageService.offerList[index].checkAddOrUndo;
+        checkAdd = true;
+      }
+    });
+    if (!checkAdd) {
       this.friendsPageService.saveOfferList.push({
         id: item.id,
-        checkAddOrUndo: this.friendsPageService.offerList[index].checkAddOrUndo
-      })
-       // cập nhật bảng yêu cầu kết bạn
+        checkAddOrUndo: this.friendsPageService.offerList[index].checkAddOrUndo,
+      });
+    }
+    // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ngay_tao: Number(new Date()),
-      ton_tai: 0
-    })
+      ton_tai: 0,
+    });
     // cập nhật bảng đã gửi
-    this.sendsListService.editSendService(item.id,parseIDUser).update({
+    this.sendsListService.editSendService(item.id, parseIDUser).update({
       ngay_tao: Number(new Date()),
-      ton_tai: 0
-    })
+      ton_tai: 0,
+    });
 
     // thêm bạn nhưng không chuyển trang profile
-    if(this.iDUrl == item.id) {
-      this.contactsService.setOfferInforService(
-            item.id,
-            item.checkAddOrUndo
-      );
+    if (this.iDUrl == item.id) {
+      this.contactsService.setOfferInforService(item.id, item.checkAddOrUndo);
     }
-    
-    
   }
 
   // thu hồi yêu cầu kết bạn
   onClickUndoAddFriends(item: OfferFriendsInfor, index: number) {
     this.friendsPageService.offerList[index].checkAddOrUndo = 'them';
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    this.friendsPageService.saveOfferList.push({
-      id: item.id,
-      checkAddOrUndo: this.friendsPageService.offerList[index].checkAddOrUndo
-    })
-          // cập nhật bảng yêu cầu kết bạn
-    this.requestListService.acceptRequestService(item.id, parseIDUser).update({
-      ton_tai: 1
-    })
-    // cập nhật bảng đã gửi
-    this.sendsListService.editSendService(item.id,parseIDUser).update({
-      ton_tai: 1
-    })
-    // hủy thêm bạn nhưng không chuyển trang profile
-      if(this.iDUrl == item.id) {
-        this.contactsService.setOfferInforService(
-              item.id,
-              item.checkAddOrUndo
-        );
+    let checkAdd = false;
+    this.friendsPageService.saveOfferList.forEach((element) => {
+      if (element.id == item.id) {
+        element.checkAddOrUndo = this.friendsPageService.offerList[index].checkAddOrUndo;
+        checkAdd = true;
       }
-   
-    
-     
-    
-}
+    });
+    if(!checkAdd){
+      this.friendsPageService.saveOfferList.push({
+        id: item.id,
+        checkAddOrUndo: this.friendsPageService.offerList[index].checkAddOrUndo,
+      });
+    }
+    // cập nhật bảng yêu cầu kết bạn
+    this.requestListService.acceptRequestService(item.id, parseIDUser).update({
+      ton_tai: 1,
+    });
+    // cập nhật bảng đã gửi
+    this.sendsListService.editSendService(item.id, parseIDUser).update({
+      ton_tai: 1,
+    });
+    // hủy thêm bạn nhưng không chuyển trang profile
+    if (this.iDUrl == item.id) {
+      this.contactsService.setOfferInforService(item.id, item.checkAddOrUndo);
+    }
+  }
 }

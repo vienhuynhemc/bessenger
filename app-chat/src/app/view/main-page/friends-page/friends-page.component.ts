@@ -194,7 +194,6 @@ export class FriendsPageComponent implements OnInit, OnDestroy, AfterViewChecked
       this.router.navigate(['de-xuat/'], { relativeTo: this.route});
       this.friendsPageService.selectedOffersFriendsService();
       this.contactsService.setOfferInforService(null,null);
-     
     }
   }
   // xoa ban be
