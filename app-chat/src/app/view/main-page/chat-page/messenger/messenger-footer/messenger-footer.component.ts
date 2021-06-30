@@ -215,20 +215,20 @@ export class MessengerFooterComponent implements OnInit {
   public getTopBoxBTCX() {
     let parent_input = document.getElementById("parent_input");
     if (parent_input.offsetHeight == 32) {
-      return "-301px";
+      return "-315px";
     } else if (parent_input.offsetHeight == 48) {
-      return "-293px";
+      return "-307px";
     }
     else if (parent_input.offsetHeight == 64) {
-      return "-285px";
+      return "-299px";
     }
     else if (parent_input.offsetHeight == 80) {
-      return "-277px";
+      return "-291px";
     }
     else if (parent_input.offsetHeight == 83) {
-      return "-276px";
+      return "-290px";
     } else {
-      return "-309px";
+      return "-323px";
     }
   }
 
