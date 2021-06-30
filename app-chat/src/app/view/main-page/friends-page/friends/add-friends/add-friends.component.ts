@@ -279,10 +279,20 @@ export class AddFriendsComponent implements OnInit {
   onClickAddFriends(item: AddFriendsInfor, index: number) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
       this.friendsPageService.addList[index].checkAddOrUndo = 'thu_hoi';
-      this.friendsPageService.saveAddList.push({
-        id: item.id,
-        checkAddOrUndo: this.friendsPageService.addList[index].checkAddOrUndo
-      })
+      let checkAdd = false;
+    // cập nhật danh sách lưu đã thêm
+      this.friendsPageService.saveAddList.forEach((element) => {
+        if (element.id == item.id) {
+          element.checkAddOrUndo = this.friendsPageService.addList[index].checkAddOrUndo;
+          checkAdd = true;
+        }
+      });
+      if(!checkAdd){
+        this.friendsPageService.saveAddList.push({
+          id: item.id,
+          checkAddOrUndo: this.friendsPageService.addList[index].checkAddOrUndo,
+        });
+      }
        // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ngay_tao: Number(new Date()),
@@ -309,10 +319,20 @@ export class AddFriendsComponent implements OnInit {
   onClickUndoAddFriends(item: AddFriendsInfor, index: number) {
     this.friendsPageService.addList[index].checkAddOrUndo = 'them';
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    this.friendsPageService.saveAddList.push({
-      id: item.id,
-      checkAddOrUndo: this.friendsPageService.addList[index].checkAddOrUndo
-    })
+    // cập nhật danh sách lưu đã thêm
+    let checkAdd = false;
+      this.friendsPageService.saveAddList.forEach((element) => {
+        if (element.id == item.id) {
+          element.checkAddOrUndo = this.friendsPageService.addList[index].checkAddOrUndo;
+          checkAdd = true;
+        }
+      });
+      if(!checkAdd){
+        this.friendsPageService.saveAddList.push({
+          id: item.id,
+          checkAddOrUndo: this.friendsPageService.addList[index].checkAddOrUndo,
+        });
+      }
           // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
       ton_tai: 1

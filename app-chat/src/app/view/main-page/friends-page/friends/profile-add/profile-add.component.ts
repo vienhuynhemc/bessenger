@@ -66,6 +66,7 @@ export class ProfileAddComponent implements OnInit, OnDestroy {
   }
   // thêm bạn
   onClickAddFriends(item: AddFriendsInfor, index: number) {
+    console.log(this.friendsPageService.saveAddList)
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
     let indexCheck;
     if(this.friendsPageService.addList.length > 0) {
@@ -75,11 +76,20 @@ export class ProfileAddComponent implements OnInit, OnDestroy {
           element.checkAddOrUndo = 'thu_hoi';
         }
       });
-      this.friendsPageService.saveAddList.push({
-        id: item.id,
-        checkAddOrUndo:
-          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-      });
+      let checkAdd = false;
+      // cập nhật danh sách lưu đã thêm
+        this.friendsPageService.saveAddList.forEach((element) => {
+          if (element.id == item.id) {
+            element.checkAddOrUndo = this.friendsPageService.addList[indexCheck].checkAddOrUndo;
+            checkAdd = true;
+          }
+        });
+        if(!checkAdd){
+          this.friendsPageService.saveAddList.push({
+            id: item.id,
+            checkAddOrUndo: this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+          });
+        }
     }
    
     // cập nhật bảng yêu cầu kết bạn
@@ -106,11 +116,20 @@ export class ProfileAddComponent implements OnInit, OnDestroy {
           element.checkAddOrUndo = 'them';
         }
       });
-      this.friendsPageService.saveAddList.push({
-        id: item.id,
-        checkAddOrUndo:
-          this.friendsPageService.addList[indexCheck].checkAddOrUndo,
-      });
+      let checkAdd = false;
+      // cập nhật danh sách lưu đã thêm
+        this.friendsPageService.saveAddList.forEach((element) => {
+          if (element.id == item.id) {
+            element.checkAddOrUndo = this.friendsPageService.addList[indexCheck].checkAddOrUndo;
+            checkAdd = true;
+          }
+        });
+        if(!checkAdd){
+          this.friendsPageService.saveAddList.push({
+            id: item.id,
+            checkAddOrUndo: this.friendsPageService.addList[indexCheck].checkAddOrUndo,
+          });
+        }
     }
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({

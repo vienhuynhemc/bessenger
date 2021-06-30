@@ -158,11 +158,19 @@ export class ProfileOfferComponent implements OnInit, OnDestroy {
           element.checkAddOrUndo = 'thu_hoi';
         }
       });
-      this.friendsPageService.saveOfferList.push({
-        id: item.id,
-        checkAddOrUndo:
-          this.friendsPageService.offerList[indexCheck].checkAddOrUndo,
+      let checkAdd = false;
+      this.friendsPageService.saveOfferList.forEach((element) => {
+        if (element.id == item.id) {
+          element.checkAddOrUndo = this.friendsPageService.offerList[indexCheck].checkAddOrUndo;
+          checkAdd = true;
+        }
       });
+      if(!checkAdd){
+        this.friendsPageService.saveOfferList.push({
+          id: item.id,
+          checkAddOrUndo: this.friendsPageService.offerList[indexCheck].checkAddOrUndo,
+        });
+      }
     }
    
     // cập nhật bảng yêu cầu kết bạn
@@ -189,11 +197,19 @@ export class ProfileOfferComponent implements OnInit, OnDestroy {
           element.checkAddOrUndo = 'them';
         }
       });
-      this.friendsPageService.saveOfferList.push({
-        id: item.id,
-        checkAddOrUndo:
-          this.friendsPageService.offerList[indexCheck].checkAddOrUndo,
+      let checkAdd = false;
+      this.friendsPageService.saveOfferList.forEach((element) => {
+        if (element.id == item.id) {
+          element.checkAddOrUndo = this.friendsPageService.offerList[indexCheck].checkAddOrUndo;
+          checkAdd = true;
+        }
       });
+      if(!checkAdd){
+        this.friendsPageService.saveOfferList.push({
+          id: item.id,
+          checkAddOrUndo: this.friendsPageService.offerList[indexCheck].checkAddOrUndo,
+        });
+      }
     }
     // cập nhật bảng yêu cầu kết bạn
     this.requestListService.acceptRequestService(item.id, parseIDUser).update({
