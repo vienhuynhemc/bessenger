@@ -11,6 +11,16 @@
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
+.loading {
+  width: 327px;
+  height: 313px;
+  background-color: white;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+}
+
 .container {
   width: 327px;
   height: 313px;

@@ -47,7 +47,6 @@ export class MessengerFooterComponent implements OnInit {
     span.classList.add("span-image-box-chat");
     span.style.backgroundImage = `url("${item.src}")`;
     let spanContent = document.createElement("span");
-    console.log(item);
     spanContent.innerText = item.alt;
     span.appendChild(spanContent);
     span.setAttribute("contenteditable", "false");

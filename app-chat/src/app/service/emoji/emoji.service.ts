@@ -41,6 +41,12 @@ export class EmojiService {
     this.getLichSu().subscribe(data => this.dienLichSu(data.payload.toJSON()));
   }
 
+  public isOKe() {
+    return this.mat_cuois.length != 0 && this.dong_vats.length != 0 && this.rau_cus.length != 0
+      && this.do_chois.length != 0 && this.du_lichs.length != 0 && this.bong_dens.length != 0 && this.dinh_kems.length != 0
+      && this.cos.length != 0;
+  }
+
   public getMatCuoi() {
     return this.db.object("/bieu_tuong_cam_xuc/-MdSEOvwkIoeSqi_ux0x/danh_sach_bieu_tuong").snapshotChanges();
   }
