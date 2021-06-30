@@ -42,128 +42,136 @@ export class EmojiService {
   }
 
   public getMatCuoi() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfZ_8JsXgwng_mE8/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEOvwkIoeSqi_ux0x/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienMatCuoi(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfZ_8JsXgwng_mE8";
+      element.ma_nhom = "-MdSEOvwkIoeSqi_ux0x";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.mat_cuois = mat_cuois;
   }
 
   public getDongVat() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfeR6vilqJpQKff6/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP0BTjcDApLk99KI/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienDongVat(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfeR6vilqJpQKff6";
+      element.ma_nhom = "-MdSEP0BTjcDApLk99KI";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.dong_vats = mat_cuois;
   }
 
   public getRauCu() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfgxHMLb9MRJLojG/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP1vZh0K_7iUbtGX/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienRauCu(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfgxHMLb9MRJLojG";
+      element.ma_nhom = "-MdSEP1vZh0K_7iUbtGX";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.rau_cus = mat_cuois;
   }
 
   public getDoChoi() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfiuOdR5CxjxvjUk/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP39ma6Q-HHEV6ts/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienDoChoi(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfiuOdR5CxjxvjUk";
+      element.ma_nhom = "-MdSEP39ma6Q-HHEV6ts";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.do_chois = mat_cuois;
   }
 
   public getDuLich() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfl7yjPiksocB0d7/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP4Xr2MzhBRuyUCj/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienDuLich(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfl7yjPiksocB0d7";
+      element.ma_nhom = "-MdSEP4Xr2MzhBRuyUCj";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.du_lichs = mat_cuois;
   }
 
   public getBongDen() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfnTICbGaUkqlCPx/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP641-Cyy1KS2aua/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienBongDen(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfnTICbGaUkqlCPx";
+      element.ma_nhom = "-MdSEP641-Cyy1KS2aua";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.bong_dens = mat_cuois;
   }
 
   public getDinhKem() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfr2oR7uV3xwJTkM/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEP9AplzMgsIJ8KGE/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienDinhKem(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfr2oR7uV3xwJTkM";
+      element.ma_nhom = "-MdSEP9AplzMgsIJ8KGE";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.dinh_kems = mat_cuois;
   }
 
   public getCo() {
-    return this.db.object("/bieu_tuong_cam_xuc/-MdDKfyoopg0XaS-7kbA/danh_sach_bieu_tuong").snapshotChanges();
+    return this.db.object("/bieu_tuong_cam_xuc/-MdSEPDnUhKtt-g-DvZp/danh_sach_bieu_tuong").snapshotChanges();
   }
 
   public dienCo(object: Object) {
     let mat_cuois: EmojiObject[] = [];
     Object.entries(object).forEach(([id, data]) => {
       let element = new EmojiObject();
-      element.ma_nhom = "-MdDKfyoopg0XaS-7kbA";
+      element.ma_nhom = "-MdSEPDnUhKtt-g-DvZp";
       element.ma_emoji = id;
       element.src = data['src'];
+      element.alt = data['alt'];
       mat_cuois.push(element);
     });
     this.cos = mat_cuois;
@@ -182,6 +190,7 @@ export class EmojiService {
         element.ma_nhom = data['ma_nhom'];
         element.ma_emoji = data['ma_emoji'];
         element.src = data['src'];
+        element.alt = data['alt'];
         mat_cuois.push(element);
       });
     }
