@@ -15,6 +15,20 @@ export class PersonalPageComponent implements OnInit {
       this.main_page_service.reset();
       this.main_page_service.selectPersonalPage();
     }, 0);
+    setTimeout(() => {
+    this.animationCircle()
+    }, 0);
+  }
+  // tạo animation khi load trang
+  animationCircle() {
+    const idLeft = document.getElementById("circle-left");
+    const idCenter = document.getElementById("circle-center");
+    const idRight = document.getElementById("circle-right");4
+    const idCoverAvt = document.getElementById("cover-avatar-bg");
+    idCenter.classList.add('circle-center-animation');
+    idLeft.classList.add('circle-left-animation')
+    idRight.classList.add('circle-right-animation')
+    idCoverAvt.classList.add("cover-avatar-bg-animation")
   }
   // thay đổi ảnh avata trong DB
   changeAvatar(): void {
