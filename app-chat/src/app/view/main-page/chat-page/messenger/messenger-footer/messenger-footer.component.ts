@@ -18,6 +18,8 @@ export class MessengerFooterComponent implements OnInit {
   // Có hiện hộp btcx
   public isShowBtcxBox: boolean;
 
+  // hiện giphy
+  public isShowBoxGiphy: boolean;
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
@@ -210,8 +212,18 @@ export class MessengerFooterComponent implements OnInit {
 
   public openBoxBtcx() {
     this.isShowBtcxBox = !this.isShowBtcxBox;
+    // mở box này thì đóng các box còn lại
+    if(this.isShowBtcxBox)
+      this.isShowBoxGiphy = false;
   }
 
+  // hiển thị box giphy
+  public openBoxGiphy() {
+    this.isShowBoxGiphy = !this.isShowBoxGiphy;
+    // mở box này thì đóng các box còn lại
+    if(this.isShowBoxGiphy)
+      this.isShowBtcxBox = false;
+  }
   public getTopBoxBTCX() {
     let parent_input = document.getElementById("parent_input");
     if (parent_input.offsetHeight == 32) {
@@ -229,6 +241,26 @@ export class MessengerFooterComponent implements OnInit {
       return "-290px";
     } else {
       return "-323px";
+    }
+  }
+
+  public getTopGiphy() {
+    let parent_input = document.getElementById("parent_input");
+    if (parent_input.offsetHeight == 32) {
+      return "-306px";
+    } else if (parent_input.offsetHeight == 48) {
+      return "-296px";
+    }
+    else if (parent_input.offsetHeight == 64) {
+      return "-286px";
+    }
+    else if (parent_input.offsetHeight == 80) {
+      return "-276px";
+    }
+    else if (parent_input.offsetHeight == 83) {
+      return "-276px";
+    } else {
+      return "-311px";
     }
   }
 

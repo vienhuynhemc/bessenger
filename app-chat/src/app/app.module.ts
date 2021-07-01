@@ -65,6 +65,7 @@ import { ProfileAddComponent } from './view/main-page/friends-page/friends/profi
 import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 import { EmojiComponent } from './view/emoji/emoji.component';
+import { GiphyComponent } from './view/giphy/giphy.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { EmojiComponent } from './view/emoji/emoji.component';
     ProfileOfferComponent,
     OfferFriendsComponent,
     EmojiComponent,
+    GiphyComponent,
 
 
   ],
