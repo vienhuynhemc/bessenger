@@ -126,7 +126,7 @@ import { EmojiComponent } from './view/emoji/emoji.component';
     FormsModule,
     BrowserAnimationsModule,
     // tooltip
-    MatTooltipModule
+    MatTooltipModule,
   ],
   providers: [
     UserChatService,
