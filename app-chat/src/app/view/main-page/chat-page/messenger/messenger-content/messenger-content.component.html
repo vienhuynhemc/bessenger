@@ -25,9 +25,21 @@
                 {{this.content_service.getCreateFriends()}}</p>
         </div>
         <!-- Tin nhắn -->
+        <!--1. Tin nhắn -->
         <div *ngFor="let item of this.content_service.object_chat.cuoc_tro_truyen.tin_nhan">
             <div *ngIf="item.loai_tin_nhan == 'thong_bao'" class="thong_bao">
                 {{item.getNoiDungThongBao(this.content_service.object_chat.thanh_vien)}}
+            </div>
+        </div>
+        <!--2. Những ông đang nhập-->
+        <div class="list-dang-nhap" *ngIf="this.content_service.dang_nhaps.length != 0">
+            <div *ngFor="let item of this.content_service.dang_nhaps" class="dang_nhap">
+                <div class="hinh" [matTooltip]="item.getNoiDung()" matTooltipClass="tooltip">
+                    <img [src]="item.hinh || 'assets/images/loading.gif'" alt="">
+                </div>
+                <div class="lottie">
+                    <main lottie [options]="this.options"></main>
+                </div>
             </div>
         </div>
         <!------------------------------------------------->

@@ -1,3 +1,4 @@
+import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
@@ -16,7 +17,9 @@ export class ChatPageChatPageContentService {
   // Danh sách mã tài khoản bạn bè
   public ban_bes: string[];
   // oninput
-  public onInput:boolean;
+  public onInput: boolean;
+  // Đối tượng tượng đang nhập
+  public dang_nhaps: ObjectDangNhap[];
 
   constructor
     (
@@ -24,19 +27,81 @@ export class ChatPageChatPageContentService {
     ) {
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
+    this.dang_nhaps = [];
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
+    // Hàm cập nhật đang nhập 3s 1 lần
+    this.updateDangNhap();
   }
 
-  public updateOnInput(id:string) {
+  public updateOnInput(id: string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let hinh = "";
+    let ten = "";
+    if (this.object_chat.thanh_vien != null) {
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_tai_khoan) {
+          hinh = this.object_chat.thanh_vien[i].link_hinh_dai_dien;
+          ten = this.object_chat.thanh_vien[i].getName();
+          break;
+        }
+      }
+    }
     setTimeout(() => {
       let current = Number(new Date());
-      this.db.object("/trang_thai_dang_nhap/"+id+"/"+ma_tai_khoan).update({lan_cuoi_dang_nhap:current})
-      if(this.onInput){
+      this.db.object("/trang_thai_dang_nhap/" + id + "/" + ma_tai_khoan).update({ lan_cuoi_dang_nhap: current, hinh: hinh, ten: ten })
+      if (this.onInput) {
         this.updateOnInput(id);
       }
-    }, 1000);
+    }, 2500);
+  }
+
+  public getDangNhap(id: string) {
+    return this.db.object("/trang_thai_dang_nhap/" + id).snapshotChanges();
+  }
+
+  public dienThongTinDangNhap(object: Object) {
+    if (object != null) {
+      let array: ObjectDangNhap[] = [];
+      let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+      Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+        if (ma_thanh_vien != ma_tai_khoan) {
+          let o = new ObjectDangNhap();
+          o.ma_tai_khoan = ma_thanh_vien;
+          o.lan_cuoi_dang_nhap = data_thanh_vien['lan_cuoi_dang_nhap'];
+          o.hinh = data_thanh_vien['hinh'];
+          o.ten = data_thanh_vien['ten'];
+          array.push(o);
+        }
+      });
+      // Xem thử ông nào quá 2s thì xóa
+      let currentTime = Number(new Date());
+      let count = 0;
+      while (count < array.length) {
+        if (currentTime - array[count].lan_cuoi_dang_nhap > 2000) {
+          array.splice(count, 1);
+        } else {
+          count++;
+        }
+      }
+      this.dang_nhaps = array;
+    }
+  }
+
+  public updateDangNhap() {
+    setTimeout(() => {
+      // Xem thử ông nào quá 2s thì xóa
+      let currentTime = Number(new Date());
+      let count = 0;
+      while (count < this.dang_nhaps.length) {
+        if (currentTime - this.dang_nhaps[count].lan_cuoi_dang_nhap > 2000) {
+          this.dang_nhaps.splice(count, 1);
+        } else {
+          count++;
+        }
+      }
+      this.updateDangNhap();
+    }, 3000);
   }
 
   public update(): void {
