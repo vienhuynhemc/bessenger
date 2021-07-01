@@ -18,6 +18,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 15px;
     .hinh-dai-dien {
       position: relative;
       width: 60px;
@@ -87,7 +88,18 @@
       font-family: "Raleway";
       font-weight: 500;
       margin-top: 7px;
+      letter-spacing: 0.5px;
     }
+  }
+
+  .thong_bao {
+    display: flex;
+    justify-content: center;
+    color: #b9b9b9;
+    font-family: "Raleway";
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
   }
 }
 

@@ -12,16 +12,20 @@ import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat
 export class MessengerContentComponent implements OnInit {
 
   constructor(
+    // Footer service để điều chỉnh height
     public messenger_footer_service: MessengerFooterService,
-    private route:ActivatedRoute,
-    private messenger_main_service:MessengerMainService,
-    public content_service:ChatPageChatPageContentService
+    // Thay đổi url
+    private route: ActivatedRoute,
+    // Để lấy mã cuộc trò chuyện
+    private messenger_main_service: MessengerMainService,
+    // Service chính
+    public content_service: ChatPageChatPageContentService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       // Lấy bạn bè
-      this.content_service.getBanBe().subscribe(data=>{
+      this.content_service.getBanBe().subscribe(data => {
         this.content_service.layBanBe(data.payload.toJSON());
       });
       // Lấy loại cuộc trò chuyện
@@ -40,6 +44,10 @@ export class MessengerContentComponent implements OnInit {
           })
         })
       });
+      // Lấy tin nhắn
+      this.content_service.getTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+        this.content_service.dienTinNhan(data.payload.toJSON());
+      })
     });
   }
 

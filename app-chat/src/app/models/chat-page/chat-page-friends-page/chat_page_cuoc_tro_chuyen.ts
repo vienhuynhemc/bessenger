@@ -8,6 +8,8 @@ export class ChatPageCuocTroChuyen {
     ma_tai_khoan_chu_so_huu: string;
     ten_nguoi_so_huu: string;
     ton_tai: number;
+    mau:string;
+    bieu_tuong_cam_xuc:string;
     tin_nhan:ChatPageTinNhan[];
 
 }
