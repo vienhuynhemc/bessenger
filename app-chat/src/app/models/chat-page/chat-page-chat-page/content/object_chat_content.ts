@@ -1,28 +1,30 @@
+import { ChatPageCuocTroChuyen } from "../../chat-page-friends-page/chat_page_cuoc_tro_chuyen";
+import { ChatPageObjectTinNhanFriend } from "../../chat-page-friends-page/chat_page_object_tin_nhan_friend";
 import { ObjectChatThanhVien } from "../header/object_chat_thanh_vien";
 
 export class ObjectChatContent {
 
-    ma_tai_khoan_so_huu: string;
-    loai: string;
-    mau: string;
-    bieu_tuong_cam_xuc: string;
-    ten_nhom: string;
+    // Cuộc trò chuyện
+    cuoc_tro_truyen: ChatPageCuocTroChuyen;
+    // Thành viên
+    thanh_vien: ChatPageObjectTinNhanFriend[];
+    // Trạng thái đang nhập
+    
     is_online: boolean;
-    thanh_vien: ObjectChatThanhVien[];
 
     public getImg(): string[] {
         let result: string[] = [];
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.thanh_vien != null) {
-            if (this.loai == "nhom") {
+            if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
                 if (this.thanh_vien.length > 1) {
-                    result.push(this.thanh_vien[this.thanh_vien.length - 1].hinh);
-                    result.push(this.thanh_vien[this.thanh_vien.length - 2].hinh);
+                    result.push(this.thanh_vien[this.thanh_vien.length - 1].link_hinh_dai_dien);
+                    result.push(this.thanh_vien[this.thanh_vien.length - 2].link_hinh_dai_dien);
                 }
-            } else if (this.loai == "don") {
+            } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
                 for (let i = 0; i < this.thanh_vien.length; i++) {
                     if (this.thanh_vien[i].ma_tai_khoan != ma_tai_khoan) {
-                        result.push(this.thanh_vien[i].hinh);
+                        result.push(this.thanh_vien[i].link_hinh_dai_dien);
                         break;
                     }
                 }
@@ -32,9 +34,9 @@ export class ObjectChatContent {
     }
 
     public getCreateFriends(ban_bes: string[]): string {
-        if (this.loai == 'don') {
+        if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don') {
             return "Bạn và " + this.getName() + " là bạn bè trên Bessenger"
-        } else if (this.loai == "nhom") {
+        } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
             let count = 0;
             if (this.thanh_vien != null && ban_bes != null) {
                 let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
