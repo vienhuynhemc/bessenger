@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { ChatPageObjectTinNhanFriend } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
@@ -22,6 +23,13 @@ export class ChatPageFriendsLeftServiceService {
   // Danh sách các box chat để hiển thị ra
   public allBoxData: ChatPageFriendsObjectLeft[];
   public search: string;
+
+  // Service
+  public layAllCuocTroChuyen:Subscription;
+  public layAllCuocTroChuyenNhom:Subscription;
+  public layThanhVienCuocTroChuyenLeft:Subscription;
+  public layAllChiTietCuocTroChuyen:Subscription;
+  public layThongTinThanhVien:Subscription;
 
   constructor(
     private db: AngularFireDatabase,
