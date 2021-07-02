@@ -3,6 +3,7 @@ import { MessengerMainService } from './../../../../../service/chat-page/chat-pa
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-messenger-content',
@@ -11,17 +12,26 @@ import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat
 })
 export class MessengerContentComponent implements OnInit {
 
+  // lottie
+  public options: AnimationOptions = {
+    path: '/assets/json/lottie/input_loading.json',
+  };
+
   constructor(
+    // Footer service để điều chỉnh height
     public messenger_footer_service: MessengerFooterService,
-    private route:ActivatedRoute,
-    private messenger_main_service:MessengerMainService,
-    public content_service:ChatPageChatPageContentService
+    // Thay đổi url
+    private route: ActivatedRoute,
+    // Để lấy mã cuộc trò chuyện
+    private messenger_main_service: MessengerMainService,
+    // Service chính
+    public content_service: ChatPageChatPageContentService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       // Lấy bạn bè
-      this.content_service.getBanBe().subscribe(data=>{
+      this.content_service.getBanBe().subscribe(data => {
         this.content_service.layBanBe(data.payload.toJSON());
       });
       // Lấy loại cuộc trò chuyện
@@ -30,15 +40,23 @@ export class MessengerContentComponent implements OnInit {
         // Lấy thông tin nhóm của nó nếu có
         this.content_service.getThongTinTroChuyenNhom(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
           this.content_service.dienThongTinNhom(data.payload.toJSON());
-          // Lấy thành viên của nó
-          this.content_service.getObjectChatThanhVien(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-            this.content_service.dienThanhVien(data.payload.toJSON());
-            // Lấy thông tin tài khoản của các thành viên
-            this.content_service.getDataThanhVien().subscribe(data => {
-              this.content_service.dienThongTinThanhVien(data.payload.toJSON());
-            })
-          })
         })
+      });
+      // Lấy thành viên của nó
+      this.content_service.getObjectChatThanhVien(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+        this.content_service.dienThanhVien(data.payload.toJSON());
+        // Lấy thông tin tài khoản của các thành viên
+        this.content_service.getDataThanhVien().subscribe(data => {
+          this.content_service.dienThongTinThanhVien(data.payload.toJSON());
+        })
+      })
+      // Lấy tin nhắn
+      this.content_service.getTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+        this.content_service.dienTinNhan(data.payload.toJSON());
+      })
+      // Lấy nhữung ông đang nhập
+      this.content_service.getDangNhap(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+        this.content_service.dienThongTinDangNhap(data.payload.toJSON());
       });
     });
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { Component, OnInit } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 
 @Component({
   selector: 'app-messenger-footer',
@@ -26,6 +27,7 @@ export class MessengerFooterComponent implements OnInit {
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
+    public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute
   ) { }
 
@@ -116,7 +118,6 @@ export class MessengerFooterComponent implements OnInit {
             }
             newpos += 2;
           }
-          console.log(newpos);
           let range = document.createRange();
           let sel = window.getSelection();
           range.setStart(input, newpos);
@@ -289,5 +290,16 @@ export class MessengerFooterComponent implements OnInit {
       }
     }
     return "141px";
+  }
+
+  public khongNhapNua(event) {
+    setTimeout(() => { this.content_service.onInput = false }, 0);
+  }
+
+  public dangNhap(event) {
+    setTimeout(() => {
+      this.content_service.onInput = true;
+      this.content_service.updateOnInput(this.messenger_main_service.ma_cuoc_tro_chuyen);
+    }, 0);
   }
 }

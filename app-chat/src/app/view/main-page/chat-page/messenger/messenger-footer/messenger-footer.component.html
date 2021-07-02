@@ -69,7 +69,7 @@
     <div class="khung-chat">
         <div class="parent-input" id="parent_input">
             <div contenteditable="true" #input class="input" (input)="inputMessenger(input.innerHTML)" id="input"
-                (keydown)="onKeyInput($event)">
+                (keydown)="onKeyInput($event)" (focusout)="khongNhapNua($event)" (focus)="dangNhap($event)" >
             </div>
         </div>
         <p class="place" *ngIf="this.tin_nhan == null || this.tin_nhan.length == 0 || this.tin_nhan == '<br>'">Aa</p>
