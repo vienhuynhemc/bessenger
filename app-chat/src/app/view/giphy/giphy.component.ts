@@ -10,6 +10,7 @@ export class GiphyComponent implements OnInit {
   APIKEY: string = "FYvCtFq1iMU8ECzsOZC6wuxYZOdABFC7"
   urlMax30: string = `https://api.giphy.com/v1/gifs/search?api_key=${this.APIKEY}&limit=30&q=`;
   urlMax50: string = `https://api.giphy.com/v1/gifs/search?api_key=${this.APIKEY}&limit=50&q=`;
+
   listGiphyDefault: GiphyObject[];
   listGiphySearch: GiphyObject[];
   constructor() { }

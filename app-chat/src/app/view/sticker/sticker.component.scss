@@ -1,0 +1,44 @@
+.arrow-giphy {
+    transform: translate(-202px, -7px) rotate(-45deg);
+    width: 17px;
+    height: 17px;
+    right: 0px;
+    position: absolute;
+    background: white;
+    bottom: -11px;
+    box-shadow: -1px 1px 1px #ffffff80;
+    
+}
+.container {
+    width: 270px;
+    height: 300px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 100;
+
+    .header {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 100%;
+        height: 13%;
+        background-color: burlywood;
+        display: flex;
+        .left {
+            width: 85%;
+            height: 100%;
+            display: flex;
+            .prev, .next {
+                width: 15%;
+                height: 100%;
+            }
+            .sticker {
+                width: 18%;
+                height: 100%;
+            }
+        }
+        .right {
+            width: 15%;
+            height: 100%;
+        }
+    }
+}

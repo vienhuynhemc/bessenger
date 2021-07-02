@@ -66,6 +66,7 @@ import { ProfileOfferComponent } from './view/main-page/friends-page/friends/pro
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 import { EmojiComponent } from './view/emoji/emoji.component';
 import { GiphyComponent } from './view/giphy/giphy.component';
+import { StickerComponent } from './view/sticker/sticker.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { GiphyComponent } from './view/giphy/giphy.component';
     OfferFriendsComponent,
     EmojiComponent,
     GiphyComponent,
+    StickerComponent,
 
 
   ],

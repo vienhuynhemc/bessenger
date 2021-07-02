@@ -18,7 +18,8 @@
                 </g>
             </svg>
         </div>
-        <div class="child" matTooltip="Chọn nhãn dán" matTooltipClass="tooltip">
+        <!-- Nhãn dán -->
+        <div (click)="openBoxStickers()" class="child" matTooltip="Chọn nhãn dán" matTooltipClass="tooltip">
             <svg x="0px" y="0px" viewBox="0 0 17 16" height="20px" width="20px"
                 class="a8c37x1j ms05siws hr662l2t b7h9ocf4 crt8y2ji">
                 <g fill-rule="evenodd">
@@ -35,7 +36,12 @@
                         [attr.fill]="this.messenger_footer_service.object_chat_footer.mau" fill-rule="nonzero"></path>
                 </g>
             </svg>
+            
         </div>
+        <div *ngIf="isShowBoxStickers" class="box-stickers">
+            <app-sticker></app-sticker>
+        </div>
+        <!--  -->
          <!-- box giphy -->
         <div  (click)="openBoxGiphy()" class="child" matTooltip="Chọn file gif" matTooltipClass="tooltip">
             <svg x="0px" y="0px" viewBox="0 0 16 16" height="20px" width="20px"
@@ -47,10 +53,8 @@
         </div>
         <div [style.top]="getTopGiphy()" class="box-giphy" *ngIf="isShowBoxGiphy">
             <app-giphy></app-giphy>
-           
-            
         </div>
-        <!-- box giphy -->
+        <!--  -->
         <div class="child" matTooltip="Đính kèm file" matTooltipClass="tooltip">
             <i [style.color]="this.messenger_footer_service.object_chat_footer.mau" class="fas fa-paperclip"></i>
         </div>
