@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -20,6 +21,15 @@ export class ChatPageChatPageContentService {
   public onInput: boolean;
   // Đối tượng tượng đang nhập
   public dang_nhaps: ObjectDangNhap[];
+
+  // service
+  public layAllBanBe:Subscription;
+  public layLoaiCuocTroChuyen:Subscription;
+  public layThongTinNhom:Subscription;
+  public layThanhVien:Subscription;
+  public layThongTinTaiKhoan:Subscription;
+  public layTinNhan:Subscription;
+  public layNhungOngDangNhap:Subscription;
 
   constructor
     (

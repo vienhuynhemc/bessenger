@@ -30,10 +30,19 @@ export class MessengerFooterComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.reset();
       // Lấy thông tin cơ bản
-      this.messenger_footer_service.getThongTinCoBan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-        this.messenger_footer_service.dienThongTinCoBan(data.payload.toJSON());
-      })
+      if (this.messenger_footer_service.layData == null) {
+        this.getData();
+      } else {
+        this.messenger_footer_service.layData.unsubscribe();
+        this.getData();
+      }
     });
+  }
+
+  public getData() {
+    this.messenger_footer_service.layData = this.messenger_footer_service.getThongTinCoBan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+      this.messenger_footer_service.dienThongTinCoBan(data.payload.toJSON());
+    })
   }
 
   public reset(): void {
