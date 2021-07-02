@@ -30,7 +30,9 @@ export class EmojiService {
     this.dinh_kems = [];
     this.cos = [];
     this.lich_sus = [];
-    this.getMatCuoi().subscribe(data => this.dienMatCuoi(data.payload.toJSON()));
+    this.getMatCuoi().subscribe(data => {
+      this.dienMatCuoi(data.payload.toJSON());
+    });
     this.getDongVat().subscribe(data => this.dienDongVat(data.payload.toJSON()));
     this.getRauCu().subscribe(data => this.dienRauCu(data.payload.toJSON()));
     this.getDoChoi().subscribe(data => this.dienDoChoi(data.payload.toJSON()));

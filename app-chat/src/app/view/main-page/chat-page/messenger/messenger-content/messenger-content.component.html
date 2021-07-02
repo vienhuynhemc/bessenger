@@ -46,13 +46,17 @@
                     <!-- Nội dung -->
                     <div class="chua-nd" [class.ban_than]="item.isBanThan()" [class.doi_phuong]="!item.isBanThan()"
                         [matTooltip]="item.getTime()" matTooltipClass="tooltip"
+                        [class.border-tren-ban-than]="item.isBanThan() && item.isHaveBorderTop(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
+                        [class.border-duoi-ban-than]="item.isBanThan() && item.isHaveBorderBottom(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
+                        [class.border-tren-doi-phuong]="!item.isBanThan() && item.isHaveBorderTop(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
+                        [class.border-duoi-doi-phuong]="!item.isBanThan() && item.isHaveBorderBottom(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
                         [style.background-color]="item.getColor(this.content_service.object_chat.cuoc_tro_truyen.mau)">
                         <div class="noi-dung" [innerHTML]="item.getNoiDungHTML(this.sanitized)">
                         </div>
                     </div>
                 </div>
                 <!-- Trạng thái gửi nếu là bản thân-->
-                <div class="trang_thai_gui" *ngIf="item.isBanThan()">
+                <div class="trang_thai_gui" *ngIf="item.isBanThan() && (item.isDaGui() || item.isDaChuyen())">
                     <div *ngIf="item.isDaGui()" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px" width="14px"
                         viewBox="2 2 20 20" role="img">
                         <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
@@ -76,7 +80,8 @@
                     </div>
                 </div>
                 <!-- Danh sách những người đã xem-->
-                <div class="da_xem" *ngIf="item.isCoNguoiXem()">
+                <div class="da_xem"
+                    *ngIf="item.isCoNguoiXem() && item.isShowNguoiXem(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)">
                     <div class="list">
                         <div *ngFor="let da_xem of item.tinh_trang_xem">
                             <div *ngIf="da_xem.isOke(item.ma_tai_khoan) && item.isLastDaXem(i,da_xem.ma_tai_khoan,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"

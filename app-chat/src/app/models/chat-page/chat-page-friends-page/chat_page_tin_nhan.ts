@@ -142,7 +142,20 @@ export class ChatPageTinNhan {
         return false;
     }
 
-    public isLastDaXem(index: number, mtk: string, tin_nhan: ChatPageTinNhan[]):boolean {
+    public isShowNguoiXem(index: number, tin_nhan: ChatPageTinNhan[]) {
+        let count = 0;
+        for (let i = 0; i < this.tinh_trang_xem.length; i++) {
+            if (this.tinh_trang_xem[i].isOke(this.ma_tai_khoan)
+                && this.isLastDaXem(index, this.tinh_trang_xem[i].ma_tai_khoan, tin_nhan)
+            ) {
+                count++;
+            }
+        }
+        if (count == 0) return false;
+        return true;
+    }
+
+    public isLastDaXem(index: number, mtk: string, tin_nhan: ChatPageTinNhan[]): boolean {
         for (let i = tin_nhan.length - 1; i > -1; i--) {
             for (let j = 0; j < tin_nhan[i].tinh_trang_xem.length; j++) {
                 if (tin_nhan[i].tinh_trang_xem[j].ma_tai_khoan == mtk) {
@@ -152,6 +165,32 @@ export class ChatPageTinNhan {
                     }
                     break;
                 }
+            }
+        }
+        return false;
+    }
+
+    public isHaveBorderTop(index: number, tin_nhan: ChatPageTinNhan[]) {
+        if (index == 0) {
+            return true;
+        } else {
+            if (tin_nhan[index - 1].ma_tai_khoan != this.ma_tai_khoan) {
+                return true;
+            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public isHaveBorderBottom(index: number, tin_nhan: ChatPageTinNhan[]) {
+        if (index == tin_nhan.length - 1) {
+            return true;
+        } else {
+            if (tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
+                return true;
+            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon') {
+                return true;
             }
         }
         return false;

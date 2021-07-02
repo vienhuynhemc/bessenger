@@ -42,7 +42,16 @@ export class SelectAvatarComponent implements OnInit {
 
   public init(): void {
     // Lấy hình đại diện của mã tài khoản đang đăng ký từ firebase
-    this.select_avatar_service.getImg().subscribe(snap => {
+    if (this.select_avatar_service.layHinh == null) {
+      this.getData();
+    } else {
+      this.select_avatar_service.layHinh.unsubscribe();
+      this.getData();
+    }
+  }
+
+  public getData() {
+    this.select_avatar_service.layHinh = this.select_avatar_service.getImg().subscribe(snap => {
       // Tải
       let value = snap.payload.toJSON();
       this.url_img_avatar = value['link_hinh'];

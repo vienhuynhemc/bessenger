@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 
@@ -15,6 +16,10 @@ export class MainPageService {
   private ban_be_duoc_chon: boolean;
   private thong_tin_ca_nhan_duoc_chon: boolean;
   private cai_dat_duoc_chon: boolean;
+
+  // Service
+  // 1. Lấy hình
+  public layHinh:Subscription;
 
   constructor(
     private db: AngularFireDatabase
