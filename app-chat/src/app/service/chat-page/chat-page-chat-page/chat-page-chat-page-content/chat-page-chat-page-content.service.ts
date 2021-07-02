@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -20,6 +21,15 @@ export class ChatPageChatPageContentService {
   public onInput: boolean;
   // Đối tượng tượng đang nhập
   public dang_nhaps: ObjectDangNhap[];
+
+  // service
+  public layAllBanBe:Subscription;
+  public layLoaiCuocTroChuyen:Subscription;
+  public layThongTinNhom:Subscription;
+  public layThanhVien:Subscription;
+  public layThongTinTaiKhoan:Subscription;
+  public layTinNhan:Subscription;
+  public layNhungOngDangNhap:Subscription;
 
   constructor
     (
@@ -127,6 +137,39 @@ export class ChatPageChatPageContentService {
       }
       this.update();
     }, 5000);
+  }
+
+  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string) {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let currentTime = Number(new Date());
+    // Tin nhắn
+    this.db.list("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen).push(
+      {
+        dia_chi_file: "",
+        link_file: "",
+        loai_tin_nhan: loai,
+        ["ma_tai_khoan"]: ma_tai_khoan,
+        ma_tin_nhan_phan_hoi: "",
+        ngay_gui: currentTime,
+        noi_dung: tin_nhan,
+      }
+    ).then((ref) => {
+      // Lấy all thành viên
+      let array: Object[] = [];
+      array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi" });
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        array.push({ ma_tai_khoan: this.object_chat.thanh_vien[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua" });
+      }
+      for (let i = 0; i < array.length; i++) {
+        this.db.object("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
+          {
+            ngay_nhan: array[i]['ngay_nhan'],
+            ngay_xem: array[i]['ngay_xem'],
+            xem_chua: array[i]['xem_chua']
+          }
+        )
+      };
+    });
   }
 
   public getBanBe() {

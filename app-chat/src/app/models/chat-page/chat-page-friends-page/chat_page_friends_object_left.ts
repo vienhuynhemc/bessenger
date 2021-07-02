@@ -199,7 +199,7 @@ export class ChatPageFriendsObjectLeft {
                 switch (this.cuoc_tro_truyen.tin_nhan[index].loai_tin_nhan) {
                     case "gui_text":
                         if (ten == "Bạn") {
-                            result.noi_dung = this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
                         } else {
                             result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
                         }
@@ -228,14 +228,39 @@ export class ChatPageFriendsObjectLeft {
                 }
             }
         }
+        // Xử lý lại noi_dung của result
+        this.handleNoiDung(result);
         result.noi_dung_goc = result.noi_dung;
-        if (result.noi_dung.length > 25) {
+        let array = result.noi_dung.split("\n");
+        if (array.length > 1) {
+            if (array[0].length > 25) {
+                result.noi_dung = array[0].substring(0, 22) + "...";
+            } else {
+                result.noi_dung = array[0] + "...";
+            }
+            result.is_cut = true;
+        } else if (result.noi_dung.length > 25) {
             result.noi_dung = result.noi_dung.substring(0, 22) + "...";
             result.is_cut = true;
         } else {
             result.is_cut = false;
         }
         return result;
+    }
+
+    public handleNoiDung(result: ChatPageObjectTen) {
+        let div = document.createElement("div");
+        div.innerHTML = result.noi_dung;
+        let nodes = div.childNodes;
+        let noi_dung_moi = "";
+        for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i].isEqualNode(document.createElement("br"))) {
+                noi_dung_moi += "\n";
+            } else {
+                noi_dung_moi += nodes[i].textContent;
+            }
+        }
+        result.noi_dung = noi_dung_moi;
     }
 
     public getTenNguoiGui(index: number): string {

@@ -28,7 +28,20 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     if (!this.login_service.isLogin()) {
       this.router.navigate(['/dang-nhap']);
+    } else {
+      if (this.main_page_service.layHinh == null) {
+        this.getData();
+      } else {
+        this.main_page_service.layHinh.unsubscribe();
+        this.getData();
+      }
     }
+  }
+
+  public getData() {
+    this.main_page_service.layHinh = this.main_page_service.getImg().subscribe(data => {
+      this.main_page_service.setImg(data.payload.toJSON());
+    });
   }
 
   // Đăng xuất

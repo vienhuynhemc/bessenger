@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ChatPageProcessServiceService } from './../chat-page-process-service.service';
 import { ChatPageBanBe } from './../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
@@ -13,12 +14,61 @@ export class ChatPageFriendsServiceService {
   // Danh sách các mã cuộc trò chuyện đơn
   public maCuocTroChuyenDons: string[];
 
+  // service
+  public layListBanbe: Subscription;
+  public layTroChuyenDon:Subscription;
+  public layThanhVienCuocTroChuyen:Subscription;
+  public layThongTinThanhVien:Subscription;
+
   constructor(
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceService
   ) {
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
+  }
+
+  public dienBanBeOnline(object: Object) {
+    let banBes: ChatPageBanBe[] = [];
+    if (object != null) {
+      Object.entries(object).forEach(([key, value]) => {
+        if (value['ton_tai'] == "0") {
+          let cpbb: ChatPageBanBe = new ChatPageBanBe();
+          cpbb.ma_tai_khoan = key;
+          banBes.push(cpbb);
+        }
+      });
+    }
+    this.ban_bes = banBes;
+    setTimeout(() => {
+      this.main_page_process_service.setLoading(false);
+    }, 0);
+  }
+
+  public dienTroChuyenDonOnline(object:Object){
+    let cuocTroChuyenDons: string[] = [];
+    if (object != null) {
+      Object.entries(object).forEach(([key, value]) => {
+        if (value['loai_cuoc_tro_truyen'] == 'don') {
+          cuocTroChuyenDons.push(key);
+        };
+      });
+    }
+    this.maCuocTroChuyenDons = cuocTroChuyenDons;
+    setTimeout(() => {
+      this.main_page_process_service.setLoading(false);
+    }, 0);
+  }
+
+  public dienThanhVienCuocTroChuyenOnline(object:Object){
+      if (object != null) {
+        Object.entries(object).forEach(([key, value]) => {
+          // Duyện đúng mã trò truyện đơn thì check thử nó có chứa 2 tài khoản không
+          if (this.checkContain(key)) {
+            this.handleThanhVienCuocTroChuyenDon(value, key);
+          }
+        });
+      }
   }
 
   public update(): void {
@@ -54,33 +104,20 @@ export class ChatPageFriendsServiceService {
     return false;
   }
 
-
   public getListFriend() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     return this.db.object("/ban_be/" + ma_tai_khoan).snapshotChanges();
   }
 
   public getCuocTroChuyenDon() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getTaiKhoan() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/tai_khoan").snapshotChanges();
   }
 
   public getThanhVienCuocTroChuyenDon() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thanh_vien_cuoc_tro_chuyen").snapshotChanges();
   }
 

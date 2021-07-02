@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ObjectChatFooter } from './../../../../models/chat-page/chat-page-chat-page/footer/object_chat_footer';
@@ -9,6 +10,9 @@ export class MessengerFooterService {
 
   public chenh_lech_height: number;
   public object_chat_footer: ObjectChatFooter;
+
+  // service
+  public layData:Subscription;
 
   constructor(
     private db: AngularFireDatabase,
