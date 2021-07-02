@@ -102,6 +102,10 @@
     font-weight: 600;
   }
 
+  .top_thong_bao {
+    margin-top: 9x;
+  }
+
   .list-dang-nhap {
     margin-left: 2px;
     margin-top: 7px;
@@ -136,6 +140,73 @@
         }
       }
     }
+  }
+
+  .gui_text {
+    width: 100%;
+    .tren {
+      display: flex;
+      align-items: flex-end;
+      .hinh {
+        margin-left: 2px;
+        width: 28px;
+        height: 28px;
+        box-shadow: 0 0 2px #909090;
+        border-radius: 50%;
+        img {
+          width: 28px;
+          height: 28px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .chua-nd {
+        border-radius: 18px;
+        .noi-dung {
+          font-family: "Raleway";
+          font-weight: 500;
+          font-size: 12px;
+          transform: scaleY(1.04);
+          letter-spacing: 0.5px;
+          max-width: 330px;
+          margin: 8px 12px;
+        }
+      }
+      .ban_than {
+        color: white;
+      }
+      .doi_phuong {
+        color: #050505;
+        margin-left: 8px;
+      }
+    }
+    .trang_thai_gui {
+      margin-left: 4px;
+      width: 14px;
+    }
+    .da_xem {
+      margin-top: 4px;
+      display: flex;
+      justify-content: flex-end;
+      .list {
+        display: flex;
+        justify-content: space-between;
+        .item-ok {
+          img {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin: 0px 1px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+  .ban_than_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
 

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { AnimationOptions } from 'ngx-lottie';
+import { DomSanitizer } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-messenger-content',
@@ -25,7 +26,9 @@ export class MessengerContentComponent implements OnInit {
     // Để lấy mã cuộc trò chuyện
     private messenger_main_service: MessengerMainService,
     // Service chính
-    public content_service: ChatPageChatPageContentService
+    public content_service: ChatPageChatPageContentService,
+    // pipi html
+    public sanitized: DomSanitizer
   ) { }
 
   ngOnInit(): void {
