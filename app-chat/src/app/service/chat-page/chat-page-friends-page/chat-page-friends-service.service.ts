@@ -56,31 +56,19 @@ export class ChatPageFriendsServiceService {
 
 
   public getListFriend() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     return this.db.object("/ban_be/" + ma_tai_khoan).snapshotChanges();
   }
 
   public getCuocTroChuyenDon() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getTaiKhoan() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/tai_khoan").snapshotChanges();
   }
 
   public getThanhVienCuocTroChuyenDon() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thanh_vien_cuoc_tro_chuyen").snapshotChanges();
   }
 

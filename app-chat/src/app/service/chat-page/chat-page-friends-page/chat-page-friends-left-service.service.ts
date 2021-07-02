@@ -407,30 +407,18 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public getAllTaiKhoan() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/tai_khoan").snapshotChanges();
   }
 
   public getAllChiTietCuocTroChuyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/chi_tiet_cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getAllCuocTroChuyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getAllCuocTroChuyenNhom() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thong_tin_tro_chuyen_nhom").snapshotChanges();
   }
 
@@ -449,9 +437,6 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public getThanhVienCuocTroTruyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thanh_vien_cuoc_tro_chuyen").snapshotChanges();
   }
 

@@ -6,6 +6,8 @@ import { Injectable, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class MainPageService {
 
+  public img:string;
+
   // Mục đích để xử tô xanh cái icon bên trái
   private trang_chu_duoc_chon: boolean;
   private tin_nhan_duoc_chon: boolean;
@@ -24,6 +26,15 @@ export class MainPageService {
     this.thong_tin_ca_nhan_duoc_chon = false;
     this.cai_dat_duoc_chon = false;
     this.updateOnline();
+  }
+
+  public getImg(){
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    return this.db.object("/tai_khoan/"+ma_tai_khoan).snapshotChanges();
+  }
+
+  public setImg(object:Object){
+    this.img = object['link_hinh'];
   }
 
   public updateOnline(): void {
