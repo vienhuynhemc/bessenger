@@ -204,6 +204,13 @@ export class ChatPageFriendsObjectLeft {
                             result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
                         }
                         break;
+                    case "gui_text_icon":
+                        if (ten == "Bạn") {
+                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                        } else {
+                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                        }
+                        break;
                     case "thong_bao":
                         result.noi_dung = ten + " " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
                         break;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { EmojiObject } from './../../models/emoji/emoji_object';
 import { EmojiService } from './../../service/emoji/emoji.service';
 // lottie
@@ -10,6 +10,9 @@ import { AnimationOptions } from 'ngx-lottie';
   styleUrls: ['./emoji.component.scss']
 })
 export class EmojiComponent implements OnInit {
+
+  // scroll
+  @HostListener('scroll', ['$event'])
 
   // lottie
   options: AnimationOptions = {
@@ -23,7 +26,6 @@ export class EmojiComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.eventScroll();
   }
 
   animationCreated(animationItem: AnimationItem): void {
@@ -95,19 +97,17 @@ export class EmojiComponent implements OnInit {
     }
   }
 
-  public eventScroll() {
+  public eventScroll(event) {
     let root = document.getElementById("list");
-    root.addEventListener('scroll', () => {
-      let allElement = document.querySelectorAll("section");
-      let i = 0;
-      allElement.forEach(element => {
-        let elementTop = element.offsetTop;
-        if (root.scrollTop >= elementTop) {
-          i++;
-        }
-      })
-      this.updateHover(i);
+    let allElement = document.querySelectorAll("section");
+    let i = 0;
+    allElement.forEach(element => {
+      let elementTop = element.offsetTop;
+      if (root.scrollTop >= elementTop) {
+        i++;
+      }
     })
+   this.updateHover(i);
   }
 
 }
