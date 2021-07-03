@@ -18,7 +18,16 @@ export class CreateGroupChatComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.chat_page_create_ground.getAllUser().subscribe(data => {
+    if (this.chat_page_create_ground.layAllUser == null) {
+      this.getData();
+    } else {
+      this.chat_page_create_ground.layAllUser.unsubscribe();
+      this.getData();
+    }
+  }
+
+  public getData() {
+    this.chat_page_create_ground.layAllUser = this.chat_page_create_ground.getAllUser().subscribe(data => {
       let object = data.payload.toJSON();
       let all_user: ChatPageObjectGroup[] = [];
       Object.entries(object).forEach(([ma_tai_khoan, data_tai_khoan]) => {

@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ChatPageObjectGroup } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_group';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,9 @@ export class ChatPageCreateGroupService {
   public user_added: ChatPageObjectGroup[];
   // Danh sách gợi ý
   public user_search: ChatPageObjectGroup[];
+  
+  // service
+  public layAllUser:Subscription;
 
   constructor(
     private db: AngularFireDatabase

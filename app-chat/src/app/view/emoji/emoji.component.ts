@@ -107,7 +107,7 @@ export class EmojiComponent implements OnInit {
         i++;
       }
     })
-   this.updateHover(i);
+    this.updateHover(i);
   }
 
 }
