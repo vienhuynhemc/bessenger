@@ -13,8 +13,10 @@ export class ChatPageChatPageScrollService {
   constructor() { }
 
   public register(element) {
-    this.resizeObserver.unobserve(element);
-    this.resizeObserver.observe(element);
+    if(element! =null){
+      this.resizeObserver.unobserve(element);
+      this.resizeObserver.observe(element);
+    }
   }
 
   public resizeObserver = new ResizeObserver(entries => {

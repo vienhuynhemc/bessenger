@@ -55,9 +55,15 @@ export class MessengerFooterComponent implements OnInit {
 
   public reset(): void {
     this.last_height = 22;
-    document.getElementById("input").innerHTML = '';
+    let input = document.getElementById("input");
+    if (input != null) {
+      input.innerHTML = '';
+    }
     this.messenger_footer_service.chenh_lech_height = 0;
-    document.getElementById("parent_input").style.marginBottom = "5px";
+    let parent_input = document.getElementById("parent_input");
+    if (parent_input != null) {
+      parent_input.style.marginBottom = "5px";
+    }
     this.tin_nhan = "";
   }
 

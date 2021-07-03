@@ -12,7 +12,7 @@ export class MessengerFooterService {
   public object_chat_footer: ObjectChatFooter;
 
   // service
-  public layData:Subscription;
+  public layData: Subscription;
 
   constructor(
     private db: AngularFireDatabase,
@@ -30,9 +30,11 @@ export class MessengerFooterService {
   }
 
   public dienThongTinCoBan(object: Object) {
-    this.object_chat_footer.loai = object['loai_cuoc_tro_truyen'];
-    this.object_chat_footer.mau = object['mau'];
-    this.object_chat_footer.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    if (object != null) {
+      this.object_chat_footer.loai = object['loai_cuoc_tro_truyen'];
+      this.object_chat_footer.mau = object['mau'];
+      this.object_chat_footer.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    }
   }
 
 }

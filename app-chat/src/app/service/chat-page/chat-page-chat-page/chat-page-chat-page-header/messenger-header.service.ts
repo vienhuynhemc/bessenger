@@ -13,10 +13,10 @@ export class MessengerHeaderService {
   public object_chat: ObjectChat;
 
   // Service
-  public layAllCuocTroChuyen:Subscription;
-  public layThongTinNhom:Subscription;
-  public layThanhVien:Subscription;
-  public layThongTinThanhVien:Subscription;
+  public layAllCuocTroChuyen: Subscription;
+  public layThongTinNhom: Subscription;
+  public layThanhVien: Subscription;
+  public layThongTinThanhVien: Subscription;
 
   constructor(
     private db: AngularFireDatabase
@@ -52,9 +52,11 @@ export class MessengerHeaderService {
   }
 
   public dienThongTinCoBan(object: Object): void {
-    this.object_chat.loai = object['loai_cuoc_tro_truyen'];
-    this.object_chat.mau = object['mau'];
-    this.object_chat.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    if (object != null) {
+      this.object_chat.loai = object['loai_cuoc_tro_truyen'];
+      this.object_chat.mau = object['mau'];
+      this.object_chat.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    }
   }
 
   public getObjectChat(ma_cuoc_tro_chuyen: string) {
@@ -83,12 +85,14 @@ export class MessengerHeaderService {
 
   public dienThanhVien(object: Object) {
     let array: ObjectChatThanhVien[] = [];
-    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
-      let objectChatThanhVien = new ObjectChatThanhVien();
-      objectChatThanhVien.ma_tai_khoan = ma_thanh_vien;
-      objectChatThanhVien.ngay_tham_gia = data_thanh_vien['ngay_tham_gia'];
-      array.push(objectChatThanhVien);
-    });
+    if (object != null) {
+      Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+        let objectChatThanhVien = new ObjectChatThanhVien();
+        objectChatThanhVien.ma_tai_khoan = ma_thanh_vien;
+        objectChatThanhVien.ngay_tham_gia = data_thanh_vien['ngay_tham_gia'];
+        array.push(objectChatThanhVien);
+      });
+    }
     this.object_chat.thanh_vien = array;
   }
 
