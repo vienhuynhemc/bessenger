@@ -23,13 +23,13 @@ export class ChatPageChatPageContentService {
   public dang_nhaps: ObjectDangNhap[];
 
   // service
-  public layAllBanBe:Subscription;
-  public layLoaiCuocTroChuyen:Subscription;
-  public layThongTinNhom:Subscription;
-  public layThanhVien:Subscription;
-  public layThongTinTaiKhoan:Subscription;
-  public layTinNhan:Subscription;
-  public layNhungOngDangNhap:Subscription;
+  public layAllBanBe: Subscription;
+  public layLoaiCuocTroChuyen: Subscription;
+  public layThongTinNhom: Subscription;
+  public layThanhVien: Subscription;
+  public layThongTinTaiKhoan: Subscription;
+  public layTinNhan: Subscription;
+  public layNhungOngDangNhap: Subscription;
 
   constructor
     (
@@ -261,31 +261,33 @@ export class ChatPageChatPageContentService {
 
   public dienTinNhan(value: object) {
     let tin_nhans: ChatPageTinNhan[] = [];
-    Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
-      let tin_nhan = new ChatPageTinNhan();
-      tin_nhan.ma_tin_nhan = ma_tin_nhan;
-      tin_nhan.dia_chi_file = data_tin_nhan['dia_chi_file'];
-      tin_nhan.link_file = data_tin_nhan['link_file'];
-      tin_nhan.loai_tin_nhan = data_tin_nhan['loai_tin_nhan'];
-      tin_nhan.ma_tai_khoan = data_tin_nhan['ma_tai_khoan'];
-      tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
-      tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
-      tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
-      let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
-      let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
-      if (tinhTrangXem != null) {
-        Object.entries(tinhTrangXem).forEach(([ma_tai_khoan, data]) => {
-          let o = new ChatPageTinhTrangXem();
-          o.ma_tai_khoan = ma_tai_khoan;
-          o.ngay_xem = data['ngay_xem'];
-          o.xem_chua = data['xem_chua'];
-          o.ngay_nhan = data['ngay_nhan'];
-          tinh_trang_xems.push(o);
-        });
-        tin_nhan.tinh_trang_xem = tinh_trang_xems;
-        tin_nhans.push(tin_nhan);
-      }
-    });
+    if (value != null) {
+      Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
+        let tin_nhan = new ChatPageTinNhan();
+        tin_nhan.ma_tin_nhan = ma_tin_nhan;
+        tin_nhan.dia_chi_file = data_tin_nhan['dia_chi_file'];
+        tin_nhan.link_file = data_tin_nhan['link_file'];
+        tin_nhan.loai_tin_nhan = data_tin_nhan['loai_tin_nhan'];
+        tin_nhan.ma_tai_khoan = data_tin_nhan['ma_tai_khoan'];
+        tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
+        tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
+        tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
+        let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
+        let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
+        if (tinhTrangXem != null) {
+          Object.entries(tinhTrangXem).forEach(([ma_tai_khoan, data]) => {
+            let o = new ChatPageTinhTrangXem();
+            o.ma_tai_khoan = ma_tai_khoan;
+            o.ngay_xem = data['ngay_xem'];
+            o.xem_chua = data['xem_chua'];
+            o.ngay_nhan = data['ngay_nhan'];
+            tinh_trang_xems.push(o);
+          });
+          tin_nhan.tinh_trang_xem = tinh_trang_xems;
+          tin_nhans.push(tin_nhan);
+        }
+      });
+    }
     this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
   }
 
