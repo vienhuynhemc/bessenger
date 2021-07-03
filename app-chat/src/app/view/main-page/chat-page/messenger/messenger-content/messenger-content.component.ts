@@ -1,10 +1,12 @@
+import { ChatPageChatPageScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { MessengerMainService } from './../../../../../service/chat-page/chat-page-chat-page/messenger-main.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { AnimationOptions } from 'ngx-lottie';
 import { DomSanitizer } from '@angular/platform-browser'
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-messenger-content',
@@ -13,10 +15,15 @@ import { DomSanitizer } from '@angular/platform-browser'
 })
 export class MessengerContentComponent implements OnInit {
 
+  // scroll
+  @HostListener('scroll', ['$event'])
+
   // lottie
   public options: AnimationOptions = {
     path: '/assets/json/lottie/input_loading.json',
   };
+
+  public showDelay = new FormControl(500);
 
   constructor(
     // Footer service để điều chỉnh height
@@ -28,7 +35,9 @@ export class MessengerContentComponent implements OnInit {
     // Service chính
     public content_service: ChatPageChatPageContentService,
     // pipi html
-    public sanitized: DomSanitizer
+    public sanitized: DomSanitizer,
+    // Service scroll
+    public scroll_service: ChatPageChatPageScrollService
   ) { }
 
   public layAllBanBe() {
@@ -112,7 +121,17 @@ export class MessengerContentComponent implements OnInit {
         this.content_service.layNhungOngDangNhap.unsubscribe();
         this.layNhungOngDangNhap();
       }
+      // add event scroll
+      this.addEventScroll();
     });
+  }
+
+  public addEventScroll() {
+    this.scroll_service.register(document.getElementById("danh-sach-tin-nhan"));
+  }
+
+  public scrollChange(event){
+    this.scroll_service.scrollTop = document.getElementById("tin-nhan-div").scrollTop;
   }
 
   public layTinNhan() {

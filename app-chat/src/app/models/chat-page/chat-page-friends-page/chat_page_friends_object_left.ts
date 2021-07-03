@@ -37,7 +37,7 @@ export class ChatPageFriendsObjectLeft {
                 last_time = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
             }
         } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-            if (this.cuoc_tro_truyen.tin_nhan != null) {
+            if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length>0) {
                 let index = 0;
                 let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
                 for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
@@ -198,6 +198,13 @@ export class ChatPageFriendsObjectLeft {
             if (this.cuoc_tro_truyen.tin_nhan.length > index) {
                 switch (this.cuoc_tro_truyen.tin_nhan[index].loai_tin_nhan) {
                     case "gui_text":
+                        if (ten == "Bạn") {
+                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                        } else {
+                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
+                        }
+                        break;
+                    case "gui_text_icon":
                         if (ten == "Bạn") {
                             result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[index].noi_dung;
                         } else {

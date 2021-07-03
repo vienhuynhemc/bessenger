@@ -143,7 +143,6 @@
   }
 
   .gui_text {
-    margin-right: 8px;
     .tren {
       display: flex;
       align-items: flex-end;
@@ -195,12 +194,29 @@
       .border-duoi-doi-phuong {
         border-bottom-left-radius: 18px;
       }
-    }
-    .trang_thai_gui {
-      margin-top: 4px;
-      width: 14px;
+      .trang_thai_gui {
+        width: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
+        display: flex;
+        justify-content: center;
+
+        .nguoi_xem {
+          img {
+            width: 14px;
+            height: 14px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 2px #909090;
+          }
+        }
+      }
+      .trang_thai_gui_kpbt {
+        margin-left: auto;
+      }
     }
     .da_xem {
+      margin-right: 3px;
       margin-top: 4px;
       display: flex;
       justify-content: flex-end;
@@ -224,6 +240,73 @@
     flex-direction: column;
     align-items: flex-end;
   }
+
+  .gui_text_icon {
+    .tren {
+      display: flex;
+      align-items: flex-end;
+      .hinh {
+        margin-left: 2px;
+        width: 28px;
+        height: 28px;
+        box-shadow: 0 0 2px #909090;
+        border-radius: 50%;
+        img {
+          width: 28px;
+          height: 28px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .chua-nd {
+        .noi-dung {
+          max-width: 330px;
+        }
+      }
+      .doi_phuong {
+        margin-left: 8px;
+      }
+      .trang_thai_gui {
+        width: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
+        display: flex;
+        justify-content: center;
+
+        .nguoi_xem {
+          img {
+            width: 14px;
+            height: 14px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 2px #909090;
+          }
+        }
+      }
+      .trang_thai_gui_kpbt {
+        margin-left: auto;
+      }
+    }
+    .da_xem {
+      margin-right: 3px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: flex-end;
+      .list {
+        display: flex;
+        justify-content: space-between;
+        .item-ok {
+          img {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin: 0px 1px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
 }
 
 .content {
@@ -233,6 +316,10 @@
   overflow-y: scroll;
   margin-bottom: 2.5%;
   margin-left: 2.5%;
+
+  #danh-sach-tin-nhan {
+    width: 100%;
+  }
 }
 ::-webkit-scrollbar-track {
   border-radius: 20px;
