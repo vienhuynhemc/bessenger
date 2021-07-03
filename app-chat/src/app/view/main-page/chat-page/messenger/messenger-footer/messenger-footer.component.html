@@ -41,6 +41,7 @@
         <div *ngIf="isShowBoxStickers" class="box-stickers">
             <app-sticker></app-sticker>
         </div>
+       
         <!--  -->
          <!-- box giphy -->
         <div  (click)="openBoxGiphy()" class="child" matTooltip="Chọn file gif" matTooltipClass="tooltip">
@@ -95,3 +96,6 @@
         </svg>
     </div>
 </div>
+
+<!-- shop sticker -->
+<app-shop-sticker *ngIf="stickersService.isShowShop"></app-shop-sticker>

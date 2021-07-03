@@ -4,6 +4,7 @@ import { MessengerFooterService } from './../../../../../service/chat-page/chat-
 import { Component, OnInit } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { StickersService } from 'src/app/service/stickers/stickers.service';
 
 @Component({
   selector: 'app-messenger-footer',
@@ -28,7 +29,8 @@ export class MessengerFooterComponent implements OnInit {
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
     public content_service: ChatPageChatPageContentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public stickersService: StickersService
   ) { }
 
   ngOnInit(): void {

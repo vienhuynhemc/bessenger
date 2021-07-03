@@ -21,8 +21,8 @@
         border-top-right-radius: 8px;
         width: 100%;
         height: 13%;
-        background-color: burlywood;
         display: flex;
+        border-bottom: #a4afbf solid 0.2px;
         .left {
             width: 85%;
             height: 100%;
@@ -30,15 +30,83 @@
             .prev, .next {
                 width: 15%;
                 height: 100%;
+                text-align: center;
+                cursor: pointer;
+                i {
+                    font-size: 20px;
+                    margin-top: 9px;
+                    color: #a4afbf;
+                }
             }
-            .sticker {
+            .next {
+                border-right: #a4afbf solid 0.2px;
+                border-left: #a4afbf solid 0.2px;
+
+            }
+            .sticker, .ago {
                 width: 18%;
                 height: 100%;
+                cursor: pointer;
+            }
+            .ago {
+                text-align: center;
+                i {
+                    font-size: 20px;
+                    margin-top: 9px;
+                    color: #a4afbf;
+                }
             }
         }
         .right {
             width: 15%;
             height: 100%;
+            .add {
+                border-radius: 50%;
+                cursor: pointer;
+                width: 80%;
+                height: 80%;
+                text-align: center;
+                margin-top: 10%;
+                margin-left: 10%;
+                transition: all 0.5s;
+                i {
+                    font-size: 20px;
+                    margin-top: 5px;
+                    color: #3275f7;
+                }
+            }
+            .add:hover {
+                background-color: #dee4ec;
+                transition: all 0.5s;
+            }
         }
     }
+    .content {
+        width: 100%;
+        height: 87%;
+        overflow-y: overlay;
+        overflow-x: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        &-sticker {
+            min-width: 25%;
+            max-width: 25%;
+            height: 25%;
+        }
+    }
+    ::-webkit-scrollbar-track {
+        border-radius: 20px;
+        background:transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+      }
+      
+      ::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar:hover {
+        background: #0700001c !important;
+      }
 }
