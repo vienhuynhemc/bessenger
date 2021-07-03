@@ -149,7 +149,6 @@ export class OfferFriendsComponent implements OnInit {
         let listFriendsMe = [];
         // kiểm tra scroll
 
-        if (friends.val() != null) {
           // lấy ra danh sách bạn bè
           friends.forEach((f_item) => {
             if (f_item.val().ton_tai == 0) listFriendsMe.push(f_item.key);
@@ -427,7 +426,6 @@ export class OfferFriendsComponent implements OnInit {
                     });
                 });
             });
-        }
         setTimeout(() => {
           this.friendsPageService.setLoading(false);
         }, 0);

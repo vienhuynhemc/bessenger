@@ -1,5 +1,5 @@
 .arrow-giphy {
-    transform: translate(-202px, -7px) rotate(-45deg);
+    transform: translate(-222px, -7px) rotate(-45deg);
     width: 17px;
     height: 17px;
     right: 0px;
@@ -15,46 +15,60 @@
     border-radius: 8px;
     position: relative;
     z-index: 100;
-
+    overflow: hidden;
     .header {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         width: 100%;
         height: 13%;
         display: flex;
-        border-bottom: #a4afbf solid 0.2px;
+        border-bottom: #d2d8e0 solid 0.2px;
+        .ago {
+            width: 14%;
+            height: 100%;
+            text-align: center;
+            cursor: pointer;
+                i {
+                    font-size: 20px;
+                    margin-top: 9px;
+                    color: #a4afbf;
+                }
+        }
+        .prev, .next {
+            width: 10%;
+            height: 100%;
+            text-align: center;
+            cursor: pointer;
+            i {
+                font-size: 20px;
+                margin-top: 9px;
+                color: #a4afbf;
+            }
+        }
+        .next {
+            border-right: #d2d8e0 solid 0.2px;
+            border-left: #d2d8e0 solid 0.2px;
+
+        }
         .left {
-            width: 85%;
+            width: 61%;
             height: 100%;
             display: flex;
-            .prev, .next {
-                width: 15%;
-                height: 100%;
+           
+            .sticker {
                 text-align: center;
-                cursor: pointer;
-                i {
-                    font-size: 20px;
-                    margin-top: 9px;
-                    color: #a4afbf;
-                }
-            }
-            .next {
-                border-right: #a4afbf solid 0.2px;
-                border-left: #a4afbf solid 0.2px;
-
-            }
-            .sticker, .ago {
-                width: 18%;
+                width: 25%;
                 height: 100%;
                 cursor: pointer;
-            }
-            .ago {
-                text-align: center;
-                i {
-                    font-size: 20px;
-                    margin-top: 9px;
-                    color: #a4afbf;
+                img {
+                    width: 70%;
+                    height: 70%;
+                    object-fit: cover;
+                    margin-top: 10px;
                 }
+            }
+            .sticker-selected {
+                background-color: #dee3eb;
             }
         }
         .right {
@@ -92,6 +106,19 @@
             min-width: 25%;
             max-width: 25%;
             height: 25%;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            img {
+                width: 80%;
+                height: 80%;
+                object-fit: cover;
+                margin-top: 10%;
+            }
+        }
+        &-sticker:hover {
+            background-color: #dee3eb;
         }
     }
     ::-webkit-scrollbar-track {
@@ -100,11 +127,13 @@
       }
       ::-webkit-scrollbar-thumb {
         border-radius: 20px;
+        background-color: rgb(226, 226, 226);
       }
       
       ::-webkit-scrollbar {
         width: 7px;
         border-radius: 10px;
+        
       }
       ::-webkit-scrollbar:hover {
         background: #0700001c !important;

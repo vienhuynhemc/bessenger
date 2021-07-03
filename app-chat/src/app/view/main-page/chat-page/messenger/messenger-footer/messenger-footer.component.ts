@@ -30,10 +30,8 @@ export class MessengerFooterComponent implements OnInit {
     public messenger_main_service: MessengerMainService,
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
-<<<<<<< HEAD
     public stickersService: StickersService
-=======
->>>>>>> master
+
   ) { }
 
   ngOnInit(): void {
