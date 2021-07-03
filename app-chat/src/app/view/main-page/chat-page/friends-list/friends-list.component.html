@@ -17,17 +17,17 @@
         <div class="myContent" *ngFor="let element of this.chat_page_friends_service.ban_bes">
             <div *ngIf="element.trang_thai_online" (click)="selectChat(element.ma_cuoc_tro_chuyen)">
                 <img [src]="element.link_hinh_dai_dien || 'assets/images/loading.gif'" alt="">
-                <div class="name" [matTooltip]="element.tenGioiHan().noi_dung_goc" matTooltipClass="tooltip"
-                    [matTooltipDisabled]="!element.tenGioiHan().is_cut">
-                    {{element.tenGioiHan().noi_dung}}
+                <div class="name" [matTooltip]="element.tenGioiHan.noi_dung_goc" matTooltipClass="tooltip"
+                    [matTooltipDisabled]="!element.tenGioiHan.is_cut">
+                    {{element.tenGioiHan.noi_dung}}
                 </div>
                 <div class="cover-online">
                     <div class="online"></div>
                 </div>
             </div>
         </div>
-        <p *ngIf="this.chat_page_friends_service.checkIsOfflineAll()" class="no_user">Hiện tại không có ai online cả</p>
-        <p *ngIf="this.chat_page_friends_service.checkIsOfflineAll()" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi
+        <p *ngIf="!this.chat_page_friends_service.isOnline" class="no_user">Hiện tại không có ai online cả</p>
+        <p *ngIf="!this.chat_page_friends_service.isOnline" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi
             nào!</p>
     </div>
     <!-- Box shadow cho header + status-->

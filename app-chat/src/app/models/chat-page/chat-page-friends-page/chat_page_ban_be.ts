@@ -7,8 +7,9 @@ export class ChatPageBanBe {
     ma_cuoc_tro_chuyen: string;
     trang_thai_online: boolean;
     ten: string;
-
-    public tenGioiHan(): ChatPageObjectTen {
+    tenGioiHan:ChatPageObjectTen;
+    
+    public getTenGioiHan(){
         let result = new ChatPageObjectTen();
         result.noi_dung = this.ten;
         result.noi_dung_goc = this.ten;
@@ -20,6 +21,6 @@ export class ChatPageBanBe {
                 result.is_cut = false;
             }
         }
-        return result;
+        this.tenGioiHan = result;
     }
 }

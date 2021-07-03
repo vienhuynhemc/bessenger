@@ -14,6 +14,9 @@ export class ChatPageFriendsServiceService {
   // Danh sách các mã cuộc trò chuyện đơn
   public maCuocTroChuyenDons: string[];
 
+  // Trạng thái online
+  public isOnline;
+
   // service
   public layListBanbe: Subscription;
   public layTroChuyenDon:Subscription;
@@ -75,33 +78,24 @@ export class ChatPageFriendsServiceService {
     setTimeout(() => {
       let currentTime = Number(new Date());
       if (this.ban_bes != null) {
+        let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
           let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
           let overTime = currentTime - lan_cuoi_dang_nhap;
           if (overTime > 10000) {
             this.ban_bes[i].trang_thai_online = false;
+            count++;
           } else {
             this.ban_bes[i].trang_thai_online = true;
+            this.isOnline =true;
           }
+        }
+        if(count == this.ban_bes.length){
+          this.isOnline =false;
         }
       }
       this.update();
     }, 5000);
-  }
-
-  public checkIsOfflineAll(): boolean {
-    if (this.ban_bes != null) {
-      let count = 0;
-      for (let i = 0; i < this.ban_bes.length; i++) {
-        if (this.ban_bes[i].trang_thai_online == false) {
-          count++;
-        }
-      }
-      if (count == this.ban_bes.length) {
-        return true;
-      }
-    }
-    return false;
   }
 
   public getListFriend() {
@@ -182,6 +176,8 @@ export class ChatPageFriendsServiceService {
           this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
           this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
           this.ban_bes[i].ten = value['ten'];
+          // Tạo luôn tên giới hạn
+          this.ban_bes[i].getTenGioiHan();
           break;
         }
       }
