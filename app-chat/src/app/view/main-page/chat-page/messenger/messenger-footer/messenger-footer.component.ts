@@ -31,6 +31,7 @@ export class MessengerFooterComponent implements OnInit {
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
     public stickersService: StickersService
+
   ) { }
 
   ngOnInit(): void {
