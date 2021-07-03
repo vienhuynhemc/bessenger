@@ -1,0 +1,19 @@
+<div class="arrow-giphy"></div>
+<div class="container">
+    <div class="search">
+        <div class="border-search">
+            <div class="left">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="right">
+                <input type="text" placeholder="Tìm kiếm" (input)="searchGiphy(valueSearch.value)" #valueSearch>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="giphy" *ngFor="let item of listGiphySearch">
+            <img [src]="item.url || 'assets/images/loading.gif'" [alt]="item.name">
+        </div>
+      
+    </div>
+</div>
