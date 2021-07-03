@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { ChatPageObjectTinNhanFriend } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
@@ -22,6 +23,13 @@ export class ChatPageFriendsLeftServiceService {
   // Danh sách các box chat để hiển thị ra
   public allBoxData: ChatPageFriendsObjectLeft[];
   public search: string;
+
+  // Service
+  public layAllCuocTroChuyen:Subscription;
+  public layAllCuocTroChuyenNhom:Subscription;
+  public layThanhVienCuocTroChuyenLeft:Subscription;
+  public layAllChiTietCuocTroChuyen:Subscription;
+  public layThongTinThanhVien:Subscription;
 
   constructor(
     private db: AngularFireDatabase,
@@ -407,30 +415,18 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public getAllTaiKhoan() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/tai_khoan").snapshotChanges();
   }
 
   public getAllChiTietCuocTroChuyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/chi_tiet_cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getAllCuocTroChuyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/cuoc_tro_chuyen").snapshotChanges();
   }
 
   public getAllCuocTroChuyenNhom() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thong_tin_tro_chuyen_nhom").snapshotChanges();
   }
 
@@ -449,9 +445,6 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public getThanhVienCuocTroTruyen() {
-    setTimeout(() => {
-      this.main_page_process_service.setLoading(true);
-    }, 0);
     return this.db.object("/thanh_vien_cuoc_tro_chuyen").snapshotChanges();
   }
 

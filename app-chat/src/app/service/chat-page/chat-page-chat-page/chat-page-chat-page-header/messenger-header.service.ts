@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ObjectChat } from 'src/app/models/chat-page/chat-page-chat-page/header/object_chat';
@@ -10,6 +11,12 @@ export class MessengerHeaderService {
 
   // Đối tượng đang chat 
   public object_chat: ObjectChat;
+
+  // Service
+  public layAllCuocTroChuyen:Subscription;
+  public layThongTinNhom:Subscription;
+  public layThanhVien:Subscription;
+  public layThongTinThanhVien:Subscription;
 
   constructor(
     private db: AngularFireDatabase

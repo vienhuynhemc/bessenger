@@ -30,17 +30,29 @@ export class MessengerFooterComponent implements OnInit {
     public messenger_main_service: MessengerMainService,
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
+<<<<<<< HEAD
     public stickersService: StickersService
+=======
+>>>>>>> master
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.reset();
       // Lấy thông tin cơ bản
-      this.messenger_footer_service.getThongTinCoBan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-        this.messenger_footer_service.dienThongTinCoBan(data.payload.toJSON());
-      })
+      if (this.messenger_footer_service.layData == null) {
+        this.getData();
+      } else {
+        this.messenger_footer_service.layData.unsubscribe();
+        this.getData();
+      }
     });
+  }
+
+  public getData() {
+    this.messenger_footer_service.layData = this.messenger_footer_service.getThongTinCoBan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+      this.messenger_footer_service.dienThongTinCoBan(data.payload.toJSON());
+    })
   }
 
   public reset(): void {
@@ -209,9 +221,23 @@ export class MessengerFooterComponent implements OnInit {
         // Ko tự động xuống dòng
         event.preventDefault();
         // submit
+        if (this.tin_nhan.trim().length != 0) {
+          let count = 0;
+          for (let i = 0; i < input.childNodes.length; i++) {
+            if (input.childNodes[i].isEqualNode(document.createElement("br"))) {
+              count++;
+            }
+          }
+          if (count != input.childNodes.length) {
+            let type = input.children.length == input.childNodes.length ? "gui_text_icon" : "gui_text";
+            this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type);
+          }
+        }
         // to do submit
         // làm rỗng ô nhập
-        input.innerHTML = '';
+        input.innerHTML = "";
+        this.tin_nhan = "";
+        this.xuLyCss();
       }
     }
   }

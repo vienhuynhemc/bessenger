@@ -1,14 +1,18 @@
-import { AngularFireStorage } from '@angular/fire/storage';
-import { RegisterProcessService } from 'src/app/service/register-account/register-process.service';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { NotificationRegisterPageService } from 'src/app/service/notification/notification-register-page.service';
+import { RegisterProcessService } from 'src/app/service/register-account/register-process.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelectAvatarService {
+
+  // Service
+  public layHinh:Subscription;
 
   constructor(
     private db: AngularFireDatabase,
