@@ -30,10 +30,7 @@ export class MessengerFooterComponent implements OnInit {
     public messenger_main_service: MessengerMainService,
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
-<<<<<<< HEAD
     public stickersService: StickersService
-=======
->>>>>>> master
   ) { }
 
   ngOnInit(): void {
@@ -245,7 +242,7 @@ export class MessengerFooterComponent implements OnInit {
   public openBoxBtcx() {
     this.isShowBtcxBox = !this.isShowBtcxBox;
     // mở box này thì đóng các box còn lại
-    if(this.isShowBtcxBox) {
+    if (this.isShowBtcxBox) {
       this.isShowBoxGiphy = false;
       this.isShowBoxStickers = false;
     }
@@ -255,7 +252,7 @@ export class MessengerFooterComponent implements OnInit {
   public openBoxGiphy() {
     this.isShowBoxGiphy = !this.isShowBoxGiphy;
     // mở box này thì đóng các box còn lại
-    if(this.isShowBoxGiphy) {
+    if (this.isShowBoxGiphy) {
       this.isShowBtcxBox = false;
       this.isShowBoxStickers = false;
     }
@@ -264,7 +261,7 @@ export class MessengerFooterComponent implements OnInit {
   // hiển thị box sticker
   public openBoxStickers() {
     this.isShowBoxStickers = !this.isShowBoxStickers;
-    if(this.isShowBoxStickers) {
+    if (this.isShowBoxStickers) {
       this.isShowBtcxBox = false;
       this.isShowBoxGiphy = false;
     }
