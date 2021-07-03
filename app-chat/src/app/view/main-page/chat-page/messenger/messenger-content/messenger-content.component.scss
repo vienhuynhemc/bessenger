@@ -216,6 +216,7 @@
       }
     }
     .da_xem {
+      margin-right: 3px;
       margin-top: 4px;
       display: flex;
       justify-content: flex-end;
@@ -287,6 +288,7 @@
       }
     }
     .da_xem {
+      margin-right: 3px;
       margin-top: 4px;
       display: flex;
       justify-content: flex-end;
@@ -314,6 +316,10 @@
   overflow-y: scroll;
   margin-bottom: 2.5%;
   margin-left: 2.5%;
+
+  #danh-sach-tin-nhan {
+    width: 100%;
+  }
 }
 ::-webkit-scrollbar-track {
   border-radius: 20px;
