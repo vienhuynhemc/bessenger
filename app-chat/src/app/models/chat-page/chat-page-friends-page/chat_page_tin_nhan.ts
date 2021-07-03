@@ -17,7 +17,18 @@ export class ChatPageTinNhan {
     tinh_trang_xem: ChatPageTinhTrangXem[];
 
     public getNoiDungHTML(sanitized: DomSanitizer) {
-        return sanitized.bypassSecurityTrustHtml(this.noi_dung);
+        if (this.loai_tin_nhan == 'gui_text') {
+            return sanitized.bypassSecurityTrustHtml(this.noi_dung);
+        } else if (this.loai_tin_nhan == 'gui_text_icon') {
+            let div = document.createElement("div");
+            div.innerHTML = this.noi_dung;
+            for (let i = 0; i < div.children.length; i++) {
+                div.children[i].classList.remove("span-image-box-chat");
+                div.children[i].classList.add("gui_text_icon_icon");
+            }
+            return sanitized.bypassSecurityTrustHtml(div.innerHTML);
+        }
+        return "";
     }
 
     public getNoiDungThongBao(list: ChatPageObjectTinNhanFriend[]): string {
@@ -151,8 +162,18 @@ export class ChatPageTinNhan {
                 count++;
             }
         }
-        if (count == 0) return false;
-        return true;
+        return count;
+    }
+
+    public getNguoiXemDuyNhatDo(index: number, tin_nhan: ChatPageTinNhan[]): ChatPageTinhTrangXem {
+        for (let i = 0; i < this.tinh_trang_xem.length; i++) {
+            if (this.tinh_trang_xem[i].isOke(this.ma_tai_khoan)
+                && this.isLastDaXem(index, this.tinh_trang_xem[i].ma_tai_khoan, tin_nhan)
+            ) {
+                return this.tinh_trang_xem[i];
+            }
+        }
+        return null;
     }
 
     public isLastDaXem(index: number, mtk: string, tin_nhan: ChatPageTinNhan[]): boolean {
@@ -187,9 +208,9 @@ export class ChatPageTinNhan {
         if (index == tin_nhan.length - 1) {
             return true;
         } else {
-            if (tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
+            if (tin_nhan[index + 1] != null && tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
                 return true;
-            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon') {
+            } else if (tin_nhan[index - 1] != null && (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon')) {
                 return true;
             }
         }
