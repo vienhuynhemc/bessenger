@@ -39,7 +39,7 @@
                     [style.margin-top]="item.getMarginTop(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
-                        <div class="hinh" *ngIf="!item.isBanThan()" [matTooltipShowDelay]="showDelay.value"
+                        <div class="hinh" *ngIf="!item.isBanThan()" 
                             [matTooltip]="item.getTen(this.content_service.object_chat.thanh_vien)"
                             matTooltipClass="tooltip">
                             <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -48,7 +48,7 @@
                         <!-- Nội dung -->
                         <div class="chua-nd" [class.ban_than]="item.isBanThan()" [class.doi_phuong]="!item.isBanThan()"
                             [matTooltip]="item.getTime()" matTooltipClass="tooltip"
-                            [matTooltipShowDelay]="showDelay.value"
+                            
                             [class.border-tren-ban-than]="item.isBanThan() && item.isHaveBorderTop(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
                             [class.border-duoi-ban-than]="item.isBanThan() && item.isHaveBorderBottom(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
                             [class.border-tren-doi-phuong]="!item.isBanThan() && item.isHaveBorderTop(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
@@ -61,7 +61,7 @@
                         <div class="trang_thai_gui"
                             *ngIf="item.isShowNguoiXem(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan) != 1">
                             <div *ngIf="item.isDaGui()" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
-                                [matTooltipShowDelay]="showDelay.value" width="14px" viewBox="2 2 20 20" role="img">
+                                 width="14px" viewBox="2 2 20 20" role="img">
                                 <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
                                     data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#bcc0c4"
@@ -73,7 +73,7 @@
                                 </svg>
                             </div>
                             <div *ngIf="item.isDaChuyen()" matTooltip="Đã chuyển" matTooltipClass="tooltip"
-                                height="14px" [matTooltipShowDelay]="showDelay.value" width="14px" viewBox="2 2 20 20"
+                                height="14px"  width="14px" viewBox="2 2 20 20"
                                 role="img">
                                 <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@
                         </div>
                         <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan()"
                             *ngIf="item.isShowNguoiXem(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan) == 1">
-                            <div class="nguoi_xem" [matTooltipShowDelay]="showDelay.value"
+                            <div class="nguoi_xem" 
                                 [matTooltip]="item.getNguoiXemDuyNhatDo(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan).getNoiDung(this.content_service.object_chat.thanh_vien)"
                                 matTooltipClass="tooltip">
                                 <img [src]="item.getNguoiXemDuyNhatDo(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan).getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -99,7 +99,7 @@
                         <div class="list">
                             <div *ngFor="let da_xem of item.tinh_trang_xem">
                                 <div *ngIf="da_xem.isOke(item.ma_tai_khoan) && item.isLastDaXem(i,da_xem.ma_tai_khoan,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
-                                    class="item-ok" [matTooltipShowDelay]="showDelay.value"
+                                    class="item-ok" 
                                     [matTooltip]="da_xem.getNoiDung(this.content_service.object_chat.thanh_vien)"
                                     matTooltipClass="tooltip">
                                     <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -115,7 +115,7 @@
                     [class.ban_than_div]="item.isBanThan()">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
-                        <div class="hinh" *ngIf="!item.isBanThan()" [matTooltipShowDelay]="showDelay.value"
+                        <div class="hinh" *ngIf="!item.isBanThan()" 
                             [matTooltip]="item.getTen(this.content_service.object_chat.thanh_vien)"
                             matTooltipClass="tooltip">
                             <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -123,7 +123,7 @@
                         </div>
                         <!-- Nội dung -->
                         <div class="chua-nd" [class.doi_phuong]="!item.isBanThan()" [matTooltip]="item.getTime()"
-                            [matTooltipShowDelay]="showDelay.value" matTooltipClass="tooltip">
+                             matTooltipClass="tooltip">
                             <div class="noi-dung" [innerHTML]="item.getNoiDungHTML(this.sanitized)">
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="trang_thai_gui"
                             *ngIf="item.isShowNguoiXem(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan) != 1">
                             <div *ngIf="item.isDaGui()" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
-                                [matTooltipShowDelay]="showDelay.value" width="14px" viewBox="2 2 20 20" role="img">
+                                 width="14px" viewBox="2 2 20 20" role="img">
                                 <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
                                     data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#bcc0c4"
@@ -143,7 +143,7 @@
                                 </svg>
                             </div>
                             <div *ngIf="item.isDaChuyen()" matTooltip="Đã chuyển" matTooltipClass="tooltip"
-                                height="14px" [matTooltipShowDelay]="showDelay.value" width="14px" viewBox="2 2 20 20"
+                                height="14px"  width="14px" viewBox="2 2 20 20"
                                 role="img">
                                 <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +155,7 @@
                         </div>
                         <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan()"
                             *ngIf="item.isShowNguoiXem(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan) == 1">
-                            <div class="nguoi_xem" [matTooltipShowDelay]="showDelay.value"
+                            <div class="nguoi_xem" 
                                 [matTooltip]="item.getNguoiXemDuyNhatDo(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan).getNoiDung(this.content_service.object_chat.thanh_vien)"
                                 matTooltipClass="tooltip">
                                 <img [src]="item.getNguoiXemDuyNhatDo(i,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan).getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -169,7 +169,7 @@
                         <div class="list">
                             <div *ngFor="let da_xem of item.tinh_trang_xem">
                                 <div *ngIf="da_xem.isOke(item.ma_tai_khoan) && item.isLastDaXem(i,da_xem.ma_tai_khoan,this.content_service.object_chat.cuoc_tro_truyen.tin_nhan)"
-                                    class="item-ok" [matTooltipShowDelay]="showDelay.value"
+                                    class="item-ok" 
                                     [matTooltip]="da_xem.getNoiDung(this.content_service.object_chat.thanh_vien)"
                                     matTooltipClass="tooltip">
                                     <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
@@ -184,7 +184,7 @@
             <div class="list-dang-nhap" *ngIf="this.content_service.dang_nhaps.length != 0">
                 <div *ngFor="let item of this.content_service.dang_nhaps" class="dang_nhap">
                     <div class="hinh" [matTooltip]="item.getNoiDung()" matTooltipClass="tooltip"
-                        [matTooltipShowDelay]="showDelay.value">
+                        >
                         <img [src]="item.hinh || 'assets/images/loading.gif'" alt="">
                     </div>
                     <div class="lottie">
