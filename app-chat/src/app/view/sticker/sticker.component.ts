@@ -15,7 +15,7 @@ export class StickerComponent implements OnInit {
   selected: string;
   constructor(public stickersService: StickersService) { }
   ngOnInit(): void {
-    this.stickersService.themNhanDan()
+    // this.stickersService.themNhanDan()
     // this.loadStickerList()
   }
 

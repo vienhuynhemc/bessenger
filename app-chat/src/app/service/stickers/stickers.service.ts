@@ -24,7 +24,7 @@ export class StickersService {
     let post = this.db.database.ref('nhan_dan').child('-MdenH-ssaWooJ39FGUF').child('danh_sach_nhan_dan');
     let newKey = post.push();
     newKey.set({
-      src:'https://scontent.xx.fbcdn.net/v/t39.1997-6/115995787_608463753084766_8658500895752460461_n.webp?_nc_cat=103&ccb=1-3&_nc_sid=0572db&_nc_ohc=4Ptzta_ej9AAX_kccQh&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=8c614b7c66d0318c880de539ae081807&oe=60E44E20'
+      src:'https://scontent.xx.fbcdn.net/v/t39.1997-6/116015199_608463983084743_1423387831326742760_n.webp?_nc_cat=106&ccb=1-3&_nc_sid=0572db&_nc_ohc=ilW-trgKcaAAX-0WkeX&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=724a9c80f40fe88b51ef1b128a8e400b&oe=60E49F34'
     })
   }
   // themNhanDan() {
