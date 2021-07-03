@@ -139,7 +139,7 @@ export class ChatPageChatPageContentService {
     }, 5000);
   }
 
-  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string) {
+  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string,ten:string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Tin nhắn
@@ -149,6 +149,7 @@ export class ChatPageChatPageContentService {
         link_file: "",
         loai_tin_nhan: loai,
         ["ma_tai_khoan"]: ma_tai_khoan,
+        ten:ten,
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: tin_nhan,

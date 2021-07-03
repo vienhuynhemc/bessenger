@@ -1,3 +1,4 @@
+import { MyNameService } from './../../../../../service/my-name/my-name.service';
 import { EmojiObject } from './../../../../../models/emoji/emoji_object';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
@@ -30,8 +31,8 @@ export class MessengerFooterComponent implements OnInit {
     public messenger_main_service: MessengerMainService,
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
-    public stickersService: StickersService
-
+    public stickersService: StickersService,
+    public my_name_service:MyNameService
   ) { }
 
   ngOnInit(): void {
@@ -234,7 +235,7 @@ export class MessengerFooterComponent implements OnInit {
           }
           if (count != input.childNodes.length) {
             let type = input.children.length == input.childNodes.length ? "gui_text_icon" : "gui_text";
-            this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type);
+            this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type,this.my_name_service.myName);
           }
         }
         // to do submit

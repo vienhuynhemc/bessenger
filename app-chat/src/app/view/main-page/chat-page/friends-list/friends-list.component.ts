@@ -1,3 +1,4 @@
+import { MyNameService } from './../../../../service/my-name/my-name.service';
 import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
 import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
 import { ChatPageBanBe } from './../../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
@@ -23,7 +24,7 @@ export class FriendsListComponent implements OnInit {
       public chat_page_friends_service: ChatPageFriendsServiceService,
       private main_page_process_service: ChatPageProcessServiceService,
       public chat_page_friend_left_service: ChatPageFriendsLeftServiceService,
-      public chat_page_create_ground: ChatPageCreateGroupService
+      public chat_page_create_ground: ChatPageCreateGroupService,
     ) { }
 
 
@@ -195,12 +196,7 @@ export class FriendsListComponent implements OnInit {
   }
   public getAllChiTietCuocTroChuyenLeft() {
     this.chat_page_friend_left_service.layAllChiTietCuocTroChuyen = this.chat_page_friend_left_service.getAllChiTietCuocTroChuyen().subscribe(data => {
-      let object = data.payload.toJSON();
-      if (object != null) {
-        Object.entries(object).forEach(([key, value]) => {
-          this.chat_page_friend_left_service.dienTinNhan(key, value);
-        });
-      }
+      this.chat_page_friend_left_service.dienAllTinNhan(data.payload.toJSON());
       // sort lại theo ngày gửi của tin nhắn cuối cùng
       this.chat_page_friend_left_service.sort();
       // seen

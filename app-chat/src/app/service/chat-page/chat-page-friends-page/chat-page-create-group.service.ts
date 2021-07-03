@@ -25,7 +25,7 @@ export class ChatPageCreateGroupService {
     this.init();
   }
 
-  public createGroup(ten_nhom: string) {
+  public createGroup(ten_nhom: string,ten:string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Cuộc trò chuyện
@@ -68,6 +68,7 @@ export class ChatPageCreateGroupService {
         link_file: "",
         loai_tin_nhan: "thong_bao",
         ["ma_tai_khoan"]: ma_tai_khoan,
+        ten:ten,
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: "đã tạo nhóm"

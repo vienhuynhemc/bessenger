@@ -25,11 +25,11 @@ export class ChatPageFriendsLeftServiceService {
   public search: string;
 
   // Service
-  public layAllCuocTroChuyen:Subscription;
-  public layAllCuocTroChuyenNhom:Subscription;
-  public layThanhVienCuocTroChuyenLeft:Subscription;
-  public layAllChiTietCuocTroChuyen:Subscription;
-  public layThongTinThanhVien:Subscription;
+  public layAllCuocTroChuyen: Subscription;
+  public layAllCuocTroChuyenNhom: Subscription;
+  public layThanhVienCuocTroChuyenLeft: Subscription;
+  public layAllChiTietCuocTroChuyen: Subscription;
+  public layThongTinThanhVien: Subscription;
 
   constructor(
     private db: AngularFireDatabase,
@@ -296,6 +296,21 @@ export class ChatPageFriendsLeftServiceService {
     return false;
   }
 
+  public dienAllTinNhan(object: Object) {
+    if (object != null) {
+      Object.entries(object).forEach(([key, value]) => {
+        this.dienTinNhan(key, value);
+      });
+      // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
+      // Ta sẽ getIsReaded
+      for(let i = 0; i < this.allBoxData.length;i++){
+        if(this.allBoxData[i].cuoc_tro_truyen.tin_nhan == null){
+          this.allBoxData[i].getIsReaded();
+        }
+      }
+    }
+  }
+
   public dienTinNhan(key: string, value: object) {
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == key) {
@@ -307,6 +322,7 @@ export class ChatPageFriendsLeftServiceService {
           tin_nhan.link_file = data_tin_nhan['link_file'];
           tin_nhan.loai_tin_nhan = data_tin_nhan['loai_tin_nhan'];
           tin_nhan.ma_tai_khoan = data_tin_nhan['ma_tai_khoan'];
+          tin_nhan.ten = data_tin_nhan['ten'];
           tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
           tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
           tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
@@ -326,6 +342,15 @@ export class ChatPageFriendsLeftServiceService {
           }
         });
         this.allBoxData[i].cuoc_tro_truyen.tin_nhan = tin_nhans;
+        // Điền tin nhắn cho boxData[i] thì lấy luôn nội dung của nó để đổ ra view cho đỡ lag
+        // Lấy vị trí bản thân
+        this.allBoxData[i].getViTriBanThan();
+        // Lấy vị trí tin nhắn cuối cùng
+        this.allBoxData[i].getIndexTinNhanCuoiCung();
+        // Lấy nội dung tin nhắn cuối cùng
+        this.allBoxData[i].getNoiDungCuoiCung();
+        // Tin nhắn cuối cùng được đọc chưa
+        this.allBoxData[i].getIsReaded();
         return;
       }
     }
@@ -343,25 +368,33 @@ export class ChatPageFriendsLeftServiceService {
   public dienTenVaHinhChoTaiKhoanTrongBoxData(key: string, value: object) {
     if (this.allBoxData != null) {
       for (let i = 0; i < this.allBoxData.length; i++) {
+        // Điền dữ liệu tài khoản cho thành viên
         for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
           if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key) {
             this.allBoxData[i].thong_tin_thanh_vien[j].ten = value['ten'];
             this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
             this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
+            // khi thông tin thành viên có link hình thì cập nhật lại img avatar ở cuộc trò chuyện để đổ 
+            // ra view ko bị lag
+            this.allBoxData[i].getImgAvatar();
             break;
           }
         }
+        // Điền duẽ liệu tài khoản cho cuoc_tro_chuyen
         if (this.allBoxData[i].cuoc_tro_truyen.ma_tai_khoan_chu_so_huu == key) {
           this.allBoxData[i].cuoc_tro_truyen.ten_nguoi_so_huu = value['ten'];
         }
+        // Điền dữ liệu tài khoản cho tin nhắn
         if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan != null) {
           for (let j = 0; j < this.allBoxData[i].cuoc_tro_truyen.tin_nhan.length; j++) {
+            // Tình trạng xem
             for (let k = 0; k < this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem.length; k++) {
               if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ma_tai_khoan == key) {
                 this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].ten = value['ten'];
                 this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].tinh_trang_xem[k].hinh = value['link_hinh'];
               }
             }
+            // Tin nhắn
             if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ma_tai_khoan == key) {
               this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ten = value['ten'];
             }
