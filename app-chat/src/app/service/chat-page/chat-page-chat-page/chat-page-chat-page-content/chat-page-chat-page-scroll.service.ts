@@ -19,14 +19,15 @@ export class ChatPageChatPageScrollService {
 
   public resizeObserver = new ResizeObserver(entries => {
     let div = document.getElementById("tin-nhan-div");
-    // Nó đang  ở bottom mới dịch chuyển
-    if (this.scrollHeight - this.scrollTop <= this.clientHeight) {
-      div.scrollTop = div.scrollHeight - div.clientHeight;
+    if (div != null) {
+      // Nó đang  ở bottom mới dịch chuyển
+      if (this.scrollHeight - this.scrollTop <= this.clientHeight) {
+        div.scrollTop = div.scrollHeight - div.clientHeight;
+      }
+      // cập nhâtk
+      this.clientHeight = div.clientHeight;
+      this.scrollHeight = div.scrollHeight;
+      this.scrollTop = div.scrollTop;
     }
-    // cập nhâtk
-    this.clientHeight = div.clientHeight;
-    this.scrollHeight = div.scrollHeight;
-    this.scrollTop = div.scrollTop;
   });
-
 }

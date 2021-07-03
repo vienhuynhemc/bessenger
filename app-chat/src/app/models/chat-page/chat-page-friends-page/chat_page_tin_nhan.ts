@@ -208,9 +208,9 @@ export class ChatPageTinNhan {
         if (index == tin_nhan.length - 1) {
             return true;
         } else {
-            if (tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
+            if (tin_nhan[index + 1] != null && tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
                 return true;
-            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon') {
+            } else if (tin_nhan[index - 1] != null && (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon')) {
                 return true;
             }
         }
