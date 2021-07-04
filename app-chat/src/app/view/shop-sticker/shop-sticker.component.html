@@ -7,7 +7,11 @@
                 <div class="title-sub"><span>Tìm nhãn dán mới để gửi cho bạn bè.</span></div>
                 <div class="exit" (click)="stickersService.openShop()"><i class="fas fa-times"></i></div>
             </div>
+           
             <div class="content-stickers">
+                <div class="loading" *ngIf="stickerList == null">
+                    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+                </div>
                 <div class="scroll-stickers">
                     <div class="sticker" *ngFor="let item of stickerList">
                         <div class="review">

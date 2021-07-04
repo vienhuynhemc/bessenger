@@ -20,7 +20,7 @@ export class StickerComponent implements OnInit, OnDestroy {
   stickerListHistory: StickerDetail[] = null;
   selected: string = 'ago';
   checkAgoHide: boolean;
-  checkNextHide: boolean
+  checkNextHide: boolean = true;
   maCuocTroChuyen: string;
   valueSub: Subscription;
   clickLeftRight: number = 1;
@@ -107,11 +107,15 @@ export class StickerComponent implements OnInit, OnDestroy {
                   this.stickerList.push(stickerDetail)
               }
             }
+          if(this.stickerList.length <= 4)
+            this.checkNextHide = true;
+          else 
+            this.checkNextHide = false;
           this.sortStickerTimeAdd();
           })
            // sắp xếp theo thứ tự thêm gần đây
         });
-       
+      
     })
   }
   // load danh sách các sticker theo id nhóm sticker

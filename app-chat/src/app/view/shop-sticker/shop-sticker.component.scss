@@ -76,6 +76,7 @@ position: fixed;
           background-color: #f7f9fc;
         }
       }
+     
       .content-stickers {
         width: 693px;
         background-color: #f1f3f7;
@@ -84,7 +85,14 @@ position: fixed;
         height: 380px;
         border-bottom-right-radius: 8px;
         overflow: hidden;
-        
+        .loading {
+          position: absolute;
+          width: 100%;
+          top: 0px;
+          height: 100%;
+          z-index: 10;
+          background-color: white;
+        }
         .scroll-stickers {
           overflow-y: overlay;
           width: 100%;
