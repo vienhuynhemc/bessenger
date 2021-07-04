@@ -94,27 +94,27 @@
                             <div class="child"></div>
                         </div>
 
-                        <div *ngIf="item.itMe()" class="so_nguoi_da_xem">
-                            <div class="hinh_1" *ngIf="item.getImgUserSeened().length>0"
-                                [matTooltip]="item.getImgUserSeened()[0].noi_dung" matTooltipClass="tooltip"><img
-                                    [src]="item.getImgUserSeened()[0].url ||  'assets/images/loading.gif'" alt=""></div>
-                            <div class="hinh_2" *ngIf="item.getImgUserSeened().length>1"
-                                [matTooltip]="item.getImgUserSeened()[1].noi_dung" matTooltipClass="tooltip"><img
-                                    [src]="item.getImgUserSeened()[1].url ||  'assets/images/loading.gif'" alt=""></div>
-                            <div class="hinh_3" *ngIf="item.getImgUserSeened().length>2"
-                                [matTooltip]="item.getImgUserSeened()[2].noi_dung" matTooltipClass="tooltip"><img
-                                    [src]="item.getImgUserSeened()[2].url ||  'assets/images/loading.gif'" alt=""></div>
-                            <div class="hinh_4" *ngIf="item.getImgUserSeened().length>3"
-                                [matTooltip]="item.getImgUserSeened()[3].noi_dung" matTooltipClass="tooltip">
-                                <p>+{{item.getImgUserSeened()[3].so_thanh_vien}}</p>
+                        <div *ngIf="item.itMe" class="so_nguoi_da_xem">
+                            <div class="hinh_1" *ngIf="item.imgUserSeened.length>0"
+                                [matTooltip]="item.imgUserSeened[0].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[0].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_2" *ngIf="item.imgUserSeened.length>1"
+                                [matTooltip]="item.imgUserSeened[1].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[1].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_3" *ngIf="item.imgUserSeened.length>2"
+                                [matTooltip]="item.imgUserSeened[2].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[2].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_4" *ngIf="item.imgUserSeened.length>3"
+                                [matTooltip]="item.imgUserSeened[3].noi_dung" matTooltipClass="tooltip">
+                                <p>+{{item.imgUserSeened[3].so_thanh_vien}}</p>
                             </div>
                         </div>
-                        <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && item.isDaNhan()" class="da_gui"
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && item.isDaNhan" class="da_gui"
                             matTooltip="Đã chuyển" matTooltipClass="tooltip">
                             <i class="fas fa-check"></i>
                         </div>
-                        <div *ngIf="item.itMe() &&item.getImgUserSeened().length ==0  && !item.isDaNhan()"
-                            class="chua_nhan" matTooltip="Đã gửi" matTooltipClass="tooltip">
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && !item.isDaNhan" class="chua_nhan"
+                            matTooltip="Đã gửi" matTooltipClass="tooltip">
                             <i class="fas fa-check"></i>
                         </div>
                     </div>

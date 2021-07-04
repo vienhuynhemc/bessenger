@@ -23,6 +23,12 @@ export class ChatPageFriendsObjectLeft {
     public isReaded: boolean;
     // Tên của box Tên người nếu đơn và tên nhóm nếu là nhóm
     public name: ChatPageObjectTen = new ChatPageObjectTen();
+    // Có phải bản thân đang chiếm vị trí cuối cùng
+    public itMe: boolean;
+    // Danh sách những người đã xem
+    public imgUserSeened: ChatPageObjectImg[] = [];
+    // Xem thử có ông nào nhận chưa
+    public isDaNhan: boolean;
 
     // 2 tham số quan trọng là vị trí bản thân và vị trí cuối cùng
     public viTriBanThan: number;
@@ -34,41 +40,10 @@ export class ChatPageFriendsObjectLeft {
     }
 
     public getLastTime(): number {
-        let last_time: number = 0;
-        if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-            let index = 0;
-            if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
-                let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.thong_tin_thanh_vien[this.viTriBanThan].roi_chua == "roi") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max &&
-                            this.cuoc_tro_truyen.tin_nhan[i].ngay_gui <= this.thong_tin_thanh_vien[this.viTriBanThan].ngay_roi_di) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    } else if (this.thong_tin_thanh_vien[this.viTriBanThan].roi_chua == "chua") {
-                        if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                            ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                            index = i;
-                        }
-                    }
-                }
-                last_time = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
-            }
-        } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-            if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
-                let index = 0;
-                let ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[0].ngay_gui;
-                for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan.length; i++) {
-                    if (this.cuoc_tro_truyen.tin_nhan[i].ngay_gui > ngay_gui_max) {
-                        ngay_gui_max = this.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
-                        index = i;
-                    }
-                }
-                last_time = this.cuoc_tro_truyen.tin_nhan[index].ngay_gui;
-            }
+        if (this.cuoc_tro_truyen.tin_nhan != null && this.cuoc_tro_truyen.tin_nhan.length > 0) {
+            return this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].ngay_gui;
         }
-        return last_time;
+        return 0;
     }
 
     public getImgAvatar() {
@@ -123,7 +98,7 @@ export class ChatPageFriendsObjectLeft {
                     for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem.length; i++) {
                         if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ma_tai_khoan == ma_tai_khoan) {
                             if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].xem_chua == "roi") {
-                                result =true;
+                                result = true;
                                 break;
                             }
                         }
@@ -301,20 +276,21 @@ export class ChatPageFriendsObjectLeft {
     }
 
     // Tin nhắn cuối cùng là mình gửi thì mới xem được những người nào đã xem
-    public itMe(): boolean {
+    public isMe() {
+        let result = false;
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             if (this.cuoc_tro_truyen.tin_nhan.length > this.viTriCuoiCung) {
                 if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].ma_tai_khoan == ma_tai_khoan) {
-                    return true;
+                    result = true;
                 }
             }
         }
-        return false;
+        this.itMe = result;
     }
 
     //  Trả về danh sách những hình ảnh xem cuối cùng
-    public getImgUserSeened(): ChatPageObjectImg[] {
+    public getImgUserSeened() {
         let result: ChatPageObjectImg[] = [];
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
@@ -356,24 +332,25 @@ export class ChatPageFriendsObjectLeft {
                 }
             }
         }
-        return result;
+        this.imgUserSeened = result;
     }
 
     // Xem thử có ông nào nhận chưa
-    public isDaNhan(): boolean {
+    public getIsDaNhan() {
+        let result = false;
         if (this.cuoc_tro_truyen.tin_nhan != null) {
             let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
             if (this.cuoc_tro_truyen.tin_nhan.length > this.viTriCuoiCung) {
                 for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem.length; i++) {
                     if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].xem_chua == "dang") {
                         if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
-                            return true;
+                            result = true;
                         }
                     }
                 }
             }
         }
-        return false;
+        this.isDaNhan = result;
     }
 
 }

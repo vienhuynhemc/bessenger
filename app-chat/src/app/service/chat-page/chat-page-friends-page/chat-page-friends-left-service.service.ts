@@ -362,7 +362,10 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].getNoiDungCuoiCung();
         // Tin nhắn cuối cùng được đọc chưa
         this.allBoxData[i].getIsReaded();
-        // Lấy thời gian cuối 
+        // Kiểm tra thử vị trí cuối cùng có phải là của bản thân hay không
+        this.allBoxData[i].isMe();
+        // Kiểm tra xem ông nào nhậ nchuwa
+        this.allBoxData[i].getIsDaNhan();
         return;
       }
     }
@@ -413,6 +416,8 @@ export class ChatPageFriendsLeftServiceService {
               this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ten = value['ten'];
             }
           }
+          // Điền hết tình trạgn xem của tin nhắn thì get imgseened
+          this.allBoxData[i].getImgUserSeened();
         }
       }
     }
