@@ -46,7 +46,9 @@ export class StickersService {
           }
       });
     })
-   
+  }
+  accessAccessHistorySticker() {
+    return this.db.database.ref('lich_su_su_dung_nhan_dan');
   }
   // themNhanDan() {
   //   let post = this.db.database.ref('nhan_dan');

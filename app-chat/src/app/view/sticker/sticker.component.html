@@ -1,7 +1,10 @@
 <div class="arrow-giphy"></div>
 <div class="container">
     <div class="header">
-        <div class="ago" *ngIf="!checkAgoHide"><i class="far fa-clock"></i></div>
+        <div [class.alo-selected]="selected == 'ago'" class="ago" *ngIf="!checkAgoHide" (click)="clickAgo()">
+            <i *ngIf="selected != 'ago'" class="far fa-clock"></i>
+            <i *ngIf="selected == 'ago'" class="fas fa-clock"></i>
+        </div>
         <div class="prev" *ngIf="checkAgoHide" (click)="toLeft(stickerList)">
             <svg class="svg-left" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" viewBox="0 0 80 80" xml:space="preserve">
                 <polyline fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
@@ -31,10 +34,19 @@
             </div>
         </div>
     </div>
-    <div class="content">
+    <div class="content content-selected"  *ngIf="selected != 'ago'" id="scroll-content">
         <div class="content-sticker" *ngFor="let item of stickerDetailList" (click)="sendSticker(item)">
             <img [src]="item.url || 'assets/images/loading.gif'" alt="">
         </div>
     </div>
+    <div class="content" *ngIf="selected == 'ago'">
+        <div class="content-sticker" *ngFor="let item of stickerListHistory" (click)="sendSticker(item)">
+            <img [src]="item.url || 'assets/images/loading.gif'" alt="">
+        </div>
+        <div class="loading" *ngIf="stickerListHistory == null">
+            <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+        </div>
+    </div>
 </div>
+
 

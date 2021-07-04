@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { Subscription } from 'rxjs';
 import { StickerObject } from 'src/app/models/sticker/sticker';
 import { StickerDetail } from 'src/app/models/sticker/sticker_detail';
@@ -15,7 +17,8 @@ export class StickerComponent implements OnInit, OnDestroy {
   idStickerList: any[]
   stickerList: StickerObject[]
   stickerDetailList: StickerDetail[] = []
-  selected: string;
+  stickerListHistory: StickerDetail[] = null;
+  selected: string = 'ago';
   checkAgoHide: boolean;
   checkNextHide: boolean
   maCuocTroChuyen: string;
@@ -30,7 +33,15 @@ export class StickerComponent implements OnInit, OnDestroy {
     this.inTheFirst()
     this.loadStickerList()
     this.getMaCuocTroChuyen();
+    this.loadHistoryUseSticker();
   }
+   // lottie
+   options: AnimationOptions = {
+    path: '/assets/json/lottie/loading2.json',
+  };
+  animationCreated(animationItem: AnimationItem): void {
+  }
+
   // lấy
   getMaCuocTroChuyen() {
     this.valueSub = this.route.paramMap.subscribe((params) => {
@@ -96,14 +107,18 @@ export class StickerComponent implements OnInit, OnDestroy {
                   this.stickerList.push(stickerDetail)
               }
             }
+          this.sortStickerTimeAdd();
           })
+           // sắp xếp theo thứ tự thêm gần đây
         });
-        // sắp xếp theo thứ tự thêm gần đây
-        this.sortStickerTimeAdd();
+       
     })
   }
   // load danh sách các sticker theo id nhóm sticker
   loadStickerDetail(idSticker: string) {
+    let scroll = document.getElementById('scroll-content');
+    if(scroll != null)
+    scroll.scrollTop = 0;
     this.selected = idSticker;
     this.stickerDetailList = []
     this.stickersService.accessStickers().child(idSticker).child('danh_sach_nhan_dan').once('value', (sticker) => {
@@ -146,6 +161,75 @@ export class StickerComponent implements OnInit, OnDestroy {
     this.stickersService.accessAccount().child(parseIDUser).once('value', (acc) => {
       this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan",acc.val().ten);
       this.stickersService.isShowBoxSticker = false;
+    });
+    this.stickersService.accessAccessHistorySticker().child(parseIDUser).once('value', (his) => {
+      if(his.val() == null) {
+        this.stickersService.accessAccessHistorySticker().child(parseIDUser).child('0').set({
+          ma_nhan_dan:item.idDetail,
+          src: item.url
+        })
+      } else {
+        let listStickerTemp = [];
+        his.forEach(element => {
+            let sticker = new StickerDetail();
+            sticker.idDetail = element.val().ma_nhan_dan;
+            sticker.url = element.val().src
+            listStickerTemp.push(sticker)
+        });
+        if(listStickerTemp.length <= 16) {
+          let checkAdd = false;
+          listStickerTemp.forEach((element,i) => {
+              if(element.idDetail == item.idDetail) {
+                checkAdd = true
+                listStickerTemp.splice(i, 1)
+              }
+          });
+          if(!checkAdd && listStickerTemp.length == 16) {
+            listStickerTemp.pop()
+            listStickerTemp.unshift(item)
+            listStickerTemp.forEach((ele, index) => {
+              this.stickersService.accessAccessHistorySticker().child(parseIDUser).child(index+'').set({
+                ma_nhan_dan:ele.idDetail,
+                src: ele.url
+              })
+            });
+          }else if(!checkAdd && listStickerTemp.length < 16) {
+            listStickerTemp.unshift(item)
+            listStickerTemp.forEach((ele, index) => {
+              this.stickersService.accessAccessHistorySticker().child(parseIDUser).child(index+'').set({
+                ma_nhan_dan:ele.idDetail,
+                src: ele.url
+              })
+            });
+          } else {
+            listStickerTemp.unshift(item)
+            listStickerTemp.forEach((ele, index) => {
+              this.stickersService.accessAccessHistorySticker().child(parseIDUser).child(index+'').set({
+                ma_nhan_dan:ele.idDetail,
+                src: ele.url
+              })
+            });
+          }
+        }
+      }
     })
+  }
+  
+  clickAgo() {
+    this.selected = 'ago'
+    this.loadHistoryUseSticker();
+  }
+  // load lich su dung sticker
+  loadHistoryUseSticker() {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.stickersService.accessAccessHistorySticker().child(parseIDUser).on('value',(his) =>{
+        this.stickerListHistory = []
+        his.forEach(element => {
+          let sticker = new StickerDetail();
+          sticker.idDetail = element.val().ma_nhan_dan
+          sticker.url = element.val().src
+          this.stickerListHistory.push(sticker)
+        });
+      })
   }
 }
