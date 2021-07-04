@@ -162,6 +162,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       temp.name = result.val().ten;
                       temp.sex = result.val().gioi_tinh;
                       temp.date = result.val().ngay_tao;
+                      temp.lastOnline = 0;
                       if (temp != null) {
                         this.friendsPageService.friendFirstList.push(temp);
                         // sắp xếp
