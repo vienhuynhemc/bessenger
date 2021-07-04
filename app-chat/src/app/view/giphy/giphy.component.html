@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="content">
-        <div class="giphy" *ngFor="let item of listGiphySearch">
+        <div class="giphy" *ngFor="let item of listGiphySearch" (click)="sendGif(item)">
             <img [src]="item.url || 'assets/images/loading.gif'" [alt]="item.name">
         </div>
       

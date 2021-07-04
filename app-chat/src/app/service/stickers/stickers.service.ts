@@ -22,6 +22,9 @@ export class StickersService {
   openGiphy() {
     this.isShowBoxGiphy = !this.isShowBoxGiphy;
   }
+  accessAccount() {
+    return this.db.database.ref('tai_khoan')
+  }
   // truy cập vào sử dụng nhãn dán
   accessUseSticker() {
     return this.db.database.ref('su_dung_nhan_dan');
