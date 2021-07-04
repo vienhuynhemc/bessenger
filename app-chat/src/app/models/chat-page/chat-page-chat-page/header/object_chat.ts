@@ -10,7 +10,11 @@ export class ObjectChat {
     is_online: boolean;
     thanh_vien: ObjectChatThanhVien[];
 
-    public getImg(): string[] {
+    // img để đổ dữ liệu khong lag
+    public imgs: string[] = [];
+    public name: ChatPageObjectTen = new ChatPageObjectTen();
+
+    public getImgs() {
         let result: string[] = [];
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.thanh_vien != null) {
@@ -28,10 +32,10 @@ export class ObjectChat {
                 }
             }
         }
-        return result;
+        this.imgs = result;
     }
 
-    public getName(): ChatPageObjectTen {
+    public getName() {
         let result: ChatPageObjectTen = new ChatPageObjectTen();
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.thanh_vien != null) {
@@ -56,7 +60,7 @@ export class ObjectChat {
                 }
             }
         }
-        return result;
+        this.name = result;
     }
 
     public getTime(): string {
