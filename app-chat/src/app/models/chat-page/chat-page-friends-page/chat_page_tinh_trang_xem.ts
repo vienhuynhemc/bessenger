@@ -9,6 +9,13 @@ export class ChatPageTinhTrangXem {
     xem_chua: string;
     ngay_nhan: number;
 
+    // Nội dung để đổ ra
+    public noi_dung: string = "";
+    public link_hinh_dai_dien = null;
+
+    // Có được phép có mặt?
+    public isShow:boolean;
+
     public isOke(ma_tk: string) {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.ma_tai_khoan == ma_tai_khoan) return false;
@@ -17,30 +24,27 @@ export class ChatPageTinhTrangXem {
         return false;
     }
 
-    public getHinh(list: ChatPageObjectTinNhanFriend[]) {
-        if (list != null) {
-            for (let i = 0; i < list.length; i++) {
-                if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
-                    return list[i].link_hinh_dai_dien;
+    public getHinh(list: ChatPageObjectTinNhanFriend[]): string {
+        if (this.link_hinh_dai_dien == null) {
+            if (list != null) {
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
+                        this.link_hinh_dai_dien = list[i].link_hinh_dai_dien;
+                        return this.link_hinh_dai_dien;
+                    }
                 }
             }
         }
-        return "";
+        return this.link_hinh_dai_dien;
     }
 
-    public getNoiDung(list: ChatPageObjectTinNhanFriend[]) {
-        return this.getName(list) + " xem lúc " + this.getTime();
+    public getNoiDung() {
+        this.noi_dung = this.getName() + " xem lúc " + this.getTime();
     }
 
-    public getName(list: ChatPageObjectTinNhanFriend[]) {
-        if (list != null) {
-            for (let i = 0; i < list.length; i++) {
-                if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
-                    return list[i].getName();
-                }
-            }
-        }
-        return "";
+    public getName() {
+        let array = this.ten.trim().split(" ");
+        return array[array.length - 1];
     }
 
     public getTime() {

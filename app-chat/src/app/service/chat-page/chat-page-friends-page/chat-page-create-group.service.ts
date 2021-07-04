@@ -49,7 +49,7 @@ export class ChatPageCreateGroupService {
       }
     );
     let array: Object[] = [];
-    array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi" });
+    array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi",ten:ten });
     for (let i = 0; i < this.user_added.length; i++) {
       this.db.object("/thanh_vien_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key + "/" + this.user_added[i].ma_tai_khoan).update(
         {
@@ -59,7 +59,7 @@ export class ChatPageCreateGroupService {
           trang_thai: "khong_cho"
         }
       );
-      array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua" });
+      array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua",ten:this.user_added[i].ten });
     }
     // Tin nhắn đầu tiên
     this.db.list("/chi_tiet_cuoc_tro_chuyen/" + cuoc_tro_chuyen.key).push(
@@ -79,7 +79,8 @@ export class ChatPageCreateGroupService {
           {
             ngay_nhan: array[i]['ngay_nhan'],
             ngay_xem: array[i]['ngay_xem'],
-            xem_chua: array[i]['xem_chua']
+            xem_chua: array[i]['xem_chua'],
+            ten:array[i]['ten']
           }
         )
       };

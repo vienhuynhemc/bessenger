@@ -9,10 +9,15 @@ export class ObjectChatContent {
     // Thành viên
     thanh_vien: ChatPageObjectTinNhanFriend[];
     // Trạng thái đang nhập
-    
+
     is_online: boolean;
 
-    public getImg(): string[] {
+    // img của thành viên nhóm chat
+    public imgAvatars: string[] = [];
+    // Thông báo sự kết nối thành viên : Bạn chưa kết nối với 3.14 người :v
+    public statusConnect: string = "";
+
+    public getImgAvatars() {
         let result: string[] = [];
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.thanh_vien != null) {
@@ -30,12 +35,13 @@ export class ObjectChatContent {
                 }
             }
         }
-        return result;
+        this.imgAvatars = result;
     }
 
-    public getCreateFriends(ban_bes: string[]): string {
+    public getCreateFriends(ban_bes: string[]) {
+        let result = "";
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don') {
-            return "Bạn và " + this.getName() + " là bạn bè trên Bessenger"
+            result = "Bạn và " + this.getName() + " là bạn bè trên Bessenger"
         } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
             let count = 0;
             if (this.thanh_vien != null && ban_bes != null) {
@@ -57,12 +63,12 @@ export class ObjectChatContent {
                 }
             }
             if (count == 0) {
-                return "";
+                result = "";
             } else {
-                return "Bạn chưa két nối với " + count + " thành viên";
+                result = "Bạn chưa két nối với " + count + " thành viên";
             }
         }
-        return "";
+        this.statusConnect = result;
     }
 
     public getName(): string {

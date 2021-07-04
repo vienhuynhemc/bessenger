@@ -1,5 +1,4 @@
-import { DomSanitizer } from '@angular/platform-browser';
-import { flatMap } from 'rxjs/operators';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ChatPageObjectTinNhanFriend } from './chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from './chat_page_tinh_trang_xem';
 
@@ -16,9 +15,43 @@ export class ChatPageTinNhan {
     noi_dung: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
 
-    public getNoiDungHTML(sanitized: DomSanitizer) {
+    // Các thuộc tính giúp đỡ lag
+    // Có phải là bản thân ko
+    public isBanThan: boolean;
+    // Màu tương ứng của tin nhắn
+    public color: string = "";
+    // Thời gian gửi của tin nhắn
+    public timeSend: string = "";
+    // Có phải trạng thái tin nhắn đã gửi ?
+    public isDaGui: boolean;
+    // Có phải trạng thái tin nhắn đã chuyển ?
+    public isDaChuyen: boolean;
+    // Có người xem chưa
+    public isCoNguoiXem: boolean;
+    // Tên của người sở hữu tinh nhắn này
+    public ten_da_duoc_xu_ly: string;
+    // Link hình địa diện nếu ko phải bản thân
+    public link_hinh_dai_dien = null;
+    // Có border top ở css hay không
+    public isHaveBorderTop: boolean;
+    public isHaveBorderBottom: boolean;
+    // Margintop
+    public marginTop: string = "";
+    // Số người xem đang ở vị trí của tin nhắn
+    public soNguoiXemDangOViTriCuaTinNhanNay:number;
+    // Ta sẽ nắm thóp được 1 thằng nếu chỉ có duy nhất 1 người xem qua lúc tính soNguoiXemDangOViTriNay
+    public thangXemDuyNhat:ChatPageTinhTrangXem = new ChatPageTinhTrangXem();
+
+    // Các thuộc tính riêng cho từng loại
+    noi_dung_thong_bao: string = "";
+
+    // noi_dung_html của tin nhắn
+    public noi_dung_html: SafeHtml = "";
+
+    public getNoiDungHTMLTinNhan(sanitized: DomSanitizer) {
+        let result: SafeHtml = "";
         if (this.loai_tin_nhan == 'gui_text') {
-            return sanitized.bypassSecurityTrustHtml(this.noi_dung);
+            result = sanitized.bypassSecurityTrustHtml(this.noi_dung);
         } else if (this.loai_tin_nhan == 'gui_text_icon') {
             let div = document.createElement("div");
             div.innerHTML = this.noi_dung;
@@ -26,96 +59,89 @@ export class ChatPageTinNhan {
                 div.children[i].classList.remove("span-image-box-chat");
                 div.children[i].classList.add("gui_text_icon_icon");
             }
-            return sanitized.bypassSecurityTrustHtml(div.innerHTML);
+            result = sanitized.bypassSecurityTrustHtml(div.innerHTML);
         }
-        return "";
+        this.noi_dung_html = result;
     }
 
-    public getNoiDungThongBao(list: ChatPageObjectTinNhanFriend[]): string {
+    public getNoiDungThongBao() {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.ma_tai_khoan == ma_tai_khoan) {
-            return "Bạn " + this.noi_dung;
+            this.noi_dung_thong_bao = "Bạn " + this.noi_dung;
         } else {
+            let array = this.ten.trim().split(" ");
+            this.noi_dung_thong_bao = array[array.length - 1] + " " + this.noi_dung;
+        }
+    }
+
+    public getIsBanThan() {
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        this.isBanThan = this.ma_tai_khoan == ma_tai_khoan;
+    }
+
+    public getColorTinNhan(mau: string) {
+        if (this.isBanThan) {
+            this.color = mau;
+        } else {
+            this.color = "#e4e6eb";
+        }
+    }
+
+    public getMarginTopTinNhan(tin_nhan: ChatPageTinNhan) {
+        let result = "";
+        if (this.loai_tin_nhan == 'gui_nhan_dan'
+            || this.loai_tin_nhan == 'gui_giphy'
+            || this.loai_tin_nhan == 'thong_bao'
+        ) {
+            result = "9px";
+        }
+        else if (tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
+            || tin_nhan.loai_tin_nhan == 'gui_giphy'
+            || tin_nhan.loai_tin_nhan == 'thong_bao'
+        ) {
+            result = "9px";
+        }
+        else if (tin_nhan.ma_tai_khoan != this.ma_tai_khoan) {
+            result = "9px";
+        }
+        else if (tin_nhan.ma_tai_khoan == this.ma_tai_khoan) {
+            result = "2px";
+        }
+        this.marginTop = result;
+    }
+
+
+    public getTen() {
+        let array = this.ten.trim().split(" ");
+        this.ten_da_duoc_xu_ly = array[array.length - 1];
+    }
+
+    public getHinh(list: ChatPageObjectTinNhanFriend[]): string {
+        if (this.link_hinh_dai_dien == null) {
             if (list != null) {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
-                        return list[i].getName() + " " + this.noi_dung;
+                        this.link_hinh_dai_dien = list[i].link_hinh_dai_dien;
+                        return this.link_hinh_dai_dien;
                     }
                 }
             }
         }
-        return "";
+        return this.link_hinh_dai_dien;
     }
 
-    public isBanThan() {
-        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-        return this.ma_tai_khoan == ma_tai_khoan;
-    }
-
-    public getColor(mau: string) {
-        if (this.isBanThan()) return mau;
-        return "#e4e6eb";
-    }
-
-    public getMarginTop(i: number, tin_nhans: ChatPageTinNhan[]) {
-        if (i == 0) {
-            return "0px";
-        } else {
-            if (tin_nhans[i].loai_tin_nhan == 'gui_nhan_dan'
-                || tin_nhans[i].loai_tin_nhan == 'gui_giphy'
-                || tin_nhans[i].loai_tin_nhan == 'thong_bao'
-            ) {
-                return "9px";
-            }
-            if (tin_nhans[i - 1].loai_tin_nhan == 'gui_nhan_dan'
-                || tin_nhans[i - 1].loai_tin_nhan == 'gui_giphy'
-                || tin_nhans[i - 1].loai_tin_nhan == 'thong_bao'
-            ) {
-                return "9px";
-            }
-            if (tin_nhans[i - 1].ma_tai_khoan != this.ma_tai_khoan) {
-                return "9px";
-            }
-            if (tin_nhans[i - 1].ma_tai_khoan == this.ma_tai_khoan) {
-                return "2px";
-            }
-            return "100px";
-        }
-    }
-
-
-    public getTen(list: ChatPageObjectTinNhanFriend[]): string {
-        if (list != null) {
-            for (let i = 0; i < list.length; i++) {
-                if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
-                    return list[i].getName();
-                }
-            }
-        }
-        return "";
-    }
-
-    public getHinh(list: ChatPageObjectTinNhanFriend[]): string {
-        if (list != null) {
-            for (let i = 0; i < list.length; i++) {
-                if (list[i].ma_tai_khoan == this.ma_tai_khoan) {
-                    return list[i].link_hinh_dai_dien;
-                }
-            }
-        }
-        return "";
-    }
-
-    public isDaGui() {
+    public getIsDaGui() {
+        let result = true;
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
                 if (this.tinh_trang_xem[i].xem_chua == 'roi' || this.tinh_trang_xem[i].xem_chua == 'dang') {
-                    return false;
+                    result = false;
+                    break;
                 }
             }
         }
-        return true;
+        this.isDaGui = result;
     }
 
     public getTime() {
@@ -126,55 +152,68 @@ export class ChatPageTinNhan {
         let gio = date.getHours();
         let phut = date.getMinutes();
         let giay = date.getSeconds();
-        return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
+        this.timeSend = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
     }
 
-    public isDaChuyen() {
+    public getIsDaChuyen() {
+        let result = true;
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         let count = 0;
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
                 if (this.tinh_trang_xem[i].xem_chua == 'roi') {
-                    return false;
+                    result = false;
                 }
                 if (this.tinh_trang_xem[i].xem_chua == 'chua') {
                     count++;
                 }
             }
         }
-        if (count == this.tinh_trang_xem.length - 1) {
-            return false;
+        if (result) {
+            if (count == this.tinh_trang_xem.length - 1) {
+                result = false;
+            } else {
+                result = true;
+            }
         }
-        return true;
+        this.isDaChuyen = result;
     }
 
-    public isCoNguoiXem() {
+    public getIsCoNguoiXem() {
+        let result = false;
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan
                 && this.tinh_trang_xem[i].ma_tai_khoan != this.ma_tai_khoan
             ) {
                 if (this.tinh_trang_xem[i].xem_chua == 'roi') {
-                    return true;
+                    result = true;
+                    break;
                 }
             }
         }
-        return false;
+        this.isCoNguoiXem = result;
     }
 
-    public isShowNguoiXem(index: number, tin_nhan: ChatPageTinNhan[]) {
+    public getSoNguoiXemDangOViTriTinNhanNay(index: number, tin_nhan: ChatPageTinNhan[]) {
         let count = 0;
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].isOke(this.ma_tai_khoan)
                 && this.isLastDaXem(index, this.tinh_trang_xem[i].ma_tai_khoan, tin_nhan)
             ) {
                 count++;
+                // cập nhật cho thằng tinh_trang_xem này được phép show
+                this.tinh_trang_xem[i].isShow =true;
             }
         }
-        return count;
+        this.soNguoiXemDangOViTriCuaTinNhanNay = count;
+        // xem thử phải có 1 thằng ko, nếu 1 thì bắt thằng đó
+        if(this.soNguoiXemDangOViTriCuaTinNhanNay == 1){
+            this.thangXemDuyNhat = this.getNguoiXemDuyNhat(index,tin_nhan);
+        }
     }
 
-    public getNguoiXemDuyNhatDo(index: number, tin_nhan: ChatPageTinNhan[]): ChatPageTinhTrangXem {
+    public getNguoiXemDuyNhat(index: number, tin_nhan: ChatPageTinNhan[]): ChatPageTinhTrangXem {
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].isOke(this.ma_tai_khoan)
                 && this.isLastDaXem(index, this.tinh_trang_xem[i].ma_tai_khoan, tin_nhan)
@@ -200,38 +239,34 @@ export class ChatPageTinNhan {
         return false;
     }
 
-    public isHaveBorderTop(index: number, tin_nhan: ChatPageTinNhan[]) {
-        if (index == 0) {
-            return true;
-        } else {
-            if (tin_nhan[index - 1].ma_tai_khoan != this.ma_tai_khoan) {
-                return true;
-            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao'
-                || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon'
-                || tin_nhan[index - 1].loai_tin_nhan == 'gui_nhan_dan'
-                || tin_nhan[index - 1].loai_tin_nhan == 'gui_giphy'
-            ) {
-                return true;
-            }
+    public getIsHaveBorderTop(tin_nhan: ChatPageTinNhan) {
+        let result = false;
+
+        if (tin_nhan.ma_tai_khoan != this.ma_tai_khoan) {
+            result = true;
+        } else if (tin_nhan.loai_tin_nhan == 'thong_bao'
+            || tin_nhan.loai_tin_nhan == 'gui_text_icon'
+            || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
+            || tin_nhan.loai_tin_nhan == 'gui_giphy'
+        ) {
+            result = true;
         }
-        return false;
+
+        this.isHaveBorderTop = result;
     }
 
-    public isHaveBorderBottom(index: number, tin_nhan: ChatPageTinNhan[]) {
-        if (index == tin_nhan.length - 1) {
-            return true;
-        } else {
-            if (tin_nhan[index + 1] != null && tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
-                return true;
-            } else if (tin_nhan[index + 1] != null && (tin_nhan[index + 1].loai_tin_nhan == 'thong_bao'
-                || tin_nhan[index + 1].loai_tin_nhan == 'gui_text_icon'
-                || tin_nhan[index + 1].loai_tin_nhan == 'gui_nhan_dan'
-                || tin_nhan[index + 1].loai_tin_nhan == 'gui_giphy'
-            )) {
-                return true;
-            }
+    public getIsHaveBorderBottom(tin_nhan: ChatPageTinNhan) {
+        let result = false;
+        if (tin_nhan.ma_tai_khoan != this.ma_tai_khoan) {
+            result = true;
+        } else if (tin_nhan != null && (tin_nhan.loai_tin_nhan == 'thong_bao'
+            || tin_nhan.loai_tin_nhan == 'gui_text_icon'
+            || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
+            || tin_nhan.loai_tin_nhan == 'gui_giphy'
+        )) {
+            result = true;
         }
-        return false;
+        this.isHaveBorderBottom = result;
     }
 
 }
