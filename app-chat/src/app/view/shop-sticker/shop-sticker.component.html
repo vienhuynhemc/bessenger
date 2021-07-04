@@ -9,71 +9,24 @@
             </div>
             <div class="content-stickers">
                 <div class="scroll-stickers">
-                    <div class="sticker">
+                    <div class="sticker" *ngFor="let item of stickerList">
                         <div class="review">
                             <div class="review-top">
                                 <div class="left">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/156592483_141550577831540_7691392649336008247_n.png?_nc_cat=1&ccb=1-3&_nc_sid=0572db&_nc_ohc=UXXZQNlyotcAX8OiCwZ&_nc_ht=scontent-hkt1-1.xx&oh=de35ccd50a46af9759c97d3d1c125793&oe=60E3BD1B" alt="">
+                                    <img [src]="item.img" alt="">
                                 </div>
                                 <div class="right">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/155229018_143264297660168_4186222627523676140_n.png?_nc_cat=102&ccb=1-3&_nc_sid=0572db&_nc_ohc=sQ2YKJJp_ZYAX8BlTMi&_nc_ht=scontent-hkt1-1.xx&oh=74fd495d616e8dd69dc35d110237ad7f&oe=60E3EBA0" alt="">
+                                    <img [src]="item.img_description" alt="">
                                 </div>
                             </div>
                             <div class="review-bot">
-                                <div class="name"><span>Tràn ngập chuối</span></div>
-                                <div class="add"><div class="btn-add"><span>Thêm</span></div></div>
+                                <div class="name"><span>{{item.name}}</span></div>
+                                <div class="add" *ngIf="item.checkAdd == 'them'"><div class="btn-add" (click)="addSticker(item.id)"><span>Thêm</span></div></div>
+                                <div class="add" *ngIf="item.checkAdd == 'go'"><div class="btn-go" (click)="removeSticker(item.id)"><span>Gỡ</span></div></div>
                             </div>
                         </div>
                     </div>
-                    <div class="sticker">
-                        <div class="review">
-                            <div class="review-top">
-                                <div class="left">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/187711910_4046845968695924_612181078665414025_n.png?_nc_cat=110&ccb=1-3&_nc_sid=0572db&_nc_ohc=H2u5xhlIzRMAX9nv6HP&_nc_oc=AQlcsRHLhlMHJxo_asnEFRs7MI3EJrsZfwQ2AZs-uuGB7UKQwtUAQiOAbP79PEmIb1dRsbJHwGDQsFbpVGV2pUWK&_nc_ht=scontent-hkt1-1.xx&oh=e7bdcc7689eea5f3a675d9f81baf24ad&oe=60E4209B" alt="">
-                                </div>
-                                <div class="right">
-                                    <img src="https://scontent-hkt1-2.xx.fbcdn.net/v/t39.1997-6/192937066_4070817836298737_5642646015765293863_n.png?_nc_cat=108&ccb=1-3&_nc_sid=0572db&_nc_ohc=sEbGltGzHXgAX8oaXlH&_nc_ht=scontent-hkt1-2.xx&oh=ab576d24c36d89717fd5500366809529&oe=60E3ED22" alt="">
-                                </div>
-                            </div>
-                            <div class="review-bot">
-                                <div class="name"><span>Cặp bài trùng Usagyuuun</span></div>
-                                <div class="add"><div class="btn-add"><span>Thêm</span></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sticker">
-                        <div class="review">
-                            <div class="review-top">
-                                <div class="left">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/115950226_608440613087080_5301457290098469091_n.png?_nc_cat=110&ccb=1-3&_nc_sid=0572db&_nc_ohc=s1nRPSsNbV4AX9lJ5qI&_nc_ht=scontent-hkt1-1.xx&oh=eba191285f813ecf0c9c3436f24ad3c1&oe=60E317D3" alt="">
-                                </div>
-                                <div class="right">
-                                    <img src="https://scontent-hkt1-2.xx.fbcdn.net/v/t39.1997-6/116707351_609632119634596_4958247337300048769_n.png?_nc_cat=104&ccb=1-3&_nc_sid=0572db&_nc_ohc=5Z7lv0PvHuoAX_vFYTH&_nc_ht=scontent-hkt1-2.xx&oh=90eb3410ccfee18fb85476ee66140b66&oe=60E4FDCA" alt="">
-                                </div>
-                            </div>
-                            <div class="review-bot">
-                                <div class="name"><span>Usagyuuun siêu đỉnh</span></div>
-                                <div class="add"><div class="btn-add"><span>Thêm</span></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sticker">
-                        <div class="review">
-                            <div class="review-top">
-                                <div class="left">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/83695669_476407373022859_502350503200423936_n.png?_nc_cat=111&ccb=1-3&_nc_sid=0572db&_nc_ohc=qOaf0_7CB18AX9yqj1X&_nc_ht=scontent-hkt1-1.xx&oh=0bff570cc7b0bc3951a6b6644ba6db5c&oe=60E39EAB" alt="">
-                                </div>
-                                <div class="right">
-                                    <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.1997-6/83871157_483514928978770_3707512917772468224_n.png?_nc_cat=110&ccb=1-3&_nc_sid=0572db&_nc_ohc=FrUB6vXCjNAAX9am_EF&tn=ezhNzfhhsiuYycKO&_nc_ht=scontent-hkt1-1.xx&oh=ada22ac1088c49c9b7066450eecb6005&oe=60E35227" alt="">
-                                </div>
-                            </div>
-                            <div class="review-bot">
-                                <div class="name"><span>
-                                    Tình yêu dịu dàng</span></div>
-                                <div class="add"><div class="btn-add"><span>Thêm</span></div></div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

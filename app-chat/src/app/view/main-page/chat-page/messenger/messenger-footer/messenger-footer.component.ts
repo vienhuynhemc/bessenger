@@ -20,11 +20,7 @@ export class MessengerFooterComponent implements OnInit {
   // Có hiện hộp btcx
   public isShowBtcxBox: boolean;
 
-  // hiện giphy
-  public isShowBoxGiphy: boolean;
-
-  // hiện sticker
-  public isShowBoxStickers: boolean;
+  
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
@@ -244,27 +240,28 @@ export class MessengerFooterComponent implements OnInit {
     this.isShowBtcxBox = !this.isShowBtcxBox;
     // mở box này thì đóng các box còn lại
     if (this.isShowBtcxBox) {
-      this.isShowBoxGiphy = false;
-      this.isShowBoxStickers = false;
+      this.stickersService.isShowBoxSticker = false;
+      this.stickersService.isShowBoxGiphy = false;
+
     }
   }
 
   // hiển thị box giphy
   public openBoxGiphy() {
-    this.isShowBoxGiphy = !this.isShowBoxGiphy;
+    this.stickersService.openGiphy();
     // mở box này thì đóng các box còn lại
-    if (this.isShowBoxGiphy) {
+    if (this.stickersService.isShowBoxGiphy) {
       this.isShowBtcxBox = false;
-      this.isShowBoxStickers = false;
+      this.stickersService.isShowBoxSticker = false;
     }
   }
 
   // hiển thị box sticker
   public openBoxStickers() {
-    this.isShowBoxStickers = !this.isShowBoxStickers;
-    if (this.isShowBoxStickers) {
+    this.stickersService.openSticker()
+    if (this.stickersService.isShowBoxSticker) {
       this.isShowBtcxBox = false;
-      this.isShowBoxGiphy = false;
+      this.stickersService.isShowBoxGiphy = false;
     }
   }
   public getTopBoxBTCX() {
