@@ -83,7 +83,6 @@ export class SendRequsetAddComponent implements OnInit, OnDestroy {
                               temp.img = data.val().link_hinh
                               temp.sex = data.val().gioi_tinh
                               temp.date = request_sub.val().ngay_tao
-                              temp.lastOnline = data.val().lan_cuoi_dang_nhap
                                // thêm vào danh sách sau đó sắp xếp theo ABCD
                                // kiểm tra có nên thêm vào dnah sách hay không
                                 this.mutualSendList.forEach(resultCheck => {

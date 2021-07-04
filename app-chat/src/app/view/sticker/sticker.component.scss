@@ -50,27 +50,36 @@
             border-left: #d2d8e0 solid 0.2px;
 
         }
+        .prev {
+            border-right: #d2d8e0 solid 0.2px;
+        }
         .left {
             width: 61%;
             height: 100%;
             display: flex;
-           
+            overflow-x: overlay;
+            scroll-behavior: smooth;
             .sticker {
                 text-align: center;
-                width: 25%;
+                min-width: 25%;
+                max-width: 25%;
                 height: 100%;
                 cursor: pointer;
                 img {
                     width: 70%;
                     height: 70%;
                     object-fit: cover;
-                    margin-top: 10px;
+                    margin-top: 5px;
                 }
             }
             .sticker-selected {
                 background-color: #dee3eb;
             }
         }
+        .left::-webkit-scrollbar {
+            height: 0px;
+        }
+       
         .right {
             width: 15%;
             height: 100%;
@@ -138,4 +147,5 @@
       ::-webkit-scrollbar:hover {
         background: #0700001c !important;
       }
+      
 }

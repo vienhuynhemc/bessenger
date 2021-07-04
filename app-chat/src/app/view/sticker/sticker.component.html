@@ -1,16 +1,16 @@
 <div class="arrow-giphy"></div>
 <div class="container">
     <div class="header">
-        <div class="ago"><i class="far fa-clock"></i></div>
-        <div class="left">
-            <!-- <div class="prev"></div> -->
-            <div class="sticker" *ngFor="let item of stickerList" (click)="loadStickerDetail(item.id)" [class.sticker-selected]="item.id == selected">
+        <div class="ago" *ngIf="!checkAgoHide"><i class="far fa-clock"></i></div>
+        <div class="prev" *ngIf="checkAgoHide" (click)="toLeft()"><i class="fas fa-chevron-left"></i></div>
+        <div class="left" id="scroll" >
+            <div class="sticker" *ngFor="let item of stickerList; let i = index" (click)="loadStickerDetail(item.id)" [class.sticker-selected]="item.id == selected">
                 <img [src]="item.img" alt="">
             </div>
             <div class="sticker"></div>
             <div class="sticker"></div>
         </div>
-        <div class="next">
+        <div class="next" (click)="toRight()">
             <i class="fas fa-chevron-right"></i>
         </div>
         <div class="right">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="content">
-        <div class="content-sticker" *ngFor="let item of stickerDetailList">
+        <div class="content-sticker" *ngFor="let item of stickerDetailList" (click)="sendSticker(item)">
             <img [src]="item.url" alt="">
         </div>
     </div>

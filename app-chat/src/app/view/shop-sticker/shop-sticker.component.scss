@@ -145,7 +145,7 @@ position: fixed;
                 .add {
                   width: 25%;
                   height: 100%;
-                  .btn-add {
+                  .btn-add, .btn-go {
                     text-align: center;
                     margin-top: 10%;
                     width: 100%;
@@ -161,6 +161,9 @@ position: fixed;
                     font-size: 13px;
 
                     }
+                  }
+                  .btn-go {
+                    background-color: rgb(175, 174, 174);
                   }
                 }
               }

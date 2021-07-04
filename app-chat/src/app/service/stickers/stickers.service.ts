@@ -6,11 +6,21 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class StickersService {
   isShowShop: boolean;
+  isShowBoxGiphy: boolean;
+  isShowBoxSticker: boolean
   constructor(private db: AngularFireDatabase) { }
 
   // hiển thị shop
   openShop() {
     this.isShowShop = !this.isShowShop;
+  }
+  // hiển thị sticker
+  openSticker() {
+    this.isShowBoxSticker = !this.isShowBoxSticker;
+  }
+  // hiển thị giphy
+  openGiphy() {
+    this.isShowBoxGiphy = !this.isShowBoxGiphy;
   }
   // truy cập vào sử dụng nhãn dán
   accessUseSticker() {
@@ -20,12 +30,20 @@ export class StickersService {
   accessStickers() {
     return this.db.database.ref('nhan_dan');
   }
-  themNhanDan() {
-    let post = this.db.database.ref('nhan_dan').child('-MdenH-ssaWooJ39FGUF').child('danh_sach_nhan_dan');
-    let newKey = post.push();
-    newKey.set({
-      src:'https://scontent.xx.fbcdn.net/v/t39.1997-6/115995787_608463753084766_8658500895752460461_n.webp?_nc_cat=103&ccb=1-3&_nc_sid=0572db&_nc_ohc=4Ptzta_ej9AAX_kccQh&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=8c614b7c66d0318c880de539ae081807&oe=60E44E20'
+  addStickerFirst(id: string) {
+    this.accessStickers().once('value', (sticker) => {
+      let loop = 0
+      sticker.forEach(element => {
+          if(loop < 5 && element.val().ton_tai == 0) {
+            this.db.database.ref('su_dung_nhan_dan').child(id).child(element.key).set({
+              ngay_tao: Number(new Date()),
+              ton_tai: 0
+            })
+            loop++;
+          }
+      });
     })
+   
   }
   // themNhanDan() {
   //   let post = this.db.database.ref('nhan_dan');

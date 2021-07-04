@@ -38,7 +38,7 @@
             </svg>
             
         </div>
-        <div *ngIf="isShowBoxStickers" class="box-stickers">
+        <div [style.top]="getTopGiphy()" *ngIf="stickersService.isShowBoxSticker" class="box-stickers">
             <app-sticker></app-sticker>
         </div>
        
@@ -52,7 +52,7 @@
                     [attr.fill]="this.messenger_footer_service.object_chat_footer.mau" fill-rule="nonzero"></path>
             </svg>
         </div>
-        <div [style.top]="getTopGiphy()" class="box-giphy" *ngIf="isShowBoxGiphy">
+        <div [style.top]="getTopGiphy()" class="box-giphy" *ngIf="stickersService.isShowBoxGiphy">
             <app-giphy></app-giphy>
         </div>
         <!--  -->
