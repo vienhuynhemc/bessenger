@@ -9,7 +9,8 @@
             </div>
         </div>
         <div class="search">
-            <input type="text" placeholder="Tìm kiếm" [(ngModel)]="this.chat_page_friend_left_service.search">
+            <input type="text" placeholder="Tìm kiếm" [(ngModel)]="this.chat_page_friend_left_service.search"
+                (input)="this.chat_page_friend_left_service.changeSearch($event)">
             <i class="fas fa-search"></i>
         </div>
     </div>
@@ -39,8 +40,8 @@
                 <div *ngFor="let item of this.chat_page_friend_left_service.allBoxData; let i = index"
                     class="container message_read" (click)="onSelected(item.cuoc_tro_truyen.ma_cuoc_tro_chuyen)"
                     [class.selected-container]="this.chat_page_friend_left_service.indexNotSearch == i"
-                    [class.selected-prev]="i ==this.chat_page_friend_left_service.getIndexPre() && (this.chat_page_friend_left_service.getIndexSeleced()!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
-                    [class.selected-next]="i==this.chat_page_friend_left_service.getIndexNext() && (this.chat_page_friend_left_service.getIndexSeleced()!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
+                    [class.selected-prev]="i ==this.chat_page_friend_left_service.indexPre && (this.chat_page_friend_left_service.indexSelect!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
+                    [class.selected-next]="i==this.chat_page_friend_left_service.indexNext && (this.chat_page_friend_left_service.indexSelect!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
                     [class.done-select]="this.chat_page_friend_left_service.indexNotSearch != i"
                     [class.hidden]="!this.chat_page_friend_left_service.compareSearch(i)">
 
@@ -121,12 +122,12 @@
                 </div>
             </div>
             <!-- Tô trắng phần còn lại-->
-            <div *ngIf="this.chat_page_friend_left_service.getLength() < 7" class="fillAll"
+            <div *ngIf="this.chat_page_friend_left_service.nowLengthShow < 7" class="fillAll"
                 [ngStyle]="getStyleFillAll()"
-                [class.selected-next]="this.chat_page_friend_left_service.getIndexSeleced() == this.chat_page_friend_left_service.getLength()-1 && (this.chat_page_friend_left_service.getIndexSeleced()!=-1) && (this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch))">
+                [class.selected-next]="this.chat_page_friend_left_service.indexSelect == this.chat_page_friend_left_service.nowLengthShow-1 && (this.chat_page_friend_left_service.indexSelect!=-1) && (this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch))">
             </div>
             <!-- Box shadown ở trên -->
-            <div *ngIf="this.chat_page_friend_left_service.getIndexSeleced() != -1" [ngStyle]="getStyleShadowTop()">
+            <div *ngIf="this.chat_page_friend_left_service.indexSelect != -1" [ngStyle]="getStyleShadowTop()">
             </div>
             <!-- Box shadow ớ dưới-->
             <div [ngStyle]="getStyleShadowBottom()">
