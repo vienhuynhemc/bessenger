@@ -35,11 +35,13 @@
         background-position: 0px -106px;
         background-size: auto;
         width: 20px;
+        image-rendering: -webkit-optimize-contrast;
         height: 20px;
         background-repeat: no-repeat;
         display: inline-block;
       }
       .select{
+        image-rendering: -webkit-optimize-contrast;
         background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
         background-position: -50px -81px;
         background-size: auto;
@@ -140,6 +142,7 @@
         justify-content: center;
         align-items: center;
         i {
+          image-rendering: -webkit-optimize-contrast;
           background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/GBQOBZbtErF.png);
           background-position: 0px -357px;
           background-size: auto;
