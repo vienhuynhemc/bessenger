@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { Subscription } from 'rxjs';
 import { GiphyObject } from 'src/app/models/giphy/giphy';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
@@ -16,7 +18,7 @@ export class GiphyComponent implements OnInit,OnDestroy {
   urlMax30: string = `https://api.giphy.com/v1/gifs/search?api_key=${this.APIKEY}&limit=30&q=`;
   urlMax50: string = `https://api.giphy.com/v1/gifs/search?api_key=${this.APIKEY}&limit=50&q=`;
 
-  listGiphyDefault: GiphyObject[];
+  listGiphyDefault: GiphyObject[] = null;
   listGiphySearch: GiphyObject[];
   valueSub: Subscription;
   maCuocTroChuyen: string;
@@ -24,7 +26,12 @@ export class GiphyComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.valueSub.unsubscribe();
   }
-
+ // lottie
+ options: AnimationOptions = {
+  path: '/assets/json/lottie/loading2.json',
+};
+animationCreated(animationItem: AnimationItem): void {
+}
   ngOnInit(): void {
     this.loadRandomGriphy()
     this.getMaCuocTroChuyen()
