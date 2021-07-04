@@ -81,20 +81,22 @@ export class ChatPageFriendsServiceService {
 
   public dienLanCuoiDangNhap(object: Object) {
     let count = 0;
-    Object.entries(object).forEach(([key, value]) => {
-      for (let i = 0; i < this.ban_bes.length; i++) {
-        if (this.ban_bes[i].ma_tai_khoan == key) {
-          this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
-          count++;
-          break;
+    if (this.ban_bes != null) {
+      Object.entries(object).forEach(([key, value]) => {
+        for (let i = 0; i < this.ban_bes.length; i++) {
+          if (this.ban_bes[i].ma_tai_khoan == key) {
+            this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
+            count++;
+            break;
+          }
         }
-      }
-    });
-    // Thằng nào chưa có thì cho nó là 0
-    if (count != this.ban_bes.length) {
-      for (let i = 0; i < this.ban_bes.length; i++) {
-        if (this.ban_bes[i].lan_cuoi_dang_nhap == null) {
-          this.ban_bes[i].lan_cuoi_dang_nhap = 0;
+      });
+      // Thằng nào chưa có thì cho nó là 0
+      if (count != this.ban_bes.length) {
+        for (let i = 0; i < this.ban_bes.length; i++) {
+          if (this.ban_bes[i].lan_cuoi_dang_nhap == null) {
+            this.ban_bes[i].lan_cuoi_dang_nhap = 0;
+          }
         }
       }
     }

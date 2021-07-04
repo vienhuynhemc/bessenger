@@ -33,13 +33,13 @@ export class ChatPageFriendsLeftServiceService {
   public layLanCuoiDangNhap: Subscription;
 
   // index
-  public indexNotSearch:number = -1;
+  public indexNotSearch: number = -1;
 
   constructor(
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceService,
     // scroll
-    private left_srcoll_service:LeftScrollService
+    private left_srcoll_service: LeftScrollService
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
@@ -51,19 +51,21 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public dienLanCuoiDangNhap(object: Object) {
-    Object.entries(object).forEach(([key2, value2]) => {
-      for (let i = 0; i < this.allBoxData.length; i++) {
-        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key2) {
-            this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value2['lan_cuoi_dang_nhap'];
+    if (this.allBoxData != null) {
+      Object.entries(object).forEach(([key2, value2]) => {
+        for (let i = 0; i < this.allBoxData.length; i++) {
+          for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+            if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key2) {
+              this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value2['lan_cuoi_dang_nhap'];
+            }
           }
         }
-      }
-    });
-    for (let i = 0; i < this.allBoxData.length; i++) {
-      for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-        if (this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap == null) {
-          this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = 0;
+      });
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap == null) {
+            this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = 0;
+          }
         }
       }
     }
@@ -209,12 +211,12 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].box_chat_dang_duoc_chon = true;
         // Cập nhật index not search
         this.indexNotSearch = i;
-        isOke =true;
+        isOke = true;
       } else {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
     }
-    if(!isOke){
+    if (!isOke) {
       this.indexNotSearch = -1;
     }
     // update to left srcoll
@@ -360,6 +362,7 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].getNoiDungCuoiCung();
         // Tin nhắn cuối cùng được đọc chưa
         this.allBoxData[i].getIsReaded();
+        // Lấy thời gian cuối 
         return;
       }
     }
