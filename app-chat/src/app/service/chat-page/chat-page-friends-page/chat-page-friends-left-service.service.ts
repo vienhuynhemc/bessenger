@@ -312,8 +312,8 @@ export class ChatPageFriendsLeftServiceService {
       Object.entries(object).forEach(([key, value]) => {
         this.dienTinNhan(key, value);
       });
-      // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
     }
+    // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
     // Ta sẽ getIsReaded
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan == null) {

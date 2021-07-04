@@ -3,7 +3,7 @@
         <div class="shop-content">
             <div class="header">
                 <img class="bg" src="assets/images/list-friends-chat-page/bg-shop-sticker.png" alt="">
-                <div class="title"><i class="fas fa-shopping-basket"></i><span>Cửa hàng nhãn dán</span></div>
+                <div class="title"><i></i><span>Cửa hàng nhãn dán</span></div>
                 <div class="title-sub"><span>Tìm nhãn dán mới để gửi cho bạn bè.</span></div>
                 <div class="exit" (click)="stickersService.openShop()"><i class="fas fa-times"></i></div>
             </div>
@@ -13,10 +13,10 @@
                         <div class="review">
                             <div class="review-top">
                                 <div class="left">
-                                    <img [src]="item.img" alt="">
+                                    <img [src]="item.img || 'assets/images/loading.gif'" alt="">
                                 </div>
                                 <div class="right">
-                                    <img [src]="item.img_description" alt="">
+                                    <img [src]="item.img_description || 'assets/images/loading.gif'" alt="">
                                 </div>
                             </div>
                             <div class="review-bot">
