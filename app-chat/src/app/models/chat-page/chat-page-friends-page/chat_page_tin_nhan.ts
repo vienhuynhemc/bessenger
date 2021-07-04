@@ -30,7 +30,7 @@ export class ChatPageTinNhan {
         }
         return "";
     }
-   
+
     public getNoiDungThongBao(list: ChatPageObjectTinNhanFriend[]): string {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.ma_tai_khoan == ma_tai_khoan) {
@@ -61,7 +61,16 @@ export class ChatPageTinNhan {
         if (i == 0) {
             return "0px";
         } else {
-            if (tin_nhans[i - 1].loai_tin_nhan == 'thong_bao') {
+            if (tin_nhans[i].loai_tin_nhan == 'gui_nhan_dan'
+                || tin_nhans[i].loai_tin_nhan == 'gui_giphy'
+                || tin_nhans[i].loai_tin_nhan == 'thong_bao'
+            ) {
+                return "9px";
+            }
+            if (tin_nhans[i - 1].loai_tin_nhan == 'gui_nhan_dan'
+                || tin_nhans[i - 1].loai_tin_nhan == 'gui_giphy'
+                || tin_nhans[i - 1].loai_tin_nhan == 'thong_bao'
+            ) {
                 return "9px";
             }
             if (tin_nhans[i - 1].ma_tai_khoan != this.ma_tai_khoan) {
@@ -197,7 +206,11 @@ export class ChatPageTinNhan {
         } else {
             if (tin_nhan[index - 1].ma_tai_khoan != this.ma_tai_khoan) {
                 return true;
-            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon') {
+            } else if (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao'
+                || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon'
+                || tin_nhan[index - 1].loai_tin_nhan == 'gui_nhan_dan'
+                || tin_nhan[index - 1].loai_tin_nhan == 'gui_giphy'
+            ) {
                 return true;
             }
         }
@@ -210,7 +223,11 @@ export class ChatPageTinNhan {
         } else {
             if (tin_nhan[index + 1] != null && tin_nhan[index + 1].ma_tai_khoan != this.ma_tai_khoan) {
                 return true;
-            } else if (tin_nhan[index - 1] != null && (tin_nhan[index - 1].loai_tin_nhan == 'thong_bao' || tin_nhan[index - 1].loai_tin_nhan == 'gui_text_icon')) {
+            } else if (tin_nhan[index + 1] != null && (tin_nhan[index + 1].loai_tin_nhan == 'thong_bao'
+                || tin_nhan[index + 1].loai_tin_nhan == 'gui_text_icon'
+                || tin_nhan[index + 1].loai_tin_nhan == 'gui_nhan_dan'
+                || tin_nhan[index + 1].loai_tin_nhan == 'gui_giphy'
+            )) {
                 return true;
             }
         }
