@@ -5,9 +5,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
   providedIn: 'root'
 })
 export class StickersService {
-  isShowShop: boolean;
-  isShowBoxGiphy: boolean;
-  isShowBoxSticker: boolean
+  isShowShop: boolean = false;
+  isShowBoxGiphy: boolean = false;
+  isShowBoxSticker: boolean = false;
   constructor(private db: AngularFireDatabase) { }
 
   // hiển thị shop

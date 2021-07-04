@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { StickerObject } from 'src/app/models/sticker/sticker';
 import { StickersService } from 'src/app/service/stickers/stickers.service';
 
@@ -8,11 +10,17 @@ import { StickersService } from 'src/app/service/stickers/stickers.service';
   styleUrls: ['./shop-sticker.component.scss']
 })
 export class ShopStickerComponent implements OnInit {
-  stickerList: StickerObject[];
+  stickerList: StickerObject[] = null;
   constructor(public stickersService: StickersService) { }
 
   ngOnInit(): void {
     this.loadStickersList()
+  }
+   // lottie
+   options: AnimationOptions = {
+    path: '/assets/json/lottie/loading2.json',
+  };
+  animationCreated(animationItem: AnimationItem): void {
   }
   loadStickersList() {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
