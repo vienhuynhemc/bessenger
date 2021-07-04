@@ -134,6 +134,10 @@ export class MessengerHeaderService {
         }
       }
     });
+    // Điền xong dữ liêu thành viên thì getimgs
+    this.object_chat.getImgs();
+    // Lấy tên
+    this.object_chat.getName();
   }
 
 }
