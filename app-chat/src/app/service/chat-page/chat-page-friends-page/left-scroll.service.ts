@@ -22,7 +22,6 @@ export class LeftScrollService {
   public resizeObserver = new ResizeObserver(entries => {
     let div = document.getElementById("danh_sach_ban_be_ben_duoi");
     if (div != null) {
-      console.log("resize")
       if (this.indexNotSearch != -1) {
         if (this.indexNotSearch < 3) {
           div.scrollTo({ top: 0, behavior: "smooth" });
