@@ -9,12 +9,16 @@ export class ChatPageObjectTinNhanFriend {
     roi_chua: string;
     trang_thai: string;
 
-    public getName(): string {
+    // Tên đã được xử lý -> chỉ lấy tên thay vì cả họ lẫn tên
+    ten_da_duoc_xu_ly:string = "";
+
+    public getName() {
+        let result = "";
         if (this.ten != null) {
             let array = this.ten.trim().split(" ");
-            return array[array.length - 1];
+            result =  array[array.length - 1];
         }
-        return "";
+        this.ten_da_duoc_xu_ly = result;
     }
 
 }

@@ -5,7 +5,10 @@ export class ObjectDangNhap {
     ten: string;
     lan_cuoi_dang_nhap:number;
 
+    // Nội dung
+    public noi_dung:string= "";
+
     public getNoiDung(){
-        return this.ten+" đang nhập gì đó :v";
+        this.noi_dung =  this.ten+" đang nhập gì đó :v";
     }
 }

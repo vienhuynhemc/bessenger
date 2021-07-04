@@ -7,6 +7,7 @@ import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,13 @@ export class ChatPageChatPageContentService {
   public layThongTinTaiKhoan: Subscription;
   public layTinNhan: Subscription;
   public layNhungOngDangNhap: Subscription;
-  public layLanCuoiOnline:Subscription;
+  public layLanCuoiOnline: Subscription;
 
   constructor
     (
-      private db: AngularFireDatabase
+      private db: AngularFireDatabase,
+       // pipi html
+    public sanitized: DomSanitizer,
     ) {
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
@@ -53,7 +56,7 @@ export class ChatPageChatPageContentService {
       for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
         if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_tai_khoan) {
           hinh = this.object_chat.thanh_vien[i].link_hinh_dai_dien;
-          ten = this.object_chat.thanh_vien[i].getName();
+          ten = this.object_chat.thanh_vien[i].ten_da_duoc_xu_ly;
           break;
         }
       }
@@ -92,6 +95,7 @@ export class ChatPageChatPageContentService {
         if (currentTime - array[count].lan_cuoi_dang_nhap > 2000) {
           array.splice(count, 1);
         } else {
+          array[count].getNoiDung();
           count++;
         }
       }
@@ -140,7 +144,7 @@ export class ChatPageChatPageContentService {
     }, 5000);
   }
 
-  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string,ten:string) {
+  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Tin nhắn
@@ -150,7 +154,7 @@ export class ChatPageChatPageContentService {
         link_file: "",
         loai_tin_nhan: loai,
         ["ma_tai_khoan"]: ma_tai_khoan,
-        ten:ten,
+        ten: ten,
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: tin_nhan,
@@ -158,30 +162,27 @@ export class ChatPageChatPageContentService {
     ).then((ref) => {
       // Lấy all thành viên
       let array: Object[] = [];
-      array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi" });
+      array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi", ten: ten });
       for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
-        array.push({ ma_tai_khoan: this.object_chat.thanh_vien[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua" });
+        array.push({ ma_tai_khoan: this.object_chat.thanh_vien[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua", ten: this.object_chat.thanh_vien[i].ten });
       }
       for (let i = 0; i < array.length; i++) {
         this.db.object("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
           {
             ngay_nhan: array[i]['ngay_nhan'],
             ngay_xem: array[i]['ngay_xem'],
-            xem_chua: array[i]['xem_chua']
+            xem_chua: array[i]['xem_chua'],
+            ten: array[i]['ten'],
           }
         )
       };
     });
   }
-  
-  
+
+
   public getBanBe() {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     return this.db.object("/ban_be/" + ma_tai_khoan).snapshotChanges();
-  }
-
-  public getCreateFriends(): string {
-    return this.object_chat.getCreateFriends(this.ban_bes);
   }
 
   public layBanBe(object: Object) {
@@ -256,12 +257,18 @@ export class ChatPageChatPageContentService {
         if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
           this.object_chat.thanh_vien[i].link_hinh_dai_dien = data_thanh_vien['link_hinh'];
           this.object_chat.thanh_vien[i].ten = data_thanh_vien['ten'];
+          // Có tên rồi thì getName cho chính bản thân nó
+          this.object_chat.thanh_vien[i].getName();
+          // Có tên rồi thì lấy status connect để đổ ra cho đỡ lag
+          this.object_chat.getCreateFriends(this.ban_bes);
         }
       }
     });
+    // Điền thông tin thành viên xong thì get img để đổ ra cho bớt lag
+    this.object_chat.getImgAvatars();
   }
 
-  public dienLanCUoiOnline(object:Object){
+  public dienLanCUoiOnline(object: Object) {
     let count = 0;
     Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
       for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
@@ -281,7 +288,7 @@ export class ChatPageChatPageContentService {
     }
   }
 
-  public getLanCuoiOnline(){
+  public getLanCuoiOnline() {
     return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
   }
 
@@ -291,6 +298,7 @@ export class ChatPageChatPageContentService {
 
   public dienTinNhan(value: object) {
     let tin_nhans: ChatPageTinNhan[] = [];
+    let count = 0;
     if (value != null) {
       Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
         let tin_nhan = new ChatPageTinNhan();
@@ -302,6 +310,7 @@ export class ChatPageChatPageContentService {
         tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
         tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
         tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
+        tin_nhan.ten = data_tin_nhan['ten'];
         let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
         let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
         if (tinhTrangXem != null) {
@@ -311,14 +320,65 @@ export class ChatPageChatPageContentService {
             o.ngay_xem = data['ngay_xem'];
             o.xem_chua = data['xem_chua'];
             o.ngay_nhan = data['ngay_nhan'];
+            o.ten = data['ten'];
+            o.getNoiDung();
             tinh_trang_xems.push(o);
           });
           tin_nhan.tinh_trang_xem = tinh_trang_xems;
+          // Oke h làm một số chuyện trc cho đỡ lag
+          // Nếu là loại thông báo thì get Noi dung thong bao
+          if (tin_nhan.loai_tin_nhan == 'thong_bao') {
+            tin_nhan.getNoiDungThongBao();
+          }
+          // Kiểm tra có phải là bản thân ko
+          tin_nhan.getIsBanThan();
+          // Lấy màu của tin nhắn
+          tin_nhan.getColorTinNhan(this.object_chat.cuoc_tro_truyen.mau);
+          // Lấy thời gian của tin nhắn
+          tin_nhan.getTime();
+          // Lấy tình trạng đã gửi
+          tin_nhan.getIsDaGui();
+          // Lấy tình trạng đã chuyển
+          tin_nhan.getIsDaChuyen();
+          // Lấy tình trạng có người xem
+          tin_nhan.getIsCoNguoiXem();
+          // Lấy tên đã được sử lý
+          tin_nhan.getTen();
+          // Lấy nội dung html
+          tin_nhan.getNoiDungHTMLTinNhan(this.sanitized);
+          // Tính xem nó có border top va bottom ko
+          // Thằng đầu tiên có border top
+          if (count == 0) {
+            tin_nhan.isHaveBorderTop = true;
+          } else {
+            tin_nhan.getIsHaveBorderTop(tin_nhans[count - 1]);
+          }
+          // Kiểm tra borderbottom
+          if (count > 0) {
+            tin_nhans[count - 1].getIsHaveBorderBottom(tin_nhan);
+          }
+          // Tính margin top cho tin nhắn
+          // Thằng đàu tiên luôn margin top 0px
+          if(count == 0){
+            tin_nhan.marginTop = "0px";
+          }else{
+            tin_nhan.getMarginTopTinNhan(tin_nhans[count-1]);
+          }
+          // add      
           tin_nhans.push(tin_nhan);
+
+          // Biến count để xem đang ở vị trí thứ mấy
+          count++;
         }
       });
+      // Thằng cuối cùng sẽ có border bottom
+      tin_nhans[count - 1].isHaveBorderBottom = true;
     }
     this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
+    // Có được list tin nhắn hoàn thiện ta tính số người đã xem được ở từng tin nhắn
+    for(let i =0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length;i++){
+      this.object_chat.cuoc_tro_truyen.tin_nhan[i].getSoNguoiXemDangOViTriTinNhanNay(i,this.object_chat.cuoc_tro_truyen.tin_nhan);
+    }
   }
 
 }
