@@ -136,6 +136,7 @@ export class AddFriendsComponent implements OnInit {
       setTimeout(() => {
         this.friendsPageService.setLoading(true)
       }, 0);
+      let checkScroll = false;
       let listFriendsMe = [];
       if(friends.val() != null) {
         let check = true;
@@ -170,7 +171,7 @@ export class AddFriendsComponent implements OnInit {
                   this.friendsPageService.addList = []
                   account.forEach(a_item => {
                     // nếu id != id người đang đăng nhập và có ký tự nhập vào, không nằm trong danh sách bạn bè, không nằm trong danh sách gửi yêu cầu, không nằm trong danh sách nhận yêu cầu
-                    
+                    // nếu id trùng với id trên url + load lần đầu
                     if(a_item.key != parseIDUser 
                         && a_item.key == this.iDUrl 
                         && !listMeSends.includes(a_item.key)
@@ -192,23 +193,47 @@ export class AddFriendsComponent implements OnInit {
                             accountTemp.checkAddOrUndo = 'them';
                           }
                           this.friendsPageService.addList.push(accountTemp)
-                      } else {
-                        if(this.friendsPageService.saveAddList.length >0) {
-                          this.friendsPageService.saveAddList.forEach(element => {
-                              if(element.id == a_item.key) {
-                                let accountTemp = new AddFriendsInfor();
-                                accountTemp.id = a_item.key;
-                                accountTemp.name = a_item.val().ten;
-                                accountTemp.img = a_item.val().link_hinh;
-                                accountTemp.checkAddOrUndo = 'them';
-                                this.friendsPageService.saveAddList.forEach(element => {
-                                      if(element.id == accountTemp.id)
-                                        accountTemp.checkAddOrUndo = element.checkAddOrUndo;
-                                });
-                                this.friendsPageService.addList.push(accountTemp)
+                         } else {
+                          //  nếu không phải load lần đầu và id không trùng với idurl
+                            if(this.friendsPageService.saveAddList.length >0) {
+                              this.friendsPageService.saveAddList.forEach(element => {
+                                  let accountTemp = new AddFriendsInfor();
+                                  accountTemp.id = a_item.key;
+                                  accountTemp.name = a_item.val().ten;
+                                  accountTemp.img = a_item.val().link_hinh;
+                                  accountTemp.checkAddOrUndo = 'them';
+                                  if(element.id == a_item.key) {
+                                    this.friendsPageService.saveAddList.forEach(element => {
+                                          if(element.id == accountTemp.id)
+                                            accountTemp.checkAddOrUndo = element.checkAddOrUndo;
+                                    });
+                                    this.friendsPageService.addList.push(accountTemp)
+                                  } else if(a_item.key != parseIDUser 
+                                      && !listMeSends.includes(a_item.key)
+                                      && !listMeRequest.includes(a_item.key)
+                                      && !listFriendsMe.includes(a_item.key)
+                                      && a_item.val().ten.toLowerCase().trim().includes(this.friendsPageService.searchVal)
+                                    ) {
+                                      this.friendsPageService.addList.push(accountTemp)
+                                  }
+                              });
+                              // nếu load lần đầu thì thêm người dùng có id trùng id trên url + những người có tên trùng với ô search
+                            } else {
+                              if(this.friendsPageService.searchVal != '') {
+                                if(a_item.key != parseIDUser 
+                                  && a_item.val().ten.toLowerCase().trim().includes(this.friendsPageService.searchVal)
+                                  && !listMeSends.includes(a_item.key)
+                                  && !listMeRequest.includes(a_item.key)
+                                  && !listFriendsMe.includes(a_item.key)) {
+                                    let accountTemp = new AddFriendsInfor();
+                                    accountTemp.id = a_item.key;
+                                    accountTemp.name = a_item.val().ten;
+                                    accountTemp.img = a_item.val().link_hinh;
+                                    accountTemp.checkAddOrUndo = 'them';
+                                    this.friendsPageService.addList.push(accountTemp)
+                                  }
                               }
-                          });
-                        }
+                            }
                       }
                    
                   });
@@ -234,13 +259,17 @@ export class AddFriendsComponent implements OnInit {
                         }
                       })
                   });
+                 
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
+                      // nếu vừa load lại trang mới mà có id thì chuyển id sang profile
+                      if(this.friendsPageService.searchVal == '') {
                       this.contactsService.setAddInforService(
                        this.friendsPageService.addList[0].id,
                         this.friendsPageService.addList[0].checkAddOrUndo
                       );
+                    }
                       check = false
                     } else {
                       
