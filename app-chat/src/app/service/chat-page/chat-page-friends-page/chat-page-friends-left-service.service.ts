@@ -399,7 +399,10 @@ export class ChatPageFriendsLeftServiceService {
             this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
             // khi thông tin thành viên có link hình thì cập nhật lại img avatar ở cuộc trò chuyện để đổ 
             // ra view ko bị lag
+            // img 
             this.allBoxData[i].getImgAvatar();
+            // Tên - tên nhóm - hoặc người nếu là đơn
+            this.allBoxData[i].getName();
             break;
           }
         }

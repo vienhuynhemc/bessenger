@@ -68,6 +68,13 @@ export class MessengerContentComponent implements OnInit {
   public layThanhVien() {
     this.content_service.layThanhVien = this.content_service.getObjectChatThanhVien(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
       this.content_service.dienThanhVien(data.payload.toJSON());
+      // Có thành viên thì bắt đầu điền cho nó lần cuối đăng nhập
+      if(this.content_service.layLanCuoiOnline == null){
+        this.layLanCuoiOnline();
+      }else{
+        this.content_service.layLanCuoiOnline.unsubscribe();
+        this.layLanCuoiOnline();
+      }
       // Lấy thông tin tài khoản của các thành viên
       if (this.content_service.layThongTinTaiKhoan == null) {
         this.layThongTinTaiKhoan();
@@ -75,6 +82,12 @@ export class MessengerContentComponent implements OnInit {
         this.content_service.layThongTinTaiKhoan.unsubscribe();
         this.layThongTinTaiKhoan();
       }
+    })
+  }
+
+  public layLanCuoiOnline(){
+    this.content_service.layLanCuoiOnline = this.content_service.getLanCuoiOnline().subscribe(data=>{
+      this.content_service.dienLanCUoiOnline(data.payload.toJSON());
     })
   }
 

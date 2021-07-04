@@ -54,9 +54,22 @@ export class MessengerHeaderComponent implements OnInit {
     })
   }
 
+  public layLanCuoiDangNha(){
+    this.header_service.layLanCuoiDangNhap = this.header_service.getLanCuoiDangNhap().subscribe(data=>{
+      this.header_service.dienLanCuoiDangNhap(data.payload.toJSON());
+    })
+  }
+
   public layThanhVien() {
     this.header_service.layThanhVien = this.header_service.getObjectChatThanhVien(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
       this.header_service.dienThanhVien(data.payload.toJSON());
+      // Có thành viên rồi thì fill lần cuối đăng nhập cho nó
+      if(this.header_service.layLanCuoiDangNhap == null){
+        this.layLanCuoiDangNha();
+      }else{
+        this.header_service.layLanCuoiDangNhap.unsubscribe();
+        this.layLanCuoiDangNha();
+      }
       // Lấy thông tin tài khoản của các thành viên
       if (this.header_service.layThongTinThanhVien == null) {
         this.layThongTinThanhVien();
