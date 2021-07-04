@@ -1,3 +1,4 @@
+import { LeftScrollService } from './../../../../service/chat-page/chat-page-friends-page/left-scroll.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
@@ -22,7 +23,9 @@ export class FriendsListComponent implements OnInit {
       public chat_page_friends_service: ChatPageFriendsServiceService,
       private main_page_process_service: ChatPageProcessServiceService,
       public chat_page_friend_left_service: ChatPageFriendsLeftServiceService,
-      public chat_page_create_ground: ChatPageCreateGroupService
+      public chat_page_create_ground: ChatPageCreateGroupService,
+      // Scroll ban đầu
+      public left_scroll:LeftScrollService,
     ) { }
 
 
@@ -52,6 +55,9 @@ export class FriendsListComponent implements OnInit {
     if (this.chat_page_friend_left_service.allBoxData == null) {
       this.getDataLeft();
     }
+    // Đăng ký resize để nó tự động scroll xuống thằng đang chọn ngay lúc ban đầu
+    // Đừng lo khi nào giao diện thay đổi mới chạy hàm của thằng này
+    this.left_scroll.register(document.getElementById("danh-sach-box-chat"))
   }
 
   // GET data online
@@ -153,8 +159,6 @@ export class FriendsListComponent implements OnInit {
         });
       }
       this.chat_page_friend_left_service.allCuocTroTruyen = allCuocTroTruyen;
-      // Vì làm lại nên có di chuyển lại
-      this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri = null;
       // Có được danh sách các cuộc trò truyện
       // Ta hãy fill tên và ngày tạo cho các nhóm có loai là nhóm
       if (this.chat_page_friend_left_service.layAllCuocTroChuyenNhom == null) {
@@ -208,7 +212,6 @@ export class FriendsListComponent implements OnInit {
         this.chat_page_friend_left_service.layLanCuoiDangNhap.unsubscribe();
         this.getLanCuoiDangNhapDataLeft();
       }
-      this.chat_page_friend_left_service.updateSelected();
       // Oke h hết tin nhắn của từng cuộc nói chuyện ra
       if (this.chat_page_friend_left_service.layAllChiTietCuocTroChuyen == null) {
         this.getAllChiTietCuocTroChuyenLeft();
@@ -223,6 +226,8 @@ export class FriendsListComponent implements OnInit {
       this.chat_page_friend_left_service.dienAllTinNhan(data.payload.toJSON());
       // sort lại theo ngày gửi của tin nhắn cuối cùng
       this.chat_page_friend_left_service.sort();
+      // sort xong thì update select
+      this.chat_page_friend_left_service.updateSelected();
       // seen
       if (this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen != 'danh-sach') {
         if (this.chat_page_friend_left_service.checkUrl(this.chat_page_friend_left_service.now_ma_cuoc_tro_chuyen)) {
@@ -249,11 +254,6 @@ export class FriendsListComponent implements OnInit {
         Object.entries(object).forEach(([key, value]) => {
           this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
         });
-      }
-      // di chuyển dúng vị trí
-      if (this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri == null ||
-        this.chat_page_friend_left_service.is_di_chuyen_dung_vi_tri < 2) {
-        this.chat_page_friend_left_service.updateScrollFirst();
       }
       setTimeout(() => {
         this.main_page_process_service.setLoading(false);

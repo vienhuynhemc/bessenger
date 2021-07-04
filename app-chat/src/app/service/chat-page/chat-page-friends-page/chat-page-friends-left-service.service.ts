@@ -1,3 +1,4 @@
+import { LeftScrollService } from './left-scroll.service';
 import { Subscription } from 'rxjs';
 import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
@@ -16,7 +17,6 @@ export class ChatPageFriendsLeftServiceService {
 
   // ma_cuoc_tro_chuyen hien hien tai
   public now_ma_cuoc_tro_chuyen: string;
-  public is_di_chuyen_dung_vi_tri: number;
 
   // Danh sách all cuộc trò truyện
   public allCuocTroTruyen: ChatPageCuocTroChuyen[];
@@ -32,9 +32,14 @@ export class ChatPageFriendsLeftServiceService {
   public layThongTinThanhVien: Subscription;
   public layLanCuoiDangNhap: Subscription;
 
+  // index
+  public indexNotSearch:number = -1;
+
   constructor(
     private db: AngularFireDatabase,
-    private main_page_process_service: ChatPageProcessServiceService
+    private main_page_process_service: ChatPageProcessServiceService,
+    // scroll
+    private left_srcoll_service:LeftScrollService
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
@@ -196,57 +201,37 @@ export class ChatPageFriendsLeftServiceService {
     return index;
   }
 
-  public getIndexSelecedNotSearch(): number {
-    let index = -1;
-    if (this.allBoxData != null) {
-      for (let i = 0; i < this.allBoxData.length; i++) {
-        if (this.allBoxData[i].box_chat_dang_duoc_chon) {
-          return i;
-        }
-      }
-    }
-    return index;
-  }
-
   public updateSelected() {
     // Select
+    let isOke = false;
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == this.now_ma_cuoc_tro_chuyen) {
         this.allBoxData[i].box_chat_dang_duoc_chon = true;
+        // Cập nhật index not search
+        this.indexNotSearch = i;
+        isOke =true;
       } else {
         this.allBoxData[i].box_chat_dang_duoc_chon = false;
       }
     }
+    if(!isOke){
+      this.indexNotSearch = -1;
+    }
+    // update to left srcoll
+    this.left_srcoll_service.indexNotSearch = this.indexNotSearch;
     this.updateScroll();
   }
 
   public updateScroll() {
     let danh_sach_ban_ben_duoi = document.getElementById("danh_sach_ban_be_ben_duoi");
     if (danh_sach_ban_ben_duoi != null) {
-      let i = this.getIndexSelecedNotSearch();
-      if (i != -1) {
-        if (i < 3) {
+      if (this.indexNotSearch != -1) {
+        if (this.indexNotSearch < 3) {
           danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
+          danh_sach_ban_ben_duoi.scrollTo({ top: (this.indexNotSearch - 2) * 76, behavior: "smooth" });
         }
       }
-    }
-  }
-
-  public updateScrollFirst() {
-    let danh_sach_ban_ben_duoi = document.getElementById("danh_sach_ban_be_ben_duoi");
-    if (danh_sach_ban_ben_duoi != null) {
-      let i = this.getIndexSeleced();
-      if (i < 3) {
-        danh_sach_ban_ben_duoi.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        danh_sach_ban_ben_duoi.scrollTo({ top: (i - 2) * 76, behavior: "smooth" });
-      }
-      if (this.is_di_chuyen_dung_vi_tri == null) {
-        this.is_di_chuyen_dung_vi_tri = 0;
-      }
-      this.is_di_chuyen_dung_vi_tri++;
     }
   }
 
