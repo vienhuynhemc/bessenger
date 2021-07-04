@@ -60,16 +60,16 @@
                         <div class="right">
                             <div class="name" *ngIf="item.noiDungCuoiCung.noi_dung.length != 0"
                                 [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
-                                [matTooltip]="item.getName().noi_dung_goc" matTooltipClass="tooltip"
-                                [matTooltipDisabled]="!item.getName().is_cut">
-                                {{item.getName().noi_dung}}
+                                [matTooltip]="item.name.noi_dung_goc" matTooltipClass="tooltip"
+                                [matTooltipDisabled]="!item.name.is_cut">
+                                {{item.name.noi_dung}}
                             </div>
                             <div class="name2" *ngIf="item.noiDungCuoiCung.noi_dung.length == 0"
                                 [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
                                 [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
-                                [matTooltip]="item.getName().noi_dung_goc" matTooltipClass="tooltip"
-                                [matTooltipDisabled]="!item.getName().is_cut">
-                                {{item.getName().noi_dung}}
+                                [matTooltip]="item.name.noi_dung_goc" matTooltipClass="tooltip"
+                                [matTooltipDisabled]="!item.name.is_cut">
+                                {{item.name.noi_dung}}
                             </div>
                             <div class="message" [ngStyle]="!item.isReaded? getStyleMessageReadMessage() : null"
                                 [matTooltip]="item.noiDungCuoiCung.noi_dung_goc" matTooltipClass="tooltip"

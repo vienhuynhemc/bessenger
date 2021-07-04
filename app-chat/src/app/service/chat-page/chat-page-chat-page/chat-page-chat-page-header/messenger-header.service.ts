@@ -17,6 +17,7 @@ export class MessengerHeaderService {
   public layThongTinNhom: Subscription;
   public layThanhVien: Subscription;
   public layThongTinThanhVien: Subscription;
+  public layLanCuoiDangNhap: Subscription;
 
   constructor(
     private db: AngularFireDatabase
@@ -24,6 +25,10 @@ export class MessengerHeaderService {
     this.object_chat = new ObjectChat();
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
+  }
+
+  public getLanCuoiDangNhap() {
+    return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
   }
 
   public update(): void {
@@ -100,11 +105,30 @@ export class MessengerHeaderService {
     return this.db.object("/tai_khoan").snapshotChanges();
   }
 
-  public dienThongTinThanhVien(object: Object) {
+  public dienLanCuoiDangNhap(object: Object) {
+    let count = 0;
     Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
       for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
         if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
           this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap = data_thanh_vien['lan_cuoi_dang_nhap'];
+          count++;
+          break;
+        }
+      }
+    });
+    if (count != this.object_chat.thanh_vien.length) {
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        if (this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap == null) {
+          this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap = 0;
+        }
+      }
+    }
+  }
+
+  public dienThongTinThanhVien(object: Object) {
+    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
           this.object_chat.thanh_vien[i].hinh = data_thanh_vien['link_hinh'];
           this.object_chat.thanh_vien[i].ten = data_thanh_vien['ten'];
         }

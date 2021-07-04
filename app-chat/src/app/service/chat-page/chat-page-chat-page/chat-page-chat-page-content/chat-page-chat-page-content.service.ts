@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
@@ -30,6 +30,7 @@ export class ChatPageChatPageContentService {
   public layThongTinTaiKhoan: Subscription;
   public layTinNhan: Subscription;
   public layNhungOngDangNhap: Subscription;
+  public layLanCuoiOnline:Subscription;
 
   constructor
     (
@@ -253,12 +254,35 @@ export class ChatPageChatPageContentService {
     Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
       for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
         if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
-          this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap = data_thanh_vien['lan_cuoi_dang_nhap'];
           this.object_chat.thanh_vien[i].link_hinh_dai_dien = data_thanh_vien['link_hinh'];
           this.object_chat.thanh_vien[i].ten = data_thanh_vien['ten'];
         }
       }
     });
+  }
+
+  public dienLanCUoiOnline(object:Object){
+    let count = 0;
+    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
+          this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap = data_thanh_vien['lan_cuoi_dang_nhap'];
+          count++;
+          break;
+        }
+      }
+    });
+    if (count != this.object_chat.thanh_vien.length) {
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        if (this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap == null) {
+          this.object_chat.thanh_vien[i].lan_cuoi_dang_nhap = 0;
+        }
+      }
+    }
+  }
+
+  public getLanCuoiOnline(){
+    return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
   }
 
   public getTinNhan(id: string) {

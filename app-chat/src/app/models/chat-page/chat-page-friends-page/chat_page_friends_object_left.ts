@@ -21,6 +21,8 @@ export class ChatPageFriendsObjectLeft {
     public timeLastMessenger: string;
     // Tin nhắn cuối cùng của cuộc trò chuyện này được đọc chưa
     public isReaded: boolean;
+    // Tên của box Tên người nếu đơn và tên nhóm nếu là nhóm
+    public name: ChatPageObjectTen = new ChatPageObjectTen();
 
     // 2 tham số quan trọng là vị trí bản thân và vị trí cuối cùng
     public viTriBanThan: number;
@@ -88,7 +90,7 @@ export class ChatPageFriendsObjectLeft {
         this.imgsAvatar = result;
     }
 
-    public getName(): ChatPageObjectTen {
+    public getName() {
         let result: ChatPageObjectTen = new ChatPageObjectTen();
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
@@ -109,7 +111,7 @@ export class ChatPageFriendsObjectLeft {
         } else {
             result.is_cut = false;
         }
-        return result;
+        this.name = result;
     }
 
     public getIsReaded() {
