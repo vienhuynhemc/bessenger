@@ -30,6 +30,7 @@ export class ChatPageFriendsLeftServiceService {
   public layThanhVienCuocTroChuyenLeft: Subscription;
   public layAllChiTietCuocTroChuyen: Subscription;
   public layThongTinThanhVien: Subscription;
+  public layLanCuoiDangNhap: Subscription;
 
   constructor(
     private db: AngularFireDatabase,
@@ -38,6 +39,29 @@ export class ChatPageFriendsLeftServiceService {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
+  }
+
+  public getLanCuoiDangNhap() {
+    return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
+  }
+
+  public dienLanCuoiDangNhap(object: Object) {
+    Object.entries(object).forEach(([key2, value2]) => {
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key2) {
+            this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value2['lan_cuoi_dang_nhap'];
+          }
+        }
+      }
+    });
+    for (let i = 0; i < this.allBoxData.length; i++) {
+      for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+        if (this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap == null) {
+          this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = 0;
+        }
+      }
+    }
   }
 
   public compareSearch(i: number): boolean {
@@ -303,8 +327,8 @@ export class ChatPageFriendsLeftServiceService {
       });
       // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
       // Ta sẽ getIsReaded
-      for(let i = 0; i < this.allBoxData.length;i++){
-        if(this.allBoxData[i].cuoc_tro_truyen.tin_nhan == null){
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan == null) {
           this.allBoxData[i].getIsReaded();
         }
       }
@@ -373,7 +397,6 @@ export class ChatPageFriendsLeftServiceService {
           if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key) {
             this.allBoxData[i].thong_tin_thanh_vien[j].ten = value['ten'];
             this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
-            this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
             // khi thông tin thành viên có link hình thì cập nhật lại img avatar ở cuộc trò chuyện để đổ 
             // ra view ko bị lag
             this.allBoxData[i].getImgAvatar();

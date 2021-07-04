@@ -1,13 +1,11 @@
-import { MyNameService } from './../../../../service/my-name/my-name.service';
-import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
-import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
-import { ChatPageBanBe } from './../../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
-import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
+import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
+import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
+import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
+import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
 
 @Component({
   selector: 'app-friends-list',
@@ -24,7 +22,7 @@ export class FriendsListComponent implements OnInit {
       public chat_page_friends_service: ChatPageFriendsServiceService,
       private main_page_process_service: ChatPageProcessServiceService,
       public chat_page_friend_left_service: ChatPageFriendsLeftServiceService,
-      public chat_page_create_ground: ChatPageCreateGroupService,
+      public chat_page_create_ground: ChatPageCreateGroupService
     ) { }
 
 
@@ -66,9 +64,23 @@ export class FriendsListComponent implements OnInit {
       this.getListFriendDataOnline();
     }
   }
+
+  public getLanCuoiDangNhap() {
+    this.chat_page_friends_service.layLanCuoiDangNhap = this.chat_page_friends_service.getLanCuoiDangNhap().subscribe(data => {
+      this.chat_page_friends_service.dienLanCuoiDangNhap(data.payload.toJSON());
+    })
+  }
+
   public getListFriendDataOnline() {
     this.chat_page_friends_service.layListBanbe = this.chat_page_friends_service.getListFriend().subscribe(data => {
       this.chat_page_friends_service.dienBanBeOnline(data.payload.toJSON());
+      // Một khi điền bạn bè thì sẽ có list bạn bè mới , ta cập nhật lại list online dựa trên list bạn bè mới này
+      if (this.chat_page_friends_service.layLanCuoiDangNhap == null) {
+        this.getLanCuoiDangNhap();
+      } else {
+        this.chat_page_friends_service.layLanCuoiDangNhap.unsubscribe();
+        this.getLanCuoiDangNhap();
+      }
       // 2. đã có list ma_tai_khoan bạn bè, h sẽ lấy mã các cuộc trò chuyện mà là cuộc trò chuyện đơn ra
       if (this.chat_page_friends_service.layTroChuyenDon == null) {
         this.getTroChuyenDonDataOnline();
@@ -171,6 +183,11 @@ export class FriendsListComponent implements OnInit {
       }
     });
   }
+  public getLanCuoiDangNhapDataLeft(){
+    this.chat_page_friend_left_service.layLanCuoiDangNhap = this.chat_page_friend_left_service.getLanCuoiDangNhap().subscribe(data=>{
+      this.chat_page_friend_left_service.dienLanCuoiDangNhap(data.payload.toJSON());
+    })
+  }
   public getThanhVienCuocTroChuyenLeft() {
     this.chat_page_friend_left_service.layThanhVienCuocTroChuyenLeft = this.chat_page_friend_left_service.getThanhVienCuocTroTruyen().subscribe(data => {
       let object = data.payload.toJSON();
@@ -184,6 +201,13 @@ export class FriendsListComponent implements OnInit {
         });
       }
       this.chat_page_friend_left_service.allBoxData = allBoxData;
+      // sau khi có hết thành viên cuộc trò chuyện thì ta lấy lần cuối đăng nhập của nó ra
+      if(this.chat_page_friend_left_service.layLanCuoiDangNhap == null){
+        this.getLanCuoiDangNhapDataLeft();
+      }else{
+        this.chat_page_friend_left_service.layLanCuoiDangNhap.unsubscribe();
+        this.getLanCuoiDangNhapDataLeft();
+      }
       this.chat_page_friend_left_service.updateSelected();
       // Oke h hết tin nhắn của từng cuộc nói chuyện ra
       if (this.chat_page_friend_left_service.layAllChiTietCuocTroChuyen == null) {
