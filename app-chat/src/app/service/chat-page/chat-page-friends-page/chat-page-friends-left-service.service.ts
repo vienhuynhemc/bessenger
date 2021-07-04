@@ -35,6 +35,15 @@ export class ChatPageFriendsLeftServiceService {
   // index
   public indexNotSearch: number = -1;
 
+  // Length hiện đang được đổ ra
+  public nowLengthShow: number;
+
+  // Bộ 3 index next pre select
+  public indexNext: number;
+  public indexPre: number;
+  public indexSelect: number;
+  public isLoadFirst:boolean;
+
   constructor(
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceService,
@@ -48,6 +57,27 @@ export class ChatPageFriendsLeftServiceService {
 
   public getLanCuoiDangNhap() {
     return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
+  }
+
+  public changeSearch(event) {
+    // Cập nhật lại length hiện đang được show ra
+    let count = 0;
+    if (this.allBoxData != null) {
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        if (this.compareSearch(i)) {
+          count++;
+        }
+      }
+    }
+    this.nowLengthShow = count;
+    // Cập nhật lại bộ 3 kia
+    this.updateBo3Index();
+  }
+
+  public updateBo3Index() {
+    this.getIndexSeleced();
+    this.getIndexPre();
+    this.getIndexNext();
   }
 
   public dienLanCuoiDangNhap(object: Object) {
@@ -73,39 +103,15 @@ export class ChatPageFriendsLeftServiceService {
 
   public compareSearch(i: number): boolean {
     if (this.allBoxData[i] != null) {
-      if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-        if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom != null) {
-          if (this.allBoxData[i].cuoc_tro_truyen.ten_nhom.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+      if (this.allBoxData[i].name != null) {
+        if (this.allBoxData[i].name.noi_dung_goc != null) {
+          if (this.allBoxData[i].name.noi_dung_goc.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
             return true;
-          }
-        }
-      } else if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
-        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-          if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-            if (this.allBoxData[i].thong_tin_thanh_vien[j].ten != null) {
-              if (this.allBoxData[i].thong_tin_thanh_vien[j].ten.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-                return true;
-              }
-            }
           }
         }
       }
     }
     return false;
-  }
-
-  public getLength(): number {
-    if (this.allBoxData != null) {
-      let count = 0;
-      for (let i = 0; i < this.allBoxData.length; i++) {
-        if (this.compareSearch(i)) {
-          count++;
-        }
-      }
-      return count;
-    }
-    return 0;
   }
 
   public update(): void {
@@ -134,7 +140,7 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   // Get index đang được chọn
-  public getIndexSeleced(): number {
+  public getIndexSeleced() {
     let index = -1;
     if (this.allBoxData != null) {
       let select = -1;
@@ -145,20 +151,21 @@ export class ChatPageFriendsLeftServiceService {
         }
       }
       if (!this.compareSearch(select)) {
-        return -1;
-      }
-      let count = 0;
-      for (let i = 0; i <= select; i++) {
-        if (!this.compareSearch(i)) {
-          count++;
+        index = -1;
+      } else {
+        let count = 0;
+        for (let i = 0; i <= select; i++) {
+          if (!this.compareSearch(i)) {
+            count++;
+          }
         }
+        index = select - count;
       }
-      return select - count;
     }
-    return index;
+    this.indexSelect = index;
   }
 
-  public getIndexPre(): number {
+  public getIndexPre() {
     let index = -1;
     if (this.allBoxData != null) {
       let select = -1;
@@ -177,11 +184,11 @@ export class ChatPageFriendsLeftServiceService {
       }
       index = count;
     }
-    return index;
+    this.indexPre = index;
   }
 
 
-  public getIndexNext(): number {
+  public getIndexNext() {
     let index = -1;
     if (this.allBoxData != null) {
       let select = -1;
@@ -200,7 +207,7 @@ export class ChatPageFriendsLeftServiceService {
       }
       index = count;
     }
-    return index;
+    this.indexNext = index;
   }
 
   public updateSelected() {
@@ -222,6 +229,8 @@ export class ChatPageFriendsLeftServiceService {
     // update to left srcoll
     this.left_srcoll_service.indexNotSearch = this.indexNotSearch;
     this.updateScroll();
+    // update bộ 3 index
+    this.updateBo3Index();
   }
 
   public updateScroll() {
@@ -312,8 +321,8 @@ export class ChatPageFriendsLeftServiceService {
       Object.entries(object).forEach(([key, value]) => {
         this.dienTinNhan(key, value);
       });
-      // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
     }
+    // ông nào ko có tin nhắn -> những cuộc trò chuyện đơn
     // Ta sẽ getIsReaded
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.tin_nhan == null) {
@@ -362,7 +371,10 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].getNoiDungCuoiCung();
         // Tin nhắn cuối cùng được đọc chưa
         this.allBoxData[i].getIsReaded();
-        // Lấy thời gian cuối 
+        // Kiểm tra thử vị trí cuối cùng có phải là của bản thân hay không
+        this.allBoxData[i].isMe();
+        // Kiểm tra xem ông nào nhậ nchuwa
+        this.allBoxData[i].getIsDaNhan();
         return;
       }
     }
@@ -413,6 +425,8 @@ export class ChatPageFriendsLeftServiceService {
               this.allBoxData[i].cuoc_tro_truyen.tin_nhan[j].ten = value['ten'];
             }
           }
+          // Điền hết tình trạgn xem của tin nhắn thì get imgseened
+          this.allBoxData[i].getImgUserSeened();
         }
       }
     }

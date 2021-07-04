@@ -25,8 +25,8 @@ export class FriendsListComponent implements OnInit {
       public chat_page_friend_left_service: ChatPageFriendsLeftServiceService,
       public chat_page_create_ground: ChatPageCreateGroupService,
       // Scroll ban đầu
-      public left_scroll:LeftScrollService,
-    ) { }
+      public left_scroll: LeftScrollService,
+  ) { }
 
 
   ngOnInit(): void {
@@ -147,6 +147,8 @@ export class FriendsListComponent implements OnInit {
     }
   }
   public getAllCuocTroChuyenLeft() {
+    // first
+    this.chat_page_friend_left_service.isLoadFirst = false;
     this.chat_page_friend_left_service.layAllCuocTroChuyen = this.chat_page_friend_left_service.getAllCuocTroChuyen().subscribe(data => {
       let object = data.payload.toJSON();
       let allCuocTroTruyen: ChatPageCuocTroChuyen[] = [];
@@ -187,8 +189,8 @@ export class FriendsListComponent implements OnInit {
       }
     });
   }
-  public getLanCuoiDangNhapDataLeft(){
-    this.chat_page_friend_left_service.layLanCuoiDangNhap = this.chat_page_friend_left_service.getLanCuoiDangNhap().subscribe(data=>{
+  public getLanCuoiDangNhapDataLeft() {
+    this.chat_page_friend_left_service.layLanCuoiDangNhap = this.chat_page_friend_left_service.getLanCuoiDangNhap().subscribe(data => {
       this.chat_page_friend_left_service.dienLanCuoiDangNhap(data.payload.toJSON());
     })
   }
@@ -205,10 +207,12 @@ export class FriendsListComponent implements OnInit {
         });
       }
       this.chat_page_friend_left_service.allBoxData = allBoxData;
+      // Cậpt nhật now length show là = length của cái này luôn
+      this.chat_page_friend_left_service.nowLengthShow = this.chat_page_friend_left_service.allBoxData.length;
       // sau khi có hết thành viên cuộc trò chuyện thì ta lấy lần cuối đăng nhập của nó ra
-      if(this.chat_page_friend_left_service.layLanCuoiDangNhap == null){
+      if (this.chat_page_friend_left_service.layLanCuoiDangNhap == null) {
         this.getLanCuoiDangNhapDataLeft();
-      }else{
+      } else {
         this.chat_page_friend_left_service.layLanCuoiDangNhap.unsubscribe();
         this.getLanCuoiDangNhapDataLeft();
       }
@@ -255,6 +259,11 @@ export class FriendsListComponent implements OnInit {
           this.chat_page_friend_left_service.dienTenVaHinhChoTaiKhoanTrongBoxData(key, value);
         });
       }
+      // Tải lần đầu
+      if (!this.chat_page_friend_left_service.isLoadFirst) {
+        this.chat_page_friend_left_service.updateBo3Index();
+        this.chat_page_friend_left_service.isLoadFirst = true;
+      }
       setTimeout(() => {
         this.main_page_process_service.setLoading(false);
       }, 0);
@@ -284,7 +293,7 @@ export class FriendsListComponent implements OnInit {
   //  Shadow top
   getStyleShadowTop(): any {
     return {
-      'height': this.chat_page_friend_left_service.getIndexSeleced() * 76 + 'px',
+      'height': this.chat_page_friend_left_service.indexSelect * 76 + 'px',
       'position': 'absolute',
       'width': '281px',
       'top': '0px',
@@ -297,14 +306,14 @@ export class FriendsListComponent implements OnInit {
   //  Shadow bottom
   getStyleShadowBottom(): any {
     let pounds = 0;
-    if (this.chat_page_friend_left_service.getLength() < 7) {
-      pounds = ((7 - this.chat_page_friend_left_service.getLength()) * 75 - (2 + this.chat_page_friend_left_service.getLength()));
+    if (this.chat_page_friend_left_service.nowLengthShow < 7) {
+      pounds = ((7 - this.chat_page_friend_left_service.nowLengthShow) * 75 - (2 + this.chat_page_friend_left_service.nowLengthShow));
     }
     return {
-      'height': ((this.chat_page_friend_left_service.getLength() - this.chat_page_friend_left_service.getIndexSeleced() - 1) * 76) + pounds + 'px',
+      'height': ((this.chat_page_friend_left_service.nowLengthShow - this.chat_page_friend_left_service.indexSelect - 1) * 76) + pounds + 'px',
       'position': 'absolute',
       'width': '281px',
-      'top': (this.chat_page_friend_left_service.getIndexSeleced() + 1) * 76 + 'px',
+      'top': (this.chat_page_friend_left_service.indexSelect + 1) * 76 + 'px',
       'left': '0px',
       'border-top-right-radius': '27px',
       'box-shadow': '4px 8px 28px 0px #d3dceb'
@@ -344,7 +353,7 @@ export class FriendsListComponent implements OnInit {
       'z-index': '10',
       'position': 'relative',
       'border-bottom': '#e5f1fc solid 0.1px',
-      'height': ((7 - this.chat_page_friend_left_service.getLength()) * 75 - (2 + this.chat_page_friend_left_service.getLength())) + 'px',
+      'height': ((7 - this.chat_page_friend_left_service.nowLengthShow) * 75 - (2 + this.chat_page_friend_left_service.nowLengthShow)) + 'px',
     }
   }
 }
