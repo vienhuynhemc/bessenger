@@ -33,6 +33,12 @@ export class OfferFriendsComponent implements OnInit {
   ngOnInit(): void {
     this.friendsPageService.selectedOffersFriendsService();
     this.getIDURLFriendsList();
+    // nếu k có id thì reset lại tất cả
+    if(this.iDUrl == null) {
+      this.friendsPageService.saveOfferList = []
+      this.friendsPageService.offerList = []
+      this.friendsPageService.setSizeOffer(0)
+    }
     this.getDataOfferFriends(this.sizeGetData);
   }
 
@@ -408,7 +414,6 @@ export class OfferFriendsComponent implements OnInit {
                               ]);
                               this.sendFriendToProfile(null, null);
                               this.friendsPageService.saveOfferList = [];
-                              this.friendsPageService.setSizeOffer(0);
                             }
                             check = true;
                           }
