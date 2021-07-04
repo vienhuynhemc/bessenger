@@ -135,7 +135,7 @@ export class StickerComponent implements OnInit, OnDestroy {
 
   // gui sticker
   sendSticker(item: StickerDetail) {
-    this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan" );
-    this.stickersService.isShowBoxSticker = false;
+    // this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan" );
+    // this.stickersService.isShowBoxSticker = false;
   }
 }

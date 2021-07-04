@@ -65,8 +65,12 @@ export class ContactsService {
       friendInfor.name = data.val().ten;
       friendInfor.sex = data.val().gioi_tinh;
       friendInfor.date = data.val().ngay_tao;
-      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
-      
+      this.db.database.ref('lan_cuoi_dang_nhap').child(idUser).on('value', (last)=> {
+        if(last.val() != null)
+          friendInfor.lastOnline = last.val().lan_cuoi_dang_nhap
+        else
+          friendInfor.lastOnline = 0;
+      })
     });
   
     return friendInfor;
@@ -81,8 +85,12 @@ export class ContactsService {
       friendInfor.name = data.val().ten;
       friendInfor.sex = data.val().gioi_tinh;
       friendInfor.date = data.val().ngay_tao;
-      friendInfor.lastOnline = data.val().lan_cuoi_dang_nhap;
-      
+      this.db.database.ref('lan_cuoi_dang_nhap').child(idUser).on('value', (last)=> {
+        if(last.val() != null)
+          friendInfor.lastOnline = last.val().lan_cuoi_dang_nhap
+        else
+          friendInfor.lastOnline = 0;
+      })
     });
   
     return friendInfor;

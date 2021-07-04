@@ -71,7 +71,6 @@ export class RequestAddFriendsComponent implements OnInit {
               // kiểm tra có là bạn chung hay không
                 if(friend_i.val().ton_tai == 0 && friend_i.key == lfriends) {
                     this.requestListService.getInforRequest(friend_i.key).on('value', (result) => {
-                      
                       req = new RequestInfor()
                       let checkAdd = true;
                       req.id = result.key
@@ -79,7 +78,6 @@ export class RequestAddFriendsComponent implements OnInit {
                       req.name = result.val().ten
                       req.sex = result.val().gioi_tinh
                       req.date = friend_i.val().ngay_tao
-                      req.lastOnline = result.val().lan_cuoi_dang_nhap 
                       // kiểm tra có nên thêm vào dnah sách hay không
                       this.mutualRequestList.forEach(element => {
                           if(element.id == req.id)

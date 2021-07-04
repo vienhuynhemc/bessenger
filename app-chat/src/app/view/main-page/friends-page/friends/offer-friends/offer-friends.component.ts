@@ -102,7 +102,6 @@ export class OfferFriendsComponent implements OnInit {
                       req.name = result.val().ten;
                       req.sex = result.val().gioi_tinh;
                       req.date = friend_i.val().ngay_tao;
-                      req.lastOnline = result.val().lan_cuoi_dang_nhap;
                       // kiểm tra có nên thêm vào dnah sách hay không
                       this.mutualOfferList.forEach((element) => {
                         if (element.id == req.id) checkAdd = false;

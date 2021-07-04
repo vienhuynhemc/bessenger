@@ -93,7 +93,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       temp.img = result.val().link_hinh;
                       temp.sex = result.val().gioi_tinh;
                       temp.date = friend_i.val().ngay_tao;
-                      temp.lastOnline = friend_i.val().lan_cuoi_dang_nhap;
                       this.mutualFriendsList.forEach(element => {
                         if(element.id == temp.id)
                             checkAdd = false;
@@ -163,7 +162,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
                       temp.name = result.val().ten;
                       temp.sex = result.val().gioi_tinh;
                       temp.date = result.val().ngay_tao;
-                      temp.lastOnline = result.val().lan_cuoi_dang_nhap;
                       if (temp != null) {
                         this.friendsPageService.friendFirstList.push(temp);
                         // sắp xếp

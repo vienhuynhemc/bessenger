@@ -74,7 +74,6 @@ export class AddFriendsComponent implements OnInit {
                       req.name = result.val().ten
                       req.sex = result.val().gioi_tinh
                       req.date = friend_i.val().ngay_tao
-                      req.lastOnline = result.val().lan_cuoi_dang_nhap 
                       // kiểm tra có nên thêm vào dnah sách hay không
                       this.mutualAddList.forEach(element => {
                           if(element.id == req.id)
@@ -137,7 +136,6 @@ export class AddFriendsComponent implements OnInit {
       setTimeout(() => {
         this.friendsPageService.setLoading(true)
       }, 0);
-      let checkScroll = false;
       let listFriendsMe = [];
       if(friends.val() != null) {
         let check = true;
@@ -236,7 +234,6 @@ export class AddFriendsComponent implements OnInit {
                         }
                       })
                   });
-                 
                   if(check) {
                     if(this.friendsPageService.addList.length > 0) {
                       this.friendsPageService.setSizeAdd(this.friendsPageService.addList.length);
