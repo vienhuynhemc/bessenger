@@ -14,11 +14,15 @@ export class ChatPageFriendsServiceService {
   // Danh sách các mã cuộc trò chuyện đơn
   public maCuocTroChuyenDons: string[];
 
+  // Trạng thái online
+  public isOnline;
+
   // service
   public layListBanbe: Subscription;
-  public layTroChuyenDon:Subscription;
-  public layThanhVienCuocTroChuyen:Subscription;
-  public layThongTinThanhVien:Subscription;
+  public layTroChuyenDon: Subscription;
+  public layThanhVienCuocTroChuyen: Subscription;
+  public layThongTinThanhVien: Subscription;
+  public layLanCuoiDangNhap: Subscription;
 
   constructor(
     private db: AngularFireDatabase,
@@ -45,7 +49,7 @@ export class ChatPageFriendsServiceService {
     }, 0);
   }
 
-  public dienTroChuyenDonOnline(object:Object){
+  public dienTroChuyenDonOnline(object: Object) {
     let cuocTroChuyenDons: string[] = [];
     if (object != null) {
       Object.entries(object).forEach(([key, value]) => {
@@ -60,48 +64,64 @@ export class ChatPageFriendsServiceService {
     }, 0);
   }
 
-  public dienThanhVienCuocTroChuyenOnline(object:Object){
-      if (object != null) {
-        Object.entries(object).forEach(([key, value]) => {
-          // Duyện đúng mã trò truyện đơn thì check thử nó có chứa 2 tài khoản không
-          if (this.checkContain(key)) {
-            this.handleThanhVienCuocTroChuyenDon(value, key);
-          }
-        });
+  public dienThanhVienCuocTroChuyenOnline(object: Object) {
+    if (object != null) {
+      Object.entries(object).forEach(([key, value]) => {
+        // Duyện đúng mã trò truyện đơn thì check thử nó có chứa 2 tài khoản không
+        if (this.checkContain(key)) {
+          this.handleThanhVienCuocTroChuyenDon(value, key);
+        }
+      });
+    }
+  }
+
+  public getLanCuoiDangNhap() {
+    return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
+  }
+
+  public dienLanCuoiDangNhap(object: Object) {
+    let count = 0;
+    Object.entries(object).forEach(([key, value]) => {
+      for (let i = 0; i < this.ban_bes.length; i++) {
+        if (this.ban_bes[i].ma_tai_khoan == key) {
+          this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
+          count++;
+          break;
+        }
       }
+    });
+    // Thằng nào chưa có thì cho nó là 0
+    if (count != this.ban_bes.length) {
+      for (let i = 0; i < this.ban_bes.length; i++) {
+        if (this.ban_bes[i].lan_cuoi_dang_nhap == null) {
+          this.ban_bes[i].lan_cuoi_dang_nhap = 0;
+        }
+      }
+    }
   }
 
   public update(): void {
     setTimeout(() => {
       let currentTime = Number(new Date());
       if (this.ban_bes != null) {
+        let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
           let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
           let overTime = currentTime - lan_cuoi_dang_nhap;
           if (overTime > 10000) {
             this.ban_bes[i].trang_thai_online = false;
+            count++;
           } else {
             this.ban_bes[i].trang_thai_online = true;
+            this.isOnline = true;
           }
+        }
+        if (count == this.ban_bes.length) {
+          this.isOnline = false;
         }
       }
       this.update();
     }, 5000);
-  }
-
-  public checkIsOfflineAll(): boolean {
-    if (this.ban_bes != null) {
-      let count = 0;
-      for (let i = 0; i < this.ban_bes.length; i++) {
-        if (this.ban_bes[i].trang_thai_online == false) {
-          count++;
-        }
-      }
-      if (count == this.ban_bes.length) {
-        return true;
-      }
-    }
-    return false;
   }
 
   public getListFriend() {
@@ -180,8 +200,9 @@ export class ChatPageFriendsServiceService {
       for (let i = 0; i < this.ban_bes.length; i++) {
         if (this.ban_bes[i].ma_tai_khoan == key) {
           this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
-          this.ban_bes[i].lan_cuoi_dang_nhap = value['lan_cuoi_dang_nhap'];
           this.ban_bes[i].ten = value['ten'];
+          // Tạo luôn tên giới hạn
+          this.ban_bes[i].getTenGioiHan();
           break;
         }
       }

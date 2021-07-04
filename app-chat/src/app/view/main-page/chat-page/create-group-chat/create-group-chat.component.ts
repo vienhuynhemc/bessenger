@@ -2,6 +2,7 @@ import { ChatPageObjectGroup } from './../../../../models/chat-page/chat-page-fr
 import { Component, OnInit } from '@angular/core';
 import { ChatPageCreateGroupService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-create-group.service';
 import { Router } from '@angular/router';
+import { MyNameService } from 'src/app/service/my-name/my-name.service';
 
 @Component({
   selector: 'app-create-group-chat',
@@ -15,10 +16,21 @@ export class CreateGroupChatComponent implements OnInit {
   public ten_hien_tai: string;
 
   constructor(public chat_page_create_ground: ChatPageCreateGroupService,
-    private router: Router) { }
+    private router: Router,
+    public my_name_service: MyNameService
+  ) { }
 
   ngOnInit(): void {
-    this.chat_page_create_ground.getAllUser().subscribe(data => {
+    if (this.chat_page_create_ground.layAllUser == null) {
+      this.getData();
+    } else {
+      this.chat_page_create_ground.layAllUser.unsubscribe();
+      this.getData();
+    }
+  }
+
+  public getData() {
+    this.chat_page_create_ground.layAllUser = this.chat_page_create_ground.getAllUser().subscribe(data => {
       let object = data.payload.toJSON();
       let all_user: ChatPageObjectGroup[] = [];
       Object.entries(object).forEach(([ma_tai_khoan, data_tai_khoan]) => {
@@ -49,7 +61,7 @@ export class CreateGroupChatComponent implements OnInit {
     if (countOK == 0) {
       document.getElementById("tao-nhom-error-1").style.display = "none";
       document.getElementById("tao-nhom-error-2").style.display = "none";
-      this.chat_page_create_ground.createGroup(this.ten_nhom);
+      this.chat_page_create_ground.createGroup(this.ten_nhom,this.my_name_service.myName);
       this.ten_nhom = "";
       this.closeTaoNhom();
       this.router.navigate(['bessenger/tin-nhan/danh-sach']);

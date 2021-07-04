@@ -139,7 +139,7 @@ export class ChatPageChatPageContentService {
     }, 5000);
   }
 
-  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string) {
+  public sumitTinNhan(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string,ten:string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Tin nhắn
@@ -149,6 +149,7 @@ export class ChatPageChatPageContentService {
         link_file: "",
         loai_tin_nhan: loai,
         ["ma_tai_khoan"]: ma_tai_khoan,
+        ten:ten,
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: tin_nhan,
@@ -193,9 +194,11 @@ export class ChatPageChatPageContentService {
   }
 
   public dienThongTinCoBan(object: Object): void {
-    this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen = object['loai_cuoc_tro_truyen'];
-    this.object_chat.cuoc_tro_truyen.mau = object['mau'];
-    this.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    if (object != null) {
+      this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen = object['loai_cuoc_tro_truyen'];
+      this.object_chat.cuoc_tro_truyen.mau = object['mau'];
+      this.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+    }
   }
 
   public getObjectChat(ma_cuoc_tro_chuyen: string) {
@@ -228,15 +231,17 @@ export class ChatPageChatPageContentService {
 
   public dienThanhVien(object: Object) {
     let array: ChatPageObjectTinNhanFriend[] = [];
-    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
-      let objectChatThanhVien = new ChatPageObjectTinNhanFriend();
-      objectChatThanhVien.ma_tai_khoan = ma_thanh_vien;
-      objectChatThanhVien.ngay_tham_gia = data_thanh_vien['ngay_tham_gia'];
-      objectChatThanhVien.trang_thai = data_thanh_vien['trang_thai'];
-      objectChatThanhVien.roi_chua = data_thanh_vien['roi_chua'];
-      objectChatThanhVien.ngay_roi_di = data_thanh_vien['ngay_roi_di'];
-      array.push(objectChatThanhVien);
-    });
+    if (object != null) {
+      Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+        let objectChatThanhVien = new ChatPageObjectTinNhanFriend();
+        objectChatThanhVien.ma_tai_khoan = ma_thanh_vien;
+        objectChatThanhVien.ngay_tham_gia = data_thanh_vien['ngay_tham_gia'];
+        objectChatThanhVien.trang_thai = data_thanh_vien['trang_thai'];
+        objectChatThanhVien.roi_chua = data_thanh_vien['roi_chua'];
+        objectChatThanhVien.ngay_roi_di = data_thanh_vien['ngay_roi_di'];
+        array.push(objectChatThanhVien);
+      });
+    }
     this.object_chat.thanh_vien = array;
   }
 

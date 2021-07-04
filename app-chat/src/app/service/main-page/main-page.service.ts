@@ -47,7 +47,7 @@ export class MainPageService {
       let currentTime = Number(new Date());
       let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
       if (ma_tai_khoan != null) {
-        this.db.object("/tai_khoan/" + ma_tai_khoan).update({ lan_cuoi_dang_nhap: currentTime });
+        this.db.object("/lan_cuoi_dang_nhap/" + ma_tai_khoan).update({ lan_cuoi_dang_nhap: currentTime });
       }
       this.updateOnline();
     }, 5000);

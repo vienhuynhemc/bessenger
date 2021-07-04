@@ -1,3 +1,4 @@
+import { MyNameService } from './../../service/my-name/my-name.service';
 import { ChatPageFriendsServiceService } from './../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +22,8 @@ export class MainPageComponent implements OnInit {
     public main_page_service: MainPageService,
     public friendsPageService: FriendsPageService,
     private chat_page_friends_object_left_service: ChatPageFriendsLeftServiceService,
-    private chat_page_firends_service: ChatPageFriendsServiceService
+    private chat_page_firends_service: ChatPageFriendsServiceService,
+    public my_name_service:MyNameService
   ) {
   }
 
@@ -34,6 +36,16 @@ export class MainPageComponent implements OnInit {
       } else {
         this.main_page_service.layHinh.unsubscribe();
         this.getData();
+      }
+      if(this.my_name_service.layTen == null){
+        this.my_name_service.getName().subscribe(data=>{
+          this.my_name_service.myName = data.payload.toJSON()['ten'];
+        })
+      }else{
+        this.my_name_service.layTen.unsubscribe();
+        this.my_name_service.getName().subscribe(data=>{
+          this.my_name_service.myName = data.payload.toJSON()['ten'];
+        });
       }
     }
   }

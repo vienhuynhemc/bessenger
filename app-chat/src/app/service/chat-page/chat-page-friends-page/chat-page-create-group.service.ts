@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ChatPageObjectGroup } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_group';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,9 @@ export class ChatPageCreateGroupService {
   public user_added: ChatPageObjectGroup[];
   // Danh sách gợi ý
   public user_search: ChatPageObjectGroup[];
+  
+  // service
+  public layAllUser:Subscription;
 
   constructor(
     private db: AngularFireDatabase
@@ -21,7 +25,7 @@ export class ChatPageCreateGroupService {
     this.init();
   }
 
-  public createGroup(ten_nhom: string) {
+  public createGroup(ten_nhom: string,ten:string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Cuộc trò chuyện
@@ -64,6 +68,7 @@ export class ChatPageCreateGroupService {
         link_file: "",
         loai_tin_nhan: "thong_bao",
         ["ma_tai_khoan"]: ma_tai_khoan,
+        ten:ten,
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: "đã tạo nhóm"
