@@ -2,26 +2,38 @@
 <div class="container">
     <div class="header">
         <div class="ago" *ngIf="!checkAgoHide"><i class="far fa-clock"></i></div>
-        <div class="prev" *ngIf="checkAgoHide" (click)="toLeft()"><i class="fas fa-chevron-left"></i></div>
+        <div class="prev" *ngIf="checkAgoHide" (click)="toLeft(stickerList)">
+            <svg class="svg-left" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" viewBox="0 0 80 80" xml:space="preserve">
+                <polyline fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
+                45.63,75.8 0.375,38.087 45.63,0.375 "/>
+              </svg> 
+        </div>
         <div class="left" id="scroll" >
             <div class="sticker" *ngFor="let item of stickerList; let i = index" (click)="loadStickerDetail(item.id)" [class.sticker-selected]="item.id == selected">
-                <img [src]="item.img" alt="">
+                <img [src]="item.img || 'assets/images/loading.gif'" alt="">
             </div>
             <div class="sticker"></div>
             <div class="sticker"></div>
         </div>
-        <div class="next" (click)="toRight()">
-            <i class="fas fa-chevron-right"></i>
+        <div *ngIf="!checkNextHide" class="next" (click)="toRight(stickerList)">
+            <svg class="svg-right" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" viewBox="0 0 80 80" xml:space="preserve">
+                <polyline  fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
+                0.375,0.375 45.63,38.087 0.375,75.8 "/>
+              </svg>
         </div>
         <div class="right">
             <div class="add" (click)="stickersService.openShop()">
-                <i class="fas fa-plus-circle"></i>
+                <svg class="svg-circleplus" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke-width="7.5"></circle>
+                    <line x1="32.5" y1="50" x2="67.5" y2="50" stroke-width="5"></line>
+                    <line x1="50" y1="32.5" x2="50" y2="67.5" stroke-width="5"></line>
+                  </svg>
             </div>
         </div>
     </div>
     <div class="content">
         <div class="content-sticker" *ngFor="let item of stickerDetailList" (click)="sendSticker(item)">
-            <img [src]="item.url" alt="">
+            <img [src]="item.url || 'assets/images/loading.gif'" alt="">
         </div>
     </div>
 </div>

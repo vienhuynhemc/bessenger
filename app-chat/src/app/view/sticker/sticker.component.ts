@@ -17,9 +17,10 @@ export class StickerComponent implements OnInit, OnDestroy {
   stickerDetailList: StickerDetail[] = []
   selected: string;
   checkAgoHide: boolean;
+  checkNextHide: boolean
   maCuocTroChuyen: string;
   valueSub: Subscription;
-
+  clickLeftRight: number = 1;
   constructor(public stickersService: StickersService, public contentService: ChatPageChatPageContentService,  private route: ActivatedRoute) { }
   ngOnDestroy(): void {
     this.valueSub.unsubscribe();
@@ -119,23 +120,32 @@ export class StickerComponent implements OnInit, OnDestroy {
    
   }
   // click di chuyển phải
-  toRight() {
+  toRight(stickerList: StickerObject[]) {
     let scroll = document.getElementById('scroll');
-    scroll.scrollLeft += 50
+    scroll.scrollLeft += 165
+    this.clickLeftRight += 1
     if(scroll.scrollLeft >= 0)
       this.checkAgoHide = true;
+    if(this.clickLeftRight >= stickerList.length/4)
+      this.checkNextHide = true;
   }
   // click di chuyển trái
-  toLeft() {
+  toLeft(stickerList: StickerObject[]) {
     let scroll = document.getElementById('scroll');
-    scroll.scrollLeft -= 50
-    if(scroll.scrollLeft < 50)
+    scroll.scrollLeft -= 165
+    this.clickLeftRight -= 1
+    if(scroll.scrollLeft < 200)
       this.checkAgoHide = false;
+      if(this.clickLeftRight < stickerList.length/4)
+      this.checkNextHide = false;
   }
 
   // gui sticker
   sendSticker(item: StickerDetail) {
-    // this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan" );
-    // this.stickersService.isShowBoxSticker = false;
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.stickersService.accessAccount().child(parseIDUser).once('value', (acc) => {
+      this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan",acc.val().ten);
+      this.stickersService.isShowBoxSticker = false;
+    })
   }
 }

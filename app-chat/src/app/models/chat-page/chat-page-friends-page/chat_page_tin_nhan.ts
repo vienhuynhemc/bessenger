@@ -30,7 +30,7 @@ export class ChatPageTinNhan {
         }
         return "";
     }
-
+   
     public getNoiDungThongBao(list: ChatPageObjectTinNhanFriend[]): string {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.ma_tai_khoan == ma_tai_khoan) {
