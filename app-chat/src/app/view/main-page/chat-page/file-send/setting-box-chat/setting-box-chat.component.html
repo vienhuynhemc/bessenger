@@ -9,7 +9,7 @@
     <!-- Nội dung -->
     <div class="noi-dung" *ngIf="this.setting_box_chat_service.isOpen">
         <!-- Đổi tên đoạn chat -->
-        <div class="item" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen =='nhom'">
+        <div class="item" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen =='nhom'" (click)="doiTenDoanChat()">
             <i class="nhom-chat"></i>
             <p>Đổi tên đoạn chat</p>
         </div>
@@ -33,6 +33,35 @@
                 </path>
             </svg>
             <p>Thay đổi biểu tượng cảm xúc</p>
+        </div>
+    </div>
+
+    <!-- Đổi tên box chat-->
+    <div class="doi-ten" *ngIf="this.setting_box_chat_service.isShowEditName">
+        <div class="doi-ten-main">
+            <div class="doi-ten-main-header">
+                <div class="doi-ten-main-header-name">
+                    Đổi tên đoạn chat
+                </div>
+                <div class="doi-ten-main-header-icon"  (click)="anDoiTen()" >
+                    <i></i>
+                </div>
+            </div>
+            <div class="doi-ten-main-content">
+                <p class="p1">Mọi người đều biết khi tên nhóm chat thay đổi.</p>
+                <input type="text" class="input1" [(ngModel)]="ten_moi" (input)="inputTen($event)">
+                <div class="doi-ten-main-content-buttons">
+                    <div class="doi-ten-main-content-buttons-item" (click)="anDoiTen()">
+                        Hủy
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-select" *ngIf="!isEqual" (click)="luuDoiTenNhom()">
+                        Lưu
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-done" *ngIf="isEqual">
+                        Lưu
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

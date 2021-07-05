@@ -13,8 +13,6 @@ import { MessengerHeaderService } from 'src/app/service/chat-page/chat-page-chat
 })
 export class FileSendComponent implements OnInit {
 
-  public ma_tai_khoan:string;
-
   constructor(
     private route: ActivatedRoute,
     public content_service: ChatPageChatPageContentService,
@@ -25,7 +23,7 @@ export class FileSendComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.ma_tai_khoan = params['id'];
+      this.setting_chat_service.ma_cuoc_tro_chuyen = params['id'];
     });
   }
 
