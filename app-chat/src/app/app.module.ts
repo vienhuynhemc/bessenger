@@ -68,6 +68,7 @@ import { EmojiComponent } from './view/emoji/emoji.component';
 import { GiphyComponent } from './view/giphy/giphy.component';
 import { StickerComponent } from './view/sticker/sticker.component';
 import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component';
+import { RecordingComponent } from './view/recording/recording.component';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component
     GiphyComponent,
     StickerComponent,
     ShopStickerComponent,
+    RecordingComponent,
 
 
   ],

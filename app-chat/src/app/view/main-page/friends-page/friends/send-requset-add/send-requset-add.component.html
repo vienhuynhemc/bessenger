@@ -3,7 +3,7 @@
         <div [class.detail-selected]="item.id === iDUrl" class="detail-friend"  *ngFor="let item of this.friendsPageService.getSendsList(); let i = index" (click)="onClickSelectedFriend(item, iDUrl)">
                 <div class="detail-sub">
                     <div class="detail-left">
-                        <img [src]="item.img" alt="">
+                        <img [src]="item.img || 'assets/images/loading.gif'" alt="">
                     </div>
                     <div class="detail-center">
                         <div *ngIf="item.checkLimitNameSendList()" [class.non-mutual]="item.mutualFriends == 0"  matTooltip="{{item.name}}" class="name" matTooltipClass="tooltip">{{item.getNameLimitSendList()}}</div>
