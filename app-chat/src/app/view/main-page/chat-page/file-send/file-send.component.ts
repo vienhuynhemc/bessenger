@@ -23,6 +23,7 @@ export class FileSendComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.setting_chat_service.ma_cuoc_tro_chuyen = params['id'];
     });
   }
 

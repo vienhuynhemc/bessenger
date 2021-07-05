@@ -51,7 +51,193 @@
   .select:hover {
     background-color: #f2f2f2;
   }
-  .noi-dung{
+  .noi-dung {
     display: flex;
+    flex-direction: column;
+    .item {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      padding: 14px 10px;
+      margin-left: 10px;
+      margin-right: 5px;
+
+      p {
+        color: #050505;
+        font-weight: 600;
+        font-family: "Raleway";
+        font-size: 14px;
+      }
+
+      .nhom-chat {
+        background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/Z8VkIC_Hc4p.png);
+        background-position: 0px -977px;
+        background-size: auto;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        padding-right: 12px;
+        filter: invert(8%) sepia(10%) saturate(200%) saturate(200%)
+          saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+      }
+
+      .chu-de {
+        margin-right: 14px;
+        display: flex;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        width: 18px;
+        height: 18px;
+        .child-chu-de {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: white;
+        }
+      }
+
+      svg {
+        margin-right: 12px;
+      }
+    }
+    .item:hover {
+      background-color: #f2f2f2;
+    }
+  }
+  .doi-ten {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 999;
+    background: #e8a2a224;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-main {
+      width: 548px;
+      height: 215px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+        inset 0 0 0 1px #ffffff80;
+
+      &-header {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        border-bottom: 1px solid #0000001a;
+        display: flex;
+        align-items: center;
+
+        &-name {
+          font-family: "Raleway";
+          font-weight: 700;
+          font-size: 20px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &-icon {
+          position: absolute;
+          cursor: pointer;
+          width: 36px;
+          right: 0px;
+          margin-right: 15px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #e4e6eb;
+          i {
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+            background-position: 0px -452px;
+            background-size: auto;
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%)
+              hue-rotate(174deg) brightness(94%) contrast(86%);
+          }
+        }
+      }
+
+      &-content {
+        margin-top: 12px;
+        width: 100%;
+
+        .p1 {
+          font-family: "Raleway";
+          font-size: 13px;
+          margin-left: 12px;
+          color: #050505;
+          margin-top: 12px;
+          font-weight: 500;
+        }
+
+        .input1 {
+          height: 34px;
+          width: 498px;
+          justify-content: center;
+          align-items: center;
+          margin-left: 12px;
+          margin-top: 17px;
+          border-radius: 6px;
+          background-color: white;
+          border: 1px solid #1877f2;
+          outline: none;
+          font-size: 16px;
+          padding: 0px 12px;
+          font-weight: 600;
+        }
+
+        &-buttons {
+          margin-top: 12px;
+          margin-left: 12px;
+          width: 522px;
+          justify-content: flex-end;
+          display: flex;
+
+          &-item {
+            border-radius: 6px;
+            color: #050505;
+            font-weight: 700;
+            font-family: "Raleway";
+            height: 36px;
+            width: 52px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e4e6eb;
+            margin-left: 8px;
+            cursor: pointer;
+          }
+
+          &-item-select {
+            background-color: #1877f2;
+            color: white;
+          }
+
+          &-item-done {
+            cursor: not-allowed;
+            color: #bcc0c4;
+            background-color: #e4e6eb;
+          }
+        }
+      }
+    }
   }
 }
