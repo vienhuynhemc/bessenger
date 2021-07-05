@@ -10,36 +10,163 @@
   height: 100%;
   width: 1144px;
   display: flex;
-}
-
-.container .avatar, .container .profile, .container .change-pass {
-  position: absolute;
-  height: 100%;
-  top: 80px;
-  left: 20px;
-}
-
-.container .profile {
-  left: 321px;
-}
-
-.container .change-pass {
-  top: 410px;
-  left: 321px;
-}
-
-.container .title {
-  position: absolute;
-  left: 30px;
-  top: 25px;
   font-family: 'Raleway';
-  font-weight: 500;
-  font-size: 25px;
 }
 
-.container .title i {
-  font-size: 25px;
-  padding-right: 10px;
-  color: gray;
+.container .main {
+  position: absolute;
+  border-radius: 40px;
+  top: 20px;
+  left: 20px;
+  width: 1104px;
+  height: 760px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.container .main .avatar-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(5px);
+}
+
+.container .main .cover-avatar-bg {
+  width: 100%;
+  height: 0%;
+  position: absolute;
+  bottom: 0px;
+  border-top-left-radius: 70%;
+  border-top-right-radius: 70%;
+  background-color: rgba(255, 255, 255, 0.432);
+}
+
+.container .main .cover-avatar-bg-animation {
+  height: 50%;
+  transition: all 1s;
+}
+
+.container .main .circle-right, .container .main .circle-left {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 275px;
+}
+
+.container .main .circle-right .circle-sub-2, .container .main .circle-left .circle-sub-2 {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.container .main .circle-right .circle-sub-2 img, .container .main .circle-left .circle-sub-2 img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+}
+
+.container .main .circle-right .circle-sub-2 i, .container .main .circle-left .circle-sub-2 i {
+  font-size: 50px;
+  position: absolute;
+  color: white;
+  left: 65px;
+  top: 65px;
+  text-shadow: 2px 2px black;
+}
+
+.container .main .circle-left {
+  left: -200px;
+}
+
+.container .main .circle-right {
+  right: -200px;
+}
+
+.container .main .circle-center {
+  position: absolute;
+  top: -200px;
+  left: 377px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.432);
+}
+
+.container .main .circle-center .circle-sub-1 {
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.container .main .circle-center .circle-sub-1 .name {
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  border-radius: 40px;
+  width: 70%;
+  height: 35px;
+  background-color: #141414;
+  text-align: center;
+}
+
+.container .main .circle-center .circle-sub-1 .name span {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  display: block;
+  margin-top: 5px;
+}
+
+.container .main .circle-center .circle-sub-1 .circle-sub-2 {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.container .main .circle-center .circle-sub-1 .circle-sub-2 img {
+  width: 270px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+}
+
+.container .main .circle-center-animation {
+  top: 205px;
+  transition: all 1s;
+}
+
+.container .main .circle-left-animation {
+  left: 120px;
+  transition: all 1s;
+}
+
+.container .main .circle-right-animation {
+  right: 120px;
+  transition: all 1s;
 }
 /*# sourceMappingURL=personal-page.component.css.map */

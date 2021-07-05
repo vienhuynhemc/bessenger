@@ -218,10 +218,10 @@ export class ChatPageFriendsObjectLeft {
                         result.noi_dung = ten + " phản hồi một tin nhắn";
                         break;
                     case "gui_nhan_dan":
-                        result.noi_dung = ten + ": gửi một nhãn dán"
+                        result.noi_dung = ten + " gửi một nhãn dán"
                         break;
                     case "gui_giphy":
-                        result.noi_dung = ten + ": gửi một file GIF từ GIPHY"
+                        result.noi_dung = ten + " gửi một file GIF từ GIPHY"
                         break;
                 }
             }

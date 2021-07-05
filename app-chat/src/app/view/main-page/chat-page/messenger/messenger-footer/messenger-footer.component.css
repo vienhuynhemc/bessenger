@@ -6,18 +6,23 @@
 .container {
   background-color: white;
   width: 100%;
-  display: flex;
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 4px 8px 28px 0px #d3dceb;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .container .icon {
+  margin-left: 15px;
   display: flex;
+  margin-top: 3px;
 }
 
 .container .icon .child {
+  cursor: pointer;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -29,6 +34,114 @@
 
 .container .khung-chat {
   display: flex;
+  width: 273px;
+  border-radius: 20px;
+  background-color: #f0f2f5;
   align-items: center;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.container .khung-chat .parent-input {
+  max-height: 83px;
+  overflow-y: scroll;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transform: translateY(2.5px);
+}
+
+.container .khung-chat .parent-input .input {
+  color: #050505;
+  width: 225px;
+  margin-right: 5px;
+  margin-left: 10px;
+  min-height: 22px;
+  outline: none;
+  font-family: "Raleway";
+  background: #f0f2f5;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.container .khung-chat ::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #00000000;
+}
+
+.container .khung-chat ::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #00000066;
+}
+
+.container .khung-chat ::-webkit-scrollbar {
+  width: 7px;
+  height: 0px;
+  border-radius: 10px;
+}
+
+.container .khung-chat ::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+
+.container .khung-chat .place {
+  font-size: 14px;
+  margin-left: 10px;
+  position: absolute;
+  color: #a1abad;
+  font-family: "Raleway";
+  font-weight: 500;
+}
+
+.container .khung-chat .c-btcx {
+  margin-left: 7px;
+  margin-right: 7px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.container .khung-chat .box-bieu-tuong-cam-xuc {
+  top: -309px;
+  position: absolute;
+  left: 141px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+}
+
+.container .khung-chat .box-bieu-tuong-cam-xuc .mui-ten {
+  transform: translate(-19px, -7px) rotate(-45deg);
+  width: 17px;
+  height: 17px;
+  right: 0px;
+  position: absolute;
+  background: white;
+  bottom: -11px;
+  box-shadow: -1px 1px 1px #ffffff80;
+}
+
+.container .bieu-tuong-cam-xuc-chat {
+  cursor: pointer;
+  margin-right: 15px;
+  margin-left: 5px;
+}
+
+.container .bieu-tuong-cam-xuc-chat .send {
+  transform: translateY(2px);
+}
+
+.container .box-giphy, .container .box-stickers {
+  position: absolute;
+  width: 270px;
+  height: 300px;
+  top: -311px;
+  left: 30px;
+  box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+  border-radius: 8px;
+  z-index: 10;
+  background-color: white;
+}
+
+.container .box-stickers {
+  left: 20px;
 }
 /*# sourceMappingURL=messenger-footer.component.css.map */

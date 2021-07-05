@@ -68,7 +68,10 @@ import { EmojiComponent } from './view/emoji/emoji.component';
 import { GiphyComponent } from './view/giphy/giphy.component';
 import { StickerComponent } from './view/sticker/sticker.component';
 import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component';
-
+import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
+import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
+import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-share/files-share.component';
+import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component'
 
 @NgModule({
   declarations: [
@@ -87,7 +90,7 @@ import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component
     FriendsListComponent,
     MessengerComponent,
     FileSendComponent,
- 
+
     FriendsComponent,
     ProfileFriendComponent,
 
@@ -114,9 +117,8 @@ import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component
     EmojiComponent,
     GiphyComponent,
     StickerComponent,
-    ShopStickerComponent,
-
-
+    ShopStickerComponent, 
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent
   ],
   imports: [
     BrowserModule,

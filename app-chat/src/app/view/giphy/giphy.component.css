@@ -1,0 +1,114 @@
+.container {
+  width: 270px;
+  height: 300px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 100;
+}
+
+.container .search {
+  width: 100%;
+  height: 14%;
+}
+
+.container .search .border-search {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  margin: auto;
+  border-radius: 20px;
+  background-color: #f5f9fc;
+  margin-top: 10px;
+}
+
+.container .search .border-search .left {
+  width: 15%;
+}
+
+.container .search .border-search .left i {
+  font-size: 15px;
+  color: #a4afbf;
+  margin-left: 13px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container .search .border-search .right {
+  width: 85%;
+}
+
+.container .search .border-search .right input {
+  width: 90%;
+  height: 50%;
+  margin-top: 8.5px;
+  border: none;
+  outline: none;
+}
+
+.container .search .border-search .right input[type="text"] {
+  font-family: 'Raleway';
+  background-color: #f5f9fc;
+  font-size: 12px;
+}
+
+.container .loading {
+  position: absolute;
+  width: 100%;
+  height: 87%;
+  border-radius: 8px;
+  z-index: 10;
+  background-color: white;
+}
+
+.container .content {
+  position: absolute;
+  overflow-y: overlay;
+  scroll-behavior: smooth;
+  height: 82.5%;
+  width: 100%;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.container .content .giphy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container .content .giphy img {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.container ::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: transparent;
+}
+
+.container ::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #b9b8b8;
+}
+
+.container ::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+.container ::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+
+.arrow-giphy {
+  transform: translate(-202px, -7px) rotate(-45deg);
+  width: 17px;
+  height: 17px;
+  right: 0px;
+  position: absolute;
+  background: white;
+  bottom: -11px;
+  box-shadow: -1px 1px 1px #ffffff80;
+}
+/*# sourceMappingURL=giphy.component.css.map */

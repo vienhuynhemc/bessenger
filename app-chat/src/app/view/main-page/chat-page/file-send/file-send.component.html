@@ -1,120 +1,38 @@
-<div class="container" *ngIf="this.ma_cuoc_tro_chuyen != 'danh-sach'">
-    <!-- part 1 -->
-    <div class="right-avatar">
-        <!-- *ngFor="let item of friends_list" -->
-        <div class="avatar">
-            <img src="{{avatar}}" />
-            <!-- <img [src]="item.link" alt="" /> -->
+<div class="container" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.ma_cuoc_tro_chuyen != 'danh-sach'">
+
+    <div class="content-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="hinh-dai-dien">
+                <div class="nhom"
+                    *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'">
+                    <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'"
+                        class="hinh-1" alt="">
+                    <img [src]="this.content_service.object_chat.imgAvatars[1] ||'assets/images/loading.gif'" alt=""
+                        class="hinh-2">
+                </div>
+                <div class="don" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don'">
+                    <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'" alt="">
+                </div>
+                <div *ngIf="this.content_service.object_chat.is_online" class="online">
+                    <div class="child"></div>
+                </div>
+            </div>
+            <div class="ten" [matTooltip]="this.header_service.object_chat.name.noi_dung_goc" matTooltipClass="tooltip"
+                [matTooltipDisabled]="!this.header_service.object_chat.name.is_cut">
+                {{this.header_service.object_chat.name.noi_dung}}
+            </div>
+            <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online">Đang hoạt động</p>
+            <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online">
+                {{this.header_service.object_chat.getTime()}}</p>
         </div>
-    </div>
-    <div class="right-title">
-        <div class="name">{{this.ma_cuoc_tro_chuyen}}</div>
-        <div class="career">{{career}}</div>
+
+        <!-- Tùy chỉnh đoạn chat -->
+        <app-setting-box-chat></app-setting-box-chat>
+        <app-members *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'">
+        </app-members>
+        <app-files-share></app-files-share>
+        <app-medias-share></app-medias-share>
     </div>
 
-    <!-- part 2 messages -->
-    <div class="dropdown">
-        <div class="maindropdown-start">
-            <div class="startMessages">
-                <div class="includes">
-                    <div class="start">
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="starred-messages">Starred Messages</div>
-                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
-            </div>
-            <div class="dropdown-content">
-            </div>
-        </div>
-    </div>
-    <!-- part 3 media -->
-    <div class="dropdown">
-        <div class="maindropdown-media">
-            <div class="media">
-                <div class="includes">
-                    <div class="images">
-                        <i class="far fa-image"></i>
-
-                    </div>
-                </div>
-                <div class="media-title">Media({{amountMedia}})</div>
-                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
-            </div>
-            <div class="dropdown-content">
-                <!-- TYPE MEDIA -->
-                <div class="filesMedia">
-                    <div class="mediaInclude">
-                        <div class="mediaIcon"><i class="far fa-image"></i></div>
-                    </div>
-                    <div class="mediaName"><a href="#">avt.png</a></div>
-                    <div class="mediaLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- part 4 files & docs -->
-    <div class="dropdown">
-        <div class="maindropdown">
-            <div class="includes">
-                <div class="drop-icon">
-                    <i class="far fa-file-alt"></i>
-                </div>
-            </div>
-            <div class="drop-files"><span>File & Docs({{amountFiles}})</span></div>
-            <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
-            <div class="dropdown-content">
-                <!-- TYPE ZIP -->
-                <div class="filesZip">
-                    <div class="zipInclude">
-                        <div class="zipIcon"><i class="fas fa-folder-open"></i></div>
-                    </div>
-                    <div class="zipName"><a href="#">MockUp.zip</a></div>
-                    <div class="zipLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
-                </div>
-                <!-- TYPE DOCX -->
-                <div class="filesDocx">
-                    <div class="docxInclude">
-                        <div class="docxIcon"><i class="far fa-file-word"></i></div>
-                    </div>
-                    <div class="docxName"><a href="#">Feedback.docx</a></div>
-                    <div class="docxLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
-                </div>
-                <!-- TYPE TXT -->
-                <div class="filesTxt">
-                    <div class="txtInclude">
-                        <div class="txtIcon"><i class="far fa-file-alt"></i></div>
-                    </div>
-                    <div class="txtName"><a href="#">Client.txt</a></div>
-                    <div class="txtLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
-                </div>
-                <!-- TYPE PDF -->
-                <div class="filesPdf">
-                    <div class="pdfInclude">
-                        <div class="pdfIcon"><i class="far fa-file-pdf"></i></div>
-                    </div>
-                    <div class="pdfName"><a href="#">New.pdf</a></div>
-                    <div class="pdfLoad"><i class="far fa-arrow-alt-circle-down"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- part 5 infor -->
-    <div class="dropdown">
-        <div class="maindropdown-infor">
-            <div class="information">
-                <div class="includes">
-                    <div class="includes-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                </div>
-                <div class="information-title">Information</div>
-                <div class="icon-angle-down"><i class="fas fa-angle-down"></i></div>
-            </div>
-            <div class="dropdown-content">
-            </div>
-        </div>
-    </div>
 </div>
