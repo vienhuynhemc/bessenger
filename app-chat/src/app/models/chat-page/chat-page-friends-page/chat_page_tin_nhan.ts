@@ -18,8 +18,6 @@ export class ChatPageTinNhan {
     // Các thuộc tính giúp đỡ lag
     // Có phải là bản thân ko
     public isBanThan: boolean;
-    // Màu tương ứng của tin nhắn
-    public color: string = "";
     // Thời gian gửi của tin nhắn
     public timeSend: string = "";
     // Có phải trạng thái tin nhắn đã gửi ?
@@ -79,25 +77,20 @@ export class ChatPageTinNhan {
         this.isBanThan = this.ma_tai_khoan == ma_tai_khoan;
     }
 
-    public getColorTinNhan(mau: string) {
-        if (this.isBanThan) {
-            this.color = mau;
-        } else {
-            this.color = "#e4e6eb";
-        }
-    }
 
     public getMarginTopTinNhan(tin_nhan: ChatPageTinNhan) {
         let result = "";
         if (this.loai_tin_nhan == 'gui_nhan_dan'
             || this.loai_tin_nhan == 'gui_giphy'
             || this.loai_tin_nhan == 'thong_bao'
+            || this.loai_tin_nhan == 'gui_tin_nhan_like'
         ) {
             result = "9px";
         }
         else if (tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'thong_bao'
+            || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
         ) {
             result = "9px";
         }
@@ -248,6 +241,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_text_icon'
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
+            || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
         ) {
             result = true;
         }
@@ -263,6 +257,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_text_icon'
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
+            || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
         )) {
             result = true;
         }
