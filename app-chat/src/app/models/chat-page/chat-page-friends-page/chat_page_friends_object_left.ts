@@ -188,21 +188,16 @@ export class ChatPageFriendsObjectLeft {
             if (this.cuoc_tro_truyen.tin_nhan.length > this.viTriCuoiCung) {
                 switch (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].loai_tin_nhan) {
                     case "gui_text":
-                        if (ten == "Bạn") {
-                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-                        } else {
-                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-                        }
+                        result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
                         break;
                     case "gui_text_icon":
-                        if (ten == "Bạn") {
-                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-                        } else {
-                            result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-                        }
+                        result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
                         break;
                     case "thong_bao":
                         result.noi_dung = ten + " " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
+                        break;
+                    case "gui_tin_nhan_like":
+                        result.noi_dung = ten + ": 👍";
                         break;
                     case "gui_hinh":
                         result.noi_dung = ten + " gửi một hình ảnh";
@@ -223,10 +218,10 @@ export class ChatPageFriendsObjectLeft {
                         result.noi_dung = ten + " phản hồi một tin nhắn";
                         break;
                     case "gui_nhan_dan":
-                        result.noi_dung = ten + ": gửi một nhãn dán"
+                        result.noi_dung = ten + " gửi một nhãn dán"
                         break;
                     case "gui_giphy":
-                        result.noi_dung = ten + ": gửi một file GIF từ GIPHY"
+                        result.noi_dung = ten + " gửi một file GIF từ GIPHY"
                         break;
                 }
             }
@@ -236,14 +231,14 @@ export class ChatPageFriendsObjectLeft {
         result.noi_dung_goc = result.noi_dung;
         let array = result.noi_dung.split("\n");
         if (array.length > 1) {
-            if (array[0].length > 25) {
-                result.noi_dung = array[0].substring(0, 22) + "...";
+            if (array[0].length > 20) {
+                result.noi_dung = array[0].substring(0, 17) + "...";
             } else {
                 result.noi_dung = array[0] + "...";
             }
             result.is_cut = true;
-        } else if (result.noi_dung.length > 25) {
-            result.noi_dung = result.noi_dung.substring(0, 22) + "...";
+        } else if (result.noi_dung.length > 20) {
+            result.noi_dung = result.noi_dung.substring(0, 17) + "...";
             result.is_cut = true;
         } else {
             result.is_cut = false;

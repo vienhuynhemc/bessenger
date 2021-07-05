@@ -20,7 +20,7 @@
             [matTooltipDisabled]="!this.header_service.object_chat.name.is_cut">
             {{this.header_service.object_chat.name.noi_dung}}
         </div>
-        <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online">Online</p>
+        <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online">Đang hoạt động</p>
         <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online">
             {{this.header_service.object_chat.getTime()}}</p>
     </div>

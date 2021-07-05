@@ -1,1 +1,399 @@
-/* No CSS *//*# sourceMappingURL=messenger-content.component.css.map */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: white;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 4px 8px 28px 0px #d3dceb;
+  display: flex;
+  height: 633px;
+  margin-bottom: 10px;
+  z-index: 0;
+  position: relative;
+}
+
+.container .first {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.container .first .hinh-dai-dien {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.container .first .hinh-dai-dien .nhom {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.container .first .hinh-dai-dien .nhom .hinh-1 {
+  box-shadow: 0 0 2px #909090;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  z-index: 10;
+  width: 38.5px;
+  height: 38.5px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.container .first .hinh-dai-dien .nhom .hinh-2 {
+  box-shadow: 0 0 2px #909090;
+  z-index: 9;
+  width: 38.5px;
+  height: 38.5px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.container .first .hinh-dai-dien .don {
+  width: 100%;
+  height: 100%;
+}
+
+.container .first .hinh-dai-dien .don img {
+  box-shadow: 0 0 2px #909090;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.container .first .hinh-dai-dien .online {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: #ffffff;
+  left: 41px;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.container .first .hinh-dai-dien .online .child {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #31a24c;
+}
+
+.container .first .create {
+  color: #65676b;
+  font-size: 13px;
+  font-family: "Raleway";
+  font-weight: 500;
+  margin-top: 7px;
+  letter-spacing: 0.5px;
+}
+
+.container .thong_bao {
+  display: flex;
+  justify-content: center;
+  color: #b9b9b9;
+  font-family: "Raleway";
+  font-size: 9.5px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.container .list-dang-nhap {
+  margin-left: 2px;
+  margin-top: 7px;
+}
+
+.container .list-dang-nhap .dang_nhap {
+  margin-top: 2px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.container .list-dang-nhap .dang_nhap .hinh {
+  width: 28px;
+  height: 28px;
+  box-shadow: 0 0 2px #909090;
+  border-radius: 50%;
+}
+
+.container .list-dang-nhap .dang_nhap .hinh img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.container .list-dang-nhap .dang_nhap .lottie {
+  background-color: #e4e6eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  margin-left: 8px;
+  border-radius: 18px;
+}
+
+.container .list-dang-nhap .dang_nhap .lottie main {
+  width: 25px;
+  margin: 0px 12px;
+  transform: translateY(2px);
+}
+
+.container .gui_text .tren {
+  display: flex;
+  align-items: flex-end;
+}
+
+.container .gui_text .tren .hinh {
+  margin-left: 2px;
+  width: 28px;
+  height: 28px;
+  box-shadow: 0 0 2px #909090;
+  border-radius: 50%;
+}
+
+.container .gui_text .tren .hinh img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.container .gui_text .tren .chua-nd .noi-dung {
+  word-wrap: break-word;
+  font-family: "Raleway";
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 12px;
+  transform: scaleY(1.04);
+  letter-spacing: 0.5px;
+  max-width: 330px;
+  margin: 8px 12px;
+}
+
+.container .gui_text .tren .ban_than {
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  color: white;
+}
+
+.container .gui_text .tren .border-tren-ban-than {
+  border-top-right-radius: 18px;
+}
+
+.container .gui_text .tren .border-duoi-ban-than {
+  border-bottom-right-radius: 18px;
+}
+
+.container .gui_text .tren .doi_phuong {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  color: #050505;
+  margin-left: 8px;
+}
+
+.container .gui_text .tren .border-tren-doi-phuong {
+  border-top-left-radius: 18px;
+}
+
+.container .gui_text .tren .border-duoi-doi-phuong {
+  border-bottom-left-radius: 18px;
+}
+
+.container .gui_text .tren .trang_thai_gui {
+  width: 14px;
+  margin-right: 4px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.container .gui_text .tren .trang_thai_gui .nguoi_xem img {
+  width: 14px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #909090;
+}
+
+.container .gui_text .tren .trang_thai_gui_kpbt {
+  margin-left: auto;
+}
+
+.container .gui_text .da_xem {
+  margin-right: 3px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container .gui_text .da_xem .list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container .gui_text .da_xem .list .item-ok img {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0px 1px;
+  object-fit: cover;
+}
+
+.container .ban_than_div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.container .gui_text_icon .tren {
+  display: flex;
+  align-items: flex-end;
+}
+
+.container .gui_text_icon .tren .hinh {
+  margin-left: 2px;
+  width: 28px;
+  height: 28px;
+  box-shadow: 0 0 2px #909090;
+  border-radius: 50%;
+}
+
+.container .gui_text_icon .tren .hinh img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.container .gui_text_icon .tren .chua-nd .noi-dung {
+  max-width: 330px;
+}
+
+.container .gui_text_icon .tren .chua-nd .sticker_noidung {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+}
+
+.container .gui_text_icon .tren .chua-nd .giphy-content {
+  max-width: 330px;
+  border-radius: 18px;
+  border: #d6dae0 solid 0.5px;
+}
+
+.container .gui_text_icon .tren .chua-nd .giphy-content .giphy-noidung {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 18px;
+  border-top-left-radius: 18px;
+}
+
+.container .gui_text_icon .tren .chua-nd .giphy-content .name-giphy {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.container .gui_text_icon .tren .chua-nd .giphy-content .name-giphy img {
+  width: 40px;
+  margin-left: 5px;
+}
+
+.container .gui_text_icon .tren .chua-nd .giphy-content .name-giphy .name {
+  width: 100px;
+  font-size: 11px;
+  font-family: "Raleway";
+  font-weight: 450;
+  letter-spacing: 1px;
+}
+
+.container .gui_text_icon .tren .doi_phuong {
+  margin-left: 8px;
+}
+
+.container .gui_text_icon .tren .trang_thai_gui {
+  width: 14px;
+  margin-right: 4px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.container .gui_text_icon .tren .trang_thai_gui .nguoi_xem img {
+  width: 14px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #909090;
+}
+
+.container .gui_text_icon .tren .trang_thai_gui_kpbt {
+  margin-left: auto;
+}
+
+.container .gui_text_icon .da_xem {
+  margin-right: 3px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container .gui_text_icon .da_xem .list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container .gui_text_icon .da_xem .list .item-ok img {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0px 1px;
+  object-fit: cover;
+}
+
+.content {
+  width: 482px;
+  height: 612px;
+  margin-top: 10px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.content #danh-sach-tin-nhan {
+  width: 100%;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #00000066;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+/*# sourceMappingURL=messenger-content.component.css.map */

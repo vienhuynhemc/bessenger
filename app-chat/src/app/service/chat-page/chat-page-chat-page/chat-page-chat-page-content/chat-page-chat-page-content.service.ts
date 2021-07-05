@@ -332,8 +332,6 @@ export class ChatPageChatPageContentService {
           }
           // Kiểm tra có phải là bản thân ko
           tin_nhan.getIsBanThan();
-          // Lấy màu của tin nhắn
-          tin_nhan.getColorTinNhan(this.object_chat.cuoc_tro_truyen.mau);
           // Lấy thời gian của tin nhắn
           tin_nhan.getTime();
           // Lấy tình trạng đã gửi

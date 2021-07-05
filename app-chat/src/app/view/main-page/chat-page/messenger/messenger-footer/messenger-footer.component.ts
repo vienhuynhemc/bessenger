@@ -227,6 +227,10 @@ export class MessengerFooterComponent implements OnInit {
     }
   }
 
+  public guiTinNhanLuotThich(){
+    this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, "", "gui_tin_nhan_like",this.my_name_service.myName);
+  }
+
   public sendTinNhan(){
     let input = document.getElementById("input");
     if (this.tin_nhan.trim().length != 0) {

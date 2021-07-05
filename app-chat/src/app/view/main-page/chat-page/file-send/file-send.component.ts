@@ -1,5 +1,10 @@
+import { ChatPageSettingService } from './../../../../service/chat-page/chat-page-file-page/chat-page-setting.service';
+import { MyNameService } from './../../../../service/my-name/my-name.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MainPageService } from 'src/app/service/main-page/main-page.service';
+import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { MessengerHeaderService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 
 @Component({
   selector: 'app-file-send',
@@ -7,30 +12,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./file-send.component.scss']
 })
 export class FileSendComponent implements OnInit {
-  name: string = 'William Halaand';
-  career: string = 'CEO & Founded';
-  avatar: string = 'assets/images/man.png';
-  amountMedia: number = 1;
-  amountFiles: number = 5;
-  //type load
-  typeZip: string = ".zip";
-  typeDocx: string = ".docx";
-  typeTxt: string = ".txt";
-  typePdf: string = ".pdf";
-
-  @Input() friends_list!: any[];
-
-  @Input() selectedUser!: number;
-
-  ma_cuoc_tro_chuyen: string;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public content_service: ChatPageChatPageContentService,
+    public header_service: MessengerHeaderService,
+    // Main service
+    public setting_chat_service:ChatPageSettingService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.ma_cuoc_tro_chuyen = params['id'];
     });
   }
 

@@ -1,0 +1,247 @@
+.container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: #e8a2a224;
+}
+
+.container .shop {
+  width: 700px;
+  border-radius: 8px;
+  height: 600px;
+  position: absolute;
+  background-color: #f1f3f7;
+  box-shadow: 0px 0px 38px 1px #a19ea1;
+  top: 50vh;
+  left: 50vw;
+  margin-left: -350px;
+  margin-top: -300px;
+}
+
+.container .shop-content {
+  width: 98%;
+  height: 100%;
+  margin: auto;
+}
+
+.container .shop-content .header {
+  width: 100%;
+  height: 211px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container .shop-content .header .bg {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.container .shop-content .header .title {
+  color: #050505;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  width: 279px;
+  align-items: center;
+  margin-top: 75px;
+  margin-right: auto;
+  justify-content: space-between;
+}
+
+.container .shop-content .header .title i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/L7Oxo-5clOa.png);
+  background-position: 0px -143px;
+  background-size: auto;
+  width: 38px;
+  height: 34px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.container .shop-content .header .title span {
+  font-family: "Raleway";
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #65676b;
+}
+
+.container .shop-content .header .title-sub {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.container .shop-content .header .title-sub span {
+  font-family: "Raleway";
+  font-size: 15px;
+  color: gray;
+}
+
+.container .shop-content .header .exit {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: #9da7b8 solid 1px;
+}
+
+.container .shop-content .header .exit i {
+  font-size: 18px;
+  color: #9da7b8;
+}
+
+.container .shop-content .header .exit:hover {
+  background-color: #f7f9fc;
+}
+
+.container .shop-content .content-stickers {
+  width: 693px;
+  background-color: #f1f3f7;
+  position: absolute;
+  top: 213px;
+  height: 380px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+.container .shop-content .content-stickers .loading {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+  z-index: 10;
+  background-color: white;
+}
+
+.container .shop-content .content-stickers .scroll-stickers {
+  overflow-y: overlay;
+  width: 100%;
+  height: 98%;
+  margin-top: 1.5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker {
+  margin: 0px 5px 10px 5px;
+  background-color: white;
+  width: 329px;
+  height: 175px;
+  border-radius: 8px;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review {
+  width: 90%;
+  height: 82%;
+  margin-top: 5%;
+  margin-left: 5%;
+  background-color: white;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-top {
+  height: 75%;
+  width: 100%;
+  display: flex;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-top .left {
+  width: 30%;
+  height: 100%;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-top .left img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-top .right {
+  width: 70%;
+  height: 100%;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-top .right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot {
+  width: 100%;
+  height: 25%;
+  display: flex;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .name {
+  width: 75%;
+  height: 100%;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .name span {
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Raleway";
+  display: block;
+  margin-top: 12px;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add {
+  width: 25%;
+  height: 100%;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add .btn-add,
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add .btn-go {
+  text-align: center;
+  margin-top: 10%;
+  width: 100%;
+  height: 80%;
+  background-color: #3275f7;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add .btn-add span,
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add .btn-go span {
+  display: block;
+  font-family: "Raleway";
+  padding-top: 7px;
+  font-size: 13px;
+}
+
+.container .shop-content .content-stickers .scroll-stickers .sticker .review .review-bot .add .btn-go {
+  background-color: #afaeae;
+}
+
+.container .shop-content .content-stickers ::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: transparent;
+}
+
+.container .shop-content .content-stickers ::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #a7a2a2;
+}
+
+.container .shop-content .content-stickers ::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+.container .shop-content .content-stickers ::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+/*# sourceMappingURL=shop-sticker.component.css.map */

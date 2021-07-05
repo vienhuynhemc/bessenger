@@ -1,0 +1,14 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>Tùy chỉnh đoạn chat</p>
+        <i class="open" *ngIf="this.setting_box_chat_service.isOpen"></i>
+        <i class="close" *ngIf="!this.setting_box_chat_service.isOpen"></i>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="noi-dung" *ngIf="this.setting_box_chat_service.isOpen">
+
+    </div>
+
+</div>

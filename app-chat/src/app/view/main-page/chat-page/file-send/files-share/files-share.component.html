@@ -1,0 +1,9 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>Tệp được chia sẻ</p>
+        <i class="open" *ngIf="this.files_share_service.isOpen"></i>
+        <i class="close" *ngIf="!this.files_share_service.isOpen"></i>
+    </div>
+
+</div>
