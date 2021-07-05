@@ -36,9 +36,9 @@ export class ChatPageChatPageContentService {
   constructor
     (
       private db: AngularFireDatabase,
-       // pipi html
-    public sanitized: DomSanitizer,
-    ) {
+      // pipi html
+      public sanitized: DomSanitizer,
+  ) {
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
     this.dang_nhaps = [];
@@ -359,10 +359,10 @@ export class ChatPageChatPageContentService {
           }
           // Tính margin top cho tin nhắn
           // Thằng đàu tiên luôn margin top 0px
-          if(count == 0){
+          if (count == 0) {
             tin_nhan.marginTop = "0px";
-          }else{
-            tin_nhan.getMarginTopTinNhan(tin_nhans[count-1]);
+          } else {
+            tin_nhan.getMarginTopTinNhan(tin_nhans[count - 1]);
           }
           // add      
           tin_nhans.push(tin_nhan);
@@ -372,12 +372,14 @@ export class ChatPageChatPageContentService {
         }
       });
       // Thằng cuối cùng sẽ có border bottom
-      tin_nhans[count - 1].isHaveBorderBottom = true;
+      if (count > 0) {
+        tin_nhans[count - 1].isHaveBorderBottom = true;
+      }
     }
     this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
     // Có được list tin nhắn hoàn thiện ta tính số người đã xem được ở từng tin nhắn
-    for(let i =0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length;i++){
-      this.object_chat.cuoc_tro_truyen.tin_nhan[i].getSoNguoiXemDangOViTriTinNhanNay(i,this.object_chat.cuoc_tro_truyen.tin_nhan);
+    for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
+      this.object_chat.cuoc_tro_truyen.tin_nhan[i].getSoNguoiXemDangOViTriTinNhanNay(i, this.object_chat.cuoc_tro_truyen.tin_nhan);
     }
   }
 
