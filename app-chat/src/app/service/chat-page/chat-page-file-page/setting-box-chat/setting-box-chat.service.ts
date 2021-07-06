@@ -50,6 +50,7 @@ export class SettingBoxChatService {
   }
 
   public doiChuDe(i:number){
+    this.colorSelected = i;
      // Đổi tên 
      this.db.object("/cuoc_tro_chuyen/" + this.setting_chat.ma_cuoc_tro_chuyen).update({ mau: this.maus[i].mau_nen,mau_tren:this.maus[i].tren,duoi:this.maus[i].duoi });
     // Tạo tin nhắn
