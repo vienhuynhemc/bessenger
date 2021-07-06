@@ -60,6 +60,13 @@ export class MessengerHeaderService {
     if (object != null) {
       this.object_chat.loai = object['loai_cuoc_tro_truyen'];
       this.object_chat.mau = object['mau'];
+      this.object_chat.mau_duoi = object['duoi'];
+      this.object_chat.mau_tren = object['mau_tren'];
+      if (this.object_chat.mau == '#3275f7') {
+        this.object_chat.mau = 'linear-gradient(0deg,#3275f7, #3275f7)';
+        this.object_chat.mau_tren = "#3275f7";
+        this.object_chat.mau_duoi = "#3275f7";
+      }
       this.object_chat.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
     }
   }

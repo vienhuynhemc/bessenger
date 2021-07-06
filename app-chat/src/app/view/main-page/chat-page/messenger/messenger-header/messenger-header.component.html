@@ -27,14 +27,14 @@
 
     <div class="icon">
         <div class="child" matTooltip="Bắt đầu gọi thoại" matTooltipClass="tooltip">
-            <i [style.color]="this.header_service.object_chat.mau" class="fas fa-phone-alt"></i>
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-phone-alt"></i>
         </div>
         <div class="child" matTooltip="Bắt đầu gọi video" matTooltipClass="tooltip">
-            <i [style.color]="this.header_service.object_chat.mau" class="fas fa-video"></i>
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-video"></i>
         </div>
         <div *ngIf="this.header_service.object_chat.loai == 'nhom'" class="child" matTooltip="Những lựa chọn thêm"
             matTooltipClass="tooltip" (click)="openMenu(boxSelect)">
-            <i [style.color]="this.header_service.object_chat.mau" class="fas fa-ellipsis-h"></i>
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-ellipsis-h"></i>
         </div>
         <div class="box-select hidden" #boxSelect>
             <button> <i class="fas fa-running"></i>Rời khỏi nhóm</button>

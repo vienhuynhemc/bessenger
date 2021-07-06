@@ -239,5 +239,51 @@
         }
       }
     }
+
+    .editColor {
+      height: 441px;
+      width: 635px;
+      display: flex;
+      align-items: center;
+
+      .editColorContent {
+        display: flex;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 592px;
+
+        .itemEditColor {
+          cursor: pointer;
+          border-radius: 30%;
+          width: 64px;
+          height: 64px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 5px;
+          div {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+          }
+        }
+
+        .itemEditColor:hover{
+          background: #ececec78;
+        }
+
+        .itemEditColorSelected{
+          background: #ececec78;
+        }
+      }
+
+      .doi-ten-main-content-buttons{
+        width: 595px;
+        margin-top: 5px;  
+      }
+
+    }
   }
 }
