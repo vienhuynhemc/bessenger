@@ -36,6 +36,7 @@ export class SettingBoxChatComponent implements OnInit {
   }
 
   public doiChuDe(){
+    this.setting_box_chat_service.updateColorSelected();
     this.colorSelected = this.setting_box_chat_service.colorSelected;
     this.setting_box_chat_service.isShowEditColor =true;
   }

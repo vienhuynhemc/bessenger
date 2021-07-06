@@ -73,17 +73,21 @@ export class SettingBoxChatService {
         array.push(mau);
       });
       this.maus = array;
-      if (this.content_service.object_chat.cuoc_tro_truyen.mau == '#3275f7') {
-        this.colorSelected = 31;
-      } else {
-        for (let i = 0; i < this.maus.length; i++) {
-          if (this.content_service.object_chat.cuoc_tro_truyen.mau == this.maus[i].mau_nen) {
-            this.colorSelected = i;
-            break;
-          }
+      this.updateColorSelected();
+    });
+  }
+
+  public updateColorSelected(){
+    if (this.content_service.object_chat.cuoc_tro_truyen.mau == '#3275f7') {
+      this.colorSelected = 31;
+    } else {
+      for (let i = 0; i < this.maus.length; i++) {
+        if (this.content_service.object_chat.cuoc_tro_truyen.mau == this.maus[i].mau_nen) {
+          this.colorSelected = i;
+          break;
         }
       }
-    });
+    }
   }
 
 
