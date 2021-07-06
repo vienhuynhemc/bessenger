@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { StickersService } from 'src/app/service/stickers/stickers.service';
+import { RecordingService } from 'src/app/service/recording/recording.service';
 
 @Component({
   selector: 'app-messenger-footer',
@@ -28,7 +29,8 @@ export class MessengerFooterComponent implements OnInit {
     public content_service: ChatPageChatPageContentService,
     private route: ActivatedRoute,
     public stickersService: StickersService,
-    public my_name_service:MyNameService
+    public my_name_service:MyNameService,
+    public recordingService: RecordingService
   ) { }
 
   ngOnInit(): void {
@@ -246,13 +248,16 @@ export class MessengerFooterComponent implements OnInit {
     this.tin_nhan = "";
     this.xuLyCss();
   }
-
+  public sendRecording() {
+    
+  }
   public openBoxBtcx() {
     this.isShowBtcxBox = !this.isShowBtcxBox;
     // mở box này thì đóng các box còn lại
     if (this.isShowBtcxBox) {
       this.stickersService.isShowBoxSticker = false;
       this.stickersService.isShowBoxGiphy = false;
+      this.recordingService.isShowRecording = false;
 
     }
   }
@@ -264,6 +269,8 @@ export class MessengerFooterComponent implements OnInit {
     if (this.stickersService.isShowBoxGiphy) {
       this.isShowBtcxBox = false;
       this.stickersService.isShowBoxSticker = false;
+      this.recordingService.isShowRecording = false;
+
     }
   }
 
@@ -272,6 +279,21 @@ export class MessengerFooterComponent implements OnInit {
     this.stickersService.openSticker()
     if (this.stickersService.isShowBoxSticker) {
       this.isShowBtcxBox = false;
+      this.stickersService.isShowBoxGiphy = false;
+      this.recordingService.isShowRecording = false;
+    }
+  }
+
+  // hiển thị ghi âm
+  public openRecording() {
+    this.recordingService.showRecording();
+    if(!this.recordingService.isShowRecording) {
+      this.recordingService.stopRecording();
+    }
+    else {
+     
+      this.isShowBtcxBox = false;
+      this.stickersService.isShowBoxSticker = false;
       this.stickersService.isShowBoxGiphy = false;
     }
   }
@@ -336,4 +358,6 @@ export class MessengerFooterComponent implements OnInit {
       this.content_service.updateOnInput(this.messenger_main_service.ma_cuoc_tro_chuyen);
     }, 0);
   }
+
+
 }
