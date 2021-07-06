@@ -68,7 +68,8 @@ export class RecordingService {
         }
       }
     setTimeout(() => {
-      this.mediaRecorder.start(100)
+      if(this.mediaRecorder.state != 'recording')
+          this.mediaRecorder.start(100)
     }, 500);
     this.interval = setInterval(this.raiseRecording, 1000);
     this.timeout = setTimeout(() => {
@@ -91,7 +92,16 @@ export class RecordingService {
       this.mediaRecorder.stop();
       clearInterval(this.interval)
       clearTimeout(this.timeout)
-     
+      if(this.isStateListen) {
+        clearInterval(this.intervalListen);
+        clearTimeout(this.timeoutListen);
+      }
+    } else {
+      clearInterval(this.interval)
+      if(this.isStateListen) {
+        clearInterval(this.intervalListen);
+        clearTimeout(this.timeoutListen);
+      }
     }
   }
 
@@ -104,51 +114,56 @@ export class RecordingService {
       let time = Number.parseInt(audioPlayRaise.dataset.timehold);
 
     //  dừng ghi âm
-     if(this.mediaRecorder.state == 'recording') {
-      this.mediaRecorder.stop();
-      this.setStatePause();
-      clearInterval(this.interval)
-      clearTimeout(this.timeout)
-      for(var i=0; i<content.length; i++) 
-        content[i].style.display = 'none';
-        // nghe lại
-    } else if(this.mediaRecorder.state != 'recording' && this.isStatePause()) {
-      this.setStateListen()
-      for(var i=0; i<content.length; i++) 
-        content[i].style.display = 'block';
-      audioTemp.play();
-      this.intervalListen = setInterval(this.raiseListen, 1000);
-      this.timeoutListen = setTimeout(() => {
-        audioTemp.pause();
-        audioTemp.currentTime = 0;
+      if(this.mediaRecorder.state == 'recording') {
+        this.mediaRecorder.stop();
         this.setStatePause();
+        clearInterval(this.interval)
+        clearTimeout(this.timeout)
         for(var i=0; i<content.length; i++) 
           content[i].style.display = 'none';
-        if(time < 10) {
-          audioPlayRaise.innerHTML = '0:0'+ time;
-        } else if(this.timeNext == 60) {
-          audioPlayRaise.innerHTML = '1:00';
-        } else {
-          audioPlayRaise.innerHTML = '0:'+ time;
+          // nghe lại
+      } else if(this.mediaRecorder.state != 'recording' && this.isStatePause()) {
+        this.setStateListen()
+        if(audioTemp != null) {
+            for(var i=0; i<content.length; i++) 
+              content[i].style.display = 'block';
+            audioTemp.play();
+            this.intervalListen = setInterval(this.raiseListen, 1000);
+            this.timeoutListen = setTimeout(() => {
+              audioTemp.pause();
+              audioTemp.currentTime = 0;
+              this.setStatePause();
+              for(var i=0; i<content.length; i++) 
+                content[i].style.display = 'none';
+              if(time < 10) {
+                audioPlayRaise.innerHTML = '0:0'+ time;
+              } else if(this.timeNext == 60) {
+                audioPlayRaise.innerHTML = '1:00';
+              } else {
+                audioPlayRaise.innerHTML = '0:'+ time;
+              }
+              audioPlayRaise.dataset.time = time+''
+              clearInterval(this.intervalListen);
+            }, Number.parseInt(audioPlayRaise.dataset.time)*1000);
         }
-        audioPlayRaise.dataset.time = time+''
+        // dừng nghe lại
+      } else {
+        this.setStatePause()
+        for(var i=0; i<content.length; i++) 
+          content[i].style.display = 'none';
         clearInterval(this.intervalListen);
-      }, Number.parseInt(audioPlayRaise.dataset.time)*1000);
-      // dừng nghe lại
-    } else {
-      this.setStatePause()
-      for(var i=0; i<content.length; i++) 
-        content[i].style.display = 'none';
-      clearInterval(this.intervalListen);
-      clearTimeout(this.timeoutListen);
-      audioTemp.pause();
+        clearTimeout(this.timeoutListen);
+        if(audioTemp != null)
+          audioTemp.pause();
+       
+      }
      
-    }
   }
   // thời gian khi nghe lại
   raiseListen() {
     let audioPlayRaise = document.getElementById('time-number');
-    let time = audioPlayRaise.dataset.time;
+    
+      let  time = audioPlayRaise.dataset.time;
     this.timeNext = Number.parseInt(time) - 1;
     if(this.timeNext < 10) {
       audioPlayRaise.innerHTML = '0:0'+ this.timeNext;

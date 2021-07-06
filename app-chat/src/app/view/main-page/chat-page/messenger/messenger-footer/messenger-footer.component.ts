@@ -329,16 +329,19 @@ export class MessengerFooterComponent implements OnInit {
 
   // hiển thị ghi âm
   public openRecording() {
-    this.recordingService.showRecording();
-    this.tin_nhan = '';
-    if(!this.recordingService.isShowRecording) {
-      this.recordingService.stopRecording();
-    }
-    else {
+    setTimeout(() => {
+      this.recordingService.showRecording();
+      this.tin_nhan = '';
+      if(!this.recordingService.isShowRecording) {
+        this.recordingService.stopRecording();
+      }
+      else {
       this.isShowBtcxBox = false;
       this.stickersService.isShowBoxSticker = false;
       this.stickersService.isShowBoxGiphy = false;
     }
+    }, 500);
+    
   }
   public getTopBoxBTCX() {
     let parent_input = document.getElementById("parent_input");
