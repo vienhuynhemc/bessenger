@@ -5,6 +5,8 @@ export class ObjectChat {
     ma_tai_khoan_so_huu: string;
     loai: string;
     mau: string;
+    mau_tren:string;
+    mau_duoi:string;
     bieu_tuong_cam_xuc: string;
     ten_nhom: string;
     is_online: boolean;
