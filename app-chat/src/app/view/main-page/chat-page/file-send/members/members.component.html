@@ -1,0 +1,9 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>Thành viên trong đoạn chat</p>
+        <i class="open" *ngIf="this.members_service.isOpen"></i>
+        <i class="close" *ngIf="!this.members_service.isOpen"></i>
+    </div>
+
+</div>

@@ -1,0 +1,244 @@
+.arrow-giphy {
+  transform: translate(-222px, -7px) rotate(-45deg);
+  width: 17px;
+  height: 17px;
+  right: 0px;
+  position: absolute;
+  background: white;
+  bottom: -11px;
+  box-shadow: -1px 1px 1px #ffffff80;
+}
+
+.container {
+  width: 270px;
+  height: 300px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.container .header {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 100%;
+  height: 13%;
+  display: flex;
+  border-bottom: #d2d8e0 solid 0.2px;
+}
+
+.container .header .ago {
+  width: 14%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container .header .ago .done {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
+  background-position: 0px -106px;
+  background-size: auto;
+  width: 20px;
+  image-rendering: -webkit-optimize-contrast;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.container .header .ago .select {
+  image-rendering: -webkit-optimize-contrast;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
+  background-position: -50px -81px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.container .header .alo-selected {
+  background-color: #dee3eb;
+}
+
+.container .header .alo-selected i {
+  color: #3275f7;
+}
+
+.container .header .prev,
+.container .header .next {
+  width: 10%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container .header .next {
+  border-right: #d2d8e0 solid 0.2px;
+  border-left: #d2d8e0 solid 0.2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .header .next i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
+  background-position: -25px -81px;
+  background-size: auto;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  transform: translateX(-1px);
+}
+
+.container .header .prev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: #d2d8e0 solid 0.2px;
+}
+
+.container .header .prev i {
+  transform: translateX(2px);
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
+  background-position: 0px -81px;
+  background-size: auto;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.container .header .left {
+  width: 61%;
+  height: 100%;
+  display: flex;
+  overflow-x: overlay;
+  scroll-behavior: smooth;
+}
+
+.container .header .left .sticker {
+  text-align: center;
+  min-width: 25%;
+  max-width: 25%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.container .header .left .sticker img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  margin-top: 5px;
+}
+
+.container .header .left .sticker-selected {
+  background-color: #dee3eb;
+}
+
+.container .header .left::-webkit-scrollbar {
+  height: 0px;
+}
+
+.container .header .right {
+  width: 15%;
+  height: 40px;
+  position: absolute;
+  right: 0px;
+}
+
+.container .header .right .add {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  margin: auto;
+  margin-top: 10%;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .header .right .add i {
+  image-rendering: -webkit-optimize-contrast;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/GBQOBZbtErF.png);
+  background-position: 0px -357px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  filter: invert(30%) sepia(98%) saturate(200%) saturate(200%) saturate(200%) saturate(166.5%) hue-rotate(192deg) brightness(91%) contrast(101%);
+}
+
+.container .header .right .add:hover {
+  background-color: #e9eaea80;
+  transition: all 0.5s;
+}
+
+.container .loading {
+  position: absolute;
+  width: 100%;
+  height: 87%;
+  border-radius: 8px;
+  z-index: 10;
+  background-color: white;
+}
+
+.container .content {
+  width: 100%;
+  overflow-y: overlay;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container .content-sticker {
+  min-width: 25%;
+  max-width: 25%;
+  height: 25%;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.container .content-sticker img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  margin-top: 10%;
+}
+
+.container .content-sticker:hover {
+  background-color: #dee3eb;
+}
+
+.container .content-selected {
+  height: 87%;
+}
+
+.container ::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: transparent;
+}
+
+.container ::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #00000066;
+}
+
+.container ::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+.container ::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+/*# sourceMappingURL=sticker.component.css.map */

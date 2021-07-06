@@ -13,4 +13,35 @@
   line-height: 16px;
   white-space: pre-line !important;
 }
+
+.span-image-box-chat {
+  image-rendering: -webkit-optimize-contrast;
+  background-size: 16px 16px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.span-image-box-chat span {
+  color: transparent;
+  caret-color: #050505;
+}
+
+.gui_text_icon_icon {
+  image-rendering: -webkit-optimize-contrast;
+  background-size: 28px 28px;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  margin: 0px 1px;
+}
+
+.gui_text_icon_icon span {
+  width: 28px;
+  height: 28px;
+  color: transparent;
+  caret-color: #050505;
+}
 /*# sourceMappingURL=styles.css.map */

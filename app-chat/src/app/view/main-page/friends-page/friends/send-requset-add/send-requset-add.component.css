@@ -68,6 +68,11 @@
   width: 100px;
 }
 
+.friends-list-content .detail-friend .detail-sub .detail-center .non-mutual {
+  margin-top: 22px;
+  margin-bottom: 13px;
+}
+
 .friends-list-content .detail-friend .detail-sub .detail-center .detail-btn {
   width: 110px;
   height: 30px;

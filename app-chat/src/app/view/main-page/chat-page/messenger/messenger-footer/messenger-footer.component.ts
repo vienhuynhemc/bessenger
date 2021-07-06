@@ -7,6 +7,7 @@ import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-p
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { StickersService } from 'src/app/service/stickers/stickers.service';
 import { RecordingService } from 'src/app/service/recording/recording.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-messenger-footer',
@@ -44,6 +45,7 @@ export class MessengerFooterComponent implements OnInit {
         this.getData();
       }
     });
+   
   }
 
   public getData() {
@@ -64,6 +66,11 @@ export class MessengerFooterComponent implements OnInit {
       parent_input.style.marginBottom = "5px";
     }
     this.tin_nhan = "";
+    // reset
+    if( this.recordingService.isShowRecording) {
+      this.recordingService.stopRecording();
+      this.recordingService.isShowRecording = false;
+    }
   }
 
   public getIcon(item: EmojiObject) {
@@ -229,6 +236,10 @@ export class MessengerFooterComponent implements OnInit {
     }
   }
 
+  public guiTinNhanLuotThich(){
+    this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, "", "gui_tin_nhan_like",this.my_name_service.myName);
+  }
+
   public sendTinNhan(){
     let input = document.getElementById("input");
     if (this.tin_nhan.trim().length != 0) {
@@ -248,9 +259,41 @@ export class MessengerFooterComponent implements OnInit {
     this.tin_nhan = "";
     this.xuLyCss();
   }
+
+  // gửi ghi âm
   public sendRecording() {
-    
+    // dừng ghi âm
+    if(this.recordingService.isStateRecording())
+      this.recordingService.pauseRecording();
+    // lưu vào fire storage
+      // trễ 1s để lấy ra src audio
+    setTimeout(() => {
+        let audio = document.getElementById('source-audio');
+        this.recordingService.urlAudio= audio.getAttribute('src');
+        // lấy blob
+        fetch(this.recordingService.urlAudio).then(res => res.blob()).then(blob => {
+          let newAdd = this.recordingService.accessRecordingStorage(blob);
+          // phần trăm loading
+          newAdd.percentageChanges().subscribe(percent => {
+            // 100% thì gửi tin nhắn
+            if (percent == 100) {
+              newAdd.snapshotChanges().pipe(
+                finalize(
+                  () => {
+                    this.recordingService.storageRef.getDownloadURL().subscribe(downloadURL => {
+                      this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, downloadURL, "gui_ghi_am", this.my_name_service.myName)
+                    });
+                  }
+                )
+              ).subscribe();
+            }
+          });
+        })
+        this.recordingService.showRecording();
+        }, 1000);
+   
   }
+
   public openBoxBtcx() {
     this.isShowBtcxBox = !this.isShowBtcxBox;
     // mở box này thì đóng các box còn lại
@@ -287,11 +330,11 @@ export class MessengerFooterComponent implements OnInit {
   // hiển thị ghi âm
   public openRecording() {
     this.recordingService.showRecording();
+    this.tin_nhan = '';
     if(!this.recordingService.isShowRecording) {
       this.recordingService.stopRecording();
     }
     else {
-     
       this.isShowBtcxBox = false;
       this.stickersService.isShowBoxSticker = false;
       this.stickersService.isShowBoxGiphy = false;
