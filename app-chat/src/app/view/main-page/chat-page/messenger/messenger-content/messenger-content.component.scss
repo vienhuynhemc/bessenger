@@ -18,7 +18,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 15px;
+    padding-bottom: 15px;
+    background: white;
     .hinh-dai-dien {
       position: relative;
       width: 60px;
@@ -100,6 +101,7 @@
     font-size: 9.5px;
     letter-spacing: 0.5px;
     font-weight: 600;
+    background: white;
   }
 
   .list-dang-nhap {
@@ -139,10 +141,12 @@
   }
 
   .gui_text {
+    overflow: hidden;
     .tren {
       display: flex;
       align-items: flex-end;
       .hinh {
+        position: relative;
         margin-left: 2px;
         width: 28px;
         height: 28px;
@@ -156,6 +160,7 @@
         }
       }
       .chua-nd {
+        box-shadow: 0 0 0px 500px white;
         .noi-dung {
           word-wrap: break-word;
           font-family: "Raleway";
@@ -239,6 +244,7 @@
   }
 
   .gui_text_icon {
+    background: white;
     .tren {
       display: flex;
       align-items: flex-end;
@@ -339,6 +345,16 @@
   }
 }
 
+.nen {
+  width: 475px;
+  height: 602px;
+  margin-top: 10px;
+  position: absolute;
+  z-index: 1;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
 .content {
   width: 482px;
   height: 612px;
@@ -346,11 +362,12 @@
   overflow-y: scroll;
   margin-bottom: 10px;
   margin-left: 10px;
+  position: relative;
+  z-index: 2;
 
   #danh-sach-tin-nhan {
     width: 100%;
     transform: translateY(-10px);
-    margin-top: 20px;
   }
 }
 ::-webkit-scrollbar-track {

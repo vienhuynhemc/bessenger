@@ -11,6 +11,7 @@ export class ChatPageCuocTroChuyen {
     mau: string;
     bieu_tuong_cam_xuc: string;
     tin_nhan: ChatPageTinNhan[];
+    backgroundImg: string;
 
     public isHaveMarginTopThongBao(index: number) {
         if (index == 0) return false;

@@ -1,6 +1,9 @@
 <div class="container" [style.height]="this.messenger_footer_service.getHeight()">
+    <div class="nen" id="nen" [style.background-image]="this.content_service.object_chat.cuoc_tro_truyen.backgroundImg">
+    </div>
     <div class="content" id="tin-nhan-div" (scroll)="scrollChange($event)">
         <div id="danh-sach-tin-nhan">
+            <div style="height: 20px; width: 100%; background-color: white;"></div>
             <!-- Thằng đầu tiên thằng nào cũng phải có -->
             <!-- Đó là thông tin cơ bản của cuộc trò chuyện -->
             <div class="first">
@@ -32,12 +35,12 @@
             <!--1. Tin nhắn -->
             <div *ngFor="let item of this.content_service.object_chat.cuoc_tro_truyen.tin_nhan;let i = index">
                 <!-- Thông báo -->
-                <div *ngIf="item.loai_tin_nhan == 'thong_bao'" class="thong_bao" [style.margin-top]="item.marginTop">
+                <div *ngIf="item.loai_tin_nhan == 'thong_bao'" class="thong_bao" [style.padding-top]="item.marginTop">
                     {{item.noi_dung_thong_bao}}
                 </div>
                 <!-- gui_text -->
                 <div *ngIf="item.loai_tin_nhan == 'gui_text'" class="gui_text" [class.ban_than_div]="item.isBanThan"
-                    [style.margin-top]="item.marginTop">
+                    [style.padding-top]="item.marginTop">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
                         <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
@@ -52,7 +55,7 @@
                             [class.border-duoi-ban-than]="item.isBanThan && item.isHaveBorderBottom"
                             [class.border-tren-doi-phuong]="!item.isBanThan && item.isHaveBorderTop"
                             [class.border-duoi-doi-phuong]="!item.isBanThan && item.isHaveBorderBottom"
-                            [style.background-color]="item.isBanThan?this.content_service.object_chat.cuoc_tro_truyen.mau:'#e4e6eb'">
+                            [style.background-color]="item.isBanThan?'':'#e4e6eb'">
                             <div class="noi-dung" [innerHTML]="item.noi_dung_html">
                             </div>
                         </div>
@@ -106,7 +109,7 @@
                 </div>
                 <!-- gửi text icon -->
                 <div *ngIf="item.loai_tin_nhan == 'gui_text_icon'" class="gui_text_icon"
-                    [style.margin-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                    [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
                         <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
@@ -168,7 +171,7 @@
                 </div>
                 <!-- Gửi Sticker và giphy -->
                 <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan' || item.loai_tin_nhan == 'gui_giphy'"
-                    class="gui_text_icon" [style.margin-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                    class="gui_text_icon" [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
                         <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
@@ -239,7 +242,7 @@
                 </div>
                 <!-- gửi tin nhắn like -->
                 <div *ngIf="item.loai_tin_nhan == 'gui_tin_nhan_like'" class="gui_text_icon"
-                    [style.margin-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                    [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
                     <div class="tren">
                         <!-- Hình nếu ko  phải bản thân -->
                         <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
