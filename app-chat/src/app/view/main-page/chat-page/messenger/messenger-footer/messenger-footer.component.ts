@@ -1,3 +1,4 @@
+import { FooterScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/footer-scroll.service';
 import { MyNameService } from './../../../../../service/my-name/my-name.service';
 import { EmojiObject } from './../../../../../models/emoji/emoji_object';
 import { ActivatedRoute } from '@angular/router';
@@ -31,7 +32,8 @@ export class MessengerFooterComponent implements OnInit {
     private route: ActivatedRoute,
     public stickersService: StickersService,
     public my_name_service:MyNameService,
-    public recordingService: RecordingService
+    public recordingService: RecordingService,
+    public footer_scroll:FooterScrollService
   ) { }
 
   ngOnInit(): void {
@@ -44,8 +46,10 @@ export class MessengerFooterComponent implements OnInit {
         this.messenger_footer_service.layData.unsubscribe();
         this.getData();
       }
+      // Đăng ký chênh lệch height
+      setTimeout(()=>    this.footer_scroll.register(document.getElementById("parent_input")),0);
+  
     });
-   
   }
 
   public getData() {
