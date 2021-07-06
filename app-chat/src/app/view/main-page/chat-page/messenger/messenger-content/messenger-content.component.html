@@ -36,7 +36,7 @@
             <div *ngFor="let item of this.content_service.object_chat.cuoc_tro_truyen.tin_nhan;let i = index">
                 <!-- Thông báo -->
                 <div *ngIf="item.loai_tin_nhan == 'thong_bao'" class="thong_bao" [style.padding-top]="item.marginTop">
-                    {{item.noi_dung_thong_bao}}
+                    <p> {{item.noi_dung_thong_bao}}</p>
                 </div>
                 <!-- gui_text -->
                 <div *ngIf="item.loai_tin_nhan == 'gui_text'" class="gui_text" [class.ban_than_div]="item.isBanThan"
