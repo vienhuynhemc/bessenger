@@ -7,10 +7,10 @@
         </div>
 </div>
 <div class="container" *ngIf="friendInfor.id != 1">
-  <img  class="bg" src="{{ friendInfor.img }}" alt="" />
+  <img  class="bg" src="{{ friendInfor.img }} || 'assets/images/loading.gif'" alt="" />
   <div class="cover-bg"></div>
   <div class="cover">
-    <img src="{{ friendInfor.img }}" alt="" />
+    <img src="{{ friendInfor.img }} || 'assets/images/loading.gif'" alt="" />
   </div>
  
   <div class="content">

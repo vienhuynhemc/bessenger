@@ -18,7 +18,7 @@ export class OfferFriendsComponent implements OnInit {
   iDUrl: any;
   mutualOfferList: any[];
   idMutualOffer: string = '';
-  // mặc định lấy ra 6
+  // mặc định lấy ra 20
   sizeGetData = 20;
   constructor(
     public friendsPageService: FriendsPageService,

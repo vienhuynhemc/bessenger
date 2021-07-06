@@ -68,6 +68,8 @@ import { EmojiComponent } from './view/emoji/emoji.component';
 import { GiphyComponent } from './view/giphy/giphy.component';
 import { StickerComponent } from './view/sticker/sticker.component';
 import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component';
+import { RecordingComponent } from './view/recording/recording.component';
+
 import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
 import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
 import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-share/files-share.component';
@@ -117,6 +119,10 @@ import { MediasShareComponent } from './view/main-page/chat-page/file-send/media
     EmojiComponent,
     GiphyComponent,
     StickerComponent,
+    ShopStickerComponent,
+    RecordingComponent,
+
+
     ShopStickerComponent, 
     SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent
   ],

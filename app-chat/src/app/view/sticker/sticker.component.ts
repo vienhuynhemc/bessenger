@@ -125,7 +125,7 @@ export class StickerComponent implements OnInit, OnDestroy {
     scroll.scrollTop = 0;
     this.selected = idSticker;
     this.stickerDetailList = []
-    this.stickersService.accessStickers().child(idSticker).child('danh_sach_nhan_dan').once('value', (sticker) => {
+    this.stickersService.accessStickers().child(idSticker).child('danh_sach_nhan_dan').on('value', (sticker) => {
         if(sticker.val()!=null) {
           sticker.forEach(element => {
             let stickerObject = new StickerDetail();
@@ -162,10 +162,12 @@ export class StickerComponent implements OnInit, OnDestroy {
   // gui sticker
   sendSticker(item: StickerDetail) {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    // gửi tin nhắn
     this.stickersService.accessAccount().child(parseIDUser).once('value', (acc) => {
       this.contentService.sumitTinNhan(this.maCuocTroChuyen ,item.url, "gui_nhan_dan",acc.val().ten);
       this.stickersService.isShowBoxSticker = false;
     });
+    // thêm vào lịch sử gửi sticker
     this.stickersService.accessAccessHistorySticker().child(parseIDUser).once('value', (his) => {
       if(his.val() == null) {
         this.stickersService.accessAccessHistorySticker().child(parseIDUser).child('0').set({
