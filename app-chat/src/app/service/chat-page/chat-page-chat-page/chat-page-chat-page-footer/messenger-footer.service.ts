@@ -33,6 +33,13 @@ export class MessengerFooterService {
     if (object != null) {
       this.object_chat_footer.loai = object['loai_cuoc_tro_truyen'];
       this.object_chat_footer.mau = object['mau'];
+      this.object_chat_footer.mau_duoi = object['duoi'];
+      this.object_chat_footer.mau_tren = object['mau_tren'];
+      if(this.object_chat_footer.mau == '#3275f7'){
+        this.object_chat_footer.mau =  'linear-gradient(0deg,#3275f7, #3275f7)';
+        this.object_chat_footer.mau_tren = "#3275f7";
+        this.object_chat_footer.mau_duoi = "#3275f7";
+      }
       this.object_chat_footer.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
     }
   }

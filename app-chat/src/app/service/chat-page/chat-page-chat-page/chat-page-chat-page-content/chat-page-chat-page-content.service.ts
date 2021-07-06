@@ -234,12 +234,13 @@ export class ChatPageChatPageContentService {
     if (object != null) {
       this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen = object['loai_cuoc_tro_truyen'];
       this.object_chat.cuoc_tro_truyen.mau = object['mau'];
+      this.object_chat.cuoc_tro_truyen.mau_tren = object['mau_tren'];
+      this.object_chat.cuoc_tro_truyen.mau_duoi = object['duoi'];
       this.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
-      let bi = object['mau_nen'];
-      if(bi!= null){
-        this.object_chat.cuoc_tro_truyen.backgroundImg = bi;
-      }else{
-        this.object_chat.cuoc_tro_truyen.backgroundImg =  'linear-gradient(0deg,#3275f7, #3275f7)';
+      if(this.object_chat.cuoc_tro_truyen.mau == '#3275f7'){
+        this.object_chat.cuoc_tro_truyen.mau =  'linear-gradient(0deg,#3275f7, #3275f7)';
+        this.object_chat.cuoc_tro_truyen.mau_tren = "#3275f7";
+        this.object_chat.cuoc_tro_truyen.mau_duoi = "#3275f7";
       }
     }
   }

@@ -9,9 +9,10 @@ export class ChatPageCuocTroChuyen {
     ten_nguoi_so_huu: string;
     ton_tai: number;
     mau: string;
+    mau_tren:string;
+    mau_duoi:string;
     bieu_tuong_cam_xuc: string;
     tin_nhan: ChatPageTinNhan[];
-    backgroundImg: string;
 
     public isHaveMarginTopThongBao(index: number) {
         if (index == 0) return false;

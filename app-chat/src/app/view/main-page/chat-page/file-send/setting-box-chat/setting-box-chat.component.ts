@@ -13,6 +13,9 @@ export class SettingBoxChatComponent implements OnInit {
   public ten_moi: string;
   public isEqual: boolean;
 
+  // Select đối tượng chọn màu
+  public colorSelected:number;
+
   constructor(
     public setting_box_chat_service: SettingBoxChatService,
     public content_service: ChatPageChatPageContentService,
@@ -30,6 +33,15 @@ export class SettingBoxChatComponent implements OnInit {
     this.ten_moi = this.header_service.object_chat.name.noi_dung_goc;
     this.isEqual = true;
     this.setting_box_chat_service.isShowEditName = true;
+  }
+
+  public doiChuDe(){
+    this.colorSelected = this.setting_box_chat_service.colorSelected;
+    this.setting_box_chat_service.isShowEditColor =true;
+  }
+
+  public anDoiChuDe(){
+    this.setting_box_chat_service.isShowEditColor =false;
   }
 
   public anDoiTen() {
@@ -52,6 +64,11 @@ export class SettingBoxChatComponent implements OnInit {
   public luuDoiTenNhom() {
     this.anDoiTen();
     this.setting_box_chat_service.doiTenNhom(this.ten_moi.trim(),);
+  }
+
+  public luuDoiChuDe(){
+    this.anDoiChuDe();
+    this.setting_box_chat_service.doiChuDe(this.colorSelected);
   }
 
 }
