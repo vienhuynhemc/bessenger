@@ -1,3 +1,4 @@
+import { EmojiObject } from './../../../../../models/emoji/emoji_object';
 import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Component, OnInit } from '@angular/core';
@@ -70,6 +71,27 @@ export class SettingBoxChatComponent implements OnInit {
   public luuDoiChuDe(){
     this.anDoiChuDe();
     this.setting_box_chat_service.doiChuDe(this.colorSelected);
+  }
+
+  public getIcon(item:EmojiObject){
+    this.hiddenEditEmoji();
+    // Check thử nó có khác icon hiện không
+    if(item.src != this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc){
+      this.setting_box_chat_service.doiBieuTuongCamXuc(item.src,item.alt);
+    }
+  }
+
+  public showEditEmoji(){
+    this.setting_box_chat_service.isShowEditEmoji =true;
+  }
+
+  public hiddenEditEmoji(){
+    this.setting_box_chat_service.isShowEditEmoji = false;
+  }
+
+  public goBieuTuongCamXuc(){
+    this.hiddenEditEmoji();
+    this.setting_box_chat_service.goBieuTuongCamXuc();
   }
 
 }

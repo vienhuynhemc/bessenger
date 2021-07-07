@@ -346,6 +346,7 @@ export class ChatPageFriendsLeftServiceService {
           tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
           tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
           tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
+          tin_nhan.alt = data_tin_nhan['alt'];
           let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
           let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
           if (tinhTrangXem != null) {

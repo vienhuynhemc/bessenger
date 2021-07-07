@@ -223,6 +223,9 @@ export class ChatPageFriendsObjectLeft {
                     case "gui_giphy":
                         result.noi_dung = ten + " gửi một file GIF từ GIPHY"
                         break;
+                    case "gui_tin_nhan_btcx":
+                        result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].alt;
+                        break;
                 }
             }
         }
