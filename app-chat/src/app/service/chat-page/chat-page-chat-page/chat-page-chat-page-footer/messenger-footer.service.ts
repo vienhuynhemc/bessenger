@@ -41,6 +41,7 @@ export class MessengerFooterService {
         this.object_chat_footer.mau_duoi = "#3275f7";
       }
       this.object_chat_footer.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
+      this.object_chat_footer.bieu_tuong_cam_xuc_alt ="Gửi "+ object['bieu_tuong_cam_xuc_alt'];
     }
   }
 

@@ -113,17 +113,29 @@
     cursor: pointer;
     margin-right: 15px;
     margin-left: 5px;
-    .send{
+    .send {
       transform: translateY(2px);
     }
+    .emoji-btcx {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 24px;
+        height: 24px;
+        image-rendering: -webkit-optimize-contrast;
+      }
+    }
   }
-  .box-giphy, .box-stickers {
+  .box-giphy,
+  .box-stickers {
     position: absolute;
     width: 270px;
     height: 300px;
     top: -311px;
     left: 30px;
-    box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+    box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+      inset 0 0 0 1px #ffffff80;
     border-radius: 8px;
     z-index: 10;
     background-color: white;

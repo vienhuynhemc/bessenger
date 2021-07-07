@@ -13,6 +13,7 @@ export class ChatPageTinNhan {
     ma_tin_nhan_phan_hoi: string;
     ngay_gui: number;
     noi_dung: string;
+    alt:string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
 
     // Các thuộc tính giúp đỡ lag
@@ -84,6 +85,7 @@ export class ChatPageTinNhan {
             || this.loai_tin_nhan == 'gui_giphy'
             || this.loai_tin_nhan == 'thong_bao'
             || this.loai_tin_nhan == 'gui_tin_nhan_like'
+            || this.loai_tin_nhan == 'gui_ghi_am'
         ) {
             result = "9px";
         }
@@ -91,6 +93,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'thong_bao'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
+            || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
         ) {
             result = "9px";
         }

@@ -103,6 +103,18 @@
       svg {
         margin-right: 12px;
       }
+
+      .emoji-btcx{
+        margin-right: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+          width: 20px;
+          height: 20px;
+          image-rendering: -webkit-optimize-contrast;
+        }
+      }
     }
     .item:hover {
       background-color: #f2f2f2;
@@ -270,20 +282,87 @@
           }
         }
 
-        .itemEditColor:hover{
+        .itemEditColor:hover {
           background: #ececec78;
         }
 
-        .itemEditColorSelected{
+        .itemEditColorSelected {
           background: #ececec78;
         }
       }
 
-      .doi-ten-main-content-buttons{
+      .doi-ten-main-content-buttons {
         width: 595px;
-        margin-top: 5px;  
+        margin-top: 5px;
       }
+    }
 
+    .editEmoji {
+      width: 365px;
+      height: 484px;
+
+      .now-emoji {
+        display: flex;
+        width: 293px;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+
+        .now-emoji-thong-tin {
+          p {
+            font-family: "Raleway";
+            font-size: 15px;
+            font-weight: 700;
+          }
+          img {
+            width: 24px;
+            height: 24px;
+            margin-top: 5px;
+            image-rendering: -webkit-optimize-contrast;
+          }
+        }
+
+        .now-emoji-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 6px;
+          cursor: pointer;
+          background-color: #e4e6eb;
+          width: 65px;
+          height: 36px;
+          p {
+            font-family: "Raleway";
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 5px;
+          }
+          i {
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/xTLfZtneakk.png);
+            background-position: 0px -772px;
+            background-size: auto;
+            width: 16px;
+            height: 16px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            filter: invert(8%) sepia(10%) saturate(200%) saturate(200%)
+              saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+          }
+        }
+      }
+      .select-emoji {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        display: flex;
+        position: relative;
+      }
+    }
+
+    .none-now {
+      height: 431px;
     }
   }
 }
