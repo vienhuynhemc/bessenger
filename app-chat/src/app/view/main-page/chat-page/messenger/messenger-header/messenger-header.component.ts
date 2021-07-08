@@ -16,6 +16,11 @@ export class MessengerHeaderComponent implements OnInit {
     public header_service: MessengerHeaderService
   ) { }
 
+  public roiKhoiNhom(element){
+    this.openMenu(element);
+    this.header_service.roiKhoiNhom(this.messenger_main_service.ma_cuoc_tro_chuyen);
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       // Lấy loại cuộc trò chuyện
