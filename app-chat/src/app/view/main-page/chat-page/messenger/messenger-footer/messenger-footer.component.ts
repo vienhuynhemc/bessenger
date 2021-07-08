@@ -340,9 +340,11 @@ export class MessengerFooterComponent implements OnInit {
                   .subscribe();
                 this.recordingService.isShowRecording = false;
                 this.checkSendAudio = false;
+               
               }
             });
           });
+          this.check100Audio = false;
       }, 1000);
     }
 
