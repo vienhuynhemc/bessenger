@@ -84,6 +84,7 @@ export class ChatPageTinNhan {
         if (this.loai_tin_nhan == 'gui_nhan_dan'
             || this.loai_tin_nhan == 'gui_giphy'
             || this.loai_tin_nhan == 'thong_bao'
+            || this.loai_tin_nhan == 'thoi_gian'
             || this.loai_tin_nhan == 'gui_tin_nhan_like'
             || this.loai_tin_nhan == 'gui_ghi_am'
         ) {
@@ -92,6 +93,7 @@ export class ChatPageTinNhan {
         else if (tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'thong_bao'
+            || tin_nhan.loai_tin_nhan == 'thoi_gian'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
         ) {
@@ -240,7 +242,9 @@ export class ChatPageTinNhan {
 
         if (tin_nhan.ma_tai_khoan != this.ma_tai_khoan) {
             result = true;
-        } else if (tin_nhan.loai_tin_nhan == 'thong_bao'
+        } else if (
+            tin_nhan.loai_tin_nhan == 'thong_bao'
+            ||   tin_nhan.loai_tin_nhan == 'thoi_gian'
             || tin_nhan.loai_tin_nhan == 'gui_text_icon'
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
@@ -258,6 +262,7 @@ export class ChatPageTinNhan {
             result = true;
         } else if (tin_nhan != null && (tin_nhan.loai_tin_nhan == 'thong_bao'
             || tin_nhan.loai_tin_nhan == 'gui_text_icon'
+            || tin_nhan.loai_tin_nhan == 'thoi_gian'
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
