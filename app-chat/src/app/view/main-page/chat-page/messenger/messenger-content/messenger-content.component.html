@@ -171,7 +171,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Gửi Sticker và giphy -->
+                    <!-- Gửi Sticker và giphy hoac ghi am-->
                     <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan' || item.loai_tin_nhan == 'gui_giphy' || item.loai_tin_nhan == 'gui_ghi_am'"
                         class="gui_text_icon" [style.padding-top]="item.marginTop"
                         [class.ban_than_div]="item.isBanThan">
@@ -205,9 +205,7 @@
                             <div *ngIf="item.loai_tin_nhan == 'gui_ghi_am'" class="chua-nd"
                                 [class.doi_phuong]="!item.isBanThan" [matTooltip]="item.timeSend"
                                 matTooltipClass="tooltip">
-                                <audio controls>
-                                    <source [src]="item.noi_dung" type="audio/mp3">
-                                </audio>
+                                <app-message-recording [colorBackground]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi" [inputRecording]="item.noi_dung" [idRecording]="item.ma_tin_nhan"></app-message-recording>
                             </div>
                             <!-- Trạng thái gửi nếu là bản thân-->
                             <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">

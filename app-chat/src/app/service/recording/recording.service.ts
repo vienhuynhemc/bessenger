@@ -61,17 +61,16 @@ export class RecordingService {
           items.push(e.data);
           if (this.mediaRecorder.state == 'inactive') {
             this.blob = new Blob(items, { type: 'audio/mp3' });
-            let audio = document.getElementById('content');
-            let audio_play = document.createElement('audio');
-            audio_play?.setAttribute('id', 'audio-temp');
-            audio_play.style.visibility = 'hidden';
-            audio_play.style.position = 'absolute';
-            audio_play?.setAttribute('controls', 'controls');
-            audio?.appendChild(audio_play);
+            let audioPlayRaise = document.getElementById('time-number');
+            let seekbar = <HTMLInputElement>document.getElementById('seekbar');
+            let audio_play = document.getElementById('audio-temp');
             audio_play.innerHTML =
               '<source id="source-audio" src="' +
               URL.createObjectURL(this.blob) +
               '" type="audio/mp3"/>';
+            let durationAu = audioPlayRaise.dataset.time;
+            seekbar.max = durationAu;
+            seekbar.step = 0.00000000000000001 + '';
           }
         };
         setTimeout(() => {
@@ -85,6 +84,11 @@ export class RecordingService {
             this.mediaRecorder.stop();
             this.setStatePause();
             clearInterval(this.interval);
+            let content = document
+              .getElementById('content')
+              .getElementsByTagName('span');
+            for (var i = 0; i < content.length; i++)
+              content[i].style.display = 'none';
           }
         }, 60000);
       });
@@ -117,8 +121,6 @@ export class RecordingService {
       .getElementById('content')
       .getElementsByTagName('span');
     let audioTemp = <HTMLVideoElement>document.getElementById('audio-temp');
-    let audioPlayRaise = document.getElementById('time-number');
-    let time = Number.parseInt(audioPlayRaise.dataset.timehold);
     setTimeout(() => {
       //  dừng ghi âm
       if (this.mediaRecorder.state == 'recording') {
@@ -135,52 +137,22 @@ export class RecordingService {
       ) {
         this.setStateListen();
         if (audioTemp != null) {
-          for (var i = 0; i < content.length; i++)
+          for (var i = 0; i < content.length; i++) {
             content[i].style.display = 'block';
+            content[i].style.animationPlayState = 'running';
+          }
           audioTemp.play();
-          this.intervalListen = setInterval(this.raiseListen, 1000);
-          this.timeoutListen = setTimeout(() => {
-            audioTemp.pause();
-            audioTemp.currentTime = 0;
-            this.setStatePause();
-            for (var i = 0; i < content.length; i++)
-              content[i].style.display = 'none';
-            if (time < 10) {
-              audioPlayRaise.innerHTML = '0:0' + time;
-            } else if (this.timeNext == 60) {
-              audioPlayRaise.innerHTML = '1:00';
-            } else {
-              audioPlayRaise.innerHTML = '0:' + time;
-            }
-            audioPlayRaise.dataset.time = time + '';
-            clearInterval(this.intervalListen);
-          }, Number.parseInt(audioPlayRaise.dataset.time) * 1000);
         }
         // dừng nghe lại
       } else {
         this.setStatePause();
         for (var i = 0; i < content.length; i++)
-          content[i].style.display = 'none';
+          content[i].style.animationPlayState = 'paused';
         clearInterval(this.intervalListen);
         clearTimeout(this.timeoutListen);
         if (audioTemp != null) audioTemp.pause();
       }
     }, 100);
-  }
-  // thời gian khi nghe lại
-  raiseListen() {
-    let audioPlayRaise = document.getElementById('time-number');
-
-    let time = audioPlayRaise.dataset.time;
-    this.timeNext = Number.parseInt(time) - 1;
-    if (this.timeNext < 10) {
-      audioPlayRaise.innerHTML = '0:0' + this.timeNext;
-    } else if (this.timeNext == 60) {
-      audioPlayRaise.innerHTML = '1:00';
-    } else {
-      audioPlayRaise.innerHTML = '0:' + this.timeNext;
-    }
-    audioPlayRaise.dataset.time = this.timeNext + '';
   }
 
   // tăng dần thời gian
@@ -190,7 +162,7 @@ export class RecordingService {
     this.timeNext = Number.parseInt(time) + 1;
     if (this.timeNext < 10) {
       audioPlayRaise.innerHTML = '0:0' + this.timeNext;
-    } else if (this.timeNext == 60) {
+    } else if (this.timeNext >= 60) {
       audioPlayRaise.innerHTML = '1:00';
     } else {
       audioPlayRaise.innerHTML = '0:' + this.timeNext;

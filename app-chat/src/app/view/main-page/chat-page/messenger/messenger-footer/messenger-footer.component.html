@@ -70,7 +70,7 @@
         </div>
     </div>
     <!-- thanh ghi âm -->
-    <app-recording *ngIf="recordingService.isShowRecording"></app-recording>
+    <app-recording [colorBackground]="this.messenger_footer_service.object_chat_footer.mau_duoi" *ngIf="recordingService.isShowRecording"></app-recording>
     <!--  -->
     <div class="khung-chat" *ngIf="!recordingService.isShowRecording">
         <div class="parent-input" id="parent_input">

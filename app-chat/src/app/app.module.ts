@@ -73,7 +73,8 @@ import { RecordingComponent } from './view/recording/recording.component';
 import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
 import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
 import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-share/files-share.component';
-import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component'
+import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component';
+import { MessageRecordingComponent } from './view/main-page/chat-page/message-recording/message-recording.component'
 
 @NgModule({
   declarations: [
@@ -124,7 +125,7 @@ import { MediasShareComponent } from './view/main-page/chat-page/file-send/media
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent
   ],
   imports: [
     BrowserModule,
