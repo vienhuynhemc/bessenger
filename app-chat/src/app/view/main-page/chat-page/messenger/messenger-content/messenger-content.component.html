@@ -40,6 +40,11 @@
                         [style.padding-top]="item.marginTop">
                         <p> {{item.noi_dung_thong_bao}}</p>
                     </div>
+                    <!-- Thời gian -->
+                    <div *ngIf="item.loai_tin_nhan == 'thoi_gian'" class="thoi_gian"
+                        [style.padding-top]="item.marginTop">
+                        <p> {{item.noi_dung}}</p>
+                    </div>
                     <!-- gui_text -->
                     <div *ngIf="item.loai_tin_nhan == 'gui_text'" class="gui_text" [class.ban_than_div]="item.isBanThan"
                         [style.padding-top]="item.marginTop">

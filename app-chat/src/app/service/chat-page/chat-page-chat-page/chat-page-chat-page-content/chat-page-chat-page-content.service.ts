@@ -214,7 +214,7 @@ export class ChatPageChatPageContentService {
     });
   }
 
-  public sumitTinNhanBTCX(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string,alt:string) {
+  public sumitTinNhanBTCX(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string, alt: string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Tin nhắn
@@ -228,7 +228,7 @@ export class ChatPageChatPageContentService {
         ma_tin_nhan_phan_hoi: "",
         ngay_gui: currentTime,
         noi_dung: tin_nhan,
-        alt:alt,
+        alt: alt,
       }
     ).then((ref) => {
       // Lấy all thành viên
@@ -273,8 +273,8 @@ export class ChatPageChatPageContentService {
       this.object_chat.cuoc_tro_truyen.mau_tren = object['mau_tren'];
       this.object_chat.cuoc_tro_truyen.mau_duoi = object['duoi'];
       this.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc = object['bieu_tuong_cam_xuc'];
-      if(this.object_chat.cuoc_tro_truyen.mau == '#3275f7'){
-        this.object_chat.cuoc_tro_truyen.mau =  'linear-gradient(0deg,#3275f7, #3275f7)';
+      if (this.object_chat.cuoc_tro_truyen.mau == '#3275f7') {
+        this.object_chat.cuoc_tro_truyen.mau = 'linear-gradient(0deg,#3275f7, #3275f7)';
         this.object_chat.cuoc_tro_truyen.mau_tren = "#3275f7";
         this.object_chat.cuoc_tro_truyen.mau_duoi = "#3275f7";
       }
@@ -376,7 +376,6 @@ export class ChatPageChatPageContentService {
 
   public dienTinNhan(value: object) {
     let tin_nhans: ChatPageTinNhan[] = [];
-    let count = 0;
     if (value != null) {
       Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
         let tin_nhan = new ChatPageTinNhan();
@@ -422,41 +421,79 @@ export class ChatPageChatPageContentService {
           tin_nhan.getTen();
           // Lấy nội dung html
           tin_nhan.getNoiDungHTMLTinNhan(this.sanitized);
-          // Tính xem nó có border top va bottom ko
-          // Thằng đầu tiên có border top
-          if (count == 0) {
-            tin_nhan.isHaveBorderTop = true;
-          } else {
-            tin_nhan.getIsHaveBorderTop(tin_nhans[count - 1]);
-          }
-          // Kiểm tra borderbottom
-          if (count > 0) {
-            tin_nhans[count - 1].getIsHaveBorderBottom(tin_nhan);
-          }
-          // Tính margin top cho tin nhắn
-          // Thằng đàu tiên luôn margin top 0px
-          if (count == 0) {
-            tin_nhan.marginTop = "0px";
-          } else {
-            tin_nhan.getMarginTopTinNhan(tin_nhans[count - 1]);
-          }
           // add      
           tin_nhans.push(tin_nhan);
-
-          // Biến count để xem đang ở vị trí thứ mấy
-          count++;
         }
       });
-      // Thằng cuối cùng sẽ có border bottom
-      if (count > 0) {
-        tin_nhans[count - 1].isHaveBorderBottom = true;
-      }
     }
     this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
     // Có được list tin nhắn hoàn thiện ta tính số người đã xem được ở từng tin nhắn
     for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
       this.object_chat.cuoc_tro_truyen.tin_nhan[i].getSoNguoiXemDangOViTriTinNhanNay(i, this.object_chat.cuoc_tro_truyen.tin_nhan);
     }
+    // Sau đó tạo các tin nhắn thời gian kèm cặp vào cách nhau 15p
+    this.addTimeSpace();
+    // Tính margin và border
+    this.handleBorderAndMargin();
+  }
+
+  public handleBorderAndMargin() {
+    let count = 0;
+    for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
+      // Tính xem nó có border top va bottom ko
+      // Thằng đầu tiên có border top
+      if (count == 0) {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[i].isHaveBorderTop = true;
+      } else {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[i].getIsHaveBorderTop(this.object_chat.cuoc_tro_truyen.tin_nhan[count - 1]);
+      }
+      // Kiểm tra borderbottom
+      if (count > 0) {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[count - 1].getIsHaveBorderBottom(this.object_chat.cuoc_tro_truyen.tin_nhan[i]);
+      }
+      // Tính margin top cho tin nhắn
+      // Thằng đàu tiên luôn margin top 0px
+      if (count == 0) {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[i].marginTop = "0px";
+      } else {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[i].getMarginTopTinNhan(this.object_chat.cuoc_tro_truyen.tin_nhan[count - 1]);
+      }
+      count++;
+    }
+    // Thằng cuối cùng sẽ có border bottom
+    if (count > 0) {
+      this.object_chat.cuoc_tro_truyen.tin_nhan[count - 1].isHaveBorderBottom = true;
+    }
+  }
+
+  public addTimeSpace() {
+    let i = 0;
+    // Thời gian hiện tại
+    let nowTime = 0;
+    while (i < this.object_chat.cuoc_tro_truyen.tin_nhan.length) {
+      let time = this.object_chat.cuoc_tro_truyen.tin_nhan[i].ngay_gui;
+      // > 15 minutes?
+      if (time - nowTime > 15 * 60000) {
+        let object = new ChatPageTinNhan();
+        object.noi_dung = this.getTimeSpaceString(time);
+        object.loai_tin_nhan = 'thoi_gian';
+        nowTime = time;
+        this.object_chat.cuoc_tro_truyen.tin_nhan.splice(i, 0, object);
+        i += 2;
+      } else {
+        i++;
+      }
+    }
+  }
+
+  public getTimeSpaceString(time: number) {
+    let date = new Date(time);
+    let year = date.getFullYear();
+    let thang = date.getMonth() + 1;
+    let ngay = date.getDate();
+    let gio = date.getHours();
+    let phut = date.getMinutes();
+    return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}, ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
   }
 
 }

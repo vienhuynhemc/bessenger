@@ -108,6 +108,22 @@
     line-height: 13px;      
     }
   }
+  .thoi_gian{
+    display: flex;
+    justify-content: center;
+    color: #8a8d91;
+    font-family: sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    font-weight: 650;
+    background: white;
+    p{
+    max-width: 256px;
+    text-align: center;
+    line-height: 13px;      
+    }
+  }
+
 
   .list-dang-nhap {
     margin-left: 2px;
