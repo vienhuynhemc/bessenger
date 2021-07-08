@@ -82,7 +82,7 @@ export class ObjectChat {
             let max = -999;
             for (let i = 0; i < this.thanh_vien.length; i++) {
                 if (this.thanh_vien[i].ma_tai_khoan != ma_tai_khoan) {
-                    if (this.thanh_vien[i].roi_chua == 'chua') {
+                    if (this.loai == 'don' || (this.loai == 'nhom'&& this.thanh_vien[i].roi_chua == 'chua')) {
                         if (this.thanh_vien[i].lan_cuoi_dang_nhap > max) {
                             max = this.thanh_vien[i].lan_cuoi_dang_nhap;
                         }
