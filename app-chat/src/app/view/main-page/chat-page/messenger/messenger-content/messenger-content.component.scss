@@ -102,13 +102,13 @@
     letter-spacing: 0.5px;
     font-weight: 600;
     background: white;
-    p{
-    max-width: 256px;
-    text-align: center;
-    line-height: 13px;      
+    p {
+      max-width: 256px;
+      text-align: center;
+      line-height: 13px;
     }
   }
-  .thoi_gian{
+  .thoi_gian {
     display: flex;
     justify-content: center;
     color: #8a8d91;
@@ -117,13 +117,12 @@
     letter-spacing: 0.5px;
     font-weight: 650;
     background: white;
-    p{
-    max-width: 256px;
-    text-align: center;
-    line-height: 13px;      
+    p {
+      max-width: 256px;
+      text-align: center;
+      line-height: 13px;
     }
   }
-
 
   .list-dang-nhap {
     padding-left: 2px;
@@ -346,6 +345,115 @@
       }
     }
     .da_xem {
+      margin-right: 3px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: flex-end;
+      .list {
+        display: flex;
+        justify-content: space-between;
+        .item-ok {
+          img {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin: 0px 1px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+
+  .gui_ghi_am {
+    overflow: hidden;
+    .tren {
+      display: flex;
+      align-items: flex-end;
+      .hinh {
+        position: relative;
+        z-index: 2;
+        margin-left: 2px;
+        width: 28px;
+        height: 28px;
+        box-shadow: 0 0 2px #909090;
+        border-radius: 50%;
+        img {
+          width: 28px;
+          height: 28px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .chua-nd {
+        position: relative;
+        z-index: 1;
+        .noi-dung {
+          max-width: 330px;
+        }
+        .sticker_noidung {
+          width: 128px;
+          height: 128px;
+          object-fit: cover;
+        }
+        .giphy-content {
+          max-width: 330px;
+          border-radius: 18px;
+          border: #d6dae0 solid 0.5px;
+          .giphy-noidung {
+            width: 100%;
+            height: 100%;
+            border-top-right-radius: 18px;
+            border-top-left-radius: 18px;
+          }
+          .name-giphy {
+            width: 100%;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            img {
+              width: 40px;
+              margin-left: 5px;
+            }
+            .name {
+              width: 100px;
+              font-size: 11px;
+              font-family: "Raleway";
+              font-weight: 450;
+              letter-spacing: 1px;
+            }
+          }
+        }
+      }
+      .doi_phuong {
+        margin-left: 8px;
+      }
+      .trang_thai_gui {
+        position: relative;
+        z-index: 2;
+        width: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
+        display: flex;
+        justify-content: center;
+
+        .nguoi_xem {
+          img {
+            width: 14px;
+            height: 14px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 2px #909090;
+          }
+        }
+      }
+      .trang_thai_gui_kpbt {
+        margin-left: auto;
+      }
+    }
+    .da_xem {
+      position: relative;
+      z-index: 2;
       margin-right: 3px;
       margin-top: 4px;
       display: flex;
