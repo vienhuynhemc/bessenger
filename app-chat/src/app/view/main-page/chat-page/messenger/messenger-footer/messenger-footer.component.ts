@@ -37,6 +37,7 @@ export class MessengerFooterComponent implements OnInit {
     public footer_scroll: FooterScrollService
   ) {}
 
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.reset();
@@ -283,6 +284,7 @@ export class MessengerFooterComponent implements OnInit {
         }
       }
       if (count != input.childNodes.length) {
+
         let type = input.children.length == input.childNodes.length ? "gui_text_icon" : "gui_text";
         this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type, this.my_name_service.myName);
       }
