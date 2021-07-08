@@ -12,6 +12,10 @@ export class ObjectChatContent {
 
     is_online: boolean;
 
+    // Trạng thái rời khỏi cuộc chat chưa
+    is_roi_chua: boolean;
+    time_roi_di: number;
+
     // img của thành viên nhóm chat
     public imgAvatars: string[] = [];
     // Thông báo sự kết nối thành viên : Bạn chưa kết nối với 3.14 người :v
@@ -23,8 +27,16 @@ export class ObjectChatContent {
         if (this.thanh_vien != null) {
             if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
                 if (this.thanh_vien.length > 1) {
-                    result.push(this.thanh_vien[this.thanh_vien.length - 1].link_hinh_dai_dien);
-                    result.push(this.thanh_vien[this.thanh_vien.length - 2].link_hinh_dai_dien);
+                    let count = 0;
+                    for(let i = this.thanh_vien.length-1;i>-1;i--){
+                        if(this.thanh_vien[i].roi_chua == 'chua'){
+                            result.push(this.thanh_vien[i].link_hinh_dai_dien);
+                            count++;
+                        }
+                        if(count == 2){
+                            break;
+                        }
+                    }
                 }
             } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
                 for (let i = 0; i < this.thanh_vien.length; i++) {
@@ -86,6 +98,32 @@ export class ObjectChatContent {
             }
         }
         return result;
+    }
+
+    public getIsRoiChua() {
+        let result = false;
+        let mtk = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        for (let i = 0; i < this.thanh_vien.length; i++) {
+            if (this.thanh_vien[i].ma_tai_khoan == mtk && this.thanh_vien[i].roi_chua == 'roi') {
+                result = true;
+                this.time_roi_di = this.thanh_vien[i].ngay_roi_di;
+                break;
+            }
+        }
+        this.is_roi_chua = result;
+    }
+
+    public checkRoiChua(mtk:string):boolean{
+        if(this.thanh_vien.length != 0){
+            for(let i =0; i  < this.thanh_vien.length;i++){
+                if(this.thanh_vien[i].ma_tai_khoan == mtk){
+                    if(this.thanh_vien[i].roi_chua == 'roi'){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

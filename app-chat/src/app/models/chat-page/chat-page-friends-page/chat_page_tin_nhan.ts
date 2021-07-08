@@ -13,7 +13,7 @@ export class ChatPageTinNhan {
     ma_tin_nhan_phan_hoi: string;
     ngay_gui: number;
     noi_dung: string;
-    alt:string;
+    alt: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
 
     // Các thuộc tính giúp đỡ lag
@@ -37,9 +37,9 @@ export class ChatPageTinNhan {
     // Margintop
     public marginTop: string = "";
     // Số người xem đang ở vị trí của tin nhắn
-    public soNguoiXemDangOViTriCuaTinNhanNay:number;
+    public soNguoiXemDangOViTriCuaTinNhanNay: number;
     // Ta sẽ nắm thóp được 1 thằng nếu chỉ có duy nhất 1 người xem qua lúc tính soNguoiXemDangOViTriNay
-    public thangXemDuyNhat:ChatPageTinhTrangXem = new ChatPageTinhTrangXem();
+    public thangXemDuyNhat: ChatPageTinhTrangXem = new ChatPageTinhTrangXem();
 
     // Các thuộc tính riêng cho từng loại
     noi_dung_thong_bao: string = "";
@@ -183,6 +183,7 @@ export class ChatPageTinNhan {
         for (let i = 0; i < this.tinh_trang_xem.length; i++) {
             if (this.tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan
                 && this.tinh_trang_xem[i].ma_tai_khoan != this.ma_tai_khoan
+                && !this.tinh_trang_xem[i].is_roi_chua
             ) {
                 if (this.tinh_trang_xem[i].xem_chua == 'roi') {
                     result = true;
@@ -201,13 +202,13 @@ export class ChatPageTinNhan {
             ) {
                 count++;
                 // cập nhật cho thằng tinh_trang_xem này được phép show
-                this.tinh_trang_xem[i].isShow =true;
+                this.tinh_trang_xem[i].isShow = true;
             }
         }
         this.soNguoiXemDangOViTriCuaTinNhanNay = count;
         // xem thử phải có 1 thằng ko, nếu 1 thì bắt thằng đó
-        if(this.soNguoiXemDangOViTriCuaTinNhanNay == 1){
-            this.thangXemDuyNhat = this.getNguoiXemDuyNhat(index,tin_nhan);
+        if (this.soNguoiXemDangOViTriCuaTinNhanNay == 1) {
+            this.thangXemDuyNhat = this.getNguoiXemDuyNhat(index, tin_nhan);
         }
     }
 
@@ -244,7 +245,7 @@ export class ChatPageTinNhan {
             result = true;
         } else if (
             tin_nhan.loai_tin_nhan == 'thong_bao'
-            ||   tin_nhan.loai_tin_nhan == 'thoi_gian'
+            || tin_nhan.loai_tin_nhan == 'thoi_gian'
             || tin_nhan.loai_tin_nhan == 'gui_text_icon'
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'

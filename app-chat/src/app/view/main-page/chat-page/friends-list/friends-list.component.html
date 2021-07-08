@@ -48,14 +48,21 @@
                     <div *ngIf="this.chat_page_friend_left_service.compareSearch(i)">
                         <div class="content">
                             <div class="left">
-                                <div class="don" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen != 'nhom'">
-                                    <img [src]="item.imgsAvatar[0] || 'assets/images/loading.gif'" alt="">
+                                <div class="nhom" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                                && item.imgsAvatar.length == 2
+                                ">
+                                    <img [src]="item.imgsAvatar[0] ||'assets/images/loading.gif'" class="hinh_1" alt="">
+                                    <img [src]="item.imgsAvatar[1] ||'assets/images/loading.gif'" alt="" class="hinh_2">
                                 </div>
-                                <div class="nhom" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'">
-                                    <img class="hinh_1" [src]="item.imgsAvatar[0] || 'assets/images/loading.gif'"
-                                        alt="">
-                                    <img class="hinh_2" [src]="item.imgsAvatar[1] || 'assets/images/loading.gif'"
-                                        alt="">
+                                <div class="don" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don'
+                                || (item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                                && item.imgsAvatar.length == 1)
+                                ">
+                                    <img [src]="item.imgsAvatar[0] ||'assets/images/loading.gif'" alt="">
+                                </div>
+                                <div class="don" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                            && item.imgsAvatar.length == 0">
+                                    <img src="assets/images/icon.ico" alt="">
                                 </div>
                                 <div class="cover-online">
                                     <div class="online"></div>
@@ -95,7 +102,7 @@
                             <div class="child"></div>
                         </div>
 
-                        <div *ngIf="item.itMe" class="so_nguoi_da_xem">
+                        <div *ngIf="item.itMe && !item.is_roi_chua" class="so_nguoi_da_xem">
                             <div class="hinh_1" *ngIf="item.imgUserSeened.length>0"
                                 [matTooltip]="item.imgUserSeened[0].noi_dung" matTooltipClass="tooltip"><img
                                     [src]="item.imgUserSeened[0].url ||  'assets/images/loading.gif'" alt=""></div>
@@ -110,11 +117,11 @@
                                 <p>+{{item.imgUserSeened[3].so_thanh_vien}}</p>
                             </div>
                         </div>
-                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && item.isDaNhan" class="da_gui"
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && item.isDaNhan && !item.is_roi_chua" class="da_gui"
                             matTooltip="Đã chuyển" matTooltipClass="tooltip">
                             <i class="fas fa-check"></i>
                         </div>
-                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && !item.isDaNhan" class="chua_nhan"
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && !item.isDaNhan && !item.is_roi_chua" class="chua_nhan"
                             matTooltip="Đã gửi" matTooltipClass="tooltip">
                             <i class="fas fa-check"></i>
                         </div>

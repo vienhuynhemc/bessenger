@@ -1,13 +1,13 @@
-import { Subscription } from 'rxjs';
-import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 
 @Injectable({
   providedIn: 'root'
@@ -89,10 +89,11 @@ export class ChatPageChatPageContentService {
         }
       });
       // Xem thử ông nào quá 2s thì xóa
+      // ông nào rời nhóm rồi cũng xóa
       let currentTime = Number(new Date());
       let count = 0;
       while (count < array.length) {
-        if (currentTime - array[count].lan_cuoi_dang_nhap > 2000) {
+        if (currentTime - array[count].lan_cuoi_dang_nhap > 2000  || this.object_chat.checkRoiChua(array[count].ma_tai_khoan) ) {
           array.splice(count, 1);
         } else {
           array[count].getNoiDung();
@@ -129,11 +130,13 @@ export class ChatPageChatPageContentService {
         if (this.object_chat.thanh_vien != null) {
           for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
             if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
-              let overTime = currentTime - last_time;
-              if (overTime < 10000) {
-                isOnline = true;
-                break;
+              if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+                let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
+                let overTime = currentTime - last_time;
+                if (overTime < 10000) {
+                  isOnline = true;
+                  break;
+                }
               }
             }
           }
@@ -323,6 +326,8 @@ export class ChatPageChatPageContentService {
       });
     }
     this.object_chat.thanh_vien = array;
+    // Có được thành viên kiểm tra rời chưa
+    this.object_chat.getIsRoiChua();
   }
 
   public getDataThanhVien() {
@@ -398,6 +403,7 @@ export class ChatPageChatPageContentService {
             o.xem_chua = data['xem_chua'];
             o.ngay_nhan = data['ngay_nhan'];
             o.ten = data['ten'];
+            o.is_roi_chua = this.taiKhoanTinhTrangXemRoiChua(o.ma_tai_khoan);
             o.getNoiDung();
             tinh_trang_xems.push(o);
           });
@@ -427,6 +433,10 @@ export class ChatPageChatPageContentService {
       });
     }
     this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
+    // Lọc lại tin nhắn lấy những tin nhắn trước thời gian ta đã rời đi
+    if (this.object_chat.is_roi_chua) {
+      this.fillter();
+    }
     // Có được list tin nhắn hoàn thiện ta tính số người đã xem được ở từng tin nhắn
     for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
       this.object_chat.cuoc_tro_truyen.tin_nhan[i].getSoNguoiXemDangOViTriTinNhanNay(i, this.object_chat.cuoc_tro_truyen.tin_nhan);
@@ -435,6 +445,30 @@ export class ChatPageChatPageContentService {
     this.addTimeSpace();
     // Tính margin và border
     this.handleBorderAndMargin();
+  }
+
+  public taiKhoanTinhTrangXemRoiChua(mtk:string):boolean{
+    for(let i =0 ; i< this.object_chat.thanh_vien.length;i++){
+      if(this.object_chat.thanh_vien[i].ma_tai_khoan == mtk){
+        if(this.object_chat.thanh_vien[i].roi_chua == 'roi'){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public fillter() {
+    let i = this.object_chat.cuoc_tro_truyen.tin_nhan.length - 1;
+    let timeRoiDi = this.object_chat.time_roi_di;
+    while (i > -1) {
+      if(this.object_chat.cuoc_tro_truyen.tin_nhan[i].ngay_gui > timeRoiDi){
+        this.object_chat.cuoc_tro_truyen.tin_nhan.splice(i,1);
+        i--;
+      }else{
+        break;
+      }
+    }
   }
 
   public handleBorderAndMargin() {
