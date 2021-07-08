@@ -1,3 +1,5 @@
+import { MyNameService } from './../../../my-name/my-name.service';
+import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -20,7 +22,9 @@ export class MessengerHeaderService {
   public layLanCuoiDangNhap: Subscription;
 
   constructor(
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private content_service: ChatPageChatPageContentService,
+    private my_name_service: MyNameService
   ) {
     this.object_chat = new ObjectChat();
     // Hàm update lại ban_bes 5s 1 lần
@@ -29,6 +33,16 @@ export class MessengerHeaderService {
 
   public getLanCuoiDangNhap() {
     return this.db.object("/lan_cuoi_dang_nhap").snapshotChanges();
+  }
+
+  public roiKhoiNhom(mctc: string) {
+    // Tạo tin nhắn
+    this.content_service.sumitTinNhanThongBaoTaoNhom(mctc,
+      "đã rời khởi nhóm", "thong_bao", this.my_name_service.myName);
+    // Rời nhóm
+    let currentTime = Number(new Date());
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    this.db.object("/thanh_vien_cuoc_tro_chuyen/" + mctc + "/" + ma_tai_khoan).update({ roi_chua: "roi", ngay_roi_di: currentTime });
   }
 
   public update(): void {
@@ -41,11 +55,13 @@ export class MessengerHeaderService {
         if (this.object_chat.thanh_vien != null) {
           for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
             if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
-              let overTime = currentTime - last_time;
-              if (overTime < 10000) {
-                isOnline = true;
-                break;
+              if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+                let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
+                let overTime = currentTime - last_time;
+                if (overTime < 10000) {
+                  isOnline = true;
+                  break;
+                }
               }
             }
           }
@@ -102,10 +118,16 @@ export class MessengerHeaderService {
         let objectChatThanhVien = new ObjectChatThanhVien();
         objectChatThanhVien.ma_tai_khoan = ma_thanh_vien;
         objectChatThanhVien.ngay_tham_gia = data_thanh_vien['ngay_tham_gia'];
+        objectChatThanhVien.ngay_roi_di = data_thanh_vien['ngay_roi_di'];
+        objectChatThanhVien.roi_chua = data_thanh_vien['roi_chua'];
         array.push(objectChatThanhVien);
       });
     }
     this.object_chat.thanh_vien = array;
+    // Có được thành viên rồi check thử bản thân rời khỏi cuộc trò chuyện này hay chưa
+    this.object_chat.getIsRoiChua();
+    // Kiểm tra đã rời hết chưa
+    this.object_chat.getIsRoiHetChua();
   }
 
   public getDataThanhVien() {

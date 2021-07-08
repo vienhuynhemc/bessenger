@@ -1,14 +1,13 @@
-import { LeftScrollService } from './left-scroll.service';
-import { Subscription } from 'rxjs';
-import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
-import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
-import { ChatPageObjectTinNhanFriend } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
-import { ChatPageCuocTroChuyen } from './../../../models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ChatPageProcessServiceService } from '../chat-page-process-service.service';
+import { Subscription } from 'rxjs';
 import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
-import { ChatPageBanBe } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_ban_be';
+import { ChatPageProcessServiceService } from '../chat-page-process-service.service';
+import { ChatPageCuocTroChuyen } from './../../../models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
+import { ChatPageObjectTinNhanFriend } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
+import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
+import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
+import { LeftScrollService } from './left-scroll.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +41,7 @@ export class ChatPageFriendsLeftServiceService {
   public indexNext: number;
   public indexPre: number;
   public indexSelect: number;
-  public isLoadFirst:boolean;
+  public isLoadFirst: boolean;
 
   constructor(
     private db: AngularFireDatabase,
@@ -124,11 +123,13 @@ export class ChatPageFriendsLeftServiceService {
           let isOnline = false;
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-              let overTime = currentTime - last_time;
-              if (overTime < 10000) {
-                isOnline = true;
-                break;
+              if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+                let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                let overTime = currentTime - last_time;
+                if (overTime < 10000) {
+                  isOnline = true;
+                  break;
+                }
               }
             }
           }
@@ -346,6 +347,7 @@ export class ChatPageFriendsLeftServiceService {
           tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
           tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
           tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
+          tin_nhan.alt = data_tin_nhan['alt'];
           let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
           let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
           if (tinhTrangXem != null) {
@@ -355,6 +357,7 @@ export class ChatPageFriendsLeftServiceService {
               o.ngay_xem = data['ngay_xem'];
               o.xem_chua = data['xem_chua'];
               o.ngay_nhan = data['ngay_nhan'];
+              o.is_roi_chua = this.taiKhoanTinhTrangXemRoiChua(o.ma_tai_khoan,i);
               tinh_trang_xems.push(o);
             });
             tin_nhan.tinh_trang_xem = tinh_trang_xems;
@@ -375,9 +378,22 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].isMe();
         // Kiểm tra xem ông nào nhậ nchuwa
         this.allBoxData[i].getIsDaNhan();
+        // Kiểm tra bản thân rời khỏi cuộc trò chuyện chưa
+        this.allBoxData[i].getIsRoiChua();
         return;
       }
     }
+  }
+
+  public taiKhoanTinhTrangXemRoiChua(mtk:string, index:number):boolean{
+    for(let i =0 ; i< this.allBoxData[index].thong_tin_thanh_vien.length;i++){
+      if(this.allBoxData[index].thong_tin_thanh_vien[i].ma_tai_khoan == mtk){
+        if(this.allBoxData[index].thong_tin_thanh_vien[i].roi_chua == 'roi'){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public sort(): void {

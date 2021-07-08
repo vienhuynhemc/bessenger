@@ -8,6 +8,7 @@ export class ChatPageTinhTrangXem {
     ngay_xem: number;
     xem_chua: string;
     ngay_nhan: number;
+    is_roi_chua:boolean;
 
     // Nội dung để đổ ra
     public noi_dung: string = "";
@@ -20,6 +21,7 @@ export class ChatPageTinhTrangXem {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.ma_tai_khoan == ma_tai_khoan) return false;
         if (this.ma_tai_khoan == ma_tk) return false;
+        if(this.is_roi_chua) return false;
         if (this.xem_chua == 'roi') return true;
         return false;
     }

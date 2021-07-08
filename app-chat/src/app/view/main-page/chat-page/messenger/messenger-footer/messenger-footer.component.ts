@@ -25,6 +25,7 @@ export class MessengerFooterComponent implements OnInit {
   // check click gửi tin nhắn audio
   checkSendAudio: boolean;
   check100Audio:boolean;
+
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
@@ -35,6 +36,7 @@ export class MessengerFooterComponent implements OnInit {
     public recordingService: RecordingService,
     public footer_scroll: FooterScrollService
   ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -47,11 +49,10 @@ export class MessengerFooterComponent implements OnInit {
         this.getData();
       }
       // Đăng ký chênh lệch height
-      setTimeout(
-        () =>
-          this.footer_scroll.register(document.getElementById('parent_input')),
-        0
-      );
+
+      setTimeout(() => this.footer_scroll.register(document.getElementById("parent_input")), 0);
+
+
     });
   }
 
@@ -259,6 +260,7 @@ export class MessengerFooterComponent implements OnInit {
   }
 
   public guiTinNhanLuotThich() {
+
     this.content_service.sumitTinNhan(
       this.messenger_main_service.ma_cuoc_tro_chuyen,
       '',
@@ -267,8 +269,13 @@ export class MessengerFooterComponent implements OnInit {
     );
   }
 
+
+  public guiTinNhanBTCX() {
+    this.content_service.sumitTinNhanBTCX(this.messenger_main_service.ma_cuoc_tro_chuyen, this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc, "gui_tin_nhan_btcx", this.my_name_service.myName, this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc_alt.split(" ")[1]);
+  }
+
   public sendTinNhan() {
-    let input = document.getElementById('input');
+    let input = document.getElementById("input");
     if (this.tin_nhan.trim().length != 0) {
       let count = 0;
       for (let i = 0; i < input.childNodes.length; i++) {
@@ -287,6 +294,8 @@ export class MessengerFooterComponent implements OnInit {
           type,
           this.my_name_service.myName
         );
+        let type = input.children.length == input.childNodes.length ? "gui_text_icon" : "gui_text";
+        this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type, this.my_name_service.myName);
       }
     }
     // làm rỗng ô nhập
@@ -345,6 +354,7 @@ export class MessengerFooterComponent implements OnInit {
           });
       }, 1000);
     }
+
   }
 
   public openBoxBtcx() {

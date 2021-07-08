@@ -24,6 +24,9 @@ export class SettingBoxChatService {
   // Màu đang được chọn
   public colorSelected: number;
 
+  // Có đang mở box edit emoji đó không
+  public isShowEditEmoji: boolean;
+
   // service
   public layMau: Subscription;
 
@@ -49,14 +52,30 @@ export class SettingBoxChatService {
       "đã đặt tên nhóm là :" + tenNhom, "thong_bao", this.my_name_service.myName);
   }
 
-  public doiChuDe(i:number){
+  public doiChuDe(i: number) {
     this.colorSelected = i;
-     // Đổi tên 
-     this.db.object("/cuoc_tro_chuyen/" + this.setting_chat.ma_cuoc_tro_chuyen).update({ mau: this.maus[i].mau_nen,mau_tren:this.maus[i].tren,duoi:this.maus[i].duoi });
+    // Đổi tên 
+    this.db.object("/cuoc_tro_chuyen/" + this.setting_chat.ma_cuoc_tro_chuyen).update({ mau: this.maus[i].mau_nen, mau_tren: this.maus[i].tren, duoi: this.maus[i].duoi });
     // Tạo tin nhắn
     this.content_service.sumitTinNhanThongBaoTaoNhom(this.setting_chat.ma_cuoc_tro_chuyen,
       "đã thay đổi màu sắc chủ đề của đoạn chat thành " + this.maus[i].ten, "thong_bao", this.my_name_service.myName);
-    }
+  }
+
+  public doiBieuTuongCamXuc(src:string,alt:string){
+    // Đổi biểu tượng cảm xúc
+    this.db.object("/cuoc_tro_chuyen/"+this.setting_chat.ma_cuoc_tro_chuyen).update({bieu_tuong_cam_xuc:src,bieu_tuong_cam_xuc_alt:alt});
+    // Tạo tin nhắn
+    this.content_service.sumitTinNhanThongBaoTaoNhom(this.setting_chat.ma_cuoc_tro_chuyen,
+      "đã đặt biểu tượng cảm xúc thành " + alt, "thong_bao", this.my_name_service.myName);
+  }
+
+  public goBieuTuongCamXuc(){
+    // Đổi biểu tượng cảm xúc
+    this.db.object("/cuoc_tro_chuyen/"+this.setting_chat.ma_cuoc_tro_chuyen).update({bieu_tuong_cam_xuc:'khong',bieu_tuong_cam_xuc_alt:''});
+    // Tạo tin nhắn
+    this.content_service.sumitTinNhanThongBaoTaoNhom(this.setting_chat.ma_cuoc_tro_chuyen,
+      "đã đặt biểu tượng cảm xúc thành 👍", "thong_bao", this.my_name_service.myName); 
+  }
 
   public getMau() {
     this.layMau = this.db.object("mau_nen").snapshotChanges().subscribe(data => {
@@ -77,7 +96,7 @@ export class SettingBoxChatService {
     });
   }
 
-  public updateColorSelected(){
+  public updateColorSelected() {
     if (this.content_service.object_chat.cuoc_tro_truyen.mau == '#3275f7') {
       this.colorSelected = 31;
     } else {

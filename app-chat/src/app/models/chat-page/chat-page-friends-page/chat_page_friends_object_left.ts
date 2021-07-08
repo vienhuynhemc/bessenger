@@ -29,6 +29,8 @@ export class ChatPageFriendsObjectLeft {
     public imgUserSeened: ChatPageObjectImg[] = [];
     // Xem thử có ông nào nhận chưa
     public isDaNhan: boolean;
+    // Bản thân ròi khỏi cuộctrof chuyện chưa
+    public is_roi_chua:boolean;
 
     // 2 tham số quan trọng là vị trí bản thân và vị trí cuối cùng
     public viTriBanThan: number;
@@ -37,6 +39,18 @@ export class ChatPageFriendsObjectLeft {
 
     public constructor() {
         this.noiDungCuoiCung.noi_dung = "";
+    }
+
+    public getIsRoiChua(){
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        let result = false;
+        for(let i =0; i<this.thong_tin_thanh_vien.length;i++){
+            if(this.thong_tin_thanh_vien[i].ma_tai_khoan == ma_tai_khoan && this.thong_tin_thanh_vien[i].roi_chua =='roi'){
+                result =true;
+                break;
+            }
+        }
+        this.is_roi_chua =result;
     }
 
     public getLastTime(): number {
@@ -51,8 +65,16 @@ export class ChatPageFriendsObjectLeft {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
             if (this.thong_tin_thanh_vien.length > 1) {
-                result.push(this.thong_tin_thanh_vien[this.thong_tin_thanh_vien.length - 1].link_hinh_dai_dien);
-                result.push(this.thong_tin_thanh_vien[this.thong_tin_thanh_vien.length - 2].link_hinh_dai_dien);
+                let count = 0;
+                for (let i = this.thong_tin_thanh_vien.length - 1; i > -1; i--) {
+                    if (this.thong_tin_thanh_vien[i].roi_chua == 'chua') {
+                        result.push(this.thong_tin_thanh_vien[i].link_hinh_dai_dien);
+                        count++;
+                    }
+                    if (count == 2) {
+                        break;
+                    }
+                }
             }
         } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
             for (let i = 0; i < this.thong_tin_thanh_vien.length; i++) {
@@ -223,6 +245,9 @@ export class ChatPageFriendsObjectLeft {
                     case "gui_giphy":
                         result.noi_dung = ten + " gửi một file GIF từ GIPHY"
                         break;
+                    case "gui_tin_nhan_btcx":
+                        result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].alt;
+                        break;
                 }
             }
         }
@@ -299,34 +324,36 @@ export class ChatPageFriendsObjectLeft {
                 for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem.length; i++) {
                     if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].xem_chua == "roi") {
                         if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ma_tai_khoan != ma_tai_khoan) {
-                            if (result.length < 3) {
-                                let object = new ChatPageObjectImg();
-                                object.url = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].hinh
-                                let ngay_thang: string = "";
-                                let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ngay_xem;
-                                let date = new Date(ngay_thang_number);
-                                let year = date.getFullYear();
-                                let thang = date.getMonth() + 1;
-                                let ngay = date.getDate();
-                                let gio = date.getHours();
-                                let phut = date.getMinutes();
-                                let giay = date.getSeconds();
-                                ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
-                                let array: string[] = [""];
-                                if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten != null) {
-                                    array = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten.split(" ");
+                            if (!this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].is_roi_chua) {
+                                if (result.length < 3) {
+                                    let object = new ChatPageObjectImg();
+                                    object.url = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].hinh
+                                    let ngay_thang: string = "";
+                                    let ngay_thang_number = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ngay_xem;
+                                    let date = new Date(ngay_thang_number);
+                                    let year = date.getFullYear();
+                                    let thang = date.getMonth() + 1;
+                                    let ngay = date.getDate();
+                                    let gio = date.getHours();
+                                    let phut = date.getMinutes();
+                                    let giay = date.getSeconds();
+                                    ngay_thang = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
+                                    let array: string[] = [""];
+                                    if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten != null) {
+                                        array = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten.split(" ");
+                                    }
+                                    object.noi_dung = array[array.length - 1] + " đã xem lúc " + ngay_thang;
+                                    result.push(object);
+                                } else if (result.length == 3) {
+                                    let object = new ChatPageObjectImg();
+                                    object.url = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].hinh
+                                    object.noi_dung = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten;
+                                    object.so_thanh_vien = 1;
+                                    result.push(object);
+                                } else {
+                                    result[3].so_thanh_vien = result[3].so_thanh_vien + 1;
+                                    result[3].noi_dung = result[3].noi_dung + "\n" + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten;
                                 }
-                                object.noi_dung = array[array.length - 1] + " đã xem lúc " + ngay_thang;
-                                result.push(object);
-                            } else if (result.length == 3) {
-                                let object = new ChatPageObjectImg();
-                                object.url = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].hinh
-                                object.noi_dung = this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten;
-                                object.so_thanh_vien = 1;
-                                result.push(object);
-                            } else {
-                                result[3].so_thanh_vien = result[3].so_thanh_vien + 1;
-                                result[3].noi_dung = result[3].noi_dung + "\n" + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ten;
                             }
                         }
                     }
