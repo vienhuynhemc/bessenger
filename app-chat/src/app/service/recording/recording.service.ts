@@ -64,6 +64,7 @@ export class RecordingService {
             let audioPlayRaise = document.getElementById('time-number');
             let seekbar = <HTMLInputElement>document.getElementById('seekbar');
             let audio_play = document.getElementById('audio-temp');
+            if(audio_play != null) {
             audio_play.innerHTML =
               '<source id="source-audio" src="' +
               URL.createObjectURL(this.blob) +
@@ -71,6 +72,7 @@ export class RecordingService {
             let durationAu = audioPlayRaise.dataset.time;
             seekbar.max = durationAu;
             seekbar.step = 0.00000000000000001 + '';
+            }
           }
         };
         setTimeout(() => {
