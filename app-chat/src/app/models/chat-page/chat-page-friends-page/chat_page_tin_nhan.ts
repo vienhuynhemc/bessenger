@@ -250,6 +250,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
+            || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
         ) {
             result = true;
         }
@@ -267,6 +268,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_nhan_dan'
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
+            || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
         )) {
             result = true;
         }
