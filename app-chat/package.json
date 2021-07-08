@@ -25,6 +25,7 @@
     "bcrypt": "^5.0.1",
     "extendable-media-recorder": "^6.3.4",
     "firebase": "^8.6.2",
+    "get-mp3-duration": "^1.0.0",
     "lottie-web": "^5.7.8",
     "ng-lottie": "^0.3.2",
     "ngx-lottie": "^6.4.0",

@@ -19,7 +19,6 @@
                 left: 4px;
                 position: absolute;
                 transform: rotate(45deg);
-                color: #3275f7;
             }
         }
         .cover-abord:hover {
@@ -30,8 +29,38 @@
         position: relative;
         width: 238px;
         height: 32px;
-        background-color: #3275f7;
         border-radius: 20px;
+        .content-raise {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.164);
+            max-width: 250px;
+        }
+        #audio-temp {
+            visibility: hidden;
+            position: absolute;
+        }
+        .seekbar {
+            -webkit-appearance: none;
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            border-radius: 20px;
+            background-color: transparent;
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+        }
+        .seekbar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+             appearance: none;
+             width: 0px;
+             height: 35px;
+             cursor: pointer;
+             background-color: white;
+        }
         .content  {
             position: absolute;
             width: 65%;
@@ -214,7 +243,6 @@
                 font-size: 13px;
                 font-family: 'Raleway';
                 margin-top: 1px;
-                color: #3275f7;
                 font-weight: 500;
             }
         }
