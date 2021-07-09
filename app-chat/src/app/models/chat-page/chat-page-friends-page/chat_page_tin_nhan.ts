@@ -12,7 +12,7 @@ export class ChatPageTinNhan {
     ten: string;
     ma_tin_nhan_phan_hoi: string;
     ngay_gui: number;
-    ngay_thu_hoi:number;
+    ngay_thu_hoi: number;
     noi_dung: string;
     alt: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
@@ -47,6 +47,9 @@ export class ChatPageTinNhan {
 
     // noi_dung_html của tin nhắn
     public noi_dung_html: SafeHtml = "";
+
+    // Nội dung thu hồi
+    public noi_dung_thu_hoi: string = "";
 
     public getNoiDungHTMLTinNhan(sanitized: DomSanitizer) {
         let result: SafeHtml = "";
@@ -88,6 +91,7 @@ export class ChatPageTinNhan {
             || this.loai_tin_nhan == 'thoi_gian'
             || this.loai_tin_nhan == 'gui_tin_nhan_like'
             || this.loai_tin_nhan == 'gui_ghi_am'
+            || this.loai_tin_nhan == 'thu_hoi'
         ) {
             result = "9px";
         }
@@ -97,6 +101,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'thoi_gian'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
+            || tin_nhan.loai_tin_nhan == 'thu_hoi'
         ) {
             result = "9px";
         }
@@ -144,14 +149,23 @@ export class ChatPageTinNhan {
     }
 
     public getTime() {
-        if(this.ngay_thu_hoi == null){
+        if (this.ngay_thu_hoi == 0) {
             this.timeSend = this.getStringTime(this.ngay_gui);
-        }else{
-            this.timeSend ="Ngày gửi: "+ this.getStringTime(this.ngay_gui)+"\nNgày thu hồi: "+this.getStringTime(this.ngay_thu_hoi);
+        } else {
+            this.timeSend = "Gửi vào: " + this.getStringTime(this.ngay_gui) + "\nThời gian thu hồi: " + this.getStringTime(this.ngay_thu_hoi);
+            let ten = "";
+            let mtk = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+            if(this.ma_tai_khoan == mtk){
+                ten = "Bạn";
+            }else{
+                let array = this.ten.trim().split(" ");
+                ten = array[array.length-1];
+            }
+            this.noi_dung_thu_hoi = ten + " đã thu hồi một tin nhắn";
         }
     }
 
-    public getStringTime(time:number){
+    public getStringTime(time: number) {
         let date = new Date(this.ngay_gui);
         let year = date.getFullYear();
         let thang = date.getMonth() + 1;
@@ -260,6 +274,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
+            || tin_nhan.loai_tin_nhan == 'thu_hoi'
         ) {
             result = true;
         }
@@ -278,6 +293,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_giphy'
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
+            || tin_nhan.loai_tin_nhan == 'thu_hoi'
         )) {
             result = true;
         }
