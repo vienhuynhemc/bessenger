@@ -218,6 +218,24 @@
           max-width: 330px;
           margin: 8px 12px;
         }
+        .thu-hoi {
+          border-radius: 18px;
+          border: 1px solid #ced0d4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          p {
+            color: #bcc0c4;
+            font-family: "Raleway";
+            font-weight: 500;
+            line-height: 20px;
+            font-size: 12px;
+            transform: scaleY(1.04);
+            letter-spacing: 0.5px;
+            padding: 8px 12px;
+            font-style: oblique;
+          }
+        }
       }
       .ban_than {
         border-top-left-radius: 18px;
@@ -282,6 +300,10 @@
         }
       }
     }
+    .div-thu-hoi {
+      border: 1px solid #ced0d4;
+      background: white;
+    }
   }
   .gui_text:hover {
     .tren {
@@ -295,7 +317,6 @@
     flex-direction: column;
     align-items: flex-end;
   }
-
   .gui_text_icon {
     background: white;
     .tren {
@@ -546,4 +567,3 @@
 ::-webkit-scrollbar:hover {
   background: #0700001c !important;
 }
-
