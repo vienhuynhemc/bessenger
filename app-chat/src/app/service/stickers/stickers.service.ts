@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class StickersService {
   isShowShop: boolean = false;
   isShowBoxGiphy: boolean = false;
   isShowBoxSticker: boolean = false;
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   // hiển thị shop
   openShop() {
