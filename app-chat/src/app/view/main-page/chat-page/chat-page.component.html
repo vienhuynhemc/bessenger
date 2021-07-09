@@ -10,3 +10,29 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+
+
+<!-- pop up hỏi có gỡ tin nhắn hay không -->
+<div class="doi-ten" *ngIf="this.recall_m.is_show">
+  <div class="doi-ten-main">
+    <div class="doi-ten-main-header">
+      <div class="doi-ten-main-header-name">
+        Bạn muốn ai không nhìn thấy tin nhắn này nữa?
+      </div>
+      <div class="doi-ten-main-header-icon" (click)="hiddenRecallM()">
+        <i></i>
+      </div>
+    </div>
+    <div class="doi-ten-main-content">
+      <p class="p1">Bạn sẽ gỡ vĩnh viễn tin nhắn này đối với tất cả các thành viên trong đoạn chat. Họ sẽ thấy rằng bạn đã thu hồi tin nhắn và vẫn có thể báo cáo tin nhắn đó.</p>
+      <div class="doi-ten-main-content-buttons">
+        <div class="doi-ten-main-content-buttons-item" (click)="hiddenRecallM()">
+          Hủy
+        </div>
+        <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-select" (click)=" this.recall_m.thuHoi();">
+          Thu hồi
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

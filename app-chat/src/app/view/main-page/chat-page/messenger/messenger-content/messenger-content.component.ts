@@ -1,3 +1,4 @@
+import { RecallMessengerService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
 import { ChatPageChatPageScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { MessengerMainService } from './../../../../../service/chat-page/chat-page-chat-page/messenger-main.service';
@@ -37,7 +38,9 @@ export class MessengerContentComponent implements OnInit {
     // pipi html
     public sanitized: DomSanitizer,
     // Service scroll
-    public scroll_service: ChatPageChatPageScrollService
+    public scroll_service: ChatPageChatPageScrollService,
+    // Thu hồi tin nhắn
+    public recall_m:RecallMessengerService
   ) { }
 
   public layAllBanBe() {
@@ -157,6 +160,12 @@ export class MessengerContentComponent implements OnInit {
     this.content_service.layNhungOngDangNhap = this.content_service.getDangNhap(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
       this.content_service.dienThongTinDangNhap(data.payload.toJSON());
     });
+  }
+
+  public thuHoi(mtn:string){
+    this.recall_m.is_show =true;
+    this.recall_m.ma_tin_nhan = mtn;
+    this.recall_m.ma_cuoc_tro_chuyen = this.messenger_main_service.ma_cuoc_tro_chuyen;
   }
 
 }

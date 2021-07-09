@@ -34,9 +34,6 @@ export class StickerComponent implements OnInit, OnDestroy {
     this.loadStickerList()
     this.getMaCuocTroChuyen();
     this.loadHistoryUseSticker();
-    this.stickersService.themnhandan();
-    this.stickersService.themanh();
-    this.stickersService.themanhchitiet();
   }
    // lottie
    options: AnimationOptions = {
