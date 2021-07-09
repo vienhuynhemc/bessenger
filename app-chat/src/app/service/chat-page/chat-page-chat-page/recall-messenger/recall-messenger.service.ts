@@ -1,5 +1,8 @@
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
+// lottie
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +13,18 @@ export class RecallMessengerService {
   public ma_cuoc_tro_chuyen:string;
   public is_show:boolean;
 
+   // lottie
+   public options: AnimationOptions = {
+    path: '/assets/json/lottie/thu_hoi.json',
+  };
+
   constructor(
     private db:AngularFireDatabase
   ) { }
+
+  public animationCreated(animationItem: AnimationItem): void {
+  }
+
 
   public thuHoi(){
     let currentTime = Number(new Date());
