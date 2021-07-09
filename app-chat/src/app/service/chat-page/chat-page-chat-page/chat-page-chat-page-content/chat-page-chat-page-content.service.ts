@@ -391,6 +391,7 @@ export class ChatPageChatPageContentService {
         tin_nhan.ma_tai_khoan = data_tin_nhan['ma_tai_khoan'];
         tin_nhan.ma_tin_nhan_phan_hoi = data_tin_nhan['ma_tin_nhan_phan_hoi'];
         tin_nhan.ngay_gui = data_tin_nhan['ngay_gui'];
+        tin_nhan.ngay_thu_hoi = data_tin_nhan['ngay_thu_hoi'];
         tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
         tin_nhan.ten = data_tin_nhan['ten'];
         let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];

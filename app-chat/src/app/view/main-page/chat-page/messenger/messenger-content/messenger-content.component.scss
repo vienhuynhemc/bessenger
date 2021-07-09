@@ -166,6 +166,31 @@
     .tren {
       display: flex;
       align-items: flex-end;
+      .cong-cu {
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 5px;
+        position: relative;
+        margin-top: auto;
+        margin-bottom: auto;
+        display: none;
+        .thu-hoi {
+          width: 22px;
+          height: 22px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 50%;
+          i {
+            color: #8a8d91;
+            font-size: 14px;
+          }
+        }
+        .thu-hoi:hover {
+          background-color: #0000001a;
+        }
+      }
       .hinh {
         position: relative;
         margin-left: 2px;
@@ -255,6 +280,13 @@
             object-fit: cover;
           }
         }
+      }
+    }
+  }
+  .gui_text:hover {
+    .tren {
+      .cong-cu {
+        display: flex;
       }
     }
   }
@@ -514,3 +546,4 @@
 ::-webkit-scrollbar:hover {
   background: #0700001c !important;
 }
+

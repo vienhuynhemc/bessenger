@@ -62,6 +62,12 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip" (click)="thuHoi(item.ma_tin_nhan)">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                            </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.ban_than]="item.isBanThan" [class.doi_phuong]="!item.isBanThan"
                                 [matTooltip]="item.timeSend" matTooltipClass="tooltip"
@@ -261,9 +267,8 @@
                         </div>
                     </div>
                     <!-- Gửi ghi âm -->
-                    <div *ngIf="item.loai_tin_nhan == 'gui_ghi_am'"
-                        class="gui_ghi_am" [style.padding-top]="item.marginTop"
-                        [class.ban_than_div]="item.isBanThan">
+                    <div *ngIf="item.loai_tin_nhan == 'gui_ghi_am'" class="gui_ghi_am"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
                         <div class="tren">
                             <!-- Hình nếu ko  phải bản thân -->
                             <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
@@ -460,6 +465,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- tin nhắn thu hồi -->
                 </div>
 
                 <!--2. Những ông đang nhập-->

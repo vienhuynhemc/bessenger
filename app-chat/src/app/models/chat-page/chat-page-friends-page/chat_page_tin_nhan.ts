@@ -12,6 +12,7 @@ export class ChatPageTinNhan {
     ten: string;
     ma_tin_nhan_phan_hoi: string;
     ngay_gui: number;
+    ngay_thu_hoi:number;
     noi_dung: string;
     alt: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
@@ -143,6 +144,14 @@ export class ChatPageTinNhan {
     }
 
     public getTime() {
+        if(this.ngay_thu_hoi == null){
+            this.timeSend = this.getStringTime(this.ngay_gui);
+        }else{
+            this.timeSend ="Ngày gửi: "+ this.getStringTime(this.ngay_gui)+"\nNgày thu hồi: "+this.getStringTime(this.ngay_thu_hoi);
+        }
+    }
+
+    public getStringTime(time:number){
         let date = new Date(this.ngay_gui);
         let year = date.getFullYear();
         let thang = date.getMonth() + 1;
@@ -150,7 +159,7 @@ export class ChatPageTinNhan {
         let gio = date.getHours();
         let phut = date.getMinutes();
         let giay = date.getSeconds();
-        this.timeSend = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
+        return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}:${giay.toString().length > 1 ? giay : "0" + giay} ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
     }
 
     public getIsDaChuyen() {
