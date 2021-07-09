@@ -66,7 +66,8 @@
                             <div class="cong-cu" *ngIf="item.isBanThan">
                                 <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
                                     (click)="thuHoi(item.ma_tin_nhan)">
-                                    <i class="fas fa-ban"></i>
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
                                 </div>
                             </div>
                             <!-- Nội dung -->
@@ -138,6 +139,14 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
+                                </div>
+                            </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" [matTooltip]="item.timeSend"
                                 matTooltipClass="tooltip">
@@ -201,6 +210,14 @@
                                 matTooltipClass="tooltip">
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
+                            </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
+                                </div>
                             </div>
                             <!-- Nội dung -->
                             <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan'" class="chua-nd"
@@ -277,6 +294,14 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
+                                </div>
+                            </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" [matTooltip]="item.timeSend"
                                 matTooltipClass="tooltip">
@@ -341,6 +366,14 @@
                                 matTooltipClass="tooltip">
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
+                            </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
+                                </div>
                             </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" [matTooltip]="item.timeSend"
@@ -412,6 +445,14 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim"></main>
+                                </div>
+                            </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" [matTooltip]="item.timeSend"
                                 matTooltipClass="tooltip">
@@ -475,13 +516,6 @@
                                 matTooltipClass="tooltip">
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
-                            </div>
-                            <!-- Div công cụ bên trái nếu là bản thân -->
-                            <div class="cong-cu" *ngIf="item.isBanThan && item.loai_tin_nhan != 'thu_hoi'">
-                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
-                                    (click)="thuHoi(item.ma_tin_nhan)">
-                                    <i class="fas fa-ban"></i>
-                                </div>
                             </div>
                             <!-- Nội dung -->
                             <div class="chua-nd" [class.ban_than]="item.isBanThan" [class.doi_phuong]="!item.isBanThan"
