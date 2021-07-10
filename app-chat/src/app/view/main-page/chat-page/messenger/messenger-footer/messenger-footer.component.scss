@@ -40,30 +40,157 @@
 
   .khung-chat {
     display: flex;
+    flex-direction: column;
     width: 273px;
     border-radius: 20px;
     background-color: #f0f2f5;
-    align-items: center;
     margin-top: 7px;
     margin-bottom: 7px;
-
-    .parent-input {
-      max-height: 83px;
-      overflow-y: scroll;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      transform: translateY(2.5px);
-      .input {
-        color: #050505;
-        width: 225px;
-        margin-right: 5px;
-        margin-left: 10px;
-        min-height: 22px;
-        outline: none;
-        font-family: "Raleway";
-        background: #f0f2f5;
-        font-weight: 500;
-        font-size: 14px;
+    .input-file {
+      max-width: 260px;
+      height: 70px;
+      margin-left: 10px;
+     
+      .scroll-input {
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+        display: flex;
+        
+        .input-item,.input-item-file, .add-file {
+       
+          min-width: 50px;
+          max-width: 50px;
+          max-height: 50px;
+          min-height: 50px;
+          margin-right: 12px;
+          margin-top: 10px;
+          border-radius: 10px;
+          position: relative;
+          .item {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+          }
+          .input-item-exit {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: #dad4d4 solid 0.5px;
+            border-radius: 50%;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+            cursor: pointer;
+            i {
+              background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/0oWpsdW0CWL.png);
+              background-size: 34px 916px;
+              background-repeat: no-repeat;
+              display: inline-block;
+              width: 12px;
+              height: 12px;
+              background-position: -18px -820px;
+              position: absolute;
+              color: #7a7272;
+              top: 4px;
+              left: 4px;
+            }
+          }
+          .input-item-exit:hover {
+            background-color: rgb(236, 236, 236);
+          }
+        }
+        .add-file {
+          background-color: rgba(134,142,153,.25);
+          cursor: pointer;
+          i {
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+            background-position: 0 -778px;
+            background-size: 52px 1338px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            color: #1d1b1b;
+            position: absolute;
+            top: 13px;
+            left: 14px;
+          }
+        }
+        .add-file:hover {
+          background-color: rgba(107, 111, 117, 0.25);
+        }
+        .input-item-file {
+          display: flex;
+          min-width: 150px;
+          background-color: rgba(134,142,153,.25);
+          .left {
+            width: 35%;
+            
+            .cover-left-icon {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              left: 10px;
+              top: 10px;
+              i {
+                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+                background-position: -34px -70px;
+                background-size: 52px 1338px;
+                background-repeat: no-repeat;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                top: 8px;
+                left: 10px;
+                color: #1d1b1b;
+              }
+            }
+          }
+          .right {
+            width: 65%;
+            .file-name {
+              display: inline-flex;
+              height: 100%;
+              align-items: center;
+              font-family: 'Raleway';
+              font-size: 15px;
+              font-weight: bold;
+            }
+          }
+          
+        }
+      }
+      ::-webkit-scrollbar {
+        height: 7px;
+      }
+    }
+   
+   
+    .khung-chat-content {
+      display: flex;
+      align-items: center;
+      .parent-input {
+        max-height: 83px;
+        overflow-y: scroll;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        transform: translateY(2.5px);
+        .input {
+          color: #050505;
+          width: 225px;
+          margin-right: 5px;
+          margin-left: 10px;
+          min-height: 22px;
+          outline: none;
+          font-family: "Raleway";
+          background: #f0f2f5;
+          font-weight: 500;
+          font-size: 14px;
+        }
       }
     }
     ::-webkit-scrollbar-track {

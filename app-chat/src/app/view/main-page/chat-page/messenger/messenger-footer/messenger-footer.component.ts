@@ -9,7 +9,8 @@ import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-p
 import { StickersService } from 'src/app/service/stickers/stickers.service';
 import { finalize } from 'rxjs/operators';
 import { RecordingService } from 'src/app/service/recording/recording.service';
-
+import { FileUpload } from 'src/app/models/file-upload/file_upload';
+import {DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'app-messenger-footer',
   templateUrl: './messenger-footer.component.html',
@@ -24,8 +25,9 @@ export class MessengerFooterComponent implements OnInit {
   public isShowBtcxBox: boolean;
   // check click gửi tin nhắn audio
   checkSendAudio: boolean;
-  check100Audio:boolean;
-
+  check100Audio: boolean;
+  // mảng file
+  arrayFileUpload: FileUpload[] = [];
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
@@ -34,9 +36,9 @@ export class MessengerFooterComponent implements OnInit {
     public stickersService: StickersService,
     public my_name_service: MyNameService,
     public recordingService: RecordingService,
-    public footer_scroll: FooterScrollService
+    public footer_scroll: FooterScrollService,
+    private sanitizer:DomSanitizer
   ) {}
-
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -50,9 +52,11 @@ export class MessengerFooterComponent implements OnInit {
       }
       // Đăng ký chênh lệch height
 
-      setTimeout(() => this.footer_scroll.register(document.getElementById("parent_input")), 0);
-
-
+      setTimeout(
+        () =>
+          this.footer_scroll.register(document.getElementById('parent_input')),
+        0
+      );
     });
   }
 
@@ -81,6 +85,13 @@ export class MessengerFooterComponent implements OnInit {
       this.recordingService.stopRecording();
       this.recordingService.isShowRecording = false;
     }
+    if(this.arrayFileUpload.length > 0) {
+      let inputFile= document.getElementById('input-file');
+        inputFile.style.display = 'none';
+    }
+    
+    this.arrayFileUpload = [];
+    
   }
 
   public getIcon(item: EmojiObject) {
@@ -260,7 +271,6 @@ export class MessengerFooterComponent implements OnInit {
   }
 
   public guiTinNhanLuotThich() {
-
     this.content_service.sumitTinNhan(
       this.messenger_main_service.ma_cuoc_tro_chuyen,
       '',
@@ -269,13 +279,20 @@ export class MessengerFooterComponent implements OnInit {
     );
   }
 
-
   public guiTinNhanBTCX() {
-    this.content_service.sumitTinNhanBTCX(this.messenger_main_service.ma_cuoc_tro_chuyen, this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc, "gui_tin_nhan_btcx", this.my_name_service.myName, this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc_alt.split(" ")[1]);
+    this.content_service.sumitTinNhanBTCX(
+      this.messenger_main_service.ma_cuoc_tro_chuyen,
+      this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc,
+      'gui_tin_nhan_btcx',
+      this.my_name_service.myName,
+      this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc_alt.split(
+        ' '
+      )[1]
+    );
   }
 
   public sendTinNhan() {
-    let input = document.getElementById("input");
+    let input = document.getElementById('input');
     if (this.tin_nhan.trim().length != 0) {
       let count = 0;
       for (let i = 0; i < input.childNodes.length; i++) {
@@ -284,9 +301,16 @@ export class MessengerFooterComponent implements OnInit {
         }
       }
       if (count != input.childNodes.length) {
-
-        let type = input.children.length == input.childNodes.length ? "gui_text_icon" : "gui_text";
-        this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, this.tin_nhan, type, this.my_name_service.myName);
+        let type =
+          input.children.length == input.childNodes.length
+            ? 'gui_text_icon'
+            : 'gui_text';
+        this.content_service.sumitTinNhan(
+          this.messenger_main_service.ma_cuoc_tro_chuyen,
+          this.tin_nhan,
+          type,
+          this.my_name_service.myName
+        );
       }
     }
     // làm rỗng ô nhập
@@ -325,7 +349,7 @@ export class MessengerFooterComponent implements OnInit {
                       this.recordingService.storageRef
                         .getDownloadURL()
                         .subscribe((downloadURL) => {
-                          if(!this.check100Audio){
+                          if (!this.check100Audio) {
                             this.content_service.sumitTinNhan(
                               this.messenger_main_service.ma_cuoc_tro_chuyen,
                               downloadURL,
@@ -340,14 +364,12 @@ export class MessengerFooterComponent implements OnInit {
                   .subscribe();
                 this.recordingService.isShowRecording = false;
                 this.checkSendAudio = false;
-               
               }
             });
           });
-          this.check100Audio = false;
+        this.check100Audio = false;
       }, 1000);
     }
-
   }
 
   public openBoxBtcx() {
@@ -455,5 +477,74 @@ export class MessengerFooterComponent implements OnInit {
         this.messenger_main_service.ma_cuoc_tro_chuyen
       );
     }, 0);
+  }
+
+  // đính kèm file
+  openChooseFile() {
+    const chooseFile = document.getElementById('choose-file');
+    chooseFile.click();
+  }
+  // thêm file vào input
+  changeChooseFile() {
+    let chooseFile = <HTMLInputElement>document.getElementById('choose-file');
+    let arrayFile = Array.from(chooseFile.files);
+    for (let index = 0; index < arrayFile.length; index++) {
+      // chỉ nhận file < 25mb
+      if (arrayFile[index].size < 25000000) {
+        // lấy ra đuôi file
+        let newFile = new FileUpload();
+        newFile.file = arrayFile[index];
+        newFile.name = arrayFile[index].name;
+        newFile.id = Number(new Date()) + newFile.name;
+        // cắt tên file ra
+        let fname = arrayFile[index].name.split('');
+        // lấy ra đuôi file
+        let typeFile = fname.slice((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1).join('');
+        // nếu đúng định dạng file
+        if (
+          typeFile == 'xlsx' ||
+          typeFile == 'xls' ||
+          typeFile == 'doc' ||
+          typeFile == 'docx' ||
+          typeFile == 'ppt' ||
+          typeFile == 'pptx' ||
+          typeFile == 'txt' ||
+          typeFile == 'pdf'
+        ) {
+          newFile.typeFile = 'file';
+          this.arrayFileUpload.push(newFile);
+        } else {
+          // lấy ra định dạng file
+          let typeFileMedia = arrayFile[index].type
+            .split('/')[0]
+            .toLowerCase()
+            .trim();
+          // nếu đúng định dang media
+          if (typeFileMedia == 'image') {
+            newFile.typeFile = 'image';
+            newFile.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(arrayFile[index]))
+            this.arrayFileUpload.push(newFile);
+          } else if (typeFileMedia == 'audio') {
+            newFile.typeFile = 'audio';
+            this.arrayFileUpload.push(newFile);
+          } else if (typeFileMedia == 'video') {
+            newFile.typeFile = 'video';
+            this.arrayFileUpload.push(newFile);
+            newFile.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(arrayFile[index]))
+          }
+        }
+      }
+    }
+  
+  }
+  // xóa file trong choose file 
+  removeFileChooseFile(file: FileUpload) {
+      this.arrayFileUpload.forEach((element,index) => {
+          if(element.id == file.id)
+              this.arrayFileUpload.splice(index,1)
+      });
+  }
+  
+  sendMessageFile() {
   }
 }
