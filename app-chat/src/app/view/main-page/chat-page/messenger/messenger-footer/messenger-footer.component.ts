@@ -543,8 +543,63 @@ export class MessengerFooterComponent implements OnInit {
           if(element.id == file.id)
               this.arrayFileUpload.splice(index,1)
       });
+      if(this.arrayFileUpload.length == 0) {
+        let chooseFile = <HTMLInputElement>document.getElementById('choose-file');
+        chooseFile.value = ''
+      }
   }
   
+  // gửi file
   sendMessageFile() {
+      let listImg = []
+      let listFile = []
+      if(this.tin_nhan.length > 0) {
+        this.sendTinNhan(); 
+      }
+      // lấy ra danh sách ảnh
+      this.arrayFileUpload.forEach(fileUpload => {
+        if(fileUpload.typeFile == 'image')
+          listImg.push(fileUpload)
+        else if(fileUpload.typeFile == 'audio' || fileUpload.typeFile == 'video' || fileUpload.typeFile == 'file')
+          listFile.push(fileUpload)
+      });
+      // nếu danh có ảnh
+      if(listImg.length > 0) {
+        let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
+        listImg.forEach(file => {
+          this.content_service.saveImageluu_fileInStorage(file,this.messenger_main_service.ma_cuoc_tro_chuyen, newKey);
+        });
+        this.content_service.submitMessageFile(this.messenger_main_service.ma_cuoc_tro_chuyen, newKey, 'gui_hinh',this.my_name_service.myName)
+      }
+      // danh sach file
+      if(listFile.length > 0) {
+        listFile.forEach(file => {
+          let check100Percent = false;
+          let typeFile = '';
+          let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
+          // luu vao firestorage
+          let ref = this.content_service.saveFileluu_fileStorage(file,this.messenger_main_service.ma_cuoc_tro_chuyen, newKey);
+          if(file.typeFile == 'audio')
+            typeFile = 'gui_ghi_am'
+          else if(file.typeFile == 'video')
+            typeFile = 'gui_video'
+            else if(file.typeFile == 'file')
+            typeFile = 'gui_file'
+            // luu vao chi tiet tin nhan + danh sach file da gui
+          ref.percentageChanges().subscribe((percent) => {
+            if (percent == 100) {
+              ref.snapshotChanges().pipe(finalize(() => {
+                this.content_service.storageRefFile.getDownloadURL().subscribe((downloadURL) => {
+                  if(!check100Percent) {
+                    this.content_service.submitMessageFile(this.messenger_main_service.ma_cuoc_tro_chuyen, downloadURL, typeFile,this.my_name_service.myName)
+                    check100Percent = true;
+                  }
+                })
+              })).subscribe();
+            }
+          })
+        });
+      }
+      this.arrayFileUpload = [];
   }
 }

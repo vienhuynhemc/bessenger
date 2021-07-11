@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
+import { FileUpload } from 'src/app/models/file-upload/file_upload';
 import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 
@@ -23,6 +25,7 @@ export class ChatPageChatPageContentService {
   // Đối tượng tượng đang nhập
   public dang_nhaps: ObjectDangNhap[];
 
+  storageRefFile:any;
   // service
   public layAllBanBe: Subscription;
   public layLoaiCuocTroChuyen: Subscription;
@@ -38,6 +41,7 @@ export class ChatPageChatPageContentService {
       private db: AngularFireDatabase,
       // pipi html
       public sanitized: DomSanitizer,
+      private storage: AngularFireStorage
   ) {
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
@@ -531,4 +535,62 @@ export class ChatPageChatPageContentService {
     return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}, ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
   }
 
+  // lưu image vào lưu_file trong storage firebase
+  public saveImageluu_fileInStorage(image: FileUpload, idConversation: string, keyImage:string) {
+    let filePath: string = '/luu_file/' + idConversation + "/" + keyImage + '/';
+    let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
+    let ref = this.storage.ref(filePath+newKey+'$%&'+image.file.name).put(image.file);
+    return ref;
+  }
+
+  // save file vao storage firebase
+  public saveFileluu_fileStorage(file: FileUpload, idConversation: string, newKey:string) {
+    let filePath: string = '/luu_file/' + idConversation + "/";
+    let ref = this.storage.ref(filePath+newKey+'$%&'+file.file.name).put(file.file);
+    this.storageRefFile = this.storage.ref(filePath+newKey+'$%&'+file.file.name);
+    return ref;
+  }
+  // lưu link image vao danh sach file trong db
+  public submitMessageFile(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string) {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let currentTime = Number(new Date());
+    // Tin nhắn
+    this.db.list("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen).push(
+      {
+        dia_chi_file: "",
+        link_file: "",
+        loai_tin_nhan: loai,
+        ["ma_tai_khoan"]: ma_tai_khoan,
+        ten: ten,
+        ma_tin_nhan_phan_hoi: "",
+        ngay_gui: currentTime,
+        noi_dung: tin_nhan,
+      }
+    ).then((ref) => {
+      // Lấy all thành viên
+      let array: Object[] = [];
+      array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi", ten: ten });
+      for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+        array.push({ ma_tai_khoan: this.object_chat.thanh_vien[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua", ten: this.object_chat.thanh_vien[i].ten });
+      }
+      for (let i = 0; i < array.length; i++) {
+        this.db.object("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
+          {
+            ngay_nhan: array[i]['ngay_nhan'],
+            ngay_xem: array[i]['ngay_xem'],
+            xem_chua: array[i]['xem_chua'],
+            ten: array[i]['ten'],
+          }
+        )
+      };
+      // lưu vào danh sách file đã gửi
+      this.db.database.ref('file_da_gui').child(ma_cuoc_tro_chuyen).child(ref.key).set({
+        ma_tai_khoan: ma_tai_khoan,
+        url: tin_nhan,
+        loai_tin_nhan: loai,
+        ngay_gui: currentTime,
+        ton_tai: 0
+      })
+    });
+  }
 }
