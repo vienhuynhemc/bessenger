@@ -44,13 +44,11 @@ export class ChatPageChatPageContentService {
       private db: AngularFireDatabase,
       // pipi html
       public sanitized: DomSanitizer,
-<<<<<<< HEAD
-      private storage: AngularFireStorage
-  ) {
-=======
+
+      private storage: AngularFireStorage,
+
       public my_name_service: MyNameService
     ) {
->>>>>>> master
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
     this.dang_nhaps = [];
@@ -598,7 +596,7 @@ export class ChatPageChatPageContentService {
     return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}, ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
   }
 
-<<<<<<< HEAD
+
   // lưu image vào lưu_file trong storage firebase
   public saveImageluu_fileInStorage(image: FileUpload, idConversation: string, keyImage:string) {
     let filePath: string = '/luu_file/' + idConversation + "/" + keyImage + '/';
@@ -657,7 +655,7 @@ export class ChatPageChatPageContentService {
       })
     });
   }
-=======
+
   public openSelectEmoji(tin_nhan: ChatPageTinNhan) {
     if (tin_nhan.is_show_select_emoji) {
       tin_nhan.is_show_select_emoji = false;
@@ -701,5 +699,5 @@ export class ChatPageChatPageContentService {
     }
   }
 
->>>>>>> master
+
 }
