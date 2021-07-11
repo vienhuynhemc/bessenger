@@ -274,11 +274,13 @@ export class ChatPageChatPageContentService {
 
   public layBanBe(object: Object) {
     let ban_bes: string[] = [];
-    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
-      if (data_thanh_vien['ton_tai'] == 0) {
-        ban_bes.push(ma_thanh_vien);
-      }
-    });
+    if (object != null) {
+      Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+        if (data_thanh_vien['ton_tai'] == 0) {
+          ban_bes.push(ma_thanh_vien);
+        }
+      });
+    }
     this.ban_bes = ban_bes;
   }
 

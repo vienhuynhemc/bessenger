@@ -2,6 +2,7 @@ import { ChatPageProcessServiceService } from './../../../service/chat-page/chat
 import { Component, OnInit } from '@angular/core';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { RecallMessengerService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
+import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -14,7 +15,8 @@ export class ChatPageComponent implements OnInit {
   constructor(
     private main_page_service: MainPageService,
     public chat_page_process_service: ChatPageProcessServiceService,
-    public recall_m : RecallMessengerService
+    public recall_m : RecallMessengerService,
+    public select_emoji:SelectEmojiService
   ) { }
 
   // lấy dữ liệu cho vào component

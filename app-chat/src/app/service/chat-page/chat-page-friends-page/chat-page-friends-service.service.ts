@@ -81,7 +81,7 @@ export class ChatPageFriendsServiceService {
 
   public dienLanCuoiDangNhap(object: Object) {
     let count = 0;
-    if (this.ban_bes != null) {
+    if (this.ban_bes != null && object != null) {
       Object.entries(object).forEach(([key, value]) => {
         for (let i = 0; i < this.ban_bes.length; i++) {
           if (this.ban_bes[i].ma_tai_khoan == key) {

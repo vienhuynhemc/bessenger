@@ -101,11 +101,13 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public compareSearch(i: number): boolean {
-    if (this.allBoxData[i] != null) {
-      if (this.allBoxData[i].name != null) {
-        if (this.allBoxData[i].name.noi_dung_goc != null) {
-          if (this.allBoxData[i].name.noi_dung_goc.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-            return true;
+    if (this.allBoxData != null && this.allBoxData.length > 0) {
+      if (this.allBoxData[i] != null) {
+        if (this.allBoxData[i].name != null) {
+          if (this.allBoxData[i].name.noi_dung_goc != null) {
+            if (this.allBoxData[i].name.noi_dung_goc.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+              return true;
+            }
           }
         }
       }

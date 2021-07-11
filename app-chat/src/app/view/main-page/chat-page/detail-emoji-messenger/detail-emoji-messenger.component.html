@@ -1,0 +1,59 @@
+<div class="doi-ten">
+    <div class="doi-ten-main">
+        <div class="doi-ten-main-header">
+            <div class="doi-ten-main-header-name">
+                Cảm xúc về tin nhắn
+            </div>
+            <div class="doi-ten-main-header-icon" (click)="this.s_e.closeDetail()">
+                <i></i>
+            </div>
+        </div>
+        <div class="doi-ten-main-content">
+            <div class="doi-ten-main-content-header">
+                <p (click)="this.s_e.select(0)" [class.select] = "this.s_e.count == 0">Tất cả {{this.s_e.arrays.length}}</p>
+                <div class="element" *ngIf="this.s_e.is_have_tim" [class.select] = "this.s_e.count == 1" (click)="this.s_e.select(1)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png" alt="">
+                    <p>{{this.s_e.tim.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_cuoi" [class.select] = "this.s_e.count == 2" (click)="this.s_e.select(2)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png" alt="">
+                    <p>{{this.s_e.cuoi.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_wow" [class.select] = "this.s_e.count == 3" (click)="this.s_e.select(3)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png" alt="">
+                    <p>{{this.s_e.wow.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_buon" [class.select] = "this.s_e.count == 4" (click)="this.s_e.select(4)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png" alt="">
+                    <p>{{this.s_e.buon.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_gian" [class.select] = "this.s_e.count == 5" (click)="this.s_e.select(5)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png" alt="">
+                    <p>{{this.s_e.gian.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_like" [class.select] = "this.s_e.count == 6" (click)="this.s_e.select(6)">
+                    <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png" alt="">
+                    <p>{{this.s_e.like.length}}</p>
+                </div>
+                <div class="element" *ngIf="this.s_e.is_have_dislike" [class.select] = "this.s_e.count == 7" (click)="this.s_e.select(7)">
+                    <img src=" https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png" alt="">
+                    <p>{{this.s_e.dislike.length}}</p>
+                </div>
+            </div>
+            <div class="doi-ten-main-content-content">
+                <div *ngFor="let item of this.s_e.now;let i = index" class="item" [class.select] = "item.is_ban_than" (click)="this.s_e.go(item,i)">
+                    <div class="a">
+                        <img [src]="item.hinh || 'assets/images/loading.gif'" alt="">
+                    </div>
+                    <div class="b">
+                        <p>{{item.ten}}</p>
+                        <span *ngIf="item.is_ban_than">Nhấn để gỡ</span>
+                    </div>
+                    <div class="c">
+                        <img [src]="item.url || 'assets/images/loading.gif'" alt="">
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
