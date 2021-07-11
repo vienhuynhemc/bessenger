@@ -1,8 +1,11 @@
+import { MyNameService } from './../../../my-name/my-name.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { CamXucTinNhan } from 'src/app/models/chat-page/chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
+import { EmojiMessenger } from 'src/app/models/chat-page/chat-page-chat-page/content/select-emoji/emoji_messenger';
 import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
 import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
@@ -41,8 +44,13 @@ export class ChatPageChatPageContentService {
       private db: AngularFireDatabase,
       // pipi html
       public sanitized: DomSanitizer,
+<<<<<<< HEAD
       private storage: AngularFireStorage
   ) {
+=======
+      public my_name_service: MyNameService
+    ) {
+>>>>>>> master
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
     this.dang_nhaps = [];
@@ -97,7 +105,7 @@ export class ChatPageChatPageContentService {
       let currentTime = Number(new Date());
       let count = 0;
       while (count < array.length) {
-        if (currentTime - array[count].lan_cuoi_dang_nhap > 2000  || this.object_chat.checkRoiChua(array[count].ma_tai_khoan) ) {
+        if (currentTime - array[count].lan_cuoi_dang_nhap > 2000 || this.object_chat.checkRoiChua(array[count].ma_tai_khoan)) {
           array.splice(count, 1);
         } else {
           array[count].getNoiDung();
@@ -134,7 +142,16 @@ export class ChatPageChatPageContentService {
         if (this.object_chat.thanh_vien != null) {
           for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
             if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+              if (this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+                  let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
+                  let overTime = currentTime - last_time;
+                  if (overTime < 10000) {
+                    isOnline = true;
+                    break;
+                  }
+                }
+              } else {
                 let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
                 let overTime = currentTime - last_time;
                 if (overTime < 10000) {
@@ -265,11 +282,13 @@ export class ChatPageChatPageContentService {
 
   public layBanBe(object: Object) {
     let ban_bes: string[] = [];
-    Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
-      if (data_thanh_vien['ton_tai'] == 0) {
-        ban_bes.push(ma_thanh_vien);
-      }
-    });
+    if (object != null) {
+      Object.entries(object).forEach(([ma_thanh_vien, data_thanh_vien]) => {
+        if (data_thanh_vien['ton_tai'] == 0) {
+          ban_bes.push(ma_thanh_vien);
+        }
+      });
+    }
     this.ban_bes = ban_bes;
   }
 
@@ -398,6 +417,7 @@ export class ChatPageChatPageContentService {
         tin_nhan.ngay_thu_hoi = data_tin_nhan['ngay_thu_hoi'];
         tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
         tin_nhan.ten = data_tin_nhan['ten'];
+        // Tình trạng xem
         let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
         let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
         if (tinhTrangXem != null) {
@@ -432,12 +452,34 @@ export class ChatPageChatPageContentService {
           tin_nhan.getTen();
           // Lấy nội dung html
           tin_nhan.getNoiDungHTMLTinNhan(this.sanitized);
+          // Emoji
+          let cam_xuc_tin_nhan: object = data_tin_nhan['cam_xuc_tin_nhan'];
+          let camXucs: CamXucTinNhan[] = [];
+          if (cam_xuc_tin_nhan != null) {
+            Object.entries(cam_xuc_tin_nhan).forEach(([k, v]) => {
+              let cx = new CamXucTinNhan();
+              cx.ma_tai_khoan = k;
+              cx.ten = v['ten'];
+              cx.loai_cam_xuc = v['loai'];
+              cx.url = v['url'];
+              camXucs.push(cx);
+            });
+            tin_nhan.cam_xuc_tin_nhan = camXucs;
+            // is exits dscx
+            tin_nhan.getIsExitsDSCX();
+            // tooltip p
+            tin_nhan.getToolTipP();
+            // exits all
+            tin_nhan.getIsExitsCX();
+          }
           // add      
           tin_nhans.push(tin_nhan);
         }
       });
     }
-    this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
+    // Xem ông nào đang bật biểu tưởng cảm xúc thì bật ổng dậy
+    // Rồi gán lại tin nhắn mới
+    this.handleOpenSelectEmojiAndUpdate(tin_nhans);
     // Lọc lại tin nhắn lấy những tin nhắn trước thời gian ta đã rời đi
     if (this.object_chat.is_roi_chua) {
       this.fillter();
@@ -452,10 +494,31 @@ export class ChatPageChatPageContentService {
     this.handleBorderAndMargin();
   }
 
-  public taiKhoanTinhTrangXemRoiChua(mtk:string):boolean{
-    for(let i =0 ; i< this.object_chat.thanh_vien.length;i++){
-      if(this.object_chat.thanh_vien[i].ma_tai_khoan == mtk){
-        if(this.object_chat.thanh_vien[i].roi_chua == 'roi'){
+  public handleOpenSelectEmojiAndUpdate(tin_nhans: ChatPageTinNhan[]) {
+    let mtks: string = null;
+    if (this.object_chat.cuoc_tro_truyen.tin_nhan != null && this.object_chat.cuoc_tro_truyen.tin_nhan.length > 0) {
+      for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
+        if (this.object_chat.cuoc_tro_truyen.tin_nhan[i].is_show_select_emoji) {
+          mtks = this.object_chat.cuoc_tro_truyen.tin_nhan[i].ma_tin_nhan;
+          break;
+        }
+      }
+    }
+    if (mtks != null) {
+      for (let i = 0; i < tin_nhans.length; i++) {
+        if (tin_nhans[i].ma_tin_nhan == mtks) {
+          tin_nhans[i].is_show_select_emoji = true;
+          break;
+        }
+      }
+    }
+    this.object_chat.cuoc_tro_truyen.tin_nhan = tin_nhans;
+  }
+
+  public taiKhoanTinhTrangXemRoiChua(mtk: string): boolean {
+    for (let i = 0; i < this.object_chat.thanh_vien.length; i++) {
+      if (this.object_chat.thanh_vien[i].ma_tai_khoan == mtk) {
+        if (this.object_chat.thanh_vien[i].roi_chua == 'roi') {
           return true;
         }
       }
@@ -467,10 +530,10 @@ export class ChatPageChatPageContentService {
     let i = this.object_chat.cuoc_tro_truyen.tin_nhan.length - 1;
     let timeRoiDi = this.object_chat.time_roi_di;
     while (i > -1) {
-      if(this.object_chat.cuoc_tro_truyen.tin_nhan[i].ngay_gui > timeRoiDi){
-        this.object_chat.cuoc_tro_truyen.tin_nhan.splice(i,1);
+      if (this.object_chat.cuoc_tro_truyen.tin_nhan[i].ngay_gui > timeRoiDi) {
+        this.object_chat.cuoc_tro_truyen.tin_nhan.splice(i, 1);
         i--;
-      }else{
+      } else {
         break;
       }
     }
@@ -535,6 +598,7 @@ export class ChatPageChatPageContentService {
     return `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}, ${ngay.toString().length > 1 ? ngay : "0" + ngay} Tháng ${thang.toString().length > 1 ? thang : "0" + thang}, ${year}`;
   }
 
+<<<<<<< HEAD
   // lưu image vào lưu_file trong storage firebase
   public saveImageluu_fileInStorage(image: FileUpload, idConversation: string, keyImage:string) {
     let filePath: string = '/luu_file/' + idConversation + "/" + keyImage + '/';
@@ -593,4 +657,49 @@ export class ChatPageChatPageContentService {
       })
     });
   }
+=======
+  public openSelectEmoji(tin_nhan: ChatPageTinNhan) {
+    if (tin_nhan.is_show_select_emoji) {
+      tin_nhan.is_show_select_emoji = false;
+    } else {
+      for (let i = 0; i < this.object_chat.cuoc_tro_truyen.tin_nhan.length; i++) {
+        this.object_chat.cuoc_tro_truyen.tin_nhan[i].is_show_select_emoji = false;
+      }
+      tin_nhan.is_show_select_emoji = true;
+    }
+  }
+
+  public selectEmoji(cx: EmojiMessenger, item: ChatPageTinNhan, mtctc: string) {
+    item.is_show_select_emoji = false;
+    // get data
+    let url = cx.img;
+    let loai = cx.ten;
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+    let ten = this.my_name_service.myName;
+    // is exits
+    let isExits = false;
+    if (item.is_exits_dscx) {
+      for (let i = 0; i < item.cam_xuc_tin_nhan.length; i++) {
+        if (item.cam_xuc_tin_nhan[i].ma_tai_khoan == ma_tai_khoan && item.cam_xuc_tin_nhan[i].loai_cam_xuc == loai) {
+          isExits = true;
+          break;
+        }
+      }
+    } else {
+      isExits = false;
+    }
+    if (!isExits) {
+      // add to firebase
+      this.db.object("/chi_tiet_cuoc_tro_chuyen/" + mtctc + "/" + item.ma_tin_nhan + "/cam_xuc_tin_nhan/" + ma_tai_khoan).update({
+        ten: ten,
+        url: url,
+        loai: loai,
+      });
+    } else {
+      //remove
+      this.db.object("/chi_tiet_cuoc_tro_chuyen/" + mtctc + "/" + item.ma_tin_nhan + "/cam_xuc_tin_nhan/" + ma_tai_khoan).remove();
+    }
+  }
+
+>>>>>>> master
 }

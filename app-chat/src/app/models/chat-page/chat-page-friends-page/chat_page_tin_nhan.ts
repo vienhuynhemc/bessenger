@@ -1,4 +1,5 @@
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CamXucTinNhan } from '../chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
 import { ChatPageObjectTinNhanFriend } from './chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from './chat_page_tinh_trang_xem';
 
@@ -16,6 +17,7 @@ export class ChatPageTinNhan {
     noi_dung: string;
     alt: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
+    cam_xuc_tin_nhan: CamXucTinNhan[];
 
     // Các thuộc tính giúp đỡ lag
     // Có phải là bản thân ko
@@ -50,6 +52,94 @@ export class ChatPageTinNhan {
 
     // Nội dung thu hồi
     public noi_dung_thu_hoi: string = "";
+
+    // Có show biểu tượng cảm xúc
+    is_show_select_emoji: boolean;
+    //////////////// Cảm xúc ////////////////////
+    is_have_tim: boolean;
+    tool_tip_tim: string = "";
+    is_have_cuoi: boolean;
+    tool_tip_cuoi: string = "";
+    is_have_wow: boolean;
+    tool_tip_wow: string = "";
+    is_have_buon: boolean;
+    tool_tip_buon: string = "";
+    is_have_gian: boolean;
+    tool_tip_gian: string = "";
+    is_have_like: boolean;
+    tool_tip_like: string = "";
+    is_have_dislike: boolean;
+    tool_tip_dislike: string = "";
+    /////////////////////////////////////////////
+
+    // Có biểu tượng cảm xúc nào hay không
+    is_exits_dscx: boolean;
+    // tooltip p
+    toolTipDSCXALL: string = "";
+
+    public getIsExitsDSCX() {
+        if (this.cam_xuc_tin_nhan != null && this.cam_xuc_tin_nhan.length > 0) {
+            this.is_exits_dscx = true;
+        } else {
+            this.is_exits_dscx = false;
+        }
+    }
+
+    public getIsExitsCX() {
+        if (this.is_exits_dscx) {
+            let v1 = "";
+            let v2 = "";
+            let v3 = "";
+            let v4 = "";
+            let v5 = "";
+            let v6 = "";
+            let v7 = "";
+            for (let i = 0; i < this.cam_xuc_tin_nhan.length; i++) {
+                if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'tim') {
+                    this.is_have_tim = true;
+                    v1 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'cuoi') {
+                    this.is_have_cuoi = true;
+                    v2 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'wow') {
+                    this.is_have_wow = true;
+                    v3 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'buon') {
+                    this.is_have_buon = true;
+                    v4 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'gian') {
+                    this.is_have_gian = true;
+                    v5 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'like') {
+                    this.is_have_like = true;
+                    v6 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                } else if (this.cam_xuc_tin_nhan[i].loai_cam_xuc == 'dislike') {
+                    this.is_have_dislike = true;
+                    v7 += this.cam_xuc_tin_nhan[i].ten + "\n";
+                }
+            }
+            this.tool_tip_tim = v1;
+            this.tool_tip_cuoi = v2;
+            this.tool_tip_wow = v3;
+            this.tool_tip_buon = v4;
+            this.tool_tip_gian = v5;
+            this.tool_tip_like = v6;
+            this.tool_tip_dislike =v7;
+        }
+    }
+
+    public getToolTipP() {
+        let value: string = "";
+        if (this.is_exits_dscx) {
+            for (let i = 0; i < this.cam_xuc_tin_nhan.length; i++) {
+                value += this.cam_xuc_tin_nhan[i].ten;
+                if (i != this.cam_xuc_tin_nhan.length - 1) {
+                    value += "\n";
+                }
+            }
+        }
+        this.toolTipDSCXALL = value;
+    }
 
     public getNoiDungHTMLTinNhan(sanitized: DomSanitizer) {
         let result: SafeHtml = "";
@@ -149,17 +239,17 @@ export class ChatPageTinNhan {
     }
 
     public getTime() {
-        if (this.ngay_thu_hoi == 0) {
+        if (this.loai_tin_nhan != 'thu_hoi') {
             this.timeSend = this.getStringTime(this.ngay_gui);
         } else {
             this.timeSend = "Gửi vào: " + this.getStringTime(this.ngay_gui) + "\nThời gian thu hồi: " + this.getStringTime(this.ngay_thu_hoi);
             let ten = "";
             let mtk = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
-            if(this.ma_tai_khoan == mtk){
+            if (this.ma_tai_khoan == mtk) {
                 ten = "Bạn";
-            }else{
+            } else {
                 let array = this.ten.trim().split(" ");
-                ten = array[array.length-1];
+                ten = array[array.length - 1];
             }
             this.noi_dung_thu_hoi = ten + " đã thu hồi một tin nhắn";
         }
