@@ -162,27 +162,32 @@
   }
 
   .gui_text {
+    display: flex;
     overflow: hidden;
     .tren {
       display: flex;
       align-items: flex-end;
       .cong-cu {
+        position: relative;
+        z-index: 2;
+        display: flex;
         align-items: center;
         justify-content: space-between;
         margin-right: 5px;
+        margin-left: 5px;
         position: relative;
         margin-top: auto;
         margin-bottom: auto;
-        display: none;
         .thu-hoi {
-          width: 22px;
-          height: 22px;
+          width: 24px;
+          height: 24px;
           display: flex;
           justify-content: center;
           align-items: center;
           cursor: pointer;
           border-radius: 50%;
-          main{
+          position: relative;
+          main {
             position: absolute;
             width: 56px;
             height: 57px;
@@ -191,8 +196,25 @@
         .thu-hoi:hover {
           background-color: #0000001a;
         }
+        .cxtn {
+          position: relative;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border-radius: 50%;
+        }
+        .cxtn:hover {
+          background-color: #0000001a;
+        }
+      }
+      .cong-cu-hidden {
+        display: none;
       }
       .hinh {
+        z-index: 2;
         position: relative;
         margin-left: 2px;
         width: 28px;
@@ -207,6 +229,7 @@
         }
       }
       .chua-nd {
+        position: relative;
         box-shadow: 0 0 0px 500px white;
         .noi-dung {
           word-wrap: break-word;
@@ -237,6 +260,66 @@
             font-style: oblique;
           }
         }
+        .dscx {
+          display: flex;
+          position: absolute;
+          bottom: -10px;
+          justify-content: center;
+          height: 18px;
+          background: white;
+          box-shadow: 0 2px 4px #0000001a;
+          align-items: center;
+          border-radius: 10px;
+          cursor: pointer;
+          p {
+            color: #65676b;
+            font-size: 11px;
+            font-family: sans-serif;
+            padding: 3px 6px;
+            padding-left: 2px;
+          }
+          .element{
+            width: 16px;
+            background: white;
+            height: 16px;
+            margin: 0px 1px;
+            position: relative;
+            border-radius: 50%;
+            padding: 1px;
+            img{
+              width: 16px;
+              height: 16px;
+            }
+          }
+          .element:nth-child(1){
+            margin-left: 2px;
+            z-index: 7;
+          }
+          .element:nth-child(2){
+            margin-left: -7px;
+            z-index: 6;
+          }
+          .element:nth-child(3){
+            margin-left: -7px;
+            z-index: 5;
+          }
+          .element:nth-child(4){
+            margin-left: -7px;
+            z-index: 4;
+          }
+          .element:nth-child(5){
+            margin-left: -7px;
+            z-index: 3;
+          }
+          .element:nth-child(6){
+            margin-left: -7px;
+            z-index: 2;
+          }
+          .element:nth-child(7){
+            margin-left: -7px;
+            z-index: 1;
+          }
+        }
       }
       .ban_than {
         border-top-left-radius: 18px;
@@ -262,6 +345,7 @@
         border-bottom-left-radius: 18px;
       }
       .trang_thai_gui {
+        position: relative;
         width: 14px;
         margin-right: 4px;
         margin-left: 4px;
@@ -305,6 +389,30 @@
       border: 1px solid #ced0d4;
       background: white;
     }
+    .chuoi-cam-xuc {
+      transform: translateY(-50px);
+      display: flex;
+      right: 50%;
+      margin-right: -145px;
+      padding: 8px 12px;
+      box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+        inset 0 0 0 1px #ffffff80;
+      border-radius: 24px;
+      position: absolute;
+      z-index: 2;
+      background: white;
+      div {
+        cursor: pointer;
+        width: 34px;
+        height: 32px;
+        margin: 2px;
+        img {
+          width: 32px;
+          height: 32px;
+          object-fit: cover;
+        }
+      }
+    }
   }
   .gui_text:hover {
     .tren {
@@ -339,7 +447,7 @@
           align-items: center;
           cursor: pointer;
           border-radius: 50%;
-          main{
+          main {
             position: absolute;
             width: 56px;
             height: 57px;
@@ -444,7 +552,7 @@
       }
     }
   }
-  .gui_text_icon:hover{
+  .gui_text_icon:hover {
     .tren {
       .cong-cu {
         display: flex;
@@ -473,7 +581,7 @@
           align-items: center;
           cursor: pointer;
           border-radius: 50%;
-          main{
+          main {
             position: absolute;
             width: 56px;
             height: 57px;
@@ -588,7 +696,7 @@
       }
     }
   }
-  .gui_ghi_am:hover{
+  .gui_ghi_am:hover {
     .tren {
       .cong-cu {
         display: flex;
