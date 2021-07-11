@@ -63,7 +63,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -100,8 +100,9 @@
                                         matTooltipClass="tooltip">
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -225,7 +226,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -252,12 +253,13 @@
                                 </div>
                                 <!-- Nội dung -->
                                 <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
-                                    <div class="noi-dung" [matTooltip]="item.timeSend"
-                                    matTooltipClass="tooltip" [innerHTML]="item.noi_dung_html">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                        [innerHTML]="item.noi_dung_html">
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -349,8 +351,8 @@
                                 </div>
                             </div>
                         </div>
-                          <!-- Nếu người dùng bấm chọn cảm xúc -->
-                          <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
                             <div *ngFor="let cx of this.s_e.emojis"
                                 (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
                                 <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
@@ -381,7 +383,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -409,12 +411,13 @@
                                 <!-- Nội dung -->
                                 <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan'" class="chua-nd"
                                     [class.doi_phuong]="!item.isBanThan">
-                                    <img [matTooltip]="item.timeSend"
-                                    matTooltipClass="tooltip" [src]="item.noi_dung || 'assets/images/loading.gif'" alt=""
+                                    <img [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                        [src]="item.noi_dung || 'assets/images/loading.gif'" alt=""
                                         class="sticker_noidung">
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -456,9 +459,8 @@
                                     </div>
                                 </div>
                                 <div *ngIf="item.loai_tin_nhan == 'gui_giphy'" class="chua-nd"
-                                    [class.doi_phuong]="!item.isBanThan" >
-                                    <div class="giphy-content" [matTooltip]="item.timeSend"
-                                    matTooltipClass="tooltip">
+                                    [class.doi_phuong]="!item.isBanThan">
+                                    <div class="giphy-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
                                         <img [src]="item.noi_dung || 'assets/images/loading.gif'" alt=""
                                             class="giphy-noidung">
                                         <div class="name-giphy">
@@ -467,8 +469,9 @@
                                         </div>
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -590,7 +593,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -616,16 +619,15 @@
                                     </div>
                                 </div>
                                 <!-- Nội dung -->
-                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" >
-                                    <app-message-recording
-                                    [matTooltip]="item.timeSend"
-                                        matTooltipClass="tooltip"
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <app-message-recording [matTooltip]="item.timeSend" matTooltipClass="tooltip"
                                         [colorBackground]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
                                         [inputRecording]="item.noi_dung" [idRecording]="item.ma_tin_nhan">
                                     </app-message-recording>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -748,7 +750,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -775,8 +777,7 @@
                                 </div>
                                 <!-- Nội dung -->
                                 <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
-                                    <div class="noi-dung" [matTooltip]="item.timeSend"
-                                    matTooltipClass="tooltip">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
                                         <svg viewBox="0 0 16 16" height="32" width="32">
                                             <path
                                                 [attr.fill]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
@@ -789,8 +790,9 @@
                                         </svg>
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -912,7 +914,7 @@
                                 <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
                                     alt="">
                             </div>
-                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 style="display: flex;align-items: center;">
                                 <!-- Div công cụ bên trái nếu là bản thân -->
                                 <div class="cong-cu" *ngIf="item.isBanThan"
@@ -938,15 +940,15 @@
                                     </div>
                                 </div>
                                 <!-- Nội dung -->
-                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan" >
-                                    <div class="noi-dung" [matTooltip]="item.timeSend"
-                                    matTooltipClass="tooltip">
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
                                         <img style="width: 32px; height: 32px; object-fit: cover;image-rendering: -webkit-optimize-contrast;"
                                             [src]="item.noi_dung || 'assets/images/loading.gif'" alt="">
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
-                                    <div class="dscx" *ngIf="item.is_exits_dscx"
-                                        [style.right]="item.isBanThan?'5px':'none'"
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
                                         [style.left]="item.isBanThan?'none':'5px'">
                                         <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
                                             matTooltipClass="tooltip">
@@ -1069,7 +1071,7 @@
                                     alt="">
                             </div>
                             <!-- Nội dung -->
-                            <div class="chua-nd" [class.ban_than]="item.isBanThan" [class.doi_phuong]="!item.isBanThan"
+                            <div class="chua-nd" [class.ban_than]="item.isBanThan" [class.doi_phuong]="!item.isBanThan" [style.margin-left] = "item.isBanThan?'auto':'0px'"
                                 [matTooltip]="item.timeSend" matTooltipClass="tooltip"
                                 [class.border-tren-ban-than]="item.isBanThan && item.isHaveBorderTop"
                                 [class.border-duoi-ban-than]="item.isBanThan && item.isHaveBorderBottom"
