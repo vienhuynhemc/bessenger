@@ -45,7 +45,7 @@ export class ChatPageChatPageContentService {
       // pipi html
       public sanitized: DomSanitizer,
 
-      private storage: AngularFireStorage
+      private storage: AngularFireStorage,
 
       public my_name_service: MyNameService
     ) {
@@ -655,6 +655,7 @@ export class ChatPageChatPageContentService {
       })
     });
   }
+
   public openSelectEmoji(tin_nhan: ChatPageTinNhan) {
     if (tin_nhan.is_show_select_emoji) {
       tin_nhan.is_show_select_emoji = false;
@@ -697,5 +698,6 @@ export class ChatPageChatPageContentService {
       this.db.object("/chi_tiet_cuoc_tro_chuyen/" + mtctc + "/" + item.ma_tin_nhan + "/cam_xuc_tin_nhan/" + ma_tai_khoan).remove();
     }
   }
+
 
 }
