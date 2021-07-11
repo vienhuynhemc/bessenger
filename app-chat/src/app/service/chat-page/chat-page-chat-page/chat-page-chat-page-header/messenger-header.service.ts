@@ -55,7 +55,16 @@ export class MessengerHeaderService {
         if (this.object_chat.thanh_vien != null) {
           for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
             if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+              if (this.object_chat.loai == 'nhom') {
+                if (this.object_chat.thanh_vien[j].roi_chua == 'chua') {
+                  let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
+                  let overTime = currentTime - last_time;
+                  if (overTime < 10000) {
+                    isOnline = true;
+                    break;
+                  }
+                }
+              } else {
                 let last_time = this.object_chat.thanh_vien[j].lan_cuoi_dang_nhap;
                 let overTime = currentTime - last_time;
                 if (overTime < 10000) {

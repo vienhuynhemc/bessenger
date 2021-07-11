@@ -74,7 +74,8 @@ import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/se
 import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
 import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-share/files-share.component';
 import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component';
-import { MessageRecordingComponent } from './view/main-page/chat-page/message-recording/message-recording.component'
+import { MessageRecordingComponent } from './view/main-page/chat-page/message-recording/message-recording.component';
+import { DetailEmojiMessengerComponent } from './view/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component'
 
 @NgModule({
   declarations: [
@@ -125,7 +126,7 @@ import { MessageRecordingComponent } from './view/main-page/chat-page/message-re
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent
   ],
   imports: [
     BrowserModule,

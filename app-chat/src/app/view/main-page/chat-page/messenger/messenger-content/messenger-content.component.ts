@@ -1,3 +1,4 @@
+import { SelectEmojiService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { RecallMessengerService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
 import { ChatPageChatPageScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
@@ -32,7 +33,7 @@ export class MessengerContentComponent implements OnInit {
     // Thay đổi url
     private route: ActivatedRoute,
     // Để lấy mã cuộc trò chuyện
-    private messenger_main_service: MessengerMainService,
+    public messenger_main_service: MessengerMainService,
     // Service chính
     public content_service: ChatPageChatPageContentService,
     // pipi html
@@ -40,7 +41,9 @@ export class MessengerContentComponent implements OnInit {
     // Service scroll
     public scroll_service: ChatPageChatPageScrollService,
     // Thu hồi tin nhắn
-    public recall_m:RecallMessengerService
+    public recall_m:RecallMessengerService,
+    // Select emoji
+    public s_e:SelectEmojiService
   ) { }
 
   public layAllBanBe() {

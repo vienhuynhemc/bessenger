@@ -101,11 +101,13 @@ export class ChatPageFriendsLeftServiceService {
   }
 
   public compareSearch(i: number): boolean {
-    if (this.allBoxData[i] != null) {
-      if (this.allBoxData[i].name != null) {
-        if (this.allBoxData[i].name.noi_dung_goc != null) {
-          if (this.allBoxData[i].name.noi_dung_goc.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
-            return true;
+    if (this.allBoxData != null && this.allBoxData.length > 0) {
+      if (this.allBoxData[i] != null) {
+        if (this.allBoxData[i].name != null) {
+          if (this.allBoxData[i].name.noi_dung_goc != null) {
+            if (this.allBoxData[i].name.noi_dung_goc.trim().toLowerCase().includes(this.search.trim().toLowerCase())) {
+              return true;
+            }
           }
         }
       }
@@ -123,7 +125,16 @@ export class ChatPageFriendsLeftServiceService {
           let isOnline = false;
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+              if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+                  let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                  let overTime = currentTime - last_time;
+                  if (overTime < 10000) {
+                    isOnline = true;
+                    break;
+                  }
+                }
+              } else {
                 let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
                 let overTime = currentTime - last_time;
                 if (overTime < 10000) {
@@ -357,7 +368,7 @@ export class ChatPageFriendsLeftServiceService {
               o.ngay_xem = data['ngay_xem'];
               o.xem_chua = data['xem_chua'];
               o.ngay_nhan = data['ngay_nhan'];
-              o.is_roi_chua = this.taiKhoanTinhTrangXemRoiChua(o.ma_tai_khoan,i);
+              o.is_roi_chua = this.taiKhoanTinhTrangXemRoiChua(o.ma_tai_khoan, i);
               tinh_trang_xems.push(o);
             });
             tin_nhan.tinh_trang_xem = tinh_trang_xems;
@@ -385,10 +396,10 @@ export class ChatPageFriendsLeftServiceService {
     }
   }
 
-  public taiKhoanTinhTrangXemRoiChua(mtk:string, index:number):boolean{
-    for(let i =0 ; i< this.allBoxData[index].thong_tin_thanh_vien.length;i++){
-      if(this.allBoxData[index].thong_tin_thanh_vien[i].ma_tai_khoan == mtk){
-        if(this.allBoxData[index].thong_tin_thanh_vien[i].roi_chua == 'roi'){
+  public taiKhoanTinhTrangXemRoiChua(mtk: string, index: number): boolean {
+    for (let i = 0; i < this.allBoxData[index].thong_tin_thanh_vien.length; i++) {
+      if (this.allBoxData[index].thong_tin_thanh_vien[i].ma_tai_khoan == mtk) {
+        if (this.allBoxData[index].thong_tin_thanh_vien[i].roi_chua == 'roi') {
           return true;
         }
       }

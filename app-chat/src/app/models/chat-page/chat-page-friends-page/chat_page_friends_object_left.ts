@@ -91,8 +91,8 @@ export class ChatPageFriendsObjectLeft {
         let result: ChatPageObjectTen = new ChatPageObjectTen();
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-            result.noi_dung = this.cuoc_tro_truyen.ten_nhom;
-            result.noi_dung_goc = this.cuoc_tro_truyen.ten_nhom;
+            result.noi_dung = this.cuoc_tro_truyen.ten_nhom||"";
+            result.noi_dung_goc = this.cuoc_tro_truyen.ten_nhom||"";
         } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
             for (let i = 0; i < this.thong_tin_thanh_vien.length; i++) {
                 if (this.thong_tin_thanh_vien[i].ma_tai_khoan != ma_tai_khoan) {

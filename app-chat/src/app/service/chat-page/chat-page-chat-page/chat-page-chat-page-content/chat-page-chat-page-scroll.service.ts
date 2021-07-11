@@ -24,9 +24,13 @@ export class ChatPageChatPageScrollService {
     let heightChild = entries[0].contentRect.height;
     let nen = document.getElementById("nen");
     if (heightChild < 612) {
-      nen.style.height = (heightChild-10)+ "px";
+      if (nen != null) {
+        nen.style.height = (heightChild - 10) + "px";
+      }
     } else if (nen.style.height != '602px') {
-      nen.style.height = '602px'
+      if (nen != null) {
+        nen.style.height = '602px'
+      }
     }
     // Xử lý scroll nội dung
     let div = document.getElementById("tin-nhan-div");
