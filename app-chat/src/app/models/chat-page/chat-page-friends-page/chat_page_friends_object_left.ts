@@ -222,7 +222,7 @@ export class ChatPageFriendsObjectLeft {
                         result.noi_dung = ten + ": 👍";
                         break;
                     case "gui_hinh":
-                        result.noi_dung = ten + " gửi một hình ảnh";
+                        result.noi_dung = ten + " đã gửi hình ảnh";
                         break;
                     case "gui_video":
                         result.noi_dung = ten + " gửi một video";

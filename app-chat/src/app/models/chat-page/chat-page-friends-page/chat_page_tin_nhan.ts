@@ -18,7 +18,7 @@ export class ChatPageTinNhan {
     alt: string;
     tinh_trang_xem: ChatPageTinhTrangXem[];
     cam_xuc_tin_nhan: CamXucTinNhan[];
-
+    danh_sach_url_anh: string[]
     // Các thuộc tính giúp đỡ lag
     // Có phải là bản thân ko
     public isBanThan: boolean;
@@ -389,5 +389,18 @@ export class ChatPageTinNhan {
         }
         this.isHaveBorderBottom = result;
     }
+    
+    public checkLimitNameFile() {
+        if (this.link_file.length > 18) return true;
+      return false;
+    }
 
+    public getLimitNameFile() {
+        let result = this.link_file;
+        if (result.length > 11) {
+          result = this.link_file.substring(0, 17).trim();
+          result += '...';
+        }
+        return result;
+    }
 }
