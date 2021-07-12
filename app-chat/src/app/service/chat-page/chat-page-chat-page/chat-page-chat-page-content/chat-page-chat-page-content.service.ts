@@ -611,20 +611,20 @@ export class ChatPageChatPageContentService {
   // lưu image vào lưu_file trong storage firebase
   public saveImageluu_fileInStorage(image: FileUpload, idConversation: string, keyImage:string) {
     let filePath: string = '/luu_file/' + idConversation + "/" + keyImage + '/';
-    let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
-    let ref = this.storage.ref(filePath+newKey+'$%&'+image.file.name).put(image.file);
+    let newKey = Number(new Date());
+    let ref = this.storage.ref(filePath+newKey+image.file.name).put(image.file);
     return ref;
   }
 
   // save file vao storage firebase
   public saveFileluu_fileStorage(file: FileUpload, idConversation: string, newKey:string, typeFile:string) {
     let filePath: string = '/luu_file/' + idConversation + "/";
-    let ref = this.storage.ref(filePath+newKey+'$%&'+file.file.name).put(file.file);
+    let ref = this.storage.ref(filePath+newKey+file.file.name).put(file.file);
     let check100Percent = false;
     ref.percentageChanges().subscribe((percent) => {
       if (percent == 100) {
         ref.snapshotChanges().pipe(finalize(() => {
-          this.storage.ref(filePath+newKey+'$%&'+file.file.name).getDownloadURL().subscribe((downloadURL) => {
+          this.storage.ref(filePath+newKey+file.file.name).getDownloadURL().subscribe((downloadURL) => {
             if(!check100Percent) {
               this.submitMessageFile(idConversation, downloadURL, typeFile,this.my_name_service.myName,file.name)
               check100Percent = true;
@@ -668,15 +668,17 @@ export class ChatPageChatPageContentService {
           }
         )
       };
-      // lưu vào danh sách file đã gửi
-      this.db.database.ref('file_da_gui').child(ma_cuoc_tro_chuyen).child(ref.key).set({
-        ma_tai_khoan: ma_tai_khoan,
-        ten_file: tenFile,
-        url: tin_nhan,
-        loai_tin_nhan: loai,
-        ngay_gui: currentTime,
-        ton_tai: 0
-      })
+      // lưu vào danh sách file đã gửi, không lưu file ghi âm
+      if(loai != 'gui_ghi_am') {
+        this.db.database.ref('file_da_gui').child(ma_cuoc_tro_chuyen).child(ref.key).set({
+          ma_tai_khoan: ma_tai_khoan,
+          ten_file: tenFile,
+          url: tin_nhan,
+          loai_tin_nhan: loai,
+          ngay_gui: currentTime,
+          ton_tai: 0
+        })
+      }
     });
   }
 // truy cập vào ảnh trong firestorage

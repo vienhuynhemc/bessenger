@@ -565,7 +565,8 @@ export class MessengerFooterComponent implements OnInit {
       });
       // nếu danh có ảnh
       if(listImg.length > 0) {
-        let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
+      // tạo key để thêm vào tên tránh trùng tên
+        let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());;
         listImg.forEach(file => {
           this.content_service.saveImageluu_fileInStorage(file,this.messenger_main_service.ma_cuoc_tro_chuyen, newKey);
         });
@@ -575,7 +576,8 @@ export class MessengerFooterComponent implements OnInit {
       if(listFile.length > 0) {
         listFile.forEach(file => {
           let typeFile = '';
-          let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
+        // tạo key để thêm vào tên tránh trùng tên
+          let newKey = Number(new Date())+'';
           // luu vao firestorage
           if(file.typeFile == 'audio')
             typeFile = 'gui_ghi_am'
