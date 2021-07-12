@@ -1,0 +1,19 @@
+<div class="container">
+
+    <div class="bar">
+        <img src="assets/images/icon.ico" alt="">
+        <p>Cuộc gọi qua Bessenger</p>
+        <div class="close" (click)="close()">
+            <i></i>
+        </div>
+    </div>
+
+    <div class="main">
+        
+        <!-- Camera bản thân -->
+        <div class="my-camera">
+            <video #my_camera [autoplay]="true" [muted]="true" [srcObject] = "this.call_video.localStream"></video>
+        </div>
+    </div>
+
+</div>

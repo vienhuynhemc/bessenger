@@ -1,6 +1,7 @@
+import { CallVideoService } from './../../../../../service/chat-page/call-video/call-video.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 
 @Component({
@@ -10,13 +11,16 @@ import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-p
 })
 export class MessengerHeaderComponent implements OnInit {
 
+
+
   constructor(
     private route: ActivatedRoute,
     public messenger_main_service: MessengerMainService,
-    public header_service: MessengerHeaderService
+    public header_service: MessengerHeaderService,
+    public call_video: CallVideoService
   ) { }
 
-  public roiKhoiNhom(element){
+  public roiKhoiNhom(element) {
     this.openMenu(element);
     this.header_service.roiKhoiNhom(this.messenger_main_service.ma_cuoc_tro_chuyen);
   }
@@ -59,8 +63,8 @@ export class MessengerHeaderComponent implements OnInit {
     })
   }
 
-  public layLanCuoiDangNha(){
-    this.header_service.layLanCuoiDangNhap = this.header_service.getLanCuoiDangNhap().subscribe(data=>{
+  public layLanCuoiDangNha() {
+    this.header_service.layLanCuoiDangNhap = this.header_service.getLanCuoiDangNhap().subscribe(data => {
       this.header_service.dienLanCuoiDangNhap(data.payload.toJSON());
     })
   }
@@ -69,9 +73,9 @@ export class MessengerHeaderComponent implements OnInit {
     this.header_service.layThanhVien = this.header_service.getObjectChatThanhVien(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
       this.header_service.dienThanhVien(data.payload.toJSON());
       // Có thành viên rồi thì fill lần cuối đăng nhập cho nó
-      if(this.header_service.layLanCuoiDangNhap == null){
+      if (this.header_service.layLanCuoiDangNhap == null) {
         this.layLanCuoiDangNha();
-      }else{
+      } else {
         this.header_service.layLanCuoiDangNhap.unsubscribe();
         this.layLanCuoiDangNha();
       }
@@ -97,6 +101,11 @@ export class MessengerHeaderComponent implements OnInit {
     } else {
       element.classList.add("hidden");
     }
+  }
+
+  public async callVideo(): Promise<void> {
+    this.call_video.localStream = await navigator.mediaDevices.getUserMedia(this.call_video.mediaConstraints);
+    this.call_video.is_show = true;
   }
 
 }
