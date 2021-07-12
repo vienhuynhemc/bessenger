@@ -36,7 +36,9 @@
         <div class="child" matTooltip="Bắt đầu gọi thoại" matTooltipClass="tooltip" *ngIf="!this.header_service.object_chat.is_roi_chua"> 
             <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-phone-alt"></i>
         </div>
-        <div class="child" matTooltip="Bắt đầu gọi video" matTooltipClass="tooltip" *ngIf="!this.header_service.object_chat.is_roi_chua">
+        <div class="child" matTooltip="Bắt đầu gọi video" matTooltipClass="tooltip" *ngIf="!this.header_service.object_chat.is_roi_chua"
+        (click)="callVideo()"
+        >
             <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-video"></i>
         </div>
         <div *ngIf="this.header_service.object_chat.loai == 'nhom' && !this.header_service.object_chat.is_roi_chua"
