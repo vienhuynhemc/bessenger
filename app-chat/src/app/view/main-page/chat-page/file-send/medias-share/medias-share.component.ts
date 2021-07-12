@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-share/MediaShare';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-medias-share',
@@ -15,8 +16,8 @@ export class MediasShareComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public medias_share_service:MediasShareService,
-    public messenger_main_service: MessengerMainService
-
+    public messenger_main_service: MessengerMainService,
+    private sanitizer:DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +38,9 @@ export class MediasShareComponent implements OnInit {
       var y = date2.dateSend;
       return x > y ? -1 : x < y ? 1 : 0;
     });
+  }
+  uRLSafe(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
   getListMediaShare() {
     this.medias_share_service.accessfile_da_gui().child(this.messenger_main_service.ma_cuoc_tro_chuyen).on('value', (media)=>{ 

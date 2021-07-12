@@ -18,7 +18,7 @@ export class MessageRecordingComponent implements OnInit {
     this.numberSoundList = Array(31).fill(1);
     this.setDurationAudio(this.idRecording)
   }
-
+ 
   changeState() {
     const audio = <HTMLAudioElement>document.getElementById(this.idRecording);
     const stroke =document.getElementById('stroke-' + this.idRecording);

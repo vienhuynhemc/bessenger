@@ -799,7 +799,7 @@
                                             <span class="name-file-right">{{item.link_file}}</span>
                                         </div>
                                     </div>
-                                    <a target="_blank" id="file-{{item.ma_tin_nhan}}" [href]="item.noi_dung" [download]="item.link_file" hidden></a>
+                                    <a target="_blank" id="file-{{item.ma_tin_nhan}}" [href]="uRLSafe(item.noi_dung)" [download]="item.link_file" hidden></a>
                                     <!-- danh sách biểu tượng cảm xúc -->
                                     <div class="dscx"
                                         (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
@@ -956,7 +956,7 @@
                                     <!-- tên file quá dài -->
                                     <div class="gui-video-content">
                                         <video controls width="320" height="173" class="gui-video">
-                                            <source  [src]="item.noi_dung || 'assets/images/loading.gif'">
+                                            <source  [src]="uRLSafe(item.noi_dung) || 'assets/images/loading.gif'">
                                         </video>
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
@@ -1112,7 +1112,7 @@
                                 <!-- Nội dung -->
                                 <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
                                     <div class="gui-anh-content">
-                                        <img *ngFor="let image of item.danh_sach_url_anh" [class.gui-anh-clone]="item.danh_sach_url_anh.length == 1" [class.gui-anh]="item.danh_sach_url_anh.length > 1" [src]="image || 'assets/images/loading.gif'" alt="">
+                                        <img *ngFor="let image of item.danh_sach_url_anh" [class.gui-anh-clone]="item.danh_sach_url_anh.length == 1" [class.gui-anh]="item.danh_sach_url_anh.length > 1" [src]="uRLSafe(image) || 'assets/images/loading.gif'" alt="">
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
                                     <div class="dscx"

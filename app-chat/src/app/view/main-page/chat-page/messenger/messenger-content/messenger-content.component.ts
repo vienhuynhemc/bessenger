@@ -102,6 +102,10 @@ export class MessengerContentComponent implements OnInit {
     })
   }
 
+
+  uRLSafe(url: string) {
+    return this.sanitized.bypassSecurityTrustUrl(url);
+  }
   ngOnInit(): void {
     
     this.route.params.subscribe(params => {

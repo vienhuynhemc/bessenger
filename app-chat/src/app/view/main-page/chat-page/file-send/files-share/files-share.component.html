@@ -17,7 +17,7 @@
                 <span class="name-file-right" [matTooltip]="file.nameFile" matTooltipClass="tooltip" *ngIf="file.checkLimitName()" >{{file.getLimitName()}}</span>
 
             </div>
-            <a id="file-{{file.idMessage}}" target="_blank" [href]="file.url" [download]="file.nameFile" hidden></a>
+            <a id="file-{{file.idMessage}}" target="_blank" [href]="uRLSafe(file.url)" [download]="file.nameFile" hidden></a>
         </div>
     </div>
 </div>

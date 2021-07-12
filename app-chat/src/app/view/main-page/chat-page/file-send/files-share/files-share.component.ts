@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileShare } from 'src/app/models/chat-page/chat-page-file-page/file-share/file-share';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-files-share',
@@ -14,7 +15,8 @@ export class FilesShareComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public files_share_service:FilesShareService,
-    public messenger_main_service: MessengerMainService
+    public messenger_main_service: MessengerMainService,
+    private sanitizer:DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +25,9 @@ export class FilesShareComponent implements OnInit {
         this.getFileShare();
     });
   }
-
+  uRLSafe(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
   public open(){
     this.files_share_service.isOpen = !this.files_share_service.isOpen;
     if(this.files_share_service.isOpen)
