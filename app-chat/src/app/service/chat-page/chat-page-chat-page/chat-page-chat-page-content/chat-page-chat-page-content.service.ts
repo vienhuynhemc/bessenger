@@ -13,6 +13,7 @@ import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page
 import { FileUpload } from 'src/app/models/file-upload/file_upload';
 import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,6 @@ export class ChatPageChatPageContentService {
   // Đối tượng tượng đang nhập
   public dang_nhaps: ObjectDangNhap[];
 
-  storageRefFile:any;
   // service
   public layAllBanBe: Subscription;
   public layLoaiCuocTroChuyen: Subscription;
@@ -47,7 +47,8 @@ export class ChatPageChatPageContentService {
 
       private storage: AngularFireStorage,
 
-      public my_name_service: MyNameService
+      public my_name_service: MyNameService,
+      
     ) {
     this.object_chat = new ObjectChatContent();
     this.object_chat.cuoc_tro_truyen = new ChatPageCuocTroChuyen();
@@ -400,7 +401,7 @@ export class ChatPageChatPageContentService {
     return this.db.object("/chi_tiet_cuoc_tro_chuyen/" + id).snapshotChanges();
   }
 
-  public dienTinNhan(value: object) {
+  public dienTinNhan(value: object, maCuocTroChuyen:string) {
     let tin_nhans: ChatPageTinNhan[] = [];
     if (value != null) {
       Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
@@ -415,6 +416,16 @@ export class ChatPageChatPageContentService {
         tin_nhan.ngay_thu_hoi = data_tin_nhan['ngay_thu_hoi'];
         tin_nhan.noi_dung = data_tin_nhan['noi_dung'];
         tin_nhan.ten = data_tin_nhan['ten'];
+        if(tin_nhan.loai_tin_nhan == 'gui_hinh') {
+          tin_nhan.danh_sach_url_anh = []
+          this.accessluu_fileFireStorage(maCuocTroChuyen,tin_nhan.noi_dung).listAll().then((result)=>{
+              result.items.forEach(element => {
+                element.getDownloadURL().then((url)=> {
+                  tin_nhan.danh_sach_url_anh.push(url)
+                })
+              });
+            })
+        }
         // Tình trạng xem
         let tinhTrangXem: object = data_tin_nhan['tinh_trang_xem'];
         let tinh_trang_xems: ChatPageTinhTrangXem[] = [];
@@ -600,27 +611,39 @@ export class ChatPageChatPageContentService {
   // lưu image vào lưu_file trong storage firebase
   public saveImageluu_fileInStorage(image: FileUpload, idConversation: string, keyImage:string) {
     let filePath: string = '/luu_file/' + idConversation + "/" + keyImage + '/';
-    let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());
-    let ref = this.storage.ref(filePath+newKey+'$%&'+image.file.name).put(image.file);
+    let newKey = Number(new Date());
+    let ref = this.storage.ref(filePath+newKey+image.file.name).put(image.file);
     return ref;
   }
 
   // save file vao storage firebase
-  public saveFileluu_fileStorage(file: FileUpload, idConversation: string, newKey:string) {
+  public saveFileluu_fileStorage(file: FileUpload, idConversation: string, newKey:string, typeFile:string) {
     let filePath: string = '/luu_file/' + idConversation + "/";
-    let ref = this.storage.ref(filePath+newKey+'$%&'+file.file.name).put(file.file);
-    this.storageRefFile = this.storage.ref(filePath+newKey+'$%&'+file.file.name);
-    return ref;
+    let ref = this.storage.ref(filePath+newKey+file.file.name).put(file.file);
+    let check100Percent = false;
+    ref.percentageChanges().subscribe((percent) => {
+      if (percent == 100) {
+        ref.snapshotChanges().pipe(finalize(() => {
+          this.storage.ref(filePath+newKey+file.file.name).getDownloadURL().subscribe((downloadURL) => {
+            if(!check100Percent) {
+              this.submitMessageFile(idConversation, downloadURL, typeFile,this.my_name_service.myName,file.name)
+              check100Percent = true;
+            }
+          })
+        })).subscribe();
+      }
+    })
   }
   // lưu link image vao danh sach file trong db
-  public submitMessageFile(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string) {
+  public submitMessageFile(ma_cuoc_tro_chuyen: string, tin_nhan: string, loai: string, ten: string, tenFile:string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
     let currentTime = Number(new Date());
     // Tin nhắn
     this.db.list("/chi_tiet_cuoc_tro_chuyen/" + ma_cuoc_tro_chuyen).push(
       {
         dia_chi_file: "",
-        link_file: "",
+        // xet link file la ten file
+        link_file: tenFile,
         loai_tin_nhan: loai,
         ["ma_tai_khoan"]: ma_tai_khoan,
         ten: ten,
@@ -645,17 +668,23 @@ export class ChatPageChatPageContentService {
           }
         )
       };
-      // lưu vào danh sách file đã gửi
-      this.db.database.ref('file_da_gui').child(ma_cuoc_tro_chuyen).child(ref.key).set({
-        ma_tai_khoan: ma_tai_khoan,
-        url: tin_nhan,
-        loai_tin_nhan: loai,
-        ngay_gui: currentTime,
-        ton_tai: 0
-      })
+      // lưu vào danh sách file đã gửi, không lưu file ghi âm
+      if(loai != 'gui_ghi_am') {
+        this.db.database.ref('file_da_gui').child(ma_cuoc_tro_chuyen).child(ref.key).set({
+          ma_tai_khoan: ma_tai_khoan,
+          ten_file: tenFile,
+          url: tin_nhan,
+          loai_tin_nhan: loai,
+          ngay_gui: currentTime,
+          ton_tai: 0
+        })
+      }
     });
   }
-
+// truy cập vào ảnh trong firestorage
+  public accessluu_fileFireStorage(idCoversation:string, idImage: string){
+    return this.storage.storage.ref('/luu_file/' + idCoversation + '/' + idImage +'/');
+  }
   public openSelectEmoji(tin_nhan: ChatPageTinNhan) {
     if (tin_nhan.is_show_select_emoji) {
       tin_nhan.is_show_select_emoji = false;

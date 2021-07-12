@@ -96,7 +96,7 @@
                         </div>
                         <div class="right" *ngIf="item.typeFile == 'file' || item.typeFile == 'audio'">
                             <span *ngIf="!item.checkLimitName()" class="file-name">{{item.name}}</span>
-                            <span *ngIf="item.checkLimitName()" class="file-name">{{item.getLimitName()}}</span>
+                            <span *ngIf="item.checkLimitName()" class="file-name" [matTooltip]="item.name" matTooltipClass="tooltip">{{item.getLimitName()}}</span>
                         </div>
                         <div class="input-item-exit"  (click)="removeFileChooseFile(item)">
                             <i></i>

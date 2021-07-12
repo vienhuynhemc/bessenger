@@ -18,7 +18,7 @@ export class MessageRecordingComponent implements OnInit {
     this.numberSoundList = Array(31).fill(1);
     this.setDurationAudio(this.idRecording)
   }
-
+ 
   changeState() {
     const audio = <HTMLAudioElement>document.getElementById(this.idRecording);
     const stroke =document.getElementById('stroke-' + this.idRecording);
@@ -91,15 +91,19 @@ export class MessageRecordingComponent implements OnInit {
             let time = document.getElementById('time-'+id);
             let seekbar = <HTMLInputElement>document.getElementById('seekbar-'+id);
             let durationAu = this.duration;
-            time.dataset.time = durationAu.toFixed(2);
-            seekbar.max = durationAu.toFixed(0);
-            seekbar.step = 0.00000000000000001 + ''
-            if(durationAu < 10) {
-              time.innerHTML = '0:0' + durationAu.toFixed(0);
-            } else if(durationAu > 59) {
-              time.innerHTML = '1:00';
-            } else {
-              time.innerHTML = '0:' + durationAu.toFixed(0);
+            if(seekbar != null) {
+              time.dataset.time = durationAu.toFixed(2);
+              seekbar.max = durationAu.toFixed(0);
+              seekbar.step = 0.00000000000000001 + ''
+            }
+            if(time != null) {
+              if(durationAu < 10) {
+                time.innerHTML = '0:0' + durationAu.toFixed(0);
+              } else if(durationAu > 59) {
+                time.innerHTML = '1:00';
+              } else {
+                time.innerHTML = '0:' + durationAu.toFixed(0);
+              }
             }
            _player.remove();
         };

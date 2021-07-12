@@ -11,7 +11,7 @@ export class FileUpload {
           if (this.name.length > 11) return true;
         return false;
       }
-      public getLimitName() {
+    public getLimitName() {
           let result = this.name;
           if (result.length > 11) {
             result = this.name.substring(0, 10).trim();

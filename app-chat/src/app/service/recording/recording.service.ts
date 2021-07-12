@@ -19,8 +19,8 @@ export class RecordingService {
   timeNext: number;
   intervalListen: any;
   timeoutListen: any;
+  trackStream:any;
   constructor(
-    private db: AngularFireDatabase,
     private storage: AngularFireStorage
   ) {}
   // hiển thị ghi âm
@@ -56,6 +56,7 @@ export class RecordingService {
       .getUserMedia(constraintObj)
       .then((stream) => {
         this.mediaRecorder = new MediaRecorder(stream);
+        this.trackStream = stream.getTracks();
         let items = [];
         this.mediaRecorder.ondataavailable = (e) => {
           items.push(e.data);
@@ -83,7 +84,9 @@ export class RecordingService {
         this.timeout = setTimeout(() => {
           // nếu đang ghi thì dừng
           if (this.mediaRecorder.state == 'recording') {
-            this.mediaRecorder.stop();
+            this.trackStream.forEach(element => {
+              element.stop();
+            });
             this.setStatePause();
             clearInterval(this.interval);
             let content = document
@@ -100,7 +103,9 @@ export class RecordingService {
   stopRecording() {
     // nếu đang ghi thì dừng
     if (this.mediaRecorder.state == 'recording') {
-      this.mediaRecorder.stop();
+      this.trackStream.forEach(element => {
+        element.stop();
+      });
       clearInterval(this.interval);
       clearTimeout(this.timeout);
       if (this.isStateListen) {
@@ -126,7 +131,9 @@ export class RecordingService {
     setTimeout(() => {
       //  dừng ghi âm
       if (this.mediaRecorder.state == 'recording') {
-        this.mediaRecorder.stop();
+        this.trackStream.forEach(element => {
+          element.stop();
+        });
         this.setStatePause();
         clearInterval(this.interval);
         clearTimeout(this.timeout);
@@ -185,6 +192,8 @@ export class RecordingService {
   }
   resetRecording() {
     this.isShowRecording = false;
-    this.mediaRecorder.stop();
+    this.trackStream.forEach(element => {
+      element.stop();
+    });
   }
 }

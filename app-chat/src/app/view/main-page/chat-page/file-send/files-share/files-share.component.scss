@@ -47,8 +47,66 @@
         background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
       }
     }
-    :hover {
+    .select:hover {
       background-color: #f2f2f2;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 10px;
+      margin-right: 5px;
+      .noi-dung-gui-file {
+        width: 100%;
+        height: 50px;
+        background-color: rgb(226, 231, 238);
+        display: flex;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        &-left{
+          width: 65px;
+          height: 100%;
+          position: relative;
+          .cover-file-left-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            i {
+              background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+              background-position: -34px -70px;
+              background-size: 52px 1338px;
+              background-repeat: no-repeat;
+              width: 16px;
+              height: 16px;
+              position: absolute;
+              top: 8px;
+              left: 8px;
+              color: #1d1b1b;
+            }
+          }
+        }
+        &-right {
+          width: 80%;
+          height: 100%;
+          margin-right: 10px;
+          .name-file-right {
+            display: inline-flex;
+            height: 100%;
+            align-items: center;
+            font-family: 'Raleway';
+            font-size: 15px;
+            font-weight: bold;
+          }
+        }
+      }
+    
     }
   }
   

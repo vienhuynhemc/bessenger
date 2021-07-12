@@ -13,8 +13,7 @@
       align-items: center;
       border-radius: 8px;
       padding: 14px 10px;
-      margin-left: 10px;
-      margin-right: 5px;
+      margin: 0px 5px 5px 10px;
       p {
         color: #050505;
         font-weight: 600;
@@ -47,8 +46,34 @@
         background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
       }
     }
-    :hover {
+    .select:hover {
       background-color: #f2f2f2;
+    }
+    .list-media-share {
+      max-width: 250px;
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 10px;
+      margin-right: 5px;
+      justify-content: center;
+      .cover-media {
+          width: 110px;
+          height: 110px;
+          border-radius: 5px;
+          margin-right: 4px;
+          margin-bottom: 4px;
+          margin: 2px 2px 2px 2px;
+          cursor: pointer;
+        .img-file {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+      }
+      .cover-media:hover {
+        opacity: 0.9;
+      }
     }
   }
   

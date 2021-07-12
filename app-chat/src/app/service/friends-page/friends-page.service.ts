@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject } from 'rxjs';
-import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
-import { RequestInfor } from 'src/app/models/friends-page/request_infor';
-import { SendInfor } from 'src/app/models/friends-page/send_infor';
-import { ContactsService } from './contacts/contacts.service';
+
 
 @Injectable({
   providedIn: 'root'

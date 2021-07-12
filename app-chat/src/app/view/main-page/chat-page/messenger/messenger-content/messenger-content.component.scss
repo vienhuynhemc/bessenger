@@ -925,6 +925,100 @@
       }
     }
   }
+  .gui-video {
+    .tren {
+      .gui-video-content {
+        background-color: white;
+        width: 320px;
+        height: 173px;
+        .gui-video {
+          cursor: pointer;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  .gui-anh {
+    .tren {
+      .gui-anh-content {
+        background-color: white;
+        max-width: 312px;
+        display: flex;
+        flex-wrap: wrap;
+        .gui-anh {
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          object-fit: cover;
+          cursor: pointer;
+          margin-right: 4px;
+          margin-bottom: 4px;
+        }
+        .gui-anh-clone {
+          max-height: 400px;
+          max-width: 320px;
+          min-height: 24px;
+          width: 158px;
+          border-radius: 18px;
+          cursor: pointer;
+        }
+        .gui-anh:hover, .gui-anh-clone:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+  .gui_file {
+    .tren {
+      .noi-dung-gui-file {
+        min-width: 150px;
+        max-width: 256px;
+        height: 50px;
+        background-color: rgb(226, 231, 238);
+        display: flex;
+        border-radius: 10px;
+        cursor: pointer;
+        &-left{
+          width: 65px;
+          height: 100%;
+          .cover-file-left-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            i {
+              background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+              background-position: -34px -70px;
+              background-size: 52px 1338px;
+              background-repeat: no-repeat;
+              width: 16px;
+              height: 16px;
+              position: absolute;
+              top: 8px;
+              left: 8px;
+              color: #1d1b1b;
+            }
+          }
+        }
+        &-right {
+          width: 80%;
+          height: 100%;
+          margin-right: 10px;
+          .name-file-right {
+            display: inline-flex;
+            height: 100%;
+            align-items: center;
+            font-family: 'Raleway';
+            font-size: 15px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
 }
 
 .nen {

@@ -1,4 +1,3 @@
-import { SelectEmojiService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { RecallMessengerService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
 import { ChatPageChatPageScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
@@ -9,6 +8,7 @@ import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat
 import { AnimationOptions } from 'ngx-lottie';
 import { DomSanitizer } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
+import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 
 @Component({
   selector: 'app-messenger-content',
@@ -16,7 +16,6 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./messenger-content.component.scss']
 })
 export class MessengerContentComponent implements OnInit {
-
   // scroll
   @HostListener('scroll', ['$event'])
 
@@ -103,7 +102,12 @@ export class MessengerContentComponent implements OnInit {
     })
   }
 
+
+  uRLSafe(url: string) {
+    return this.sanitized.bypassSecurityTrustUrl(url);
+  }
   ngOnInit(): void {
+    
     this.route.params.subscribe(params => {
       // Lấy bạn bè
       if (this.content_service.layAllBanBe == null) {
@@ -155,7 +159,7 @@ export class MessengerContentComponent implements OnInit {
 
   public layTinNhan() {
     this.content_service.layTinNhan = this.content_service.getTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-      this.content_service.dienTinNhan(data.payload.toJSON());
+      this.content_service.dienTinNhan(data.payload.toJSON(), this.messenger_main_service.ma_cuoc_tro_chuyen);
     })
   }
 
@@ -171,4 +175,12 @@ export class MessengerContentComponent implements OnInit {
     this.recall_m.ma_cuoc_tro_chuyen = this.messenger_main_service.ma_cuoc_tro_chuyen;
   }
 
+  // click file
+  public clickMessageFile(ma_tin_nhan: string, urlFile:string) {
+    let linkFile = <HTMLAreaElement>document.getElementById('file-'+ma_tin_nhan);
+    linkFile.click();
+  
+  }
+  
+  
 }
