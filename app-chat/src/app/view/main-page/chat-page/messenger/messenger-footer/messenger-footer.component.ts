@@ -86,11 +86,8 @@ export class MessengerFooterComponent implements OnInit {
       this.recordingService.stopRecording();
       this.recordingService.isShowRecording = false;
     }
-    if(this.arrayFileUpload.length > 0) {
-      let inputFile= document.getElementById('input-file');
-        inputFile.style.display = 'none';
-    }
     
+    this.arrayImageVideoUpload = [];
     this.arrayFileUpload = [];
     
   }
