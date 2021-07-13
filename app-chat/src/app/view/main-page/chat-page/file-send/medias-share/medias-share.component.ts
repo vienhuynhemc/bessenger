@@ -4,6 +4,7 @@ import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-s
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
 
 @Component({
   selector: 'app-medias-share',
@@ -17,7 +18,8 @@ export class MediasShareComponent implements OnInit {
     private route: ActivatedRoute,
     public medias_share_service:MediasShareService,
     public messenger_main_service: MessengerMainService,
-    private sanitizer:DomSanitizer
+    private sanitizer:DomSanitizer,
+    public imageDetailService: ImageDetailService
   ) { }
 
   ngOnInit(): void {
