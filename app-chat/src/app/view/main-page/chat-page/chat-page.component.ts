@@ -1,3 +1,4 @@
+import { CallVideoService } from './../../../service/chat-page/call-video/call-video.service';
 import { ChatPageProcessServiceService } from './../../../service/chat-page/chat-page-process-service.service';
 import { Component, OnInit } from '@angular/core';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
@@ -18,7 +19,8 @@ export class ChatPageComponent implements OnInit {
     public chat_page_process_service: ChatPageProcessServiceService,
     public recall_m : RecallMessengerService,
     public select_emoji:SelectEmojiService,
-    public imageDetailService: ImageDetailService
+    public imageDetailService: ImageDetailService,
+    public call_video:CallVideoService
   ) { }
 
   // lấy dữ liệu cho vào component

@@ -78,6 +78,9 @@ import { MessageRecordingComponent } from './view/main-page/chat-page/message-re
 import { DetailEmojiMessengerComponent } from './view/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component';
 import { DetailImageComponent } from './view/main-page/chat-page/detail-image/detail-image.component'
 
+import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-video.component'
+
+
 @NgModule({
   declarations: [
     // Trang index
@@ -127,7 +130,8 @@ import { DetailImageComponent } from './view/main-page/chat-page/detail-image/de
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent
+
   ],
   imports: [
     BrowserModule,

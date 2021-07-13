@@ -40,4 +40,9 @@
 
 <!-- Danh sách thông tin chi tiết cảm xúc của một tin nhắn nào đó -->
 <app-detail-emoji-messenger *ngIf="this.select_emoji.is_show_detail"></app-detail-emoji-messenger>
+<!-- xem chi tiết hình ảnh -->
 <app-detail-image *ngIf="imageDetailService.isOpen"></app-detail-image>
+
+
+<!--Component video call -->
+<app-call-video *ngIf="this.call_video.is_show"></app-call-video>
