@@ -954,7 +954,7 @@
                                 <!-- Nội dung -->
                                 <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
                                     <!-- tên file quá dài -->
-                                    <div class="gui-video-content">
+                                    <div class="gui-video-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
                                         <video controls width="320" height="173" class="gui-video" (click)="imageDetailService.openImageURL(item.noi_dung,item.loai_tin_nhan ,this.messenger_main_service.ma_cuoc_tro_chuyen)">
                                             <source  [src]="uRLSafe(item.noi_dung) || 'assets/images/loading.gif'">
                                         </video>
@@ -1111,7 +1111,7 @@
                                 </div>
                                 <!-- Nội dung -->
                                 <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
-                                    <div class="gui-anh-content">
+                                    <div class="gui-anh-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
                                         <img (click)="imageDetailService.openImageURL(image,item.loai_tin_nhan ,this.messenger_main_service.ma_cuoc_tro_chuyen)" *ngFor="let image of item.danh_sach_url_anh" [class.gui-anh-clone]="item.danh_sach_url_anh.length == 1" [class.gui-anh]="item.danh_sach_url_anh.length > 1" [src]="uRLSafe(image) || 'assets/images/loading.gif'" alt="">
                                     </div>
                                     <!-- danh sách biểu tượng cảm xúc -->
