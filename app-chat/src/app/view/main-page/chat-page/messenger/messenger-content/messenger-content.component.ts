@@ -9,6 +9,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { DomSanitizer } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
 import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
+import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
 
 @Component({
   selector: 'app-messenger-content',
@@ -42,7 +43,8 @@ export class MessengerContentComponent implements OnInit {
     // Thu hồi tin nhắn
     public recall_m:RecallMessengerService,
     // Select emoji
-    public s_e:SelectEmojiService
+    public s_e:SelectEmojiService,
+    public imageDetailService:ImageDetailService
   ) { }
 
   public layAllBanBe() {

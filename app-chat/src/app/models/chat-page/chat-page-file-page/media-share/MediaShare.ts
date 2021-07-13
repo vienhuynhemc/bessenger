@@ -5,7 +5,7 @@ export class MediaShare {
     dateSend: number;
     nameFile: string;
     url: string;
-    urlImage: string;
+
 
 
 }

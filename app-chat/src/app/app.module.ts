@@ -76,7 +76,10 @@ import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-
 import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component';
 import { MessageRecordingComponent } from './view/main-page/chat-page/message-recording/message-recording.component';
 import { DetailEmojiMessengerComponent } from './view/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component';
+import { DetailImageComponent } from './view/main-page/chat-page/detail-image/detail-image.component'
+
 import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-video.component'
+
 
 @NgModule({
   declarations: [
@@ -127,7 +130,8 @@ import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-v
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, CallVideoComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent
+
   ],
   imports: [
     BrowserModule,
