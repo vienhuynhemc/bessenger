@@ -28,6 +28,7 @@ export class MessengerFooterComponent implements OnInit {
   check100Audio: boolean;
   // mảng file
   arrayFileUpload: FileUpload[] = [];
+  arrayImageVideoUpload: FileUpload[] = [];
   constructor(
     public messenger_footer_service: MessengerFooterService,
     public messenger_main_service: MessengerMainService,
@@ -535,7 +536,9 @@ export class MessengerFooterComponent implements OnInit {
         }
       }
     }
-  
+    // nếu có file thì xóa danh sách image, video
+    if(this.arrayFileUpload.length > 0)
+        this.arrayImageVideoUpload = []
   }
   // xóa file trong choose file 
   removeFileChooseFile(file: FileUpload) {
@@ -543,10 +546,9 @@ export class MessengerFooterComponent implements OnInit {
           if(element.id == file.id)
               this.arrayFileUpload.splice(index,1)
       });
-      if(this.arrayFileUpload.length == 0) {
+      // clear input để khi tải lại file vừa xóa k bị trùng
         let chooseFile = <HTMLInputElement>document.getElementById('choose-file');
         chooseFile.value = ''
-      }
   }
   
   // gửi file
@@ -591,5 +593,91 @@ export class MessengerFooterComponent implements OnInit {
         });
       }
       this.arrayFileUpload = [];
+  }
+
+  // gửi Video hoặc ảnh
+  openChooseImageOrVideo() {
+    const chooseImageOrVideo = document.getElementById('choose-image-video');
+    chooseImageOrVideo.click();
+  }
+// khi có ảnh hoặc video
+  changeChooseImageOrVideo() {
+    let chooseFile = <HTMLInputElement>document.getElementById('choose-image-video');
+    let arrayFile = Array.from(chooseFile.files);
+    console.log(arrayFile)
+    for (let index = 0; index < arrayFile.length; index++) {
+      // chỉ nhận file < 25mb
+      if (arrayFile[index].size < 25000000) {
+        // lấy ra đuôi file
+        let newFile = new FileUpload();
+        newFile.file = arrayFile[index];
+        newFile.name = arrayFile[index].name;
+        newFile.id = Number(new Date()) + newFile.name;
+          let typeFileMedia = arrayFile[index].type
+            .split('/')[0]
+            .toLowerCase()
+            .trim();
+          // nếu đúng định dang media
+          if (typeFileMedia == 'image') {
+            newFile.typeFile = 'image';
+            newFile.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(arrayFile[index]))
+            this.arrayImageVideoUpload.push(newFile);
+          } else if (typeFileMedia == 'video') {
+            newFile.typeFile = 'video';
+            this.arrayImageVideoUpload.push(newFile);
+            newFile.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(arrayFile[index]))
+          }
+      }
+    }
+    // nếu có image,video thì xóa danh sách file
+    if(this.arrayImageVideoUpload.length > 0)
+      this.arrayFileUpload = []
+  }
+
+   // xóa file trong choose file 
+   removeImageVideoChoose(file: FileUpload) {
+    this.arrayImageVideoUpload.forEach((element,index) => {
+        if(element.id == file.id)
+            this.arrayImageVideoUpload.splice(index,1)
+    });
+      // clear input để khi tải lại file vừa xóa k bị trùng
+      let chooseFile = <HTMLInputElement>document.getElementById('choose-image-video');
+      chooseFile.value = ''
+  }
+  // gui anh video
+  sendMessageImageVideo() {
+      let listImg = []
+      let listFile = []
+      if(this.tin_nhan.length > 0) {
+        this.sendTinNhan(); 
+      }
+      // lấy ra danh sách ảnh
+      this.arrayImageVideoUpload.forEach(fileUpload => {
+        if(fileUpload.typeFile == 'image')
+          listImg.push(fileUpload)
+        else if(fileUpload.typeFile == 'video')
+          listFile.push(fileUpload)
+      });
+      // nếu danh có ảnh
+      if(listImg.length > 0) {
+      // tạo key để thêm vào tên tránh trùng tên
+        let newKey = JSON.parse(localStorage.getItem('ma_tai_khoan_dn')) + Number(new Date());;
+        listImg.forEach(file => {
+          this.content_service.saveImageluu_fileInStorage(file,this.messenger_main_service.ma_cuoc_tro_chuyen, newKey);
+        });
+        this.content_service.submitMessageFile(this.messenger_main_service.ma_cuoc_tro_chuyen, newKey, 'gui_hinh',this.my_name_service.myName,'')
+      }
+      // danh sach file
+      if(listFile.length > 0) {
+        listFile.forEach(file => {
+          let typeFile = 'gui_video';
+          // tạo key để thêm vào tên tránh trùng tên
+          let newKey = Number(new Date())+'';
+          // luu vao firestorage
+          // luu vao chi tiet tin nhan + danh sach file da gui
+          this.content_service.saveFileluu_fileStorage(file,this.messenger_main_service.ma_cuoc_tro_chuyen, newKey, typeFile);
+        });
+      }
+      this.arrayImageVideoUpload = [];
   }
 }
