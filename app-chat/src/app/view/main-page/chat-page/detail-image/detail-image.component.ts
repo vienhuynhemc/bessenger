@@ -60,6 +60,6 @@ export class DetailImageComponent implements OnInit {
       }
     }
   }
-
+  
   
 }
