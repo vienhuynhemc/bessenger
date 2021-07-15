@@ -1,26 +1,50 @@
 <div class="container">
     <div class="main">
-        <img class="avatar-bg" src="assets/images/list-friends-chat-page/avt5.jpg" alt="">
+        <img class="avatar-bg" [src]="persionalService.persional.linkPicture || 'assets/images/loading.gif'" alt="">
         <div class="cover-avatar-bg" id="cover-avatar-bg"></div>
         <div class="circle-left" id="circle-left">
-                <div class="circle-sub-2" matTooltip="Chỉnh sửa thông tin cá nhân" matTooltipClass="tooltip">
-                    <img src="assets/images/personal-page/bg-girl.jpg" alt="">
+                <div (click)="changeProfile()" class="circle-sub-2" matTooltip="Chỉnh sửa thông tin cá nhân" matTooltipClass="tooltip">
+                    <img *ngIf="persionalService.persional.sex == 'Nữ'" src="assets/images/personal-page/bg-girl.jpg" alt="">
+                    <img *ngIf="persionalService.persional.sex == 'Nam'" src="assets/images/personal-page/bg-boy.jpg" alt="">
+
                     <i class="fas fa-id-card"></i>
                 </div>
         </div>
-        <div class="circle-center" id="circle-center">
-            <div class="circle-sub-1">
+        <div class="circle-center" id="circle-center" >
+            <div class="circle-sub-1" (click)="clickAvatar()">
                 <div class="circle-sub-2" matTooltip="Cập nhật ảnh đại diện" matTooltipClass="tooltip">
-                <img src="assets/images/list-friends-chat-page/avt5.jpg" alt="">
+                <img [src]="persionalService.persional.linkPicture || 'assets/images/loading.gif'" alt="">
                 </div>
-                <div class="name"><span>Halena Jolie</span></div>
+                <div class="name" *ngIf="persionalService.persional.checkLimitName()" [matTooltip]="persionalService.persional.name" matTooltipClass="tooltip"><span>{{persionalService.persional.getLimitName()}}</span></div>
+                <div class="name" *ngIf="!persionalService.persional.checkLimitName()"><span>{{persionalService.persional.name}}</span></div>
+                <input id="avatar-update" type="file" hidden accept="image/*" (change)="changeAvatar()">
             </div>
         </div>
         <div class="circle-right" id="circle-right">
-                <div class="circle-sub-2" matTooltip="Đổi mật khẩu" matTooltipClass="tooltip">
+                <div (click)="changePass()" class="circle-sub-2" matTooltip="Đổi mật khẩu" matTooltipClass="tooltip">
                     <img src="assets/images/personal-page/pass.jpg" alt="">
                     <i class="fas fa-key"></i>
                 </div>
         </div>
     </div>
+</div>
+<div class="formYesNo" [class.show-unfriend]="this.fileAvatar != null">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Thay đổi ảnh đại diện</p>
+            <img class="avatar-new" *ngIf="this.fileAvatar != null" [src]="uRLSafe(this.urlNewAvatar)" alt="">
+            <p class="title2">Bạn có chắc chắn muốn chọn ảnh này làm ảnh đại diện
+            <div>
+                <p (click)="okChangeAvatar()">Có, chắc chắn <i class="fa fa-check"></i></p>
+                <span (click)="notChangeAvatar()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+<div class="loading" *ngIf="persionalService.isLoadingProcess()">
+    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
 </div>

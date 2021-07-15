@@ -78,7 +78,9 @@ import { MessageRecordingComponent } from './view/main-page/chat-page/message-re
 import { DetailEmojiMessengerComponent } from './view/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component';
 import { DetailImageComponent } from './view/main-page/chat-page/detail-image/detail-image.component'
 
-import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-video.component'
+import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-video.component';
+import { ChangeProfileComponent } from './view/main-page/personal-page/change-profile/change-profile.component';
+import { ChangePasswordComponent } from './view/main-page/personal-page/change-password/change-password.component'
 
 
 @NgModule({
@@ -130,7 +132,7 @@ import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-v
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent
 
   ],
   imports: [

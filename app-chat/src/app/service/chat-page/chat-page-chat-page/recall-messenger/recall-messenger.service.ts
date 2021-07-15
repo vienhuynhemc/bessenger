@@ -29,9 +29,17 @@ export class RecallMessengerService {
   public thuHoi(){
     let currentTime = Number(new Date());
     this.db.object("/chi_tiet_cuoc_tro_chuyen/"+this.ma_cuoc_tro_chuyen+"/"+this.ma_tin_nhan).update({loai_tin_nhan:"thu_hoi",ngay_thu_hoi:currentTime});
+    // thu hồi file đã gửi
+    this.db.database.ref('file_da_gui').child(this.ma_cuoc_tro_chuyen).child(this.ma_tin_nhan).once('value', result => {
+        if(result.val() != null) {
+          this.db.database.ref('file_da_gui').child(this.ma_cuoc_tro_chuyen).child(this.ma_tin_nhan).update({
+            ton_tai: 1
+          })
+        }
+    })
     this.is_show =false;
     this.ma_cuoc_tro_chuyen =null;
-    this.ma_cuoc_tro_chuyen = null;
+    
   }
 
 }

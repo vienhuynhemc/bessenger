@@ -27,6 +27,8 @@ import { SelectSexComponent } from './view/register-page/select-sex/select-sex.c
 import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
 import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
+import { ChangePasswordComponent } from './view/main-page/personal-page/change-password/change-password.component';
+import { ChangeProfileComponent } from './view/main-page/personal-page/change-profile/change-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dang-nhap', pathMatch: 'full' },
@@ -108,7 +110,12 @@ const routes: Routes = [
         ],
       },
 
-      { path: 'thong-tin-ca-nhan', component: PersonalPageComponent },
+      { path: 'thong-tin-ca-nhan', component: PersonalPageComponent,
+        children: [
+          {path: 'doi-mat-khau', component: ChangePasswordComponent},
+          {path: 'doi-thong-tin', component: ChangeProfileComponent}
+        ]
+    },
       { path: 'cai-dat', component: SettingPageComponent },
     ],
   },
