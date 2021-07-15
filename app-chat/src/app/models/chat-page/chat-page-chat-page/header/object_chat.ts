@@ -18,6 +18,18 @@ export class ObjectChat {
     public imgs: string[] = [];
     public name: ChatPageObjectTen = new ChatPageObjectTen();
 
+    public getTK():ObjectChatThanhVien{
+        let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
+        if(this.loai == 'don'){
+            for(let i = 0; i < this.thanh_vien.length;i++){
+                if(this.thanh_vien[i].ma_tai_khoan != ma_tai_khoan){
+                    return this.thanh_vien[i];
+                }
+            }
+        }
+        return null;
+    }
+
     public getImgs() {
         let result: string[] = [];
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
