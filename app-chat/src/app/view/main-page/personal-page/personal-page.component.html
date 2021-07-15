@@ -33,9 +33,9 @@
     <div class="content">
         <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
         <div class="select">
-            <p class="title1">Thay đổi ảnh đại diện</p>
+            <p class="title1">Cập nhật ảnh đại diện</p>
             <img class="avatar-new" *ngIf="this.fileAvatar != null" [src]="uRLSafe(this.urlNewAvatar)" alt="">
-            <p class="title2">Bạn có chắc chắn muốn chọn ảnh này làm ảnh đại diện
+            <p class="title2">Bạn có chắc chắn muốn chọn ảnh này làm ảnh đại diện?
             <div>
                 <p (click)="okChangeAvatar()">Có, chắc chắn <i class="fa fa-check"></i></p>
                 <span (click)="notChangeAvatar()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
