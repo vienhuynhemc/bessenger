@@ -25,6 +25,9 @@ export class PersionalService {
   }
   getProfile() {
     let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'))
+    setTimeout(() => {
+      this.setLoading(true)
+    }, 0);
     this.accesstai_khoan().child(parseIDUser).on('value', profile => {
       this.persional.email = profile.val().email;
       this.persional.sex = profile.val().gioi_tinh;
@@ -33,6 +36,9 @@ export class PersionalService {
       this.persional.pass = profile.val().mat_khau;
       this.persional.dateCreate = profile.val().ngay_tao;
       this.persional.name = profile.val().ten;
+      setTimeout(() => {
+        this.setLoading(false)
+      }, 0);
     }) 
   }
 }
