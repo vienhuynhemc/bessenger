@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { CallVideoService } from './../../../../service/chat-page/call-video/call-video.service';
+
+// Peer
+declare var Peer: any;
 
 @Component({
   selector: 'app-call-video',
@@ -8,17 +12,30 @@ import { CallVideoService } from './../../../../service/chat-page/call-video/cal
 })
 export class CallVideoComponent implements OnInit {
 
-  constructor(
-    public call_video:CallVideoService
-  ) { }
+  public peer: any;
+  public peerId: string;
 
-  ngOnInit(): void {
+  constructor(
+    public call_video: CallVideoService,
+    public main_page_service: MainPageService,
+  ) {
+    this.peer = new Peer();
   }
 
-  public close(){
-    this.call_video.is_show = false;
-    this.call_video.localStream.getTracks().forEach(function(track) {
-      track.stop();
+  ngOnInit(): void {
+    // Lấy id phòng
+    this.getPeerId();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event) {
+    this.call_video.close();
+  }
+
+  public getPeerId() {
+    this.peer.on('open', (id) => {
+      this.peerId = id;
+      console.log(this.peerId);
     });
   }
 

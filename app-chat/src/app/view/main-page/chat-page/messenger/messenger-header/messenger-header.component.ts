@@ -1,8 +1,8 @@
-import { CallVideoService } from './../../../../../service/chat-page/call-video/call-video.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { CallVideoService } from './../../../../../service/chat-page/call-video/call-video.service';
+import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 
 @Component({
   selector: 'app-messenger-header',
@@ -10,8 +10,6 @@ import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-p
   styleUrls: ['./messenger-header.component.scss']
 })
 export class MessengerHeaderComponent implements OnInit {
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -101,11 +99,6 @@ export class MessengerHeaderComponent implements OnInit {
     } else {
       element.classList.add("hidden");
     }
-  }
-
-  public async callVideo(): Promise<void> {
-    this.call_video.localStream = await navigator.mediaDevices.getUserMedia(this.call_video.mediaConstraints);
-    this.call_video.is_show = true;
   }
 
 }
