@@ -14,6 +14,7 @@ export class HomePageComponent implements OnInit {
   ) {}
   selectedSlide: number = 1;
   timeOut: any = 0;
+  first: boolean = true;
   ngOnInit(): void {
     setTimeout(() => {
       this.main_page_service.reset();
@@ -58,7 +59,8 @@ export class HomePageComponent implements OnInit {
         slide3.classList.add('slide-selected');
         this.selectedSlide = 0;
       }
-      this.setChangeSlide();
+      if(slide1 != null ) 
+        this.setChangeSlide();
     }, 7000);
   }
   slideClick(slide: number) {
