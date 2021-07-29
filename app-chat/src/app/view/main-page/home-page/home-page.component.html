@@ -1,2 +1,73 @@
 <div class="container">
+  <div class="main">
+    <div class="slide-1 slide" id="slide-1">
+      <div class="left">
+          <div class="title">
+            Tụ họp
+            <br />
+            mọi lúc, mọi nơi
+          </div>
+          <div class="title-sub">
+            Với Bessenger, việc kết nối với những người <br />
+            mình yêu mến thật đơn giản và thú vị.
+          </div>
+          <div class="btn-message" *ngIf="selectedSlide == 1" (click)="moveToMessage()">Tìm hiểu thêm</div>
+      </div>
+      <div class="right">
+        <video
+          style="width: 95%; margin-top: 122.4px; margin-left: 14px"
+          autoplay="1"
+          loop="1"
+          [muted]="true"
+          src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.2365-6/100408028_267332531131682_25462391491788800_n.mp4?_nc_cat=110&ccb=1-3&_nc_sid=ad8a9d&_nc_ohc=cAmkpiPCxe0AX8QSTGS&_nc_ht=scontent.fsgn5-3.fna&oh=dda867eafab226cbdef225af640004c3&oe=6106CE11"
+          data-preload="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.2365-6/100408028_267332531131682_25462391491788800_n.mp4?_nc_cat=110&ccb=1-3&_nc_sid=ad8a9d&_nc_ohc=cAmkpiPCxe0AX8QSTGS&_nc_ht=scontent.fsgn5-3.fna&oh=dda867eafab226cbdef225af640004c3&oe=6106CE11"
+          playsinline="1"
+          data-preload-type="video"
+        ></video>
+      </div>
+    </div>
+    <div class="slide-2 slide" id="slide-2">
+      <div class="left">
+        <video id="slide-2-video"
+          style="width: 95%; margin-top: 223.8px; margin-left: 14px"
+          autoplay="1"
+          loop="1"
+          [muted]="true"
+          src="https://scontent.fsgn5-7.fna.fbcdn.net/v/t39.2365-6/100502435_676440833153290_152092578727067648_n.mp4?_nc_cat=104&ccb=1-3&_nc_sid=ad8a9d&_nc_ohc=XOeDdHZQrNwAX9c1HJ3&_nc_ht=scontent.fsgn5-7.fna&oh=2e046954472340495c41c3af8e462014&oe=6106272E"
+          data-preload="https://scontent.fsgn5-7.fna.fbcdn.net/v/t39.2365-6/100502435_676440833153290_152092578727067648_n.mp4?_nc_cat=104&ccb=1-3&_nc_sid=ad8a9d&_nc_ohc=XOeDdHZQrNwAX9c1HJ3&_nc_ht=scontent.fsgn5-7.fna&oh=2e046954472340495c41c3af8e462014&oe=6106272E"
+          playsinline="1"
+          data-preload-type="video"
+        ></video>
+      </div>
+      <div class="right">
+        <div class="title">
+          Thêm bạn
+          <br />
+          thêm vui
+        </div>
+        <div class="title-sub">
+          Hãy thêm thật nhiều bạn bè để cùng nhau tận hưởng những khoảng khắc thú vị.<br />
+        </div>
+        <div *ngIf="selectedSlide == 2" class="btn-message" (click)="moveToRecomend()">Tìm hiểu thêm</div>
+      </div>
+    </div>
+    <div class="slide-3 slide" id="slide-3">
+        <div class="left">
+            <div class="title">
+              Bạn kiểm soát trải nghiệm của chính mình trên Bessenger
+            </div>
+            <div class="title-sub">
+                Chúng tôi luôn nỗ lực để đảm bảo Bessenger là nơi đáng tin cậy, riêng tư và an toàn để bạn kết nối với những người quan trọng.
+            </div>
+          </div>
+          <div class="right">
+            <img class="img-title" src="https://scontent-xsp1-3.xx.fbcdn.net/v/t39.8562-6/120546850_2817650045135056_2430023427047717125_n.png?_nc_cat=111&ccb=1-3&_nc_sid=6825c5&_nc_ohc=9OweHrrzI6wAX-Nj84c&_nc_ht=scontent-xsp1-3.xx&oh=b4f957ffe8ef45c56f6719259378e63e&oe=6107C34E" alt="">
+          </div>
+    </div>
+    <div class="slide-change">
+      <div (click)="slideClick(0)" class="slide-change-1 slide-change-sub" [class.slide-change-color]="selectedSlide == 1" id="slide-change-1"></div>
+      <div (click)="slideClick(1)" class="slide-change-2 slide-change-sub" [class.slide-change-color]="selectedSlide == 2" id="slide-change-2"></div>
+      <div (click)="slideClick(2)" class="slide-change-3 slide-change-sub" [class.slide-change-color]="selectedSlide == 0" id="slide-change-3"></div>
+    </div>
+  </div>
 </div>

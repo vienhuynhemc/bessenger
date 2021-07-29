@@ -45,7 +45,6 @@ export class PersonalPageComponent implements OnInit {
     const idLeft = document.getElementById('circle-left');
     const idCenter = document.getElementById('circle-center');
     const idRight = document.getElementById('circle-right');
-    4;
     const idCoverAvt = document.getElementById('cover-avatar-bg');
     idCenter.classList.add('circle-center-animation');
     idLeft.classList.add('circle-left-animation');
