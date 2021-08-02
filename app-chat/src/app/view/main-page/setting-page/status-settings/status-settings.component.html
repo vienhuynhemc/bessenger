@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="content" id="content">
+    <h6 class="title">TRẠNG THÁI HOẠT ĐỘNG</h6>
+    <div class="fill" [class.active-fill]="state == 'trang_thai_hoat_dong'">
+      <div class="fill-content">
+        <div class="title-sub">Hiển thị trạng thái hoạt động</div>
+        <label class="switch">
+          <input type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <div class="status">Trạng thái hoạt động: <span>Đang bật</span></div>
+        <div class="content-details">
+          Bạn bè và người liên hệ của bạn sẽ biết khi nào bạn đang hoạt động
+          hoặc đang hoạt động gần đây. Bạn sẽ hiển thị là đang hoạt động hoặc
+          hoạt động gần đây, trừ khi bạn tắt cài đặt này ở mọi nơi bạn đang dùng
+          Bessenger. Bạn cũng sẽ biết khi nào bạn bè và người liên hệ của mình
+          đang hoạt động hoặc hoạt động gần đây.
+        </div>
+      </div>
+    </div>
+    <h6 class="title title-notification">THÔNG BÁO</h6>
+    <div class="fill" [class.active-fill]="state == 'thong_bao'">
+      <div class="fill-content">
+        <div class="title-sub">Hiển thị bản xem trước</div>
+        <label class="switch switch-notification">
+          <input type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <div class="content-details content-details-notification">
+          Hiển thị bản xem trước tin nhắn khi bạn không dùng ứng dụng.
+        </div>
+        <div class="line"></div>
+        <div class="title-sub title-sub-notification">Âm thanh thông báo</div>
+        <label class="switch switch-notification">
+          <input type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <div class="content-details">
+          Thông báo bằng âm thanh khi bạn nhận được tin nhắn, cuộc gọi hoặc đoạn
+          chat video.
+        </div>
+      </div>
+    </div>
+    <h6 class="title title-supports">HỖ TRỢ</h6>
+    <div class="fill" [class.active-fill]="state == 'ho_tro'">
+      <div class="fill-content">
+        <div class="title-sub">Liên hệ hỗ trợ</div>
+        <div class="support">
+          <div class="left-support">
+            <div class="left-support-title">Tổng đài:</div>
+            <div class="left-support-title">Email:</div>
+            <div class="left-support-title">Website:</div>
+          </div>
+          <div class="right-support">
+            <div class="right-support-content">0359989998</div>
+            <div class="right-support-content">hotro@bessenger.me</div>
+            <a href="https://bessenger-6b25f.web.app">https://bessenger-6b25f.web.app</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
