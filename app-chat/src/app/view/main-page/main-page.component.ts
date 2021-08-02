@@ -6,6 +6,7 @@ import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/cha
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { LoginService } from './../../service/login/login.service';
 import { MainPageService } from './../../service/main-page/main-page.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class MainPageComponent implements OnInit {
     public friendsPageService: FriendsPageService,
     private chat_page_friends_object_left_service: ChatPageFriendsLeftServiceService,
     private chat_page_firends_service: ChatPageFriendsServiceService,
-    public my_name_service:MyNameService
+    public my_name_service:MyNameService,
+    private settings_service: SettingsServiceService
   ) {
   }
 
@@ -86,6 +88,7 @@ export class MainPageComponent implements OnInit {
   }
   moveToSettingPage(): void {
     this.router.navigate(['cai-dat'], { relativeTo: this.route });
+    this.settings_service.selectedStateStatus()
   }
   //////////////////////////////////////////
 
