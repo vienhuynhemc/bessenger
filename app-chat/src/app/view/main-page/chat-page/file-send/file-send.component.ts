@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { MessengerHeaderService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-file-send',
@@ -18,7 +19,8 @@ export class FileSendComponent implements OnInit {
     public content_service: ChatPageChatPageContentService,
     public header_service: MessengerHeaderService,
     // Main service
-    public setting_chat_service:ChatPageSettingService
+    public setting_chat_service:ChatPageSettingService,
+    public settingsService: SettingsServiceService
   ) { }
 
   ngOnInit(): void {

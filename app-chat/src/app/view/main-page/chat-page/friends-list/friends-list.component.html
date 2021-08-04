@@ -14,7 +14,7 @@
             <i class="fas fa-search"></i>
         </div>
     </div>
-    <div class="status" id="danh_sach_ban_be_ben_tren">
+    <div class="status" id="danh_sach_ban_be_ben_tren" *ngIf="this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'bat'">
         <div class="myContent" *ngFor="let element of this.chat_page_friends_service.ban_bes">
             <div *ngIf="element.trang_thai_online" (click)="selectChat(element.ma_cuoc_tro_chuyen)">
                 <img [src]="element.link_hinh_dai_dien || 'assets/images/loading.gif'" alt="">
@@ -27,9 +27,14 @@
                 </div>
             </div>
         </div>
-        <p *ngIf="!this.chat_page_friends_service.isOnline" class="no_user">Hiện tại không có ai online cả</p>
+        <p *ngIf="!this.chat_page_friends_service.isOnline " class="no_user">Hiện tại không có ai online cả</p>
         <p *ngIf="!this.chat_page_friends_service.isOnline" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi
             nào!</p>
+    </div>
+    <div class="status" id="danh_sach_ban_be_ben_tren" *ngIf="this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'tat'">
+        <p class="no_status">Trạng thái hoạt động đang tắt</p>
+        <p class="no_status_2">Bạn có muốn <span (click)="changeStateStatus()">bật</span> trạng thái hoạt động?</p>
+
     </div>
     <!-- Box shadow cho header + status-->
     <div class="box-shadow-header-and-status" id="box-shadow-header-and-status">
@@ -98,7 +103,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="item.trang_thai_online" class="online">
+                        <div *ngIf="item.trang_thai_online && this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'bat'" class="online">
                             <div class="child"></div>
                         </div>
 

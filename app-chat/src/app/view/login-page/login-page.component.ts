@@ -103,6 +103,7 @@ export class LoginPageComponent implements OnInit {
     let email: string = this.userName.trim();
     let mat_khau: string = this.passWord;
     let count = 0;
+    
     if (email.length == 0) {
       count++;
       document.getElementById("dn-email").style.border = "1px solid #ff7b5c";

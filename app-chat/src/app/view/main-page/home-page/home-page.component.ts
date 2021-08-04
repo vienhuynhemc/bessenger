@@ -49,9 +49,9 @@ export class HomePageComponent implements OnInit {
         slide1.classList.remove('slide-selected');
         slide2.classList.add('slide-selected');
         slide3.classList.remove('slide-selected');
-
         let video = <HTMLVideoElement>document.getElementById('slide-2-video');
-        video.load();
+        if(video != null)
+          video.load();
         this.selectedSlide = 2;
       } else {
         slide1.classList.remove('slide-selected');
@@ -81,7 +81,8 @@ export class HomePageComponent implements OnInit {
         slide3.classList.remove('slide-selected');
         slide2.classList.add('slide-selected');
         let video = <HTMLVideoElement>document.getElementById('slide-2-video');
-        video.load();
+        if(video != null)
+          video.load();
         this.selectedSlide = 2;
       } else {
         slide2.classList.remove('slide-selected');

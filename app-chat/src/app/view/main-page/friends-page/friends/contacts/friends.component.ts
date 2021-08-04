@@ -14,6 +14,7 @@ import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-friends',
@@ -31,6 +32,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
   xIcon: number = -1;
   yIcon: number = -1;
   iDUrl: any;
+  statusMe: string = 'tat';
   valueSub: Subscription;
   idMutualFriend: string = '';
   constructor(
@@ -38,13 +40,15 @@ export class FriendsComponent implements OnInit, OnDestroy {
     public friendsPageService: FriendsPageService,
     private route: ActivatedRoute,
     private router: Router,
-    private profileFriendService: ProfileFriendService
+    private profileFriendService: ProfileFriendService,
+    private settingsSerivce: SettingsServiceService
   ) {}
   ngOnInit(): void {
     this.onClickOutFocusOption = this.onClickOutFocusOption.bind(this);
     document.addEventListener('click', this.onClickOutFocusOption);
     this.friendsPageService.selectedFriendsPageDefaultSerivce();
     this.getIDURLFriendsList();
+    this.getSettingsMe()
     this.getListFriends();
     this.setFriendFirst();
   }
@@ -263,7 +267,8 @@ export class FriendsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.valueSub.unsubscribe();
+    if(this.valueSub != undefined)
+      this.valueSub.unsubscribe();
   }
 
   // Khi click vào bạn bè bất kì
@@ -402,5 +407,12 @@ export class FriendsComponent implements OnInit, OnDestroy {
           this.sendFriendToProfile(null);
         }
       });
+  }
+  
+  getSettingsMe() {
+    let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.settingsSerivce.accessSettings(parseIDUser).on('value', set => {
+      this.statusMe = set.val().trang_thai_hoat_dong;
+    })
   }
 }

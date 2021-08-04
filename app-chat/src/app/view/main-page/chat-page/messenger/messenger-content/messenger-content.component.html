@@ -29,7 +29,7 @@
                         && this.content_service.object_chat.imgAvatars.length == 0">
                             <img src="assets/images/iconRectangle.png" alt="">
                         </div>
-                        <div *ngIf="this.content_service.object_chat.is_online" class="online">
+                        <div *ngIf="this.content_service.object_chat.is_online && this.settingsService.stateStatus == 'bat'" class="online">
                             <div class="child"></div>
                         </div>
                     </div>

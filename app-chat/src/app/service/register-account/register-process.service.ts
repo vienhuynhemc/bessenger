@@ -15,6 +15,7 @@ export class RegisterProcessService {
     this.chon_hinh_dai_dien_duoc_chon = false;
     this.xac_nhan_email_chon = false;
     this.getData();
+    
   }
 
   public isLoadingProcess(): boolean {
@@ -36,6 +37,7 @@ export class RegisterProcessService {
       this.xac_nhan_email_chon = true;
     }
   }
+  
 
   public reset(): void {
     this.chon_gioi_tinh_duoc_chon = false;

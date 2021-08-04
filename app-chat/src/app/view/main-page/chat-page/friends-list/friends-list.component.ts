@@ -7,6 +7,7 @@ import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/cha
 import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
 import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-friends-list',
@@ -26,6 +27,7 @@ export class FriendsListComponent implements OnInit {
       public chat_page_create_ground: ChatPageCreateGroupService,
       // Scroll ban đầu
       public left_scroll: LeftScrollService,
+      private settingsService: SettingsServiceService
   ) { }
 
 
@@ -45,6 +47,7 @@ export class FriendsListComponent implements OnInit {
       if (this.chat_page_friend_left_service.allBoxData != null) {
         this.chat_page_friend_left_service.updateSelected();
       }
+      this.chat_page_friends_service.getSettings();
     });
     // Lấy thông tin
     // Nếu như service của trang chưa được chạy lần nào
@@ -60,6 +63,7 @@ export class FriendsListComponent implements OnInit {
     this.left_scroll.register(document.getElementById("danh-sach-box-chat"))
   }
 
+  
   // GET data online
   public getDataOnline(): void {
     // lấy danh sách ma_tai_khoan bạn bè của tài khoản này
@@ -355,5 +359,12 @@ export class FriendsListComponent implements OnInit {
       'border-bottom': '#e5f1fc solid 0.1px',
       'height': ((7 - this.chat_page_friend_left_service.nowLengthShow) * 75 - (2 + this.chat_page_friend_left_service.nowLengthShow)) + 'px',
     }
+  }
+
+  changeStateStatus() {
+    let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+      this.settingsService.accessSettings(idUser).update({
+        trang_thai_hoat_dong: 'bat'
+      })
   }
 }
