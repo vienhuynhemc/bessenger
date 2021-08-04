@@ -116,7 +116,14 @@ const routes: Routes = [
           {path: 'doi-thong-tin', component: ChangeProfileComponent}
         ]
     },
-      { path: 'cai-dat', component: SettingPageComponent },
+      { path: 'cai-dat', component: SettingPageComponent,
+      children: [
+        {path: 'trang-thai-hoat-dong', component: SettingPageComponent},
+        {path: 'thong-bao', component: SettingPageComponent},
+        {path: 'ho-tro', component: SettingPageComponent}
+
+      ]
+    },
     ],
   },
   { path: '**', component: NotFoundPageComponent },

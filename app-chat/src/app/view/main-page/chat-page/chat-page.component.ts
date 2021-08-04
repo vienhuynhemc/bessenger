@@ -5,6 +5,7 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { RecallMessengerService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
 import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -20,7 +21,8 @@ export class ChatPageComponent implements OnInit {
     public recall_m : RecallMessengerService,
     public select_emoji:SelectEmojiService,
     public imageDetailService: ImageDetailService,
-    public call_video:CallVideoService
+    public call_video:CallVideoService,
+    private settingsService: SettingsServiceService
   ) { }
 
   // lấy dữ liệu cho vào component
@@ -29,6 +31,8 @@ export class ChatPageComponent implements OnInit {
       this.main_page_service.reset();
       this.main_page_service.selectChatPage();
     }, 0);
+    // gọi setting của bản thân
+    this.settingsService.getStatusMe();
   }
 
   public hiddenRecallM(){

@@ -22,7 +22,7 @@
             && this.content_service.object_chat.imgAvatars.length == 0">
                     <img src="assets/images/iconRectangle.png" alt="">
                 </div>
-                <div *ngIf="this.content_service.object_chat.is_online" class="online">
+                <div *ngIf="this.content_service.object_chat.is_online && settingsService.stateStatus == 'bat'" class="online">
                     <div class="child"></div>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 [matTooltipDisabled]="!this.header_service.object_chat.name.is_cut">
                 {{this.header_service.object_chat.name.noi_dung}}
             </div>
-            <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online">Đang hoạt động</p>
-            <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online">
+            <p class="trang-thai" *ngIf="this.header_service.object_chat.is_online && settingsService.stateStatus == 'bat'">Đang hoạt động</p>
+            <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online && settingsService.stateStatus == 'bat' && this.header_service.object_chat.getTime() != ''">
                 {{this.header_service.object_chat.getTime()}}</p>
         </div>
 

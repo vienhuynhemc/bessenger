@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 import { CallVideoService } from './../../../../../service/chat-page/call-video/call-video.service';
 import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 
@@ -10,12 +11,12 @@ import { MessengerHeaderService } from './../../../../../service/chat-page/chat-
   styleUrls: ['./messenger-header.component.scss']
 })
 export class MessengerHeaderComponent implements OnInit {
-
   constructor(
     private route: ActivatedRoute,
     public messenger_main_service: MessengerMainService,
     public header_service: MessengerHeaderService,
-    public call_video: CallVideoService
+    public call_video: CallVideoService,
+    public settingsService: SettingsServiceService
   ) { }
 
   public roiKhoiNhom(element) {
@@ -101,4 +102,5 @@ export class MessengerHeaderComponent implements OnInit {
     }
   }
 
+  
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject } from 'rxjs';
@@ -43,7 +44,7 @@ export class FriendsPageService {
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
   };
-  constructor(
+  constructor(private db: AngularFireDatabase
   ) {
     this.update()
   }
@@ -219,13 +220,19 @@ export class FriendsPageService {
       let currentTime = Number(new Date());
       if (this.friendsList != null) {
         for (let i = 0; i < this.friendsList.length; i++) {
-          let lan_cuoi_dang_nhap = this.friendsList[i].lastOnline;
-          let overTime = currentTime - lan_cuoi_dang_nhap;
-          if (overTime > 10000) {
-            this.friendsList[i].status = false; 
-          } else {
-            this.friendsList[i].status = true;
-          }
+          this.db.database.ref('cai_dat').child(this.friendsList[i].id).on('value', set =>{
+            if(set.val().trang_thai_hoat_dong == 'tat') {
+              this.friendsList[i].status = false; 
+            } else {
+              let lan_cuoi_dang_nhap = this.friendsList[i].lastOnline;
+              let overTime = currentTime - lan_cuoi_dang_nhap;
+              if (overTime > 10000) {
+                this.friendsList[i].status = false; 
+              } else {
+                this.friendsList[i].status = true;
+              }
+            }
+          })
         }
       }
       this.update();

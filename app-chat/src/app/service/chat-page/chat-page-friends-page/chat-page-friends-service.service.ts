@@ -3,6 +3,7 @@ import { ChatPageProcessServiceService } from './../chat-page-process-service.se
 import { ChatPageBanBe } from './../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
+import { Setting } from 'src/app/models/settings/setting';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ChatPageFriendsServiceService {
   public ban_bes: ChatPageBanBe[];
   // Danh sách các mã cuộc trò chuyện đơn
   public maCuocTroChuyenDons: string[];
-
+  // cai dat
+  public settingsOfUser: Setting = new Setting();
   // Trạng thái online
   public isOnline;
 
@@ -108,15 +110,22 @@ export class ChatPageFriendsServiceService {
       if (this.ban_bes != null) {
         let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
-          let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
-          let overTime = currentTime - lan_cuoi_dang_nhap;
-          if (overTime > 10000) {
-            this.ban_bes[i].trang_thai_online = false;
-            count++;
-          } else {
-            this.ban_bes[i].trang_thai_online = true;
-            this.isOnline = true;
-          }
+          this.db.database.ref('cai_dat').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
+            if(set.val().trang_thai_hoat_dong == 'tat') {
+              this.ban_bes[i].trang_thai_online = false;
+              count++;
+            } else {
+              let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
+              let overTime = currentTime - lan_cuoi_dang_nhap;
+              if (overTime > 10000) {
+                this.ban_bes[i].trang_thai_online = false;
+                count++;
+              } else {
+                this.ban_bes[i].trang_thai_online = true;
+                this.isOnline = true;
+              }
+            }
+          })
         }
         if (count == this.ban_bes.length) {
           this.isOnline = false;
@@ -211,4 +220,16 @@ export class ChatPageFriendsServiceService {
     }
   }
 
+  // lấy ra cài đặt
+  getSettings() {
+    let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
+    this.db.database.ref('cai_dat').child(idUser).on('value', set => {
+      this.settingsOfUser = new Setting()
+      this.settingsOfUser.ma_tai_khoan = set.key;
+      this.settingsOfUser.trang_thai_hoat_dong = set.val().trang_thai_hoat_dong;
+      this.settingsOfUser.khong_lam_phien = set.val().khong_lam_phien;
+      this.settingsOfUser.hien_thi_ban_xem_truoc = set.val().hien_thi_ban_xem_truoc;
+      this.settingsOfUser.am_thanh_thong_bao = set.val().am_thanh_thong_bao;
+    })
+  }
 }

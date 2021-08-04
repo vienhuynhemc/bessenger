@@ -88,7 +88,7 @@ export class MainPageComponent implements OnInit {
   }
   moveToSettingPage(): void {
     this.router.navigate(['cai-dat'], { relativeTo: this.route });
-    this.settings_service.selectedStateStatus()
+    this.settings_service.selectedStateSettings()
   }
   //////////////////////////////////////////
 

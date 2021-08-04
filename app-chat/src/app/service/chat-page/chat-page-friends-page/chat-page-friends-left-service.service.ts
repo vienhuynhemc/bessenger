@@ -125,23 +125,27 @@ export class ChatPageFriendsLeftServiceService {
           let isOnline = false;
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
-                if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
-                  let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-                  let overTime = currentTime - last_time;
-                  if (overTime < 10000) {
-                    isOnline = true;
-                    break;
+              this.db.database.ref('cai_dat').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
+                if(set.val().trang_thai_hoat_dong == 'bat') {
+                  if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                    if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+                      let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                      let overTime = currentTime - last_time;
+                      if (overTime < 10000) {
+                        isOnline = true;
+                      }
+                    }
+                  } else {
+                    let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                    let overTime = currentTime - last_time;
+                    if (overTime < 10000) {
+                      isOnline = true;
+                    }
                   }
                 }
-              } else {
-                let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-                let overTime = currentTime - last_time;
-                if (overTime < 10000) {
-                  isOnline = true;
-                  break;
-                }
-              }
+              })
+              if(isOnline)
+                break;
             }
           }
           this.allBoxData[i].trang_thai_online = isOnline;

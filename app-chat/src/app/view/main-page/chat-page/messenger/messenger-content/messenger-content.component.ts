@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
 import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
+import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-messenger-content',
@@ -24,7 +25,6 @@ export class MessengerContentComponent implements OnInit {
   public options: AnimationOptions = {
     path: '/assets/json/lottie/input_loading.json',
   };
-
   public showDelay = new FormControl(500);
 
   constructor(
@@ -44,7 +44,8 @@ export class MessengerContentComponent implements OnInit {
     public recall_m:RecallMessengerService,
     // Select emoji
     public s_e:SelectEmojiService,
-    public imageDetailService:ImageDetailService
+    public imageDetailService:ImageDetailService,
+    public settingsService: SettingsServiceService
   ) { }
 
   public layAllBanBe() {
@@ -183,6 +184,6 @@ export class MessengerContentComponent implements OnInit {
     linkFile.click();
   
   }
-  
+ 
   
 }

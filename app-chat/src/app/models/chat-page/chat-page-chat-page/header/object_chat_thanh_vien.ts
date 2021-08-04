@@ -6,4 +6,5 @@ export class ObjectChatThanhVien {
     ngay_tham_gia:number;
     roi_chua:string;
     ngay_roi_di:string;
+    trang_thai_hoat_dong: string;
 }

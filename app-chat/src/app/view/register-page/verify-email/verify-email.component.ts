@@ -55,19 +55,30 @@ export class VerifyEmailComponent implements OnInit {
       if (data.length > 0) {
         // Update lại tài khoản trên database webservice là đã kích hoạt rồi
         this.verify_email_service.turnOnAccount().subscribe(data => {
+          // lấy ra mã tài khoản để thêm cài đặt
+          this.register_account_service.accessSettings().set({
+            trang_thai_hoat_dong: 'bat',
+            thong_bao: 'bat',
+            hien_thi_ban_xem_truoc: 'bat',
+            am_thanh_thong_bao:'bat'
+          })
           // Xóa ma_tai_khoan và register-process trong localStorage
           localStorage.removeItem("ma_tai_khoan");
           localStorage.removeItem("register-process");
           // ẩn loading
+
           setTimeout(() => {
             this.register_process_service.setLoading(false);
           }, 0);
+          // thêm cài đặt cho tài khoản
+
           // Hiển thị thông báo cho trang đăng nhập
           this.notification_login_page.setTitle("Đăng ký thành công!");
           this.notification_login_page.setChild("Đã tới lúc đăng nhập và thưởng thức nào!");
           this.notification_login_page.showPop();
           // Chuyển tới trang đăng nhập
           this.router.navigate(['/dang-nhap']);
+          
         });
       } else {
         setTimeout(() => {

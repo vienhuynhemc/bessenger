@@ -47,11 +47,7 @@
         .switch-notification {
           margin-bottom: 0px;
         }
-        .switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
+      
         .slider {
           position: absolute;
           cursor: pointer;
@@ -88,13 +84,21 @@
           -ms-transform: translateX(24px);
           transform: translateX(24px);
         }
+        .slider-checked {
+          background-color: #a8c2f7;
+        }
+        .slider-checked::before {
+          -webkit-transform: translateX(24px);
+          -ms-transform: translateX(24px);
+          transform: translateX(24px);
+        }
         .slider.round {
           border-radius: 34px;
         }
         .slider.round:before {
           border-radius: 50%;
         }
-        .status {
+        .status span {
           font-weight: 450;
         }
         .line {

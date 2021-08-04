@@ -1,30 +1,54 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 
 @Component({
   selector: 'app-setting-page',
   templateUrl: './setting-page.component.html',
-  styleUrls: ['./setting-page.component.scss']
+  styleUrls: ['./setting-page.component.scss'],
 })
 export class SettingPageComponent implements OnInit {
-  state: string = 'trang_thai_hoat_dong'
-  constructor(private main_page_service: MainPageService, private settings_service: SettingsServiceService) { }
+  state: string = 'cai_dat';
+  stateSubscription: Subscription;
+
+  constructor(
+    private main_page_service: MainPageService,
+    private settings_service: SettingsServiceService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.main_page_service.reset();
       this.main_page_service.selectSettingPage();
     }, 0);
+    this.reloadChangeState()
   }
-  clickChangeState(state: string) {
-    this.state = state
-    if(state == 'trang_thai_hoat_dong') {
-      this.settings_service.selectedStateStatus()
-    } else if( state == 'thong_bao') {
-      this.settings_service.selectedStateNotification()
-    } else {
-      this.settings_service.selectedStateSupport()
+  reloadChangeState() {
+    let pathName = window.location.pathname;
+    if(pathName == '/bessenger/cai-dat/trang-thai-hoat-dong') {
+      this.clickChangeState('trang_thai_hoat_dong')
+    } else if(pathName == '/bessenger/cai-dat/thong-bao') {
+      this.clickChangeState('thong_bao')
+    } else if(pathName == '/bessenger/cai-dat/ho-tro') {
+      this.clickChangeState('ho_tro')
     }
   }
+  clickChangeState(state: string) {
+    this.state = state;
+    if (state == 'trang_thai_hoat_dong') {
+      this.settings_service.selectedStateStatus();
+      this.router.navigate(['trang-thai-hoat-dong/'], { relativeTo: this.route});
+    } else if (state == 'thong_bao') {
+      this.settings_service.selectedStateNotification();
+      this.router.navigate(['thong-bao/'], { relativeTo: this.route});
+    } else {
+      this.settings_service.selectedStateSupport();
+      this.router.navigate(['ho-tro/'], { relativeTo: this.route});
+    }
+  }
+  
 }
