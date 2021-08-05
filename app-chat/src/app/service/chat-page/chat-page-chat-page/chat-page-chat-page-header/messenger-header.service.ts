@@ -174,7 +174,7 @@ export class MessengerHeaderService {
         if (this.object_chat.thanh_vien[i].ma_tai_khoan == ma_thanh_vien) {
           this.object_chat.thanh_vien[i].hinh = data_thanh_vien['link_hinh'];
           this.object_chat.thanh_vien[i].ten = data_thanh_vien['ten'];
-          this.db.database.ref('cai_dat').child(ma_thanh_vien).on('value', set => {
+          this.db.database.ref('cai_dat').child(ma_thanh_vien).once('value', set => {
             this.object_chat.thanh_vien[i].trang_thai_hoat_dong = set.val().trang_thai_hoat_dong;
           })
         }

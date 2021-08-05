@@ -110,7 +110,7 @@ export class ChatPageFriendsServiceService {
       if (this.ban_bes != null) {
         let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
-          this.db.database.ref('cai_dat').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
+          this.db.database.ref('cai_dat').child(this.ban_bes[i].ma_tai_khoan).once('value', set =>{
             if(set.val().trang_thai_hoat_dong == 'tat') {
               this.ban_bes[i].trang_thai_online = false;
               count++;
