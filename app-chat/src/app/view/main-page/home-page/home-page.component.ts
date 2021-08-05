@@ -40,6 +40,7 @@ export class HomePageComponent implements OnInit {
     let slide3 = document.getElementById('slide-3');
 
     this.timeOut = setTimeout(() => {
+      if(slide1 != null || slide2 != null || slide3 != null) {
       if (this.selectedSlide == 0) {
         slide3.classList.remove('slide-selected');
         slide2.classList.remove('slide-selected');
@@ -59,9 +60,10 @@ export class HomePageComponent implements OnInit {
         slide3.classList.add('slide-selected');
         this.selectedSlide = 0;
       }
-      if(slide1 != null ) 
         this.setChangeSlide();
+      }
     }, 7000);
+    
   }
   slideClick(slide: number) {
       let slide1 = document.getElementById('slide-1');
