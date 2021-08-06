@@ -6,7 +6,6 @@ export class ChatPageFriendsObjectLeft {
 
     cuoc_tro_truyen: ChatPageCuocTroChuyen;
     thong_tin_thanh_vien: ChatPageObjectTinNhanFriend[];
-
     // Trạng thái online
     trang_thai_online: boolean;
 
@@ -119,7 +118,7 @@ export class ChatPageFriendsObjectLeft {
                 if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem != null) {
                     for (let i = 0; i < this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem.length; i++) {
                         if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].ma_tai_khoan == ma_tai_khoan) {
-                            if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].xem_chua == "roi") {
+                            if (this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].tinh_trang_xem[i].xem_chua == "roi"  ) {
                                 result = true;
                                 break;
                             }
@@ -132,6 +131,7 @@ export class ChatPageFriendsObjectLeft {
         }
         this.isReaded = result;
     }
+   
 
     public getIndexTinNhanCuoiCung() {
         let index = 0;
@@ -380,5 +380,7 @@ export class ChatPageFriendsObjectLeft {
         }
         this.isDaNhan = result;
     }
+    
+ 
 
 }
