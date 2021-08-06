@@ -125,7 +125,7 @@ export class ChatPageFriendsLeftServiceService {
           let isOnline = false;
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              this.db.database.ref('cai_dat').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).once('value', set => {
+              this.db.database.ref('cai_dat').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
                 if(set.val().trang_thai_hoat_dong == 'bat') {
                   if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
                     if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
@@ -350,6 +350,7 @@ export class ChatPageFriendsLeftServiceService {
   public dienTinNhan(key: string, value: object) {
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == key) {
+       
         let tin_nhans: ChatPageTinNhan[] = [];
         Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
           let tin_nhan = new ChatPageTinNhan();
@@ -389,12 +390,14 @@ export class ChatPageFriendsLeftServiceService {
         this.allBoxData[i].getNoiDungCuoiCung();
         // Tin nhắn cuối cùng được đọc chưa
         this.allBoxData[i].getIsReaded();
+    
         // Kiểm tra thử vị trí cuối cùng có phải là của bản thân hay không
         this.allBoxData[i].isMe();
         // Kiểm tra xem ông nào nhậ nchuwa
         this.allBoxData[i].getIsDaNhan();
         // Kiểm tra bản thân rời khỏi cuộc trò chuyện chưa
         this.allBoxData[i].getIsRoiChua();
+
         return;
       }
     }

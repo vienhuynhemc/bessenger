@@ -601,7 +601,6 @@ export class MessengerFooterComponent implements OnInit {
   changeChooseImageOrVideo() {
     let chooseFile = <HTMLInputElement>document.getElementById('choose-image-video');
     let arrayFile = Array.from(chooseFile.files);
-    console.log(arrayFile)
     for (let index = 0; index < arrayFile.length; index++) {
       // chỉ nhận file < 25mb
       if (arrayFile[index].size < 25000000) {

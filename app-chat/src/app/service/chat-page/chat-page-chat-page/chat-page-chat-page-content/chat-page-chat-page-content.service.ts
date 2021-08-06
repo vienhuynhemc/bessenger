@@ -141,7 +141,7 @@ export class ChatPageChatPageContentService {
         if (this.object_chat.thanh_vien != null) {
           for (let j = 0; j < this.object_chat.thanh_vien.length; j++) {
             if (this.object_chat.thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              this.db.database.ref('cai_dat').child(this.object_chat.thanh_vien[j].ma_tai_khoan).once('value', set => {
+              this.db.database.ref('cai_dat').child(this.object_chat.thanh_vien[j].ma_tai_khoan).on('value', set => {
                 if(set.val().trang_thai_hoat_dong == 'tat')
                   isOnline = false;
                 else {
