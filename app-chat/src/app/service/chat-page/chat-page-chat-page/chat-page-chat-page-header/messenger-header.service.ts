@@ -116,7 +116,7 @@ export class MessengerHeaderService {
   public dienThongTinNhom(object: Object) {
     if (object != null) {
       if (object['ton_tai'] == 0) {
-        this.object_chat.ten_nhom = object['ten-nhom'];
+        this.object_chat.ten_nhom = object['ten_nhom'];
         this.object_chat.ma_tai_khoan_so_huu = object['chu_so_huu'];
       }
     } else {

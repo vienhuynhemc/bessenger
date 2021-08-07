@@ -35,7 +35,7 @@ export class ChatPageCreateGroupService {
       {
         chu_so_huu: ma_tai_khoan,
         ngay_tao: currentTime,
-        ["ten-nhom"]: ten_nhom,
+        ["ten_nhom"]: ten_nhom,
         ton_tai: 0
       }
     );

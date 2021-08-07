@@ -8,7 +8,8 @@ import { LoginService } from './../../service/login/login.service';
 import { MainPageService } from './../../service/main-page/main-page.service';
 import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
 import { NotificationService } from 'src/app/service/notification-settings/notification.service';
-import { Subscription } from 'rxjs';
+import { SettingNotification } from 'src/app/models/settings/settingNotification';
+import { SingleOrGroupChat } from 'src/app/models/settings/SingleOrGroupChat';
 
 
 
@@ -100,7 +101,9 @@ export class MainPageComponent implements OnInit {
   // thông báo
   notificationMessage() {
     let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-    this.notificationMessageService.accessSettings(idUser).on('value', set => {
+      // tránh lặp nhiều lần
+      let checkLoop = ''
+    this.notificationMessageService.accessSettings(idUser).once('value', set => {
       if(set.val().khong_lam_phien == 'tat') {
         // truy cập lấy ra tất cả mã cuộc trò chuyện
         this.notificationMessageService.access_cuoc_tro_chuyen().on('value', conver => {
@@ -111,42 +114,67 @@ export class MainPageComponent implements OnInit {
             });
             // vào thanh viên cuộc trò chuyện để lấy ra danh sách các cuộc trò chuyện bản thân có tham gia
                 this.notificationMessageService.access_thanh_vien_cuoc_tro_chuyen().on('value', member =>{ 
-                  let listIDConverUserJoin= []
+                  let listIDConverUserJoin = []
                   listIDConver.forEach(keySingle => {
                    member.child(keySingle).forEach(elementMember => {
                     //  nếu là chat đơn
                     if(elementMember.val().roi_chua == undefined) {
-                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho') 
-                            listIDConverUserJoin.push(keySingle)
+                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho') {
+                            let singleBox = new SingleOrGroupChat();
+                            singleBox.idConver = keySingle;
+                            singleBox.typeConver = 'don';
+                            listIDConverUserJoin.push(singleBox)
+                          }
                     // nếu là nhóm chat
                     } else { 
-                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho' && elementMember.val().roi_chua == 'chua') 
-                            listIDConverUserJoin.push(keySingle)
-                          }
+                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho' && elementMember.val().roi_chua == 'chua'){
+                          let groupBox = new SingleOrGroupChat();
+                            groupBox.idConver = keySingle;
+                            groupBox.typeConver = 'nhom';
+                            // lấy ra tên nhóm
+                            this.notificationMessageService.access_thong_tin_tro_chuyen_nhom().child(keySingle).once('value', group => {
+                              groupBox.nameGroup = group.val().ten_nhom
+                            })
+                            listIDConverUserJoin.push(groupBox)
+                          } 
+                        }
                       });
                    });
-                   
-                    // tránh lặp nhiều lần
-                  let checkLoop = '' 
+                    
                     //  vào chi tiết cuộc trò chuyện lấy ra tin nhắn chưa xem
                    this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().on('value', converMess => {
                       listIDConverUserJoin.forEach(elementJoin => {
-                          let idCon = elementJoin
-                          converMess.child(elementJoin).forEach(elementDetail => {
+                          let idCon = elementJoin.idConver
+                          converMess.child(elementJoin.idConver).forEach(elementDetail => {
+                            // chỉ xét tin nhắn không phải thu hồi và không phải bản thân gửi
                             if(elementDetail.val().loai_tin_nhan != 'thu_hoi' && elementDetail.val().ma_tai_khoan != idUser ) {
+                              // lấy ra tin nhắn bản thân chưa xem
                               elementDetail.child('tinh_trang_xem').forEach(watch => {
                                   if(watch.key == idUser && watch.val().xem_chua == 'chua' && checkLoop != elementDetail.key) {
                                     checkLoop = elementDetail.key
-                                    let pathName = window.location.pathname;
-                                    let splitPathName = pathName.split('/')
-                                    if(Notification.permission === 'granted' && !splitPathName.includes('tin-nhan')) {
-                                      const notification = new Notification(elementDetail.val().ten, {
-                                        body: elementDetail.val().noi_dung,
-                                        icon: 'assets/images/icon.ico'
+                                    if(Notification.permission === 'granted') {
+                                      // truy cập vào tài khoản để lấy ra ảnh đại diện
+                                      this.notificationMessageService.access_tai_khoan().child(elementDetail.val().ma_tai_khoan).once('value', acc => {
+                                        let mess = new SettingNotification();
+                                        mess.urlAvatar = acc.val().link_hinh;
+                                        mess.idConversation = idCon;
+                                        mess.content = elementDetail.val().noi_dung;
+                                        mess.typeMess = elementDetail.val().loai_tin_nhan;
+                                        mess.soundNoti = set.val().am_thanh_thong_bao;
+                                        mess.contentNoti = set.val().hien_thi_ban_xem_truoc;
+                                        if(elementJoin.typeConver == 'nhom')
+                                            mess.name = elementJoin.nameGroup;
+                                        else
+                                            mess.name = elementDetail.val().ten;
+                                        this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().child(idCon).child(elementDetail.key).child('tinh_trang_xem').child(idUser).update({
+                                          ngay_nhan: Number(new Date()),
+                                          xem_chua: 'dang'
+                                        })
+                                        if (mess.typeMess == 'gui_tin_nhan_btcx')
+                                            mess.alt = elementDetail.val().alt;
+                                        this.showMessage(mess)
                                       })
-                                      notification.onclick = (e) => {
-                                            this.router.navigate(['/bessenger/tin-nhan/' + idCon]);
-                                      }
+                                      
                                     } 
                                   }
                               });
@@ -161,50 +189,62 @@ export class MainPageComponent implements OnInit {
     
   }
 
-  showMessage() {
-    // let result = '';
-    // switch (type) {
-    //   case "gui_text":
-    //       result = content;
-    //       break;
-    //   case "gui_text_icon":
-    //       result = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-    //       break;
-    //   case "thong_bao":
-    //       result.noi_dung = ten + " " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].noi_dung;
-    //       break;
-    //   case "gui_tin_nhan_like":
-    //       result.noi_dung = ten + ": 👍";
-    //       break;
-    //   case "gui_hinh":
-    //       result.noi_dung = ten + " đã gửi hình ảnh";
-    //       break;
-    //   case "gui_video":
-    //       result.noi_dung = ten + " gửi một video";
-    //       break;
-    //   case "gui_ghi_am":
-    //       result.noi_dung = ten + " gửi một tin nhắn thoại";
-    //       break;
-    //   case "gui_file":
-    //       result.noi_dung = ten + " gửi một tệp";
-    //       break;
-    //   case "thu_hoi":
-    //       result.noi_dung = ten + " thu hồi một tin nhắn";
-    //       break;
-    //   case "phan_hoi":
-    //       result.noi_dung = ten + " phản hồi một tin nhắn";
-    //       break;
-    //   case "gui_nhan_dan":
-    //       result.noi_dung = ten + " gửi một nhãn dán"
-    //       break;
-    //   case "gui_giphy":
-    //       result.noi_dung = ten + " gửi một file GIF từ GIPHY"
-    //       break;
-    //   case "gui_tin_nhan_btcx":
-    //       result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].alt;
-    //       break;
+  // format thông báo tin nhắn mới và hiển thị
+  showMessage(mess: SettingNotification) {
+    let result = '';
+    switch (mess.typeMess) {
+      case "gui_text":
+          result = mess.content;
+          break;
+      case "gui_text_icon":
+          result = "Đã gửi icon";
+          break;
+      case "thong_bao":
+          result = mess.content.charAt(0).toUpperCase() + mess.content.slice(1);
+          break;
+      case "gui_tin_nhan_like":
+          result =  "👍";
+          break;
+      case "gui_hinh":
+          result = "Đã gửi hình ảnh";
+          break;
+      case "gui_video":
+          result = "Gửi một video";
+          break;
+      case "gui_ghi_am":
+          result = "Gửi một tin nhắn thoại";
+          break;
+      case "gui_file":
+          result = "Gửi một tệp";
+          break;
+      case "phan_hoi":
+          result = "Phản hồi một tin nhắn";
+          break;
+      case "gui_nhan_dan":
+          result = "Gửi một nhãn dán"
+          break;
+      case "gui_giphy":
+          result =  "Gửi một file GIF từ GIPHY"
+          break;
+      case "gui_tin_nhan_btcx":
+          result = mess.alt;
+          break;
+      
   }
- 
-    
+    if(result != '') {
+      // thay thế tất cả <br> = ' '
+      result = result.replace(/<br>/g, ' ');
+      const notification = new Notification(mess.name, {
+        body: mess.contentNoti == 'bat' ? result : '',
+        icon: mess.urlAvatar,
+        silent: mess.soundNoti == 'bat' ? false : true
+      })
+      // if(window.location.pathname != '/bessenger/tin-nhan/' + mess.idConversation) {
+        notification.onclick = (e) => {
+          window.close()
+          window.open(location.origin + '/bessenger/tin-nhan/' + mess.idConversation, '_blank');
+        // }
+      } 
+    }
   }
-
+}

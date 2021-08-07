@@ -529,7 +529,7 @@ export class ChatPageFriendsLeftServiceService {
     for (let i = 0; i < this.allCuocTroTruyen.length; i++) {
       if (this.allCuocTroTruyen[i].loai_cuoc_tro_truyen == 'nhom') {
         if (this.allCuocTroTruyen[i].ma_cuoc_tro_chuyen == ma_nhom && value['ton_tai'] == 0) {
-          this.allCuocTroTruyen[i].ten_nhom = value['ten-nhom'];
+          this.allCuocTroTruyen[i].ten_nhom = value['ten_nhom'];
           this.allCuocTroTruyen[i].ngay_tao = value['ngay_tao'];
           this.allCuocTroTruyen[i].ma_tai_khoan_chu_so_huu = value['chu_so_huu'];
           this.allCuocTroTruyen[i].ton_tai = value['ton_tai'];
