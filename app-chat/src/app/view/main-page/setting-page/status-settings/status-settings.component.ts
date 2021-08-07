@@ -59,6 +59,7 @@ export class StatusSettingsComponent implements OnInit,OnDestroy {
       this.settings_service.accessSettings(idUser).update({
         am_thanh_thong_bao: state
       })
+     
     }
   }
   // cài đặt hiển thị văn bản xem trước thông báo
@@ -77,7 +78,7 @@ export class StatusSettingsComponent implements OnInit,OnDestroy {
       if(state == 'trang_thai_hoat_dong' || state == 'cai_dat') {
         scroll.scrollTop = 0
       } else if( state == 'thong_bao') {
-        scroll.scrollTop = 202
+        scroll.scrollTop = 250
       } else {
         scroll.scrollTop = 99999
       }

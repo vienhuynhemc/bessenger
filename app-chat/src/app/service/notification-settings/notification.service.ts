@@ -5,7 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
   providedIn: 'root'
 })
 export class NotificationService {
-
+ 
   constructor(private db: AngularFireDatabase) { }
   public accessSettings(maTaiKhoan: string) {
     return this.db.database.ref('cai_dat').child(maTaiKhoan);
@@ -21,5 +21,13 @@ export class NotificationService {
 
   public access_chi_tiet_cuoc_tro_chuyen() {
     return this.db.database.ref('chi_tiet_cuoc_tro_chuyen');
+  }
+
+  public access_tai_khoan() {
+    return this.db.database.ref('tai_khoan');
+  }
+  
+  public access_thong_tin_tro_chuyen_nhom() {
+    return this.db.database.ref('thong_tin_tro_chuyen_nhom');
   }
 }
