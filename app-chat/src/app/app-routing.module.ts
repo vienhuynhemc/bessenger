@@ -118,6 +118,7 @@ const routes: Routes = [
     },
       { path: 'cai-dat', component: SettingPageComponent,
       children: [
+        { path: '', redirectTo: 'trang-thai-hoat-dong', pathMatch: 'full' },
         {path: 'trang-thai-hoat-dong', component: SettingPageComponent},
         {path: 'thong-bao', component: SettingPageComponent},
         {path: 'ho-tro', component: SettingPageComponent}
