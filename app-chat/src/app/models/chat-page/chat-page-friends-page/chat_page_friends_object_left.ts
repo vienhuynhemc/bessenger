@@ -29,7 +29,7 @@ export class ChatPageFriendsObjectLeft {
     // Xem thử có ông nào nhận chưa
     public isDaNhan: boolean;
     // Bản thân ròi khỏi cuộctrof chuyện chưa
-    public is_roi_chua:boolean;
+    public is_roi_chua: boolean;
 
     // 2 tham số quan trọng là vị trí bản thân và vị trí cuối cùng
     public viTriBanThan: number;
@@ -40,16 +40,16 @@ export class ChatPageFriendsObjectLeft {
         this.noiDungCuoiCung.noi_dung = "";
     }
 
-    public getIsRoiChua(){
+    public getIsRoiChua() {
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         let result = false;
-        for(let i =0; i<this.thong_tin_thanh_vien.length;i++){
-            if(this.thong_tin_thanh_vien[i].ma_tai_khoan == ma_tai_khoan && this.thong_tin_thanh_vien[i].roi_chua =='roi'){
-                result =true;
+        for (let i = 0; i < this.thong_tin_thanh_vien.length; i++) {
+            if (this.thong_tin_thanh_vien[i].ma_tai_khoan == ma_tai_khoan && this.thong_tin_thanh_vien[i].roi_chua == 'roi') {
+                result = true;
                 break;
             }
         }
-        this.is_roi_chua =result;
+        this.is_roi_chua = result;
     }
 
     public getLastTime(): number {
@@ -90,8 +90,8 @@ export class ChatPageFriendsObjectLeft {
         let result: ChatPageObjectTen = new ChatPageObjectTen();
         let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
         if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "nhom") {
-            result.noi_dung = this.cuoc_tro_truyen.ten_nhom||"";
-            result.noi_dung_goc = this.cuoc_tro_truyen.ten_nhom||"";
+            result.noi_dung = this.cuoc_tro_truyen.ten_nhom || "";
+            result.noi_dung_goc = this.cuoc_tro_truyen.ten_nhom || "";
         } else if (this.cuoc_tro_truyen.loai_cuoc_tro_truyen == "don") {
             for (let i = 0; i < this.thong_tin_thanh_vien.length; i++) {
                 if (this.thong_tin_thanh_vien[i].ma_tai_khoan != ma_tai_khoan) {
@@ -247,6 +247,13 @@ export class ChatPageFriendsObjectLeft {
                         break;
                     case "gui_tin_nhan_btcx":
                         result.noi_dung = ten + ": " + this.cuoc_tro_truyen.tin_nhan[this.viTriCuoiCung].alt;
+                        break;
+                    case "cuoc_goi_nho":
+                        if (ten == 'Bạn') {
+                            result.noi_dung = "Đối phương đã bỏ lỡ lần chat video với bạn"
+                        } else {
+                            result.noi_dung = "Ban đã bỏ lỡ lần chat video với đối phương"
+                        }
                         break;
                 }
             }

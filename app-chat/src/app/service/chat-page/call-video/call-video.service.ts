@@ -1,3 +1,5 @@
+import { MessengerMainService } from './../chat-page-chat-page/messenger-main.service';
+import { ChatPageChatPageContentService } from './../chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { MyNameService } from 'src/app/service/my-name/my-name.service';
 import { ObjectChatThanhVien } from './../../../models/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
@@ -34,6 +36,8 @@ export class CallVideoService {
   public now_user: ObjectChatThanhVien;
   // request 45s
   public countRequest = 0;
+  // Trạng thái 
+  public status: number;
 
   // service
   public layAllUser: Subscription;
@@ -41,7 +45,9 @@ export class CallVideoService {
   constructor(
     private db: AngularFireDatabase,
     private my_name_service: MyNameService,
-    private main_page_service: MainPageService
+    private main_page_service: MainPageService,
+    private content_service: ChatPageChatPageContentService,
+    private messenger_main_service: MessengerMainService
   ) {
     if (this.layAllUser == null) {
       this.getData();
@@ -54,6 +60,8 @@ export class CallVideoService {
   public getData() {
     this.layAllUser = this.db.object("/call_video").snapshotChanges().subscribe(data => {
       let array: UserVideo[] = [];
+      let isCall = false;
+      let mtk = JSON.parse(localStorage.getItem("ma_tai_khoan_dn"));
       Object.entries(data.payload.toJSON()).forEach(([k, v]) => {
         let o = new UserVideo();
         o.ma_tai_khoan = k;
@@ -64,10 +72,24 @@ export class CallVideoService {
         o.tk_goi_minh = v['tk_goi_minh'];
         o.hinh_tk_goi_minh = v['hinh_tk_goi_minh'];
         o.ten_tk_goi_minh = v['ten_tk_goi_minh'];
+        // Đang trong cuộc gọi
+        if (k == mtk && o.goi_chua == 'dang') {
+          isCall = true;
+        }
         array.push(o);
       });
       this.all_user = array;
+      if (isCall) {
+        this.is_show = true;
+      }else{
+        this.is_show = false;
+      }
     })
+  }
+
+  public async getVideoUserAndShow() {
+    this.localStream = await navigator.mediaDevices.getUserMedia(this.mediaConstraints);
+    this.is_show = true;
   }
 
   public async callVideo(tk: ObjectChatThanhVien) {
@@ -75,13 +97,14 @@ export class CallVideoService {
     // Check thử available
     if (this.isAvailable(tk.ma_tai_khoan)) {
       // Lấy video
-      this.localStream = await navigator.mediaDevices.getUserMedia(this.mediaConstraints);
-      this.is_show = true;
+      this.getVideoUserAndShow();
       // Cập nhật lại trong firebase
       this.writeToFirebase(tk);
       // Time out 45s
       this.countRequest = 0;
       this.request45second();
+      // Status là gọi
+      this.status = 1;
     } else {
       // Lấy video
       this.localStream = null;
@@ -104,6 +127,10 @@ export class CallVideoService {
         }
         if (!isOk) {
           this.request45second();
+        } else {
+          // Có người bắt máy
+          // Chuyển status sang bắt máy
+          this.status = 2;
         }
       } else {
         this.cuocGoiNho();
@@ -160,7 +187,18 @@ export class CallVideoService {
 
   public close() {
     // countRequest
-    this.countRequest = 45;
+    if (this.status == 1) {
+      this.countRequest = 45;
+    } else if (this.status == 2) {
+      // view
+      this.is_show = false;
+      this.localStream.getTracks().forEach(function (track) {
+        track.stop();
+      });
+      this.is_close_camera = false;
+      // data
+      this.closeData();
+    }
   }
 
   public cuocGoiNho() {
@@ -172,6 +210,16 @@ export class CallVideoService {
     this.is_close_camera = false;
     // data
     this.closeData();
+    // Tạo tin nhắn cuộc gọi nhỡ
+    this.createTinNhan();
+  }
+
+  public createTinNhan() {
+    let nowDate = new Date();
+    let gio = nowDate.getHours();
+    let phut = nowDate.getMinutes();
+    let noi_dung = `${gio.toString().length > 1 ? gio : "0" + gio}:${phut.toString().length > 1 ? phut : "0" + phut}`
+    this.content_service.sumitTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen, noi_dung, "cuoc_goi_nho", this.my_name_service.myName);
   }
 
   public closeData() {

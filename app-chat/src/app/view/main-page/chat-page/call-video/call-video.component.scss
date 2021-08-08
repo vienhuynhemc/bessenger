@@ -76,7 +76,7 @@
     bottom: 0px;
     height: 62px;
     .element {
-      width: 74px;
+      width: 60px;
       display: flex;
       height: 66px;
       flex-direction: column;
@@ -93,6 +93,11 @@
     .off-camera {
       svg {
         background-color: white;
+      }
+    }
+    .tat-cuoc-goi{
+      svg{
+        background-color: #ff4242;
       }
     }
   }
@@ -120,14 +125,14 @@
       z-index: 1;
     }
 
-    img{
+    img {
       transition: all 0.3s ease-in-out;
       width: 60px;
       height: 60px;
       object-fit: cover;
       border-radius: 50%;
     }
-    .go-to-left{
+    .go-to-left {
       transition: all 0.3s ease-in-out;
       position: absolute;
       left: 0px;
@@ -135,6 +140,36 @@
       width: 17px;
       height: 24px;
       cursor: pointer;
+    }
+  }
+
+  .status1 {
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    p {
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 20px;
+      font-size: 18px;
+      font-family: "Raleway";
+      color: white;
+    }
+    span {
+      margin-top: 7px;
+      font-family: "Raleway";
+      color: white;
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
     }
   }
 }
