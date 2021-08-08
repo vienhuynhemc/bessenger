@@ -58,7 +58,7 @@ export class VerifyEmailComponent implements OnInit {
           // lấy ra mã tài khoản để thêm cài đặt
           this.register_account_service.accessSettings().set({
             trang_thai_hoat_dong: 'bat',
-            thong_bao: 'bat',
+            khong_lam_phien: 'bat',
             hien_thi_ban_xem_truoc: 'bat',
             am_thanh_thong_bao:'bat'
           })
