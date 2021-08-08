@@ -435,7 +435,8 @@
     background: white;
     display: flex;
     overflow: hidden;
-    .tren { width: 100%;
+    .tren {
+      width: 100%;
       display: flex;
       align-items: flex-end;
       .cong-cu {
@@ -679,7 +680,8 @@
   .gui_ghi_am {
     display: flex;
     overflow: hidden;
-    .tren { width: 100%;
+    .tren {
+      width: 100%;
       display: flex;
       align-items: flex-end;
       .cong-cu {
@@ -843,6 +845,97 @@
             z-index: 1;
           }
         }
+        .cuoc-goi-nho {
+          height: 60px;
+          border-radius: 18px;
+          background-color: #f0f2f5;
+          display: flex;
+          align-items: center;
+          .icon-cgnbt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 12px;
+            margin-right: 12px;
+            background-color: #f3425f;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            i {
+              background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
+              background-position: 0px -745px;
+              background-size: auto;
+              width: 20px;
+              height: 20px;
+              background-repeat: no-repeat;
+              display: inline-block;
+              filter: invert(100%);
+            }
+          }
+          .noi-dung-cgnbt {
+            margin-right: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 32px;
+            p {
+              color: #050505;
+              font-family: "Raleway";
+              font-size: 13px;
+              font-weight: 600;
+            }
+            span {
+              color: #65676b;
+              font-family: sans-serif;
+              font-size: 11px;
+            }
+          }
+        }
+        .cuoc-goi-nho-ban-than {
+          height: 60px;
+          border-radius: 18px;
+          background-color: #f0f2f5;
+          display: flex;
+          align-items: center;
+          .icon-cgnbt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 12px;
+            margin-right: 12px;
+            background-color: #e4e6eb;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            i {
+              background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
+              background-position: 0px -745px;
+              background-size: auto;
+              width: 20px;
+              height: 20px;
+              background-repeat: no-repeat;
+              display: inline-block;
+            }
+          }
+          .noi-dung-cgnbt {
+            margin-right: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 32px;
+            p {
+              color: #050505;
+              font-family: "Raleway";
+              font-size: 13px;
+              font-weight: 600;
+            }
+            span {
+              color: #65676b;
+              font-family: sans-serif;
+              font-size: 11px;
+            }
+          }
+        }
       }
       .doi_phuong {
         margin-left: 8px;
@@ -962,7 +1055,8 @@
           border-radius: 18px;
           cursor: pointer;
         }
-        .gui-anh:hover, .gui-anh-clone:hover {
+        .gui-anh:hover,
+        .gui-anh-clone:hover {
           background-color: #e8ecf1a6;
           opacity: 0.9;
         }
@@ -979,7 +1073,7 @@
         display: flex;
         border-radius: 10px;
         cursor: pointer;
-        &-left{
+        &-left {
           width: 65px;
           height: 100%;
           .cover-file-left-icon {
@@ -1012,7 +1106,7 @@
             display: inline-flex;
             height: 100%;
             align-items: center;
-            font-family: 'Raleway';
+            font-family: "Raleway";
             font-size: 15px;
             font-weight: bold;
           }

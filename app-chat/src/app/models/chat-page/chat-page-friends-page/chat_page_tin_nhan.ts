@@ -182,6 +182,7 @@ export class ChatPageTinNhan {
             || this.loai_tin_nhan == 'gui_tin_nhan_like'
             || this.loai_tin_nhan == 'gui_ghi_am'
             || this.loai_tin_nhan == 'thu_hoi'
+            || this.loai_tin_nhan == 'cuoc_goi_nho'
         ) {
             result = "9px";
         }
@@ -192,6 +193,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
             || tin_nhan.loai_tin_nhan == 'thu_hoi'
+            || tin_nhan.loai_tin_nhan == 'cuoc_goi_nho'
         ) {
             result = "9px";
         }
@@ -365,6 +367,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
             || tin_nhan.loai_tin_nhan == 'thu_hoi'
+            || tin_nhan.loai_tin_nhan == 'cuoc_goi_nho'
         ) {
             result = true;
         }
@@ -384,6 +387,7 @@ export class ChatPageTinNhan {
             || tin_nhan.loai_tin_nhan == 'gui_tin_nhan_like'
             || tin_nhan.loai_tin_nhan == 'gui_ghi_am'
             || tin_nhan.loai_tin_nhan == 'thu_hoi'
+            || tin_nhan.loai_tin_nhan == 'cuoc_goi_nho'
         )) {
             result = true;
         }
