@@ -16,7 +16,6 @@ export class StatusSettingsComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.changeState()
     this.getSetting()
-    
   }
   ngOnDestroy(): void {
     this.stateSubscription.unsubscribe();
@@ -47,9 +46,27 @@ export class StatusSettingsComponent implements OnInit,OnDestroy {
   changeNotification(state: string) {
     if(state != this.settingObject.khong_lam_phien) {
       let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-      this.settings_service.accessSettings(idUser).update({
-        khong_lam_phien: state
-      })
+      // nếu chưa cho phép bật thông báo thì hiển thị
+      if(Notification.permission != 'granted' && state == 'tat') {
+        Notification.requestPermission().then(permission => {
+          // nếu cho phép hiển thị 
+          if(permission == 'granted') {
+            this.settings_service.accessSettings(idUser).update({
+              khong_lam_phien: state
+            })
+            
+          } else {
+            // hiển thị thông báo khi không cho gg gửi thông báo
+            let error = document.getElementById('error-block');
+            error.style.display = 'block';
+          }
+        })
+      } else {
+        this.settings_service.accessSettings(idUser).update({
+          khong_lam_phien: state
+        })
+      }
+      
     }
   }
   // cài đặt âm thanh thông báo
@@ -84,4 +101,5 @@ export class StatusSettingsComponent implements OnInit,OnDestroy {
       }
     })
   }
+  
 }

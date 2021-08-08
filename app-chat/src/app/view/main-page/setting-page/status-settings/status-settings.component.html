@@ -47,14 +47,16 @@
             *ngIf="settingObject.khong_lam_phien == 'bat'"
             checked
             (click)="changeNotification('tat')"
+            id="checked-klp-1"
           />
           <input hidden
             type="checkbox"
             *ngIf="settingObject.khong_lam_phien == 'tat'"
             (click)="changeNotification('bat')"
           />
-          <span class="slider round"></span>
+          <span class="slider round" [class.slider-klp]="settingObject.khong_lam_phien == 'bat'"></span>
         </label>
+        <div class="error-block" id="error-block">Vui lòng cho phép bessenger gửi thông báo trên trình duyệt!</div>
         <div class="status">
           Trạng thái không làm phiền:
           <span *ngIf="settingObject.khong_lam_phien == 'bat'"
