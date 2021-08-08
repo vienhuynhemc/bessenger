@@ -5,28 +5,17 @@
       <div class="fill-content">
         <div class="title-sub">Hiển thị trạng thái hoạt động</div>
         <label class="switch">
-          <input hidden
-            type="checkbox"
-            *ngIf="settingObject.trang_thai_hoat_dong == 'bat'"
-            checked
-            (click)="changeStatusOnline('tat')"
-          />
-          <input hidden
-            type="checkbox"
-            *ngIf="settingObject.trang_thai_hoat_dong == 'tat'"
-            (click)="changeStatusOnline('bat')"
-          />
+          <input hidden type="checkbox" *ngIf="settingObject.trang_thai_hoat_dong == 'bat'" checked
+            (click)="changeStatusOnline('tat')" />
+          <input hidden type="checkbox" *ngIf="settingObject.trang_thai_hoat_dong == 'tat'"
+            (click)="changeStatusOnline('bat')" />
 
           <span class="slider round"></span>
         </label>
         <div class="status">
           Trạng thái hoạt động:
-          <span *ngIf="settingObject.trang_thai_hoat_dong == 'bat'"
-            >Đang bật</span
-          >
-          <span *ngIf="settingObject.trang_thai_hoat_dong == 'tat'"
-            >Đang tắt</span
-          >
+          <span *ngIf="settingObject.trang_thai_hoat_dong == 'bat'">Đang bật</span>
+          <span *ngIf="settingObject.trang_thai_hoat_dong == 'tat'">Đang tắt</span>
         </div>
         <div class="content-details">
           Bạn bè và người liên hệ của bạn sẽ biết khi nào bạn đang hoạt động
@@ -42,29 +31,17 @@
       <div class="fill-content">
         <div class="title-sub">Không làm phiền</div>
         <label class="switch">
-          <input hidden
-            type="checkbox"
-            *ngIf="settingObject.khong_lam_phien == 'bat'"
-            checked
-            (click)="changeNotification('tat')"
-            id="checked-klp-1"
-          />
-          <input hidden
-            type="checkbox"
-            *ngIf="settingObject.khong_lam_phien == 'tat'"
-            (click)="changeNotification('bat')"
-          />
+          <input hidden type="checkbox" *ngIf="settingObject.khong_lam_phien == 'bat'" checked
+            (click)="changeNotification('tat')" id="checked-klp-1" />
+          <input hidden type="checkbox" *ngIf="settingObject.khong_lam_phien == 'tat'"
+            (click)="changeNotification('bat')" />
           <span class="slider round" [class.slider-klp]="settingObject.khong_lam_phien == 'bat'"></span>
         </label>
         <div class="error-block" id="error-block">Vui lòng cho phép bessenger gửi thông báo trên trình duyệt!</div>
         <div class="status">
           Trạng thái không làm phiền:
-          <span *ngIf="settingObject.khong_lam_phien == 'bat'"
-            >Đang bật</span
-          >
-          <span *ngIf="settingObject.khong_lam_phien == 'tat'"
-            >Đang tắt</span
-          >
+          <span *ngIf="settingObject.khong_lam_phien == 'bat'">Đang bật</span>
+          <span *ngIf="settingObject.khong_lam_phien == 'tat'">Đang tắt</span>
         </div>
         <div class="content-details content-details-notification">
           Thông báo sẽ không được gửi đến bạn.
@@ -74,67 +51,41 @@
           Hiển thị bản xem trước
         </div>
         <label class="switch switch-notification">
-          <input hidden
-            type="checkbox"
-            *ngIf="
+          <input hidden type="checkbox" *ngIf="
               settingObject.hien_thi_ban_xem_truoc == 'bat' &&
               settingObject.khong_lam_phien == 'tat'
-            "
-            checked
-            (click)="changeDisplayContentMessageNotification('tat')"
-          />
-          <input hidden
-            type="checkbox"
-            *ngIf="
+            " checked (click)="changeDisplayContentMessageNotification('tat')" />
+          <input hidden type="checkbox" *ngIf="
               settingObject.hien_thi_ban_xem_truoc == 'tat' &&
               settingObject.khong_lam_phien == 'tat'
-            "
-            (click)="changeDisplayContentMessageNotification('bat')"
-          />
+            " (click)="changeDisplayContentMessageNotification('bat')" />
           <span class="slider round" *ngIf="settingObject.khong_lam_phien== 'tat'"></span>
-          <span
-            *ngIf="settingObject.khong_lam_phien== 'bat'"
-            class="slider round"
-            [class.slider-checked]="
+          <span *ngIf="settingObject.khong_lam_phien== 'bat'" class="slider round" [class.slider-checked]="
               settingObject.hien_thi_ban_xem_truoc == 'bat' &&
               settingObject.khong_lam_phien == 'bat'
-            "
-          ></span>
+            "></span>
         </label>
         <div class="content-details content-details-notification">
           Hiển thị bản xem trước tin nhắn khi bạn không dùng ứng dụng.
-          
+
         </div>
         <div class="line"></div>
         <div class="title-sub title-sub-notification">Âm thanh thông báo</div>
         <label class="switch switch-notification">
-          <input hidden
-            type="checkbox"
-            *ngIf="
+          <input hidden type="checkbox" *ngIf="
               settingObject.am_thanh_thong_bao == 'bat' &&
               settingObject.khong_lam_phien == 'tat'
-            "
-            checked
-            (click)="changeSoundNotification('tat')"
-          />
-          <input hidden
-            type="checkbox"
-            *ngIf="
+            " checked (click)="changeSoundNotification('tat')" />
+          <input hidden type="checkbox" *ngIf="
               settingObject.am_thanh_thong_bao == 'tat' &&
               settingObject.khong_lam_phien == 'tat'
-            "
-            (click)="changeSoundNotification('bat')"
-          />
+            " (click)="changeSoundNotification('bat')" />
           <span class="slider round" *ngIf="settingObject.khong_lam_phien== 'tat'"></span>
-          <span
-            *ngIf="settingObject.khong_lam_phien == 'bat'"
-            class="slider round"
-            [class.slider-checked]="
+          <span *ngIf="settingObject.khong_lam_phien == 'bat'" class="slider round" [class.slider-checked]="
               settingObject.am_thanh_thong_bao == 'bat' &&
               settingObject.khong_lam_phien == 'bat'
-            "
-          ></span>
-          
+            "></span>
+
         </label>
         <div class="content-details">
           Thông báo bằng âm thanh khi bạn nhận được tin nhắn, cuộc gọi hoặc đoạn
@@ -158,9 +109,7 @@
           <div class="right-support">
             <div class="right-support-content">0359989998</div>
             <div class="right-support-content">hotro@bessenger.me</div>
-            <a href="https://bessenger-6b25f.web.app"
-              >https://bessenger-6b25f.web.app</a
-            >
+            <a class="right-support-content" href="https://bessenger-6b25f.web.app">https://bessenger-6b25f.web.app</a>
           </div>
         </div>
       </div>
