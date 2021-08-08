@@ -10,12 +10,11 @@ import { SettingsServiceService } from 'src/app/service/settings/settings-servic
   styleUrls: ['./setting-page.component.scss'],
 })
 export class SettingPageComponent implements OnInit {
-  state: string = 'cai_dat';
   stateSubscription: Subscription;
 
   constructor(
     private main_page_service: MainPageService,
-    private settings_service: SettingsServiceService,
+    public settings_service: SettingsServiceService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -30,15 +29,18 @@ export class SettingPageComponent implements OnInit {
   reloadChangeState() {
     let pathName = window.location.pathname;
     if(pathName == '/bessenger/cai-dat/trang-thai-hoat-dong') {
-      this.clickChangeState('trang_thai_hoat_dong')
+      this.settings_service.stateSetting = 'trang_thai_hoat_dong';
+      this.settings_service.selectedStateStatus();
     } else if(pathName == '/bessenger/cai-dat/thong-bao') {
-      this.clickChangeState('thong_bao')
+      this.settings_service.stateSetting = 'thong_bao';
+      this.settings_service.selectedStateNotification();
     } else if(pathName == '/bessenger/cai-dat/ho-tro') {
-      this.clickChangeState('ho_tro')
+      this.settings_service.stateSetting = 'ho_tro';
+      this.settings_service.selectedStateSupport();
     }
   }
   clickChangeState(state: string) {
-    this.state = state;
+    this.settings_service.stateSetting = state;
     if (state == 'trang_thai_hoat_dong') {
       this.settings_service.selectedStateStatus();
       this.router.navigate(['trang-thai-hoat-dong/'], { relativeTo: this.route});

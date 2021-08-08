@@ -6,9 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SettingsServiceService {
-  private source = new BehaviorSubject('cai_dat');
+  private source = new BehaviorSubject('trang_thai_hoat_dong');
   public stateDefault = this.source.asObservable();
   stateStatus: string = 'tat'
+  stateSetting: string = 'trang_thai_hoat_dong';
   constructor(private db: AngularFireDatabase) { }
   selectedStateNotification():void {
     this.source.next('thong_bao');
@@ -19,9 +20,7 @@ export class SettingsServiceService {
   selectedStateSupport():void {
     this.source.next('ho_tro');
   }
-  selectedStateSettings():void {
-    this.source.next('cai_dat');
-  }
+  
   public accessSettings(maTaiKhoan: string) {
     return this.db.database.ref('cai_dat').child(maTaiKhoan);
   }
