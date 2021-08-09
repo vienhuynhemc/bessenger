@@ -11,7 +11,6 @@ import { SettingsServiceService } from 'src/app/service/settings/settings-servic
 })
 export class SettingPageComponent implements OnInit {
   stateSubscription: Subscription;
-
   constructor(
     private main_page_service: MainPageService,
     public settings_service: SettingsServiceService,

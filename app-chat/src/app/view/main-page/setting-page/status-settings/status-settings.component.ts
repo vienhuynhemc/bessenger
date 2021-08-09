@@ -1,10 +1,7 @@
 import {
   Component,
-  EventEmitter,
-  HostListener,
   OnDestroy,
   OnInit,
-  Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -25,7 +22,6 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
   state: string = 'trang_thai_hoat_dong';
   stateSubscription: Subscription;
   settingObject: Setting = new Setting();
-
   ngOnInit(): void {
     this.changeState();
     this.getSetting();
@@ -101,17 +97,19 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
       });
     }
   }
+  
   changeState() {
     this.stateSubscription = this.settings_service.stateDefault.subscribe(
       (state) => {
         const scroll = document.getElementById('content');
+        scroll.style.scrollBehavior = 'auto'
         if(this.state != state) {
           this.state = state
-          if(state == 'trang_thai_hoat_dong')
+          if(state == 'trang_thai_hoat_dong' && (scroll.scrollTop == 0 || scroll.scrollTop < 250 || scroll.scrollTop > 320))
             scroll.scrollTop = 0;
-          else if(state == 'thong_bao')
+          else if( state == 'thong_bao' && (scroll.scrollTop <= 250  || scroll.scrollTop > 320) )
             scroll.scrollTop = 250;
-          else 
+          else if(state == 'ho_tro' && scroll.scrollTop <= 320 )
             scroll.scrollTop = 9999;
         }
         
@@ -122,6 +120,7 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
   public eventScroll(event) {
     const scroll = document.getElementById('content');
     let allElement = document.querySelectorAll('section');
+    
     let i = 0;
     allElement.forEach((element) => {
       let elementTop = element.offsetTop;
@@ -129,16 +128,19 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
         i++;
       }
     });
-    if(i == 0)
+   
+    if(i == 0 && scroll.scrollTop >= 0 ) {
       this.changeStateScroll('trang_thai_hoat_dong')
-    else if(i == 1)
+    } else if(i == 1 && scroll.scrollTop >= 250) {
       this.changeStateScroll('thong_bao')
-    else
+    } else  if(i == 2 && scroll.scrollTop >= 320 ){
       this.changeStateScroll('ho_tro')
+    }
 
   }
   changeStateScroll(state: string) {
     this.settings_service.stateSetting = state;
+  
     if (state == 'trang_thai_hoat_dong') {
       this.settings_service.selectedStateStatus();
       this.router.navigate(['trang-thai-hoat-dong/'], {
