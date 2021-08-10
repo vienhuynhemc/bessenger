@@ -1,9 +1,31 @@
 <div class="container">
-
     <div class="select" (click)="open()">
         <p>Thành viên trong đoạn chat</p>
         <i class="open" *ngIf="this.members_service.isOpen"></i>
         <i class="close" *ngIf="!this.members_service.isOpen"></i>
     </div>
-
+    <div class="members-list">
+        <div class="member">
+            <div class="left">
+                <img src="assets/images/list-friends-chat-page/avt2.jpg" alt="">
+            </div>
+            <div class="center">
+                <div class="name">Anh Duy</div>
+                <div class="role">Quản trị viên</div>
+            </div>
+            <div class="right">
+                <i class="fas fa-ellipsis-h" (click)="openOption()"></i>
+            </div>
+        </div>
+        <div class="member-add">
+            <div class="left">
+                <div class="circle">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="right">
+                <div class="name">Thêm người</div>
+            </div>
+        </div>
+    </div>
 </div>

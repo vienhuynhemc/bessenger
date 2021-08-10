@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.scss']
 })
 export class MembersComponent implements OnInit {
-
+  // tắt mở option
+  isOpenOption: boolean = false;
   constructor(
     public members_service:MembersService,
   ) { }
@@ -19,4 +20,7 @@ export class MembersComponent implements OnInit {
     this.members_service.isOpen = !this.members_service.isOpen;
   }
 
+  public openOption() {
+    this.isOpenOption = !this.isOpenOption;
+  } 
 }
