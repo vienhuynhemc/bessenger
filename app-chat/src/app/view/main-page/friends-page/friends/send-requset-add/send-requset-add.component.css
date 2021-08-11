@@ -20,7 +20,8 @@
   border: #e7e7e7 solid 0.5px;
   height: 110px;
   width: 350px;
-  box-shadow: 4px 4px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 4px 28px 0px #d3dceb;
+          box-shadow: 4px 4px 28px 0px #d3dceb;
   background-color: white;
   border-radius: 10px;
   margin-left: 10px;
@@ -32,8 +33,11 @@
 .friends-list-content .detail-friend .detail-sub {
   width: 100%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-radius: 10px;
+  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 
@@ -42,7 +46,8 @@
 }
 
 .friends-list-content .detail-friend .detail-sub .detail-left img {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: 77px;
   width: 70px;
   border-radius: 5px;
@@ -81,11 +86,17 @@
   border-radius: 5px;
   color: #3275f7;
   font-size: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Raleway";
   font-weight: 600;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 7px;
 }
 
@@ -101,6 +112,8 @@
   top: 18px;
   text-align: center;
   cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -116,6 +129,7 @@
 
 .friends-list-content .detail-friend .detail-sub:hover {
   background-color: #9dcff5;
+  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 
@@ -145,8 +159,12 @@
   position: fixed;
   background: #e8a2a224;
   z-index: 999;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: none;
   top: 0px;
   left: 0px;
@@ -184,9 +202,15 @@
   height: 30px;
   border-radius: 50%;
   border: #e7e7e7 solid 0.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .mutual-friends-list .content-mutual-friends .header .exit i {
@@ -208,11 +232,14 @@
   width: 80%;
   height: 80px;
   background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: auto;
   margin-bottom: 18px;
   border-radius: 10px;
-  box-shadow: 0px 0px 3px 0px #dee2e7;
+  -webkit-box-shadow: 0px 0px 3px 0px #dee2e7;
+          box-shadow: 0px 0px 3px 0px #dee2e7;
   cursor: pointer;
 }
 
@@ -222,7 +249,8 @@
 }
 
 .mutual-friends-list .content-mutual-friends .content-scroll .detail-mutual-friends .detail-left img {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 55px;
   height: 55px;
   border-radius: 50%;
@@ -265,8 +293,14 @@
 }
 
 .mutual-display {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=send-requset-add.component.css.map */

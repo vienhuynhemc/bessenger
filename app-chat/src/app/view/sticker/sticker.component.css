@@ -1,12 +1,14 @@
 .arrow-giphy {
-  transform: translate(-222px, -7px) rotate(-45deg);
+  -webkit-transform: translate(-222px, -7px) rotate(-45deg);
+          transform: translate(-222px, -7px) rotate(-45deg);
   width: 17px;
   height: 17px;
   right: 0px;
   position: absolute;
   background: white;
   bottom: -11px;
-  box-shadow: -1px 1px 1px #ffffff80;
+  -webkit-box-shadow: -1px 1px 1px #ffffff80;
+          box-shadow: -1px 1px 1px #ffffff80;
 }
 
 .container {
@@ -23,15 +25,23 @@
   border-top-right-radius: 8px;
   width: 100%;
   height: 13%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-bottom: #d2d8e0 solid 0.2px;
 }
 
 .container .header .ago {
   width: 14%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   text-align: center;
   cursor: pointer;
@@ -78,9 +88,15 @@
 .container .header .next {
   border-right: #d2d8e0 solid 0.2px;
   border-left: #d2d8e0 solid 0.2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container .header .next i {
@@ -91,18 +107,26 @@
   height: 24px;
   background-repeat: no-repeat;
   display: inline-block;
-  transform: translateX(-1px);
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
 }
 
 .container .header .prev {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-right: #d2d8e0 solid 0.2px;
 }
 
 .container .header .prev i {
-  transform: translateX(2px);
+  -webkit-transform: translateX(2px);
+          transform: translateX(2px);
   background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/NCSnVu2y2t-.png);
   background-position: 0px -81px;
   background-size: auto;
@@ -115,6 +139,8 @@
 .container .header .left {
   width: 61%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   overflow-x: overlay;
   scroll-behavior: smooth;
@@ -131,7 +157,8 @@
 .container .header .left .sticker img {
   width: 70%;
   height: 70%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-top: 5px;
 }
 
@@ -158,10 +185,17 @@
   text-align: center;
   margin: auto;
   margin-top: 10%;
+  -webkit-transition: all 0.5s;
   transition: all 0.5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container .header .right .add i {
@@ -173,11 +207,13 @@
   height: 20px;
   background-repeat: no-repeat;
   display: inline-block;
-  filter: invert(30%) sepia(98%) saturate(200%) saturate(200%) saturate(200%) saturate(166.5%) hue-rotate(192deg) brightness(91%) contrast(101%);
+  -webkit-filter: invert(30%) sepia(98%) saturate(200%) saturate(200%) saturate(200%) saturate(166.5%) hue-rotate(192deg) brightness(91%) contrast(101%);
+          filter: invert(30%) sepia(98%) saturate(200%) saturate(200%) saturate(200%) saturate(166.5%) hue-rotate(192deg) brightness(91%) contrast(101%);
 }
 
 .container .header .right .add:hover {
   background-color: #e9eaea80;
+  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 
@@ -194,8 +230,11 @@
   width: 100%;
   overflow-y: overlay;
   overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .container .content-sticker {
@@ -211,7 +250,8 @@
 .container .content-sticker img {
   width: 80%;
   height: 80%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-top: 10%;
 }
 

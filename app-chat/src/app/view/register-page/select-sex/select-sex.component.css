@@ -9,8 +9,13 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .container .title-header {
@@ -31,27 +36,35 @@
 }
 
 .container .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-top: 35px;
 }
 
 .container .content .icon {
   width: 200px;
-  box-shadow: 0 0 46px 10px #a0a0a026;
+  -webkit-box-shadow: 0 0 46px 10px #a0a0a026;
+          box-shadow: 0 0 46px 10px #a0a0a026;
   border-radius: 27px;
   overflow: hidden;
   padding: 13px;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .container .content .icon img {
   width: 200px;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .container .content :hover {
-  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 /*# sourceMappingURL=select-sex.component.css.map */

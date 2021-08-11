@@ -9,9 +9,15 @@
   position: fixed;
   background: #e8a2a224;
   z-index: 999;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   top: 0px;
   left: 0px;
 }
@@ -19,12 +25,20 @@
 .notification .content {
   width: 600px;
   height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background-color: white;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 10px;
-  box-shadow: 17px 20px 14px 4px #dbdae4;
+  -webkit-box-shadow: 17px 20px 14px 4px #dbdae4;
+          box-shadow: 17px 20px 14px 4px #dbdae4;
 }
 
 .notification .content .anim {
@@ -56,11 +70,17 @@
 .notification .content .confirm {
   border: none;
   background-color: #ff7ca9;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   cursor: pointer;
   border-radius: 5px;
@@ -87,9 +107,15 @@
   position: fixed;
   background: #e8a2a224;
   z-index: 999;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   top: 0px;
   left: 0px;
 }
@@ -104,11 +130,17 @@
 
 .container {
   width: 1244px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   height: 800px;
   background-color: white;
-  box-shadow: 0 0 73px 10px #d7e2edd6;
+  -webkit-box-shadow: 0 0 73px 10px #d7e2edd6;
+          box-shadow: 0 0 73px 10px #d7e2edd6;
   border-radius: 40px;
   margin: 50px;
 }
@@ -126,16 +158,22 @@
   width: 700px;
   position: absolute;
   top: 0px;
-  transform: translateX(-100px);
+  -webkit-transform: translateX(-100px);
+          transform: translateX(-100px);
   left: 0px;
+  -webkit-transition: all 3s ease-in-out;
   transition: all 3s ease-in-out;
 }
 
 .left_header {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   top: 50px;
   left: 50px;
 }
@@ -167,6 +205,7 @@
   position: absolute;
   top: 0px;
   left: 0px;
+  -webkit-transition: all 3s ease-in-out;
   transition: all 3s ease-in-out;
   width: 64px;
   height: 4px;
@@ -181,11 +220,14 @@
   font-size: 19px;
   font-weight: 600;
   left: 314px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Raleway";
 }
 
 .left .content_child p:nth-child(1) {
+  -webkit-transition: all 2s ease-in-out;
   transition: all 2s ease-in-out;
   color: white;
 }
@@ -240,12 +282,18 @@
   top: 671px;
   font-weight: 500;
   font-size: 11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .left .more p {
-  transform: translateY(-7px);
+  -webkit-transform: translateY(-7px);
+          transform: translateY(-7px);
   margin-left: 17px;
 }
 
@@ -259,16 +307,28 @@
   overflow: hidden;
   border-bottom-right-radius: 40px;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .right .header {
   width: 100%;
   height: 27%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
 }
 
@@ -285,10 +345,16 @@
 .right .header .process {
   width: 60%;
   margin-top: 37px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .right .header .process i {
@@ -321,10 +387,16 @@
 .right .header .process-name {
   width: 68%;
   margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .right .header .process-name p {
@@ -344,6 +416,8 @@
 }
 
 .right .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 72%;
   margin-left: 140px;
@@ -356,7 +430,8 @@
   line-height: 21px;
   letter-spacing: 1px;
   font-size: 11px;
-  transform: translateY(-5px);
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
   margin-left: 17px;
 }
 

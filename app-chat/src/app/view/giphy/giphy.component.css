@@ -14,6 +14,8 @@
 .container .search .border-search {
   width: 90%;
   height: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: auto;
   border-radius: 20px;
@@ -72,13 +74,19 @@
 
 .container .content .giphy {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .container .content .giphy img {
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   cursor: pointer;
 }
 
@@ -102,13 +110,15 @@
 }
 
 .arrow-giphy {
-  transform: translate(-202px, -7px) rotate(-45deg);
+  -webkit-transform: translate(-202px, -7px) rotate(-45deg);
+          transform: translate(-202px, -7px) rotate(-45deg);
   width: 17px;
   height: 17px;
   right: 0px;
   position: absolute;
   background: white;
   bottom: -11px;
-  box-shadow: -1px 1px 1px #ffffff80;
+  -webkit-box-shadow: -1px 1px 1px #ffffff80;
+          box-shadow: -1px 1px 1px #ffffff80;
 }
 /*# sourceMappingURL=giphy.component.css.map */

@@ -9,5 +9,72 @@
   border-radius: 40px;
   height: 100%;
   width: 1144px;
+  font-family: 'Raleway';
+}
+
+.container .left-settings {
+  width: 300px;
+  height: 760px;
+  background-color: white;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  -webkit-box-shadow: #d3dceb 4px 8px 28px 0px;
+          box-shadow: #d3dceb 4px 8px 28px 0px;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 27px;
+}
+
+.container .left-settings .left-body {
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.container .left-settings .left-body .left-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .left-settings .left-body .left-nav .nav-item {
+  width: 100%;
+  height: 30px;
+  padding: 0.5rem 0rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  border-radius: .25rem;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.container .left-settings .left-body .left-nav .nav-item svg {
+  margin-right: 20px;
+  margin-left: 15px;
+}
+
+.container .left-settings .left-body .left-nav .nav-item i {
+  font-size: 24px;
+  margin-right: 20px;
+  margin-left: 15px;
+}
+
+.container .left-settings .left-body .left-nav .nav-item:hover:not(.active) {
+  color: #3275f7;
+}
+
+.container .left-settings .left-body .left-nav .active {
+  background-color: #3275f7;
+  color: white;
 }
 /*# sourceMappingURL=setting-page.component.css.map */

@@ -45,7 +45,8 @@ export class ChatPageCreateGroupService {
         ngay_roi_di: 0,
         ngay_tham_gia: currentTime,
         roi_chua: "chua",
-        trang_thai: "khong_cho"
+        trang_thai: "khong_cho",
+        chuc_vu: 'quan_tri_vien'
       }
     );
     let array: Object[] = [];
@@ -56,7 +57,8 @@ export class ChatPageCreateGroupService {
           ngay_roi_di: 0,
           ngay_tham_gia: currentTime,
           roi_chua: "chua",
-          trang_thai: "khong_cho"
+          trang_thai: "khong_cho",
+          chuc_vu: 'thanh_vien'
         }
       );
       array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua",ten:this.user_added[i].ten });

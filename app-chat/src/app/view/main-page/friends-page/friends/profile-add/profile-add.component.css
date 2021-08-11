@@ -1,18 +1,22 @@
 .container {
   width: 100%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Raleway";
   background-color: white;
   border-radius: 40px;
-  box-shadow: 4px 8px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
 }
 
 .container .bg-hands {
   width: 100%;
   height: 100%;
   border-radius: 40px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .container .bg-title {
@@ -54,6 +58,7 @@
 .container .top {
   width: 100%;
   height: 70%;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bfd1f5), to(#3275f7));
   background-image: linear-gradient(#bfd1f5, #3275f7);
   border-bottom-right-radius: 80%;
   border-bottom-left-radius: 80%;
@@ -61,13 +66,15 @@
 }
 
 .container .top .bg-top {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 0.2;
   width: 100%;
   height: 100%;
   border-bottom-right-radius: 80%;
   border-bottom-left-radius: 80%;
-  filter: blur(5px);
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
 }
 
 .container .top .name-opacity {
@@ -113,7 +120,9 @@
   border-top-left-radius: 100px;
   border-top-right-radius: 100px;
   text-align: center;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: absolute;
 }
 
@@ -125,13 +134,15 @@
 .container .top .left-circle {
   top: 100px;
   left: 130px;
-  transform: rotate(-40deg);
+  -webkit-transform: rotate(-40deg);
+          transform: rotate(-40deg);
 }
 
 .container .top .right-circle {
   top: 100px;
   right: 130px;
-  transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
 }
 
 .container .top .circle-1 {
@@ -143,8 +154,12 @@
   top: 140px;
   left: 102px;
   text-align: center;
-  justify-content: center;
-  align-self: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .container .top .circle-1 .circle-2 {
@@ -170,7 +185,8 @@
 .container .top .circle-1 .circle-2 .circle-3 .avt {
   width: 440px;
   height: 440px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   position: absolute;
   top: 5px;
@@ -185,6 +201,8 @@
   bottom: 0px;
   left: 100px;
   border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -218,7 +236,8 @@
   border-radius: 50%;
   background-color: white;
   top: -30px;
-  box-shadow: 0px 0px 10px 0px #acb0b4;
+  -webkit-box-shadow: 0px 0px 10px 0px #acb0b4;
+          box-shadow: 0px 0px 10px 0px #acb0b4;
   cursor: pointer;
 }
 

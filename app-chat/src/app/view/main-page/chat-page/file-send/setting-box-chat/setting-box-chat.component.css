@@ -5,15 +5,22 @@
 
 .container {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .container .select {
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 8px;
   padding: 14px 10px;
   margin-left: 10px;
@@ -27,9 +34,10 @@
   font-size: 14px;
 }
 
-.container .select i {
+.container .select .open {
   margin-right: 5px;
-  filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+  -webkit-filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+          filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
   background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
   background-position: 0px -389px;
   background-size: auto;
@@ -39,7 +47,439 @@
   display: inline-block;
 }
 
-.container :hover {
+.container .select .close {
+  margin-right: 5px;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+  background-position: 0px -284px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+          filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+}
+
+.container .select:hover {
   background-color: #f2f2f2;
+}
+
+.container .noi-dung {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .noi-dung .item {
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 8px;
+  padding: 14px 10px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.container .noi-dung .item p {
+  color: #050505;
+  font-weight: 600;
+  font-family: "Raleway";
+  font-size: 14px;
+}
+
+.container .noi-dung .item .nhom-chat {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/Z8VkIC_Hc4p.png);
+  background-position: 0px -977px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  padding-right: 12px;
+  -webkit-filter: invert(8%) sepia(10%) saturate(200%) saturate(200%) saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+          filter: invert(8%) sepia(10%) saturate(200%) saturate(200%) saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+}
+
+.container .noi-dung .item .chu-de {
+  margin-right: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 50%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.container .noi-dung .item .chu-de .child-chu-de {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.container .noi-dung .item svg {
+  margin-right: 12px;
+}
+
+.container .noi-dung .item .emoji-btcx {
+  margin-right: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .noi-dung .item .emoji-btcx img {
+  width: 20px;
+  height: 20px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.container .noi-dung .item:hover {
+  background-color: #f2f2f2;
+}
+
+.container .doi-ten {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 999;
+  background: #e8a2a224;
+  top: 0px;
+  left: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .doi-ten-main {
+  width: 548px;
+  height: 215px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+  -webkit-box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+          box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+}
+
+.container .doi-ten-main-header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #0000001a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .doi-ten-main-header-name {
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .doi-ten-main-header-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 36px;
+  right: 0px;
+  margin-right: 15px;
+  height: 36px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #e4e6eb;
+}
+
+.container .doi-ten-main-header-icon i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+  background-position: 0px -452px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+          filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+}
+
+.container .doi-ten-main-content {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.container .doi-ten-main-content .p1 {
+  font-family: "Raleway";
+  font-size: 13px;
+  margin-left: 12px;
+  color: #050505;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.container .doi-ten-main-content .input1 {
+  height: 34px;
+  width: 498px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 12px;
+  margin-top: 17px;
+  border-radius: 6px;
+  background-color: white;
+  border: 1px solid #1877f2;
+  outline: none;
+  font-size: 16px;
+  padding: 0px 12px;
+  font-weight: 600;
+}
+
+.container .doi-ten-main-content-buttons {
+  margin-top: 12px;
+  margin-left: 12px;
+  width: 522px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .doi-ten-main-content-buttons-item {
+  border-radius: 6px;
+  color: #050505;
+  font-weight: 700;
+  font-family: "Raleway";
+  height: 36px;
+  width: 52px;
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #e4e6eb;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.container .doi-ten-main-content-buttons-item-select {
+  background-color: #1877f2;
+  color: white;
+}
+
+.container .doi-ten-main-content-buttons-item-done {
+  cursor: not-allowed;
+  color: #bcc0c4;
+  background-color: #e4e6eb;
+}
+
+.container .doi-ten .editColor {
+  height: 441px;
+  width: 635px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .doi-ten .editColor .editColorContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 592px;
+}
+
+.container .doi-ten .editColor .editColorContent .itemEditColor {
+  cursor: pointer;
+  border-radius: 30%;
+  width: 64px;
+  height: 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 5px;
+}
+
+.container .doi-ten .editColor .editColorContent .itemEditColor div {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.container .doi-ten .editColor .editColorContent .itemEditColor:hover {
+  background: #ececec78;
+}
+
+.container .doi-ten .editColor .editColorContent .itemEditColorSelected {
+  background: #ececec78;
+}
+
+.container .doi-ten .editColor .doi-ten-main-content-buttons {
+  width: 595px;
+  margin-top: 5px;
+}
+
+.container .doi-ten .editEmoji {
+  width: 365px;
+  height: 484px;
+}
+
+.container .doi-ten .editEmoji .now-emoji {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 293px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.container .doi-ten .editEmoji .now-emoji .now-emoji-thong-tin p {
+  font-family: "Raleway";
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.container .doi-ten .editEmoji .now-emoji .now-emoji-thong-tin img {
+  width: 24px;
+  height: 24px;
+  margin-top: 5px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.container .doi-ten .editEmoji .now-emoji .now-emoji-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #e4e6eb;
+  width: 65px;
+  height: 36px;
+}
+
+.container .doi-ten .editEmoji .now-emoji .now-emoji-button p {
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.container .doi-ten .editEmoji .now-emoji .now-emoji-button i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/xTLfZtneakk.png);
+  background-position: 0px -772px;
+  background-size: auto;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-filter: invert(8%) sepia(10%) saturate(200%) saturate(200%) saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+          filter: invert(8%) sepia(10%) saturate(200%) saturate(200%) saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
+}
+
+.container .doi-ten .editEmoji .select-emoji {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.container .doi-ten .none-now {
+  height: 431px;
 }
 /*# sourceMappingURL=setting-box-chat.component.css.map */

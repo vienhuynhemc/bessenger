@@ -1,0 +1,291 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.doi-ten {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 999;
+  background: #e8a2a224;
+  top: 0px;
+  left: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main {
+  width: 548px;
+  height: 360px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+  -webkit-box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+          box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+}
+
+.doi-ten-main-header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #0000001a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main-header-name {
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main-header-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 36px;
+  right: 0px;
+  margin-right: 15px;
+  height: 36px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #e4e6eb;
+}
+
+.doi-ten-main-header-icon i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+  background-position: 0px -452px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+          filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+}
+
+.doi-ten-main-content {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.doi-ten-main-content-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main-content-header > p {
+  height: 60px;
+  font-family: "Raleway";
+  color: #65676b;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.doi-ten-main-content-header > p:hover {
+  background-color: #f2f2f2;
+}
+
+.doi-ten-main-content-header .element {
+  cursor: pointer;
+  height: 60px;
+  border-radius: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.doi-ten-main-content-header .element img {
+  width: 20px;
+  height: 20px;
+}
+
+.doi-ten-main-content-header .element p {
+  font-family: "Raleway";
+  color: #65676b;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.doi-ten-main-content-header .element:hover {
+  background-color: #f2f2f2;
+}
+
+.doi-ten-main-content-header .select {
+  color: #1876f2;
+  border-bottom: solid 3px #1876f2;
+  border-radius: 0px;
+}
+
+.doi-ten-main-content-header .select:hover {
+  background-color: white;
+}
+
+.doi-ten-main-content-content {
+  overflow-y: scroll;
+  width: 538px;
+  height: 222px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.doi-ten-main-content-content .item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.doi-ten-main-content-content .item .a {
+  width: 40px;
+  height: 40px;
+  margin-left: 8px;
+}
+
+.doi-ten-main-content-content .item .a img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
+}
+
+.doi-ten-main-content-content .item .b {
+  margin-left: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.doi-ten-main-content-content .item .b p {
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.doi-ten-main-content-content .item .b span {
+  font-family: "Raleway";
+  color: #8a8d91;
+  font-size: 13px;
+}
+
+.doi-ten-main-content-content .item .c {
+  margin-right: 8px;
+  margin-left: auto;
+}
+
+.doi-ten-main-content-content .item .c img {
+  width: 28px;
+  height: 28px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.doi-ten-main-content-content .select {
+  cursor: pointer;
+}
+
+.doi-ten-main-content-content .select .b {
+  height: 33px;
+}
+
+.doi-ten-main-content-content .select:hover {
+  background-color: #f2f2f2;
+}
+
+.doi-ten .none-now {
+  height: 431px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #00000066;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar:hover {
+  background: #0700001c !important;
+}
+/*# sourceMappingURL=detail-emoji-messenger.component.css.map */

@@ -3,20 +3,43 @@
   padding: 0;
 }
 
+.content-show {
+  width: 100%;
+  border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .container {
   background-color: white;
   width: 100%;
   border-radius: 12px;
-  box-shadow: 4px 8px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
   z-index: 2;
 }
 
 .container .icon {
   margin-left: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-top: 3px;
 }
@@ -33,24 +56,182 @@
 }
 
 .container .khung-chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 273px;
   border-radius: 20px;
   background-color: #f0f2f5;
-  align-items: center;
   margin-top: 7px;
   margin-bottom: 7px;
 }
 
-.container .khung-chat .parent-input {
+.container .khung-chat .input-file {
+  max-width: 260px;
+  height: 70px;
+  margin-left: 10px;
+}
+
+.container .khung-chat .input-file .scroll-input {
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item, .container .khung-chat .input-file .scroll-input .input-item-file, .container .khung-chat .input-file .scroll-input .add-file {
+  min-width: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  margin-right: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item .item, .container .khung-chat .input-file .scroll-input .input-item-file .item, .container .khung-chat .input-file .scroll-input .add-file .item {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item .input-item-exit, .container .khung-chat .input-file .scroll-input .input-item-file .input-item-exit, .container .khung-chat .input-file .scroll-input .add-file .input-item-exit {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: #dad4d4 solid 0.5px;
+  border-radius: 50%;
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  cursor: pointer;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item .input-item-exit i, .container .khung-chat .input-file .scroll-input .input-item-file .input-item-exit i, .container .khung-chat .input-file .scroll-input .add-file .input-item-exit i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/0oWpsdW0CWL.png);
+  background-size: 34px 916px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-position: -18px -820px;
+  position: absolute;
+  color: #7a7272;
+  top: 4px;
+  left: 4px;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item .input-item-exit:hover, .container .khung-chat .input-file .scroll-input .input-item-file .input-item-exit:hover, .container .khung-chat .input-file .scroll-input .add-file .input-item-exit:hover {
+  background-color: #ececec;
+}
+
+.container .khung-chat .input-file .scroll-input .add-file {
+  background-color: rgba(134, 142, 153, 0.25);
+  cursor: pointer;
+}
+
+.container .khung-chat .input-file .scroll-input .add-file i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+  background-position: 0 -778px;
+  background-size: 52px 1338px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  color: #1d1b1b;
+  position: absolute;
+  top: 13px;
+  left: 14px;
+}
+
+.container .khung-chat .input-file .scroll-input .add-file:hover {
+  background-color: rgba(107, 111, 117, 0.25);
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 150px;
+  background-color: rgba(134, 142, 153, 0.25);
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file .left {
+  width: 35%;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file .left .cover-left-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file .left .cover-left-icon i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+  background-position: -34px -70px;
+  background-size: 52px 1338px;
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  color: #1d1b1b;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file .right {
+  width: 65%;
+}
+
+.container .khung-chat .input-file .scroll-input .input-item-file .right .file-name {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Raleway';
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.container .khung-chat .input-file ::-webkit-scrollbar {
+  height: 7px;
+}
+
+.container .khung-chat .khung-chat-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .khung-chat .khung-chat-content .parent-input {
   max-height: 83px;
   overflow-y: scroll;
   margin-top: 5px;
   margin-bottom: 5px;
-  transform: translateY(2.5px);
+  -webkit-transform: translateY(2.5px);
+          transform: translateY(2.5px);
 }
 
-.container .khung-chat .parent-input .input {
+.container .khung-chat .khung-chat-content .parent-input .input {
   color: #050505;
   width: 225px;
   margin-right: 5px;
@@ -105,18 +286,21 @@
   left: 141px;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+  -webkit-box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+          box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
 }
 
 .container .khung-chat .box-bieu-tuong-cam-xuc .mui-ten {
-  transform: translate(-19px, -7px) rotate(-45deg);
+  -webkit-transform: translate(-19px, -7px) rotate(-45deg);
+          transform: translate(-19px, -7px) rotate(-45deg);
   width: 17px;
   height: 17px;
   right: 0px;
   position: absolute;
   background: white;
   bottom: -11px;
-  box-shadow: -1px 1px 1px #ffffff80;
+  -webkit-box-shadow: -1px 1px 1px #ffffff80;
+          box-shadow: -1px 1px 1px #ffffff80;
 }
 
 .container .bieu-tuong-cam-xuc-chat {
@@ -126,16 +310,37 @@
 }
 
 .container .bieu-tuong-cam-xuc-chat .send {
-  transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
 }
 
-.container .box-giphy, .container .box-stickers {
+.container .bieu-tuong-cam-xuc-chat .emoji-btcx {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .bieu-tuong-cam-xuc-chat .emoji-btcx img {
+  width: 24px;
+  height: 24px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.container .box-giphy,
+.container .box-stickers {
   position: absolute;
   width: 270px;
   height: 300px;
   top: -311px;
   left: 30px;
-  box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+  -webkit-box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+          box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
   border-radius: 8px;
   z-index: 10;
   background-color: white;

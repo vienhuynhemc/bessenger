@@ -1,0 +1,216 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: absolute;
+  background-color: white;
+  height: 760px;
+  width: 784px;
+  right: 20px;
+  top: 20px;
+  font-family: "Raleway";
+  border-radius: 27px;
+  -webkit-box-shadow: #d3dceb 4px 8px 28px 0px;
+          box-shadow: #d3dceb 4px 8px 28px 0px;
+}
+
+.container .content {
+  width: 727px;
+  height: 704px;
+  overflow-y: scroll;
+  padding-right: 27px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+  margin-top: 27px;
+  padding-left: 27px;
+}
+
+.container .content .title {
+  margin-bottom: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1rem;
+}
+
+.container .content .fill {
+  border: 0.5px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 10px 0px #dfebf5;
+          box-shadow: 0px 0px 10px 0px #dfebf5;
+}
+
+.container .content .fill .fill-content {
+  padding: 20px;
+  position: relative;
+}
+
+.container .content .fill .fill-content .title-sub {
+  margin: 0px 0 5px 0;
+  font-weight: 450;
+}
+
+.container .content .fill .fill-content .title-sub-notification {
+  margin-top: 20px;
+}
+
+.container .content .fill .fill-content .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  margin-bottom: 20px;
+}
+
+.container .content .fill .fill-content .error-block {
+  position: absolute;
+  left: 100px;
+  top: 63px;
+  color: #ff7b5c;
+  font-size: 14px;
+  display: none;
+}
+
+.container .content .fill .fill-content .switch-notification {
+  margin-bottom: 0px;
+}
+
+.container .content .fill .fill-content .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.container .content .fill .fill-content .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.container .content .fill .fill-content input:checked + .slider {
+  background-color: #3275f7;
+}
+
+.container .content .fill .fill-content input:focus + .slider {
+  -webkit-box-shadow: 0 0 1px #3275f7;
+          box-shadow: 0 0 1px #3275f7;
+}
+
+.container .content .fill .fill-content input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+.container .content .fill .fill-content .slider-checked {
+  background-color: #a8c2f7;
+}
+
+.container .content .fill .fill-content .slider-checked::before {
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+.container .content .fill .fill-content .slider-klp {
+  background-color: #3275f7;
+}
+
+.container .content .fill .fill-content .slider-klp::before {
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+.container .content .fill .fill-content .slider.round {
+  border-radius: 34px;
+}
+
+.container .content .fill .fill-content .slider.round:before {
+  border-radius: 50%;
+}
+
+.container .content .fill .fill-content .status span {
+  font-weight: 450;
+}
+
+.container .content .fill .fill-content .line {
+  width: 100%;
+  height: 0.1px;
+  background-color: #d2d8e6;
+}
+
+.container .content .fill .fill-content .content-details {
+  word-wrap: break-word;
+  margin-top: 20px;
+  color: #4a5568;
+  font-style: italic;
+}
+
+.container .content .fill .fill-content .content-details-notification {
+  margin-bottom: 20px;
+}
+
+.container .content .fill .fill-content .support {
+  width: 100%;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #4a5568;
+}
+
+.container .content .fill .fill-content .support .left-support {
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .content .fill .fill-content .support .left-support .left-support-title {
+  margin-top: 15px;
+}
+
+.container .content .fill .fill-content .support .right-support {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .content .fill .fill-content .support .right-support .right-support-content {
+  margin-top: 15px;
+}
+
+.container .content .active-fill {
+  background-color: #eff6fc;
+}
+
+.container .content .title-notification,
+.container .content .title-supports {
+  margin-top: 35px;
+}
+
+.container ::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+/*# sourceMappingURL=status-settings.component.css.map */

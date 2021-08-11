@@ -8,9 +8,14 @@
   height: 60px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 4px 8px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
   position: relative;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -28,23 +33,27 @@
 }
 
 .hinh-dai-dien .nhom .hinh-1 {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   position: absolute;
   left: 0px;
   bottom: 0px;
   z-index: 10;
   width: 26px;
   height: 26px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 
 .hinh-dai-dien .nhom .hinh-2 {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   z-index: 9;
   width: 26px;
   height: 26px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   position: absolute;
   top: 0px;
@@ -57,10 +66,12 @@
 }
 
 .hinh-dai-dien .don img {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 
@@ -71,9 +82,15 @@
   background-color: #ffffff;
   left: 27px;
   bottom: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 50%;
 }
 
@@ -86,9 +103,15 @@
 
 .thong-tin {
   height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   margin-left: 20px;
 }
 
@@ -111,8 +134,12 @@
 
 .icon {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   right: 10px;
 }
 
@@ -126,23 +153,29 @@
 }
 
 .icon .hidden {
-  transform: translateX(77px) scaleY(0) !important;
+  -webkit-transform: translateX(77px) scaleY(0) !important;
+          transform: translateX(77px) scaleY(0) !important;
 }
 
 .icon .box-select {
-  transform: translateX(77px);
+  -webkit-transform: translateX(77px);
+          transform: translateX(77px);
   position: absolute;
   padding: 20px 40px 5px 15px;
-  box-shadow: 17px 20px 14px 4px #dbdae4;
+  -webkit-box-shadow: 17px 20px 14px 4px #dbdae4;
+          box-shadow: 17px 20px 14px 4px #dbdae4;
   background-color: white;
   border-radius: 5px;
   top: 40px;
   right: 0px;
   z-index: 1;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .icon .box-select button {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background-color: white;
   border: none;
@@ -151,8 +184,12 @@
   width: 125px;
   color: #5e6467;
   font-family: "Raleway";
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 14px;

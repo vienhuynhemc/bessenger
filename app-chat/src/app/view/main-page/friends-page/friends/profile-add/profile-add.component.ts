@@ -172,10 +172,11 @@ export class ProfileAddComponent implements OnInit, OnDestroy {
             }
             // nếu trùng id và iduser và không phải là nhóm chat
             if (
-              (memberList[0].id == id && memberList[1].id == parseIDUser) ||
+              ((memberList[0].id == id && memberList[1].id == parseIDUser) ||
               (memberList[0].id == parseIDUser &&
-                memberList[1].id == id &&
-                !groupChatsList.includes(itemConver.key))
+                memberList[1].id == id ))
+                &&
+                !groupChatsList.includes(itemConver.key)
             ) {
               this.requestListService
                 .updateMembersConversation(itemConver.key, parseIDUser)

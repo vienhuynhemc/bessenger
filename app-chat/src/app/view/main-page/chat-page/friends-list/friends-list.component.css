@@ -2,7 +2,7 @@
   font-family: "Raleway";
   width: 281px;
   position: relative;
-  height: 95%;
+  height: 760px;
   top: 20px;
   left: 20px;
   border-radius: 27px;
@@ -19,6 +19,8 @@
 
 .friends-list .header .title {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: auto;
   margin-bottom: 25px;
@@ -37,9 +39,15 @@
   width: 35px;
   height: 35px;
   top: -8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   cursor: pointer;
 }
 
@@ -62,6 +70,18 @@
   margin-top: 5px;
   border: none;
   outline: none;
+}
+
+.friends-list .header .search ::-webkit-input-placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search :-ms-input-placeholder {
+  color: #a4afbf;
+}
+
+.friends-list .header .search ::-ms-input-placeholder {
+  color: #a4afbf;
 }
 
 .friends-list .header .search ::placeholder {
@@ -92,11 +112,13 @@
   padding-left: 14px;
   left: 96px;
   overflow: scroll;
-  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 
 .friends-list .status .no_user {
-  transform: rotate(90deg) translate(105px, 58px);
+  -webkit-transform: rotate(90deg) translate(105px, 58px);
+          transform: rotate(90deg) translate(105px, 58px);
   width: 211px;
   font-family: "Raleway";
   font-weight: 600;
@@ -105,7 +127,8 @@
 }
 
 .friends-list .status .no_user_2 {
-  transform: rotate(90deg) translate(69px, 79px);
+  -webkit-transform: rotate(90deg) translate(69px, 79px);
+          transform: rotate(90deg) translate(69px, 79px);
   width: 211px;
   position: absolute;
   font-family: "Raleway";
@@ -115,8 +138,36 @@
   letter-spacing: 1px;
 }
 
+.friends-list .status .no_status {
+  -webkit-transform: rotate(90deg) translate(106px, 60px);
+          transform: rotate(90deg) translate(106px, 60px);
+  width: 215px;
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.friends-list .status .no_status_2 {
+  -webkit-transform: rotate(90deg) translate(70px, 83px);
+          transform: rotate(90deg) translate(70px, 83px);
+  width: 220px;
+  position: absolute;
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 10px;
+  color: gray;
+  letter-spacing: 1px;
+}
+
+.friends-list .status .no_status_2 span {
+  color: #3275f7;
+  cursor: pointer;
+}
+
 .friends-list .status .myContent {
-  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
   margin-right: 10px;
   max-width: 45px;
   position: relative;
@@ -124,10 +175,12 @@
 }
 
 .friends-list .status .myContent div img {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   width: 40px;
   height: 40px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -146,11 +199,17 @@
   position: absolute;
   background-color: white;
   top: 26px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   right: 4px;
   border-radius: 50%;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .friends-list .status .myContent div .cover-online .online {
@@ -203,32 +262,41 @@
 
 .friends-list .status .slide1-selected {
   opacity: 1;
-  transform: translateX(6%);
+  -webkit-transform: translateX(6%);
+          transform: translateX(6%);
+  -webkit-transition: all 1s;
   transition: all 1s;
   margin-left: 15px;
 }
 
 .friends-list .status .slide2-unselected {
   opacity: 0;
-  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: all 1s;
   transition: all 1s;
 }
 
 .friends-list .status .slide1-unselected {
   opacity: 0;
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: all 1s;
   transition: all 1s;
 }
 
 .friends-list .status .slide2-selected {
   opacity: 1;
-  transform: translateX(-94%);
+  -webkit-transform: translateX(-94%);
+          transform: translateX(-94%);
+  -webkit-transition: all 1s;
   transition: all 1s;
   margin-left: 17px;
 }
 
 .friends-list .box-shadow-header-and-status {
-  box-shadow: 4px 8px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
   position: absolute;
   top: 0px;
   background-color: white;
@@ -270,6 +338,8 @@
 .friends-list .friends .content-friends .container .content {
   width: 85%;
   margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding-top: 12px;
   position: relative;
@@ -282,31 +352,37 @@
 }
 
 .friends-list .friends .content-friends .container .content .left .don img {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   width: 50px;
   height: 50px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 
 .friends-list .friends .content-friends .container .content .left .nhom .hinh_1 {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   position: absolute;
   left: 0px;
   bottom: 0px;
   z-index: 10;
   width: 32px;
   height: 32px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 
 .friends-list .friends .content-friends .container .content .left .nhom .hinh_2 {
-  box-shadow: 0 0 2px #909090;
+  -webkit-box-shadow: 0 0 2px #909090;
+          box-shadow: 0 0 2px #909090;
   z-index: 9;
   width: 32px;
   height: 32px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   position: absolute;
   top: 0px;
@@ -407,6 +483,7 @@
 .friends-list .friends .content-friends .selected-container {
   border-bottom: none;
   border-left: #3275f7 solid 4px;
+  -webkit-transition: all 0.25s ease-in;
   transition: all 0.25s ease-in;
 }
 
@@ -421,9 +498,15 @@
   background-color: #ffffff;
   left: 54px;
   bottom: 13px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 50%;
 }
 
@@ -436,6 +519,8 @@
 
 .friends-list .friends .content-friends .chua_nhan {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   right: 28px;
   top: 39px;
@@ -443,8 +528,12 @@
   border: 1px solid #bcc0c4;
   width: 17px;
   height: 17px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -459,6 +548,8 @@
 
 .friends-list .friends .content-friends .da_gui {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   right: 28px;
   top: 39px;
@@ -466,8 +557,12 @@
   background: #bcc0c4;
   width: 17px;
   height: 17px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -482,12 +577,18 @@
 
 .friends-list .friends .content-friends .so_nguoi_da_xem {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   right: -20px;
   top: 37px;
   width: 115px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_1 {
@@ -495,9 +596,15 @@
   border-radius: 50%;
   width: 21px;
   height: 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   z-index: 5;
   background-color: white;
 }
@@ -506,61 +613,88 @@
   border-radius: 50%;
   width: 17px;
   height: 17px;
-  object-fit: cover;
-  box-shadow: 0 0 1px #909090;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-box-shadow: 0 0 1px #909090;
+          box-shadow: 0 0 1px #909090;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_2 {
   background-color: white;
-  transform: translateX(-7px);
+  -webkit-transform: translateX(-7px);
+          transform: translateX(-7px);
   position: relative;
   z-index: 4;
   border-radius: 50%;
   width: 21px;
   height: 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_2 img {
   border-radius: 50%;
   width: 17px;
   height: 17px;
-  object-fit: cover;
-  box-shadow: 0 0 1px #909090;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-box-shadow: 0 0 1px #909090;
+          box-shadow: 0 0 1px #909090;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_3 {
   background-color: white;
   position: relative;
-  transform: translateX(-14px);
+  -webkit-transform: translateX(-14px);
+          transform: translateX(-14px);
   z-index: 3;
   border-radius: 50%;
   width: 21px;
   height: 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_3 img {
   border-radius: 50%;
   width: 17px;
   height: 17px;
-  object-fit: cover;
-  box-shadow: 0 0 1px #909090;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-box-shadow: 0 0 1px #909090;
+          box-shadow: 0 0 1px #909090;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_4 {
-  transform: translateX(-14px);
+  -webkit-transform: translateX(-14px);
+          transform: translateX(-14px);
   z-index: 2;
   border-radius: 50%;
   width: 21px;
   height: 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .friends-list .friends .content-friends .so_nguoi_da_xem .hinh_4 p {
@@ -573,9 +707,15 @@
   font-size: 13px;
   font-weight: 600;
   text-align: center;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .friends-list .friends .hidden_error {
@@ -592,7 +732,8 @@
 
 .friends-list .end {
   z-index: 2;
-  box-shadow: 8px 5px 37px 0px #b3bac5;
+  -webkit-box-shadow: 8px 5px 37px 0px #b3bac5;
+          box-shadow: 8px 5px 37px 0px #b3bac5;
   margin-top: -17px;
   width: 100%;
   height: 25px;
