@@ -1,0 +1,314 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 270px;
+  border-radius: 20px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  height: 32px;
+}
+
+.container .left {
+  margin-right: 2px;
+}
+
+.container .left .cover-abord {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.container .left .cover-abord svg {
+  top: 4px;
+  left: 4px;
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.container .left .cover-abord:hover {
+  background-color: #dad8d8;
+}
+
+.container .right {
+  position: relative;
+  width: 238px;
+  height: 32px;
+  border-radius: 20px;
+}
+
+.container .right .content-raise {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0.164);
+  max-width: 250px;
+}
+
+.container .right #audio-temp {
+  visibility: hidden;
+  position: absolute;
+}
+
+.container .right .seekbar {
+  -webkit-appearance: none;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  border-radius: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+}
+
+.container .right .seekbar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0px;
+  height: 35px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.container .right .content {
+  position: absolute;
+  width: 65%;
+  height: 100%;
+  margin-left: 14%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .right .content .stroke {
+  display: block;
+  background-color: white;
+  height: 60%;
+  width: 1px;
+  border-radius: 50px;
+  margin: 5% 2px;
+  -webkit-animation: animate 1s linear infinite;
+          animation: animate 1s linear infinite;
+}
+
+@-webkit-keyframes animate {
+  50% {
+    height: 20%;
+  }
+  100% {
+    height: 60%;
+  }
+}
+
+@keyframes animate {
+  50% {
+    height: 20%;
+  }
+  100% {
+    height: 60%;
+  }
+}
+
+.container .right .content .stroke:nth-child(1) {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+.container .right .content .stroke:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.container .right .content .stroke:nth-child(4) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.container .right .content .stroke:nth-child(5) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(6) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(7) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.container .right .content .stroke:nth-child(8) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.container .right .content .stroke:nth-child(9) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(10) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.container .right .content .stroke:nth-child(11) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(12) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.container .right .content .stroke:nth-child(13) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(14) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.container .right .content .stroke:nth-child(15) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(16) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(17) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.container .right .content .stroke:nth-child(18) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(19) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(20) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(21) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.container .right .content .stroke:nth-child(22) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(23) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(24) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.container .right .content .stroke:nth-child(25) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(26) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.container .right .content .stroke:nth-child(27) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(28) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+.container .right .content .stroke:nth-child(29) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.container .right .content .stroke:nth-child(30) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .content .stroke:nth-child(31) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.container .right .audio-play {
+  position: absolute;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgba(213, 222, 241, 0.2);
+}
+
+.container .right .pause {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 5px;
+  top: 5px;
+  text-align: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.container .right .time {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  top: 6px;
+  right: 5px;
+  background-color: white;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.container .right .time .time-number {
+  font-size: 13px;
+  font-family: 'Raleway';
+  margin-top: 1px;
+  font-weight: 500;
+}
+/*# sourceMappingURL=recording.component.css.map */

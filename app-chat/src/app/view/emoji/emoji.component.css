@@ -3,9 +3,12 @@
   padding: 0;
   -webkit-touch-callout: none;
   /* iOS Safari */
+  -webkit-user-select: none;
   /* Safari */
   /* Konqueror HTML */
+  -moz-user-select: none;
   /* Old versions of Firefox */
+  -ms-user-select: none;
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently
@@ -47,8 +50,11 @@
 }
 
 .container > .list > section .icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .container > .list > section .icons > div > :hover {
@@ -95,13 +101,19 @@
 }
 
 .container .danh-muc .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .container .danh-muc .list > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   cursor: pointer;
   overflow: hidden;
@@ -109,6 +121,8 @@
 
 .container .danh-muc .list > div span {
   margin: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/d-CLxy2kETR.png);
   background-repeat: no-repeat;

@@ -9,5 +9,219 @@
   border-radius: 40px;
   height: 100%;
   width: 1144px;
+  font-family: "Raleway";
+}
+
+.container .main {
+  position: absolute;
+  border-radius: 40px;
+  top: 20px;
+  left: 20px;
+  width: 1104px;
+  height: 760px;
+  background-color: white;
+  border-radius: 40px;
+}
+
+.container .main .slide {
+  border-radius: 40px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+
+.container .main .slide-1 {
+  position: absolute;
+}
+
+.container .main .slide-1 .left {
+  width: 50%;
+  height: 100%;
+}
+
+.container .main .slide-1 .left .title {
+  margin-top: 140px;
+  margin-left: 30px;
+  background-image: linear-gradient(83.84deg, #0088ff -6.87%, #a033ff 26.54%, #ff5c87 58.58%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 450;
+  height: 300px;
+  width: 500px;
+  font-size: 70px;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.container .main .slide-1 .left .title-sub {
+  margin-left: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #595959;
+}
+
+.container .main .slide-1 .left .btn-message {
+  margin-top: 40px;
+  margin-left: 30px;
+  cursor: pointer;
+  width: 170px;
+  height: 40px;
+  color: white;
+  font-size: 17px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #3275f7;
+  border-radius: 20px;
+}
+
+.container .main .slide-1 .right {
+  width: 50%;
+  height: 100%;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  background-color: #f7f7f7;
+}
+
+.container .main .slide-2 .right {
+  width: 50%;
+  height: 100%;
+}
+
+.container .main .slide-2 .right .title {
+  margin-top: 200px;
+  margin-left: 30px;
+  background-image: linear-gradient(83.84deg, #0088ff -6.87%, #a033ff 26.54%, #ff5c87 58.58%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 450;
+  height: 210px;
+  width: 500px;
+  font-size: 70px;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.container .main .slide-2 .right .title-sub {
+  margin-left: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #595959;
+}
+
+.container .main .slide-2 .right .btn-message {
+  margin-top: 40px;
+  margin-left: 30px;
+  cursor: pointer;
+  width: 170px;
+  height: 40px;
+  color: white;
+  font-size: 17px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #3275f7;
+  border-radius: 20px;
+}
+
+.container .main .slide-2 .left {
+  width: 50%;
+  height: 100%;
+}
+
+.container .main .slide-3 .left {
+  width: 50%;
+  height: 100%;
+}
+
+.container .main .slide-3 .left .title {
+  margin-top: 70px;
+  margin-left: 30px;
+  background-image: linear-gradient(83.84deg, #0088ff -6.87%, #a033ff 26.54%, #ff5c87 58.58%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 450;
+  height: 480px;
+  width: 330px;
+  font-size: 60px;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.container .main .slide-3 .left .title-sub {
+  margin-left: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #595959;
+}
+
+.container .main .slide-3 .right {
+  width: 50%;
+  height: 100%;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.container .main .slide-3 .right .img-title {
+  width: 94%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: auto;
+  margin-top: 130px;
+}
+
+.container .main .slide-selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .main .slide-change {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  bottom: 50px;
+  left: 171px;
+}
+
+.container .main .slide-change .slide-change-sub {
+  width: 50px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.089);
+  margin-right: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.container .main .slide-change .slide-change-color {
+  background-image: linear-gradient(83.84deg, #0088ff -6.87%, #a033ff 26.54%, #ff5c87 58.58%);
 }
 /*# sourceMappingURL=home-page.component.css.map */

@@ -5,11 +5,17 @@
 
 .container {
   width: 1244px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   height: 800px;
   background-color: white;
-  box-shadow: 0 0 73px 10px #d7e2edd6;
+  -webkit-box-shadow: 0 0 73px 10px #d7e2edd6;
+          box-shadow: 0 0 73px 10px #d7e2edd6;
   border-radius: 40px;
   margin: 50px;
 }
@@ -21,9 +27,16 @@
   background-color: white;
   width: 100px;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container-left-icon {
@@ -39,18 +52,31 @@
   margin-top: 40px;
   width: 66px;
   height: 66px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 2px solid #eef2fb;
   border-radius: 50%;
 }
 
 .container-left-avatar-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 8px 20px #d9f0f3;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0px 8px 20px #d9f0f3;
+          box-shadow: 0px 8px 20px #d9f0f3;
   width: 60px;
   height: 60px;
   overflow: hidden;
@@ -70,10 +96,17 @@
 }
 
 .container-left-menu-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 12px;
+  -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
   padding: 15px;
   cursor: pointer;
@@ -87,8 +120,10 @@
 
 .container-left-menu-icon-selected {
   background-color: #3275f7;
-  transform: translateX(-40px);
-  box-shadow: 0 0 40px #3275f7e0;
+  -webkit-transform: translateX(-40px);
+          transform: translateX(-40px);
+  -webkit-box-shadow: 0 0 40px #3275f7e0;
+          box-shadow: 0 0 40px #3275f7e0;
 }
 
 .container-left-menu-icon-selected i {

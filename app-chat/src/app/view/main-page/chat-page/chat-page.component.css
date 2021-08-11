@@ -9,9 +9,15 @@
   position: fixed;
   background: #e8a2a224;
   z-index: 999;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   top: 0px;
   left: 0px;
 }
@@ -28,7 +34,165 @@
   position: relative;
   background-color: #f5f9fc;
   border-radius: 40px;
-  height: 100%;
+  height: 800px;
   width: 1144px;
+}
+
+.doi-ten {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  background: #e8a2a224;
+  top: 0px;
+  left: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main {
+  width: 700px;
+  height: 215px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+  -webkit-box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+          box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a, inset 0 0 0 1px #ffffff80;
+}
+
+.doi-ten-main-header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #0000001a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main-header-name {
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.doi-ten-main-header-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 36px;
+  right: 0px;
+  margin-right: 15px;
+  height: 36px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #e4e6eb;
+}
+
+.doi-ten-main-header-icon i {
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
+  background-position: 0px -452px;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+          filter: invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);
+}
+
+.doi-ten-main-content {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.doi-ten-main-content .p1 {
+  font-family: "Raleway";
+  font-size: 13px;
+  color: #65676b;
+  margin-top: 9px;
+  font-weight: 500;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 20px;
+}
+
+.doi-ten-main-content-buttons {
+  margin-top: 22px;
+  margin-left: 12px;
+  width: 637px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.doi-ten-main-content-buttons-item {
+  border-radius: 6px;
+  color: #050505;
+  font-weight: 700;
+  font-family: "Raleway";
+  height: 36px;
+  width: 97px;
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #e4e6eb;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.doi-ten-main-content-buttons-item-select {
+  background-color: #1877f2;
+  color: white;
+}
+
+.doi-ten-main-content-buttons-item-done {
+  cursor: not-allowed;
+  color: #bcc0c4;
+  background-color: #e4e6eb;
 }
 /*# sourceMappingURL=chat-page.component.css.map */

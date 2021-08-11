@@ -9,16 +9,23 @@
   position: fixed;
   background: #e8a2a224;
   z-index: 998;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   top: 0px;
   left: 0px;
 }
 
 .tao-nhom-moi .content {
   background: white;
-  box-shadow: 17px 20px 14px 4px #dbdae4;
+  -webkit-box-shadow: 17px 20px 14px 4px #dbdae4;
+          box-shadow: 17px 20px 14px 4px #dbdae4;
   width: 500px;
   position: relative;
   border-radius: 10px;
@@ -42,9 +49,15 @@
   height: 30px;
   border-radius: 50%;
   border: #e7e7e7 solid 0.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .tao-nhom-moi .content .exit i {
@@ -61,7 +74,8 @@
 }
 
 .tao-nhom-moi .content .main .top {
-  box-shadow: 0 0 11px #e0e0e0;
+  -webkit-box-shadow: 0 0 11px #e0e0e0;
+          box-shadow: 0 0 11px #e0e0e0;
 }
 
 .tao-nhom-moi .content .main .error {
@@ -83,6 +97,8 @@
 }
 
 .tao-nhom-moi .content .main .name-group .fill {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -116,6 +132,8 @@
 
 .tao-nhom-moi .content .main .parent-danh-sach {
   padding-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -127,13 +145,20 @@
 }
 
 .tao-nhom-moi .content .main .parent-danh-sach .danh-sach {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-right: 40px;
 }
 
 .tao-nhom-moi .content .main .parent-danh-sach .danh-sach .element {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background: #e7f3ff;
   padding: 7px;
@@ -184,6 +209,8 @@
 }
 
 .tao-nhom-moi .content .main .auto .element {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 95%;
   cursor: pointer;
@@ -192,14 +219,17 @@
   border-radius: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .tao-nhom-moi .content .main .auto .element img {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-left: 10px;
   margin-right: 15px;
 }
@@ -224,11 +254,17 @@
 
 .tao-nhom-moi .content .end .confirm {
   border: none;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   cursor: pointer;
   border-radius: 5px;

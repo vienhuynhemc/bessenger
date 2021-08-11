@@ -1,11 +1,14 @@
 .container {
   width: 100%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Raleway";
   background-color: white;
   border-radius: 40px;
-  box-shadow: 4px 8px 28px 0px #d3dceb;
+  -webkit-box-shadow: 4px 8px 28px 0px #d3dceb;
+          box-shadow: 4px 8px 28px 0px #d3dceb;
   position: relative;
 }
 
@@ -13,7 +16,8 @@
   width: 100%;
   height: 100%;
   border-radius: 40px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .container .bg-title {
@@ -48,7 +52,8 @@
 }
 
 .container .bg {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
   height: 70%;
   border-top-left-radius: 40px;
@@ -61,6 +66,7 @@
   width: 100%;
   height: 100%;
   border-radius: 40px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffffa2), to(#568cf7));
   background-image: linear-gradient(to bottom, #ffffffa2, #568cf7);
 }
 
@@ -79,7 +85,8 @@
   position: absolute;
   left: 15px;
   top: 15px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 300px;
   height: 300px;
   border-radius: 50%;
@@ -94,7 +101,8 @@
   border-bottom-left-radius: 40px;
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
-  clip-path: polygon(49% 53%, 69% 70%, 100% 70%, 100% 100%, 0 100%, 0 70%, 31% 70%);
+  -webkit-clip-path: polygon(49% 53%, 69% 70%, 100% 70%, 100% 100%, 0 100%, 0 70%, 31% 70%);
+          clip-path: polygon(49% 53%, 69% 70%, 100% 70%, 100% 100%, 0 100%, 0 70%, 31% 70%);
 }
 
 .container .content {
@@ -106,7 +114,8 @@
   border-bottom-left-radius: 40px;
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
-  clip-path: polygon(50% 50%, 70% 68.5%, 100% 68.5%, 100% 100%, 0 100%, 0 68.5%, 30% 68.5%);
+  -webkit-clip-path: polygon(50% 50%, 70% 68.5%, 100% 68.5%, 100% 100%, 0 100%, 0 68.5%, 30% 68.5%);
+          clip-path: polygon(50% 50%, 70% 68.5%, 100% 68.5%, 100% 100%, 0 100%, 0 68.5%, 30% 68.5%);
   background-color: white;
 }
 
