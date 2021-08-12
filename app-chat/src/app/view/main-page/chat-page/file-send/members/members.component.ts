@@ -171,7 +171,7 @@ export class MembersComponent implements OnInit {
 }
   onClickAcceptOutGroup(memberList: MemberGroupChat[]) {
     this.members_service.outGroup(this.messenger_main_service.ma_cuoc_tro_chuyen, this.outGroup)
-    if(!this.checkAdmin) {
+    if(!this.checkAdmin && memberList.length > 0) {
       this.members_service.decisionMember(this.messenger_main_service.ma_cuoc_tro_chuyen, memberList[1].idUser)
     } 
     this.outGroup = null;

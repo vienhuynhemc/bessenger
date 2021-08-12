@@ -24,7 +24,7 @@
                 <div class="remove-member option-btn" (click)="outGroupClick(item)" *ngIf="item.idUser == getIDMe()"><i class="fas fa-running" style="margin-right: 16px;"></i> Rời khỏi nhóm</div>
             </div>
         </div>
-        <div class="member-add" *ngIf="this.members_service.isOpen">
+        <!-- <div class="member-add" *ngIf="this.members_service.isOpen">
             <div class="left">
                 <div class="circle">
                     <i class="fas fa-plus"></i>
@@ -33,7 +33,7 @@
             <div class="right">
                 <div class="name">Thêm người</div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="formYesNo" [class.show-unfriend]="adminNew != null">
