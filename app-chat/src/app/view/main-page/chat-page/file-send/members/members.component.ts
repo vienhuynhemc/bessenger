@@ -128,16 +128,19 @@ export class MembersComponent implements OnInit {
   // chỉ định quản trị viên
   decisionAdminClick(member: MemberGroupChat) {
     this.adminNew = member;
+    this.isOpenOption = !this.isOpenOption;
   }
 
   // xóa thành viên
   removeMemberClick(member: MemberGroupChat) {
     this.removeMember = member;
+    this.isOpenOption = !this.isOpenOption;
   }
 
   // rời khỏi nhóm
   outGroupClick(member: MemberGroupChat) {
     this.outGroup = member;
+    this.isOpenOption = !this.isOpenOption;
   }
 
   onClickAcceptDecision() {
