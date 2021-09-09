@@ -1,3 +1,4 @@
+import { VersionService } from './../../service/version/version.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -41,7 +42,8 @@ export class LoginPageComponent implements OnInit {
     private register_account_service: RegisterAccountService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
-    public notification_login_page: NotificationLoginPageService
+    public notification_login_page: NotificationLoginPageService,
+    public version_service:VersionService
   ) {
   }
 
@@ -79,6 +81,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // change version
+    if(this.version_service.version == 2){
+    }
     //recapcha
     this.isCheckRecapcha = false;
     this.addRecaptchaScript();

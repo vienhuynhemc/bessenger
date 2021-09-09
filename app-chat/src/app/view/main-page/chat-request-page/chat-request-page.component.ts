@@ -1,3 +1,4 @@
+import { ChatPageProcessServiceService } from './../../../service/chat-request-page/cha-page-friends-page/chat-page-process-service.service';
 import { Component, OnInit } from '@angular/core';
 import { MainPageService } from 'src/app/service/main-page/main-page.service';
 
@@ -8,7 +9,10 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
 })
 export class ChatRequestPageComponent implements OnInit {
 
-  constructor(private main_page_service: MainPageService) { }
+  constructor(
+    private main_page_service: MainPageService,
+    public chat_page_process_service: ChatPageProcessServiceService,
+    ) { }
 
   ngOnInit(): void {
     setTimeout(() => {
