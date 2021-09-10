@@ -1,6 +1,6 @@
-import { NotificationRegisterPageService } from '../../service/firebase/notification/notification-register-page.service';
-import { RegisterProcessService } from '../../service/firebase/register-account/register-process.service';
-import { RegisterAccountService } from '../../service/firebase/register-account/register-account.service';
+import { NotificationRegisterPageService } from '../../../service/firebase/notification/notification-register-page.service';
+import { RegisterProcessService } from '../../../service/firebase/register-account/register-process.service';
+import { RegisterAccountService } from '../../../service/firebase/register-account/register-account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie

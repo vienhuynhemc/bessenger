@@ -42,10 +42,10 @@ import { UserOnlineService } from 'src/app/service/firebase/user-online/user-onl
 import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
 import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
 
-import { RegisterPageComponent } from './view/register-page/register-page.component';
-import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
-import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
-import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
+import { RegisterPageComponent } from './view/firebase/register-page/register-page.component';
+import { SelectSexComponent } from './view/firebase/select-sex/select-sex.component';
+import { SelectAvatarComponent } from './view/firebase/select-avatar/select-avatar.component';
+import { VerifyEmailComponent } from './view/firebase/verify-email/verify-email.component';
 import { ContactsService } from './service/friends-page/contacts/contacts.service';
 import { RequestAddFriendsComponent } from './view/main-page/friends-page/friends/request-add-friends/request-add-friends.component';
 import { SendRequsetAddComponent } from './view/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
