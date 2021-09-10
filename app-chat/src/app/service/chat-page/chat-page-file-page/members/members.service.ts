@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MemberGroupChat } from 'src/app/models/chat-page/chat-page-file-page/member/member';
-import { MyNameService } from 'src/app/service/my-name/my-name.service';
+import { MyNameService } from 'src/app/service/firebase/my-name/my-name.service';
 import { ChatPageChatPageContentService } from '../../chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 
 @Injectable({

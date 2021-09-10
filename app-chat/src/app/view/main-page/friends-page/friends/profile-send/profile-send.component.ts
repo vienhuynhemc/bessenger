@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FriendInfor } from 'src/app/models/friends-page/friend_Infor';
-import { SendInfor } from 'src/app/models/friends-page/send_infor';
+import { FriendInfor } from 'src/app/models/firebase/friends-page/friend_Infor';
+import { SendInfor } from 'src/app/models/firebase/friends-page/send_infor';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
 import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';

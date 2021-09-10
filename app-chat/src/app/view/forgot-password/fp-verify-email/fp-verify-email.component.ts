@@ -1,10 +1,10 @@
-import { FpVerifyEmailService } from './../../../service/forgot-password/fp-verify-email.service';
+import { FpVerifyEmailService } from '../../../service/firebase/forgot-password/fp-verify-email.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
-import { FpProcessServiceService } from 'src/app/service/forgot-password/fp-process-service.service';
-import { FpServiceService } from 'src/app/service/forgot-password/fp-service.service';
-import { NotificationFpPageService } from 'src/app/service/notification/notification-fp-page.service';
+import { FpProcessServiceService } from 'src/app/service/firebase/forgot-password/fp-process-service.service';
+import { FpServiceService } from 'src/app/service/firebase/forgot-password/fp-service.service';
+import { NotificationFpPageService } from 'src/app/service/firebase/notification/notification-fp-page.service';
 
 @Component({
   selector: 'app-fp-verify-email',

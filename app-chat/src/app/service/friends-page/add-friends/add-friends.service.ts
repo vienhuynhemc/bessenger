@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
+import { AddFriendsInfor } from 'src/app/models/firebase/friends-page/add_friends';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,8 @@
-import { EmojiComponent } from './view/emoji/emoji.component';
+import { SelectSexWsComponent } from './view/ws/register-page-ws/select-sex-ws/select-sex-ws.component';
+import { RegisterPageWsComponent } from './view/ws/register-page-ws/register-page-ws.component';
+import { ChangeVersionStreetComponent } from './view/change-version-street/change-version-street.component';
+import { LoginPageWsComponent } from './view/ws/login-page-ws/login-page-ws.component';
+import { EmojiComponent } from './view/firebase/emoji/emoji.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
@@ -8,7 +12,7 @@ import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/f
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
-import { LoginPageComponent } from './view/login-page/login-page.component';
+import { LoginPageComponent } from './view/firebase/login-page/login-page.component';
 import { ChatPageComponent } from './view/main-page/chat-page/chat-page.component';
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { FriendsPageComponent } from './view/main-page/friends-page/friends-page.component';
@@ -29,10 +33,14 @@ import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-f
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
 import { ChangePasswordComponent } from './view/main-page/personal-page/change-password/change-password.component';
 import { ChangeProfileComponent } from './view/main-page/personal-page/change-profile/change-profile.component';
+import { VerifyEmailWsComponent } from './view/ws/register-page-ws/verify-email-ws/verify-email-ws.component';
+import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dang-nhap', pathMatch: 'full' },
   { path: 'dang-nhap', component: LoginPageComponent },
+  { path: 'dang-nhap-ws', component: LoginPageWsComponent },
+  { path: 'change-version', component: ChangeVersionStreetComponent },
   {
     path: 'dang-ky',
     component: RegisterPageComponent,
@@ -41,6 +49,16 @@ const routes: Routes = [
       { path: 'chon-gioi-tinh', component: SelectSexComponent },
       { path: 'chon-hinh-dai-dien', component: SelectAvatarComponent },
       { path: 'xac-nhan-email', component: VerifyEmailComponent },
+    ],
+  },
+  {
+    path:'dang-ky-ws',
+    component:RegisterPageWsComponent,
+    children: [
+      { path: '', redirectTo: 'chon-gioi-tinh', pathMatch: 'full' },
+      { path: 'chon-gioi-tinh', component: SelectSexWsComponent },
+      { path: 'chon-hinh-dai-dien', component: SelectAvatarWsComponent },
+      { path: 'xac-nhan-email', component: VerifyEmailWsComponent },
     ],
   },
   {
@@ -110,21 +128,23 @@ const routes: Routes = [
         ],
       },
 
-      { path: 'thong-tin-ca-nhan', component: PersonalPageComponent,
+      {
+        path: 'thong-tin-ca-nhan', component: PersonalPageComponent,
         children: [
-          {path: 'doi-mat-khau', component: ChangePasswordComponent},
-          {path: 'doi-thong-tin', component: ChangeProfileComponent}
+          { path: 'doi-mat-khau', component: ChangePasswordComponent },
+          { path: 'doi-thong-tin', component: ChangeProfileComponent }
         ]
-    },
-      { path: 'cai-dat', component: SettingPageComponent,
-      children: [
-        { path: '', redirectTo: 'trang-thai-hoat-dong', pathMatch: 'full' },
-        {path: 'trang-thai-hoat-dong', component: SettingPageComponent},
-        {path: 'thong-bao', component: SettingPageComponent},
-        {path: 'ho-tro', component: SettingPageComponent}
+      },
+      {
+        path: 'cai-dat', component: SettingPageComponent,
+        children: [
+          { path: '', redirectTo: 'trang-thai-hoat-dong', pathMatch: 'full' },
+          { path: 'trang-thai-hoat-dong', component: SettingPageComponent },
+          { path: 'thong-bao', component: SettingPageComponent },
+          { path: 'ho-tro', component: SettingPageComponent }
 
-      ]
-    },
+        ]
+      },
     ],
   },
   { path: '**', component: NotFoundPageComponent },

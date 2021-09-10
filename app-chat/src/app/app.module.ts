@@ -15,14 +15,14 @@ import { MainPageComponent } from './view/main-page/main-page.component';
 import { ChatPageComponent } from './view/main-page/chat-page/chat-page.component';
 import { FriendsPageComponent } from './view/main-page/friends-page/friends-page.component';
 import { HomePageComponent } from './view/main-page/home-page/home-page.component';
-import { LoginPageComponent } from './view/login-page/login-page.component';
+import { LoginPageComponent } from './view/firebase/login-page/login-page.component';
 import { NotFoundPageComponent } from './view/not-found-page/not-found-page.component';
 import { SettingPageComponent } from './view/main-page/setting-page/setting-page.component';
 import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
 import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
 import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
 // các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
+import { UserChatService } from 'src/app/service/firebase/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // tooltip
@@ -35,7 +35,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
 import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
-import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
+import { UserOnlineService } from 'src/app/service/firebase/user-online/user-online.service';
 
 
 
@@ -64,11 +64,11 @@ import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/m
 import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
 import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
 import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
-import { EmojiComponent } from './view/emoji/emoji.component';
-import { GiphyComponent } from './view/giphy/giphy.component';
-import { StickerComponent } from './view/sticker/sticker.component';
-import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component';
-import { RecordingComponent } from './view/recording/recording.component';
+import { EmojiComponent } from './view/firebase/emoji/emoji.component';
+import { GiphyComponent } from './view/firebase/giphy/giphy.component';
+import { StickerComponent } from './view/firebase/sticker/sticker.component';
+import { ShopStickerComponent } from './view/firebase/shop-sticker/shop-sticker.component';
+import { RecordingComponent } from './view/firebase/recording/recording.component';
 
 import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
 import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
@@ -82,8 +82,14 @@ import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-v
 import { ChangeProfileComponent } from './view/main-page/personal-page/change-profile/change-profile.component';
 import { ChangePasswordComponent } from './view/main-page/personal-page/change-password/change-password.component';
 import { StatusSettingsComponent } from './view/main-page/setting-page/status-settings/status-settings.component';
-import { MainPageWsComponent } from './view/main-page-ws/main-page-ws.component';
-import { ChangeVersionComponent } from './view/change-version/change-version.component'
+import { MainPageWsComponent } from './view/ws/main-page-ws/main-page-ws.component';
+import { ChangeVersionComponent } from './view/change-version/change-version.component';
+import { LoginPageWsComponent } from './view/ws/login-page-ws/login-page-ws.component';
+import { ChangeVersionStreetComponent } from './view/change-version-street/change-version-street.component';
+import { RegisterPageWsComponent } from './view/ws/register-page-ws/register-page-ws.component';
+import { VerifyEmailWsComponent } from './view/ws/register-page-ws/verify-email-ws/verify-email-ws.component';
+import { SelectSexWsComponent } from './view/ws/register-page-ws/select-sex-ws/select-sex-ws.component';
+import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component'
 
 
 @NgModule({
@@ -135,7 +141,7 @@ import { ChangeVersionComponent } from './view/change-version/change-version.com
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent, MainPageWsComponent, ChangeVersionComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent, MainPageWsComponent, ChangeVersionComponent, LoginPageWsComponent, ChangeVersionStreetComponent, RegisterPageWsComponent, VerifyEmailWsComponent, SelectSexWsComponent, SelectAvatarWsComponent
 
   ],
   imports: [

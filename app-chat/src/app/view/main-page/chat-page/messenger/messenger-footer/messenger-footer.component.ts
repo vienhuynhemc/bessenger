@@ -1,15 +1,15 @@
 import { FooterScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/footer-scroll.service';
-import { MyNameService } from './../../../../../service/my-name/my-name.service';
-import { EmojiObject } from './../../../../../models/emoji/emoji_object';
+import { MyNameService } from '../../../../../service/firebase/my-name/my-name.service';
+import { EmojiObject } from '../../../../../models/firebase/emoji/emoji_object';
 import { ActivatedRoute } from '@angular/router';
 import { MessengerFooterService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { Component, OnInit } from '@angular/core';
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
-import { StickersService } from 'src/app/service/stickers/stickers.service';
+import { StickersService } from 'src/app/service/firebase/stickers/stickers.service';
 import { finalize } from 'rxjs/operators';
-import { RecordingService } from 'src/app/service/recording/recording.service';
-import { FileUpload } from 'src/app/models/file-upload/file_upload';
+import { RecordingService } from 'src/app/service/firebase/recording/recording.service';
+import { FileUpload } from 'src/app/models/firebase/file-upload/file_upload';
 import {DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'app-messenger-footer',

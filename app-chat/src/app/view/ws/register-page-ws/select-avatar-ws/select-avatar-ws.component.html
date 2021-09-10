@@ -1,0 +1,22 @@
+<div class="container">
+    <p class="title-header">Bạn trông như thế nào ?</p>
+    <p class="noi-dung">Hãy để mọi người biết bạn đẹp như thế nào, đừng ngại ngùng :v</p>
+    <div class="content">
+        <div class="icon">
+            <img [src]="url_img_avatar || 'assets/images/loading.gif'" alt="">
+        </div>
+    </div>
+    <div class="update-file" (click)="chonHinhTuMay(input)">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Tải hình lên</p>
+    </div>
+    <div class="go-back" (click)="goBack()">
+        <i class="fas fa-angle-left"></i>
+        <p>Trở lại</p>
+    </div>
+    <div class="go-next" (click)="goNext()">
+        <p>Tiếp tục</p>
+        <i class="fas fa-angle-right"></i>
+    </div>
+    <input #input type="file" style="display: none;" (change)="chonHinh($event)" accept="image/*">
+</div>

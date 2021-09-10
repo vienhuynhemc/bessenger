@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
 import { CallVideoService } from './../../../../service/chat-page/call-video/call-video.service';
 
 // Peer

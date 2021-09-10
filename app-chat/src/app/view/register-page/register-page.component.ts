@@ -1,11 +1,12 @@
-import { NotificationRegisterPageService } from './../../service/notification/notification-register-page.service';
-import { RegisterProcessService } from './../../service/register-account/register-process.service';
-import { RegisterAccountService } from './../../service/register-account/register-account.service';
+import { NotificationRegisterPageService } from '../../service/firebase/notification/notification-register-page.service';
+import { RegisterProcessService } from '../../service/firebase/register-account/register-process.service';
+import { RegisterAccountService } from '../../service/firebase/register-account/register-account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({
   selector: 'app-register-page',
@@ -26,10 +27,14 @@ export class RegisterPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public register_process_service: RegisterProcessService,
-    public notification_register_page: NotificationRegisterPageService
+    public notification_register_page: NotificationRegisterPageService,
+    public version_service: VersionService,
   ) { }
 
   ngOnInit(): void {
+    if(this.version_service.version == 2){
+      this.router.navigate(['/change-version']);
+    }
     if (!this.register_account_service.isRegister()) {
       this.router.navigate(['/bessenger']);
     } else {

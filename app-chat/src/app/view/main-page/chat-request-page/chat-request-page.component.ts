@@ -1,6 +1,6 @@
 import { ChatPageProcessServiceService } from './../../../service/chat-request-page/cha-page-friends-page/chat-page-process-service.service';
 import { Component, OnInit } from '@angular/core';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
 
 @Component({
   selector: 'app-chat-request-page',

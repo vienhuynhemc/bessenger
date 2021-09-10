@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-import { RequestInfor } from 'src/app/models/friends-page/request_infor';
+import { RequestInfor } from 'src/app/models/firebase/friends-page/request_infor';
 
 import { FriendsPageService } from '../friends-page.service';
 

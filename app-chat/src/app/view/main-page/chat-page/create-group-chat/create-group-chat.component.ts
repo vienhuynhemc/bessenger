@@ -2,7 +2,7 @@ import { ChatPageObjectGroup } from './../../../../models/chat-page/chat-page-fr
 import { Component, OnInit } from '@angular/core';
 import { ChatPageCreateGroupService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-create-group.service';
 import { Router } from '@angular/router';
-import { MyNameService } from 'src/app/service/my-name/my-name.service';
+import { MyNameService } from 'src/app/service/firebase/my-name/my-name.service';
 
 @Component({
   selector: 'app-create-group-chat',

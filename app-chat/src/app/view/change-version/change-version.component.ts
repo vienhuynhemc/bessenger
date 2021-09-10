@@ -42,7 +42,7 @@ export class ChangeVersionComponent implements OnInit {
 
   public changeVersion():void{
     this.version_service.changeVersion();
-    this.router.navigate(["/bessenger"]);
+    this.router.navigate(["/change-version"]);
   }
 
 }

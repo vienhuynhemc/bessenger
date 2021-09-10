@@ -1,11 +1,12 @@
-import { NotificationLoginPageService } from './../../../service/notification/notification-login-page.service';
-import { NotificationRegisterPageService } from './../../../service/notification/notification-register-page.service';
-import { VerifyEmailService } from './../../../service/register-account/verify-email.service';
+import { NotificationLoginPageService } from '../../../service/firebase/notification/notification-login-page.service';
+import { NotificationRegisterPageService } from '../../../service/firebase/notification/notification-register-page.service';
+import { VerifyEmailService } from '../../../service/firebase/register-account/verify-email.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
-import { RegisterAccountService } from 'src/app/service/register-account/register-account.service';
-import { RegisterProcessService } from 'src/app/service/register-account/register-process.service';
+import { RegisterAccountService } from 'src/app/service/firebase/register-account/register-account.service';
+import { RegisterProcessService } from 'src/app/service/firebase/register-account/register-process.service';
+import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({
   selector: 'app-verify-email',
@@ -28,10 +29,14 @@ export class VerifyEmailComponent implements OnInit {
     public register_process_service: RegisterProcessService,
     private verify_email_service: VerifyEmailService,
     public notification_register_page_service: NotificationRegisterPageService,
-    public notification_login_page: NotificationLoginPageService
+    public notification_login_page: NotificationLoginPageService,
+    public version_service: VersionService,
   ) { }
 
   ngOnInit(): void {
+    if (this.version_service.version == 2) {
+      this.router.navigate(['/change-version']);
+    }
     if (!this.register_account_service.isRegister()) {
       this.router.navigate(['/bessenger']);
     } else {

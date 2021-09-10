@@ -2,14 +2,14 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterContentInit, Afte
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { Subscription } from 'rxjs';
-import { AddFriendsInfor } from 'src/app/models/friends-page/add_friends';
+import { AddFriendsInfor } from 'src/app/models/firebase/friends-page/add_friends';
 import { AddFriendsService } from 'src/app/service/friends-page/add-friends/add-friends.service';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
 import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';
 
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
 
 @Component({
   selector: 'app-friends-page',

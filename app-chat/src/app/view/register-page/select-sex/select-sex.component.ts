@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterAccountService } from 'src/app/service/register-account/register-account.service';
-import { RegisterProcessService } from 'src/app/service/register-account/register-process.service';
+import { RegisterAccountService } from 'src/app/service/firebase/register-account/register-account.service';
+import { RegisterProcessService } from 'src/app/service/firebase/register-account/register-process.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({
   selector: 'app-select-sex',
@@ -19,10 +20,14 @@ export class SelectSexComponent implements OnInit {
     public register_process_service: RegisterProcessService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
+    public version_service: VersionService,
   ) { }
 
 
   ngOnInit(): void {
+    if (this.version_service.version == 2) {
+      this.router.navigate(['/change-version']);
+    }
     if (!this.register_account_service.isRegister()) {
       this.router.navigate(['/bessenger']);
     } else {

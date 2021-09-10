@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FpProcessServiceService } from 'src/app/service/forgot-password/fp-process-service.service';
-import { FpServiceService } from 'src/app/service/forgot-password/fp-service.service';
-import { NotificationFpPageService } from 'src/app/service/notification/notification-fp-page.service';
-import { NotificationLoginPageService } from 'src/app/service/notification/notification-login-page.service';
+import { FpProcessServiceService } from 'src/app/service/firebase/forgot-password/fp-process-service.service';
+import { FpServiceService } from 'src/app/service/firebase/forgot-password/fp-service.service';
+import { NotificationFpPageService } from 'src/app/service/firebase/notification/notification-fp-page.service';
+import { NotificationLoginPageService } from 'src/app/service/firebase/notification/notification-login-page.service';
 
 @Component({
   selector: 'app-fp-select-password',

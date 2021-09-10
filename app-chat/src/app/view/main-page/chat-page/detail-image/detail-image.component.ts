@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-share/MediaShare';
-import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
+import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
 
 @Component({
   selector: 'app-detail-image',

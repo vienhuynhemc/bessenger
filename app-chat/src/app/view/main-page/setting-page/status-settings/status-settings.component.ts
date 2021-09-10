@@ -6,7 +6,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Setting } from 'src/app/models/settings/setting';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({
   selector: 'app-status-settings',

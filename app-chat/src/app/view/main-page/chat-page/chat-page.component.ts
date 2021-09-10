@@ -1,11 +1,11 @@
 import { CallVideoService } from './../../../service/chat-page/call-video/call-video.service';
 import { ChatPageProcessServiceService } from './../../../service/chat-page/chat-page-process-service.service';
 import { Component, OnInit } from '@angular/core';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
 import { RecallMessengerService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
 import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
-import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
+import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({
   selector: 'app-chat-page',

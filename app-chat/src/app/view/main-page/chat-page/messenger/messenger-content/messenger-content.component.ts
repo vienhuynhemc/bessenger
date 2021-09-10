@@ -9,8 +9,8 @@ import { AnimationOptions } from 'ngx-lottie';
 import { DomSanitizer } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
 import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
-import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
+import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({
   selector: 'app-messenger-content',

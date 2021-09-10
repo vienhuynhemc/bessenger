@@ -1,4 +1,4 @@
-import { LoginService } from './../../service/login/login.service';
+import { LoginService } from '../../service/firebase/login/login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie

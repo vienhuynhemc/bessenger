@@ -1,4 +1,4 @@
-import { MainPageService } from './../../../service/main-page/main-page.service';
+import { MainPageService } from '../../../service/firebase/main-page/main-page.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Persional } from 'src/app/models/persional/persional';

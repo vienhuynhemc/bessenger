@@ -7,7 +7,7 @@ import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/cha
 import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
 import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({
   selector: 'app-friends-list',

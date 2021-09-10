@@ -1,4 +1,4 @@
-import { EmojiObject } from './../../../../../models/emoji/emoji_object';
+import { EmojiObject } from '../../../../../models/firebase/emoji/emoji_object';
 import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Component, OnInit } from '@angular/core';

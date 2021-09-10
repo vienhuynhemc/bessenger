@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OfferFriendsInfor } from 'src/app/models/friends-page/offer_friends';
+import { OfferFriendsInfor } from 'src/app/models/firebase/friends-page/offer_friends';
 import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
 import { OfferFriendsService } from 'src/app/service/friends-page/offer-friends/offer-friends.service';

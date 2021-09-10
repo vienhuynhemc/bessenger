@@ -1,4 +1,4 @@
-import { MyNameService } from './../../../my-name/my-name.service';
+import { MyNameService } from '../../../firebase/my-name/my-name.service';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';

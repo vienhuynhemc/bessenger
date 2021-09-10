@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MainPageService } from './../../../service/main-page/main-page.service';
+import { MainPageService } from '../../../service/firebase/main-page/main-page.service';
 
 @Component({
   selector: 'app-home-page',

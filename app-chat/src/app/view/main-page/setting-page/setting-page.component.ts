@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({
   selector: 'app-setting-page',

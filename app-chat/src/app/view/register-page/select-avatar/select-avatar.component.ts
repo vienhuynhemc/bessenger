@@ -1,8 +1,9 @@
-import { SelectAvatarService } from './../../../service/register-account/select-avatar.service';
+import { SelectAvatarService } from '../../../service/firebase/register-account/select-avatar.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterAccountService } from 'src/app/service/register-account/register-account.service';
-import { RegisterProcessService } from 'src/app/service/register-account/register-process.service';
+import { RegisterAccountService } from 'src/app/service/firebase/register-account/register-account.service';
+import { RegisterProcessService } from 'src/app/service/firebase/register-account/register-process.service';
+import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({
   selector: 'app-select-avatar',
@@ -18,10 +19,14 @@ export class SelectAvatarComponent implements OnInit {
     private register_account_service: RegisterAccountService,
     private router: Router,
     public register_process_service: RegisterProcessService,
-    private select_avatar_service: SelectAvatarService
+    private select_avatar_service: SelectAvatarService,
+    public version_service: VersionService,
   ) { }
 
   ngOnInit(): void {
+    if (this.version_service.version == 2) {
+      this.router.navigate(['/change-version']);
+    }
     if (!this.register_account_service.isRegister()) {
       this.router.navigate(['/bessenger']);
     } else {

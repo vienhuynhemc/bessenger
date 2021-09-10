@@ -4,7 +4,7 @@ import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-s
 import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ImageDetailService } from 'src/app/service/image-detail/image-detail.service';
+import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
 
 @Component({
   selector: 'app-medias-share',

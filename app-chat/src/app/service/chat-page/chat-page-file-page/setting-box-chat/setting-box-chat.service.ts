@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Mau } from './../../../../models/chat-page/chat-page-file-page/setting-box-chat/mau';
 import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
-import { MyNameService } from './../../../my-name/my-name.service';
+import { MyNameService } from '../../../firebase/my-name/my-name.service';
 import { ChatPageSettingService } from './../chat-page-setting.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';

@@ -1,7 +1,7 @@
 import { MessengerMainService } from './../chat-page-chat-page/messenger-main.service';
 import { ChatPageChatPageContentService } from './../chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
-import { MyNameService } from 'src/app/service/my-name/my-name.service';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
+import { MyNameService } from 'src/app/service/firebase/my-name/my-name.service';
 import { ObjectChatThanhVien } from './../../../models/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subscription } from 'rxjs';

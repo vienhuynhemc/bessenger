@@ -1,13 +1,13 @@
-import { MyNameService } from './../../service/my-name/my-name.service';
+import { MyNameService } from '../../service/firebase/my-name/my-name.service';
 import { ChatPageFriendsServiceService } from './../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
 import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
-import { LoginService } from './../../service/login/login.service';
-import { MainPageService } from './../../service/main-page/main-page.service';
-import { SettingsServiceService } from 'src/app/service/settings/settings-service.service';
-import { NotificationService } from 'src/app/service/notification-settings/notification.service';
+import { LoginService } from '../../service/firebase/login/login.service';
+import { MainPageService } from '../../service/firebase/main-page/main-page.service';
+import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
+import { NotificationService } from 'src/app/service/firebase/notification-settings/notification.service';
 import { SettingNotification } from 'src/app/models/settings/settingNotification';
 import { SingleOrGroupChat } from 'src/app/models/settings/SingleOrGroupChat';
 

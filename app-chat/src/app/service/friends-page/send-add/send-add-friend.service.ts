@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { SendInfor } from 'src/app/models/friends-page/send_infor';
+import { SendInfor } from 'src/app/models/firebase/friends-page/send_infor';
 import { FriendsPageService } from '../friends-page.service';
 
 @Injectable({

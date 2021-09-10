@@ -1,4 +1,4 @@
-import { MyNameService } from './../../../my-name/my-name.service';
+import { MyNameService } from '../../../firebase/my-name/my-name.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -10,7 +10,7 @@ import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friend
 import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
 import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
 import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
-import { FileUpload } from 'src/app/models/file-upload/file_upload';
+import { FileUpload } from 'src/app/models/firebase/file-upload/file_upload';
 import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
 import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { finalize } from 'rxjs/operators';
