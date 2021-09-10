@@ -1,10 +1,10 @@
-import { MediasShareService } from './../../../../../service/chat-page/chat-page-file-page/medias-share/medias-share.service';
 import { Component, OnInit } from '@angular/core';
-import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-share/MediaShare';
-import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { MediaShare } from 'src/app/models/firebase/chat-page/chat-page-file-page/media-share/MediaShare';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
+import { MediasShareService } from 'src/app/service/firebase/chat-page/chat-page-file-page/medias-share/medias-share.service';
 
 @Component({
   selector: 'app-medias-share',

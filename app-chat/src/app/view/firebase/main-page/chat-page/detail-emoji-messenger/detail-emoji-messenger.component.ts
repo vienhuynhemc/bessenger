@@ -1,4 +1,4 @@
-import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
+import { SelectEmojiService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

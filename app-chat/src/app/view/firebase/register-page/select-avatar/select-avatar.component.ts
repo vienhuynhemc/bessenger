@@ -1,8 +1,8 @@
-import { SelectAvatarService } from '../../../service/firebase/register-account/select-avatar.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterAccountService } from 'src/app/service/firebase/register-account/register-account.service';
 import { RegisterProcessService } from 'src/app/service/firebase/register-account/register-process.service';
+import { SelectAvatarService } from 'src/app/service/firebase/register-account/select-avatar.service';
 import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({

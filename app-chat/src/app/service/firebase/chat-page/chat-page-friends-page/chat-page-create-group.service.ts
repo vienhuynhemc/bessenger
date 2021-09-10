@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ChatPageObjectGroup } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_group';
 import { Injectable } from '@angular/core';
+import { ChatPageObjectGroup } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_object_group';
 
 @Injectable({
   providedIn: 'root'

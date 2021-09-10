@@ -1,9 +1,9 @@
 import { Subscription } from 'rxjs';
 import { ChatPageProcessServiceService } from './../chat-page-process-service.service';
-import { ChatPageBanBe } from './../../../models/chat-page/chat-page-friends-page/chat_page_ban_be';
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
-import { Setting } from 'src/app/models/settings/setting';
+import { Setting } from 'src/app/models/firebase/settings/setting';
+import { ChatPageBanBe } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_ban_be';
 
 @Injectable({
   providedIn: 'root'

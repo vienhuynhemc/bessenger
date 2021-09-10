@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
 
 @Component({
   selector: 'app-messenger',

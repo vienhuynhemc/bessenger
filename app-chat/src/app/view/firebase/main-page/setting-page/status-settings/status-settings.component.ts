@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Setting } from 'src/app/models/settings/setting';
+import { Setting } from 'src/app/models/firebase/settings/setting';
 import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({

@@ -11,9 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/firebase/friends-page/friend_Infor';
-import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
-import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
-import { ProfileFriendService } from 'src/app/service/friends-page/profile-friend/profile-friend.service';
+import { ContactsService } from 'src/app/service/firebase/friends-page/contacts/contacts.service';
+import { FriendsPageService } from 'src/app/service/firebase/friends-page/friends-page.service';
+import { ProfileFriendService } from 'src/app/service/firebase/friends-page/profile-friend/profile-friend.service';
 import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({

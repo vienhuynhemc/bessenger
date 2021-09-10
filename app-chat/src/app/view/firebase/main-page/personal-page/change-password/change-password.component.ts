@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChangePassService } from 'src/app/service/personal-page/change-pass/change-pass.service';
-import { PersionalService } from 'src/app/service/personal-page/persional.service';
+import { ChangePassService } from 'src/app/service/firebase/personal-page/change-pass/change-pass.service';
+import { PersionalService } from 'src/app/service/firebase/personal-page/persional.service';
 
 @Component({
   selector: 'app-change-password',

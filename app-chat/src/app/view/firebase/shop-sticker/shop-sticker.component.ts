@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-import { StickerObject } from 'src/app/models/sticker/sticker';
+import { StickerObject } from 'src/app/models/firebase/sticker/sticker';
 import { StickersService } from 'src/app/service/firebase/stickers/stickers.service';
 
 @Component({

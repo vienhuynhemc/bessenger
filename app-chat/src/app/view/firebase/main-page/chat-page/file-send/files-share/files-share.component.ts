@@ -1,9 +1,9 @@
-import { FilesShareService } from './../../../../../service/chat-page/chat-page-file-page/files-share/files-share.service';
 import { Component, OnInit } from '@angular/core';
-import { FileShare } from 'src/app/models/chat-page/chat-page-file-page/file-share/file-share';
-import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { FileShare } from 'src/app/models/firebase/chat-page/chat-page-file-page/file-share/file-share';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FilesShareService } from 'src/app/service/firebase/chat-page/chat-page-file-page/files-share/files-share.service';
 
 @Component({
   selector: 'app-files-share',

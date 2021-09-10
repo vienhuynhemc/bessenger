@@ -1,11 +1,11 @@
-import { NotificationLoginPageService } from '../../../service/firebase/notification/notification-login-page.service';
-import { NotificationRegisterPageService } from '../../../service/firebase/notification/notification-register-page.service';
-import { VerifyEmailService } from '../../../service/firebase/register-account/verify-email.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
+import { NotificationLoginPageService } from 'src/app/service/firebase/notification/notification-login-page.service';
+import { NotificationRegisterPageService } from 'src/app/service/firebase/notification/notification-register-page.service';
 import { RegisterAccountService } from 'src/app/service/firebase/register-account/register-account.service';
 import { RegisterProcessService } from 'src/app/service/firebase/register-account/register-process.service';
+import { VerifyEmailService } from 'src/app/service/firebase/register-account/verify-email.service';
 import { VersionService } from 'src/app/service/version/version.service';
 
 @Component({

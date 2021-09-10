@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AddFriendsInfor } from 'src/app/models/firebase/friends-page/add_friends';
-import { AddFriendsService } from 'src/app/service/friends-page/add-friends/add-friends.service';
-import { ContactsService } from 'src/app/service/friends-page/contacts/contacts.service';
-import { FriendsPageService } from 'src/app/service/friends-page/friends-page.service';
-import { RequestAddFriendsService } from 'src/app/service/friends-page/request-add/request-add-friends.service';
-import { SendAddFriendService } from 'src/app/service/friends-page/send-add/send-add-friend.service';
+import { AddFriendsService } from 'src/app/service/firebase/friends-page/add-friends/add-friends.service';
+import { ContactsService } from 'src/app/service/firebase/friends-page/contacts/contacts.service';
+import { FriendsPageService } from 'src/app/service/firebase/friends-page/friends-page.service';
+import { RequestAddFriendsService } from 'src/app/service/firebase/friends-page/request-add/request-add-friends.service';
+import { SendAddFriendService } from 'src/app/service/firebase/friends-page/send-add/send-add-friend.service';
 
 @Component({
   selector: 'app-profile-add',

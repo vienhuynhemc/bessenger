@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { CamXucTinNhan } from 'src/app/models/chat-page/chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
-import { EmojiMessenger } from './../../../../models/chat-page/chat-page-chat-page/content/select-emoji/emoji_messenger';
+import { CamXucTinNhan } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
 import { Injectable } from '@angular/core';
+import { EmojiMessenger } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/select-emoji/emoji_messenger';
 
 @Injectable({
   providedIn: 'root'

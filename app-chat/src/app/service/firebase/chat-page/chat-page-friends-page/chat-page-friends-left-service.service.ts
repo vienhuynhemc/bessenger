@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subscription } from 'rxjs';
-import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
+import { ChatPageCuocTroChuyen } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
+import { ChatPageFriendsObjectLeft } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_friends_object_left';
+import { ChatPageObjectTinNhanFriend } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
+import { ChatPageTinhTrangXem } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
+import { ChatPageTinNhan } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { ChatPageProcessServiceService } from '../chat-page-process-service.service';
-import { ChatPageCuocTroChuyen } from './../../../models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
-import { ChatPageObjectTinNhanFriend } from './../../../models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
-import { ChatPageTinhTrangXem } from './../../../models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
-import { ChatPageTinNhan } from './../../../models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { LeftScrollService } from './left-scroll.service';
 
 @Injectable({

@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { finalize } from 'rxjs/operators';
-import { RegisterObjectSendMail } from '../../../models/regiser-account/register_object_send_mail';
 import { LoginService } from '../../../service/firebase/login/login.service';
 import { NotificationLoginPageService } from '../../../service/firebase/notification/notification-login-page.service';
 import { RegisterAccountService } from '../../../service/firebase/register-account/register-account.service';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Component({
   selector: 'app-login-page',

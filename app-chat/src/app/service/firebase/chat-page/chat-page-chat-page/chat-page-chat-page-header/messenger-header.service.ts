@@ -1,10 +1,10 @@
-import { MyNameService } from '../../../firebase/my-name/my-name.service';
-import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { ChatPageChatPageContentService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ObjectChat } from 'src/app/models/chat-page/chat-page-chat-page/header/object_chat';
-import { ObjectChatThanhVien } from './../../../../models/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
+import { ObjectChat } from 'src/app/models/firebase/chat-page/chat-page-chat-page/header/object_chat';
+import { MyNameService } from '../../../my-name/my-name.service';
+import { ObjectChatThanhVien } from 'src/app/models/firebase/chat-page/chat-page-chat-page/header/object_chat_thanh_vien';
 
 @Injectable({
   providedIn: 'root'

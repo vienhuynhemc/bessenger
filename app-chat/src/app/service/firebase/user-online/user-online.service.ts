@@ -6,7 +6,7 @@ import { of } from 'rxjs'
 // firebase
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 // user online
-import { UserOnline } from 'src/app/models/user_online';
+import { UserOnline } from 'src/app/models/firebase/user_online';
 @Injectable({
   providedIn: 'root'
 })

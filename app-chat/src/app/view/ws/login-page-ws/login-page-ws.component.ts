@@ -1,7 +1,6 @@
 import { RegisterAccountWsService } from './../../../service/ws/register-account/register-account-ws.service';
 import { LoginWsService } from './../../../service/ws/login/login-ws.service';
 import { LoginWsWsService } from './../../../service/ws/login/login-ws-ws.service';
-import { RegisterObjectSendMail } from './../../../models/regiser-account/register_object_send_mail';
 import { NotificationLoginPageWsService } from '../../../service/ws/notification/notification-login-page-ws.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,6 +11,7 @@ import { VersionService } from 'src/app/service/version/version.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Component({
   selector: 'app-login-page-ws',

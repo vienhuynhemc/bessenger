@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // dùng observable xử lý bất đồng bộ
 import { Observable, of } from 'rxjs';
-import { BoxChat } from 'src/app/models/box_chat';
+import { BoxChat } from 'src/app/models/firebase/box_chat';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 @Injectable({
   providedIn: 'root'

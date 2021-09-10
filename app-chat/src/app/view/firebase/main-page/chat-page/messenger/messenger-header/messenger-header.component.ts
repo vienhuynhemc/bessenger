@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
+import { CallVideoService } from 'src/app/service/firebase/chat-page/call-video/call-video.service';
+import { MessengerHeaderService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
 import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
-import { CallVideoService } from './../../../../../service/chat-page/call-video/call-video.service';
-import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
 
 @Component({
   selector: 'app-messenger-header',

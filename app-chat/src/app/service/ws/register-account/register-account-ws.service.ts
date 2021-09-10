@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Injectable({
   providedIn: 'root'

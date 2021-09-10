@@ -1,16 +1,16 @@
-import { RecallMessengerService } from './../../../../../service/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
-import { ChatPageChatPageScrollService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
-import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
-import { MessengerMainService } from './../../../../../service/chat-page/chat-page-chat-page/messenger-main.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessengerFooterService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
 import { AnimationOptions } from 'ngx-lottie';
 import { DomSanitizer } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
-import { SelectEmojiService } from 'src/app/service/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 import { ImageDetailService } from 'src/app/service/firebase/image-detail/image-detail.service';
 import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
+import { MessengerFooterService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-footer/messenger-footer.service';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
+import { ChatPageChatPageContentService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { ChatPageChatPageScrollService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-scroll.service';
+import { RecallMessengerService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/recall-messenger/recall-messenger.service';
+import { SelectEmojiService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/recall-messenger/select-emoji.service';
 
 @Component({
   selector: 'app-messenger-content',

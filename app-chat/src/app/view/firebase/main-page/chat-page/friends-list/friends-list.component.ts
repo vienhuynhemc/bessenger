@@ -1,12 +1,12 @@
-import { LeftScrollService } from './../../../../service/chat-page/chat-page-friends-page/left-scroll.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
-import { ChatPageFriendsObjectLeft } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_friends_object_left';
-import { ChatPageFriendsLeftServiceService } from 'src/app/service/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
-import { ChatPageCreateGroupService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-create-group.service';
-import { ChatPageFriendsServiceService } from './../../../../service/chat-page/chat-page-friends-page/chat-page-friends-service.service';
-import { ChatPageProcessServiceService } from './../../../../service/chat-page/chat-page-process-service.service';
+import { ChatPageCuocTroChuyen } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
+import { ChatPageFriendsObjectLeft } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_friends_object_left';
+import { ChatPageCreateGroupService } from 'src/app/service/firebase/chat-page/chat-page-friends-page/chat-page-create-group.service';
+import { ChatPageFriendsLeftServiceService } from 'src/app/service/firebase/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
+import { ChatPageFriendsServiceService } from 'src/app/service/firebase/chat-page/chat-page-friends-page/chat-page-friends-service.service';
+import { LeftScrollService } from 'src/app/service/firebase/chat-page/chat-page-friends-page/left-scroll.service';
+import { ChatPageProcessServiceService } from 'src/app/service/firebase/chat-page/chat-page-process-service.service';
 import { SettingsServiceService } from 'src/app/service/firebase/settings/settings-service.service';
 
 @Component({

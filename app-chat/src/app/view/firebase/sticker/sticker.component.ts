@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { Subscription } from 'rxjs';
-import { StickerObject } from 'src/app/models/sticker/sticker';
-import { StickerDetail } from 'src/app/models/sticker/sticker_detail';
-import { ChatPageChatPageContentService } from 'src/app/service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { StickerObject } from 'src/app/models/firebase/sticker/sticker';
+import { StickerDetail } from 'src/app/models/firebase/sticker/sticker_detail';
+import { ChatPageChatPageContentService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { StickersService } from 'src/app/service/firebase/stickers/stickers.service';
 
 @Component({

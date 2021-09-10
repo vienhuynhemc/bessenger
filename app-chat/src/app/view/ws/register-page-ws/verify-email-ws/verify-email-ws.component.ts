@@ -6,7 +6,7 @@ import { NotificationLoginPageWsService } from 'src/app/service/ws/notification/
 import { NotificationRegisterPageWsService } from 'src/app/service/ws/notification/notification-register-page-ws.service';
 import { RegisterAccountWsService } from 'src/app/service/ws/register-account/register-account-ws.service';
 import { RegisterProcessWsService } from 'src/app/service/ws/register-account/register-process-ws.service';
-import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Component({
   selector: 'app-verify-email-ws',
@@ -30,7 +30,7 @@ export class VerifyEmailWsComponent implements OnInit {
     public notification_login_page_ws: NotificationLoginPageWsService,
     public version_service: VersionService,
     public register_account_service_ws: RegisterAccountWsService,
-    public verify_email_service_ws:VerifyEmailWsService
+    public verify_email_service_ws: VerifyEmailWsService
   ) { }
 
   ngOnInit(): void {

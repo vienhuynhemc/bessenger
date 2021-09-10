@@ -1,12 +1,12 @@
-import { MainPageService } from '../../../service/firebase/main-page/main-page.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Persional } from 'src/app/models/persional/persional';
-import { PersionalService } from 'src/app/service/personal-page/persional.service';
-import { ChangeAvatarService } from 'src/app/service/personal-page/change-avatar/change-avatar.service';
+import { Persional } from 'src/app/models/firebase/persional/persional';
+import { PersionalService } from 'src/app/service/firebase/personal-page/persional.service';
+import { ChangeAvatarService } from 'src/app/service/firebase/personal-page/change-avatar/change-avatar.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { MainPageService } from 'src/app/service/firebase/main-page/main-page.service';
 
 @Component({
   selector: 'app-personal-page',

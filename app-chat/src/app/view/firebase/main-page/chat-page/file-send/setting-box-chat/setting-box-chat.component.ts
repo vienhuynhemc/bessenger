@@ -1,8 +1,8 @@
-import { EmojiObject } from '../../../../../models/firebase/emoji/emoji_object';
-import { MessengerHeaderService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
-import { ChatPageChatPageContentService } from './../../../../../service/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
 import { Component, OnInit } from '@angular/core';
-import { SettingBoxChatService } from 'src/app/service/chat-page/chat-page-file-page/setting-box-chat/setting-box-chat.service';
+import { EmojiObject } from 'src/app/models/firebase/emoji/emoji_object';
+import { ChatPageChatPageContentService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-content/chat-page-chat-page-content.service';
+import { MessengerHeaderService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/chat-page-chat-page-header/messenger-header.service';
+import { SettingBoxChatService } from 'src/app/service/firebase/chat-page/chat-page-file-page/setting-box-chat/setting-box-chat.service';
 
 @Component({
   selector: 'app-setting-box-chat',

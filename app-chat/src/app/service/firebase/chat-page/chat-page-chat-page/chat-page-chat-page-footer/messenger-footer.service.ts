@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ObjectChatFooter } from './../../../../models/chat-page/chat-page-chat-page/footer/object_chat_footer';
+import { ObjectChatFooter } from 'src/app/models/firebase/chat-page/chat-page-chat-page/footer/object_chat_footer';
 
 @Injectable({
   providedIn: 'root'

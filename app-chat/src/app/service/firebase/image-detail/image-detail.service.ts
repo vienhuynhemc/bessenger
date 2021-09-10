@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { MediaShare } from 'src/app/models/chat-page/chat-page-file-page/media-share/MediaShare';
+import { MediaShare } from 'src/app/models/firebase/chat-page/chat-page-file-page/media-share/MediaShare';
 
 @Injectable({
   providedIn: 'root'

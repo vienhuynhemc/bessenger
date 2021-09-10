@@ -1,8 +1,8 @@
-import { MembersService } from './../../../../../service/chat-page/chat-page-file-page/members/members.service';
 import { Component, OnInit } from '@angular/core';
-import { MessengerMainService } from 'src/app/service/chat-page/chat-page-chat-page/messenger-main.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberGroupChat } from 'src/app/models/chat-page/chat-page-file-page/member/member';
+import { MemberGroupChat } from 'src/app/models/firebase/chat-page/chat-page-file-page/member/member';
+import { MessengerMainService } from 'src/app/service/firebase/chat-page/chat-page-chat-page/messenger-main.service';
+import { MembersService } from 'src/app/service/firebase/chat-page/chat-page-file-page/members/members.service';
 
 
 @Component({

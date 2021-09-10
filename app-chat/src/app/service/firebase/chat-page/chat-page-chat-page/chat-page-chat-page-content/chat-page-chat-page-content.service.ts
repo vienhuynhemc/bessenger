@@ -1,19 +1,19 @@
-import { MyNameService } from '../../../firebase/my-name/my-name.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { CamXucTinNhan } from 'src/app/models/chat-page/chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
-import { EmojiMessenger } from 'src/app/models/chat-page/chat-page-chat-page/content/select-emoji/emoji_messenger';
-import { ChatPageCuocTroChuyen } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
-import { ChatPageObjectTinNhanFriend } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
-import { ChatPageTinhTrangXem } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
-import { ChatPageTinNhan } from 'src/app/models/chat-page/chat-page-friends-page/chat_page_tin_nhan';
+import { CamXucTinNhan } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/select-emoji/cam_xuc_tin_nhan';
+import { EmojiMessenger } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/select-emoji/emoji_messenger';
+import { ChatPageCuocTroChuyen } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen';
+import { ChatPageObjectTinNhanFriend } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend';
+import { ChatPageTinhTrangXem } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem';
+import { ChatPageTinNhan } from 'src/app/models/firebase/chat-page/chat-page-friends-page/chat_page_tin_nhan';
 import { FileUpload } from 'src/app/models/firebase/file-upload/file_upload';
-import { ObjectChatContent } from './../../../../models/chat-page/chat-page-chat-page/content/object_chat_content';
-import { ObjectDangNhap } from './../../../../models/chat-page/chat-page-chat-page/content/object_dang_nhap';
 import { finalize } from 'rxjs/operators';
+import { MyNameService } from '../../../my-name/my-name.service';
+import { ObjectChatContent } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/object_chat_content';
+import { ObjectDangNhap } from 'src/app/models/firebase/chat-page/chat-page-chat-page/content/object_dang_nhap';
 
 @Injectable({
   providedIn: 'root'

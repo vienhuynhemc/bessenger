@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { RegisterProcessService } from '../register-account/register-process.service';
-import { RegisterObjectSendMail } from 'src/app/models/regiser-account/register_object_send_mail';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Injectable({
   providedIn: 'root'

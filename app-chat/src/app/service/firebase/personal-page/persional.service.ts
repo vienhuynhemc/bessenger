@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Persional } from 'src/app/models/persional/persional';
+import { Persional } from 'src/app/models/firebase/persional/persional';
 
 @Injectable({
   providedIn: 'root'

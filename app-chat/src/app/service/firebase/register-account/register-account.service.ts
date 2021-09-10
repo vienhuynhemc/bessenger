@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { AccountWebservice } from 'src/app/models/regiser-account/account_webserivce';
-import { RegisterObjectSendMail } from '../../../models/regiser-account/register_object_send_mail';
+import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
+import { AccountWebservice } from 'src/app/models/firebase/regiser-account/account_webserivce';
 
 @Injectable({
   providedIn: 'root',
