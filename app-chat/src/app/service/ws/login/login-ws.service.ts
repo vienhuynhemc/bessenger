@@ -15,4 +15,15 @@ export class LoginWsService {
   public isLogin(): boolean {
     return JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws")) != null;
   }
+
+  public checkEmail(email: string) {
+    const url = `${this.REST_API_SERVER}/kiem_tra_email_dang_nhap_ws.php?email=${email}`;
+    return this.http.get<any>(url);
+  }
+
+  public login(ma_tai_khoan:string,email:string): void {
+    localStorage.setItem("ma_tai_khoan_dn_ws", JSON.stringify(ma_tai_khoan));
+    localStorage.setItem("email_dn_ws",email);
+  }
+
 }

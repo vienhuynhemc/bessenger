@@ -43,7 +43,7 @@ export class LoginPageWsComponent implements OnInit {
     public login_ws_ws: LoginWsWsService,
     public version_service: VersionService,
     public login_service_ws: LoginWsService,
-    public register_account_service_ws:RegisterAccountWsService,
+    public register_account_service_ws: RegisterAccountWsService,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase,
   ) {
@@ -455,64 +455,69 @@ export class LoginPageWsComponent implements OnInit {
   }
 
   dangNhap(): void {
-    // let email: string = this.userName.trim();
-    // let mat_khau: string = this.passWord;
-    // let count = 0;
+    let email: string = this.userName.trim();
+    let mat_khau: string = this.passWord;
+    let count = 0;
 
-    // if (email.length == 0) {
-    //   count++;
-    //   document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
-    //   document.getElementById("dn-error-1").style.display = "block";
-    //   document.getElementById("dn-error-1").innerText = "Email không thể thiếu"
-    // }
-    // if (mat_khau.length == 0) {
-    //   count++;
-    //   document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
-    //   document.getElementById("dn-error-2").style.display = "block";
-    //   document.getElementById("dn-error-2").innerText = "Mật khẩu không thể thiếu"
-    // }
-    // if (!this.isCheckRecapcha) {
-    //   count++;
-    //   document.getElementById("dn-error-3").style.display = "block";
-    //   document.getElementById("dn-error-3").innerText = "Bạn là Robot ư?"
-    // }
-    // if (count == 0) {
-    //   this.isLoading = true;
-    //   // Check tài khoản
-    //   this.login_service.checkEmail(email).subscribe(data => {
-    //     if (data.length == 0) {
-    //       document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
-    //       document.getElementById("dn-error-1").style.display = "block";
-    //       document.getElementById("dn-error-1").innerText = "Email chưa đăng ký tài khoản Bessenger"
-    //       this.isLoading = false;
-    //     } else {
-    //       if (data[0]['trang_thai_kich_hoat'] == "chua") {
-    //         document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
-    //         document.getElementById("dn-error-1").style.display = "block";
-    //         document.getElementById("dn-error-1").innerText = "Tài khoản chưa được kich hoạt, vui lòng chọn Quên Mật Khẩu để kích hoạt tài khoản"
-    //         this.isLoading = false;
-    //       } else {
-    //         if (mat_khau != data[0]['mat_khau']) {
-    //           document.getElementById("dn-email").style.border = "1px solid #e2e2e2";
-    //           document.getElementById("dn-error-1").style.display = "none";
-    //           document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
-    //           document.getElementById("dn-error-2").style.display = "block";
-    //           document.getElementById("dn-error-2").innerText = "Mật khẩu không chính xác"
-    //           this.isLoading = false;
-    //         } else {
-    //           document.getElementById("dn-email").style.border = "1px solid #e2e2e2";
-    //           document.getElementById("dn-error-1").style.display = "none";
-    //           document.getElementById("dn-mat-khau").style.border = "1px solid #e2e2e2";
-    //           document.getElementById("dn-error-2").style.display = "none";
-    //           this.login_service.login(data[0]['ma_tai_khoan']);
-    //           this.isRunningSlide = false;
-    //           this.isLoading = false;
-    //           this.router.navigate(["/bessenger"]);
-    //         }
-    //       }
-    //     }
-    //   })
-    // }
+    if (email.length == 0) {
+      count++;
+      document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-1").style.display = "block";
+      document.getElementById("dn-error-1").innerText = "Email không thể thiếu"
+    }
+    if (mat_khau.length == 0) {
+      count++;
+      document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
+      document.getElementById("dn-error-2").style.display = "block";
+      document.getElementById("dn-error-2").innerText = "Mật khẩu không thể thiếu"
+    }
+    if (!this.isCheckRecapcha) {
+      count++;
+      document.getElementById("dn-error-3").style.display = "block";
+      document.getElementById("dn-error-3").innerText = "Bạn là Robot ư?"
+    }
+    if (count == 0) {
+      this.isLoading = true;
+      // Check tài khoản
+      this.login_service_ws.checkEmail(email).subscribe(data => {
+        if (data.length == 0) {
+          document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
+          document.getElementById("dn-error-1").style.display = "block";
+          document.getElementById("dn-error-1").innerText = "Email chưa đăng ký tài khoản Bessenger"
+          this.isLoading = false;
+        } else {
+          if (data[0]['trang_thai_kich_hoat'] == "chua") {
+            document.getElementById("dn-email").style.border = "1px solid #ff7b5c";
+            document.getElementById("dn-error-1").style.display = "block";
+            document.getElementById("dn-error-1").innerText = "Tài khoản chưa được kich hoạt, vui lòng chọn Quên Mật Khẩu để kích hoạt tài khoản"
+            this.isLoading = false;
+          } else {
+            if (mat_khau != data[0]['mat_khau_2']) {
+              document.getElementById("dn-email").style.border = "1px solid #e2e2e2";
+              document.getElementById("dn-error-1").style.display = "none";
+              document.getElementById("dn-mat-khau").style.border = "1px solid #ff7b5c";
+              document.getElementById("dn-error-2").style.display = "block";
+              document.getElementById("dn-error-2").innerText = "Mật khẩu không chính xác"
+              this.isLoading = false;
+            } else {
+              document.getElementById("dn-email").style.border = "1px solid #e2e2e2";
+              document.getElementById("dn-error-1").style.display = "none";
+              document.getElementById("dn-mat-khau").style.border = "1px solid #e2e2e2";
+              document.getElementById("dn-error-2").style.display = "none";
+              // this.login_service_ws.login(data[0]['ma_tai_khoan'], email);
+              // Kết nối ws api login
+              this.login_ws_ws.login(email, data[0]['mat_khau']);
+              this.login_ws_ws.messages_login.subscribe(data => {
+                let value = JSON.parse(JSON.stringify(data));
+                this.isRunningSlide = false;
+                this.isLoading = false;
+                this.router.navigate(["/bessenger-ws"]);
+              })
+            }
+          }
+        }
+      })
+    }
   }
 
 
