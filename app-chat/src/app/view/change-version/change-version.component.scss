@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: absolute;
+  z-index: 3;
+  left: 969px;
+  top: 10px;
+}
+
+.open {
+  background-color: #e7f3ff !important;
+  i {
+    filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%)
+      saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg)
+      brightness(97%) contrast(96%);
+  }
+}
+
+.open-option {
+  position: relative;
+  left: 325px;
+  width: 40px;
+  height: 40px;
+  background-color: #e4e6eb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 17px 20px 14px 4px #dbdae4;
+  cursor: pointer;
+
+  i {
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yA/r/W8VX4aUw2vn.png);
+    background-position: -42px -88px;
+    background-size: auto;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+}
+
+.tab {
+  box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+    inset 0 0 0 1px #ffffff80;
+  background: white;
+  border-radius: 8px;
+  width: 327px;
+  position: relative;
+  left: 37px;
+  top: 7px;
+
+  .f1 {
+    padding-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    div {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+    p {
+      color: #050505;
+      font-family: "Raleway";
+      font-size: 15px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+  }
+
+  .line {
+    background: #dadde1;
+    border-width: 0;
+    color: #dadde1;
+    height: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+  }
+
+  .f2 {
+    cursor: pointer;
+    display: flex;
+    margin-left: 18px;
+    .img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 30px;
+      }
+    }
+    .text {
+      .title {
+        color: #050505;
+        font-family: "Raleway";
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 5px;
+        margin-top: 9px;
+      }
+      .mes {
+        color: #65676b;
+        font-family: "Raleway";
+        font-size: 13px;
+        font-weight: 400;
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: 27px;
+      }
+    }
+  }
+}

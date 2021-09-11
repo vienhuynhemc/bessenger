@@ -11,18 +11,18 @@ export function playerFactory() {
 // Trang index
 import { AppComponent } from './app.component';
 // Các trang của chat app
-import { MainPageComponent } from './view/main-page/main-page.component';
-import { ChatPageComponent } from './view/main-page/chat-page/chat-page.component';
-import { FriendsPageComponent } from './view/main-page/friends-page/friends-page.component';
-import { HomePageComponent } from './view/main-page/home-page/home-page.component';
-import { LoginPageComponent } from './view/login-page/login-page.component';
+import { MainPageComponent } from './view/firebase/main-page/main-page.component';
+import { ChatPageComponent } from './view/firebase/main-page/chat-page/chat-page.component';
+import { FriendsPageComponent } from './view/firebase/main-page/friends-page/friends-page.component';
+import { HomePageComponent } from './view/firebase/main-page/home-page/home-page.component';
+import { LoginPageComponent } from './view/firebase/login-page/login-page.component';
 import { NotFoundPageComponent } from './view/not-found-page/not-found-page.component';
-import { SettingPageComponent } from './view/main-page/setting-page/setting-page.component';
-import { ChatRequestPageComponent } from './view/main-page/chat-request-page/chat-request-page.component';
-import { PersonalPageComponent } from './view/main-page/personal-page/personal-page.component';
-import { FriendsListComponent } from './view/main-page/chat-page/friends-list/friends-list.component';
+import { SettingPageComponent } from './view/firebase/main-page/setting-page/setting-page.component';
+import { ChatRequestPageComponent } from './view/firebase/main-page/chat-request-page/chat-request-page.component';
+import { PersonalPageComponent } from './view/firebase/main-page/personal-page/personal-page.component';
+import { FriendsListComponent } from './view/firebase/main-page/chat-page/friends-list/friends-list.component';
 // các service để lấy dữ liệu từ đâu đó
-import { UserChatService } from 'src/app/service/user-chat/user-chat.service';
+import { UserChatService } from 'src/app/service/firebase/user-chat/user-chat.service';
 // thư viện get request
 import { HttpClientModule } from '@angular/common/http';
 // tooltip
@@ -33,55 +33,82 @@ import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
-import { MessengerComponent } from './view/main-page/chat-page/messenger/messenger.component';
-import { FileSendComponent } from './view/main-page/chat-page/file-send/file-send.component';
-import { UserOnlineService } from 'src/app/service/user-online/user-online.service';
+import { MessengerComponent } from './view/firebase/main-page/chat-page/messenger/messenger.component';
+import { FileSendComponent } from './view/firebase/main-page/chat-page/file-send/file-send.component';
+import { UserOnlineService } from 'src/app/service/firebase/user-online/user-online.service';
 
 
 
-import { FriendsComponent } from './view/main-page/friends-page/friends/contacts/friends.component';
-import { ProfileFriendComponent } from './view/main-page/friends-page/friends/profile-friend/profile-friend.component';
+import { FriendsComponent } from './view/firebase/main-page/friends-page/friends/contacts/friends.component';
+import { ProfileFriendComponent } from './view/firebase/main-page/friends-page/friends/profile-friend/profile-friend.component';
 
-import { RegisterPageComponent } from './view/register-page/register-page.component';
-import { SelectSexComponent } from './view/register-page/select-sex/select-sex.component';
-import { SelectAvatarComponent } from './view/register-page/select-avatar/select-avatar.component';
-import { VerifyEmailComponent } from './view/register-page/verify-email/verify-email.component';
-import { ContactsService } from './service/friends-page/contacts/contacts.service';
-import { RequestAddFriendsComponent } from './view/main-page/friends-page/friends/request-add-friends/request-add-friends.component';
-import { SendRequsetAddComponent } from './view/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
-import { ProfileRequestComponent } from './view/main-page/friends-page/friends/profile-request/profile-request.component';
-import { ProfileSendComponent } from './view/main-page/friends-page/friends/profile-send/profile-send.component';
-import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
-import { FpVerifyEmailComponent } from './view/forgot-password/fp-verify-email/fp-verify-email.component';
-import { FpSelectPasswordComponent } from './view/forgot-password/fp-select-password/fp-select-password.component';
+import { RegisterPageComponent } from './view/firebase/register-page/register-page.component';
+import { SelectSexComponent } from './view/firebase/register-page/select-sex/select-sex.component';
+import { SelectAvatarComponent } from './view/firebase/register-page/select-avatar/select-avatar.component';
+import { VerifyEmailComponent } from './view/firebase/register-page/verify-email/verify-email.component';
+import { ContactsService } from './service/firebase/friends-page/contacts/contacts.service';
+import { RequestAddFriendsComponent } from './view/firebase/main-page/friends-page/friends/request-add-friends/request-add-friends.component';
+import { SendRequsetAddComponent } from './view/firebase/main-page/friends-page/friends/send-requset-add/send-requset-add.component';
+import { ProfileRequestComponent } from './view/firebase/main-page/friends-page/friends/profile-request/profile-request.component';
+import { ProfileSendComponent } from './view/firebase/main-page/friends-page/friends/profile-send/profile-send.component';
+import { ForgotPasswordComponent } from './view/firebase/forgot-password/forgot-password.component';
+import { FpVerifyEmailComponent } from './view/firebase/forgot-password/fp-verify-email/fp-verify-email.component';
+import { FpSelectPasswordComponent } from './view/firebase/forgot-password/fp-select-password/fp-select-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AddFriendsComponent } from './view/main-page/friends-page/friends/add-friends/add-friends.component';
-import { CreateGroupChatComponent } from './view/main-page/chat-page/create-group-chat/create-group-chat.component';
-import { MessengerHeaderComponent } from './view/main-page/chat-page/messenger/messenger-header/messenger-header.component';
-import { MessengerContentComponent } from './view/main-page/chat-page/messenger/messenger-content/messenger-content.component';
-import { MessengerFooterComponent } from './view/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
-import { ProfileAddComponent } from './view/main-page/friends-page/friends/profile-add/profile-add.component';
-import { ProfileOfferComponent } from './view/main-page/friends-page/friends/profile-offer/profile-offer.component';
-import { OfferFriendsComponent } from './view/main-page/friends-page/friends/offer-friends/offer-friends.component';
-import { EmojiComponent } from './view/emoji/emoji.component';
-import { GiphyComponent } from './view/giphy/giphy.component';
-import { StickerComponent } from './view/sticker/sticker.component';
-import { ShopStickerComponent } from './view/shop-sticker/shop-sticker.component';
-import { RecordingComponent } from './view/recording/recording.component';
+import { AddFriendsComponent } from './view/firebase/main-page/friends-page/friends/add-friends/add-friends.component';
+import { CreateGroupChatComponent } from './view/firebase/main-page/chat-page/create-group-chat/create-group-chat.component';
+import { MessengerHeaderComponent } from './view/firebase/main-page/chat-page/messenger/messenger-header/messenger-header.component';
+import { MessengerContentComponent } from './view/firebase/main-page/chat-page/messenger/messenger-content/messenger-content.component';
+import { MessengerFooterComponent } from './view/firebase/main-page/chat-page/messenger/messenger-footer/messenger-footer.component';
+import { ProfileAddComponent } from './view/firebase/main-page/friends-page/friends/profile-add/profile-add.component';
+import { ProfileOfferComponent } from './view/firebase/main-page/friends-page/friends/profile-offer/profile-offer.component';
+import { OfferFriendsComponent } from './view/firebase/main-page/friends-page/friends/offer-friends/offer-friends.component';
+import { EmojiComponent } from './view/firebase/emoji/emoji.component';
+import { GiphyComponent } from './view/firebase/giphy/giphy.component';
+import { StickerComponent } from './view/firebase/sticker/sticker.component';
+import { ShopStickerComponent } from './view/firebase/shop-sticker/shop-sticker.component';
+import { RecordingComponent } from './view/firebase/recording/recording.component';
 
-import { SettingBoxChatComponent } from './view/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
-import { MembersComponent } from './view/main-page/chat-page/file-send/members/members.component';
-import { FilesShareComponent } from './view/main-page/chat-page/file-send/files-share/files-share.component';
-import { MediasShareComponent } from './view/main-page/chat-page/file-send/medias-share/medias-share.component';
-import { MessageRecordingComponent } from './view/main-page/chat-page/message-recording/message-recording.component';
-import { DetailEmojiMessengerComponent } from './view/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component';
-import { DetailImageComponent } from './view/main-page/chat-page/detail-image/detail-image.component'
+import { SettingBoxChatComponent } from './view/firebase/main-page/chat-page/file-send/setting-box-chat/setting-box-chat.component';
+import { MembersComponent } from './view/firebase/main-page/chat-page/file-send/members/members.component';
+import { FilesShareComponent } from './view/firebase/main-page/chat-page/file-send/files-share/files-share.component';
+import { MediasShareComponent } from './view/firebase/main-page/chat-page/file-send/medias-share/medias-share.component';
+import { MessageRecordingComponent } from './view/firebase/main-page/chat-page/message-recording/message-recording.component';
+import { DetailEmojiMessengerComponent } from './view/firebase/main-page/chat-page/detail-emoji-messenger/detail-emoji-messenger.component';
+import { DetailImageComponent } from './view/firebase/main-page/chat-page/detail-image/detail-image.component'
 
-import { CallVideoComponent } from './view/main-page/chat-page/call-video/call-video.component';
-import { ChangeProfileComponent } from './view/main-page/personal-page/change-profile/change-profile.component';
-import { ChangePasswordComponent } from './view/main-page/personal-page/change-password/change-password.component';
-import { StatusSettingsComponent } from './view/main-page/setting-page/status-settings/status-settings.component'
+import { CallVideoComponent } from './view/firebase/main-page/chat-page/call-video/call-video.component';
+import { ChangeProfileComponent } from './view/firebase/main-page/personal-page/change-profile/change-profile.component';
+import { ChangePasswordComponent } from './view/firebase/main-page/personal-page/change-password/change-password.component';
+import { StatusSettingsComponent } from './view/firebase/main-page/setting-page/status-settings/status-settings.component';
+import { MainPageWsComponent } from './view/ws/main-page-ws/main-page-ws.component';
+import { ChangeVersionComponent } from './view/change-version/change-version.component';
+import { LoginPageWsComponent } from './view/ws/login-page-ws/login-page-ws.component';
+import { ChangeVersionStreetComponent } from './view/change-version-street/change-version-street.component';
+import { RegisterPageWsComponent } from './view/ws/register-page-ws/register-page-ws.component';
+import { VerifyEmailWsComponent } from './view/ws/register-page-ws/verify-email-ws/verify-email-ws.component';
+import { SelectSexWsComponent } from './view/ws/register-page-ws/select-sex-ws/select-sex-ws.component';
+import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component';
+import { ForgotPasswordWsComponent } from './view/ws/forgot-password-ws/forgot-password-ws.component';
+import { FpSelectPasswordWsComponent } from './view/ws/forgot-password-ws/fp-select-password-ws/fp-select-password-ws.component';
+import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify-email-ws/fp-verify-email-ws.component';
+import { HomePageWsComponent } from './view/ws/main-page-ws/home-page-ws/home-page-ws.component';
+import { ChatPageWsComponent } from './view/ws/main-page-ws/chat-page-ws/chat-page-ws.component';
+import { ChatRequestPageWsComponent } from './view/ws/main-page-ws/chat-request-page-ws/chat-request-page-ws.component';
+import { FriendsPageWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-page-ws.component';
+import { PersonalPageWsComponent } from './view/ws/main-page-ws/personal-page-ws/personal-page-ws.component';
+import { SettingPageWsComponent } from './view/ws/main-page-ws/setting-page-ws/setting-page-ws.component';
+import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/friends-ws.component';
+import { FriendsListWsComponent } from './view/ws/main-page-ws/chat-page-ws/friends-list-ws/friends-list-ws.component';
+import { MessengerWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-ws.component';
+import { FileSendWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/file-send-ws.component';
+import { RequestAddFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/request-add-friends-ws/request-add-friends-ws.component';
+import { SendRequsetAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/send-requset-add-ws/send-requset-add-ws.component';
+import { AddFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/add-friends-ws/add-friends-ws.component';
+import { OfferFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/offer-friends-ws/offer-friends-ws.component';
+import { ChangePasswordWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-password-ws/change-password-ws.component';
+import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-profile-ws/change-profile-ws.component'
 
 
 @NgModule({
@@ -133,8 +160,44 @@ import { StatusSettingsComponent } from './view/main-page/setting-page/status-se
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent
-
+    SettingBoxChatComponent,
+    MembersComponent, 
+    FilesShareComponent,
+    MediasShareComponent,
+    MessageRecordingComponent, 
+    DetailEmojiMessengerComponent,
+    DetailImageComponent, 
+    CallVideoComponent,
+    ChangeProfileComponent,
+    ChangePasswordComponent, 
+    StatusSettingsComponent,
+    MainPageWsComponent,
+    ChangeVersionComponent,
+    LoginPageWsComponent, 
+    ChangeVersionStreetComponent, 
+    RegisterPageWsComponent,
+    VerifyEmailWsComponent,
+    SelectSexWsComponent,
+    SelectAvatarWsComponent,
+    ForgotPasswordWsComponent,
+    FpSelectPasswordWsComponent,
+    FpVerifyEmailWsComponent,
+    HomePageWsComponent, 
+    ChatPageWsComponent,
+    ChatRequestPageWsComponent, 
+    FriendsPageWsComponent, 
+    PersonalPageWsComponent, 
+    SettingPageWsComponent,
+    FriendsWsComponent,
+    FriendsListWsComponent, 
+    MessengerWsComponent,
+    FileSendWsComponent,
+    RequestAddFriendsWsComponent, 
+    SendRequsetAddWsComponent, 
+    AddFriendsWsComponent,
+    OfferFriendsWsComponent,
+    ChangePasswordWsComponent,
+    ChangeProfileWsComponent
   ],
   imports: [
     BrowserModule,

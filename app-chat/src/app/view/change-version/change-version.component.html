@@ -1,0 +1,27 @@
+<div class="container">
+    <!-- open option -->
+    <div class="open-option" [class.open] = "this.is_open_option" (click)="openOption()">
+        <i></i>
+    </div>
+
+    <!-- Tab -->
+    <div class="tab" *ngIf="this.is_open_option">
+        <div class="f1">
+            <div>
+                <img [src]="getImgF1()" alt="">
+            </div>
+            <p>{{getTextF1()}}</p>
+        </div>
+        <div class="line">
+        </div>
+        <div class="f2" (click)="changeVersion()">
+            <div class="img">
+                <img [src]="getImgF2()" alt="">
+            </div>
+            <div class="text">
+                <p class="title">Chuyển Version</p>
+                <p class="mes">Chuyển sang Version {{getTextF2()}}</p>
+            </div>
+        </div>
+    </div>
+</div>

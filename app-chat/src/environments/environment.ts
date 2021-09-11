@@ -14,7 +14,9 @@ export const environment = {
     messagingSenderId: "23435073727",
     appId: "1:23435073727:web:a2b3d58888a5df49d4ce0a",
     measurementId: "G-WWR7ES6LYB"
-  }
+  },
+  // Websocket config
+  CHAT_URL: 'ws://203.113.148.132:23023/chat/chat'
 };
 
 /*

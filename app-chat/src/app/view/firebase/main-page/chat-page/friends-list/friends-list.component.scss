@@ -1,0 +1,616 @@
+$color-bg-item: #e5f1fc;
+$color-bg-online: rgb(48, 228, 48);
+$color-bg-main: #f5f9fc;
+.friends-list {
+  font-family: "Raleway";
+  // width main
+  width: 281px;
+  position: relative;
+  height: 760px;
+  top: 20px;
+  left: 20px;
+  border-radius: 27px;
+
+  // bao gồm title và search
+  .header {
+    z-index: 4;
+    background-color: white;
+    padding-top: 27px;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+    position: relative;
+
+    .title {
+      width: 80%;
+      display: flex;
+      margin: auto;
+      margin-bottom: 25px;
+      position: relative;
+      h3 {
+        margin: 0;
+      }
+      .new-message {
+        position: absolute;
+        right: -4px;
+        border-radius: 50%;
+        background-color: $color-bg-main;
+        width: 35px;
+        height: 35px;
+        top: -8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        i {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .search {
+      width: 85%;
+      height: 35px;
+      margin: auto;
+      border-radius: 20px;
+      position: relative;
+      background-color: $color-bg-main;
+      input {
+        height: 70%;
+        margin-left: 20px;
+        margin-top: 5px;
+        border: none;
+        outline: none;
+      }
+      ::placeholder {
+        color: #a4afbf;
+      }
+      input[type="text"] {
+        font-size: 13px;
+        background-color: $color-bg-main;
+      }
+      i {
+        color: #a4afbf;
+        font-size: 15px;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+  // danh sách những người đang onl
+  .status {
+    margin-top: 15px;
+    position: absolute;
+    z-index: 4;
+    height: 265px;
+    width: 88px;
+    top: 9px;
+    padding-left: 14px;
+    left: 96px;
+    overflow: scroll;
+    transform: rotate(-90deg);
+
+    .no_user {
+      transform: rotate(90deg) translate(105px, 58px);
+      width: 211px;
+      font-family: "Raleway";
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .no_user_2 {
+      transform: rotate(90deg) translate(69px, 79px);
+      width: 211px;
+      position: absolute;
+      font-family: "Raleway";
+      font-weight: 500;
+      font-size: 10px;
+      color: gray;
+      letter-spacing: 1px;
+    }
+    .no_status {
+      transform: rotate(90deg) translate(106px, 60px);
+      width: 215px;
+      font-family: "Raleway";
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .no_status_2{
+      transform: rotate(90deg) translate(70px, 83px);
+      width: 220px;
+      position: absolute;
+      font-family: "Raleway";
+      font-weight: 500;
+      font-size: 10px;
+      color: gray;
+      letter-spacing: 1px;
+      span {
+        color: #3275f7;
+        cursor: pointer;
+      }
+    }
+    .myContent {
+      transform: rotate(90deg);
+      margin-right: 10px;
+      max-width: 45px;
+      position: relative;
+      margin-left: 10px;
+      div {
+        img {
+          box-shadow: 0 0 2px #909090;
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .name {
+          margin-top: 7px;
+          height: 13px;
+          text-align: center;
+          font-size: 11px;
+          cursor: pointer;
+          word-wrap: break-word;
+        }
+        .cover-online {
+          width: 13.5px;
+          height: 13.5px;
+          position: absolute;
+          background-color: white;
+          top: 26px;
+          display: flex;
+          right: 4px;
+          border-radius: 50%;
+          justify-content: center;
+          align-items: center;
+          .online {
+            width: 9.5px;
+            height: 9.5px;
+            border-radius: 50%;
+            background-color: #31a24c;
+          }
+        }
+      }
+    }
+    .o1 {
+      margin-left: 16px;
+    }
+    .o4 {
+      margin-right: 0px;
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 15px;
+      text-align: center;
+      background-color: $color-bg-item;
+      top: 145px;
+
+      cursor: pointer;
+    }
+    .next {
+      position: absolute;
+      top: 37px;
+      right: 21px;
+    }
+    .prev {
+      position: absolute;
+      top: 37px;
+      left: 21px;
+      // display: none;
+    }
+    // slide online
+    .prev-none {
+      display: none;
+    }
+    .next-none {
+      display: none;
+    }
+    // slide 1 duoc chon
+    .slide1-selected {
+      opacity: 1;
+      transform: translateX(6%);
+      transition: all 1s;
+      margin-left: 15px;
+    }
+    .slide2-unselected {
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 1s;
+    }
+    // slide 2 duoc chon
+    .slide1-unselected {
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: all 1s;
+    }
+    .slide2-selected {
+      opacity: 1;
+      transform: translateX(-94%);
+      transition: all 1s;
+      margin-left: 17px;
+    }
+  }
+
+  //  Box shadow cho header + status
+  .box-shadow-header-and-status {
+    box-shadow: 4px 8px 28px 0px #d3dceb;
+    position: absolute;
+    top: 0px;
+    background-color: white;
+    left: 0px;
+    width: 100%;
+    height: 210px;
+    z-index: 2;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+  }
+
+  // Danh sách bạn bè và tin nhắn của họ
+  .friends {
+    margin-top: 101px;
+    z-index: 3;
+    overflow-y: hidden;
+    position: relative;
+    height: 541px;
+    width: 320px;
+
+    .content-friends {
+      width: 320px;
+      height: 541px;
+      overflow: scroll;
+      position: relative;
+      scroll-behavior: smooth;
+
+      .container {
+        width: 281px;
+        height: 75px;
+        z-index: 2;
+        //   background-color: white;
+        position: relative;
+        cursor: pointer;
+        border-bottom: $color-bg-item solid 0.1px;
+        z-index: 10;
+        .content {
+          width: 85%;
+          margin: auto;
+          display: flex;
+          padding-top: 12px;
+          position: relative;
+          .left {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            .don {
+              img {
+                box-shadow: 0 0 2px #909090;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+              }
+            }
+
+            .nhom {
+              .hinh_1 {
+                box-shadow: 0 0 2px #909090;
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                z-index: 10;
+                width: 32px;
+                height: 32px;
+                object-fit: cover;
+                border-radius: 50%;
+              }
+
+              .hinh_2 {
+                box-shadow: 0 0 2px #909090;
+                z-index: 9;
+                width: 32px;
+                height: 32px;
+                object-fit: cover;
+                border-radius: 50%;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+              }
+            }
+
+            .cover-online {
+              width: 18px;
+              height: 18px;
+              position: absolute;
+              background-color: white;
+              top: 33px;
+              right: -2px;
+              border-radius: 50%;
+              display: none;
+              .online {
+                position: absolute;
+                top: 16%;
+                left: 17%;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: $color-bg-online;
+              }
+            }
+            .status-online {
+              display: block;
+            }
+          }
+          .right {
+            margin-left: 15px;
+            padding-top: 5px;
+            max-width: 215px;
+            .name {
+              font-family: "Raleway";
+              word-wrap: break-word;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            .message {
+              font-size: 11px;
+              color: grey;
+              padding-top: 10px;
+            }
+            .name2 {
+              font-family: "Raleway";
+              word-wrap: break-word;
+              font-size: 13px;
+              font-weight: 600;
+              margin-top: 13px;
+            }
+          }
+
+          .timer {
+            font-size: 11px;
+            color: grey;
+            padding-top: 3px;
+            position: absolute;
+            right: 0px;
+            top: 18px;
+          }
+          .timer2 {
+            margin-top: 10px;
+            font-size: 11px;
+            color: grey;
+            padding-top: 3px;
+            position: absolute;
+            right: 0px;
+            top: 18px;
+          }
+        }
+      }
+
+      .selected-prev {
+        border-bottom-right-radius: 27px;
+      }
+
+      .selected-next {
+        border-top-right-radius: 27px;
+      }
+
+      .done-select {
+        // box-shadow: 4px 8px 28px 0px #d3dceb;
+        background-color: white;
+
+        &:hover {
+          background-color: $color-bg-item;
+          .content {
+            .left {
+              .cover-online {
+                background-color: $color-bg-item;
+              }
+            }
+          }
+        }
+      }
+
+      .selected-container {
+        //   background-color: $color-bg-main;
+        border-bottom: none;
+        border-left: #3275f7 solid 4px;
+        transition: all 0.25s ease-in;
+        .content {
+          .left {
+            .cover-online {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+
+      .online {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        background-color: #ffffff;
+        left: 54px;
+        bottom: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        .child {
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          background-color: #31a24c;
+        }
+      }
+
+      .chua_nhan {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        border: 1px solid #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: #bcc0c4;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .da_gui {
+        position: absolute;
+        display: flex;
+        right: 28px;
+        top: 39px;
+        border-radius: 50%;
+        background: #bcc0c4;
+        width: 17px;
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: white;
+          font-size: 9px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .so_nguoi_da_xem {
+        position: absolute;
+        display: flex;
+        right: -20px;
+        top: 37px;
+        width: 115px;
+        justify-content: center;
+        align-items: center;
+
+        .hinh_1 {
+          position: relative;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 5;
+          background-color: white;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_2 {
+          background-color: white;
+          transform: translateX(-7px);
+          position: relative;
+          z-index: 4;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_3 {
+          background-color: white;
+          position: relative;
+          transform: translateX(-14px);
+          z-index: 3;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+            box-shadow: 0 0 1px #909090;
+          }
+        }
+        .hinh_4 {
+          transform: translateX(-14px);
+          z-index: 2;
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          p {
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            color: #65676b;
+            background-color: #e4e6eb;
+            font-family: "Raleway";
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+    }
+
+    .hidden_error {
+      width: 26px;
+      height: 22px;
+      color: #e5f1fc;
+      left: 299px;
+      position: absolute;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .end {
+    z-index: 2;
+    box-shadow: 8px 5px 37px 0px #b3bac5;
+    margin-top: -17px;
+    width: 100%;
+    height: 25px;
+    border-bottom-right-radius: 27px;
+    border-bottom-left-radius: 27px;
+    background-color: white;
+    position: relative;
+  }
+}
+
+.hidden {
+  display: none;
+}

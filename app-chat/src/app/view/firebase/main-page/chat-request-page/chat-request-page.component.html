@@ -1,0 +1,9 @@
+<div class="loading" *ngIf="this.chat_page_process_service.isLoadingProcess()">
+    <main lottie [options]="this.chat_page_process_service.options"
+        (animationCreated)="this.chat_page_process_service.animationCreated($event)" class="anim"></main>
+</div>
+
+<!-- Trang chat với bạn bè -->
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
