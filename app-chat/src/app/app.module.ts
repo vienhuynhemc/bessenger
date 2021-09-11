@@ -99,7 +99,7 @@ import { ChatRequestPageWsComponent } from './view/ws/main-page-ws/chat-request-
 import { FriendsPageWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-page-ws.component';
 import { PersonalPageWsComponent } from './view/ws/main-page-ws/personal-page-ws/personal-page-ws.component';
 import { SettingPageWsComponent } from './view/ws/main-page-ws/setting-page-ws/setting-page-ws.component';
-import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/friends-ws.component';
+import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/contacts-ws/friends-ws.component';
 import { FriendsListWsComponent } from './view/ws/main-page-ws/chat-page-ws/friends-list-ws/friends-list-ws.component';
 import { MessengerWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-ws.component';
 import { FileSendWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/file-send-ws.component';
@@ -108,7 +108,10 @@ import { SendRequsetAddWsComponent } from './view/ws/main-page-ws/friends-page-w
 import { AddFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/add-friends-ws/add-friends-ws.component';
 import { OfferFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/offer-friends-ws/offer-friends-ws.component';
 import { ChangePasswordWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-password-ws/change-password-ws.component';
-import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-profile-ws/change-profile-ws.component'
+import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-profile-ws/change-profile-ws.component';
+import { ProfileFriendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-friend-ws/profile-friend-ws.component';
+import { ProfileRequestWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-request-ws/profile-request-ws.component';
+import { ProfileSendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-send-ws/profile-send-ws.component'
 
 
 @NgModule({
@@ -197,7 +200,10 @@ import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-w
     AddFriendsWsComponent,
     OfferFriendsWsComponent,
     ChangePasswordWsComponent,
-    ChangeProfileWsComponent
+    ChangeProfileWsComponent,
+    ProfileFriendWsComponent,
+    ProfileRequestWsComponent,
+    ProfileSendWsComponent
   ],
   imports: [
     BrowserModule,

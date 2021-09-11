@@ -1,1 +1,79 @@
-<p>friends-page-ws works!</p>
+<div class="loading" *ngIf="this.friendsPageServiceWS.isLoadingProcess()">
+    <main lottie [options]="this.friendsPageServiceWS.options"
+        (animationCreated)="this.friendsPageServiceWS.animationCreated($event)" class="anim"></main>
+</div>
+
+<div class="container">
+    <div class="left">
+        <div class="search" [class.search-none]="friendsPageDefautl === 4">
+            <input *ngIf="friendsPageDefautl === 0" type="text" placeholder="Tìm kiếm"
+                (input)="searchFriends(myinput.value)" #myinput>
+            <input *ngIf="friendsPageDefautl === 1" type="text" placeholder="Tìm kiếm"
+                (input)="searchRequest(myNameRequest.value)" #myNameRequest>
+            <input *ngIf="friendsPageDefautl === 2" type="text" placeholder="Tìm kiếm"
+                (input)="searchSends(myNameSends.value)" #myNameSends>
+            <i class="fas fa-search"></i>
+            <input *ngIf="friendsPageDefautl === 3" type="text" placeholder="Tìm kiếm" [value]="this.friendsPageServiceWS.searchVal"
+                (input)="searchAddFriends(myNameAddFriends.value)" #myNameAddFriends>
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="menu">
+            <div (click)="moveToFriends()" id="btn-friends" class="btn-friends btn-menu " (click)="onClickMenu(0)">
+                <i id="icon_f" class="icon_f fas fa-users"></i>
+                <span id="text-f" class="text_f">
+                    Bạn bè
+                </span>
+            </div>
+            <div (click)="moveToRequest()" id="btn-request" class="btn-request btn-menu" (click)="onClickMenu(1)">
+                <i id="icon_r" class="icon_r fas fa-question-circle"></i>
+                <span id="text-r" class="text_r">
+                    Lời mời
+                </span>
+            </div>
+            <div (click)="moveToSend()" id="btn-send" class="btn-send btn-menu" (click)="onClickMenu(2)">
+                <i id="icon_s" class="icon_s fas fa-paper-plane"></i>
+                <span id="text-s" class="text-s ">
+                    Đã gửi
+                </span>
+            </div>
+        </div>
+        <div class="result">
+            <div class="title" *ngIf="friendsPageDefautl === 0">{{this.friendsPageServiceWS.getSizeFriends()}} kết quả
+            </div>
+            <div class="title" *ngIf="friendsPageDefautl === 1">{{this.friendsPageServiceWS.getSizeRequest()}} kết quả
+            </div>
+             <div class="title" *ngIf="friendsPageDefautl === 2">{{this.friendsPageServiceWS.getSizeSends()}} kết quả
+            </div>
+            <div class="title" *ngIf="friendsPageDefautl === 3">{{this.friendsPageServiceWS.getSizeAdd()}} kết quả
+            </div>
+            <div class="title" *ngIf="friendsPageDefautl === 4">{{this.friendsPageServiceWS.getSizeOffer()}} đề xuất
+            </div>
+            <div (click)="moveToOfferFriends()" (click)="onClickMenu(4)" id="btn-offers" matTooltip="Đề xuất kết bạn" class="next btn-offer" matTooltipClass="tooltip"><i id="icon_offers"  class="fas fa-lightbulb"></i></div>
+            <div (click)="moveToAddFriends()" (click)="onClickMenu(3)"  id="btn-add-friends" class="next btn-result" matTooltipClass="tooltip" matTooltip="Thêm bạn"><i id="icon_add" class="fas fa-user-plus"></i></div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+    <div class="right">
+        <app-profile-friend-ws *ngIf="friendsPageDefautl === 0 "></app-profile-friend-ws>
+        <app-profile-request-ws *ngIf="friendsPageDefautl === 1"></app-profile-request-ws>
+        <app-profile-send-ws *ngIf="friendsPageDefautl === 2"></app-profile-send-ws>
+        <app-profile-add *ngIf="friendsPageDefautl === 3"></app-profile-add>
+        <app-profile-offer *ngIf="friendsPageDefautl === 4"></app-profile-offer>
+    </div>
+</div>
+
+<div class="formYesNo" [class.show-unfriend]="this.friendsPageServiceWS.getIDUnFriend() != ''">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Xóa bạn bè</p>
+            <p class="title2">Bạn có chắc chắn là muốn hủy kết bạn với
+                {{this.friendsPageServiceWS.getNameUnFriend()}}</p>
+            <div>
+                <p (click)="onClickAcceptUnFriend()">Có, chắc chắn <i class="fa fa-check"></i></p>
+                <span (click)="onClickNonAcceptUnFriend()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

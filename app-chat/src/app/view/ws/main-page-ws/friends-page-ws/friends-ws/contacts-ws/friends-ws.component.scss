@@ -15,7 +15,7 @@
       .detail-friend {
         position: relative;
         border: rgb(231, 231, 231) solid 0.5px;
-        height: 110px;
+        height: 90px;
         width: 350px;
         box-shadow: 4px 4px 28px 0px #d3dceb;
         background-color: white;
@@ -33,23 +33,44 @@
           transition: all 0.5s;
           .detail-left {
             height: 100%;
-  
+            position: relative;
             img {
               object-fit: cover;
-              height:77px;
+              height: 70px;
               width: 70px;
               border-radius: 5px;
-              margin-top: 16px;
-              margin-left: 20px;
+              margin-top: 10px;
+              margin-left: 10px;
+            }
+            .cover-online {
+              background-color: white;
+              border-radius: 50%;
+              right: -1px;
+              bottom: 9px;
+              position: absolute;
+              width: 15px;
+              height: 15px;
+              justify-content: center;
+              align-items: center;
+              display: flex;
+              .online {
+                position: absolute;
+                background-color: #31a24c;
+                border-radius: 50%;
+                width: 11px;
+                height: 11px;
+              }
             }
           }
           .detail-center {
             margin-left: 25px;
-            width: 170px;
             .name {
               font-size: 15px;
               font-weight: 600;
-              margin-top: 16px;
+              margin-top: 27px;
+            }
+            .non-mutual {
+              margin-top: 37px;
             }
             .mutual-friends {
               color: gray;
@@ -57,51 +78,83 @@
               margin-top: 5px;
               width: 100px;
             }
-            .non-mutual {
-              margin-top: 22px;
-              margin-bottom: 13px;
-            }
-            .detail-btn {
-              width: 110px;
-              height: 30px;
-              background-color: white;
-              border: #3275f7 solid 2px;
-              border-radius: 5px;
-              color: #3275f7;
-              font-size: 12px;
-              display: flex;
-              font-family: "Raleway";
-              font-weight: 600;
-              justify-content: center;
-              align-items: center;
-              margin-top: 7px;
-              i {
-                margin-right: 5px;
-              }
-            }
           }
           .detail-right {
             position: absolute;
-            width: 60px;
+            width: 40px;
             height: 20px;
-            right: 0px;
-            top: 18px;
+            right: 15px;
+            top: 38px;
             text-align: center;
             cursor: pointer;
-            display: flex;
-            .time {
-              color: #5a5a5a;
-              font-size: 13px;
+            i {
+              position: absolute;
+              color: #d3dffa;
             }
-          
-  
-           
+            .fa-ellipsis-v {
+              transform: rotate(90deg);
+              width: 20px;
+              height: 20px;
+              right: -1px;
+            }
+            .fa-heart {
+              left: -5px;
+              color: rgb(255, 85, 85);
+            }
           }
         }
+        .option {
+          position: absolute;
+          border-radius: 5px;
+          font-weight: 500;
+          width: 170px;
+          height: 90px;
+          background-color: white;
+          box-shadow: 17px 20px 14px 4px #dbdae4;
+          top: 60px;
+          z-index: 0;
+          right: 20px;
+          opacity: 0;
   
+          i {
+            font-size: 15px;
+            color: #888585;
+            position: absolute;
+            top: 12px;
+            left: 15px;
+          }
+          span {
+            left: 45px;
+            font-size: 13px;
+            position: absolute;
+            top: 11px;
+          }
+          .option-detail {
+            width: 90%;
+            margin: auto;
+            position: relative;
+            height: 35px;
+            display: none;
+          }
+          .option-detail:hover {
+            background-color: #d4e6f3;
+            border-radius: 5px;
+          }
+          .option-profile {
+            margin-top: 8px;
+          }
+          .option-abord {
+            span {
+              left: 47px;
+            }
+          }
+        }
         .option-detail-block {
           opacity: 1;
           z-index: 10;
+          .option-detail {
+            display: block;
+          }
         }
         .detail-sub:hover {
           background-color: #9dcff5;
@@ -109,6 +162,11 @@
           .detail-center {
             .mutual-friends {
               color: rgb(90, 90, 90);
+            }
+          }
+          .detail-right {
+            .fa-ellipsis-v {
+              color: gray;
             }
           }
         }
@@ -119,7 +177,7 @@
   
         .detail-right {
           .fa-ellipsis-v {
-            color: gray;
+            color: gray !important;
           }
         }
         .detail-center {
@@ -152,6 +210,7 @@
       background-color: white;
       border-radius: 10px;
       margin: auto;
+      box-shadow: 0 0 47px 0px #bbb7b7;
       .header {
         position: relative;
         height: 60px;
@@ -210,6 +269,8 @@
               border-radius: 50%;
               margin-top: 13px;
             }
+          
+          
           }
           .detail-right {
             width: 60%;
@@ -219,9 +280,8 @@
               margin-top: 22px;
               font-weight: 600;
               position: relative;
-              
             }
-          
+  
             .date {
               font-size: 13px;
               margin-top: 5px;
@@ -252,3 +312,4 @@
     justify-content: center;
     align-items: center;
   }
+  

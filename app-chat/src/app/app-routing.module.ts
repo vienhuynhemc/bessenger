@@ -44,7 +44,7 @@ import { ChatRequestPageWsComponent } from './view/ws/main-page-ws/chat-request-
 import { FriendsPageWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-page-ws.component';
 import { PersonalPageWsComponent } from './view/ws/main-page-ws/personal-page-ws/personal-page-ws.component';
 import { SettingPageWsComponent } from './view/ws/main-page-ws/setting-page-ws/setting-page-ws.component';
-import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/friends-ws.component';
+import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/contacts-ws/friends-ws.component';
 import { FriendsListWsComponent } from './view/ws/main-page-ws/chat-page-ws/friends-list-ws/friends-list-ws.component';
 import { FileSendWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/file-send-ws.component';
 import { MessengerWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-ws.component';

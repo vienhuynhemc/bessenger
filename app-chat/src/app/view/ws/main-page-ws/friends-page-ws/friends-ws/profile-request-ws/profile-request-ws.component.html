@@ -1,0 +1,75 @@
+<div class="container" *ngIf="friendInforWS.id != 1">
+    <img
+      class="bg"
+      src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg"
+      alt=""
+    />
+    <div class="cover-circle">
+      <div class="circle">
+        <img
+          src="assets/images/list-friends-friends-page/bg-profile-myfriend.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="cover-avt">
+      <img
+        class="avt"
+        src="{{ friendInforWS.img }} || 'assets/images/loading.gif'"
+        alt=""
+      />
+    </div>
+  
+    <div (click)="onClickMessage(friendInforWS.id)" class="message circle-small">
+      <div class="fill-img"></div>
+      <div class="content"><span class="sp-message">Nhắn tin</span></div>
+  
+      <div class="cover-icon">
+        <i class="fas fa-comment"></i>
+      </div>
+    </div>
+  
+    <div class="accept circle-small" (click)="acceptRequest(friendInforWS.id)">
+      <div class="fill-img"></div>
+      <div class="content"><span class="sp-accept">Chấp nhận</span></div>
+      <div class="cover-icon">
+        <i class="fas fa-user-check"></i>
+      </div>
+    </div>
+  
+    <div class="cancel circle-small" (click)="refuseRequest(friendInforWS.id)">
+      <div class="fill-img"></div>
+      <div class="content"><span class="sp-cancel">Từ chối</span></div>
+      <div class="cover-icon">
+        <i class="fas fa-user-times"></i>
+      </div>
+    </div>
+    <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
+    <div
+      class="name"
+      matTooltipClass="tooltip"
+      matTooltip="{{ friendInforWS.name }}"
+      *ngIf="friendInforWS.checkLimitNameRequestProfile()"
+    >
+      {{ friendInforWS.getNameLimitRequestProfile()
+      }}
+    </div>
+    <div class="name" *ngIf="!friendInforWS.checkLimitNameRequestProfile()">
+      {{ friendInforWS.name
+      }}
+    </div>
+  </div>
+  <div class="container" *ngIf="friendInforWS.id == 1">
+    <div class="content">
+      <img
+        class="bg-hands"
+        src="assets/images/list-friends-friends-page/request.jpg"
+        alt=""
+      />
+      <div class="bg-title">
+        <div class="icon"><i class="icon_r fas fa-question-circle"></i></div>
+        <div class="title"><span>Bạn chưa có lời mời kết bạn nào.</span></div>
+      </div>
+    </div>
+  </div>
+  
