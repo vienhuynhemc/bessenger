@@ -35,6 +35,9 @@ import { ChangePasswordComponent } from './view/firebase/main-page/personal-page
 import { ChangeProfileComponent } from './view/firebase/main-page/personal-page/change-profile/change-profile.component';
 import { VerifyEmailWsComponent } from './view/ws/register-page-ws/verify-email-ws/verify-email-ws.component';
 import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component';
+import { ForgotPasswordWsComponent } from './view/ws/forgot-password-ws/forgot-password-ws.component';
+import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify-email-ws/fp-verify-email-ws.component';
+import { FpSelectPasswordWsComponent } from './view/ws/forgot-password-ws/fp-select-password-ws/fp-select-password-ws.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dang-nhap', pathMatch: 'full' },
@@ -68,6 +71,15 @@ const routes: Routes = [
       { path: '', redirectTo: 'xac-nhan-email', pathMatch: 'full' },
       { path: 'xac-nhan-email', component: FpVerifyEmailComponent },
       { path: 'chon-mat-khau', component: FpSelectPasswordComponent },
+    ],
+  },
+  {
+    path: 'quen-mat-khau-ws',
+    component: ForgotPasswordWsComponent,
+    children: [
+      { path: '', redirectTo: 'xac-nhan-email', pathMatch: 'full' },
+      { path: 'xac-nhan-email', component: FpVerifyEmailWsComponent },
+      { path: 'chon-mat-khau', component: FpSelectPasswordWsComponent },
     ],
   },
   {

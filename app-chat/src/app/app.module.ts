@@ -89,7 +89,10 @@ import { ChangeVersionStreetComponent } from './view/change-version-street/chang
 import { RegisterPageWsComponent } from './view/ws/register-page-ws/register-page-ws.component';
 import { VerifyEmailWsComponent } from './view/ws/register-page-ws/verify-email-ws/verify-email-ws.component';
 import { SelectSexWsComponent } from './view/ws/register-page-ws/select-sex-ws/select-sex-ws.component';
-import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component'
+import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component';
+import { ForgotPasswordWsComponent } from './view/ws/forgot-password-ws/forgot-password-ws.component';
+import { FpSelectPasswordWsComponent } from './view/ws/forgot-password-ws/fp-select-password-ws/fp-select-password-ws.component';
+import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify-email-ws/fp-verify-email-ws.component'
 
 
 @NgModule({
@@ -141,7 +144,7 @@ import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avata
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent, MainPageWsComponent, ChangeVersionComponent, LoginPageWsComponent, ChangeVersionStreetComponent, RegisterPageWsComponent, VerifyEmailWsComponent, SelectSexWsComponent, SelectAvatarWsComponent
+    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent, MainPageWsComponent, ChangeVersionComponent, LoginPageWsComponent, ChangeVersionStreetComponent, RegisterPageWsComponent, VerifyEmailWsComponent, SelectSexWsComponent, SelectAvatarWsComponent, ForgotPasswordWsComponent, FpSelectPasswordWsComponent, FpVerifyEmailWsComponent
 
   ],
   imports: [

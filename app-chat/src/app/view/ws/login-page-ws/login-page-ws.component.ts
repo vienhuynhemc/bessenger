@@ -312,54 +312,54 @@ export class LoginPageWsComponent implements OnInit {
   }
 
   public requestQMK(): void {
-    // if (this.email_quen_mat_khau == undefined) {
-    //   document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
-    //   document.getElementById("qmk-error").style.display = "block";
-    //   document.getElementById("qmk-error").innerText = "Email không thể thiếu"
-    // } else {
-    //   let email: string = this.email_quen_mat_khau.trim();
-    //   if (email.length == 0) {
-    //     document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
-    //     document.getElementById("qmk-error").style.display = "block";
-    //     document.getElementById("qmk-error").innerText = "Email không thể thiếu"
-    //   } else {
-    //     // show loading
-    //     this.isLoading = true;
-    //     // check email
-    //     this.register_account_service.checkEmail(email).subscribe(data => {
-    //       // Bên kia trả về 1 bảng object AccountWebservice 
-    //       if (data.length == 0) {
-    //         document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
-    //         document.getElementById("qmk-error").style.display = "block";
-    //         document.getElementById("qmk-error").innerText = "Email bạn nhập chưa đăng ký tài khoản Bessenger";
-    //         this.isLoading = false;
-    //       } else {
-    //         // Lấy mã tài khoản
-    //         let ma_tai_khoan = data[0]['ma_tai_khoan'];
-    //         // Lưu vô session hiện tại đang có request quên mk
-    //         localStorage.setItem("ma_tai_khoan_qmk", JSON.stringify(ma_tai_khoan));
-    //         // Gửi lại mã
-    //         let code: string = "";
-    //         for (let i = 0; i < 6; i++) {
-    //           let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
-    //           code += newNumber + "";
-    //         }
-    //         let newData = new RegisterObjectSendMail();
-    //         newData.code = code;
-    //         newData.email = email;
-    //         // Lưu mã mới vô webservice
-    //         this.register_account_service.updateEmail(code).subscribe(data => {
-    //           // Lưu xong gửi email
-    //           this.register_account_service.sendMailQMK(newData).subscribe((data) => {
-    //             // Gửi xong thì chuyển tới trang quên mật khẩu
-    //             this.isLoading = false;
-    //             this.router.navigate(['quen-mat-khau']);
-    //           });
-    //         })
-    //       }
-    //     });
-    //   }
-    // }
+    if (this.email_quen_mat_khau == undefined) {
+      document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+      document.getElementById("qmk-error").style.display = "block";
+      document.getElementById("qmk-error").innerText = "Email không thể thiếu"
+    } else {
+      let email: string = this.email_quen_mat_khau.trim();
+      if (email.length == 0) {
+        document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+        document.getElementById("qmk-error").style.display = "block";
+        document.getElementById("qmk-error").innerText = "Email không thể thiếu"
+      } else {
+        // show loading
+        this.isLoading = true;
+        // check email
+        this.register_account_service_ws.checkEmail(email).subscribe(data => {
+          // Bên kia trả về 1 bảng object AccountWebservice 
+          if (data.length == 0) {
+            document.getElementById("qmk-email").style.border = "1px solid #ff7b5c";
+            document.getElementById("qmk-error").style.display = "block";
+            document.getElementById("qmk-error").innerText = "Email bạn nhập chưa đăng ký tài khoản Bessenger";
+            this.isLoading = false;
+          } else {
+            // Lấy mã tài khoản
+            let ma_tai_khoan = data[0]['ma_tai_khoan'];
+            // Lưu vô session hiện tại đang có request quên mk
+            localStorage.setItem("ma_tai_khoan_qmk_ws", JSON.stringify(ma_tai_khoan));
+            // Gửi lại mã
+            let code: string = "";
+            for (let i = 0; i < 6; i++) {
+              let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;
+              code += newNumber + "";
+            }
+            let newData = new RegisterObjectSendMail();
+            newData.code = code;
+            newData.email = email;
+            // Lưu mã mới vô webservice
+            this.register_account_service_ws.updateEmail(code).subscribe(data => {
+              // Lưu xong gửi email
+              this.register_account_service_ws.sendMailQMK(newData).subscribe((data) => {
+                // Gửi xong thì chuyển tới trang quên mật khẩu
+                this.isLoading = false;
+                this.router.navigate(['quen-mat-khau-ws']);
+              });
+            })
+          }
+        });
+      }
+    }
   }
 
   dangKy(): void {
@@ -385,7 +385,7 @@ export class LoginPageWsComponent implements OnInit {
     }
     if (count == 0) {
       // showloading
-      // this.isLoading = true;
+      this.isLoading = true;
       let code: string = "";
       for (let i = 0; i < 6; i++) {
         let newNumber = Math.floor(Math.random() * (9 - 0 + 1)) + 0;;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import { AccountWebservice } from 'src/app/models/firebase/regiser-account/account_webserivce';
 import { RegisterObjectSendMail } from 'src/app/models/firebase/regiser-account/register_object_send_mail';
 
 @Injectable({
@@ -75,6 +76,22 @@ export class RegisterAccountWsService {
   public accessSettings() {
     let maTaiKhoan = JSON.parse(localStorage.getItem('ma_tai_khoan_ws'));
     return this.db.database.ref('cai_dat_ws').child(maTaiKhoan);
+  }
+
+  public checkEmail(email: string): Observable<AccountWebservice[]> {
+    const url = `${this.REST_API_SERVER}/kiem_tra_email_ws.php?email=${email}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  public updateEmail(code: string) {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem('ma_tai_khoan_qmk_ws'));
+    const url = `${this.REST_API_SERVER}/cap_nhat_code_ws.php?ma_tai_khoan=${ma_tai_khoan}&&code=${code}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  public sendMailQMK(data: RegisterObjectSendMail): Observable<any> {
+    const url = `${this.REST_API_SERVER}/sendEmailQMK_ws.php?code=${data.code}&&email=${data.email}`;
+    return this.httpClient.get<any>(url);
   }
 
 

@@ -1,0 +1,47 @@
+<div class="container">
+    <img class="email" src="assets/images/register-page/email.png" alt="">
+    <p class="title-header">Hãy xác thực Email của bạn</p>
+    <p class="noi-dung">Chúng tôi đã gửi cho bạn một "Mã xác thực" đến Email của bạn gồm 6 CHỮ SỐ, hãy nhập để chắc chắn
+        đó là bạn!</p>
+    <div class="verify">
+        <div class="child">
+            <input type="number" [(ngModel)]="num1" (change)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+        <div class="child">
+            <input type="number" [(ngModel)]="num2" (change)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+        <div class="child">
+            <input type="number" [(ngModel)]="num3" (change)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+        <div class="child">
+            <input type="number" [(ngModel)]="num4" (change)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+        <div class="child">
+            <input type="number" [(ngModel)]="num5" (change)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+        <div class="child">
+            <input type="number" [(ngModel)]="num6" (ngModelChange)="handleButton(button)"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="1">
+        </div>
+    </div>
+    <p class="error" #error>Mã xác thực không đúng, vui lòng kiểm tra lại!</p>
+    <button class="confirm button-done-select" disabled #button (click)="submit(error)">
+        <i class="fab fa-cloudversify"></i>
+        <p>Xác thực</p>
+    </button>
+    <div class="re-send">
+        <p class="child-1">Bạn không nhận được mã?</p>
+        <p class="child-2" (click)="reSendEmail()"><i class="fas fa-spinner"></i> Gửi lại mã</p>
+    </div>
+</div>

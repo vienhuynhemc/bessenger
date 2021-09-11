@@ -1,52 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FpProcessServiceService } from 'src/app/service/firebase/forgot-password/fp-process-service.service';
-import { FpServiceService } from 'src/app/service/firebase/forgot-password/fp-service.service';
-import { NotificationFpPageService } from 'src/app/service/firebase/notification/notification-fp-page.service';
-import { NotificationLoginPageService } from 'src/app/service/firebase/notification/notification-login-page.service';
 import { VersionService } from 'src/app/service/version/version.service';
+import { FpProcessServiceWsService } from 'src/app/service/ws/forgot-password/fp-process-service-ws.service';
+import { FpServiceWsService } from 'src/app/service/ws/forgot-password/fp-service-ws.service';
+import { NotificationFpPageWsService } from 'src/app/service/ws/notification/notification-fp-page-ws.service';
+import { NotificationLoginPageWsService } from 'src/app/service/ws/notification/notification-login-page-ws.service';
 
 @Component({
-  selector: 'app-fp-select-password',
-  templateUrl: './fp-select-password.component.html',
-  styleUrls: ['./fp-select-password.component.scss']
+  selector: 'app-fp-select-password-ws',
+  templateUrl: './fp-select-password-ws.component.html',
+  styleUrls: ['./fp-select-password-ws.component.scss']
 })
-export class FpSelectPasswordComponent implements OnInit {
+export class FpSelectPasswordWsComponent implements OnInit {
 
   public password: string;
 
   constructor(
-    private fp_service: FpServiceService,
-    public notification_fp: NotificationFpPageService,
-    public fp_process_service: FpProcessServiceService,
+    private fp_service_ws: FpServiceWsService,
+    public notification_fp_ws: NotificationFpPageWsService,
+    public fp_process_service_ws: FpProcessServiceWsService,
     private router: Router,
-    public notification_login_page: NotificationLoginPageService,
+    public notification_login_page_ws: NotificationLoginPageWsService,
     public version_service: VersionService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     // change version
-    if (this.version_service.version == 2) {
+    if (this.version_service.version == 1) {
       this.router.navigate(['/change-version']);
     }
-    if (!this.fp_service.isQMK()) {
-      this.router.navigate(['/bessenger']);
+    if (!this.fp_service_ws.isQMK()) {
+      this.router.navigate(['/bessenger-ws']);
     } else {
       // Xử lý việc đi tới component tương ứng
-      if (this.fp_process_service.isChonMatKhau()) {
+      if (this.fp_process_service_ws.isChonMatKhau()) {
         setTimeout(() => {
-          this.fp_process_service.reset();
-          this.fp_process_service.getData();
+          this.fp_process_service_ws.reset();
+          this.fp_process_service_ws.getData();
         }, 0);
-      } else if (this.fp_process_service.isXacNhanEmail()) {
+      } else if (this.fp_process_service_ws.isXacNhanEmail()) {
         this.moveToSelectVerifyEmail();
       }
     }
   }
 
   moveToSelectVerifyEmail(): void {
-    this.router.navigate(['quen-mat-khau/xac-nhan-email']);
+    this.router.navigate(['quen-mat-khau-ws/xac-nhan-email']);
   }
 
   hasNumber(myString) {
@@ -123,24 +122,24 @@ export class FpSelectPasswordComponent implements OnInit {
       document.getElementById("dk-password").style.border = "1px solid #ff7b5c";
       document.getElementById("dk-error-3").style.display = "block";
     } else {
-      this.fp_process_service.setLoading(true);
+      this.fp_process_service_ws.setLoading(true);
       // cập nhật mật khẩu mới lên webservice
-      this.fp_service.updatePassword(mat_khau).subscribe(data => {
+      this.fp_service_ws.updatePassword(mat_khau).subscribe(data => {
         // Cập nhật mật khẩu lên firebase
-        this.fp_service.updatePasswordFirebase(mat_khau);
+        this.fp_service_ws.updatePasswordFirebase(mat_khau);
         // Xong ẩn loading
         setTimeout(() => {
-          this.fp_process_service.setLoading(false);
+          this.fp_process_service_ws.setLoading(false);
         }, 0);
         // Xóa ma_tai_khoan và process trong localStorage
-        localStorage.removeItem("ma_tai_khoan_qmk");
-        localStorage.removeItem("qmk-process");
+        localStorage.removeItem("ma_tai_khoan_qmk_ws");
+        localStorage.removeItem("qmk-process-ws");
         // Hiển thị thông báo cho trang đăng nhập
-        this.notification_login_page.setTitle("Lấy lại mật khẩu thành công!");
-        this.notification_login_page.setChild("Đã tới lúc đăng nhập và thưởng thức nào!");
-        this.notification_login_page.showPop();
+        this.notification_login_page_ws.setTitle("Lấy lại mật khẩu thành công!");
+        this.notification_login_page_ws.setChild("Đã tới lúc đăng nhập và thưởng thức nào!");
+        this.notification_login_page_ws.showPop();
         // Chuyển tới trang đăng nhập
-        this.router.navigate(['/dang-nhap']);
+        this.router.navigate(['/dang-nhap-ws']);
       });
     }
   }

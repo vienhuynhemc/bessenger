@@ -1,44 +1,42 @@
-import { VersionService } from './../../../service/version/version.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FpProcessServiceService } from 'src/app/service/firebase/forgot-password/fp-process-service.service';
-import { FpServiceService } from 'src/app/service/firebase/forgot-password/fp-service.service';
-import { NotificationFpPageService } from 'src/app/service/firebase/notification/notification-fp-page.service';
+import { VersionService } from 'src/app/service/version/version.service';
+import { FpProcessServiceWsService } from 'src/app/service/ws/forgot-password/fp-process-service-ws.service';
+import { FpServiceWsService } from 'src/app/service/ws/forgot-password/fp-service-ws.service';
+import { NotificationFpPageWsService } from 'src/app/service/ws/notification/notification-fp-page-ws.service';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  selector: 'app-forgot-password-ws',
+  templateUrl: './forgot-password-ws.component.html',
+  styleUrls: ['./forgot-password-ws.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordWsComponent implements OnInit {
 
   public countSlide: number;
   public isRunningSlide: boolean;
 
   constructor(
-    public notification_fp: NotificationFpPageService,
-    public fp_process_service: FpProcessServiceService,
+    public notification_fp_ws: NotificationFpPageWsService,
+    public fp_process_service_ws: FpProcessServiceWsService,
     private router: Router,
     private route: ActivatedRoute,
-    private fp_service: FpServiceService,
+    private fp_service_ws: FpServiceWsService,
     public version_service: VersionService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     // change version
-    if (this.version_service.version == 2) {
+    if (this.version_service.version == 1) {
       this.router.navigate(['/change-version']);
     }
-    if (!this.fp_service.isQMK()) {
-      this.router.navigate(['/bessenger']);
+    if (!this.fp_service_ws.isQMK()) {
+      this.router.navigate(['/bessenger-ws']);
     } else {
-      let count = JSON.parse(localStorage.getItem("qmk-process"));
+      let count = JSON.parse(localStorage.getItem("qmk-process-ws"));
       if (count == null) {
-        localStorage.setItem("qmk-process", JSON.stringify("0"));
-        this.fp_process_service.reset();
-        this.fp_process_service.getData();
+        localStorage.setItem("qmk-process-ws", JSON.stringify("0"));
+        this.fp_process_service_ws.reset();
+        this.fp_process_service_ws.getData();
       }
       this.init();
     }
@@ -46,7 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   public init(): void {
     setTimeout(() => {
-      this.fp_process_service.setLoading(false);
+      this.fp_process_service_ws.setLoading(false);
     }, 0);
     document.getElementById("hinh2").style.opacity = "0";
     document.getElementById("hinh3").style.opacity = "0";
@@ -56,9 +54,9 @@ export class ForgotPasswordComponent implements OnInit {
     this.isRunningSlide = true;
     this.setDelay(10000);
     // Xử lý việc đi tới component tương ứng
-    if (this.fp_process_service.isXacNhanEmail()) {
+    if (this.fp_process_service_ws.isXacNhanEmail()) {
       this.moveToVerifyEmailPage();
-    } else if (this.fp_process_service.isChonMatKhau()) {
+    } else if (this.fp_process_service_ws.isChonMatKhau()) {
       this.moveToSelectPassword();
     }
   }
