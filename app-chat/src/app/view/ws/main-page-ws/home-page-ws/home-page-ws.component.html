@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="main">
+      <div class="slide-1 slide" id="slide-1">
+        <div class="left">
+            <div class="title">
+              Tụ họp
+              <br />
+              mọi lúc, mọi nơi
+            </div>
+            <div class="title-sub">
+              Với Bessenger, việc kết nối với những người <br />
+              mình yêu mến thật đơn giản và thú vị.
+            </div>
+            <div class="btn-message" *ngIf="selectedSlide == 1" (click)="moveToMessage()">Tìm hiểu thêm</div>
+        </div>
+        <div class="right">
+          <video
+            style="width: 95%; margin-top: 122.4px; margin-left: 14px"
+            autoplay="1"
+            loop="1"
+            [muted]="true"
+            src="assets/video/homepage/slide1.mp4"
+            data-preload="assets/video/homepage/slide1.mp4"
+            playsinline="1"
+            data-preload-type="video"
+          ></video>
+        </div>
+      </div>
+      <div class="slide-2 slide" id="slide-2">
+        <div class="left">
+          <video id="slide-2-video"
+            style="width: 95%; margin-top: 223.8px; margin-left: 14px"
+            autoplay="1"
+            loop="1"
+            [muted]="true"
+            src="assets/video/homepage/slide2.mp4"
+            data-preload="assets/video/homepage/slide2.mp4"
+            playsinline="1"
+            data-preload-type="video"
+          ></video>
+        </div>
+        <div class="right">
+          <div class="title">
+            Thêm bạn
+            <br />
+            thêm vui
+          </div>
+          <div class="title-sub">
+            Hãy thêm thật nhiều bạn bè để cùng nhau tận hưởng những khoảng khắc thú vị.<br />
+          </div>
+          <div *ngIf="selectedSlide == 2" class="btn-message" (click)="moveToRecomend()">Tìm hiểu thêm</div>
+        </div>
+      </div>
+      <div class="slide-3 slide" id="slide-3">
+          <div class="left">
+              <div class="title">
+                Bạn kiểm soát trải nghiệm của chính mình trên Bessenger
+              </div>
+              <div class="title-sub">
+                  Chúng tôi luôn nỗ lực để đảm bảo Bessenger là nơi đáng tin cậy, riêng tư và an toàn để bạn kết nối với những người quan trọng.
+              </div>
+            </div>
+            <div class="right">
+              <img class="img-title" src="assets/images/homepage/slide3.png" alt="">
+            </div>
+      </div>
+      <div class="slide-change">
+        <div (click)="slideClick(0)" class="slide-change-1 slide-change-sub" [class.slide-change-color]="selectedSlide == 1" id="slide-change-1"></div>
+        <div (click)="slideClick(1)" class="slide-change-2 slide-change-sub" [class.slide-change-color]="selectedSlide == 2" id="slide-change-2"></div>
+        <div (click)="slideClick(2)" class="slide-change-3 slide-change-sub" [class.slide-change-color]="selectedSlide == 0" id="slide-change-3"></div>
+      </div>
+    </div>
+  </div>
+  

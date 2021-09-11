@@ -92,7 +92,23 @@ import { SelectSexWsComponent } from './view/ws/register-page-ws/select-sex-ws/s
 import { SelectAvatarWsComponent } from './view/ws/register-page-ws/select-avatar-ws/select-avatar-ws.component';
 import { ForgotPasswordWsComponent } from './view/ws/forgot-password-ws/forgot-password-ws.component';
 import { FpSelectPasswordWsComponent } from './view/ws/forgot-password-ws/fp-select-password-ws/fp-select-password-ws.component';
-import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify-email-ws/fp-verify-email-ws.component'
+import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify-email-ws/fp-verify-email-ws.component';
+import { HomePageWsComponent } from './view/ws/main-page-ws/home-page-ws/home-page-ws.component';
+import { ChatPageWsComponent } from './view/ws/main-page-ws/chat-page-ws/chat-page-ws.component';
+import { ChatRequestPageWsComponent } from './view/ws/main-page-ws/chat-request-page-ws/chat-request-page-ws.component';
+import { FriendsPageWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-page-ws.component';
+import { PersonalPageWsComponent } from './view/ws/main-page-ws/personal-page-ws/personal-page-ws.component';
+import { SettingPageWsComponent } from './view/ws/main-page-ws/setting-page-ws/setting-page-ws.component';
+import { FriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/friends-ws.component';
+import { FriendsListWsComponent } from './view/ws/main-page-ws/chat-page-ws/friends-list-ws/friends-list-ws.component';
+import { MessengerWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-ws.component';
+import { FileSendWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/file-send-ws.component';
+import { RequestAddFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/request-add-friends-ws/request-add-friends-ws.component';
+import { SendRequsetAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/send-requset-add-ws/send-requset-add-ws.component';
+import { AddFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/add-friends-ws/add-friends-ws.component';
+import { OfferFriendsWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/offer-friends-ws/offer-friends-ws.component';
+import { ChangePasswordWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-password-ws/change-password-ws.component';
+import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-profile-ws/change-profile-ws.component'
 
 
 @NgModule({
@@ -144,8 +160,44 @@ import { FpVerifyEmailWsComponent } from './view/ws/forgot-password-ws/fp-verify
 
 
     ShopStickerComponent, 
-    SettingBoxChatComponent, MembersComponent, FilesShareComponent, MediasShareComponent, MessageRecordingComponent, DetailEmojiMessengerComponent, DetailImageComponent, CallVideoComponent, ChangeProfileComponent, ChangePasswordComponent, StatusSettingsComponent, MainPageWsComponent, ChangeVersionComponent, LoginPageWsComponent, ChangeVersionStreetComponent, RegisterPageWsComponent, VerifyEmailWsComponent, SelectSexWsComponent, SelectAvatarWsComponent, ForgotPasswordWsComponent, FpSelectPasswordWsComponent, FpVerifyEmailWsComponent
-
+    SettingBoxChatComponent,
+    MembersComponent, 
+    FilesShareComponent,
+    MediasShareComponent,
+    MessageRecordingComponent, 
+    DetailEmojiMessengerComponent,
+    DetailImageComponent, 
+    CallVideoComponent,
+    ChangeProfileComponent,
+    ChangePasswordComponent, 
+    StatusSettingsComponent,
+    MainPageWsComponent,
+    ChangeVersionComponent,
+    LoginPageWsComponent, 
+    ChangeVersionStreetComponent, 
+    RegisterPageWsComponent,
+    VerifyEmailWsComponent,
+    SelectSexWsComponent,
+    SelectAvatarWsComponent,
+    ForgotPasswordWsComponent,
+    FpSelectPasswordWsComponent,
+    FpVerifyEmailWsComponent,
+    HomePageWsComponent, 
+    ChatPageWsComponent,
+    ChatRequestPageWsComponent, 
+    FriendsPageWsComponent, 
+    PersonalPageWsComponent, 
+    SettingPageWsComponent,
+    FriendsWsComponent,
+    FriendsListWsComponent, 
+    MessengerWsComponent,
+    FileSendWsComponent,
+    RequestAddFriendsWsComponent, 
+    SendRequsetAddWsComponent, 
+    AddFriendsWsComponent,
+    OfferFriendsWsComponent,
+    ChangePasswordWsComponent,
+    ChangeProfileWsComponent
   ],
   imports: [
     BrowserModule,

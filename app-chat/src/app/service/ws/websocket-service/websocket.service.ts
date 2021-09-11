@@ -10,6 +10,10 @@ export class WebsocketService {
 
   constructor() { }
 
+  public reCreate(url) {
+    this.subject = null
+  }
+
   // Connect
   public connect(url): Subject<MessageEvent> {
     if (!this.subject) {

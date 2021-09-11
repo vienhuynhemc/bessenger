@@ -23,7 +23,12 @@ export class LoginWsService {
 
   public login(ma_tai_khoan:string,email:string): void {
     localStorage.setItem("ma_tai_khoan_dn_ws", JSON.stringify(ma_tai_khoan));
-    localStorage.setItem("email_dn_ws",email);
+    localStorage.setItem("email_dn_ws",JSON.stringify(email));
+  }
+
+  public logOut(): void {
+    localStorage.removeItem('ma_tai_khoan_dn_ws');
+    localStorage.removeItem("email_dn_ws");
   }
 
 }

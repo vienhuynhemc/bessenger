@@ -504,11 +504,12 @@ export class LoginPageWsComponent implements OnInit {
               document.getElementById("dn-error-1").style.display = "none";
               document.getElementById("dn-mat-khau").style.border = "1px solid #e2e2e2";
               document.getElementById("dn-error-2").style.display = "none";
-              // this.login_service_ws.login(data[0]['ma_tai_khoan'], email);
+              this.login_service_ws.login(data[0]['ma_tai_khoan'], email);
               // Kết nối ws api login
               this.login_ws_ws.login(email, data[0]['mat_khau']);
               this.login_ws_ws.messages_login.subscribe(data => {
                 let value = JSON.parse(JSON.stringify(data));
+                console.log("Đăng nhập từ trang đăng nhập: "+value.data+" "+value.mes+" "+value.status);
                 this.isRunningSlide = false;
                 this.isLoading = false;
                 this.router.navigate(["/bessenger-ws"]);

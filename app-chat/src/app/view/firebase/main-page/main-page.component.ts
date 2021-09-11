@@ -1,3 +1,4 @@
+import { VersionService } from './../../../service/version/version.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatPageFriendsLeftServiceService } from 'src/app/service/firebase/chat-page/chat-page-friends-page/chat-page-friends-left-service.service';
@@ -28,13 +29,17 @@ export class MainPageComponent implements OnInit {
     public friendsPageService: FriendsPageService,
     private chat_page_friends_object_left_service: ChatPageFriendsLeftServiceService,
     private chat_page_firends_service: ChatPageFriendsServiceService,
-    public my_name_service:MyNameService,
+    public my_name_service: MyNameService,
     private settings_service: SettingsServiceService,
-    private notificationMessageService: NotificationService
+    private notificationMessageService: NotificationService,
+    public version_service: VersionService
   ) {
   }
 
   ngOnInit(): void {
+    if (this.version_service.version == 2) {
+      this.router.navigate(['/change-version']);
+    }
     if (!this.login_service.isLogin()) {
       this.router.navigate(['/dang-nhap']);
     } else {
@@ -45,13 +50,13 @@ export class MainPageComponent implements OnInit {
         this.main_page_service.layHinh.unsubscribe();
         this.getData();
       }
-      if(this.my_name_service.layTen == null){
-        this.my_name_service.getName().subscribe(data=>{
+      if (this.my_name_service.layTen == null) {
+        this.my_name_service.getName().subscribe(data => {
           this.my_name_service.myName = data.payload.toJSON()['ten'];
         })
-      }else{
+      } else {
         this.my_name_service.layTen.unsubscribe();
-        this.my_name_service.getName().subscribe(data=>{
+        this.my_name_service.getName().subscribe(data => {
           this.my_name_service.myName = data.payload.toJSON()['ten'];
         });
       }
@@ -72,7 +77,7 @@ export class MainPageComponent implements OnInit {
     this.chat_page_firends_service.ban_bes = null;
     this.router.navigate(['/dang-nhap']);
   }
-  
+
   ///////////////////////////////////////
   // Các hàm di chuyển trang
   moveToHomePage(): void {
@@ -101,92 +106,92 @@ export class MainPageComponent implements OnInit {
   // thông báo
   notificationMessage() {
     let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn'));
-      // tránh lặp nhiều lần
-      let checkLoop = ''
+    // tránh lặp nhiều lần
+    let checkLoop = ''
     this.notificationMessageService.accessSettings(idUser).once('value', set => {
-      if(set.val().khong_lam_phien == 'tat') {
+      if (set.val().khong_lam_phien == 'tat') {
         // truy cập lấy ra tất cả mã cuộc trò chuyện
         this.notificationMessageService.access_cuoc_tro_chuyen().on('value', conver => {
           // danh sách chat
-            let listIDConver = []
-            conver.forEach(elementConver => {
-                  listIDConver.push(elementConver.key)
+          let listIDConver = []
+          conver.forEach(elementConver => {
+            listIDConver.push(elementConver.key)
+          });
+          // vào thanh viên cuộc trò chuyện để lấy ra danh sách các cuộc trò chuyện bản thân có tham gia
+          this.notificationMessageService.access_thanh_vien_cuoc_tro_chuyen().on('value', member => {
+            let listIDConverUserJoin = []
+            listIDConver.forEach(keySingle => {
+              member.child(keySingle).forEach(elementMember => {
+                //  nếu là chat đơn
+                if (elementMember.val().roi_chua == undefined) {
+                  if (elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho') {
+                    let singleBox = new SingleOrGroupChat();
+                    singleBox.idConver = keySingle;
+                    singleBox.typeConver = 'don';
+                    listIDConverUserJoin.push(singleBox)
+                  }
+                  // nếu là nhóm chat
+                } else {
+                  if (elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho' && elementMember.val().roi_chua == 'chua') {
+                    let groupBox = new SingleOrGroupChat();
+                    groupBox.idConver = keySingle;
+                    groupBox.typeConver = 'nhom';
+                    // lấy ra tên nhóm
+                    this.notificationMessageService.access_thong_tin_tro_chuyen_nhom().child(keySingle).once('value', group => {
+                      groupBox.nameGroup = group.val().ten_nhom
+                    })
+                    listIDConverUserJoin.push(groupBox)
+                  }
+                }
+              });
             });
-            // vào thanh viên cuộc trò chuyện để lấy ra danh sách các cuộc trò chuyện bản thân có tham gia
-                this.notificationMessageService.access_thanh_vien_cuoc_tro_chuyen().on('value', member =>{ 
-                  let listIDConverUserJoin = []
-                  listIDConver.forEach(keySingle => {
-                   member.child(keySingle).forEach(elementMember => {
-                    //  nếu là chat đơn
-                    if(elementMember.val().roi_chua == undefined) {
-                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho') {
-                            let singleBox = new SingleOrGroupChat();
-                            singleBox.idConver = keySingle;
-                            singleBox.typeConver = 'don';
-                            listIDConverUserJoin.push(singleBox)
-                          }
-                    // nếu là nhóm chat
-                    } else { 
-                        if(elementMember.key == idUser && elementMember.val().trang_thai == 'khong_cho' && elementMember.val().roi_chua == 'chua'){
-                          let groupBox = new SingleOrGroupChat();
-                            groupBox.idConver = keySingle;
-                            groupBox.typeConver = 'nhom';
-                            // lấy ra tên nhóm
-                            this.notificationMessageService.access_thong_tin_tro_chuyen_nhom().child(keySingle).once('value', group => {
-                              groupBox.nameGroup = group.val().ten_nhom
+
+            //  vào chi tiết cuộc trò chuyện lấy ra tin nhắn chưa xem
+            this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().on('value', converMess => {
+              listIDConverUserJoin.forEach(elementJoin => {
+                let idCon = elementJoin.idConver
+                converMess.child(elementJoin.idConver).forEach(elementDetail => {
+                  // chỉ xét tin nhắn không phải thu hồi và không phải bản thân gửi
+                  if (elementDetail.val().loai_tin_nhan != 'thu_hoi' && elementDetail.val().ma_tai_khoan != idUser) {
+                    // lấy ra tin nhắn bản thân chưa xem
+                    elementDetail.child('tinh_trang_xem').forEach(watch => {
+                      if (watch.key == idUser && watch.val().xem_chua == 'chua' && checkLoop != elementDetail.key) {
+                        checkLoop = elementDetail.key
+                        if (Notification.permission === 'granted') {
+                          // truy cập vào tài khoản để lấy ra ảnh đại diện
+                          this.notificationMessageService.access_tai_khoan().child(elementDetail.val().ma_tai_khoan).once('value', acc => {
+                            let mess = new SettingNotification();
+                            mess.urlAvatar = acc.val().link_hinh;
+                            mess.idConversation = idCon;
+                            mess.content = elementDetail.val().noi_dung;
+                            mess.typeMess = elementDetail.val().loai_tin_nhan;
+                            mess.soundNoti = set.val().am_thanh_thong_bao;
+                            mess.contentNoti = set.val().hien_thi_ban_xem_truoc;
+                            if (elementJoin.typeConver == 'nhom')
+                              mess.name = elementJoin.nameGroup;
+                            else
+                              mess.name = elementDetail.val().ten;
+                            this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().child(idCon).child(elementDetail.key).child('tinh_trang_xem').child(idUser).update({
+                              ngay_nhan: Number(new Date()),
+                              xem_chua: 'dang'
                             })
-                            listIDConverUserJoin.push(groupBox)
-                          } 
+                            if (mess.typeMess == 'gui_tin_nhan_btcx')
+                              mess.alt = elementDetail.val().alt;
+                            this.showMessage(mess)
+                          })
+
                         }
-                      });
-                   });
-                    
-                    //  vào chi tiết cuộc trò chuyện lấy ra tin nhắn chưa xem
-                   this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().on('value', converMess => {
-                      listIDConverUserJoin.forEach(elementJoin => {
-                          let idCon = elementJoin.idConver
-                          converMess.child(elementJoin.idConver).forEach(elementDetail => {
-                            // chỉ xét tin nhắn không phải thu hồi và không phải bản thân gửi
-                            if(elementDetail.val().loai_tin_nhan != 'thu_hoi' && elementDetail.val().ma_tai_khoan != idUser ) {
-                              // lấy ra tin nhắn bản thân chưa xem
-                              elementDetail.child('tinh_trang_xem').forEach(watch => {
-                                  if(watch.key == idUser && watch.val().xem_chua == 'chua' && checkLoop != elementDetail.key) {
-                                    checkLoop = elementDetail.key
-                                    if(Notification.permission === 'granted') {
-                                      // truy cập vào tài khoản để lấy ra ảnh đại diện
-                                      this.notificationMessageService.access_tai_khoan().child(elementDetail.val().ma_tai_khoan).once('value', acc => {
-                                        let mess = new SettingNotification();
-                                        mess.urlAvatar = acc.val().link_hinh;
-                                        mess.idConversation = idCon;
-                                        mess.content = elementDetail.val().noi_dung;
-                                        mess.typeMess = elementDetail.val().loai_tin_nhan;
-                                        mess.soundNoti = set.val().am_thanh_thong_bao;
-                                        mess.contentNoti = set.val().hien_thi_ban_xem_truoc;
-                                        if(elementJoin.typeConver == 'nhom')
-                                            mess.name = elementJoin.nameGroup;
-                                        else
-                                            mess.name = elementDetail.val().ten;
-                                        this.notificationMessageService.access_chi_tiet_cuoc_tro_chuyen().child(idCon).child(elementDetail.key).child('tinh_trang_xem').child(idUser).update({
-                                          ngay_nhan: Number(new Date()),
-                                          xem_chua: 'dang'
-                                        })
-                                        if (mess.typeMess == 'gui_tin_nhan_btcx')
-                                            mess.alt = elementDetail.val().alt;
-                                        this.showMessage(mess)
-                                      })
-                                      
-                                    } 
-                                  }
-                              });
-                            }
-                          });
-                      });
-                   })
-                })
+                      }
+                    });
+                  }
+                });
+              });
+            })
+          })
         })
       }
     })
-    
+
   }
 
   // format thông báo tin nhắn mới và hiển thị
@@ -194,44 +199,44 @@ export class MainPageComponent implements OnInit {
     let result = '';
     switch (mess.typeMess) {
       case "gui_text":
-          result = mess.content;
-          break;
+        result = mess.content;
+        break;
       case "gui_text_icon":
-          result = "Đã gửi icon";
-          break;
+        result = "Đã gửi icon";
+        break;
       case "thong_bao":
-          result = mess.content.charAt(0).toUpperCase() + mess.content.slice(1);
-          break;
+        result = mess.content.charAt(0).toUpperCase() + mess.content.slice(1);
+        break;
       case "gui_tin_nhan_like":
-          result =  "👍";
-          break;
+        result = "👍";
+        break;
       case "gui_hinh":
-          result = "Đã gửi hình ảnh";
-          break;
+        result = "Đã gửi hình ảnh";
+        break;
       case "gui_video":
-          result = "Gửi một video";
-          break;
+        result = "Gửi một video";
+        break;
       case "gui_ghi_am":
-          result = "Gửi một tin nhắn thoại";
-          break;
+        result = "Gửi một tin nhắn thoại";
+        break;
       case "gui_file":
-          result = "Gửi một tệp";
-          break;
+        result = "Gửi một tệp";
+        break;
       case "phan_hoi":
-          result = "Phản hồi một tin nhắn";
-          break;
+        result = "Phản hồi một tin nhắn";
+        break;
       case "gui_nhan_dan":
-          result = "Gửi một nhãn dán"
-          break;
+        result = "Gửi một nhãn dán"
+        break;
       case "gui_giphy":
-          result =  "Gửi một file GIF từ GIPHY"
-          break;
+        result = "Gửi một file GIF từ GIPHY"
+        break;
       case "gui_tin_nhan_btcx":
-          result = mess.alt;
-          break;
-      
-  }
-    if(result != '') {
+        result = mess.alt;
+        break;
+
+    }
+    if (result != '') {
       // thay thế tất cả <br> = ' '
       result = result.replace(/<br>/g, ' ');
       const notification = new Notification(mess.name, {
@@ -240,11 +245,11 @@ export class MainPageComponent implements OnInit {
         silent: mess.soundNoti == 'bat' ? false : true
       })
       // if(window.location.pathname != '/bessenger/tin-nhan/' + mess.idConversation) {
-        notification.onclick = (e) => {
-          window.close()
-          window.open(location.origin + '/bessenger/tin-nhan/' + mess.idConversation, '_blank');
+      notification.onclick = (e) => {
+        window.close()
+        window.open(location.origin + '/bessenger/tin-nhan/' + mess.idConversation, '_blank');
         // }
-      } 
+      }
     }
   }
 }
