@@ -88,6 +88,7 @@ export class FriendsWsComponent implements OnInit, OnDestroy {
                       temp.img = result.val().link_hinh;
                       temp.sex = result.val().gioi_tinh;
                       temp.date = friend_i.val().ngay_tao;
+                      
                       this.mutualFriendsList.forEach(element => {
                         if(element.id == temp.id)
                             checkAdd = false;

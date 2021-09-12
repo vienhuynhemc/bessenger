@@ -7,6 +7,7 @@ export class FriendInforWS {
     status: boolean;
     sex: string;
     lastOnline: number;
+    email: string;
     // định dạng ngày tháng VD: 27 Tháng Tám 2020 - 10:04:02
     public dateAddFormatMutualFriends() {
       if (this.date != undefined) {

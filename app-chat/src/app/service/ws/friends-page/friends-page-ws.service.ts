@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { FriendsPageWebSocketService } from './friends-page-web-socket/friends-page-web-socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class FriendsPageWsService {
   public options: AnimationOptions = {
     path: '/assets/json/lottie/loading.json',
   };
-  constructor(private db: AngularFireDatabase
+  constructor(private db: AngularFireDatabase, private friendsWS: FriendsPageWebSocketService
   ) {
     this.update()
   }
@@ -217,20 +218,22 @@ export class FriendsPageWsService {
   // cập nhật trạng thái on - off
   public update(): void {
     setTimeout(() => {
-      let currentTime = Number(new Date());
       if (this.friendsList != null) {
         for (let i = 0; i < this.friendsList.length; i++) {
           this.db.database.ref('cai_dat_ws').child(this.friendsList[i].id).on('value', set =>{
             if(set.val().trang_thai_hoat_dong == 'tat') {
               this.friendsList[i].status = false; 
             } else {
-              let lan_cuoi_dang_nhap = this.friendsList[i].lastOnline;
-              let overTime = currentTime - lan_cuoi_dang_nhap;
-              if (overTime > 10000) {
-                this.friendsList[i].status = false; 
-              } else {
-                this.friendsList[i].status = true;
-              }
+              // kiểm tra onl web socket
+              this.friendsWS.checkOnline(this.friendsList[i].email);
+              // lấy ra trạng thái từ server
+              this.friendsWS.messages_online.subscribe(data => {
+                let value = JSON.parse(JSON.stringify(data));
+                if(value.status == "success")
+                  this.friendsList[i].status = value.data.status;
+                else
+                  this.friendsList[i].status = false;
+              })
             }
           })
         }
