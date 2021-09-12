@@ -1,0 +1,63 @@
+<div class="header">
+
+    <div class="hinh-dai-dien">
+        <div class="nhom" *ngIf="this.header_service.object_chat.loai == 'nhom'
+                            && this.header_service.object_chat.imgs.length == 2
+                            ">
+            <img [src]="this.header_service.object_chat.imgs[0] ||'assets/images/loading.gif'" class="hinh-1" alt="">
+            <img [src]="this.header_service.object_chat.imgs[1] ||'assets/images/loading.gif'" alt="" class="hinh-2">
+        </div>
+        <div class="don" *ngIf="this.header_service.object_chat.loai == 'don'
+                            || (this.header_service.object_chat.loai == 'nhom'
+                            && this.header_service.object_chat.imgs.length == 1)
+                            ">
+            <img [src]="this.header_service.object_chat.imgs[0] ||'assets/images/loading.gif'" alt="">
+        </div>
+        <div class="don" *ngIf="this.header_service.object_chat.loai == 'nhom'
+                        && this.header_service.object_chat.imgs.length == 0">
+            <img src="assets/images/iconRectangle.png" alt="">
+        </div>
+        <div *ngIf="this.header_service.object_chat.is_online && settingsService.stateStatus == 'bat'" class="online">
+            <div class="child"></div>
+        </div>
+    </div>
+
+    <div class="thong-tin">
+        <div class="ten" [matTooltip]="this.header_service.object_chat.name.noi_dung_goc" matTooltipClass="tooltip"
+            [matTooltipDisabled]="!this.header_service.object_chat.name.is_cut">
+            {{this.header_service.object_chat.name.noi_dung}}
+        </div>
+        <p  class="trang-thai" *ngIf="this.header_service.object_chat.is_online && settingsService.stateStatus == 'bat'">Đang hoạt động</p>
+        <p class="trang-thai" *ngIf="!this.header_service.object_chat.is_online && settingsService.stateStatus == 'bat' && this.header_service.object_chat.getTime() != ''">
+            {{this.header_service.object_chat.getTime()}}</p>
+    </div>
+
+    <div class="icon" *ngIf="!this.header_service.object_chat.is_roi_het_chua">
+        <div class="child" matTooltip="Bắt đầu gọi thoại" matTooltipClass="tooltip"
+            *ngIf="!this.header_service.object_chat.is_roi_chua && this.header_service.object_chat.loai == 'don'">
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-phone-alt"></i>
+        </div>
+        <div class="child" matTooltip="Tính năng đang được xây dựng" matTooltipClass="tooltip"
+            *ngIf="!this.header_service.object_chat.is_roi_chua && this.header_service.object_chat.loai == 'nhom'">
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-phone-alt"></i>
+        </div>
+
+        <div class="child" matTooltip="Bắt đầu gọi video" matTooltipClass="tooltip"
+            *ngIf="!this.header_service.object_chat.is_roi_chua && this.header_service.object_chat.loai == 'don'"
+            (click)="this.call_video.callVideo(this.header_service.object_chat.getTK())">
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-video"></i>
+        </div>
+        <div class="child" matTooltip="Tính năng đang được xây dựng" matTooltipClass="tooltip"
+            *ngIf="!this.header_service.object_chat.is_roi_chua && this.header_service.object_chat.loai == 'nhom'">
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-video"></i>
+        </div>
+        <div *ngIf="this.header_service.object_chat.loai == 'nhom' && !this.header_service.object_chat.is_roi_chua"
+            class="child" matTooltip="Những lựa chọn thêm" matTooltipClass="tooltip" (click)="openMenu(boxSelect)">
+            <i [style.color]="this.header_service.object_chat.mau_tren" class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="box-select hidden" #boxSelect>
+            <button (click)="roiKhoiNhom(boxSelect)"> <i class="fas fa-running"></i>Rời khỏi nhóm</button>
+        </div>
+    </div>
+
+</div>

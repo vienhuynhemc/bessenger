@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="container-bg">
+        <img  *ngIf="imageDetailService.urlSelected.typeMessage == 'gui_hinh'" class="img-bg" [src]="imageDetailService.urlSelected.url || 'assets/images/loading.gif'" alt="">
+        <video class="img-bg" width="100%" height="100%" *ngIf="imageDetailService.urlSelected.typeMessage == 'gui_video'">
+            <source [src]="imageDetailService.urlSelected.url || 'assets/images/loading.gif'">
+        </video>
+        <div class="content">
+            <div class="left" *ngIf="imageDetailService.indexSelected > 0" (click)="clickPrev()">
+                <div class="prev arrow">
+                    <i></i>
+                </div>
+            </div>
+            <div class="left-hidden" *ngIf="imageDetailService.indexSelected <= 0">
+            </div>
+            <div class="center">
+                <div class="cover-img">
+                    <img *ngIf="imageDetailService.urlSelected.typeMessage == 'gui_hinh'" class="img-main" [src]="imageDetailService.urlSelected.url || 'assets/images/loading.gif'" alt="">
+                    <video autoplay controls width="100%" height="100%" *ngIf="imageDetailService.urlSelected.typeMessage == 'gui_video'">
+                        <source [src]="imageDetailService.urlSelected.url || 'assets/images/loading.gif'">
+                    </video>
+                </div>
+            </div>
+            <div class="right" *ngIf="imageDetailService.indexSelected < imageDetailService.lengthMediaList - 1" (click)="clickNext()">
+                <div class="next arrow">
+                    <i></i>
+                </div>
+            </div>
+            <div class="right-hidden" *ngIf="imageDetailService.indexSelected >= imageDetailService.lengthMediaList - 1">
+                
+            </div>
+        </div>
+        <div class="header-option">
+            <div class="exit" (click)="imageDetailService.openImage()">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div [class.center-bottom]="imageDetailService.lengthMediaList < 31" class="bottom-image" id="scroll-image">
+            <div class="image-sub-cover" *ngFor="let item of imageDetailService.mediaList; let i = index" (click)="clickChangeSelected(item, i)">
+                <img *ngIf="item.typeMessage == 'gui_hinh'" [class.image-selected]="item.url == imageDetailService.urlSelected.url" class="image-sub" [src]="item.url || 'assets/images/loading.gif'" alt="">
+                <video *ngIf="item.typeMessage == 'gui_video'" width="36" height="36" class="video-sub" [class.image-selected]="item.url == imageDetailService.urlSelected.url">
+                    <source [src]="item.url || 'assets/images/loading.gif'">
+                </video>
+            </div>
+            
+        </div>
+    </div>
+</div>

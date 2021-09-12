@@ -1,0 +1,147 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>Tùy chỉnh đoạn chat</p>
+        <i class="open" *ngIf="this.setting_box_chat_service.isOpen"></i>
+        <i class="close" *ngIf="!this.setting_box_chat_service.isOpen"></i>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="noi-dung" *ngIf="this.setting_box_chat_service.isOpen">
+        <!-- Đổi tên đoạn chat -->
+        <div class="item" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen =='nhom'"
+            (click)="doiTenDoanChat()">
+            <i class="nhom-chat"></i>
+            <p>Đổi tên đoạn chat</p>
+        </div>
+        <!-- Đổi chủ đề -->
+        <div class="item" (click)="doiChuDe()">
+            <div class="chu-de" [style.background-color]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi">
+                <div class="child-chu-de">
+                </div>
+            </div>
+            <p>Đổi chủ đề</p>
+        </div>
+        <!-- Thay đổi biểu tượng cảm xúc -->
+        <div class="item" (click)="showEditEmoji()">
+            <!-- Biểu tượgn cảm xúc-->
+            <div class="emoji-btcx" 
+                *ngIf="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc != 'khong'">
+                <img [src]="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc || 'assets/images/loading.gif'"
+                    alt="">
+            </div>
+            <svg viewBox="0 0 16 16" height="20" width="20"
+                *ngIf="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc == 'khong'">
+                <path [attr.fill]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
+                    d="M16,9.1c0-0.8-0.3-1.1-0.6-1.3c0.2-0.3,0.3-0.7,0.3-1.2c0-1-0.8-1.7-2.1-1.7h-3.1c0.1-0.5,0.2-1.3,0.2-1.8 c0-1.1-0.3-2.4-1.2-3C9.3,0.1,9,0,8.7,0C8.1,0,7.7,0.2,7.6,0.4C7.5,0.5,7.5,0.6,7.5,0.7L7.6,3c0,0.2,0,0.4-0.1,0.5L5.7,6.6 c0,0-0.1,0.1-0.1,0.1l0,0l0,0L5.3,6.8C5.1,7,5,7.2,5,7.4v6.1c0,0.2,0.1,0.4,0.2,0.5c0.1,0.1,1,1,2,1h5.2c0.9,0,1.4-0.3,1.8-0.9 c0.3-0.5,0.2-1,0.1-1.4c0.5-0.2,0.9-0.5,1.1-1.2c0.1-0.4,0-0.8-0.2-1C15.6,10.3,16,9.9,16,9.1z">
+                </path>
+                <path [attr.fill]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
+                    d="M3.3,6H0.7C0.3,6,0,6.3,0,6.7v8.5C0,15.7,0.3,16,0.7,16h2.5C3.7,16,4,15.7,4,15.3V6.7C4,6.3,3.7,6,3.3,6z">
+                </path>
+            </svg>
+            <p>Thay đổi biểu tượng cảm xúc</p>
+        </div>
+    </div>
+
+    <!-- Đổi tên box chat-->
+    <div class="doi-ten" *ngIf="this.setting_box_chat_service.isShowEditName">
+        <div class="doi-ten-main">
+            <div class="doi-ten-main-header">
+                <div class="doi-ten-main-header-name">
+                    Đổi tên đoạn chat
+                </div>
+                <div class="doi-ten-main-header-icon" (click)="anDoiTen()">
+                    <i></i>
+                </div>
+            </div>
+            <div class="doi-ten-main-content">
+                <p class="p1">Mọi người đều biết khi tên nhóm chat thay đổi.</p>
+                <input type="text" class="input1" [(ngModel)]="ten_moi" (input)="inputTen($event)">
+                <div class="doi-ten-main-content-buttons">
+                    <div class="doi-ten-main-content-buttons-item" (click)="anDoiTen()">
+                        Hủy
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-select"
+                        *ngIf="!isEqual" (click)="luuDoiTenNhom()">
+                        Lưu
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-done"
+                        *ngIf="isEqual">
+                        Lưu
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chọn màu -->
+    <div class="doi-ten" *ngIf="this.setting_box_chat_service.isShowEditColor">
+        <div class="doi-ten-main editColor">
+            <div class="doi-ten-main-header">
+                <div class="doi-ten-main-header-name">
+                    Màu
+                </div>
+                <div class="doi-ten-main-header-icon" (click)="anDoiChuDe()">
+                    <i></i>
+                </div>
+            </div>
+            <div class="editColorContent">
+                <div *ngFor="let item of this.setting_box_chat_service.maus;let i = index" class="itemEditColor"
+                    [class.itemEditColorSelected]="i == this.colorSelected" (click)="this.colorSelected = i">
+                    <div [style.background-color]="item.background_color"
+                        [style.background-image]="item.background_image">
+                    </div>
+                </div>
+            </div>
+            <div class="doi-ten-main-content">
+                <div class="doi-ten-main-content-buttons">
+                    <div class="doi-ten-main-content-buttons-item" (click)="anDoiChuDe()">
+                        Hủy
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-select"
+                        (click)="luuDoiChuDe()"
+                        *ngIf="this.colorSelected != this.setting_box_chat_service.colorSelected">
+                        Lưu
+                    </div>
+                    <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-done"
+                        *ngIf="this.colorSelected == this.setting_box_chat_service.colorSelected">
+                        Lưu
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biểu tượng cảm xúc -->
+    <div class="doi-ten" *ngIf="this.setting_box_chat_service.isShowEditEmoji">
+        <div class="doi-ten-main editEmoji"
+            [class.none-now]="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc == 'khong'">
+            <div class="doi-ten-main-header">
+                <div class="doi-ten-main-header-name">
+                    Biểu tượng cảm xúc
+                </div>
+                <div class="doi-ten-main-header-icon" (click)=" this.hiddenEditEmoji();">
+                    <i></i>
+                </div>
+            </div>
+            <div style="height: 15px;">
+            </div>
+            <div class="now-emoji"
+                *ngIf="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc != 'khong'">
+                <div class="now-emoji-thong-tin">
+                    <p>Biểu tượng cảm xúc hiện tại</p>
+                    <img [src]="this.content_service.object_chat.cuoc_tro_truyen.bieu_tuong_cam_xuc || 'assets/images/loading.gif'"
+                        alt="">
+                </div>
+                <div class="now-emoji-button" (click)="goBieuTuongCamXuc()">
+                    <i></i>
+                    <p>Gỡ</p>
+                </div>
+            </div>
+            <div class="select-emoji">
+                <app-emoji (icon)="getIcon($event)"></app-emoji>
+            </div>
+        </div>
+    </div>
+
+</div>

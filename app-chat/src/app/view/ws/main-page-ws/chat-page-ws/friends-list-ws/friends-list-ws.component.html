@@ -1,1 +1,157 @@
-<p>friends-list-ws works!</p>
+<!-- danh sách bạn bè -->
+<div class="friends-list">
+    <div class="header">
+        <div class="title">
+            <h3>Bensenger</h3>
+            <div class="new-message" matTooltip="Tạo nhóm chat mới" matTooltipClass="tooltip"
+                (click)="createNewGroup()">
+                <i class="far fa-edit"></i>
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Tìm kiếm" [(ngModel)]="this.chat_page_friend_left_service.search"
+                (input)="this.chat_page_friend_left_service.changeSearch($event)">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+    <div class="status" id="danh_sach_ban_be_ben_tren" *ngIf="this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'bat'">
+        <div class="myContent" *ngFor="let element of this.chat_page_friends_service.ban_bes">
+            <div *ngIf="element.trang_thai_online" (click)="selectChat(element.ma_cuoc_tro_chuyen)">
+                <img [src]="element.link_hinh_dai_dien || 'assets/images/loading.gif'" alt="">
+                <div class="name" [matTooltip]="element.tenGioiHan.noi_dung_goc" matTooltipClass="tooltip"
+                    [matTooltipDisabled]="!element.tenGioiHan.is_cut">
+                    {{element.tenGioiHan.noi_dung}}
+                </div>
+                <div class="cover-online">
+                    <div class="online"></div>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="!this.chat_page_friends_service.isOnline " class="no_user">Hiện tại không có ai online cả</p>
+        <p *ngIf="!this.chat_page_friends_service.isOnline" class="no_user_2">Chờ online ư? Đi kết thêm bạn đi
+            nào!</p>
+    </div>
+    <div class="status" id="danh_sach_ban_be_ben_tren" *ngIf="this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'tat'">
+        <p class="no_status">Trạng thái hoạt động đang tắt</p>
+        <p class="no_status_2">Bạn có muốn <span (click)="changeStateStatus()">bật</span> trạng thái hoạt động?</p>
+
+    </div>
+    <!-- Box shadow cho header + status-->
+    <div class="box-shadow-header-and-status" id="box-shadow-header-and-status">
+    </div>
+    <div class="friends">
+        <div class="content-friends" id="danh_sach_ban_be_ben_duoi">
+            <div id="danh-sach-box-chat">
+                <div *ngFor="let item of this.chat_page_friend_left_service.allBoxData; let i = index"
+                    class="container message_read" (click)="onSelected(item.cuoc_tro_truyen.ma_cuoc_tro_chuyen)"
+                    [class.selected-container]="this.chat_page_friend_left_service.indexNotSearch == i"
+                    [class.selected-prev]="i ==this.chat_page_friend_left_service.indexPre && (this.chat_page_friend_left_service.indexSelect!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
+                    [class.selected-next]="i==this.chat_page_friend_left_service.indexNext && (this.chat_page_friend_left_service.indexSelect!=-1) && this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch)"
+                    [class.done-select]="this.chat_page_friend_left_service.indexNotSearch != i"
+                    [class.hidden]="!this.chat_page_friend_left_service.compareSearch(i)">
+
+                    <div *ngIf="this.chat_page_friend_left_service.compareSearch(i)">
+                        <div class="content">
+                            <div class="left">
+                                <div class="nhom" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                                && item.imgsAvatar.length == 2
+                                ">
+                                    <img [src]="item.imgsAvatar[0] ||'assets/images/loading.gif'" class="hinh_1" alt="">
+                                    <img [src]="item.imgsAvatar[1] ||'assets/images/loading.gif'" alt="" class="hinh_2">
+                                </div>
+                                <div class="don" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don'
+                                || (item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                                && item.imgsAvatar.length == 1)
+                                ">
+                                    <img [src]="item.imgsAvatar[0] ||'assets/images/loading.gif'" alt="">
+                                </div>
+                                <div class="don" *ngIf="item.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                            && item.imgsAvatar.length == 0">
+                                    <img src="assets/images/iconRectangle.png" alt="">
+                                </div>
+                                <div class="cover-online">
+                                    <div class="online"></div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="name" *ngIf="item.noiDungCuoiCung.noi_dung.length != 0"
+                                    [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
+                                    [matTooltip]="item.name.noi_dung_goc" matTooltipClass="tooltip"
+                                    [matTooltipDisabled]="!item.name.is_cut">
+                                    {{item.name.noi_dung}}
+                                </div>
+                                <div class="name2" *ngIf="item.noiDungCuoiCung.noi_dung.length == 0"
+                                    [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
+                                    [ngStyle]="!item.isReaded ? getStyleNameReadMessage() : null"
+                                    [matTooltip]="item.name.noi_dung_goc" matTooltipClass="tooltip"
+                                    [matTooltipDisabled]="!item.name.is_cut">
+                                    {{item.name.noi_dung}}
+                                </div>
+                                <div class="message" [ngStyle]="!item.isReaded? getStyleMessageReadMessage() : null"
+                                    [matTooltip]="item.noiDungCuoiCung.noi_dung_goc" matTooltipClass="tooltip"
+                                    [matTooltipDisabled]="!item.noiDungCuoiCung.is_cut">
+                                    {{item.noiDungCuoiCung.noi_dung}}
+                                </div>
+                                <div class="message-unread"
+                                    [ngStyle]="!item.isReaded ? getStylePointReadMessage() : null">
+                                </div>
+                            </div>
+
+                            <div *ngIf="item.noiDungCuoiCung.noi_dung.length != 0" class="timer">{{ item.getTime()}}
+                            </div>
+                            <div *ngIf="item.noiDungCuoiCung.noi_dung.length == 0" class="timer2">{{item.getTime()}}
+                            </div>
+                        </div>
+
+                        <div *ngIf="item.trang_thai_online && this.chat_page_friends_service.settingsOfUser.trang_thai_hoat_dong == 'bat'" class="online">
+                            <div class="child"></div>
+                        </div>
+
+                        <div *ngIf="item.itMe && !item.is_roi_chua" class="so_nguoi_da_xem">
+                            <div class="hinh_1" *ngIf="item.imgUserSeened.length>0"
+                                [matTooltip]="item.imgUserSeened[0].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[0].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_2" *ngIf="item.imgUserSeened.length>1"
+                                [matTooltip]="item.imgUserSeened[1].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[1].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_3" *ngIf="item.imgUserSeened.length>2"
+                                [matTooltip]="item.imgUserSeened[2].noi_dung" matTooltipClass="tooltip"><img
+                                    [src]="item.imgUserSeened[2].url ||  'assets/images/loading.gif'" alt=""></div>
+                            <div class="hinh_4" *ngIf="item.imgUserSeened.length>3"
+                                [matTooltip]="item.imgUserSeened[3].noi_dung" matTooltipClass="tooltip">
+                                <p>+{{item.imgUserSeened[3].so_thanh_vien}}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && item.isDaNhan && !item.is_roi_chua" class="da_gui"
+                            matTooltip="Đã chuyển" matTooltipClass="tooltip">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div *ngIf="item.itMe &&item.imgUserSeened.length ==0  && !item.isDaNhan && !item.is_roi_chua" class="chua_nhan"
+                            matTooltip="Đã gửi" matTooltipClass="tooltip">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tô trắng phần còn lại-->
+            <div *ngIf="this.chat_page_friend_left_service.nowLengthShow < 7" class="fillAll"
+                [ngStyle]="getStyleFillAll()"
+                [class.selected-next]="this.chat_page_friend_left_service.indexSelect == this.chat_page_friend_left_service.nowLengthShow-1 && (this.chat_page_friend_left_service.indexSelect!=-1) && (this.chat_page_friend_left_service.compareSearch(this.chat_page_friend_left_service.indexNotSearch))">
+            </div>
+            <!-- Box shadown ở trên -->
+            <div *ngIf="this.chat_page_friend_left_service.indexSelect != -1" [ngStyle]="getStyleShadowTop()">
+            </div>
+            <!-- Box shadow ớ dưới-->
+            <div [ngStyle]="getStyleShadowBottom()">
+            </div>
+        </div>
+        <!-- Che thằng lòi -->
+        <div class="hidden_error">
+        </div>
+    </div>
+    <!-- Điền hết chỗ trống ở đuôi-->
+    <div class="end">
+    </div>
+</div>
+
+<router-outlet></router-outlet>
