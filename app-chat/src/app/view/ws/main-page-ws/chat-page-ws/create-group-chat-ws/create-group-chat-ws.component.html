@@ -1,0 +1,55 @@
+<!-- Tạo nhóm mới -->
+<div class="tao-nhom-moi" *ngIf="this.chat_page_create_ground.isshow">
+
+    <div class="content">
+        <p class="title">Tạo nhóm chat mới</p>
+        <div class="exit" (click)="closeTaoNhom()"><i class="fas fa-times"></i></div>
+        <div class="main">
+            <!-- Chứ nội dung -->
+            <div class="top">
+                <div class="name-group">
+                    <div class="fill">
+                        <p class="title_input_data">Tên nhóm: </p>
+                        <div class="input_data">
+                            <input type="text" placeholder="Nhập tên nhóm" [(ngModel)]="this.ten_nhom"
+                                (ngModelChange)="inputTenNhom($event)">
+                        </div>
+                    </div>
+                    <p class="error" id="tao-nhom-error-1">Tên nhóm không thể thiếu</p>
+                </div>
+
+                <div class="parent-danh-sach">
+
+                    <p class="title_input_data">Đến: </p>
+                    <div class="danh-sach">
+
+                        <div class="element" *ngFor="let item of this.chat_page_create_ground.user_added">
+                            <p>{{item.ten}}</p>
+                            <button (click)="this.clearAdded(item.ma_tai_khoan)"><i class="fas fa-times"></i></button>
+                        </div>
+
+                        <div class="input_data">
+                            <input type="text" placeholder="Nhập tên" [(ngModel)]="this.ten_hien_tai" (ngModelChange)=inputTenHienTai($event)>
+                        </div>
+
+                        <p class="error" id="tao-nhom-error-2">Không thể thiếu thành viên</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Chứa gợi ý -->
+            <div class="auto">
+                <div class="element" *ngFor="let item of this.chat_page_create_ground.user_search" (click)="selectUser(item.ma_tai_khoan)">
+                    <img [src]="item.hinh || 'assets/images/loading.gif'" alt="">
+                    <p>{{item.ten}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Kết tạo-->
+        <div class="end">
+            <button class="confirm" (click)="taoNhom()">
+                <i class="fab fa-cloudversify"></i>
+                <p>Tạo nhóm</p>
+            </button>
+        </div>
+    </div>
+</div>

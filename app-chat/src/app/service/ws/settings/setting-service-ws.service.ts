@@ -12,10 +12,16 @@ export class SettingServiceWsService {
   stateStatus: string = 'tat'
   stateSetting: string = 'trang_thai_hoat_dong';
   constructor(private db: AngularFireDatabase) { }
-
+  selectedStateNotification():void {
+    this.source.next('thong_bao');
+  }
   selectedStateStatus():void {
     this.source.next('trang_thai_hoat_dong');
   }
+  selectedStateSupport():void {
+    this.source.next('ho_tro');
+  }
+  
 
   public accessSettings(maTaiKhoan: string) {
     return this.db.database.ref('cai_dat_ws').child(maTaiKhoan);

@@ -128,7 +128,10 @@ import { StickerWsComponent } from './view/ws/sticker-ws/sticker-ws.component';
 import { ShopStickerWsComponent } from './view/ws/shop-sticker-ws/shop-sticker-ws.component';
 import { RecordingWsComponent } from './view/ws/recording-ws/recording-ws.component';
 import { GiphyWsComponent } from './view/ws/giphy-ws/giphy-ws.component';
-import { EmojiWsComponent } from './view/ws/emoji-ws/emoji-ws.component'
+import { EmojiWsComponent } from './view/ws/emoji-ws/emoji-ws.component';
+import { StatusSettingsWsComponent } from './view/ws/main-page-ws/setting-page-ws/status-settings-ws/status-settings-ws.component';
+import { CallVideoWsComponent } from './view/ws/main-page-ws/chat-page-ws/call-video-ws/call-video-ws.component';
+import { CreateGroupChatWsComponent } from './view/ws/main-page-ws/chat-page-ws/create-group-chat-ws/create-group-chat-ws.component'
 
 
 @NgModule({
@@ -237,7 +240,10 @@ import { EmojiWsComponent } from './view/ws/emoji-ws/emoji-ws.component'
     ShopStickerWsComponent,
     RecordingWsComponent,
     GiphyWsComponent,
-    EmojiWsComponent
+    EmojiWsComponent,
+    StatusSettingsWsComponent,
+    CallVideoWsComponent,
+    CreateGroupChatWsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 <!-- Tạo nhóm chat -->
-<app-create-group-chat></app-create-group-chat>
+<app-create-group-chat-ws></app-create-group-chat-ws>
 
 <div class="loading" *ngIf="this.chat_page_process_service.isLoadingProcess()">
   <main lottie [options]="this.chat_page_process_service.options"
@@ -45,4 +45,4 @@
 
 
 <!--Component video call -->
-<app-call-video *ngIf="this.call_video.is_show"></app-call-video>
+<app-call-video-ws *ngIf="this.call_video.is_show"></app-call-video-ws>
