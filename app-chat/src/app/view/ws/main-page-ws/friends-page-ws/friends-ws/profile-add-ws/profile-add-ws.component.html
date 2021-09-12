@@ -1,0 +1,48 @@
+<div *ngIf="addInforWS.id == 1" class="container">
+    <img class="bg-hands" src="assets/images/list-friends-friends-page/add-friends.jpg" alt="">
+    <div class="bg-title">
+       
+        <div class="icon"><i class="fas fa-user-plus"></i></div>
+        <div class="title"><span>Hãy kết bạn để có thêm nhiều niềm vui.</span></div>
+    </div>
+</div>
+<div *ngIf="addInforWS.id != 1"class="container">
+<div class="top"  >
+    <img class="bg-top" [src]="addInforWS.img || 'assets/images/loading.gif'" alt="">
+    <div class="name-opacity">{{addInforWS.getFirstName()}}</div>
+    <div class="name-bg-1">{{addInforWS.getFirstName()}}</div>
+    <div class="name-bg-2">{{addInforWS.getNameLast()}}</div>
+    <div class="left-circle tai-tho">
+        <i class="fas fa-caret-up"></i>
+    </div>
+    <div class="right-circle tai-tho">
+        <i class="fas fa-caret-up"></i>
+    </div>
+    <div class="circle-1">
+        <div class="circle-2">
+            <div class="circle-3">
+                <img class="avt" [src]="addInforWS.img || 'assets/images/loading.gif'" alt="">
+                <div *ngIf="!addInforWS.checkLimitNameAddProfile()" class="name"><span>{{addInforWS.getAllNotName()}} <span class="ten">{{addInforWS.getNameLast()}}</span></span></div>
+                <div *ngIf="addInforWS.checkLimitNameAddProfile()" matTooltip="{{addInforWS.name}}" matTooltipClass="tooltip" class="name"><span>{{addInforWS.getNameLimitAddProfile()}} </span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom">
+    <div (click)="onClickUndoAddFriends(addInforWS, 0)" *ngIf="addInforWS.checkAddOrUndo == 'thu_hoi'" matTooltip="Thu hồi" matTooltipClass="tooltip" class="add-f bot-circle">
+        <div class="content-add circle">
+            <i class="fas fa-undo"></i>
+        </div>
+    </div>
+    <div (click)="onClickAddFriends(addInforWS, 0)" *ngIf="addInforWS.checkAddOrUndo == 'them'" matTooltip="Thêm bạn" matTooltipClass="tooltip" class="add-f bot-circle">
+        <div class="content-add circle">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+    <div  (click)="onClickMessage(addInforWS.id)" matTooltip="Nhắn tin" matTooltipClass="tooltip" class="message bot-circle">
+        <div class="content-message circle">
+            <i class="fas fa-comment" ></i>
+        </div>
+    </div>
+</div>
+</div>

@@ -14,7 +14,7 @@ import { MainPageService } from 'src/app/service/firebase/main-page/main-page.se
   styleUrls: ['./personal-page.component.scss'],
 })
 export class PersonalPageComponent implements OnInit {
-  // @input truyền vào user từ component cha khi login
+ 
   fileAvatar: File;
   urlNewAvatar: string;
   constructor(

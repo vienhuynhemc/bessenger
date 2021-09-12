@@ -111,7 +111,9 @@ import { ChangePasswordWsComponent } from './view/ws/main-page-ws/personal-page-
 import { ChangeProfileWsComponent } from './view/ws/main-page-ws/personal-page-ws/change-profile-ws/change-profile-ws.component';
 import { ProfileFriendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-friend-ws/profile-friend-ws.component';
 import { ProfileRequestWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-request-ws/profile-request-ws.component';
-import { ProfileSendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-send-ws/profile-send-ws.component'
+import { ProfileSendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-send-ws/profile-send-ws.component';
+import { ProfileOfferWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-offer-ws/profile-offer-ws.component';
+import { ProfileAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-add-ws/profile-add-ws.component'
 
 
 @NgModule({
@@ -203,7 +205,9 @@ import { ProfileSendWsComponent } from './view/ws/main-page-ws/friends-page-ws/f
     ChangeProfileWsComponent,
     ProfileFriendWsComponent,
     ProfileRequestWsComponent,
-    ProfileSendWsComponent
+    ProfileSendWsComponent,
+    ProfileOfferWsComponent,
+    ProfileAddWsComponent
   ],
   imports: [
     BrowserModule,

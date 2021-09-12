@@ -1,0 +1,172 @@
+.container {
+    width: 100%;
+    height: 100%;
+    font-family: "Raleway";
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 4px 8px 28px 0px #d3dceb;
+    position: relative;
+    .content {
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        .bg-hands {
+            width: 100%;
+            height: 100%;
+            border-radius: 40px;
+            object-fit: cover;
+        }
+            .icon {
+                position: absolute;
+                left: 292px;
+                top: 260px;
+                i {
+                    font-size: 140px;
+                    color: white;
+                }
+            }
+            .title {
+                position: absolute;
+                top: 430px;
+                left: 20px;
+                text-align: center;
+                span{
+                    font-weight: bold;
+                    font-size: 25px;
+                    color: white;
+                }
+            }
+    }
+    .bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 40px;
+    }
+
+    .profile {
+        width: 300px;
+        height: 40px;
+        background-color: white;
+        position: absolute;
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-bottom: white solid 2px;
+        border-left: white solid 2px;
+        border-right: white solid 2px;
+        border-radius: 20px;
+        left: 212px;
+        text-align: center;
+        span {
+            color: white;
+            margin-top: 8px;
+            display: block;
+            font-weight: bold;
+            font-size: 20px;
+            
+        }
+    }
+    .circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        top: 30px;
+        left: 20px;
+        .circle-content {
+            width: 30px;
+            height: 30px;
+            background-color: rgb(50, 117, 247);
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+    }
+    .line {
+        width: 3px;
+        height: 300px;
+        background-color: white;
+        position: absolute;
+        border-radius: 20px;
+        top: 80px;
+        left: 38.5px;
+    }
+    .name-line {
+        font-size: 15px;
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        top: 420px;
+        transform: rotate(90deg);
+        left: 3px;
+        
+    }
+    .icon-bess {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        position: absolute;
+        top: 480px;
+        transform: rotate(90deg);
+        left: 25px;
+
+}
+    .name {
+        width: 400px;
+        height: 50px;
+        background-color: #0e0c0c;
+        position: absolute;
+        bottom: 100px;
+        text-align: center;
+        border-radius: 40px;
+        left: 162px;
+        span {
+            margin-top: 13px;
+            display: block;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+    .circle-event {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 120px;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px 0px #acb0b4;
+        .event {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(50, 117, 247);
+            position: absolute;
+            top: 5px;
+            left: 5px;
+
+            i{
+                color: white;
+                font-size: 25px;
+                position: absolute;
+                top: 13px;
+                left: 12px;
+            }
+        }
+    }
+    .circle-add {
+        left: 200px;
+        .add {
+            i {
+                left: 14px;
+            }
+        }
+    }
+    .circle-message {
+       right: 200px 
+    }
+}

@@ -1,1 +1,51 @@
-<p>change-profile-ws works!</p>
+<div class="formYesNo" id="formYesNo">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Chỉnh sửa Thông tin cá nhân</p>
+            <div class="change">
+                <div class="email change-profile">
+                    <div class="left">Email:</div>
+                    <div class="right">
+                        {{personalServiceWS.persional.email}}
+                    </div>
+                </div>
+                <div class="date change-profile">
+                    <div class="left">Ngày tạo:</div>
+                    <div class="right">{{personalServiceWS.persional.dateCreateFormat()}}</div>
+                </div>
+                <div class="name change-profile">
+                    <div class="left">Tên:</div>
+                    <div class="right">
+                        <input id="name" type="text" [value]="personalServiceWS.persional.name" (keyup)="changeInput()">
+                    </div>
+                </div>
+                <div class="sex change-profile">
+                    <div class="left">Giới tính:</div>
+                    <div class="right">
+                        <div class="right-content-sex">
+                            <div class="nam">
+                                <span>Nam </span>
+                                <input id="man" *ngIf="personalServiceWS.persional.sex == 'Nam'" name="sex" type="radio" checked>
+                                <input id="man" *ngIf="personalServiceWS.persional.sex == 'Nữ'" name="sex" type="radio">
+                            </div>
+                            <div class="nu">
+                                <span>Nữ </span>
+                                <input id="woman" *ngIf="personalServiceWS.persional.sex == 'Nam'" name="sex" type="radio">
+                                <input id="woman" *ngIf="personalServiceWS.persional.sex == 'Nữ'" name="sex" type="radio" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="error-name" id="error-name">Tên không thể để trống</p>
+                <p class="success" id="success">Thay đổi thông tin thành công</p>
+
+            </div>
+            <div class="btn">
+                <p (click)="clickOkChangeProfile()">Chỉnh sửa <i class="fa fa-check"></i></p>
+                <span (click)="clickClose()">Đóng <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

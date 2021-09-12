@@ -1,0 +1,185 @@
+.show-yesno {
+    transform: scaleY(1) !important;
+  }
+  .formYesNo {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999;
+      transition: 0.2s all ease-in-out;
+      transform: scaleY(0);
+      .formYesNoHidden {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #e8a2a224;
+        top: 0px;
+        z-index: 2;
+      }
+    
+      .content {
+        border-radius: 10px;
+        width: 630px;
+        height: 440px;
+        top: 50%;
+        left: 50%;
+        margin-left: -300px;
+        margin-top: -230px;
+        z-index: 3;
+        background-color: white;
+        position: absolute;
+        box-shadow: 17px 20px 14px 4px #dbdae4;
+       
+        .title {
+          text-align: center;
+          font-family: sans-serif;
+          color: rgb(65, 98, 251);
+          font-weight: bold;
+          font-size: 22px;
+          margin-top: 30px;
+          margin-bottom: 0px;
+          i {
+            color: rgb(65, 98, 251);
+          }
+        }
+    
+        .select {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .title1 {
+            color: #36363f;
+            font-weight: bold;
+            font-size: 18px;
+            font-family: sans-serif;
+            margin-bottom: 20px;
+          }
+        
+          .title2 {
+            color: #5e6477;
+            font-size: 14px;
+            text-align: center;
+            width: 350px;
+            margin-top: 35px;
+            font-family: sans-serif;
+          }
+          .change {
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Raleway';
+            position: relative;
+            .change-profile {
+              width: 100%;
+              height: 50px;
+              display: flex;
+              .left {
+                display: flex;
+                align-items: center;
+                width: 35%;
+                font-weight: bold;
+              }
+              .right {
+                display: flex;
+                align-items: center;
+                width: 65%;
+              }
+            }
+          }
+          .sex {
+            .right {
+              .right-content-sex {
+                display: flex;
+                .nam {
+                  margin-right: 50px;
+                }
+              }
+              input{
+                cursor: pointer;
+              }
+            }
+          }
+          .name {
+            .left {
+              width: 34.5% !important;
+              padding-top: 5px;
+            }
+            .right {
+              width: 65.5% !important;
+              input {
+                border: 1px solid #e2e2e2;
+                outline: none;
+                border-radius: 10px;
+                height: 30px;
+                width: 250px;
+              }
+              input[type="text"] {
+                padding-left: 10px;
+              }
+            }
+          }
+          .error-name, .success {
+            position: absolute;
+            margin: 0px;
+            font-size: 13px;
+            font-family: 'Raleway';
+            color: #ff7b5c;
+            bottom: -15px;
+            left: 130px;
+            display: none;
+          }
+          .success {
+            color: #4162fb;
+            left: 115px;
+          }
+          .btn {
+            display: flex;
+            p {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: white;
+              background-color: rgb(216 216 216);
+              border: none;
+              border-radius: 3px;
+              width: 200px;
+              height: 40px;
+              margin-top: 30px;
+              font-size: 14px;
+              font-family: sans-serif;
+              justify-content: center;
+              align-items: center;
+              margin-right: 10px;
+              cursor: pointer;
+              i {
+                margin-left: 5px;
+              }
+            }
+            span {
+              color: white;
+              background-color: rgb(65, 98, 251);
+              border: none;
+              border-radius: 3px;
+              width: 200px;
+              height: 40px;
+              margin-top: 30px;
+              font-size: 14px;
+              font-family: sans-serif;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 10px;
+              cursor: pointer;
+              i {
+                color: white;
+                margin-left: 5px;
+              }
+            }
+          }
+  
+        }
+      }
+    }
+    
