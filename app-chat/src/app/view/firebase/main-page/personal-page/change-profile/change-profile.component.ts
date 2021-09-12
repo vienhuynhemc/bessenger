@@ -64,13 +64,12 @@ export class ChangeProfileComponent implements OnInit {
         ten: name.value.trim(),
         gioi_tinh: sexNew
       })
-      if(name.value.trim() != this.personalService.persional.name) {
         this.changeProfileService.updateName(name.value.trim(),parseIDUser).subscribe(data => {
+          setTimeout(() => {
+            this.personalService.setLoading(false)
+          }, 0);
         })
-      }
-      setTimeout(() => {
-        this.personalService.setLoading(false)
-      }, 0);
+    
       success.style.display = 'block';
     }
   }
