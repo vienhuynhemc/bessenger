@@ -1,1 +1,14 @@
-<p>messenger-ws works!</p>
+<div class="container" *ngIf="this.messenger_main_service.ma_cuoc_tro_chuyen != 'danh-sach'">
+
+    <!-- Header -->
+    <app-messenger-header-ws></app-messenger-header-ws>
+
+    <div class="content">
+        <!-- Content -->
+        <app-messenger-content-ws></app-messenger-content-ws>
+        <!-- Footer -->
+        <app-messenger-footer-ws></app-messenger-footer-ws>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -113,7 +113,25 @@ import { ProfileFriendWsComponent } from './view/ws/main-page-ws/friends-page-ws
 import { ProfileRequestWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-request-ws/profile-request-ws.component';
 import { ProfileSendWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-send-ws/profile-send-ws.component';
 import { ProfileOfferWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-offer-ws/profile-offer-ws.component';
-import { ProfileAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-add-ws/profile-add-ws.component'
+import { ProfileAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/friends-ws/profile-add-ws/profile-add-ws.component';
+import { MessengerContentWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-content-ws/messenger-content-ws.component';
+import { MessengerFooterWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-footer-ws/messenger-footer-ws.component';
+import { MessengerHeaderWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenger-ws/messenger-header-ws/messenger-header-ws.component';
+import { FilesShareWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/files-share-ws/files-share-ws.component';
+import { MediasShareWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/medias-share-ws/medias-share-ws.component';
+import { MembersWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/members-ws/members-ws.component';
+import { SettingBoxChatWsComponent } from './view/ws/main-page-ws/chat-page-ws/file-send-ws/setting-box-chat-ws/setting-box-chat-ws.component';
+import { DetailEmojiMessengerWsComponent } from './view/ws/main-page-ws/chat-page-ws/detail-emoji-messenger-ws/detail-emoji-messenger-ws.component';
+import { DetailImageWsComponent } from './view/ws/main-page-ws/chat-page-ws/detail-image-ws/detail-image-ws.component';
+import { MessengeRecordingWsComponent } from './view/ws/main-page-ws/chat-page-ws/messenge-recording-ws/messenge-recording-ws.component';
+import { StickerWsComponent } from './view/ws/sticker-ws/sticker-ws.component';
+import { ShopStickerWsComponent } from './view/ws/shop-sticker-ws/shop-sticker-ws.component';
+import { RecordingWsComponent } from './view/ws/recording-ws/recording-ws.component';
+import { GiphyWsComponent } from './view/ws/giphy-ws/giphy-ws.component';
+import { EmojiWsComponent } from './view/ws/emoji-ws/emoji-ws.component';
+import { StatusSettingsWsComponent } from './view/ws/main-page-ws/setting-page-ws/status-settings-ws/status-settings-ws.component';
+import { CallVideoWsComponent } from './view/ws/main-page-ws/chat-page-ws/call-video-ws/call-video-ws.component';
+import { CreateGroupChatWsComponent } from './view/ws/main-page-ws/chat-page-ws/create-group-chat-ws/create-group-chat-ws.component'
 
 
 @NgModule({
@@ -207,7 +225,25 @@ import { ProfileAddWsComponent } from './view/ws/main-page-ws/friends-page-ws/fr
     ProfileRequestWsComponent,
     ProfileSendWsComponent,
     ProfileOfferWsComponent,
-    ProfileAddWsComponent
+    ProfileAddWsComponent,
+    MessengerContentWsComponent,
+    MessengerFooterWsComponent,
+    MessengerHeaderWsComponent,
+    FilesShareWsComponent,
+    MediasShareWsComponent,
+    MembersWsComponent,
+    SettingBoxChatWsComponent,
+    DetailEmojiMessengerWsComponent,
+    DetailImageWsComponent,
+    MessengeRecordingWsComponent,
+    StickerWsComponent,
+    ShopStickerWsComponent,
+    RecordingWsComponent,
+    GiphyWsComponent,
+    EmojiWsComponent,
+    StatusSettingsWsComponent,
+    CallVideoWsComponent,
+    CreateGroupChatWsComponent
   ],
   imports: [
     BrowserModule,

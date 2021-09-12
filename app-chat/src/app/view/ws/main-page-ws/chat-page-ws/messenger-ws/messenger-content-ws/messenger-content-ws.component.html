@@ -1,0 +1,1810 @@
+<div class="container" [style.height]="this.messenger_footer_service.getHeight()">
+    <div class="nen" id="nen" [style.background-image]="this.content_service.object_chat.cuoc_tro_truyen.mau">
+    </div>
+    <div class="content" id="tin-nhan-div" (scroll)="scrollChange($event)">
+        <div id="danh-sach-tin-nhan">
+            <div style="display: inline;">
+                <div style="height: 20px; width: 100%; background-color: white;"></div>
+                <!-- Thằng đầu tiên thằng nào cũng phải có -->
+                <!-- Đó là thông tin cơ bản của cuộc trò chuyện -->
+                <div class="first">
+                    <!-- 1.Hình -->
+                    <div class="hinh-dai-dien">
+                        <div class="nhom" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                            && this.content_service.object_chat.imgAvatars.length == 2
+                            ">
+                            <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'"
+                                class="hinh-1" alt="">
+                            <img [src]="this.content_service.object_chat.imgAvatars[1] ||'assets/images/loading.gif'"
+                                alt="" class="hinh-2">
+                        </div>
+                        <div class="don" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don'
+                            || (this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                            && this.content_service.object_chat.imgAvatars.length == 1)
+                            ">
+                            <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'"
+                                alt="">
+                        </div>
+                        <div class="don" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
+                        && this.content_service.object_chat.imgAvatars.length == 0">
+                            <img src="assets/images/iconRectangle.png" alt="">
+                        </div>
+                        <div *ngIf="this.content_service.object_chat.is_online && this.settingsService.stateStatus == 'bat'" class="online">
+                            <div class="child"></div>
+                        </div>
+                    </div>
+                    <!-- 2. Thông tin-->
+                    <p class="create">Bessenger</p>
+                    <!--Nếu loại là nhóm thôgn báo cho mình biết chưa kết nối với bao nhiêu người-->
+                    <p class="create" *ngIf="this.content_service.object_chat.statusConnect.length != 0 ">
+                        {{this.content_service.object_chat.statusConnect}}</p>
+                </div>
+                <!-- Tin nhắn -->
+                <!--1. Tin nhắn -->
+                <div *ngFor="let item of this.content_service.object_chat.cuoc_tro_truyen.tin_nhan;let i = index">
+                    <!-- Thông báo -->
+                    <div *ngIf="item.loai_tin_nhan == 'thong_bao'" class="thong_bao"
+                        [style.padding-top]="item.marginTop">
+                        <p> {{item.noi_dung_thong_bao}}</p>
+                    </div>
+                    <!-- Thời gian -->
+                    <div *ngIf="item.loai_tin_nhan == 'thoi_gian'" class="thoi_gian"
+                        [style.padding-top]="item.marginTop">
+                        <p> {{item.noi_dung}}</p>
+                    </div>
+                    <!-- gui_text -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_text'" class="gui_text" [class.ban_than_div]="item.isBanThan"
+                        [style.padding-top]="item.marginTop">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" *ngIf="!item.isBanThan"
+                                [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.ban_than]="item.isBanThan"
+                                    [class.doi_phuong]="!item.isBanThan"
+                                    [class.border-tren-ban-than]="item.isBanThan && item.isHaveBorderTop"
+                                    [class.border-duoi-ban-than]="item.isBanThan && item.isHaveBorderBottom"
+                                    [class.border-tren-doi-phuong]="!item.isBanThan && item.isHaveBorderTop"
+                                    [class.border-duoi-doi-phuong]="!item.isBanThan && item.isHaveBorderBottom"
+                                    [style.background-color]="item.isBanThan?'':'#e4e6eb'">
+                                    <div class="noi-dung" [innerHTML]="item.noi_dung_html" [matTooltip]="item.timeSend"
+                                        matTooltipClass="tooltip">
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <!-- Không có người xem thì sẽ là chuyển hoặc đã gửi -->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Có một người xem thì thế vô chỗ này -->
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gửi text icon -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_text_icon'" class="gui_text_icon"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                        [innerHTML]="item.noi_dung_html">
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gửi Sticker và giphy-->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan' || item.loai_tin_nhan == 'gui_giphy'"
+                        class="gui_text_icon" [style.padding-top]="item.marginTop"
+                        [class.ban_than_div]="item.isBanThan">
+
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div *ngIf="item.loai_tin_nhan == 'gui_nhan_dan'" class="chua-nd"
+                                    [class.doi_phuong]="!item.isBanThan">
+                                    <img [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                        [src]="item.noi_dung || 'assets/images/loading.gif'" alt=""
+                                        class="sticker_noidung">
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="item.loai_tin_nhan == 'gui_giphy'" class="chua-nd"
+                                    [class.doi_phuong]="!item.isBanThan">
+                                    <div class="giphy-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                        <img [src]="item.noi_dung || 'assets/images/loading.gif'" alt=""
+                                            class="giphy-noidung">
+                                        <div class="name-giphy">
+                                            <img src="assets/images/giphy.png" alt="">
+                                            <span class="name">GIPHY</span>
+                                        </div>
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gửi ghi âm -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_ghi_am'" class="gui_ghi_am"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <app-messenge-recording-ws [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                        [colorBackground]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
+                                        [inputRecording]="item.noi_dung" [idRecording]="item.ma_tin_nhan">
+                                    </app-messenge-recording-ws>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <!-- gửi file -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_file'" class="gui_ghi_am gui_file"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <!-- tên file quá dài -->
+                                    <div *ngIf="item.checkLimitNameFile()" class="noi-dung-gui-file" (click)="clickMessageFile(item.ma_tin_nhan, item.noi_dung)">
+                                        <div class="noi-dung-gui-file-left" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                            <div class="cover-file-left-icon">
+                                                <i></i>
+                                            </div>
+                                        </div>
+                                        <div class="noi-dung-gui-file-right">
+                                            <span  [matTooltip]="item.link_file" matTooltipClass="tooltip" class="name-file-right">{{item.getLimitNameFile()}}</span>
+                                        </div>
+                                    </div>
+                                    <!-- tên file vừa đủ -->
+                                    <div *ngIf="!item.checkLimitNameFile()" class="noi-dung-gui-file" [matTooltip]="item.timeSend" matTooltipClass="tooltip" (click)="clickMessageFile(item.ma_tin_nhan, item.noi_dung)">
+                                        <div class="noi-dung-gui-file-left" >
+                                            <div class="cover-file-left-icon">
+                                                <i></i>
+                                            </div>
+                                        </div>
+                                        <div class="noi-dung-gui-file-right">
+                                            <span class="name-file-right">{{item.link_file}}</span>
+                                        </div>
+                                    </div>
+                                    <a target="_blank" id="file-{{item.ma_tin_nhan}}" [href]="uRLSafe(item.noi_dung)" [download]="item.link_file" hidden></a>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <!-- gui video -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_video'" class="gui_ghi_am gui-video"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <!-- tên file quá dài -->
+                                    <div class="gui-video-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                        <video controls width="320" height="173" class="gui-video" (click)="imageDetailService.openImageURL(item.noi_dung,item.loai_tin_nhan ,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                            <source  [src]="uRLSafe(item.noi_dung) || 'assets/images/loading.gif'">
+                                        </video>
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gui anh -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_hinh'" class="gui_ghi_am gui-anh"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <div class="gui-anh-content" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                        <img (click)="imageDetailService.openImageURL(image,item.loai_tin_nhan ,this.messenger_main_service.ma_cuoc_tro_chuyen)" *ngFor="let image of item.danh_sach_url_anh" [class.gui-anh-clone]="item.danh_sach_url_anh.length == 1" [class.gui-anh]="item.danh_sach_url_anh.length > 1" [src]="uRLSafe(image) || 'assets/images/loading.gif'" alt="">
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gửi tin nhắn like -->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_tin_nhan_like'" class="gui_text_icon"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                        <svg viewBox="0 0 16 16" height="32" width="32">
+                                            <path
+                                                [attr.fill]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
+                                                d="M16,9.1c0-0.8-0.3-1.1-0.6-1.3c0.2-0.3,0.3-0.7,0.3-1.2c0-1-0.8-1.7-2.1-1.7h-3.1c0.1-0.5,0.2-1.3,0.2-1.8 c0-1.1-0.3-2.4-1.2-3C9.3,0.1,9,0,8.7,0C8.1,0,7.7,0.2,7.6,0.4C7.5,0.5,7.5,0.6,7.5,0.7L7.6,3c0,0.2,0,0.4-0.1,0.5L5.7,6.6 c0,0-0.1,0.1-0.1,0.1l0,0l0,0L5.3,6.8C5.1,7,5,7.2,5,7.4v6.1c0,0.2,0.1,0.4,0.2,0.5c0.1,0.1,1,1,2,1h5.2c0.9,0,1.4-0.3,1.8-0.9 c0.3-0.5,0.2-1,0.1-1.4c0.5-0.2,0.9-0.5,1.1-1.2c0.1-0.4,0-0.8-0.2-1C15.6,10.3,16,9.9,16,9.1z">
+                                            </path>
+                                            <path
+                                                [attr.fill]="this.content_service.object_chat.cuoc_tro_truyen.mau_duoi"
+                                                d="M3.3,6H0.7C0.3,6,0,6.3,0,6.7v8.5C0,15.7,0.3,16,0.7,16h2.5C3.7,16,4,15.7,4,15.3V6.7C4,6.3,3.7,6,3.3,6z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gửi tin nhắn btcx-->
+                    <div *ngIf="item.loai_tin_nhan == 'gui_tin_nhan_btcx'" class="gui_text_icon"
+                        [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                        <div class="tren">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                                *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                style="display: flex;align-items: center;">
+                                <!-- Div công cụ bên trái nếu là bản thân -->
+                                <div class="cong-cu" *ngIf="item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                        (click)="thuHoi(item.ma_tin_nhan)">
+                                        <main lottie [options]="this.recall_m.options"
+                                            (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                        </main>
+                                    </div>
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- Nội dung -->
+                                <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                    <div class="noi-dung" [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                        <img style="width: 32px; height: 32px; object-fit: cover;image-rendering: -webkit-optimize-contrast;"
+                                            [src]="item.noi_dung || 'assets/images/loading.gif'" alt="">
+                                    </div>
+                                    <!-- danh sách biểu tượng cảm xúc -->
+                                    <div class="dscx"
+                                        (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                        *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                        [style.left]="item.isBanThan?'none':'5px'">
+                                        <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                            matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                                alt="">
+                                        </div>
+                                        <div class="element" *ngIf="item.is_have_dislike"
+                                            [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                            <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                                alt="">
+                                        </div>
+                                        <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                            {{item.cam_xuc_tin_nhan.length}}</p>
+                                    </div>
+                                </div>
+                                <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                                <div class="cong-cu" *ngIf="!item.isBanThan"
+                                    [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                    <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                        (click)="this.content_service.openSelectEmoji(item)">
+                                        <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                            <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></circle>
+                                            <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                                stroke="#8a8d91" fill="#fff"></path>
+                                            <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                            <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nếu người dùng bấm chọn cảm xúc -->
+                        <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                            <div *ngFor="let cx of this.s_e.emojis"
+                                (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                                <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tin nhắn thu hồi -->
+                    <div *ngIf="item.loai_tin_nhan == 'thu_hoi'" class="gui_text" [class.ban_than_div]="item.isBanThan"
+                        [style.padding-top]="item.marginTop">
+                        <div class="tren div-thu-hoi">
+                            <!-- Hình nếu ko  phải bản thân -->
+                            <div class="hinh" *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly"
+                                matTooltipClass="tooltip">
+                                <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                            <!-- Nội dung -->
+                            <div class="chua-nd" [class.ban_than]="item.isBanThan" [class.doi_phuong]="!item.isBanThan" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                                [matTooltip]="item.timeSend" matTooltipClass="tooltip"
+                                [class.border-tren-ban-than]="item.isBanThan && item.isHaveBorderTop"
+                                [class.border-duoi-ban-than]="item.isBanThan && item.isHaveBorderBottom"
+                                [class.border-tren-doi-phuong]="!item.isBanThan && item.isHaveBorderTop"
+                                [class.border-duoi-doi-phuong]="!item.isBanThan && item.isHaveBorderBottom">
+                                <div class="thu-hoi">
+                                    <p>{{item.noi_dung_thu_hoi}}</p>
+                                </div>
+                            </div>
+                            <!-- Trạng thái gửi nếu là bản thân-->
+                            <!-- Không có người xem thì sẽ là chuyển hoặc đã gửi -->
+                            <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                                <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                    width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                        </path>
+                                        <path fill="#bcc0c4"
+                                            d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                    height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                    <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#bcc0c4"
+                                            d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Có một người xem thì thế vô chỗ này -->
+                            <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                                *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                                <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Danh sách những người đã xem-->
+                        <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                            <div class="list">
+                                <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                    <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                        matTooltipClass="tooltip">
+                                        <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cuộc gọi nhỡ -->
+                    <div *ngIf="item.loai_tin_nhan == 'cuoc_goi_nho'" class="gui_ghi_am"
+                    [style.padding-top]="item.marginTop" [class.ban_than_div]="item.isBanThan">
+                    <div class="tren">
+                        <!-- Hình nếu ko  phải bản thân -->
+                        <div class="hinh" [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'"
+                            *ngIf="!item.isBanThan" [matTooltip]="item.ten_da_duoc_xu_ly" matTooltipClass="tooltip">
+                            <img [src]="item.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                alt="">
+                        </div>
+                        <div [style.margin-bottom]="item.is_exits_dscx?'15px':'0px'" [style.margin-left] = "item.isBanThan?'auto':'0px'"
+                            style="display: flex;align-items: center;">
+                            <!-- Div công cụ bên trái nếu là bản thân -->
+                            <div class="cong-cu" *ngIf="item.isBanThan"
+                                [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                <div class="thu-hoi" matTooltip="Thu hồi tin nhắn" matTooltipClass="tooltip"
+                                    (click)="thuHoi(item.ma_tin_nhan)">
+                                    <main lottie [options]="this.recall_m.options"
+                                        (animationCreated)="this.recall_m.animationCreated($event)" class="anim">
+                                    </main>
+                                </div>
+                                <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                    (click)="this.content_service.openSelectEmoji(item)">
+                                    <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                        <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                            stroke="#8a8d91" fill="#fff"></circle>
+                                        <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                            stroke="#8a8d91" fill="#fff"></path>
+                                        <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                        </circle>
+                                        <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                        </circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Nội dung -->
+                            <div class="chua-nd" [class.doi_phuong]="!item.isBanThan">
+                                <div *ngIf="item.isBanThan" class="cuoc-goi-nho-ban-than"   [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                    <div class="icon-cgnbt">
+                                        <i></i>
+                                    </div>
+                                    <div class="noi-dung-cgnbt">
+                                        <p>Chat video</p>
+                                        <span>{{item.noi_dung}}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="!item.isBanThan" class="cuoc-goi-nho"   [matTooltip]="item.timeSend" matTooltipClass="tooltip">
+                                    <div class="icon-cgnbt">
+                                        <i></i>
+                                    </div>
+                                    <div class="noi-dung-cgnbt">
+                                        <p>Đã bỏ lỡ lần chat video</p>
+                                        <span>{{item.noi_dung}}</span>
+                                    </div>
+                                </div>
+                                <!-- danh sách biểu tượng cảm xúc -->
+                                <div class="dscx"
+                                    (click)="this.s_e.openDetail(item.cam_xuc_tin_nhan,item.ma_tin_nhan,this.messenger_main_service.ma_cuoc_tro_chuyen)"
+                                    *ngIf="item.is_exits_dscx" [style.right]="item.isBanThan?'5px':'none'"
+                                    [style.left]="item.isBanThan?'none':'5px'">
+                                    <div class="element" *ngIf="item.is_have_tim" [matTooltip]="item.tool_tip_tim"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t72/1/32/2764.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_cuoi" [matTooltip]="item.tool_tip_cuoi"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t8e/1/32/1f606.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_wow" [matTooltip]="item.tool_tip_wow"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t7b/1/32/1f62e.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_buon" [matTooltip]="item.tool_tip_buon"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc8/1/32/1f622.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_gian" [matTooltip]="item.tool_tip_gian"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tc6/1/32/1f620.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_like" [matTooltip]="item.tool_tip_like"
+                                        matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/tb6/1/32/1f44d.png"
+                                            alt="">
+                                    </div>
+                                    <div class="element" *ngIf="item.is_have_dislike"
+                                        [matTooltip]="item.tool_tip_dislike" matTooltipClass="tooltip">
+                                        <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t37/1/32/1f44e.png"
+                                            alt="">
+                                    </div>
+                                    <p [matTooltip]="item.toolTipDSCXALL" matTooltipClass="tooltip">
+                                        {{item.cam_xuc_tin_nhan.length}}</p>
+                                </div>
+                            </div>
+                            <!-- Div công cụ bên phải nếu không phải là bản thân -->
+                            <div class="cong-cu" *ngIf="!item.isBanThan"
+                                [class.cong-cu-hidden]="!item.is_show_select_emoji">
+                                <div class="cxtn" matTooltip="Bày tỏ cảm xúc" matTooltipClass="tooltip"
+                                    (click)="this.content_service.openSelectEmoji(item)">
+                                    <svg _ngcontent-klf-c87="" width="22px" height="22px" viewBox="0 0 22 22">
+                                        <circle _ngcontent-klf-c87="" cx="11" cy="11" r="7" stroke-width="1.5px"
+                                            stroke="#8a8d91" fill="#fff"></circle>
+                                        <path _ngcontent-klf-c87="" d="M8,13Q11,16,14,13" stroke-width="1.5px"
+                                            stroke="#8a8d91" fill="#fff"></path>
+                                        <circle _ngcontent-klf-c87="" cx="9" cy="10" r="1.2" fill="#8a8d91">
+                                        </circle>
+                                        <circle _ngcontent-klf-c87="" cx="13" cy="10" r="1.2" fill="#8a8d91">
+                                        </circle>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Trạng thái gửi nếu là bản thân-->
+                        <div class="trang_thai_gui" *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay != 1">
+                            <div *ngIf="item.isDaGui" matTooltip="Đã gửi" matTooltipClass="tooltip" height="14px"
+                                width="14px" viewBox="2 2 20 20" role="img">
+                                <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                    data-testid="message_delivery_state_sent" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#bcc0c4"
+                                        d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm0 18.5a8.5 8.5 0 1 1 8.5-8.5 8.51 8.51 0 0 1 -8.5 8.5z">
+                                    </path>
+                                    <path fill="#bcc0c4"
+                                        d="m15.982 8.762-5.482 5.487-2.482-2.478a.75.75 0 0 0 -1.06 1.06l3.008 3.008a.748.748 0 0 0 1.06 0l6.016-6.016a.75.75 0 0 0 -1.06-1.061z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div *ngIf="item.isDaChuyen" matTooltip="Đã chuyển" matTooltipClass="tooltip"
+                                height="14px" width="14px" viewBox="2 2 20 20" role="img">
+                                <svg height="14px" width="14px" viewBox="2 2 20 20" role="img"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#bcc0c4"
+                                        d="m12 2a10 10 0 1 0 10 10 10.011 10.011 0 0 0 -10-10zm5.219 8-6.019 6.016a1 1 0 0 1 -1.414 0l-3.005-3.008a1 1 0 1 1 1.419-1.414l2.3 2.3 5.309-5.31a1 1 0 1 1 1.41 1.416z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="trang_thai_gui" [class.trang_thai_gui_kpbt]="!item.isBanThan"
+                            *ngIf="item.soNguoiXemDangOViTriCuaTinNhanNay == 1">
+                            <div class="nguoi_xem" [matTooltip]="item.thangXemDuyNhat.noi_dung"
+                                matTooltipClass="tooltip">
+                                <img [src]="item.thangXemDuyNhat.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nếu người dùng bấm chọn cảm xúc -->
+                    <div class="chuoi-cam-xuc" *ngIf="item.is_show_select_emoji">
+                        <div *ngFor="let cx of this.s_e.emojis"
+                            (click)="this.content_service.selectEmoji(cx,item,this.messenger_main_service.ma_cuoc_tro_chuyen)">
+                            <img [src]="cx.img || 'assets/images/loading.gif'" alt="">
+                        </div>
+                    </div>
+                    <!-- Danh sách những người đã xem-->
+                    <div class="da_xem" *ngIf="item.isCoNguoiXem && item.soNguoiXemDangOViTriCuaTinNhanNay >1">
+                        <div class="list">
+                            <div *ngFor="let da_xem of item.tinh_trang_xem">
+                                <div *ngIf="da_xem.isShow" class="item-ok" [matTooltip]="da_xem.noi_dung"
+                                    matTooltipClass="tooltip">
+                                    <img [src]="da_xem.getHinh(this.content_service.object_chat.thanh_vien) || 'assets/images/loading.gif'"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!--2. Những ông đang nhập-->
+                <div class="list-dang-nhap"
+                    *ngIf="this.content_service.dang_nhaps.length != 0 && !this.content_service.object_chat.is_roi_chua ">
+                    <div *ngFor="let item of this.content_service.dang_nhaps" class="dang_nhap">
+                        <div class="hinh" [matTooltip]="item.noi_dung" matTooltipClass="tooltip">
+                            <img [src]="item.hinh || 'assets/images/loading.gif'" alt="">
+                        </div>
+                        <div class="lottie">
+                            <main lottie [options]="this.options"></main>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------------------->
+                <div style="height: 15px; width: 100%; background-color: white;"></div>
+            </div>
+        </div>
+    </div>
+</div>

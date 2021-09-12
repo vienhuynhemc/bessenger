@@ -1,0 +1,244 @@
+<div class="container">
+    <div class="content-show" *ngIf="!this.content_service.object_chat.is_roi_chua">
+        <div class="icon">
+            <div class="child" matTooltip="Đính kèm một ảnh hoặc video" matTooltipClass="tooltip" (click)="openChooseImageOrVideo()">
+                <svg viewBox="0 -1 17 17" height="20px" width="20px" class="a8c37x1j ms05siws hr662l2t b7h9ocf4">
+                    <g fill="none" fill-rule="evenodd">
+                        <path
+                            d="M2.882 13.13C3.476 4.743 3.773.48 3.773.348L2.195.516c-.7.1-1.478.647-1.478 1.647l1.092 11.419c0 .5.2.9.4 1.3.4.2.7.4.9.4h.4c-.6-.6-.727-.951-.627-2.151z"
+                            [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi"> </path>
+                        <circle [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" cx="8.5"
+                            cy="4.5" r="1.5"></circle>
+                        <path
+                            d="M14 6.2c-.2-.2-.6-.3-.8-.1l-2.8 2.4c-.2.1-.2.4 0 .6l.6.7c.2.2.2.6-.1.8-.1.1-.2.1-.4.1s-.3-.1-.4-.2L8.3 8.3c-.2-.2-.6-.3-.8-.1l-2.6 2-.4 3.1c0 .5.2 1.6.7 1.7l8.8.6c.2 0 .5 0 .7-.2.2-.2.5-.7.6-.9l.6-5.9L14 6.2z"
+                            [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi"></path>
+                        <path
+                            d="M13.9 15.5l-8.2-.7c-.7-.1-1.3-.8-1.3-1.6l1-11.4C5.5 1 6.2.5 7 .5l8.2.7c.8.1 1.3.8 1.3 1.6l-1 11.4c-.1.8-.8 1.4-1.6 1.3z"
+                            [attr.stroke]="this.messenger_footer_service.object_chat_footer.mau_duoi"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+                    <input multiple type="file" id="choose-image-video" hidden="hidden" (change)="changeChooseImageOrVideo()" accept="image/*, video/*">
+
+            </div>
+            <!-- Nhãn dán -->
+            <div (click)="openBoxStickers()" class="child" matTooltip="Chọn nhãn dán" matTooltipClass="tooltip">
+                <svg x="0px" y="0px" viewBox="0 0 17 16" height="20px" width="20px"
+                    class="a8c37x1j ms05siws hr662l2t b7h9ocf4 crt8y2ji">
+                    <g fill-rule="evenodd">
+                        <circle fill="none" cx="5.5" cy="5.5" r="1"></circle>
+                        <circle fill="none" cx="11.5" cy="4.5" r="1"></circle>
+                        <path
+                            d="M5.3 9c-.2.1-.4.4-.3.7.4 1.1 1.2 1.9 2.3 2.3h.2c.2 0 .4-.1.5-.3.1-.3 0-.5-.3-.6-.8-.4-1.4-1-1.7-1.8-.1-.2-.4-.4-.7-.3z"
+                            fill="none"></path>
+                        <path
+                            d="M10.4 13.1c0 .9-.4 1.6-.9 2.2 4.1-1.1 6.8-5.1 6.5-9.3-.4.6-1 1.1-1.8 1.5-2 1-3.7 3.6-3.8 5.6z"
+                            [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi"></path>
+                        <path
+                            d="M2.5 13.4c.1.8.6 1.6 1.3 2 .5.4 1.2.6 1.8.6h.6l.4-.1c1.6-.4 2.6-1.5 2.7-2.9.1-2.4 2.1-5.4 4.5-6.6 1.3-.7 1.9-1.6 1.9-2.8l-.2-.9c-.1-.8-.6-1.6-1.3-2-.7-.5-1.5-.7-2.4-.5L3.6 1.5C1.9 1.8.7 3.4 1 5.2l1.5 8.2zm9-8.9c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm-3.57 6.662c.3.1.4.4.3.6-.1.3-.3.4-.5.4h-.2c-1-.4-1.9-1.3-2.3-2.3-.1-.3.1-.6.3-.7.3-.1.5 0 .6.3.4.8 1 1.4 1.8 1.7zM5.5 5.5c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"
+                            [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="nonzero">
+                        </path>
+                    </g>
+                </svg>
+
+            </div>
+            <div [style.top]="getTopGiphy()" *ngIf="stickersService.isShowBoxSticker" class="box-stickers">
+                <app-sticker-ws></app-sticker-ws>
+            </div>
+
+            <!--  -->
+            <!-- box giphy -->
+            <div (click)="openBoxGiphy()" class="child" matTooltip="Chọn file gif" matTooltipClass="tooltip">
+                <svg x="0px" y="0px" viewBox="0 0 16 16" height="20px" width="20px"
+                    class="a8c37x1j ms05siws hr662l2t b7h9ocf4 crt8y2ji">
+                    <path
+                        d="M.783 12.705c.4.8 1.017 1.206 1.817 1.606 0 0 1.3.594 2.5.694 1 .1 1.9.1 2.9.1s1.9 0 2.9-.1 1.679-.294 2.479-.694c.8-.4 1.157-.906 1.557-1.706.018 0 .4-1.405.5-2.505.1-1.2.1-3 0-4.3-.1-1.1-.073-1.976-.473-2.676-.4-.8-.863-1.408-1.763-1.808-.6-.3-1.2-.3-2.4-.4-1.8-.1-3.8-.1-5.7 0-1 .1-1.7.1-2.5.5s-1.417 1.1-1.817 1.9c0 0-.4 1.484-.5 2.584-.1 1.2-.1 3 0 4.3.1 1 .2 1.705.5 2.505zm10.498-8.274h2.3c.4 0 .769.196.769.696 0 .5-.247.68-.747.68l-1.793.02.022 1.412 1.252-.02c.4 0 .835.204.835.704s-.442.696-.842.696H11.82l-.045 2.139c0 .4-.194.8-.694.8-.5 0-.7-.3-.7-.8l-.031-5.631c0-.4.43-.696.93-.696zm-3.285.771c0-.5.3-.8.8-.8s.8.3.8.8l-.037 5.579c0 .4-.3.8-.8.8s-.8-.4-.8-.8l.037-5.579zm-3.192-.825c.7 0 1.307.183 1.807.683.3.3.4.7.1 1-.2.4-.7.4-1 .1-.2-.1-.5-.3-.9-.3-1 0-2.011.84-2.011 2.14 0 1.3.795 2.227 1.695 2.227.4 0 .805.073 1.105-.127V8.6c0-.4.3-.8.8-.8s.8.3.8.8v1.8c0 .2.037.071-.063.271-.7.7-1.57.991-2.47.991C2.868 11.662 1.3 10.2 1.3 8s1.704-3.623 3.504-3.623z"
+                        [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="nonzero">
+                    </path>
+                </svg>
+            </div>
+            <div [style.top]="getTopGiphy()" class="box-giphy" *ngIf="stickersService.isShowBoxGiphy">
+                <app-giphy-ws></app-giphy-ws>
+            </div>
+            <!--  -->
+            <div (click)="openChooseFile()" class="child" matTooltip="Đính kèm file" matTooltipClass="tooltip">
+                <i [style.color]="this.messenger_footer_service.object_chat_footer.mau_duoi"
+                    class="fas fa-paperclip"></i>
+                    <input multiple type="file" id="choose-file" hidden="hidden" (change)="changeChooseFile()" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf, image/*, audio/*, video/*">
+               
+            </div>
+            <div class="child" matTooltip="Tạo cuộc thăm dò ý kiến" matTooltipClass="tooltip"
+                *ngIf="this.messenger_footer_service.object_chat_footer.loai == 'nhom'">
+                <i [style.color]="this.messenger_footer_service.object_chat_footer.mau_duoi" class="fas fa-poll"></i>
+            </div>
+
+            <div class="child" matTooltip="Gửi clip âm thanh" matTooltipClass="tooltip" (click)="openRecording()">
+                <i [style.color]="this.messenger_footer_service.object_chat_footer.mau_duoi"
+                    class="fas fa-microphone"></i>
+
+            </div>
+        </div>
+        <!-- thanh ghi âm -->
+        <app-recording-ws [colorBackground]="this.messenger_footer_service.object_chat_footer.mau_duoi" *ngIf="recordingService.isShowRecording"></app-recording-ws>
+        <!--  -->
+
+        <div class="khung-chat" *ngIf="!recordingService.isShowRecording">
+            <!-- danh sách file chức năng chọn file -->
+            <div class="input-file" id="input-file" *ngIf="arrayFileUpload.length > 0">
+                <div class="scroll-input" id="scroll-input">
+                    <div  *ngFor="let item of arrayFileUpload" 
+                    [class.input-item]="item.typeFile == 'image' || item.typeFile == 'video'"
+                    [class.input-item-file]="item.typeFile == 'file' || item.typeFile == 'audio'">
+                        <img *ngIf="item.typeFile == 'image'" class="item" [src]="item.url" alt="">
+                        <video *ngIf="item.typeFile == 'video'" class="item" [src]="item.url"></video>
+                        <div class="left" *ngIf="item.typeFile == 'file' || item.typeFile == 'audio'">
+                            <div class="cover-left-icon">
+                                <i></i>
+                            </div>
+                        </div>
+                        <div class="right" *ngIf="item.typeFile == 'file' || item.typeFile == 'audio'">
+                            <span *ngIf="!item.checkLimitName()" class="file-name">{{item.name}}</span>
+                            <span *ngIf="item.checkLimitName()" class="file-name" [matTooltip]="item.name" matTooltipClass="tooltip">{{item.getLimitName()}}</span>
+                        </div>
+                        <div class="input-item-exit"  (click)="removeFileChooseFile(item)">
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="add-file" (click)="openChooseFile()">
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <!-- image hoac video -->
+            <div class="input-file" id="input-file" *ngIf="arrayImageVideoUpload.length > 0">
+                <div class="scroll-input" id="scroll-input">
+                    <div  *ngFor="let item of arrayImageVideoUpload" 
+                    [class.input-item]="item.typeFile == 'image' || item.typeFile == 'video'"
+                    [class.input-item-file]="item.typeFile == 'file' || item.typeFile == 'audio'">
+                        <img *ngIf="item.typeFile == 'image'" class="item" [src]="item.url" alt="">
+                        <video *ngIf="item.typeFile == 'video'" class="item" [src]="item.url"></video>
+                        <div class="left" *ngIf="item.typeFile == 'file' || item.typeFile == 'audio'">
+                            <div class="cover-left-icon">
+                                <i></i>
+                            </div>
+                        </div>
+                        <div class="right" *ngIf="item.typeFile == 'file' || item.typeFile == 'audio'">
+                            <span *ngIf="!item.checkLimitName()" class="file-name">{{item.name}}</span>
+                            <span *ngIf="item.checkLimitName()" class="file-name" [matTooltip]="item.name" matTooltipClass="tooltip">{{item.getLimitName()}}</span>
+                        </div>
+                        <div class="input-item-exit"  (click)="removeImageVideoChoose(item)">
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="add-file" (click)="openChooseImageOrVideo()">
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div class="khung-chat-content">
+                <div class="parent-input" id="parent_input">
+                    <div contenteditable="true" #input class="input" (input)="inputMessenger(input.innerHTML)" id="input"
+                        (keydown)="onKeyInput($event)" (focusout)="khongNhapNua($event)" (focus)="dangNhap($event)">
+                    </div>
+                </div>
+         
+                <p class="place" *ngIf="this.tin_nhan == null || this.tin_nhan.length == 0 || this.tin_nhan == '<br>'">Aa
+                </p>
+                <i [style.color]="this.messenger_footer_service.object_chat_footer.mau_duoi" class="fas fa-smile c-btcx"
+                    (click)="openBoxBtcx()" matTooltip="Chọn biểu tượng cảm xúc" matTooltipClass="tooltip"></i>
+                <!-- Khung để hiện chọn biểu tượng cảm xúc -->
+                <div class="box-bieu-tuong-cam-xuc" id="box-btcx" *ngIf="isShowBtcxBox" [style.top]="getTopBoxBTCX()"
+                    [style.left]="getLeftBoxBTCX()">
+                    <app-emoji-ws (icon)="getIcon($event)"></app-emoji-ws>
+                    <div class="mui-ten"></div>
+                </div>
+            </div>
+            <!--------->
+        </div>
+        <div class="bieu-tuong-cam-xuc-chat">
+            <!-- nút like -->
+            <svg viewBox="0 0 16 16" height="20" width="20" matTooltip="Gửi lượt thích" matTooltipClass="tooltip"
+                (click)=" guiTinNhanLuotThich()"
+                *ngIf="this.arrayImageVideoUpload.length == 0 && this.arrayFileUpload.length == 0 && !recordingService.isShowRecording && this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc == 'khong' && (this.tin_nhan == null || this.tin_nhan.length == 0 || this.tin_nhan == '<br>')">
+
+                <path [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi"
+                    d="M16,9.1c0-0.8-0.3-1.1-0.6-1.3c0.2-0.3,0.3-0.7,0.3-1.2c0-1-0.8-1.7-2.1-1.7h-3.1c0.1-0.5,0.2-1.3,0.2-1.8 c0-1.1-0.3-2.4-1.2-3C9.3,0.1,9,0,8.7,0C8.1,0,7.7,0.2,7.6,0.4C7.5,0.5,7.5,0.6,7.5,0.7L7.6,3c0,0.2,0,0.4-0.1,0.5L5.7,6.6 c0,0-0.1,0.1-0.1,0.1l0,0l0,0L5.3,6.8C5.1,7,5,7.2,5,7.4v6.1c0,0.2,0.1,0.4,0.2,0.5c0.1,0.1,1,1,2,1h5.2c0.9,0,1.4-0.3,1.8-0.9 c0.3-0.5,0.2-1,0.1-1.4c0.5-0.2,0.9-0.5,1.1-1.2c0.1-0.4,0-0.8-0.2-1C15.6,10.3,16,9.9,16,9.1z">
+                </path>
+                <path [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi"
+                    d="M3.3,6H0.7C0.3,6,0,6.3,0,6.7v8.5C0,15.7,0.3,16,0.7,16h2.5C3.7,16,4,15.7,4,15.3V6.7C4,6.3,3.7,6,3.3,6z">
+                </path>
+            </svg>
+
+
+            <!-- Biểu tượgn cảm xúc-->
+            <div class="emoji-btcx" (click)="guiTinNhanBTCX()"
+                [matTooltip]=" this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc_alt"
+                matTooltipClass="tooltip"
+                *ngIf="this.arrayImageVideoUpload.length == 0 && this.arrayFileUpload.length == 0 && !recordingService.isShowRecording && this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc != 'khong' && (this.tin_nhan == null || this.tin_nhan.length == 0 || this.tin_nhan == '<br>')">
+                <img [src]="this.messenger_footer_service.object_chat_footer.bieu_tuong_cam_xuc || 'assets/images/loading.gif'"
+                    alt="">
+            </div>
+
+            <!-- Nút send -->
+            <svg width="20px" height="20px" viewBox="0 0 24 24" matTooltip="Nhấn Enter để gửi" matTooltipClass="tooltip"
+                class="send" (click)="this.sendTinNhan()"
+                *ngIf="this.arrayImageVideoUpload.length == 0 && this.arrayFileUpload.length == 0 && !recordingService.isShowRecording && this.tin_nhan != null && this.tin_nhan.length != 0 && this.tin_nhan != '<br>'">
+                <path
+                    d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.8132856,11.0605983 22.3423792,10.4322088 21.714504,10.118014 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.8376543,3.0486314 1.15159189,3.99121575 L3.03521743,10.4322088 C3.03521743,10.5893061 3.34915502,10.7464035 3.50612381,10.7464035 L16.6915026,11.5318905 C16.6915026,11.5318905 17.1624089,11.5318905 17.1624089,12.0031827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z"
+                    [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="evenodd"
+                    stroke="none">
+                </path>
+            </svg>
+            <!-- Nút send gửi file -->
+            <svg width="20px" height="20px" viewBox="0 0 24 24" matTooltip="Nhấn Enter để gửi" matTooltipClass="tooltip"
+                class="send" (click)="this.sendMessageFile()"
+                *ngIf="this.arrayFileUpload.length > 0 && !recordingService.isShowRecording">
+                <path
+                    d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.8132856,11.0605983 22.3423792,10.4322088 21.714504,10.118014 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.8376543,3.0486314 1.15159189,3.99121575 L3.03521743,10.4322088 C3.03521743,10.5893061 3.34915502,10.7464035 3.50612381,10.7464035 L16.6915026,11.5318905 C16.6915026,11.5318905 17.1624089,11.5318905 17.1624089,12.0031827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z"
+                    [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="evenodd"
+                    stroke="none">
+                </path>
+            </svg>
+             <!-- Nút send gửi video image-->
+             <svg width="20px" height="20px" viewBox="0 0 24 24" matTooltip="Nhấn Enter để gửi" matTooltipClass="tooltip"
+             class="send" (click)="this.sendMessageImageVideo()"
+             *ngIf="this.arrayImageVideoUpload.length > 0 && !recordingService.isShowRecording">
+                <path
+                    d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.8132856,11.0605983 22.3423792,10.4322088 21.714504,10.118014 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.8376543,3.0486314 1.15159189,3.99121575 L3.03521743,10.4322088 C3.03521743,10.5893061 3.34915502,10.7464035 3.50612381,10.7464035 L16.6915026,11.5318905 C16.6915026,11.5318905 17.1624089,11.5318905 17.1624089,12.0031827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z"
+                    [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="evenodd"
+                    stroke="none">
+                </path>
+            </svg>
+            <!-- Nút send cho ghi âm -->
+            <svg width="20px" height="20px" viewBox="0 0 24 24" matTooltip="Nhấn Enter để gửi" matTooltipClass="tooltip"
+                class="send" (click)="this.sendRecording()" *ngIf="recordingService.isShowRecording">
+                <path
+                    d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.8132856,11.0605983 22.3423792,10.4322088 21.714504,10.118014 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.8376543,3.0486314 1.15159189,3.99121575 L3.03521743,10.4322088 C3.03521743,10.5893061 3.34915502,10.7464035 3.50612381,10.7464035 L16.6915026,11.5318905 C16.6915026,11.5318905 17.1624089,11.5318905 17.1624089,12.0031827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z"
+                    [attr.fill]="this.messenger_footer_service.object_chat_footer.mau_duoi" fill-rule="evenodd"
+                    stroke="none">
+                </path>
+            </svg>
+
+        </div>
+    </div>
+
+    <div *ngIf="this.content_service.object_chat.is_roi_chua">
+        <div id="parent_input" style="height: 22px;opacity: 0;margin-top: 12px;margin-bottom: 12px;">
+        </div>
+        <p style="position: 'absolute';
+        font-family: 'Raleway';
+        font-weight: 600;
+        font-size: 14px;
+        color: #9e9b9b;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;">Hiện tại bạn đã rời nhóm</p>
+    </div>
+</div>
+
+<!-- shop sticker -->
+<app-shop-sticker-ws *ngIf="stickersService.isShowShop"></app-shop-sticker-ws>

@@ -1,0 +1,42 @@
+<div class="arrow-giphy"></div>
+<div class="container">
+    <div class="header">
+        <div [class.alo-selected]="selected == 'ago'" class="ago" *ngIf="!checkAgoHide" (click)="clickAgo()">
+            <i *ngIf="selected != 'ago'"  class="done"></i>
+            <i *ngIf="selected == 'ago'" class="select" ></i>
+        </div>
+        <div class="prev" *ngIf="checkAgoHide" (click)="toLeft(stickerList)">
+           <i></i>
+        </div>
+        <div class="left" id="scroll" >
+            <div class="sticker" *ngFor="let item of stickerList; let i = index" (click)="loadStickerDetail(item.id)" [class.sticker-selected]="item.id == selected">
+                <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+            </div>
+            <div class="sticker"></div>
+            <div class="sticker"></div>
+        </div>
+        <div *ngIf="!checkNextHide" class="next" (click)="toRight(stickerList)">
+           <i></i>
+        </div>
+        <div class="right">
+            <div class="add" (click)="stickersService.openShop()">
+                <i></i>
+            </div>
+        </div>
+    </div>
+    <div class="content content-selected"  *ngIf="selected != 'ago'" id="scroll-content">
+        <div class="content-sticker" *ngFor="let item of stickerDetailList" (click)="sendSticker(item)">
+            <img [src]="item.url || 'assets/images/loading.gif'" alt="">
+        </div>
+    </div>
+    <div class="content" *ngIf="selected == 'ago'">
+        <div class="content-sticker" *ngFor="let item of stickerListHistory" (click)="sendSticker(item)">
+            <img [src]="item.url || 'assets/images/loading.gif'" alt="">
+        </div>
+        <div class="loading" *ngIf="stickerListHistory == null">
+            <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+        </div>
+    </div>
+</div>
+
+

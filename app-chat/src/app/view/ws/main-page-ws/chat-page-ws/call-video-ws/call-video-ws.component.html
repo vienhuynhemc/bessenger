@@ -1,0 +1,70 @@
+<div class="container">
+
+    <div class="bar">
+        <img src="assets/images/icon.ico" alt="">
+        <p>Cuộc gọi qua Bessenger</p>
+        <div class="close" (click)="this.call_video.close()">
+            <i></i>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <!-- Nếu ở trạng thái đang gọi chưa bắt máy thì hiện cái này -->
+        <div class="status1" *ngIf="this.call_video.status == 1">
+            <img [src]="this.call_video.now_user.hinh || 'assets/images/loading.gif'" alt="">
+            <p>{{this.call_video.now_user.ten}}</p>
+            <span>Đang gọi...</span>
+        </div>
+
+        <!-- Thanh công cụ tương tác -->
+        <div class="thanh-cong-cu">
+            <!-- off video -->
+            <div class="element" *ngIf="!this.call_video.is_close_camera">
+                <svg viewBox="0 0 48 48" matTooltip="Tắt video" matTooltipClass="tooltip2"
+                    (click)="this.call_video.offVideo()">
+                    <path fill="#fff"
+                        d="M26.5 33a4 4 0 004-4V19a4 4 0 00-4-4h-11a4 4 0 00-4 4v10a4 4 0 004 4h11l10.553-3.6-3.724-1.864a1.501 1.501 0 01-.829-1.343v-4.385c0-.569.321-1.089.829-1.343l3.724-1.863a1 1 0 011.447.895v9.007a1 1 0 01-1.447.895">
+                    </path>
+                </svg>
+            </div>
+            <!-- on video -->
+            <div class="element off-camera" *ngIf="this.call_video.is_close_camera" matTooltip="Bật video"
+                matTooltipClass="tooltip2">
+                <svg viewBox="0 0 48 48" (click)="this.call_video.startVideo()">
+                    <path
+                        d="M13.022 29.736c-.514.514-1.514.266-1.514-.724V19.007a4 4 0 013.999-4.002h10.112c.787 0 1.182.953.625 1.51l-13.222 13.22zm20.675-15.029l-2.608 2.61a1.998 1.998 0 00-.585 1.412l-.002 10.283a3.992 3.992 0 01-3.996 3.995h-10.27c-.53 0-1.039.21-1.414.585l-3.116 3.117a.999.999 0 11-1.413-1.414l21.99-22.002a.999.999 0 111.414 1.414zm3.356 14.704l-3.722-1.864a1.503 1.503 0 01-.83-1.343v-4.388c0-.569.322-1.089.83-1.343l3.722-1.864a1 1 0 011.447.895v9.012a1 1 0 01-1.447.895z">
+                    </path>
+                </svg>
+            </div>
+            <!-- Nút tắt cuộc gọi -->
+            <div class="element tat-cuoc-goi">
+                <svg (click)="this.call_video.close()" matTooltip="Kết thúc cuộc gọi" matTooltipClass="tooltip2"
+                    viewBox="0 0 48 48">
+                    <path fill="#fff"
+                        d="M12.054 24.58C12.52 19.102 24.34 19.002 24.54 19c.202 0 12.024-.1 12.408 5.37.284 4.048-1.092 3.74-1.56 3.778-.41.033-4.823-.767-5.452-1.19-.63-.422-.785-2.703-1.293-3.094-.507-.39-3.092-.51-4.134-.502-1.043.01-3.63.174-4.143.572-.513.4-.702 2.683-1.337 3.117-.636.434-5.062 1.31-5.47 1.283-.47-.03-1.85.3-1.506-3.753">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Camera bản thân -->
+        <div class="my-camera">
+            <!-- Nếu camera bật thì hiển thị video -->
+            <video #my_camera id="my_camera" [autoplay]="true" [muted]="true" *ngIf="!this.call_video.is_close_camera"
+                [style.transform]="this.call_video.is_camera_go_to_left?'translateX(284px) scaleX(-1)':'translateX(0px) scaleX(-1)'"
+                [srcObject]="this.call_video.localStream"></video>
+            <!-- Camera off thì có cái hình -->
+            <img [style.transform]="this.call_video.is_camera_go_to_left?'translateX(284px)':'translateX(0px'"
+                id="my_avatar" *ngIf="this.call_video.is_close_camera"
+                [src]="this.main_page_service.img||'assets/images/loading.gif'" alt="">
+            <!-- Nút thu vô -->
+            <svg class="go-to-left" id="go_to_left" (click)="this.call_video.cameraGoToLeft()"
+                [style.transform]="this.call_video.is_camera_go_to_left?'scaleX(-1)':'scaleX(1)'"
+                [style.left]="this.call_video.is_camera_go_to_left?'265px':'0px'" viewBox="0 0 8 28">
+                <path d="M2 2l4 12-4 12" fill="none" stroke="#fff" stroke-width="3"></path>
+            </svg>
+        </div>
+    </div>
+
+</div>

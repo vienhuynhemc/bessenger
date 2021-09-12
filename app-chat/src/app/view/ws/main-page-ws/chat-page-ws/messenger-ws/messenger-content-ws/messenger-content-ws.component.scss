@@ -1,0 +1,1159 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    background-color: white;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 4px 8px 28px 0px #d3dceb;
+    display: flex;
+    height: 633px;
+    margin-bottom: 10px;
+    z-index: 0;
+    position: relative;
+  
+    .first {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding-bottom: 15px;
+      background: white;
+      .hinh-dai-dien {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        .nhom {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          .hinh-1 {
+            box-shadow: 0 0 2px #909090;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            z-index: 10;
+            width: 38.5px;
+            height: 38.5px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+  
+          .hinh-2 {
+            box-shadow: 0 0 2px #909090;
+            z-index: 9;
+            width: 38.5px;
+            height: 38.5px;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+          }
+        }
+        .don {
+          width: 100%;
+          height: 100%;
+          img {
+            box-shadow: 0 0 2px #909090;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .online {
+          width: 15px;
+          height: 15px;
+          position: absolute;
+          background-color: #ffffff;
+          left: 41px;
+          bottom: 0px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+  
+          .child {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: #31a24c;
+          }
+        }
+      }
+      .create {
+        color: #65676b;
+        font-size: 13px;
+        font-family: "Raleway";
+        font-weight: 500;
+        margin-top: 7px;
+        letter-spacing: 0.5px;
+      }
+    }
+  
+    .thong_bao {
+      display: flex;
+      justify-content: center;
+      color: #b9b9b9;
+      font-family: "Raleway";
+      font-size: 9.5px;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      background: white;
+      p {
+        max-width: 256px;
+        text-align: center;
+        line-height: 13px;
+      }
+    }
+    .thoi_gian {
+      display: flex;
+      justify-content: center;
+      color: #8a8d91;
+      font-family: sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      font-weight: 650;
+      background: white;
+      p {
+        max-width: 256px;
+        text-align: center;
+        line-height: 13px;
+      }
+    }
+  
+    .list-dang-nhap {
+      padding-left: 2px;
+      padding-top: 7px;
+      background-color: white;
+      .dang_nhap {
+        margin-top: 2px;
+        display: flex;
+        align-items: flex-end;
+        .hinh {
+          width: 28px;
+          height: 28px;
+          box-shadow: 0 0 2px #909090;
+          border-radius: 50%;
+          img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .lottie {
+          background-color: #e4e6eb;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 32px;
+          margin-left: 8px;
+          border-radius: 18px;
+          main {
+            width: 25px;
+            margin: 0px 12px;
+            transform: translateY(2px);
+          }
+        }
+      }
+    }
+  
+    .gui_text {
+      display: flex;
+      overflow: hidden;
+      .tren {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        .cong-cu {
+          z-index: 2;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-right: 5px;
+          margin-left: 5px;
+          margin-top: auto;
+          margin-bottom: auto;
+          .thu-hoi {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+            position: relative;
+            main {
+              position: absolute;
+              width: 56px;
+              height: 57px;
+            }
+          }
+          .thu-hoi:hover {
+            background-color: #0000001a;
+          }
+          .cxtn {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+          }
+          .cxtn:hover {
+            background-color: #0000001a;
+          }
+        }
+        .cong-cu-hidden {
+          display: none;
+        }
+        .hinh {
+          z-index: 2;
+          position: relative;
+          margin-left: 2px;
+          width: 28px;
+          height: 28px;
+          box-shadow: 0 0 2px #909090;
+          border-radius: 50%;
+          img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .chua-nd {
+          position: relative;
+          z-index: 1;
+          box-shadow: 0 0 0px 500px white;
+          .noi-dung {
+            word-wrap: break-word;
+            font-family: "Raleway";
+            font-weight: 500;
+            line-height: 20px;
+            font-size: 12px;
+            transform: scaleY(1.04);
+            letter-spacing: 0.5px;
+            max-width: 330px;
+            margin: 8px 12px;
+          }
+          .thu-hoi {
+            margin-left: 8px;
+            border-radius: 18px;
+            border: 1px solid #ced0d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p {
+              color: #bcc0c4;
+              font-family: "Raleway";
+              font-weight: 500;
+              line-height: 20px;
+              font-size: 12px;
+              transform: scaleY(1.04);
+              letter-spacing: 0.5px;
+              padding: 8px 12px;
+              font-style: oblique;
+            }
+          }
+          .dscx {
+            display: flex;
+            position: absolute;
+            bottom: -10px;
+            justify-content: center;
+            height: 18px;
+            background: white;
+            box-shadow: 0 2px 4px #0000001a;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+            p {
+              color: #65676b;
+              font-size: 11px;
+              font-family: sans-serif;
+              padding: 3px 6px;
+              padding-left: 2px;
+            }
+            .element {
+              width: 16px;
+              background: white;
+              height: 16px;
+              margin: 0px 1px;
+              position: relative;
+              border-radius: 50%;
+              padding: 1px;
+              img {
+                width: 16px;
+                height: 16px;
+              }
+            }
+            .element:nth-child(1) {
+              margin-left: 2px;
+              z-index: 7;
+            }
+            .element:nth-child(2) {
+              margin-left: -7px;
+              z-index: 6;
+            }
+            .element:nth-child(3) {
+              margin-left: -7px;
+              z-index: 5;
+            }
+            .element:nth-child(4) {
+              margin-left: -7px;
+              z-index: 4;
+            }
+            .element:nth-child(5) {
+              margin-left: -7px;
+              z-index: 3;
+            }
+            .element:nth-child(6) {
+              margin-left: -7px;
+              z-index: 2;
+            }
+            .element:nth-child(7) {
+              margin-left: -7px;
+              z-index: 1;
+            }
+          }
+        }
+        .ban_than {
+          border-radius: 4px;
+          border-top-left-radius: 18px;
+          border-bottom-left-radius: 18px;
+          color: white;
+        }
+        .border-tren-ban-than {
+          border-top-right-radius: 18px;
+        }
+        .border-duoi-ban-than {
+          border-bottom-right-radius: 18px;
+        }
+        .doi_phuong {
+          border-top-right-radius: 18px;
+          border-bottom-right-radius: 18px;
+          color: #050505;
+          margin-left: 8px;
+        }
+        .border-tren-doi-phuong {
+          border-top-left-radius: 18px;
+        }
+        .border-duoi-doi-phuong {
+          border-bottom-left-radius: 18px;
+        }
+        .trang_thai_gui {
+          z-index: 2;
+          position: relative;
+          width: 14px;
+          margin-right: 4px;
+          margin-left: 4px;
+          display: flex;
+          justify-content: center;
+  
+          .nguoi_xem {
+            img {
+              width: 14px;
+              height: 14px;
+              object-fit: cover;
+              border-radius: 50%;
+              box-shadow: 0 0 2px #909090;
+            }
+          }
+        }
+        .trang_thai_gui_kpbt {
+          margin-left: auto;
+        }
+      }
+      .da_xem {
+        position: relative;
+        z-index: 2;
+        margin-right: 3px;
+        margin-top: 4px;
+        display: flex;
+        justify-content: flex-end;
+        .list {
+          display: flex;
+          justify-content: space-between;
+          .item-ok {
+            img {
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              margin: 0px 1px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+      .div-thu-hoi {
+        border: 1px solid #ced0d4;
+        background: white;
+      }
+      .chuoi-cam-xuc {
+        transform: translateY(-50px);
+        display: flex;
+        right: 50%;
+        margin-right: -145px;
+        padding: 8px 12px;
+        box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+          inset 0 0 0 1px #ffffff80;
+        border-radius: 24px;
+        position: absolute;
+        z-index: 2;
+        background: white;
+        div {
+          cursor: pointer;
+          width: 34px;
+          height: 32px;
+          margin: 2px;
+          img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .gui_text:hover {
+      .tren {
+        .cong-cu {
+          display: flex;
+        }
+      }
+    }
+    .ban_than_div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .gui_text_icon {
+      background: white;
+      display: flex;
+      overflow: hidden;
+      .tren {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        .cong-cu {
+          display: flex;
+          z-index: 2;
+          position: relative;
+          align-items: center;
+          justify-content: space-between;
+          margin-right: 5px;
+          margin-left: 5px;
+          margin-top: auto;
+          margin-bottom: auto;
+          .thu-hoi {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+            position: relative;
+            main {
+              position: absolute;
+              width: 56px;
+              height: 57px;
+            }
+          }
+          .thu-hoi:hover {
+            background-color: #0000001a;
+          }
+          .cxtn {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+          }
+          .cxtn:hover {
+            background-color: #0000001a;
+          }
+        }
+        .cong-cu-hidden {
+          display: none;
+        }
+        .hinh {
+          z-index: 2;
+          position: relative;
+          margin-left: 2px;
+          width: 28px;
+          height: 28px;
+          box-shadow: 0 0 2px #909090;
+          border-radius: 50%;
+          img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .chua-nd {
+          position: relative;
+          .noi-dung {
+            max-width: 330px;
+          }
+          .sticker_noidung {
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+          }
+          .giphy-content {
+            max-width: 330px;
+            border-radius: 18px;
+            border: #d6dae0 solid 0.5px;
+            .giphy-noidung {
+              width: 100%;
+              height: 100%;
+              border-top-right-radius: 18px;
+              border-top-left-radius: 18px;
+            }
+            .name-giphy {
+              width: 100%;
+              height: 20px;
+              display: flex;
+              align-items: center;
+              img {
+                width: 40px;
+                margin-left: 5px;
+              }
+              .name {
+                width: 100px;
+                font-size: 11px;
+                font-family: "Raleway";
+                font-weight: 450;
+                letter-spacing: 1px;
+              }
+            }
+          }
+          .dscx {
+            display: flex;
+            position: absolute;
+            bottom: -10px;
+            justify-content: center;
+            height: 18px;
+            background: white;
+            box-shadow: 0 2px 4px #0000001a;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+            p {
+              color: #65676b;
+              font-size: 11px;
+              font-family: sans-serif;
+              padding: 3px 6px;
+              padding-left: 2px;
+            }
+            .element {
+              width: 16px;
+              background: white;
+              height: 16px;
+              margin: 0px 1px;
+              position: relative;
+              border-radius: 50%;
+              padding: 1px;
+              img {
+                width: 16px;
+                height: 16px;
+              }
+            }
+            .element:nth-child(1) {
+              margin-left: 2px;
+              z-index: 7;
+            }
+            .element:nth-child(2) {
+              margin-left: -7px;
+              z-index: 6;
+            }
+            .element:nth-child(3) {
+              margin-left: -7px;
+              z-index: 5;
+            }
+            .element:nth-child(4) {
+              margin-left: -7px;
+              z-index: 4;
+            }
+            .element:nth-child(5) {
+              margin-left: -7px;
+              z-index: 3;
+            }
+            .element:nth-child(6) {
+              margin-left: -7px;
+              z-index: 2;
+            }
+            .element:nth-child(7) {
+              margin-left: -7px;
+              z-index: 1;
+            }
+          }
+        }
+        .doi_phuong {
+          margin-left: 8px;
+        }
+        .trang_thai_gui {
+          z-index: 2;
+          position: relative;
+          width: 14px;
+          margin-right: 4px;
+          margin-left: 4px;
+          display: flex;
+          justify-content: center;
+  
+          .nguoi_xem {
+            img {
+              width: 14px;
+              height: 14px;
+              object-fit: cover;
+              border-radius: 50%;
+              box-shadow: 0 0 2px #909090;
+            }
+          }
+        }
+        .trang_thai_gui_kpbt {
+          margin-left: auto;
+        }
+      }
+      .da_xem {
+        position: relative;
+        z-index: 2;
+        margin-right: 3px;
+        margin-top: 4px;
+        display: flex;
+        justify-content: flex-end;
+        .list {
+          display: flex;
+          justify-content: space-between;
+          .item-ok {
+            img {
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              margin: 0px 1px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+      .chuoi-cam-xuc {
+        transform: translateY(-50px);
+        display: flex;
+        right: 50%;
+        margin-right: -145px;
+        padding: 8px 12px;
+        box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+          inset 0 0 0 1px #ffffff80;
+        border-radius: 24px;
+        position: absolute;
+        z-index: 2;
+        background: white;
+        div {
+          cursor: pointer;
+          width: 34px;
+          height: 32px;
+          margin: 2px;
+          img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .gui_text_icon:hover {
+      .tren {
+        .cong-cu {
+          display: flex;
+        }
+      }
+    }
+    .gui_ghi_am {
+      display: flex;
+      overflow: hidden;
+      .tren {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        .cong-cu {
+          z-index: 2;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-right: 5px;
+          margin-left: 5px;
+          margin-top: auto;
+          margin-bottom: auto;
+          .thu-hoi {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+            position: relative;
+            main {
+              position: absolute;
+              width: 56px;
+              height: 57px;
+            }
+          }
+          .thu-hoi:hover {
+            background-color: #0000001a;
+          }
+          .cxtn {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+          }
+          .cxtn:hover {
+            background-color: #0000001a;
+          }
+        }
+        .cong-cu-hidden {
+          display: none;
+        }
+        .hinh {
+          position: relative;
+          z-index: 2;
+          margin-left: 2px;
+          width: 28px;
+          height: 28px;
+          box-shadow: 0 0 2px #909090;
+          border-radius: 50%;
+          img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .chua-nd {
+          position: relative;
+          z-index: 1;
+          border-radius: 20px;
+          box-shadow: 0 0 0px 500px white;
+          .noi-dung {
+            max-width: 330px;
+          }
+          .sticker_noidung {
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+          }
+          .giphy-content {
+            max-width: 330px;
+            border-radius: 18px;
+            border: #d6dae0 solid 0.5px;
+            .giphy-noidung {
+              width: 100%;
+              height: 100%;
+              border-top-right-radius: 18px;
+              border-top-left-radius: 18px;
+            }
+            .name-giphy {
+              width: 100%;
+              height: 20px;
+              display: flex;
+              align-items: center;
+              img {
+                width: 40px;
+                margin-left: 5px;
+              }
+              .name {
+                width: 100px;
+                font-size: 11px;
+                font-family: "Raleway";
+                font-weight: 450;
+                letter-spacing: 1px;
+              }
+            }
+          }
+          .dscx {
+            display: flex;
+            position: absolute;
+            bottom: -10px;
+            justify-content: center;
+            height: 18px;
+            background: white;
+            box-shadow: 0 2px 4px #0000001a;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+            p {
+              color: #65676b;
+              font-size: 11px;
+              font-family: sans-serif;
+              padding: 3px 6px;
+              padding-left: 2px;
+            }
+            .element {
+              width: 16px;
+              background: white;
+              height: 16px;
+              margin: 0px 1px;
+              position: relative;
+              border-radius: 50%;
+              padding: 1px;
+              img {
+                width: 16px;
+                height: 16px;
+              }
+            }
+            .element:nth-child(1) {
+              margin-left: 2px;
+              z-index: 7;
+            }
+            .element:nth-child(2) {
+              margin-left: -7px;
+              z-index: 6;
+            }
+            .element:nth-child(3) {
+              margin-left: -7px;
+              z-index: 5;
+            }
+            .element:nth-child(4) {
+              margin-left: -7px;
+              z-index: 4;
+            }
+            .element:nth-child(5) {
+              margin-left: -7px;
+              z-index: 3;
+            }
+            .element:nth-child(6) {
+              margin-left: -7px;
+              z-index: 2;
+            }
+            .element:nth-child(7) {
+              margin-left: -7px;
+              z-index: 1;
+            }
+          }
+          .cuoc-goi-nho {
+            height: 60px;
+            border-radius: 18px;
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            .icon-cgnbt {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 12px;
+              margin-right: 12px;
+              background-color: #f3425f;
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              i {
+                background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
+                background-position: 0px -745px;
+                background-size: auto;
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                display: inline-block;
+                filter: invert(100%);
+              }
+            }
+            .noi-dung-cgnbt {
+              margin-right: 16px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              height: 32px;
+              p {
+                color: #050505;
+                font-family: "Raleway";
+                font-size: 13px;
+                font-weight: 600;
+              }
+              span {
+                color: #65676b;
+                font-family: sans-serif;
+                font-size: 11px;
+              }
+            }
+          }
+          .cuoc-goi-nho-ban-than {
+            height: 60px;
+            border-radius: 18px;
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            .icon-cgnbt {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 12px;
+              margin-right: 12px;
+              background-color: #e4e6eb;
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              i {
+                background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
+                background-position: 0px -745px;
+                background-size: auto;
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                display: inline-block;
+              }
+            }
+            .noi-dung-cgnbt {
+              margin-right: 16px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              height: 32px;
+              p {
+                color: #050505;
+                font-family: "Raleway";
+                font-size: 13px;
+                font-weight: 600;
+              }
+              span {
+                color: #65676b;
+                font-family: sans-serif;
+                font-size: 11px;
+              }
+            }
+          }
+        }
+        .doi_phuong {
+          margin-left: 8px;
+        }
+        .trang_thai_gui {
+          position: relative;
+          z-index: 2;
+          width: 14px;
+          margin-right: 4px;
+          margin-left: 4px;
+          display: flex;
+          justify-content: center;
+  
+          .nguoi_xem {
+            img {
+              width: 14px;
+              height: 14px;
+              object-fit: cover;
+              border-radius: 50%;
+              box-shadow: 0 0 2px #909090;
+            }
+          }
+        }
+        .trang_thai_gui_kpbt {
+          margin-left: auto;
+        }
+      }
+      .da_xem {
+        position: relative;
+        z-index: 2;
+        position: relative;
+        z-index: 2;
+        margin-right: 3px;
+        margin-top: 4px;
+        display: flex;
+        justify-content: flex-end;
+        .list {
+          display: flex;
+          justify-content: space-between;
+          .item-ok {
+            img {
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              margin: 0px 1px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+      .chuoi-cam-xuc {
+        transform: translateY(-50px);
+        display: flex;
+        right: 50%;
+        margin-right: -145px;
+        padding: 8px 12px;
+        box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
+          inset 0 0 0 1px #ffffff80;
+        border-radius: 24px;
+        position: absolute;
+        z-index: 2;
+        background: white;
+        div {
+          cursor: pointer;
+          width: 34px;
+          height: 32px;
+          margin: 2px;
+          img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .gui_ghi_am:hover {
+      .tren {
+        .cong-cu {
+          display: flex;
+        }
+      }
+    }
+    .gui-video {
+      .tren {
+        .gui-video-content {
+          background-color: white;
+          width: 320px;
+          height: 173px;
+          .gui-video {
+            cursor: pointer;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+    .gui-anh {
+      .tren {
+        .gui-anh-content {
+          background-color: white;
+          max-width: 312px;
+          display: flex;
+          flex-wrap: wrap;
+          .gui-anh {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+            cursor: pointer;
+            margin-right: 4px;
+            margin-bottom: 4px;
+          }
+          .gui-anh-clone {
+            max-height: 400px;
+            max-width: 320px;
+            min-height: 24px;
+            width: 158px;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          .gui-anh:hover,
+          .gui-anh-clone:hover {
+            background-color: #e8ecf1a6;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    .gui_file {
+      .tren {
+        .noi-dung-gui-file {
+          min-width: 150px;
+          max-width: 256px;
+          height: 50px;
+          background-color: rgb(226, 231, 238);
+          display: flex;
+          border-radius: 10px;
+          cursor: pointer;
+          &-left {
+            width: 65px;
+            height: 100%;
+            .cover-file-left-icon {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              left: 10px;
+              top: 10px;
+              i {
+                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
+                background-position: -34px -70px;
+                background-size: 52px 1338px;
+                background-repeat: no-repeat;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                color: #1d1b1b;
+              }
+            }
+          }
+          &-right {
+            width: 80%;
+            height: 100%;
+            margin-right: 10px;
+            .name-file-right {
+              display: inline-flex;
+              height: 100%;
+              align-items: center;
+              font-family: "Raleway";
+              font-size: 15px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .nen {
+    width: 475px;
+    height: 602px;
+    margin-top: 10px;
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  
+  .content {
+    width: 482px;
+    height: 612px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    position: relative;
+    z-index: 2;
+  
+    #danh-sach-tin-nhan {
+      width: 100%;
+    }
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: #00000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #00000066;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar:hover {
+    background: #0700001c !important;
+  }
+  

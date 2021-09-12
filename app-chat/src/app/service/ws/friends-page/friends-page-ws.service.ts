@@ -218,8 +218,12 @@ export class FriendsPageWsService {
   // cập nhật trạng thái on - off
   public update(): void {
     let loop = 5000;
-    // set biến lặp cho phù hợp để tránh trùng nhau
-    this.friendsList != null && this.friendsList.length > 0 ? loop = (this.friendsList.length + 2) * 2000 : loop = loop;
+    // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
+    if(this.friendsList != null && this.friendsList.length > 0) {
+      for (let index = 0; index < this.friendsList.length; index++)
+          loop += index * 2000;
+      loop += 6000;
+    }
     setTimeout(() => {
       if (this.friendsList != null) {
           for (let i = 0; i < this.friendsList.length; i++) {

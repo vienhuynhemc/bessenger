@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="select" (click)="open()">
+        <p>Thành viên trong đoạn chat</p>
+        <i class="open" *ngIf="this.members_service.isOpen"></i>
+        <i class="close" *ngIf="!this.members_service.isOpen"></i>
+    </div>
+    <div class="members-list" *ngIf="this.members_service.isOpen">
+        <div class="member" *ngFor="let item of this.members_service.memberList">
+            <div class="left">
+                <img [src]="item.img" alt="">
+            </div>
+            <div class="center">
+                <div class="name" [matTooltip]="item.name" matTooltipClass="tooltip" [class.name-member]="item.role == 'thanh_vien'" *ngIf="item.isLimitName()">{{item.getLimitName()}}</div>
+                <div class="name" [class.name-member]="item.role == 'thanh_vien'" *ngIf="!item.isLimitName()">{{item.name}}</div>
+                <div class="role" *ngIf="item.role == 'quan_tri_vien'">Quản trị viên</div>
+            </div>
+            <div class="right">
+                <i class="fas fa-ellipsis-h" (click)="openOption(item.idUser)"></i>
+            </div>
+            <div class="option hidden" [id]="'op-'+item.idUser">
+                <div class="message option-btn" (click)="messageClick(item.idUser)" *ngIf="item.idUser != getIDMe()"><i class="fas fa-comment" style="margin-right: 14px;"></i> Nhắn tin</div>
+                <div class="change-role option-btn" (click)="decisionAdminClick(item)" *ngIf="this.members_service.isAdmin && item.idUser != getIDMe() && item.role != 'quan_tri_vien'"><i class="fas fa-user-tag"></i>Chỉ định quản trị viên</div>
+                <div class="remove-member option-btn" (click)="removeMemberClick(item)" *ngIf="this.members_service.isAdmin && item.idUser != getIDMe()"><i class="fas fa-user-times"></i>Xóa thành viên</div>
+                <div class="remove-member option-btn" (click)="outGroupClick(item)" *ngIf="item.idUser == getIDMe()"><i class="fas fa-running" style="margin-right: 16px;"></i> Rời khỏi nhóm</div>
+            </div>
+        </div>
+        <!-- <div class="member-add" *ngIf="this.members_service.isOpen">
+            <div class="left">
+                <div class="circle">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="right">
+                <div class="name">Thêm người</div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="formYesNo" [class.show-unfriend]="adminNew != null">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Chỉ định quản trị viên</p>
+            <p class="title2" *ngIf="adminNew != null">Bạn có chắc chắn là muốn 
+                {{adminNew.name}} làm quản trị viên.</p>
+            <div>
+                <p (click)="onClickAcceptDecision()">Có, chắc chắn <i class="fa fa-check"></i></p>
+                <span (click)="onClickNonAcceptDecision()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="formYesNo" [class.show-unfriend]="removeMember != null">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Xóa thành viên ra khỏi nhóm chat</p>
+            <p class="title2" *ngIf="removeMember!= null">Bạn có chắc chắn là muốn xóa
+                {{removeMember.name}} ra khỏi nhóm chat.</p>
+            <div>
+                <p (click)="onClickAcceptRemove()">Có, chắc chắn <i class="fa fa-check"></i></p>
+                <span (click)="onClickNonAcceptRemove()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="formYesNo" [class.show-unfriend]="outGroup != null">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="select">
+            <p class="title1">Rời khỏi nhóm chat</p>
+            <p class="title2" *ngIf="outGroup!= null && checkAdminOutGroup(this.members_service.memberList)" >Bạn có chắc chắn là muốn rời khỏi nhóm chat?</p>
+            <p class="title2" *ngIf="outGroup!= null && !checkAdminOutGroup(this.members_service.memberList)" >Bạn chưa chọn quản trị viên thay thế, nếu bạn rời khỏi nhóm thành viên kỳ cựu nhất sẽ được chọn làm quản trị viên?</p>
+            <div>
+                <p (click)="onClickAcceptOutGroup(this.members_service.memberList)">Có, chắc chắn <i class="fa fa-check"></i></p>
+                <span (click)="onClickNonOutGroup()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

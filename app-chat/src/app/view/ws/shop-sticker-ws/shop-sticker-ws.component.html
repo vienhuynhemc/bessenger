@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="shop">
+        <div class="shop-content">
+            <div class="header">
+                <img class="bg" src="assets/images/list-friends-chat-page/bg-shop-sticker.png" alt="">
+                <div class="title"><i></i><span>Cửa hàng nhãn dán</span></div>
+                <div class="title-sub"><span>Tìm nhãn dán mới để gửi cho bạn bè.</span></div>
+                <div class="exit" (click)="stickersService.openShop()"><i class="fas fa-times"></i></div>
+            </div>
+           
+            <div class="content-stickers">
+                <div class="loading" *ngIf="stickerList == null">
+                    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+                </div>
+                <div class="scroll-stickers">
+                    <div class="sticker" *ngFor="let item of stickerList">
+                        <div class="review">
+                            <div class="review-top">
+                                <div class="left">
+                                    <img [src]="item.img || 'assets/images/loading.gif'" alt="">
+                                </div>
+                                <div class="right">
+                                    <img [src]="item.img_description || 'assets/images/loading.gif'" alt="">
+                                </div>
+                            </div>
+                            <div class="review-bot">
+                                <div class="name"><span>{{item.name}}</span></div>
+                                <div class="add" *ngIf="item.checkAdd == 'them'"><div class="btn-add" (click)="addSticker(item.id)"><span>Thêm</span></div></div>
+                                <div class="add" *ngIf="item.checkAdd == 'go'"><div class="btn-go" (click)="removeSticker(item.id)"><span>Gỡ</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

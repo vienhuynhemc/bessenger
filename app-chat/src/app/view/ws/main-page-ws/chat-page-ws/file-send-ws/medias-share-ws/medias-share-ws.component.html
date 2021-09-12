@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>File phương tiện được chia sẻ</p>
+        <i class="open" *ngIf="this.medias_share_service.isOpen"></i>
+        <i class="close" *ngIf="!this.medias_share_service.isOpen"></i>
+    </div>
+    <div class="list-media-share" *ngIf="this.medias_share_service.isOpen" >
+        <div class="cover-media" *ngFor="let image  of listMediaMainShare" (click)="imageDetailService.openImageURL(image.url,image.typeMessage,messenger_main_service.ma_cuoc_tro_chuyen)">
+            <img *ngIf="image.typeMessage=='gui_hinh'" class="img-file" [src]="uRLSafe(image.url) || 'assets/images/loading.gif'" alt="">
+            <video *ngIf="image.typeMessage=='gui_video'" width="110" height="110" >
+                <source [src]="uRLSafe(image.url)">
+            </video>
+        </div>       
+    </div>
+</div>

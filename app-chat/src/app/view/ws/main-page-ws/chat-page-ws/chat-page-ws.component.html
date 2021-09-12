@@ -1,1 +1,48 @@
-<p>chat-page-ws works!</p>
+<!-- Tạo nhóm chat -->
+<app-create-group-chat-ws></app-create-group-chat-ws>
+
+<div class="loading" *ngIf="this.chat_page_process_service.isLoadingProcess()">
+  <main lottie [options]="this.chat_page_process_service.options"
+    (animationCreated)="this.chat_page_process_service.animationCreated($event)" class="anim"></main>
+</div>
+
+<!-- Trang chat với bạn bè -->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- pop up hỏi có gỡ tin nhắn hay không -->
+<div class="doi-ten" *ngIf="this.recall_m.is_show">
+  <div class="doi-ten-main">
+    <div class="doi-ten-main-header">
+      <div class="doi-ten-main-header-name">
+        Bạn muốn ai không nhìn thấy tin nhắn này nữa?
+      </div>
+      <div class="doi-ten-main-header-icon" (click)="hiddenRecallM()">
+        <i></i>
+      </div>
+    </div>
+    <div class="doi-ten-main-content">
+      <p class="p1">Bạn sẽ gỡ vĩnh viễn tin nhắn này đối với tất cả các thành viên trong đoạn chat. Họ sẽ thấy rằng bạn đã thu hồi tin nhắn và vẫn có thể báo cáo tin nhắn đó.</p>
+      <div class="doi-ten-main-content-buttons">
+        <div class="doi-ten-main-content-buttons-item" (click)="hiddenRecallM()">
+          Hủy
+        </div>
+        <div class="doi-ten-main-content-buttons-item doi-ten-main-content-buttons-item-select" (click)=" this.recall_m.thuHoi();">
+          Thu hồi
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Danh sách thông tin chi tiết cảm xúc của một tin nhắn nào đó -->
+<app-detail-emoji-messenger-ws *ngIf="this.select_emoji.is_show_detail"></app-detail-emoji-messenger-ws>
+<!-- xem chi tiết hình ảnh -->
+<app-detail-image-ws *ngIf="imageDetailService.isOpen"></app-detail-image-ws>
+
+
+<!--Component video call -->
+<app-call-video-ws *ngIf="this.call_video.is_show"></app-call-video-ws>

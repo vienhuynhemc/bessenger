@@ -1,0 +1,17 @@
+<div class="container" id="container">
+    <audio muted (timeupdate)="changeTime()" [src]="inputRecording" class="audio-rec" preload="auto" controls [id]="idRecording"  type="audio/mpeg">
+    </audio>
+    <div class="content" id="content-{{idRecording}}">
+    </div>
+    <div class="stroke-content" id="stroke-{{idRecording}}">
+        <span class="stroke" *ngFor="let item of numberSoundList"></span>
+    </div>
+    <input id="seekbar-{{idRecording}}" class="seekbar" type="range" min="0" max="60" step="1" value="0" (change)="changeSeekbar()">
+    <div class="pause" (click)="changeState()">
+        <svg *ngIf="state=='play'" class="crt8y2ji" width="22px" height="22px" viewBox="0 0 36 36"><path d="M11 8.5A1.5 1.5 0 009.5 10v16a1.5 1.5 0 001.5 1.5h4a1.5 1.5 0 001.5-1.5V10A1.5 1.5 0 0015 8.5h-4zm10 0a1.5 1.5 0 00-1.5 1.5v16a1.5 1.5 0 001.5 1.5h4a1.5 1.5 0 001.5-1.5V10A1.5 1.5 0 0025 8.5h-4z" [style.fill]="colorBackground" fill-rule="evenodd" stroke="none"></path></svg>
+        <svg *ngIf="state=='pause'" class="crt8y2ji" width="22px" height="22px" viewBox="0 0 36 36"><path d="M10 25.498V10.502a1.5 1.5 0 012.17-1.342l14.997 7.498c1.105.553 1.105 2.13 0 2.684L12.17 26.84A1.5 1.5 0 0110 25.498z" [style.fill]="colorBackground" fill-rule="evenodd" stroke="none"></path></svg>
+    </div>
+    <div class="time">
+        <div class="time-read" [style.color]="colorBackground" id="time-{{idRecording}}" data-time="0">0:00</div>
+    </div>
+</div>

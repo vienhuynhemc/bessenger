@@ -1,0 +1,23 @@
+<div class="container">
+
+    <div class="select" (click)="open()">
+        <p>Tệp được chia sẻ</p>
+        <i class="open" *ngIf="this.files_share_service.isOpen"></i>
+        <i class="close" *ngIf="!this.files_share_service.isOpen"></i>
+    </div>
+    <div class="file-list" *ngIf="this.files_share_service.isOpen">
+        <div class="noi-dung-gui-file" *ngFor="let file of listFileShare" (click)="clickFile(file.idMessage)">
+            <div class="noi-dung-gui-file-left" >
+                <div class="cover-file-left-icon">
+                    <i></i>
+                </div>
+            </div>
+            <div class="noi-dung-gui-file-right">
+                <span class="name-file-right" *ngIf="!file.checkLimitName()">{{file.nameFile}}</span>
+                <span class="name-file-right" [matTooltip]="file.nameFile" matTooltipClass="tooltip" *ngIf="file.checkLimitName()" >{{file.getLimitName()}}</span>
+
+            </div>
+            <a id="file-{{file.idMessage}}" target="_blank" [href]="uRLSafe(file.url)" [download]="file.nameFile" hidden></a>
+        </div>
+    </div>
+</div>
