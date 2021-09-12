@@ -1,0 +1,278 @@
+.friends-list {
+    position: relative;
+    top: 40px;
+    width: 100%;
+    height: 580px;
+    font-family: "Raleway";
+    &-content {
+      height: 100%;
+      width: 420px;
+      // background-color: yellowgreen;
+      overflow-y: scroll;
+      margin: auto;
+      position: absolute;
+      left: -10px;
+      .detail-friend {
+        position: relative;
+        border: rgb(231, 231, 231) solid 0.5px;
+        height: 110px;
+        width: 350px;
+        box-shadow: 4px 4px 28px 0px #d3dceb;
+        background-color: white;
+        border-radius: 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        margin-bottom: 20px;
+  
+        .detail-sub {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          border-radius: 10px;
+          transition: all 0.5s;
+          .detail-left {
+            height: 100%;
+  
+            img {
+              object-fit: cover;
+              height: 77px;
+              width: 70px;
+              border-radius: 5px;
+              margin-top: 16px;
+              margin-left: 20px;
+            }
+          }
+          .detail-center {
+            margin-left: 25px;
+            .name {
+              font-size: 15px;
+              font-weight: 600;
+              margin-top: 16px;
+            }
+            .non-mutual {
+              margin-top: 25px;
+              margin-bottom: 20px;
+            }
+            .mutual-friends {
+              color: gray;
+              font-size: 13px;
+              margin-top: 5px;
+              width: 100px;
+            }
+            .detail-center-sub {
+              margin-top: 10px;
+              display: flex;
+              .detail-btn {
+                width: 100px;
+                height: 27px;
+                background-color: rgb(230, 217, 217);
+                border-radius: 10px;
+                
+              }
+              i {
+                color: white;
+              }
+              .stick {
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 10px;
+                background-color: rgb(50, 117, 247);
+                border: rgb(50, 117, 247) solid 1px;
+                transition: all 0.5s;
+    
+                i {
+                  font-size: 12px;
+                }
+              }
+             
+              .abort {
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                border: rgb(50, 117, 247) solid 1px;
+                i {
+                  color: rgb(50, 117, 247);
+                  font-size: 13px;
+                }
+              }
+            }
+          }
+          .detail-right {
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            right: 0px;
+            top: 18px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            .time {
+              color: #5a5a5a;
+              font-size: 13px;
+            }
+            
+           
+          }
+          .non-mutual-time {
+            top: 26px
+          }
+        }
+  
+        .option-detail-block {
+          opacity: 1;
+          z-index: 10;
+        }
+        .detail-sub:hover {
+          background-color: #9dcff5;
+          transition: all 0.5s;
+          .detail-center {
+            .mutual-friends {
+              color: rgb(90, 90, 90);
+            }
+          }
+        }
+      }
+  
+      .detail-selected {
+        background-color: #9dcff5;
+  
+        .detail-right {
+          .fa-ellipsis-v {
+            color: gray;
+          }
+        }
+        .detail-center {
+          .mutual-friends {
+            color: rgb(90, 90, 90);
+          }
+        }
+      }
+    }
+  
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+  }
+  .mutual-friends-list {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: #e8a2a224;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    top: 0px;
+    left: 0px;
+  
+    .content-mutual-friends {
+      width: 650px;
+      height: 480px;
+      background-color: white;
+      border-radius: 10px;
+      margin: auto;
+      .header {
+        position: relative;
+        height: 60px;
+        .title {
+          position: absolute;
+          width: 106px;
+          left: 64px;
+          font-size: 18px;
+          top: 31px;
+          letter-spacing: 1px;
+          font-weight: 700;
+        }
+        .exit {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          border: #e7e7e7 solid 0.5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          i {
+            top: 5px;
+            font-size: 16px;
+            left: 8px;
+            color: #a4afbf;
+          }
+        }
+      }
+      .content-scroll {
+        overflow-y: scroll;
+        height: 80%;
+        width: 100%;
+        margin-top: 16px;
+        padding-top: 5px;
+        .detail-mutual-friends {
+          width: 80%;
+          height: 80px;
+          background-color: white;
+          display: flex;
+          margin: auto;
+          margin-bottom: 18px;
+          border-radius: 10px;
+          box-shadow: 0px 0px 3px 0px #dee2e7;
+          cursor: pointer;
+          .detail-left {
+            width: 17%;
+            margin-left: 3.8%;
+            img {
+              object-fit: cover;
+              width: 55px;
+              height: 55px;
+              border-radius: 50%;
+              margin-top: 13px;
+            }
+          }
+          .detail-right {
+            width: 60%;
+            position: relative;
+            .name {
+              font-size: 15px;
+              margin-top: 22px;
+              font-weight: 600;
+              position: relative;
+              
+            }
+          
+            .date {
+              font-size: 13px;
+              margin-top: 5px;
+              span {
+                font-weight: 500;
+                margin-right: 5px;
+              }
+            }
+          }
+          .right-date {
+            .gender {
+              font-size: 12px;
+              margin-top: 25px;
+              span {
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
+    }
+  }
+  .mutual-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

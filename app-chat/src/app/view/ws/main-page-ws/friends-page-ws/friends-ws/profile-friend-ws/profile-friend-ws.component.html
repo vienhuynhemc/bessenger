@@ -1,0 +1,27 @@
+<div class="container" *ngIf="friendInforWS.id != 1 ">
+    <img class="bg" src="assets/images/list-friends-friends-page/bg-profile-myfriend2.jpg" alt="">
+    <div   class="left">
+        <div  class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
+
+        <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInforWS.name}}" *ngIf="friendInforWS.checkLimitNameFriendsProfile()">{{friendInforWS.getNameLimitFriendsProfile()}}</div>
+
+        <div class="name" *ngIf="!friendInforWS.checkLimitNameFriendsProfile()">{{friendInforWS.name}}</div>
+        <button (click)="onClickMessage(friendInforWS.id)" class="message btn"><i class="fas fa-comment" ></i>Nhắn tin</button>
+        <button class="abort-friend btn" (click)="onClickUnFriend(friendInforWS.id, friendInforWS.name)"><i class="fas fa-user-times"></i>Hủy kết bạn</button>
+    </div>
+    <div class="right">
+        <div class="cover"></div>
+        <div class="avt">
+            <img [src]="friendInforWS.img || 'assets/images/loading.gif'" alt="">
+        </div>
+        <div class="line"></div>
+    </div>
+</div>
+<div class="container" *ngIf="friendInforWS.id == 1">
+        <img class="bg-hands" src="assets/images/list-friends-friends-page/friends.jpg" alt="">
+        <div class="bg-title">
+           
+            <div class="icon"><i id="icon_f" class="icon_f fas fa-users"></i></div>
+            <div class="title"><span>Hãy tìm kiếm cho mình người bạn đầu tiên đi nào.</span></div>
+        </div>
+</div>

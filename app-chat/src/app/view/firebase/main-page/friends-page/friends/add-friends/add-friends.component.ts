@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { throwIfEmpty } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { SendAddFriendService } from 'src/app/service/firebase/friends-page/send
   templateUrl: './add-friends.component.html',
   styleUrls: ['./add-friends.component.scss'],
 })
-export class AddFriendsComponent implements OnInit {
+export class AddFriendsComponent implements OnInit, OnDestroy {
   
   valueSub: Subscription;
   iDUrl: any;

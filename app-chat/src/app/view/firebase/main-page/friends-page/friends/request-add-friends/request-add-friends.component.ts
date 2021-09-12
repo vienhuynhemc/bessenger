@@ -1,5 +1,5 @@
 import { ThrowStmt, TmplAstTemplate } from '@angular/compiler';
-import { AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FriendInfor } from 'src/app/models/firebase/friends-page/friend_Infor';
@@ -14,7 +14,7 @@ import { SendAddFriendService } from 'src/app/service/firebase/friends-page/send
   templateUrl: './request-add-friends.component.html',
   styleUrls: ['./request-add-friends.component.scss']
 })
-export class RequestAddFriendsComponent implements OnInit {
+export class RequestAddFriendsComponent implements OnInit, OnDestroy {
 
   constructor(
     private contactsService: ContactsService,

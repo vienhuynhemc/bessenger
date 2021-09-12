@@ -16,4 +16,18 @@ export class SettingServiceWsService {
   selectedStateStatus():void {
     this.source.next('trang_thai_hoat_dong');
   }
+
+  public accessSettings(maTaiKhoan: string) {
+    return this.db.database.ref('cai_dat_ws').child(maTaiKhoan);
+  }
+
+  public accessAcc() {
+    return this.db.database.ref('tai_khoan_ws');
+  }
+  getStatusMe() {
+    let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn_ws'));
+    this.accessSettings(idUser).on('value', set => {
+      this.stateStatus = set.val().trang_thai_hoat_dong;
+    })
+  }
 }

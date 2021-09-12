@@ -1,0 +1,230 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-family: "Raleway";
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 4px 8px 28px 0px #d3dceb;
+   
+      .bg-hands {
+          width: 100%;
+          height: 100%;
+          border-radius: 40px;
+          object-fit: cover;
+      }
+      .bg-title{
+          width: 100%;
+          height: 100%;
+          border-radius: 40px;
+          .icon {
+              position: absolute;
+              left: 292px;
+              top: 260px;
+              i {
+                  font-size: 140px;
+                  color: white;
+              }
+          }
+          .title {
+              position: absolute;
+              top: 430px;
+              left: 130px;
+              text-align: center;
+              span{
+                  font-weight: bold;
+                  font-size: 25px;
+                  color: white;
+              }
+          }
+  }
+      .bg {
+          width: 100%;
+          height: 100%;
+          border-radius: 40px;
+      }
+    .top {
+        width: 100%;
+        height: 70%;
+        background-image: linear-gradient(rgb(191, 209, 245), rgb(50, 117, 247));
+        border-bottom-right-radius: 80%;
+        border-bottom-left-radius: 80%;
+        position: relative;
+        .bg-top {
+            object-fit: cover;
+            opacity: 0.2;
+            width: 100%;
+            height: 100%;
+            border-bottom-right-radius: 80%;
+            border-bottom-left-radius: 80%;
+            filter: blur(5px);
+        }
+        .name-opacity {
+            max-width: 100%;
+            overflow: hidden;
+            font-size: 192px;
+            font-weight: bold;
+            background: -webkit-linear-gradient(rgba(255, 255, 255, 0.788), rgba(123, 155, 221, 0.801));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.5;
+            position: absolute;
+            top: 70px;
+        }
+        .name-bg-1 {
+          max-width: 98%;
+          overflow: hidden;
+          font-size: 180px;
+          font-weight: bold;
+          color: rgba(255, 255, 255, 0.801);
+          position: absolute;
+          top: 150px;
+        }
+        .name-bg-2 {
+          max-width: 97%;
+          overflow: hidden;
+          font-size: 260px;
+          font-weight: bold;
+          background: -webkit-linear-gradient(#dae0ec, rgba(50, 116, 247, 0.801));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          position: absolute;
+          top: 360px;
+          
+        }
+        .tai-tho {
+            width: 120px;
+            height: 200px;
+            border: white solid 10px;
+            background-color: rgb(95, 146, 247);
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            text-align: center;
+            justify-content: center;
+            position: absolute;
+            i {
+                font-size: 100px;
+                color: white;
+            }
+        }
+        .left-circle {
+          top: 100px;
+          left: 130px;
+          transform: rotate(-40deg);
+        }
+        .right-circle {
+          top: 100px;
+          right: 130px;
+          transform: rotate(40deg);
+        }
+        
+        .circle-1 {
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 140px;
+            left: 102px;
+            text-align: center;
+            justify-content: center;
+            align-self: center;
+            .circle-2 {
+                width: 480px;
+                height: 480px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.6);
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                .circle-3 {
+                  width: 450px;
+                  height: 450px;
+                  border-radius: 50%;
+                  background-color: white;
+                  position: absolute;
+                  top: 15px;
+                  left: 15px;
+                  .avt {
+                      width: 440px;
+                      height: 440px;
+                      object-fit: cover;
+                      border-radius: 50%;
+                      position: absolute;
+                      top: 5px;
+                      left: 5px;
+                  }
+                  .name {
+                      width: 250px;
+                      height: 40px;
+                      background-color: rgb(14, 12, 12);
+                      position: absolute;
+                      bottom: 0px;
+                      left: 100px;
+                      border-radius: 30px;
+                      display: flex;
+                      span {
+                          margin-top: 8px;
+                          color: white;
+                          font-size: 25px;
+                          font-weight: bold;
+                          margin: auto;
+                      }
+                      .ten {
+                          color: rgb(50, 117, 247);
+                      }
+                  }
+                }
+            }
+        }
+    }
+    .bottom {
+      width: 70%;
+      position: absolute;
+      height: 50px;
+      bottom: 0px;
+      left: 15%;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      background-color: rgb(14, 12, 12);
+      .bot-circle {
+          position: absolute;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: white;
+          top: -30px;
+          box-shadow: 0px 0px 10px 0px #acb0b4;
+          cursor: pointer;
+          .circle {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              position: absolute;
+              top: 5px;
+              left: 5px;
+              
+              background-color: rgb(50, 117, 247);
+              i {
+                  position: absolute;
+                  left: 13px;
+                  top: 12px;
+                  font-size: 25px;
+                  color: white;
+              }
+          }
+      }
+      .add-f {
+          left: 150px;
+          .circle {
+              i {
+                  top: 13px;
+                  left: 14px;
+              }
+          }
+      }
+      .message {
+          right: 150px;
+      }
+    }
+  }

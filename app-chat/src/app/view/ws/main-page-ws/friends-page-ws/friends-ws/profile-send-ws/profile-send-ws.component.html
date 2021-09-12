@@ -1,0 +1,39 @@
+<div class="container" *ngIf="friendInforWS.id == 1">
+    <img class="bg-hands" src="assets/images/list-friends-friends-page/sends.jpg" alt="">
+    <div class="bg-title">
+       
+        <div class="icon"><i id="icon_s" class="icon_s fas fa-paper-plane"></i></div>
+        <div class="title"><span>Bạn chưa gửi yêu cầu kết bạn nào.</span></div>
+    </div>
+</div>
+<div class="container" *ngIf="friendInforWS.id != 1">
+<img  class="bg" src="{{ friendInforWS.img }} || 'assets/images/loading.gif'" alt="" />
+<div class="cover-bg"></div>
+<div class="cover">
+<img src="{{ friendInforWS.img }} || 'assets/images/loading.gif'" alt="" />
+</div>
+
+<div class="content">
+<img
+class="bg-sub"
+src="assets/images/list-friends-friends-page/bg-profile-myfriend7.jpg"
+alt=""
+/>
+</div>
+<div class="right">
+  <div class="ins">XIN CHÀO, <span>TÊN</span> TÔI LÀ</div>
+   <div class="name" matTooltipClass="tooltip" matTooltip="{{friendInforWS.name}}" *ngIf="friendInforWS.checkLimitNameSendProfile()">{{friendInforWS.getNameLimitSendProfile()}}</div>
+<div class="name" *ngIf="!friendInforWS.checkLimitNameSendProfile()">{{friendInforWS.name}}</div>
+ 
+  <button (click)="undoSendRequest(friendInforWS.id)" class="abort-friend btn">
+    <i class="fas fa-undo"></i>Hủy yêu cầu
+  </button>
+  <button (click)="onClickMessage(friendInforWS.id)" class="accept btn">
+    <i class="fas fa-comment"></i>Nhắn tin
+  </button>
+</div>
+
+</div>
+<div class="container" *ngIf="friendInforWS == null">
+
+</div>
