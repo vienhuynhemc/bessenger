@@ -15,7 +15,7 @@
     </div>
     <div class="line"></div>
     <div class="name-line">Bessenger</div>
-    <img class="icon-bess" src="assets/images/icon_browser.ico" alt="">
+    <img class="icon-bess" src="assets/images/icon.ico" alt="">
     <div *ngIf="!offerInforWS.checkLimitNameOfferProfile()" class="name"><span class="name-content">{{offerInforWS.name}}</span></div>
     <div *ngIf="offerInforWS.checkLimitNameOfferProfile()" matTooltip="{{offerInforWS.name}}" matTooltipClass="tooltip" class="name"><span class="name-content">{{offerInforWS.getNameLimitOfferProfile()}}</span></div>
     <div (click)="onClickAddFriends(offerInforWS, 0)" *ngIf="offerInforWS.checkAddOrUndo == 'them'" matTooltip="Thêm bạn" matTooltipClass="tooltip" class="circle-add circle-event">
