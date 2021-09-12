@@ -217,28 +217,35 @@ export class FriendsPageWsService {
 
   // cập nhật trạng thái on - off
   public update(): void {
+    let loop = 5000;
+    // set biến lặp cho phù hợp để tránh trùng nhau
+    this.friendsList != null && this.friendsList.length > 0 ? loop = (this.friendsList.length + 2) * 2000 : loop = loop;
     setTimeout(() => {
       if (this.friendsList != null) {
-        for (let i = 0; i < this.friendsList.length; i++) {
-          this.db.database.ref('cai_dat_ws').child(this.friendsList[i].id).on('value', set =>{
-            if(set.val().trang_thai_hoat_dong == 'tat') {
-              this.friendsList[i].status = false; 
-            } else {
-              // kiểm tra onl web socket
-              this.friendsWS.checkOnline(this.friendsList[i].email);
-              // lấy ra trạng thái từ server
-              this.friendsWS.messages_online.subscribe(data => {
-                let value = JSON.parse(JSON.stringify(data));
-                if(value.status == "success")
-                  this.friendsList[i].status = value.data.status;
-                else
+          for (let i = 0; i < this.friendsList.length; i++) {
+            // set time out để bất đồng bộ do server trả về chậm hơi vòng lặp for
+            setTimeout(() => {
+              this.db.database.ref('cai_dat_ws').child(this.friendsList[i].id).on('value', set => {
+                if (set.val().trang_thai_hoat_dong == 'tat') {
                   this.friendsList[i].status = false;
+                } else {
+                  // kiểm tra onl web socket
+                  this.friendsWS.checkOnline(this.friendsList[i].email);
+                  // lấy ra trạng thái từ server
+                  this.friendsWS.messages_online.subscribe(async (data) => {
+                    let value = await JSON.parse(JSON.stringify(data));
+                    if (value.status == "success")
+                      this.friendsList[i].status = value.data.status;
+                    else
+                      this.friendsList[i].status = false;
+                  });
+                }
               })
-            }
-          })
-        }
+            }, i * 2000);
+          }
       }
       this.update();
-    }, 5000);
+    }, loop);
   }
+  
 }
