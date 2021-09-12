@@ -2,7 +2,7 @@ import { RegisterAccountWsService } from './../../../service/ws/register-account
 import { LoginWsService } from './../../../service/ws/login/login-ws.service';
 import { LoginWsWsService } from './../../../service/ws/login/login-ws-ws.service';
 import { NotificationLoginPageWsService } from '../../../service/ws/notification/notification-login-page-ws.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 // lottie
 import { AnimationItem } from 'lottie-web';
@@ -26,7 +26,7 @@ export class LoginPageWsComponent implements OnInit {
   };
 
   //recapcha
-  @ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
+  @ViewChild('recaptcha_ws', { static: true }) recaptchaElement: ElementRef;
   public isCheckRecapcha: boolean;
 
   public email_quen_mat_khau: string;
@@ -49,6 +49,38 @@ export class LoginPageWsComponent implements OnInit {
   ) {
   }
 
+  //recapcha
+  addRecaptchaScript() {
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptcha();
+    }
+    (function (d, s, id, obj) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptcha(); return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&render=explicit";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+
+  }
+  renderReCaptcha() {
+    try {
+      window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+        'sitekey': '6LdT1D0aAAAAAHDZf574nzU5pDf_Reb25rV6SIqY',
+        'callback': (response) => {
+          this.isCheckRecapcha = true;
+          document.getElementById("dn-error-3").style.display = "none";
+        },
+        'expired-callback': (response) => {
+          this.isCheckRecapcha = false;
+          document.getElementById("dn-error-3").innerText = "Mã xác minh đã hết hạn, vui lòng xác minh lại"
+          document.getElementById("dn-error-3").style.display = "block";
+        }
+      });
+    } catch (e) {
+    }
+  }
+  //////////////////////////////////////////////////////////////
   ngOnInit(): void {
     // change version
     if (this.version_service.version == 1) {
@@ -67,7 +99,6 @@ export class LoginPageWsComponent implements OnInit {
     this.isRunningSlide = true;
     this.userName = "";
     this.passWord = "";
-
     if (this.login_service_ws.isLogin()) {
       this.router.navigate(["/bessenger-ws"]);
     }
@@ -76,36 +107,6 @@ export class LoginPageWsComponent implements OnInit {
 
   animationCreated(animationItem: AnimationItem): void {
   }
-
-  //recapcha
-  addRecaptchaScript() {
-    window['grecaptchaCallback'] = () => {
-      this.renderReCaptcha();
-    }
-    (function (d, s, id, obj) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { obj.renderReCaptcha(); return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&render=explicit";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'recaptcha-jssdk', this));
-
-  }
-  renderReCaptcha() {
-    window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
-      'sitekey': '6LdT1D0aAAAAAHDZf574nzU5pDf_Reb25rV6SIqY',
-      'callback': (response) => {
-        this.isCheckRecapcha = true;
-        document.getElementById("dn-error-3").style.display = "none";
-      },
-      'expired-callback': (response) => {
-        this.isCheckRecapcha = false;
-        document.getElementById("dn-error-3").innerText = "Mã xác minh đã hết hạn, vui lòng xác minh lại"
-        document.getElementById("dn-error-3").style.display = "block";
-      }
-    });
-  }
-  //////////////////////////////////////////////////////////////
 
   dangKyTaoKhoanChuyenComponent() {
     document.getElementById("dang-nhap").style.display = "none";
@@ -509,7 +510,7 @@ export class LoginPageWsComponent implements OnInit {
               this.login_ws_ws.login(email, data[0]['mat_khau']);
               this.login_ws_ws.messages_login.subscribe(data => {
                 let value = JSON.parse(JSON.stringify(data));
-                console.log("Đăng nhập từ trang đăng nhập: "+value.data+" "+value.mes+" "+value.status);
+                console.log("Đăng nhập từ trang đăng nhập: " + value.data + " " + value.mes + " " + value.status);
                 this.isRunningSlide = false;
                 this.isLoading = false;
                 this.router.navigate(["/bessenger-ws"]);
