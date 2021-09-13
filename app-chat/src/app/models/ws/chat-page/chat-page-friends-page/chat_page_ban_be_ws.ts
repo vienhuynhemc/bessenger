@@ -1,7 +1,7 @@
 import { ChatPageObjectTenWS } from "./chat_page_object_ten_ws";
 
 export class ChatPageBanBeWS {
-
+    email: string;
     ma_tai_khoan: string;
     link_hinh_dai_dien: string;
     lan_cuoi_dang_nhap: number;
@@ -9,7 +9,7 @@ export class ChatPageBanBeWS {
     trang_thai_online: boolean;
     ten: string;
     tenGioiHan:ChatPageObjectTenWS;
-    
+   
     public getTenGioiHan(){
         let result = new ChatPageObjectTenWS();
         result.noi_dung = this.ten;

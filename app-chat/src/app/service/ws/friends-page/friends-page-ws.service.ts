@@ -217,7 +217,7 @@ export class FriendsPageWsService {
 
   // cập nhật trạng thái on - off
   public update(): void {
-    let loop = 5000;
+    let loop = 6000;
     // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
     if(this.friendsList != null && this.friendsList.length > 0) {
       for (let index = 0; index < this.friendsList.length; index++)
@@ -236,8 +236,8 @@ export class FriendsPageWsService {
                   // kiểm tra onl web socket
                   this.friendsWS.checkOnline(this.friendsList[i].email);
                   // lấy ra trạng thái từ server
-                  this.friendsWS.messages_online.subscribe(async (data) => {
-                    let value = await JSON.parse(JSON.stringify(data));
+                  this.friendsWS.messages_online.subscribe( (data) => {
+                    let value = JSON.parse(JSON.stringify(data));
                     if (value.status == "success")
                       this.friendsList[i].status = value.data.status;
                     else

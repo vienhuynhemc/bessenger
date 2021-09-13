@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subscription } from 'rxjs';
+import { count } from 'rxjs/operators';
 import { ChatPageBanBeWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_ban_be_ws';
 import { SettingWS } from 'src/app/models/ws/settings/setting_ws';
 import { ChatPageProcessServiceWsService } from '../chat-page-process-service-ws.service';
+import { ChatPageFriendsWebsocketService } from './chat-page-friends-websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,10 @@ export class ChatPageFriendsServiceWsService {
 
   constructor(
     private db: AngularFireDatabase,
-    private main_page_process_service: ChatPageProcessServiceWsService
+    private main_page_process_service: ChatPageProcessServiceWsService,
+   
   ) {
+  
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
   }
@@ -211,6 +215,7 @@ export class ChatPageFriendsServiceWsService {
         if (this.ban_bes[i].ma_tai_khoan == key) {
           this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
           this.ban_bes[i].ten = value['ten'];
+          this.ban_bes[i].email = value['email'];
           // Tạo luôn tên giới hạn
           this.ban_bes[i].getTenGioiHan();
           break;
