@@ -8,7 +8,7 @@ export class ChatPageObjectTinNhanFriendWS {
     ngay_roi_di: number;
     roi_chua: string;
     trang_thai: string;
-
+    email: string;
     // Tên đã được xử lý -> chỉ lấy tên thay vì cả họ lẫn tên
     ten_da_duoc_xu_ly:string = "";
 

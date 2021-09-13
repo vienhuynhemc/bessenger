@@ -258,7 +258,7 @@ export class MainPageWsComponent implements OnInit {
       // if(window.location.pathname != '/bessenger/tin-nhan/' + mess.idConversation) {
       notification.onclick = (e) => {
         window.close()
-        window.open(location.origin + '/bessenger/tin-nhan/' + mess.idConversation, '_blank');
+        window.open(location.origin + '/bessenger-ws/tin-nhan/' + mess.idConversation, '_blank');
         // }
       }
     }

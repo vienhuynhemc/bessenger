@@ -7,6 +7,7 @@ import { ChatPageObjectTinNhanFriendWS } from 'src/app/models/ws/chat-page/chat-
 import { ChatPageTinhTrangXemWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem_ws';
 import { ChatPageTinNhanWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_tin_nhan_ws';
 import { ChatPageProcessServiceWsService } from '../chat-page-process-service-ws.service';
+import { ChatPageFriendsWebsocketService } from './chat-page-friends-websocket.service';
 import { LeftScrollWsService } from './left-scroll-ws.service';
 
 @Injectable({
@@ -46,7 +47,8 @@ export class ChatPageFriendsLeftServiceWsService {
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceWsService,
     // scroll
-    private left_srcoll_service: LeftScrollWsService
+    private left_srcoll_service: LeftScrollWsService,
+    private chat_page_friends_websocket: ChatPageFriendsWebsocketService
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
@@ -116,42 +118,67 @@ export class ChatPageFriendsLeftServiceWsService {
 
   public update(): void {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws"));
+    let loop = 6000;
+    // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
+    if(this.allBoxData != null && this.allBoxData.length > 0) {
+      for (let i= 0; i < this.allBoxData.length; i++) {
+          for (let j = 0; j <this.allBoxData[i].thong_tin_thanh_vien.length; j++) 
+              loop += j * 2000;
+          loop += i * 2000;
+      }
+      loop += 6000;
+    }
     setTimeout(() => {
       // Kiểm tra online
-      let currentTime = Number(new Date());
+
       if (this.allBoxData != null) {
         for (let i = 0; i < this.allBoxData.length; i++) {
-          let isOnline = false;
+          this.allBoxData[i].trang_thai_online = false;
+          setTimeout(() => {
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-            if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-              this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
-                if(set.val().trang_thai_hoat_dong == 'bat') {
-                  if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
-                    if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
-                      let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-                      let overTime = currentTime - last_time;
-                      if (overTime < 10000) {
-                        isOnline = true;
+            setTimeout(() => {
+              if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+                this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
+                
+                  if(set.val().trang_thai_hoat_dong == 'bat') {
+                    if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                      if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+                        
+                        this.chat_page_friends_websocket.checkOnlineFriendsChat(this.allBoxData[i].thong_tin_thanh_vien[j].email);
+                        this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
+                          let value = JSON.parse(JSON.stringify(data));
+                          if (value.status == "success" && value.data.status)
+                              this.allBoxData[i].trang_thai_online = value.data.status;
+                            
+                        });
+                      
                       }
-                    }
-                  } else {
-                    let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-                    let overTime = currentTime - last_time;
-                    if (overTime < 10000) {
-                      isOnline = true;
+                    } else {
+                      this.chat_page_friends_websocket.checkOnlineFriendsChat(this.allBoxData[i].thong_tin_thanh_vien[j].email);
+                      this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
+                        let value =  JSON.parse(JSON.stringify(data));
+                        if (value.status == "success" && value.data.status)
+                              this.allBoxData[i].trang_thai_online = value.data.status;
+                            
+                        
+                      });
+                    
+                      
                     }
                   }
-                }
-              })
-              if(isOnline)
+                 
+                })
+              }
+            }, j * 2000);
+            if(this.allBoxData[i].trang_thai_online)
                 break;
-            }
           }
-          this.allBoxData[i].trang_thai_online = isOnline;
+          }, i * 2000);
+         
         }
       }
       this.update();
-    }, 5000);
+    }, loop);
   }
 
   // Get index đang được chọn
@@ -430,6 +457,7 @@ export class ChatPageFriendsLeftServiceWsService {
           if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan == key) {
             this.allBoxData[i].thong_tin_thanh_vien[j].ten = value['ten'];
             this.allBoxData[i].thong_tin_thanh_vien[j].link_hinh_dai_dien = value['link_hinh'];
+            this.allBoxData[i].thong_tin_thanh_vien[j].email = value['email'];
             // khi thông tin thành viên có link hình thì cập nhật lại img avatar ở cuộc trò chuyện để đổ 
             // ra view ko bị lag
             // img 

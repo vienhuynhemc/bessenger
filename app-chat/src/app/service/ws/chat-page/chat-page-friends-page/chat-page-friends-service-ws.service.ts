@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subscription } from 'rxjs';
+import { count } from 'rxjs/operators';
 import { ChatPageBanBeWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_ban_be_ws';
 import { SettingWS } from 'src/app/models/ws/settings/setting_ws';
 import { ChatPageProcessServiceWsService } from '../chat-page-process-service-ws.service';
+import { ChatPageFriendsWebsocketService } from './chat-page-friends-websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,10 @@ export class ChatPageFriendsServiceWsService {
 
   constructor(
     private db: AngularFireDatabase,
-    private main_page_process_service: ChatPageProcessServiceWsService
+    private main_page_process_service: ChatPageProcessServiceWsService,
+    private chat_page_friends_websocket: ChatPageFriendsWebsocketService
   ) {
+    this.chat_page_friends_websocket.reCreate();
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
   }
@@ -104,34 +108,46 @@ export class ChatPageFriendsServiceWsService {
   }
 
   public update(): void {
+    let loop = 6000;
+    // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
+    if(this.ban_bes != null && this.ban_bes.length > 0) {
+      for (let index = 0; index < this.ban_bes.length; index++)
+          loop += index * 2000;
+      loop += 6000;
+    }
     setTimeout(() => {
-      let currentTime = Number(new Date());
       if (this.ban_bes != null) {
         let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
-          this.db.database.ref('cai_dat_ws').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
-            if(set.val().trang_thai_hoat_dong == 'tat') {
-              this.ban_bes[i].trang_thai_online = false;
-              count++;
-            } else {
-              let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
-              let overTime = currentTime - lan_cuoi_dang_nhap;
-              if (overTime > 10000) {
+          setTimeout(() => {
+            this.db.database.ref('cai_dat_ws').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
+              if(set.val().trang_thai_hoat_dong == 'tat') {
                 this.ban_bes[i].trang_thai_online = false;
-                count++;
               } else {
-                this.ban_bes[i].trang_thai_online = true;
-                this.isOnline = true;
+                this.chat_page_friends_websocket.checkOnlineFriends(this.ban_bes[i].email);
+                this.chat_page_friends_websocket.messages_online_friends.subscribe(data =>{
+                  let value = JSON.parse(JSON.stringify(data));
+                  if (value.status == "success" && value.data.status) {
+                    this.ban_bes[i].trang_thai_online = value.data.status;
+                    this.isOnline = true;
+                  }else {
+                    this.ban_bes[i].trang_thai_online = false;
+                    count++;
+                  }
+                })
+              
               }
-            }
-          })
+            })
+          }, i * 2000);
         }
-        if (count == this.ban_bes.length) {
-          this.isOnline = false;
-        }
+        // kiểm tra có bạn bè nào onl không
+        setTimeout(() => {
+          if(count == this.ban_bes.length)
+              this.isOnline = false;
+        }, loop);
       }
       this.update();
-    }, 5000);
+    }, loop);
   }
 
   public getListFriend() {
@@ -211,6 +227,7 @@ export class ChatPageFriendsServiceWsService {
         if (this.ban_bes[i].ma_tai_khoan == key) {
           this.ban_bes[i].link_hinh_dai_dien = value['link_hinh'];
           this.ban_bes[i].ten = value['ten'];
+          this.ban_bes[i].email = value['email'];
           // Tạo luôn tên giới hạn
           this.ban_bes[i].getTenGioiHan();
           break;
