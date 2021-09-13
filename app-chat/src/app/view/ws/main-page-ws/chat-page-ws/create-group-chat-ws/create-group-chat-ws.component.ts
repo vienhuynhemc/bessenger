@@ -13,7 +13,7 @@ export class CreateGroupChatWsComponent implements OnInit {
 
   public ten_nhom: string;
   public ten_hien_tai: string;
-
+ 
   constructor(public chat_page_create_ground: ChatPageCreateGroupWsService,
     private router: Router,
     public my_name_service: MyNameWsService
@@ -35,6 +35,7 @@ export class CreateGroupChatWsComponent implements OnInit {
       Object.entries(object).forEach(([ma_tai_khoan, data_tai_khoan]) => {
         all_user.push(new ChatPageObjectGroupWS(data_tai_khoan['ten'], ma_tai_khoan, data_tai_khoan['link_hinh']));
       });
+     
       this.chat_page_create_ground.all_user = all_user;
     });
   }
@@ -47,12 +48,14 @@ export class CreateGroupChatWsComponent implements OnInit {
     let countOK = 0;
     if (this.ten_nhom == null || this.ten_nhom.length == 0) {
       document.getElementById("tao-nhom-error-1").style.display = "block";
+      document.getElementById("tao-nhom-error-0").style.display = "none";
       countOK++;
     } else {
       document.getElementById("tao-nhom-error-1").style.display = "none";
     }
     if (!this.chat_page_create_ground.isOke()) {
       document.getElementById("tao-nhom-error-2").style.display = "block";
+      document.getElementById("tao-nhom-error-0").style.display = "none";
       countOK++;
     } else {
       document.getElementById("tao-nhom-error-2").style.display = "none";
@@ -61,17 +64,27 @@ export class CreateGroupChatWsComponent implements OnInit {
       document.getElementById("tao-nhom-error-1").style.display = "none";
       document.getElementById("tao-nhom-error-2").style.display = "none";
       this.chat_page_create_ground.createGroup(this.ten_nhom,this.my_name_service.myName);
-      this.ten_nhom = "";
-      this.closeTaoNhom();
-      this.router.navigate(['bessenger-ws/tin-nhan/danh-sach']);
-    }
+        // trễ 2s để đợi ws trả về kết quả
+        setTimeout(() => {
+          if(this.chat_page_create_ground.checkCreate) {
+            this.ten_nhom = "";
+            this.closeTaoNhom();
+            this.router.navigate(['bessenger-ws/tin-nhan/danh-sach']);
+          } else 
+          document.getElementById("tao-nhom-error-0").style.display = "block";
+        }, 1500);
+      }
+     
+    
   }
 
   public inputTenNhom(value) {
     if (value.trim().length == 0) {
       document.getElementById("tao-nhom-error-1").style.display = "block";
+      document.getElementById("tao-nhom-error-0").style.display = "none";
     } else {
       document.getElementById("tao-nhom-error-1").style.display = "none";
+      document.getElementById("tao-nhom-error-0").style.display = "none";
     }
   }
 

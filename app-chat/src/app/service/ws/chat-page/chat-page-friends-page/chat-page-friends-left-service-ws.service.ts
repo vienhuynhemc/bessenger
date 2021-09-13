@@ -51,6 +51,7 @@ export class ChatPageFriendsLeftServiceWsService {
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
+    this.chat_page_friends_websocket.reCreate()
     this.update();
   }
 

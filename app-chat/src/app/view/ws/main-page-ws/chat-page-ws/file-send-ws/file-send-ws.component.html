@@ -7,10 +7,11 @@
                 <div class="nhom" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
                 && this.content_service.object_chat.imgAvatars.length == 2
                 ">
-                    <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'"
-                        class="hinh-1" alt="">
                     <img [src]="this.content_service.object_chat.imgAvatars[1] ||'assets/images/loading.gif'" alt=""
                         class="hinh-2">
+                    <img [src]="this.content_service.object_chat.imgAvatars[0] ||'assets/images/loading.gif'"
+                        class="hinh-1" alt="">
+                    
                 </div>
                 <div class="don" *ngIf="this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don'
                 || (this.content_service.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom'
