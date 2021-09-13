@@ -1,5 +1,5 @@
 export class ChatPageObjectGroupWS {
-
+    email: string;
     ten: string;
     ma_tai_khoan: string;
     hinh: string;
@@ -8,6 +8,7 @@ export class ChatPageObjectGroupWS {
         this.ten = ten;
         this.ma_tai_khoan = ma_tai_khoan;
         this.hinh = hinh;
+        
     }
 
 }

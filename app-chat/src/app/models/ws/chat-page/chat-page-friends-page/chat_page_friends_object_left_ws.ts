@@ -36,7 +36,8 @@ export class ChatPageFriendsObjectLeftWS {
     public viTriBanThan: number;
     public viTriCuoiCung: number;
     /////////////////////////////////////////////////////////////
-
+    // Trạng thái online/offline websocket (v)
+    trang_thai_online_websocket: boolean;
     public constructor() {
         this.noiDungCuoiCung.noi_dung = "";
     }

@@ -10,14 +10,26 @@ import { WebsocketService } from '../../websocket-service/websocket.service';
 })
 export class ChatPageFriendsWebsocketService {
   public messages_online_friends_chat: Subject<Object>;
- 
+  public messages_create_group_chat: Subject<Object>;
   constructor(private ws: WebsocketService) { 
-    this.reCreate();
+    
   }
 
    // tạo kết nối
    public reCreate() {
     this.messages_online_friends_chat = <Subject<MessageOnlineFriends>>(
+      this.ws.connect(environment.CHAT_URL).pipe(
+        map((response: MessageEvent): MessageOnlineFriends => {
+          const data = JSON.parse(response.data);
+          return {
+            status: data.status,
+            mes: data.mes,
+            data: data.data
+          };
+        })
+      )
+    );
+    this.messages_create_group_chat = <Subject<MessageOnlineFriends>>(
       this.ws.connect(environment.CHAT_URL).pipe(
         map((response: MessageEvent): MessageOnlineFriends => {
           const data = JSON.parse(response.data);
@@ -46,4 +58,20 @@ export class ChatPageFriendsWebsocketService {
       },
     });
   }
+
+   // gửi request kiểm tra box chat
+   public createGroup(name): void {
+    this.messages_online_friends_chat.next({
+      action: 'onchat',
+      data: {
+        event: 'CREATE_ROOM',
+        data: {
+          name: name,
+        },
+      },
+    });
+  }
+
+  
+
 }

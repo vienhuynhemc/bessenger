@@ -42,7 +42,7 @@ export class ChatPageFriendsLeftServiceWsService {
   public indexPre: number;
   public indexSelect: number;
   public isLoadFirst: boolean;
-
+  
   constructor(
     private db: AngularFireDatabase,
     // scroll
@@ -51,7 +51,10 @@ export class ChatPageFriendsLeftServiceWsService {
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
-    this.update();
+    this.chat_page_friends_websocket.reCreate()
+    // update on/off websocket (v)
+    this.updateWebSocket();
+    this.uState();
   }
 
   public getLanCuoiDangNhap() {
@@ -115,7 +118,8 @@ export class ChatPageFriendsLeftServiceWsService {
     return false;
   }
 
-  public update(): void {
+  // update on/off websocket (v)
+  public updateWebSocket(): void {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws"));
     let loop = 6000;
     // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
@@ -132,7 +136,7 @@ export class ChatPageFriendsLeftServiceWsService {
 
       if (this.allBoxData != null) {
         for (let i = 0; i < this.allBoxData.length; i++) {
-          this.allBoxData[i].trang_thai_online = false;
+          this.allBoxData[i].trang_thai_online_websocket = false;
           setTimeout(() => {
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             setTimeout(() => {
@@ -147,7 +151,7 @@ export class ChatPageFriendsLeftServiceWsService {
                         this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
                           let value = JSON.parse(JSON.stringify(data));
                           if (value.status == "success" && value.data.status)
-                              this.allBoxData[i].trang_thai_online = value.data.status;
+                              this.allBoxData[i].trang_thai_online_websocket = value.data.status;
                             
                         });
                       
@@ -157,11 +161,9 @@ export class ChatPageFriendsLeftServiceWsService {
                       this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
                         let value =  JSON.parse(JSON.stringify(data));
                         if (value.status == "success" && value.data.status)
-                              this.allBoxData[i].trang_thai_online = value.data.status;
+                              this.allBoxData[i].trang_thai_online_websocket = value.data.status;
                             
-                        
                       });
-                    
                       
                     }
                   }
@@ -169,14 +171,14 @@ export class ChatPageFriendsLeftServiceWsService {
                 })
               }
             }, j * 2000);
-            if(this.allBoxData[i].trang_thai_online)
+            if(this.allBoxData[i].trang_thai_online_websocket)
                 break;
           }
           }, i * 2000);
          
         }
       }
-      this.update();
+      this.updateWebSocket();
     }, loop);
   }
 
@@ -567,5 +569,46 @@ export class ChatPageFriendsLeftServiceWsService {
 
   public getThanhVienCuocTroTruyen() {
     return this.db.object("/thanh_vien_cuoc_tro_chuyen_ws").snapshotChanges();
+  }
+
+  // firebase on/off
+  public uState(): void {
+    let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws"));
+    setTimeout(() => {
+      // Kiểm tra online
+      let currentTime = Number(new Date());
+      if (this.allBoxData != null) {
+        for (let i = 0; i < this.allBoxData.length; i++) {
+          let isOnline = false;
+          for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+            if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+              this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
+                if(set.val().trang_thai_hoat_dong == 'bat') {
+                  if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                    if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+                      let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                      let overTime = currentTime - last_time;
+                      if (overTime < 10000) {
+                        isOnline = true;
+                      }
+                    }
+                  } else {
+                    let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                    let overTime = currentTime - last_time;
+                    if (overTime < 10000) {
+                      isOnline = true;
+                    }
+                  }
+                }
+              })
+              if(isOnline)
+                break;
+            }
+          }
+          this.allBoxData[i].trang_thai_online = isOnline;
+        }
+      }
+      this.uState();
+    }, 5000);
   }
 }
