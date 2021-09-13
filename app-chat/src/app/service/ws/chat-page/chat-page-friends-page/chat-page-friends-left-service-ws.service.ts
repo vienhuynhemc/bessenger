@@ -45,7 +45,6 @@ export class ChatPageFriendsLeftServiceWsService {
 
   constructor(
     private db: AngularFireDatabase,
-    private main_page_process_service: ChatPageProcessServiceWsService,
     // scroll
     private left_srcoll_service: LeftScrollWsService,
     private chat_page_friends_websocket: ChatPageFriendsWebsocketService

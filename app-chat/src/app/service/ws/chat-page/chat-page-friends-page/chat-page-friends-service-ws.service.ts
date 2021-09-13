@@ -30,9 +30,9 @@ export class ChatPageFriendsServiceWsService {
   constructor(
     private db: AngularFireDatabase,
     private main_page_process_service: ChatPageProcessServiceWsService,
-    private chat_page_friends_websocket: ChatPageFriendsWebsocketService
+   
   ) {
-    this.chat_page_friends_websocket.reCreate();
+  
     // Hàm update lại ban_bes 5s 1 lần
     this.update();
   }
@@ -108,46 +108,34 @@ export class ChatPageFriendsServiceWsService {
   }
 
   public update(): void {
-    let loop = 6000;
-    // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
-    if(this.ban_bes != null && this.ban_bes.length > 0) {
-      for (let index = 0; index < this.ban_bes.length; index++)
-          loop += index * 2000;
-      loop += 6000;
-    }
     setTimeout(() => {
+      let currentTime = Number(new Date());
       if (this.ban_bes != null) {
         let count = 0;
         for (let i = 0; i < this.ban_bes.length; i++) {
-          setTimeout(() => {
-            this.db.database.ref('cai_dat_ws').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
-              if(set.val().trang_thai_hoat_dong == 'tat') {
+          this.db.database.ref('cai_dat_ws').child(this.ban_bes[i].ma_tai_khoan).on('value', set =>{
+            if(set.val().trang_thai_hoat_dong == 'tat') {
+              this.ban_bes[i].trang_thai_online = false;
+              count++;
+            } else {
+              let lan_cuoi_dang_nhap = this.ban_bes[i].lan_cuoi_dang_nhap;
+              let overTime = currentTime - lan_cuoi_dang_nhap;
+              if (overTime > 10000) {
                 this.ban_bes[i].trang_thai_online = false;
+                count++;
               } else {
-                this.chat_page_friends_websocket.checkOnlineFriends(this.ban_bes[i].email);
-                this.chat_page_friends_websocket.messages_online_friends.subscribe(data =>{
-                  let value = JSON.parse(JSON.stringify(data));
-                  if (value.status == "success" && value.data.status) {
-                    this.ban_bes[i].trang_thai_online = value.data.status;
-                    this.isOnline = true;
-                  }else {
-                    this.ban_bes[i].trang_thai_online = false;
-                    count++;
-                  }
-                })
-              
+                this.ban_bes[i].trang_thai_online = true;
+                this.isOnline = true;
               }
-            })
-          }, i * 2000);
+            }
+          })
         }
-        // kiểm tra có bạn bè nào onl không
-        setTimeout(() => {
-          if(count == this.ban_bes.length)
-              this.isOnline = false;
-        }, loop);
+        if (count == this.ban_bes.length) {
+          this.isOnline = false;
+        }
       }
       this.update();
-    }, loop);
+    }, 5000);
   }
 
   public getListFriend() {
