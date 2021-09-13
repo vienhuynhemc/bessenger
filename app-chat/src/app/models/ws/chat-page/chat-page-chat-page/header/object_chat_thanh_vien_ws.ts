@@ -1,4 +1,5 @@
 export class ObjectChatThanhVienWS {
+    email: string;
     ten: string;
     hinh: string;
     ma_tai_khoan: string;

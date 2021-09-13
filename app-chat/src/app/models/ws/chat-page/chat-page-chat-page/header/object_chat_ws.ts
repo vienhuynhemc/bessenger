@@ -3,7 +3,7 @@ import { ChatPageObjectTenWS } from '../../chat-page-friends-page/chat_page_obje
 import { ObjectChatThanhVienWS } from './object_chat_thanh_vien_ws';
 
 export class ObjectChatWS {
-
+    
     ma_tai_khoan_so_huu: string;
     loai: string;
     mau: string;

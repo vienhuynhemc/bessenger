@@ -56,7 +56,7 @@ export class ChatPageFriendsWebsocketService {
     });
   }
 
-   // gửi request kiểm tra box chat online
+   // gửi request kiểm tra box chat
    public checkOnlineFriendsChat(name): void {
     this.messages_online_friends_chat.next({
       action: 'onchat',
