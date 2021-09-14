@@ -33,8 +33,7 @@ export class MainPageWsService {
     this.thong_tin_ca_nhan_duoc_chon = false;
     this.cai_dat_duoc_chon = false;
     this.updateOnline();
-    // tự động join group
-    this.autoJoinGroup();
+    
   }
 
   public getImg() {
@@ -72,9 +71,9 @@ export class MainPageWsService {
                   // chưa tham gia thì gửi request join group
                   this.db.database.ref('thong_tin_tro_chuyen_nhom_ws').child(gDetail.key).once('value', inforG => {
                     this.main_page_websocket.joinGroup(inforG.val().ten_nhom);
-                    this.main_page_websocket.messages_join_group.subscribe(data => {
-                      let value = JSON.parse(JSON.stringify(data));
+                    this.main_page_websocket.messages_join_group.subscribe(async data => {
                       setTimeout(() => {
+                        let value = JSON.parse(JSON.stringify(data));
                         if (value.status == "success") {
                           // tham gia thành công thì set lại trong fire
                           this.db.database.ref('thanh_vien_cuoc_tro_chuyen_ws').child(gDetail.key).child(ma_tai_khoan).update({
@@ -82,7 +81,6 @@ export class MainPageWsService {
                           })
                         }
                       }, 1000);
-                      
                     })
                   })
                 }
