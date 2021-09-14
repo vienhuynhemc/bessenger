@@ -33,7 +33,9 @@ export class MainPageWsComponent implements OnInit {
     public friendsPageService_ws: FriendsPageWsService,
     public settings_service_ws: SettingServiceWsService,
     public notificationMessageService_ws: NotificationWsService
-  ) { }
+  ) {
+   
+   }
 
   ngOnInit(): void {
     if (this.version_service.version == 1) {
@@ -70,6 +72,9 @@ export class MainPageWsComponent implements OnInit {
         });
       }
     }
+    // tự động join group
+    this.main_page_service_ws.autoJoinGroup();
+     
   }
 
   public getData() {
