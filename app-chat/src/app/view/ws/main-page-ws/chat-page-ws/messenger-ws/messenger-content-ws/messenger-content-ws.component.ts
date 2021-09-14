@@ -69,7 +69,7 @@ export class MessengerContentWsComponent implements OnInit {
 
  public layThongTinNhom() {
    this.content_service.layThongTinNhom = this.content_service.getThongTinTroChuyenNhom(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-     this.content_service.dienThongTinNhom(data.payload.toJSON());
+    this.content_service.dienThongTinNhom(data.payload.toJSON());
    })
  }
 
