@@ -10,6 +10,7 @@ import { WebsocketService } from '../../../websocket-service/websocket.service';
 })
 export class ChatPageContentWebsocketService {
   public messages_send: Subject<Object>;
+  
   constructor(private ws: WebsocketService) {
     this.reCreate();
    }
@@ -27,6 +28,7 @@ export class ChatPageContentWebsocketService {
         })
       )
     );
+   
    
   }
 
@@ -59,4 +61,7 @@ export class ChatPageContentWebsocketService {
       },
     });
   }
+
+   
+
 }

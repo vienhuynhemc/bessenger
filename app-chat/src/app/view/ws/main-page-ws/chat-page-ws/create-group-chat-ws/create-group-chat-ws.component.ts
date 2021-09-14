@@ -72,7 +72,7 @@ export class CreateGroupChatWsComponent implements OnInit {
             this.router.navigate(['bessenger-ws/tin-nhan/danh-sach']);
           } else 
           document.getElementById("tao-nhom-error-0").style.display = "block";
-        }, 1500);
+        }, 1000);
       }
      
     

@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ObjectChatContentWS } from 'src/app/models/ws/chat-page/chat-page-chat-page/content/object_chat_content_ws';
 import { ObjectDangNhapWS } from 'src/app/models/ws/chat-page/chat-page-chat-page/content/object_dang_nhap_ws';
@@ -15,7 +15,6 @@ import { ChatPageTinhTrangXemWS } from 'src/app/models/ws/chat-page/chat-page-fr
 import { ChatPageTinNhanWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_tin_nhan_ws';
 import { FileUploadWS } from 'src/app/models/ws/file-upload/file_upload_ws';
 import { MyNameWsService } from '../../../my-name/my-name-ws.service';
-import { MessengerHeaderWsService } from '../chat-page-chat-page-header/messenger-header-ws.service';
 import { ChatPageContentWebsocketService } from './chat-page-content-websocket.service';
 
 @Injectable({
@@ -31,7 +30,12 @@ public onInput: boolean;
 // Đối tượng tượng đang nhập
 public dang_nhaps: ObjectDangNhapWS[];
 
+// tin nhắn lấy từ websocket
+public messagesWebsocket: string[] = [];
+// kiểm tra load lần đầu websocket
+public checkLoadMessageWS: boolean = false;
 // service
+
 public layAllBanBe: Subscription;
 public layLoaiCuocTroChuyen: Subscription;
 public layThongTinNhom: Subscription;
@@ -419,6 +423,7 @@ public layLanCuoiOnline: Subscription;
     return this.db.object("/chi_tiet_cuoc_tro_chuyen_ws/" + id).snapshotChanges();
   }
 
+  
   public dienTinNhan(value: object, maCuocTroChuyen:string) {
     let tin_nhans: ChatPageTinNhanWS[] = [];
     if (value != null) {
@@ -752,12 +757,13 @@ public layLanCuoiOnline: Subscription;
   submitMessageWebsocket(ma_cuoc_tro_chuyen: string, ma_tin_nhan: string) {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws"));
     // gửi tin nhắn 1 : 1
-    if(this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen = 'don') {
+    if(this.object_chat.cuoc_tro_truyen.loai_cuoc_tro_truyen == 'don') {
         this.db.database.ref('thanh_vien_cuoc_tro_chuyen_ws').child(ma_cuoc_tro_chuyen).once('value', members => {
           members.forEach(eleMember=> {
               if(eleMember.key != ma_tai_khoan) {
                 this.db.database.ref('tai_khoan_ws').child(eleMember.key).once('value' , infor => {
                   this.chat_page_content_websocket.sendMessagesPeople(infor.val().email, ma_tin_nhan);
+                 
                 })
               }
           });
