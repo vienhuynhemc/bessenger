@@ -104,4 +104,54 @@ outGroup(ma_cuoc_tro_chuyen: string, member: MemberGroupChatWS) {
   })
   
 }
+
+addMember(ma_cuoc_tro_chuyen: string, member: MemberGroupChatWS) {
+  let currentTime = Number(new Date());
+  this.content_service.sumitTinNhanThongBaoTaoNhom(ma_cuoc_tro_chuyen,
+    "đã thêm thành viên " + member.name + " vào nhóm", "thong_bao", this.my_name_service.myName);
+    this.db.database.ref("thanh_vien_cuoc_tro_chuyen_ws").child(ma_cuoc_tro_chuyen).child(member.idUser).set(
+      {
+        ngay_roi_di: 0,
+        ngay_tham_gia: currentTime,
+        roi_chua: "chua",
+        trang_thai: "khong_cho",
+        chuc_vu: 'thanh_vien',
+        tham_gia: "chua"
+      }
+    );
+}
+
+  getNewMembers(nameSearch: string, oldMembers: MemberGroupChatWS[]):MemberGroupChatWS[] {
+    let newMembers = []
+    let parseID = JSON.parse(localStorage.getItem('ma_tai_khoan_dn_ws'))
+      this.accesstai_khoan().on('value', accounts =>  {
+          newMembers = [];
+          accounts.forEach(ele_acc => {
+              let checkAdd = false;
+              oldMembers.forEach(ele_old => {
+                    if(ele_acc.key == ele_old.idUser || ele_acc.key == parseID)
+                        checkAdd = true;
+              });
+              if(!checkAdd) {
+                if(nameSearch.trim() == '') {
+                    let newMember = new MemberGroupChatWS();
+                    newMember.idUser = ele_acc.key;
+                    newMember.img = ele_acc.val().link_hinh;
+                    newMember.name = ele_acc.val().ten;
+                    newMembers.push(newMember);
+                } else {
+                  if(ele_acc.val().ten.toLowerCase().trim().includes(nameSearch.toLowerCase().trim())) {
+                    let newMember = new MemberGroupChatWS();
+                    newMember.idUser = ele_acc.key;
+                    newMember.img = ele_acc.val().link_hinh;
+                    newMember.name = ele_acc.val().ten;
+                    newMembers.push(newMember);
+                  }
+                }
+              }
+          });
+      })
+   
+    return newMembers
+  }
 }

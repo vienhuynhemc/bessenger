@@ -1,3 +1,4 @@
+$color-bg-main: #f5f9fc;
 * {
     margin: 0;
     padding: 0;
@@ -201,8 +202,9 @@
       top: 0px;
       z-index: 2;
     }
-  
-    .content {
+    
+    
+    .content, .content_new {
       border-radius: 10px;
       width: 530px;
       height: 340px;
@@ -214,8 +216,8 @@
       background-color: white;
       position: absolute;
       box-shadow: 17px 20px 14px 4px #dbdae4;
-  
-      .title {
+      
+      .title, .title_new {
         text-align: center;
         font-family: sans-serif;
         color: rgb(65, 98, 251);
@@ -227,8 +229,119 @@
           color: rgb(65, 98, 251);
         }
       }
-  
-      .select {
+      .title_new {
+        margin-top: 30px;
+        margin-bottom: 20px;
+      }
+      .exit {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: #e7e7e7 solid 0.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          top: 5px;
+          font-size: 16px;
+          left: 8px;
+          color: #a4afbf;
+        }
+      }
+      .search {
+        width: 85%;
+        height: 35px;
+        margin: auto;
+        border-radius: 20px;
+        position: relative;
+        background-color: $color-bg-main;
+        input {
+          height: 70%;
+          width: 86%;
+          margin-left: 20px;
+          margin-top: 5px;
+          border: none;
+          outline: none;
+        }
+        ::placeholder {
+          color: #a4afbf;
+        }
+        input[type="text"] {
+          font-size: 13px;
+          background-color: $color-bg-main;
+        }
+        i {
+          color: #a4afbf;
+          font-size: 15px;
+          position: absolute;
+          top: 10px;
+          right: 15px;
+          cursor: pointer;
+        }
+      }
+      .scroll-new-members {
+        width: 85%;
+        height: 290px;
+        overflow: scroll;
+        margin: 15px auto 15px auto;
+
+        .member {
+          display: flex;
+          width: 100%;
+          height: 48px;
+          border-radius: 8px;
+          cursor: pointer;
+          position: relative;
+          .left {
+            width: 13%;
+            img {
+              border-radius: 50%;
+              width: 38px;
+              height: 38px;
+              object-fit: cover;
+              margin-top: 5px;
+              margin-left: 5px;
+
+            }
+          }
+          .center {
+            width: 82%;
+            display: flex;
+            align-items: center;
+            .name {
+              font-family: sans-serif;
+              font-weight: 450;
+            }
+          }
+          .right {
+            width: 5%;
+            display: flex;
+            align-items: center;
+            
+            .cover {
+              width: 5%;
+              position: absolute;
+              height: 100%;
+              z-index: 10;
+            }
+            input {
+              width: 15px;
+              height: 15px;
+              z-index: 1;
+             
+            }
+          }
+         
+        }
+        .member:hover {
+          background-color: #f2f2f2;
+        }
+      }
+      .select, .select_new {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -295,6 +408,34 @@
           }
         }
       }
+      .select_new {
+        margin-top: 0px;
+       
+      }
+    }
+    .content_new {
+      height: 490px;
+      top: 40%;
+      div {
+        span {
+          margin-top: 0px !important;
+        }
+      }
     }
   }
-  
+  ::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: #00000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #00000066;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 0px;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar:hover {
+    background: #0700001c !important;
+  }
