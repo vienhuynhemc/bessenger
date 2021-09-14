@@ -69,7 +69,7 @@ export class MessengerContentWsComponent implements OnInit {
 
  public layThongTinNhom() {
    this.content_service.layThongTinNhom = this.content_service.getThongTinTroChuyenNhom(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-     this.content_service.dienThongTinNhom(data.payload.toJSON());
+    this.content_service.dienThongTinNhom(data.payload.toJSON());
    })
  }
 
@@ -161,10 +161,10 @@ export class MessengerContentWsComponent implements OnInit {
  }
 
  public layTinNhan() {
-   this.content_service.layTinNhan = this.content_service.getTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
-     this.content_service.dienTinNhan(data.payload.toJSON(), this.messenger_main_service.ma_cuoc_tro_chuyen);
-   })
- }
+  this.content_service.layTinNhan = this.content_service.getTinNhan(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {
+    this.content_service.dienTinNhan(data.payload.toJSON(), this.messenger_main_service.ma_cuoc_tro_chuyen);
+  })
+  }
 
  public layNhungOngDangNhap() {
    this.content_service.layNhungOngDangNhap = this.content_service.getDangNhap(this.messenger_main_service.ma_cuoc_tro_chuyen).subscribe(data => {

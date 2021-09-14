@@ -11,6 +11,7 @@ import { WebsocketService } from '../../websocket-service/websocket.service';
 export class ChatPageFriendsWebsocketService {
   public messages_online_friends_chat: Subject<Object>;
   public messages_create_group_chat: Subject<Object>;
+  public messages_send: Subject<Object>;
   constructor(private ws: WebsocketService) { 
     
   }
@@ -30,6 +31,18 @@ export class ChatPageFriendsWebsocketService {
       )
     );
     this.messages_create_group_chat = <Subject<MessageOnlineFriends>>(
+      this.ws.connect(environment.CHAT_URL).pipe(
+        map((response: MessageEvent): MessageOnlineFriends => {
+          const data = JSON.parse(response.data);
+          return {
+            status: data.status,
+            mes: data.mes,
+            data: data.data
+          };
+        })
+      )
+    );
+    this.messages_send = <Subject<MessageOnlineFriends>>(
       this.ws.connect(environment.CHAT_URL).pipe(
         map((response: MessageEvent): MessageOnlineFriends => {
           const data = JSON.parse(response.data);
@@ -72,6 +85,18 @@ export class ChatPageFriendsWebsocketService {
     });
   }
 
-  
-
+    // gửi request chat nhóm
+    public sendMessagesGroup(to, mes): void {
+      this.messages_send.next({
+        action: 'onchat',
+        data: {
+          event: 'SEND_CHAT',
+          data: {
+            type: 'room',
+            to: to,
+            mes: mes
+          },
+        },
+      });
+    }
 }

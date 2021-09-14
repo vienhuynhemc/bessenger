@@ -33,78 +33,81 @@ export class ChatPageCreateGroupWsService {
     let currentTime = Number(new Date());
     let value = "error";
     this.chat_page_friends_websocket.createGroup(ten_nhom);
-    this.chat_page_friends_websocket.messages_create_group_chat.subscribe(data => {
+    
+    this.chat_page_friends_websocket.messages_create_group_chat.subscribe(async data => {
       value = JSON.parse(JSON.stringify(data)).status;
-      
-    })
-      setTimeout(() => {
-          if (value == "success") {
-            // Cuộc trò chuyện
-            let cuoc_tro_chuyen = this.db.list("/cuoc_tro_chuyen_ws").push({ loai_cuoc_tro_truyen: "nhom", bieu_tuong_cam_xuc: "khong", mau: "#3275f7" });
-            // Thông tin trò chuyện nhóm
-            this.db.object("/thong_tin_tro_chuyen_nhom_ws/" + cuoc_tro_chuyen.key).update(
-              {
-                chu_so_huu: ma_tai_khoan,
-                ngay_tao: currentTime,
-                ["ten_nhom"]: ten_nhom,
-                ton_tai: 0
-              }
-            );
-            // Thành viên cuộc trò chuyện
-            this.db.object("/thanh_vien_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + ma_tai_khoan).update(
-              {
-                ngay_roi_di: 0,
-                ngay_tham_gia: currentTime,
-                roi_chua: "chua",
-                trang_thai: "khong_cho",
-                chuc_vu: 'quan_tri_vien',
-                tham_gia: "roi"
-              }
-            );
-            let array: Object[] = [];
-            array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi",ten:ten });
-            for (let i = 0; i < this.user_added.length; i++) {
-             
-              this.db.object("/thanh_vien_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + this.user_added[i].ma_tai_khoan).update(
-                {
-                  ngay_roi_di: 0,
-                  ngay_tham_gia: currentTime,
-                  roi_chua: "chua",
-                  trang_thai: "khong_cho",
-                  chuc_vu: 'thanh_vien',
-                  tham_gia: "chua"
-                }
-              );
-              array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua",ten:this.user_added[i].ten });
+      if (await value == "success") {
+        // Cuộc trò chuyện
+        let cuoc_tro_chuyen = this.db.list("/cuoc_tro_chuyen_ws").push({ loai_cuoc_tro_truyen: "nhom", bieu_tuong_cam_xuc: "khong", mau: "#3275f7" });
+        // Thông tin trò chuyện nhóm
+        this.db.object("/thong_tin_tro_chuyen_nhom_ws/" + cuoc_tro_chuyen.key).update(
+          {
+            chu_so_huu: ma_tai_khoan,
+            ngay_tao: currentTime,
+            ["ten_nhom"]: ten_nhom,
+            ton_tai: 0
+          }
+        );
+        // Thành viên cuộc trò chuyện
+        this.db.object("/thanh_vien_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + ma_tai_khoan).update(
+          {
+            ngay_roi_di: 0,
+            ngay_tham_gia: currentTime,
+            roi_chua: "chua",
+            trang_thai: "khong_cho",
+            chuc_vu: 'quan_tri_vien',
+            tham_gia: "roi"
+          }
+        );
+        let array: Object[] = [];
+        array.push({ ma_tai_khoan: ma_tai_khoan, ngay_nhan: 0, ngay_xem: currentTime, xem_chua: "roi",ten:ten });
+        for (let i = 0; i < this.user_added.length; i++) {
+         
+          this.db.object("/thanh_vien_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + this.user_added[i].ma_tai_khoan).update(
+            {
+              ngay_roi_di: 0,
+              ngay_tham_gia: currentTime,
+              roi_chua: "chua",
+              trang_thai: "khong_cho",
+              chuc_vu: 'thanh_vien',
+              tham_gia: "chua"
             }
-            // Tin nhắn đầu tiên
-            this.db.list("/chi_tiet_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key).push(
+          );
+          array.push({ ma_tai_khoan: this.user_added[i].ma_tai_khoan, ngay_nhan: 0, ngay_xem: 0, xem_chua: "chua",ten:this.user_added[i].ten });
+        }
+        // Tin nhắn đầu tiên
+        this.db.list("/chi_tiet_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key).push(
+          {
+            dia_chi_file: "",
+            link_file: "",
+            loai_tin_nhan: "thong_bao",
+            ["ma_tai_khoan"]: ma_tai_khoan,
+            ten:ten,
+            ma_tin_nhan_phan_hoi: "",
+            ngay_gui: currentTime,
+            noi_dung: "đã tạo nhóm"
+          }
+        ).then((ref) => {
+          for (let i = 0; i < array.length; i++) {
+            this.db.object("/chi_tiet_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
               {
-                dia_chi_file: "",
-                link_file: "",
-                loai_tin_nhan: "thong_bao",
-                ["ma_tai_khoan"]: ma_tai_khoan,
-                ten:ten,
-                ma_tin_nhan_phan_hoi: "",
-                ngay_gui: currentTime,
-                noi_dung: "đã tạo nhóm"
+                ngay_nhan: array[i]['ngay_nhan'],
+                ngay_xem: array[i]['ngay_xem'],
+                xem_chua: array[i]['xem_chua'],
+                ten:array[i]['ten']
               }
-            ).then((ref) => {
-              for (let i = 0; i < array.length; i++) {
-                this.db.object("/chi_tiet_cuoc_tro_chuyen_ws/" + cuoc_tro_chuyen.key + "/" + ref.key + "/tinh_trang_xem/" + array[i]['ma_tai_khoan']).update(
-                  {
-                    ngay_nhan: array[i]['ngay_nhan'],
-                    ngay_xem: array[i]['ngay_xem'],
-                    xem_chua: array[i]['xem_chua'],
-                    ten:array[i]['ten']
-                  }
-                )
-              };
-            });
-            this.checkCreate = true;
-          } else 
-            this.checkCreate = false;
-        }, 1000);
+            )
+          };
+          // gửi tin nhắn thông báo tạo nhóm websocket
+          this.chat_page_friends_websocket.sendMessagesGroup(ten_nhom, ref.key);
+        });
+       
+        this.checkCreate = true;
+      } else
+        this.checkCreate = false;
+    })
+          
+   
     
   }
 
