@@ -260,11 +260,10 @@ export class MainPageWsComponent implements OnInit {
         icon: mess.urlAvatar,
         silent: mess.soundNoti == 'bat' ? false : true
       })
-      // if(window.location.pathname != '/bessenger/tin-nhan/' + mess.idConversation) {
+     
       notification.onclick = (e) => {
         window.close()
         window.open(location.origin + '/bessenger-ws/tin-nhan/' + mess.idConversation, '_blank');
-        // }
       }
     }
   }
