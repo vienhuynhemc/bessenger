@@ -66,6 +66,8 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
             this.settings_service.accessSettings(idUser).update({
               khong_lam_phien: state,
             });
+             // reload để cập nhật lại cài đặt
+             location.reload()
           } else {
             // hiển thị thông báo khi không cho gg gửi thông báo
             let error = document.getElementById('error-block');
@@ -76,6 +78,8 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
         this.settings_service.accessSettings(idUser).update({
           khong_lam_phien: state,
         });
+         // reload để cập nhật lại cài đặt
+         location.reload()
       }
     }
   }
@@ -86,6 +90,8 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
       this.settings_service.accessSettings(idUser).update({
         am_thanh_thong_bao: state,
       });
+       // reload để cập nhật lại cài đặt
+       location.reload()
     }
   }
   // cài đặt hiển thị văn bản xem trước thông báo
@@ -95,6 +101,8 @@ export class StatusSettingsComponent implements OnInit, OnDestroy {
       this.settings_service.accessSettings(idUser).update({
         hien_thi_ban_xem_truoc: state,
       });
+       // reload để cập nhật lại cài đặt
+       location.reload()
     }
   }
   
