@@ -18,7 +18,7 @@ export class MembersWsComponent implements OnInit {
   outGroup: MemberGroupChatWS = null;
   checkAdmin: boolean = false;
   newMembers: MemberGroupChatWS[];
-  chooseNewMembers: MemberGroupChatWS[];
+  chooseNewMembers: MemberGroupChatWS[] = [];
   constructor(
     public members_service: MembersWsService,
     private route: ActivatedRoute,
@@ -187,32 +187,41 @@ export class MembersWsComponent implements OnInit {
 
   // hiển thị danh sách ng muốn thêm
   showAddNewMembers(nameMember: string,memberOldList:MemberGroupChatWS[]) {
-    this.chooseNewMembers = [];
     this.newMembers = [];
     this.newMembers = this.members_service.getNewMembers(nameMember,memberOldList);
+   
   }
   // đóng thêm thành viên
   closeAddNewMembers() {
+    this.chooseNewMembers = [];
     this.newMembers = null;
   }
 
   // tìm kiếm thành viên theo tên
   searchNewMembers(nameMember: string, memberOldList:MemberGroupChatWS[]) {
     this.showAddNewMembers(nameMember, memberOldList)
+  
   }
 
+  // kiểm tra có nằm trong danh sách chọn không để hiển thị checkbox
+  checkContains(memberChoose:MemberGroupChatWS): boolean {
+      for (let index = 0; index < this.chooseNewMembers.length; index++) 
+        if(this.chooseNewMembers[index].idUser == memberChoose.idUser)
+            return true;
+    return false;
+  }
   // chọn thành viên
   checkedNewMember(memberChoose:MemberGroupChatWS) {
-    let checked = <HTMLInputElement>document.getElementById(memberChoose.idUser);
-    checked.checked = !checked.checked;
-    if(checked.checked)
-      this.chooseNewMembers.push(memberChoose);
-    else {
+      let checkContain = false;
       for (let index = 0; index <  this.chooseNewMembers.length; index++) {
-          if( this.chooseNewMembers[index].idUser == memberChoose.idUser)
+          if( this.chooseNewMembers[index].idUser == memberChoose.idUser) {
               this.chooseNewMembers.splice(index, 1);
+              checkContain = true;
+              break;
+          }
       }
-    }
+      if(!checkContain)
+        this.chooseNewMembers.push(memberChoose);
   }
 
   // thêm thành viên vào nhóm
@@ -222,6 +231,7 @@ export class MembersWsComponent implements OnInit {
         this.members_service.addMember(this.messenger_main_service.ma_cuoc_tro_chuyen, choose);
       });
     }
+    this.chooseNewMembers = [];
     this.newMembers = null;
   }
   

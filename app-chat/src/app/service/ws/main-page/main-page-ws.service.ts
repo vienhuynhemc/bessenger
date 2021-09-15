@@ -71,7 +71,7 @@ export class MainPageWsService {
                   // chưa tham gia thì gửi request join group
                   this.db.database.ref('thong_tin_tro_chuyen_nhom_ws').child(gDetail.key).once('value', inforG => {
                     this.main_page_websocket.joinGroup(inforG.val().ten_nhom);
-                    this.main_page_websocket.messages_join_group.subscribe(async data => {
+                    this.main_page_websocket.messages_join_group.subscribe(data => {
                       setTimeout(() => {
                         let value = JSON.parse(JSON.stringify(data));
                         if (value.status == "success") {
@@ -80,7 +80,7 @@ export class MainPageWsService {
                             tham_gia: 'roi'
                           })
                         }
-                      }, 1000);
+                      }, 2000);
                     })
                   })
                 }
