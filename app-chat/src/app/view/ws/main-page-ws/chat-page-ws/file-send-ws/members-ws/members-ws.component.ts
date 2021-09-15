@@ -212,16 +212,16 @@ export class MembersWsComponent implements OnInit {
   }
   // chọn thành viên
   checkedNewMember(memberChoose:MemberGroupChatWS) {
-    let checked = <HTMLInputElement>document.getElementById(memberChoose.idUser);
-    checked.checked = !checked.checked;
-    if(checked.checked)
-      this.chooseNewMembers.push(memberChoose);
-    else {
+      let checkContain = false;
       for (let index = 0; index <  this.chooseNewMembers.length; index++) {
-          if( this.chooseNewMembers[index].idUser == memberChoose.idUser)
+          if( this.chooseNewMembers[index].idUser == memberChoose.idUser) {
               this.chooseNewMembers.splice(index, 1);
+              checkContain = true;
+              break;
+          }
       }
-    }
+      if(!checkContain)
+        this.chooseNewMembers.push(memberChoose);
   }
 
   // thêm thành viên vào nhóm

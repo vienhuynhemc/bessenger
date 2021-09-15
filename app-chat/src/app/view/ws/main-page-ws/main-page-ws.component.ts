@@ -73,7 +73,8 @@ export class MainPageWsComponent implements OnInit {
       }
     }
     // tự động join group
-    this.main_page_service_ws.autoJoinGroup();
+      this.main_page_service_ws.autoJoinGroup();
+ 
      
   }
 
@@ -110,6 +111,8 @@ export class MainPageWsComponent implements OnInit {
   }
   moveToChatPage(): void {
     this.router.navigate(['tin-nhan/danh-sach'], { relativeTo: this.route });
+    // sau khi login chạy hàm tự join group, khi nhấn vào tin nhắn thì chạy 1 lần nữa cho chắc
+    this.main_page_service_ws.autoJoinGroup();
   }
   moveToChatRequestPage(): void {
     this.router.navigate(['tin-nhan-an'], { relativeTo: this.route });

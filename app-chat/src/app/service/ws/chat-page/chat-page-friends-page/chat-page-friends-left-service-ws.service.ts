@@ -134,10 +134,10 @@ export class ChatPageFriendsLeftServiceWsService {
     setTimeout(() => {
       // Kiểm tra online
 
-      if (this.allBoxData != null) {
+      if (this.allBoxData != null && this.allBoxData.length > 0) {
         for (let i = 0; i < this.allBoxData.length; i++) {
           this.allBoxData[i].trang_thai_online_websocket = false;
-          setTimeout(() => {
+        setTimeout(() => {
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             setTimeout(() => {
               if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
@@ -169,7 +169,7 @@ export class ChatPageFriendsLeftServiceWsService {
                   }
                  
                 })
-              }
+              } 
             }, j * 2000);
             if(this.allBoxData[i].trang_thai_online_websocket)
                 break;
