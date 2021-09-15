@@ -102,7 +102,8 @@
                 </div>
                 <div class="right">
                     <div class="cover"></div>
-                    <input  type="checkbox"  [id]="item.idUser" >
+                    <input  type="checkbox"  [id]="item.idUser" checked *ngIf="checkContains(item)">
+                    <input  type="checkbox"  [id]="item.idUser" *ngIf="!checkContains(item)">
                 </div>
               
             </div>
