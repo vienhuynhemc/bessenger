@@ -24,16 +24,16 @@
                 <div class="remove-member option-btn" (click)="outGroupClick(item)" *ngIf="item.idUser == getIDMe()"><i class="fas fa-running" style="margin-right: 16px;"></i> Rời khỏi nhóm</div>
             </div>
         </div>
-        <!-- <div class="member-add" *ngIf="this.members_service.isOpen">
+        <div class="member-add" *ngIf="this.members_service.isOpen" (click)="showAddNewMembers('',this.members_service.memberList)">
             <div class="left">
                 <div class="circle">
                     <i class="fas fa-plus"></i>
                 </div>
             </div>
             <div class="right">
-                <div class="name">Thêm người</div>
+                <div class="name">Thêm thành viên</div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 <div class="formYesNo" [class.show-unfriend]="adminNew != null">
@@ -77,6 +77,41 @@
             <div>
                 <p (click)="onClickAcceptOutGroup(this.members_service.memberList)">Có, chắc chắn <i class="fa fa-check"></i></p>
                 <span (click)="onClickNonOutGroup()">Không, suy nghĩ thêm <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="formYesNo" [class.show-unfriend]="newMembers != null">
+    <div class="formYesNoHidden"></div>
+    
+    <div class="content_new">
+        <div class="exit" (click)="closeAddNewMembers()" ><i class="fas fa-times"></i></div>
+        <p class="title_new"><i class="fa fa-cogs"></i> Bessenger </p>
+        <div class="search">
+            <input type="text" placeholder="Tìm kiếm"  (input)="searchNewMembers(myinput.value, this.members_service.memberList)" #myinput>
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="scroll-new-members">
+            <div class="member" *ngFor="let item of newMembers" (click)="checkedNewMember(item)">
+                <div class="left">
+                    <img [src]="item.img" alt="">
+                </div>
+                <div class="center">
+                    <div class="name">{{item.name}}</div>
+                </div>
+                <div class="right">
+                    <div class="cover"></div>
+                    <input  type="checkbox"   checked *ngIf="checkContains(item)">
+                    <input  type="checkbox"   *ngIf="!checkContains(item)">
+                </div>
+              
+            </div>
+            
+        </div>
+        <div class="select_new">
+            <div>
+                <span (click)="addMembersToGroup()">Thêm thành viên <i class="fas fa-user-plus"></i></span>
             </div>
         </div>
     </div>
