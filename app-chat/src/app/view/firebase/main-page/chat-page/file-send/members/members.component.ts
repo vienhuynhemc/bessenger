@@ -18,6 +18,8 @@ export class MembersComponent implements OnInit {
   removeMember: MemberGroupChat = null;
   outGroup: MemberGroupChat = null;
   checkAdmin: boolean = false;
+  newMembers: MemberGroupChat[];
+  chooseNewMembers: MemberGroupChat[] = [];
   constructor(
     public members_service: MembersService,
     private route: ActivatedRoute,
@@ -182,4 +184,55 @@ export class MembersComponent implements OnInit {
   onClickNonOutGroup() {
     this.outGroup = null
   }
+
+  // hiển thị danh sách ng muốn thêm
+  showAddNewMembers(nameMember: string,memberOldList:MemberGroupChat[]) {
+    this.newMembers = [];
+    this.newMembers = this.members_service.getNewMembers(nameMember,memberOldList);
+   
+  }
+  // đóng thêm thành viên
+  closeAddNewMembers() {
+    this.chooseNewMembers = [];
+    this.newMembers = null;
+  }
+
+  // tìm kiếm thành viên theo tên
+  searchNewMembers(nameMember: string, memberOldList:MemberGroupChat[]) {
+    this.showAddNewMembers(nameMember, memberOldList)
+  
+  }
+
+  // kiểm tra có nằm trong danh sách chọn không để hiển thị checkbox
+  checkContains(memberChoose:MemberGroupChat): boolean {
+      for (let index = 0; index < this.chooseNewMembers.length; index++) 
+        if(this.chooseNewMembers[index].idUser == memberChoose.idUser)
+            return true;
+    return false;
+  }
+  // chọn thành viên
+  checkedNewMember(memberChoose:MemberGroupChat) {
+      let checkContain = false;
+      for (let index = 0; index <  this.chooseNewMembers.length; index++) {
+          if( this.chooseNewMembers[index].idUser == memberChoose.idUser) {
+              this.chooseNewMembers.splice(index, 1);
+              checkContain = true;
+              break;
+          }
+      }
+      if(!checkContain)
+        this.chooseNewMembers.push(memberChoose);
+  }
+
+  // thêm thành viên vào nhóm
+  addMembersToGroup() {
+    if(this.chooseNewMembers.length > 0) {
+      this.chooseNewMembers.forEach(choose => {
+        this.members_service.addMember(this.messenger_main_service.ma_cuoc_tro_chuyen, choose);
+      });
+    }
+    this.chooseNewMembers = [];
+    this.newMembers = null;
+  }
 }
+
