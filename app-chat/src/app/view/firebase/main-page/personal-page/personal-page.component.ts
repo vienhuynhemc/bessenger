@@ -62,7 +62,7 @@ export class PersonalPageComponent implements OnInit {
     const avatarInput = <HTMLInputElement>(
       document.getElementById('avatar-update')
     );
-    if(avatarInput.type.split('/')[0].toLowerCase().trim() == 'image') {
+    if(avatarInput.files[0].type.split('/')[0].toLowerCase().trim() == 'image') {
       this.fileAvatar = avatarInput.files[0];
       this.urlNewAvatar = URL.createObjectURL(this.fileAvatar);
     }
