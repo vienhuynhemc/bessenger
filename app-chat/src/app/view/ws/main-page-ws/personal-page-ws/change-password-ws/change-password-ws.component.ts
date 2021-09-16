@@ -37,22 +37,22 @@ export class ChangePasswordWsComponent implements OnInit {
     const errorEqual = document.getElementById('dn-error-4');
     const success = document.getElementById('dn-success');
 
-    if(oldPass.value.trim() == '' || newPass.value.trim() =='' || confirmPass.value.trim() == '') {
-      if(oldPass.value.trim() == '') {
+    if(oldPass.value == '' || newPass.value=='' || confirmPass.value == '') {
+      if(oldPass.value == '') {
         borderOld.style.border = '1px solid #ff7b5c';
         errorOld.style.display = 'block';
       } 
-      if(newPass.value.trim() == '') {
+      if(newPass.value == '') {
         borderNew.style.border = '1px solid #ff7b5c';
         errorNew.style.display = 'block';
       }
-      if(confirmPass.value.trim() == '') {
+      if(confirmPass.value == '') {
         borderConfirm.style.border = '1px solid #ff7b5c';
         errorEqual.style.display = 'none';
         errorConfirm.style.display = 'block';
       }
     // nếu mật khẩu cũ không chính xác
-    } else if(oldPass.value.trim() != this.personServiceWS.persional.pass) {
+    } else if(oldPass.value != this.personServiceWS.persional.pass) {
       borderOld.style.border = '1px solid #ff7b5c';
       errorOldNotAcctualy.style.display = 'block';
       errorEqual.style.display = 'none';
@@ -60,7 +60,7 @@ export class ChangePasswordWsComponent implements OnInit {
       borderConfirm.style.border = '1px solid #e2e2e2';
 
       // nếu mật khẩu cũ trùng mật khẩu mới
-    } else if(oldPass.value.trim() == newPass.value.trim()) {
+    } else if(oldPass.value == newPass.value) {
       borderNew.style.border = '1px solid #ff7b5c';
       errorOldEqualNew.style.display = 'block';
       errorOldNotAcctualy.style.display = 'none';
@@ -69,7 +69,7 @@ export class ChangePasswordWsComponent implements OnInit {
       borderOld.style.border = '1px solid #e2e2e2';
     }
     // nếu mật khẩu mới và xác nhận mật khẩu không trùng khớp
-    else if( newPass.value.trim() !=  confirmPass.value.trim()) {
+    else if( newPass.value !=  confirmPass.value) {
       errorEqual.style.display = 'block';
       borderConfirm.style.border = '1px solid #ff7b5c';
       errorOldNotAcctualy.style.display = 'none';
@@ -82,9 +82,9 @@ export class ChangePasswordWsComponent implements OnInit {
       }, 0);
       let parseIDUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn_ws'))
       this.passServiceWS.accesstai_khoan().child(parseIDUser).update({
-        mat_khau_2: newPass.value.trim()
+        mat_khau_2: newPass.value
       })
-      this.passServiceWS.updatePass(newPass.value.trim(),parseIDUser).subscribe(data=>{
+      this.passServiceWS.updatePass(newPass.value,parseIDUser).subscribe(data=>{
         setTimeout(() => {
           this.personServiceWS.setLoading(false)
         }, 0);
@@ -136,7 +136,7 @@ export class ChangePasswordWsComponent implements OnInit {
     success.style.display = 'none'
     errorOldNotAcctualy.style.display = 'none'
     errorOldEqualNew.style.display = 'none';
-    if(e.value.trim() == '') {
+    if(e.value == '') {
       border.style.border = '1px solid #ff7b5c';
       error.style.display = 'block';
       

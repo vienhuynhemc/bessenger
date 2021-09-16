@@ -61,8 +61,11 @@ export class PersonalPageWsComponent implements OnInit {
     const avatarInput = <HTMLInputElement>(
       document.getElementById('avatar-update')
     );
-    this.fileAvatar = avatarInput.files[0];
-    this.urlNewAvatar = URL.createObjectURL(this.fileAvatar);
+   
+    if(avatarInput.files[0].type.split('/')[0].toLowerCase().trim() == 'image') {
+      this.fileAvatar = avatarInput.files[0];
+      this.urlNewAvatar = URL.createObjectURL(this.fileAvatar);
+    }
   }
   changeProfile(): void {
     this.router.navigate(['doi-thong-tin'], { relativeTo: this.route });
@@ -73,12 +76,14 @@ export class PersonalPageWsComponent implements OnInit {
   }
 // xác nhận thay đổi avatar
   okChangeAvatar() {
-    this.avatarServiceWS.accessStoragetai_khoan(this.fileAvatar);
-    const avatarInput = <HTMLInputElement>(
-      document.getElementById('avatar-update')
-    );
-    avatarInput.value = '';
-    this.fileAvatar = null;
+    if(this.fileAvatar != null) {
+      this.avatarServiceWS.accessStoragetai_khoan(this.fileAvatar);
+      const avatarInput = <HTMLInputElement>(
+        document.getElementById('avatar-update')
+      );
+      avatarInput.value = '';
+      this.fileAvatar = null;
+    }
   }
 // không đổi avatar
   notChangeAvatar() {
