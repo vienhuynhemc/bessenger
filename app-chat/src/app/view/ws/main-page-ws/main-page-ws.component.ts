@@ -1,3 +1,4 @@
+import { ChatDataWs } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_data_ws';
 import { NotificationWsService } from './../../../service/ws/notification-settings/notification-ws.service';
 import { SettingServiceWsService } from './../../../service/ws/settings/setting-service-ws.service';
 import { FriendsPageWsService } from './../../../service/ws/friends-page/friends-page-ws.service';
@@ -34,8 +35,8 @@ export class MainPageWsComponent implements OnInit {
     public settings_service_ws: SettingServiceWsService,
     public notificationMessageService_ws: NotificationWsService
   ) {
-   
-   }
+
+  }
 
   ngOnInit(): void {
     if (this.version_service.version == 1) {
@@ -51,7 +52,25 @@ export class MainPageWsComponent implements OnInit {
         this.login_ws_ws.login(email, data[0]['mat_khau']);
         this.login_ws_ws.messages_login.subscribe(data => {
           let value = JSON.parse(JSON.stringify(data));
-          console.log("Đăng nhập từ OnInit: " + value.status + " " + value.mes + " " + value.data);
+          if (value.event == "LOGIN") {
+            console.log("Đăng nhập từ OnInit: " + value.status + " " + value.mes);
+          } else if (value.event == "GET_USER_LIST") {
+            this.chat_page_friends_object_left_service_ws.subscribe_ws_user_list(value);
+          } else if (value.event == "GET_ROOM_CHAT_MES") {
+            this.chat_page_friends_object_left_service_ws.subscribe_ws_nhom(value);
+          }else if(value.event == "GET_PEOPLE_CHAT_MES"){
+            this.chat_page_friends_object_left_service_ws.subscribe_ws_don(value);
+          }else if(value.event == "SEND_CHAT"){
+            let object = new ChatDataWs();
+            object.id = value.data.id;
+            object.name = value.data.name;
+            object.type = value.data.type;
+            object.to = value.data.to;
+            object.mes = value.data.mes;
+            object.createAt = value.data.createAt;
+            this.chat_page_friends_object_left_service_ws.actionWsNew(object);
+            console.log("send chat");
+          }
         })
       })
       this.notificationMessage()
@@ -73,9 +92,9 @@ export class MainPageWsComponent implements OnInit {
       }
     }
     // tự động join group
-      this.main_page_service_ws.autoJoinGroup();
- 
-     
+    this.main_page_service_ws.autoJoinGroup();
+
+
   }
 
   public getData() {
@@ -263,7 +282,7 @@ export class MainPageWsComponent implements OnInit {
         icon: mess.urlAvatar,
         silent: mess.soundNoti == 'bat' ? false : true
       })
-     
+
       notification.onclick = (e) => {
         window.close()
         window.open(location.origin + '/bessenger-ws/tin-nhan/' + mess.idConversation, '_blank');

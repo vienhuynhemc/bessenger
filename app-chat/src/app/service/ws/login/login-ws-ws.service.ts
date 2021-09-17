@@ -44,7 +44,8 @@ export class LoginWsWsService {
           return {
             status: data.status,
             data: data.data,
-            mes: data.mes
+            mes: data.mes,
+            event:data.event
           };
         }));
     this.messages_logout = <Subject<Message>>this.ws
