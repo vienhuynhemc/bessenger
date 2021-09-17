@@ -136,9 +136,9 @@ export class StatusSettingsWsComponent implements OnInit {
    
     if(i == 0 && scroll.scrollTop >= 0 ) {
       this.changeStateScroll('trang_thai_hoat_dong')
-    } else if(i == 1 && scroll.scrollTop >= 250) {
+    } else if(i == 1 && scroll.scrollTop >= 220) {
       this.changeStateScroll('thong_bao')
-    } else  if(i == 2 && scroll.scrollTop >= 320 ){
+    } else  if(i == 2 && scroll.scrollTop >= 370 ){
       this.changeStateScroll('ho_tro')
     }
 
