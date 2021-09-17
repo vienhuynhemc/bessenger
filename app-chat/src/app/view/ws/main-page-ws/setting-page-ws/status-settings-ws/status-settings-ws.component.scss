@@ -157,6 +157,46 @@
               }
             }
           }
+
+          .members {
+            width: 100%;
+            display: flex;
+            margin-top: 20px;
+            justify-content: center;
+            .active {
+              margin-left: 80px;
+            }
+            .member {
+              width: 100px;
+              height: 170px;
+              margin-right: 80px;
+              img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
+              .name {
+                display: flex;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-weight: 450;
+                justify-content: center;
+              }
+              .contacts {
+                display: flex;
+                justify-content: center;
+                i {
+                  margin-right: 10px;
+                  color: black;
+                  cursor: pointer;
+                }
+                .active {
+                  margin-left: 10px;
+                }
+              }
+            }
+          }
         }
       }
       .active-fill {
