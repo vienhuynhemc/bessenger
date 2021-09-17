@@ -1,19 +1,30 @@
+import { BoxCuocTroChuyenWs } from './../../../../models/ws/chat-page/chat-page-friends-page/cuoc_tro_chuyen_ws';
+import { WebsocketService } from './../../websocket-service/websocket.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ChatPageCuocTroChuyenWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_cuoc_tro_chuyen_ws';
 import { ChatPageFriendsObjectLeftWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_friends_object_left_ws';
 import { ChatPageObjectTinNhanFriendWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_object_tin_nhan_friend_ws';
 import { ChatPageTinhTrangXemWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_tinh_trang_xem_ws';
 import { ChatPageTinNhanWS } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_page_tin_nhan_ws';
+import { Message } from 'src/app/models/ws/login/message';
+import { environment } from 'src/environments/environment.prod';
 import { ChatPageProcessServiceWsService } from '../chat-page-process-service-ws.service';
 import { ChatPageFriendsWebsocketService } from './chat-page-friends-websocket.service';
 import { LeftScrollWsService } from './left-scroll-ws.service';
+import { MessageLogin } from 'src/app/models/ws/login/message_login';
+import { BoxNhomWs } from 'src/app/models/ws/chat-page/chat-page-friends-page/box_nhom_ws';
+import { BoxNhomUserList } from 'src/app/models/ws/chat-page/chat-page-friends-page/box_nhom_user_list';
+import { ChatDataWs } from 'src/app/models/ws/chat-page/chat-page-friends-page/chat_data_ws';
+import { BoxDonWs } from 'src/app/models/ws/chat-page/chat-page-friends-page/box_don_ws';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatPageFriendsLeftServiceWsService {
+
   // ma_cuoc_tro_chuyen hien hien tai
   public now_ma_cuoc_tro_chuyen: string;
 
@@ -42,12 +53,22 @@ export class ChatPageFriendsLeftServiceWsService {
   public indexPre: number;
   public indexSelect: number;
   public isLoadFirst: boolean;
-  
+
+  // Get all user
+  public ws_get_all_user: Subject<Object>;
+  public get_nhom_ws: Subject<Object>;
+  public get_don_ws: Subject<Object>;
+  public boxCuocTroChuyenWss: BoxCuocTroChuyenWs[];
+  public nhom_ws: BoxNhomWs[];
+  public don_ws: BoxDonWs[];
+  public all:BoxNhomWs[];
+
   constructor(
     private db: AngularFireDatabase,
     // scroll
     private left_srcoll_service: LeftScrollWsService,
-    private chat_page_friends_websocket: ChatPageFriendsWebsocketService
+    private chat_page_friends_websocket: ChatPageFriendsWebsocketService,
+    private ws: WebsocketService
   ) {
     this.search = "";
     // Hàm update lại ban_bes 5s 1 lần
@@ -55,6 +76,40 @@ export class ChatPageFriendsLeftServiceWsService {
     // update on/off websocket (v)
     this.updateWebSocket();
     this.uState();
+    // create ws
+    this.ws_get_all_user = <Subject<MessageLogin>>this.ws
+      .connect(environment.CHAT_URL).pipe(map(
+        (response: MessageEvent): MessageLogin => {
+          const data = JSON.parse(response.data);
+          return {
+            status: data.status,
+            data: data.data,
+            mes: data.mes,
+            event: data.event
+          };
+        }));
+    this.get_nhom_ws = <Subject<MessageLogin>>this.ws
+      .connect(environment.CHAT_URL).pipe(map(
+        (response: MessageEvent): MessageLogin => {
+          const data = JSON.parse(response.data);
+          return {
+            status: data.status,
+            data: data.data,
+            mes: data.mes,
+            event: data.event,
+          };
+        }));
+    this.get_don_ws = <Subject<MessageLogin>>this.ws
+      .connect(environment.CHAT_URL).pipe(map(
+        (response: MessageEvent): MessageLogin => {
+          const data = JSON.parse(response.data);
+          return {
+            status: data.status,
+            data: data.data,
+            mes: data.mes,
+            event: data.event,
+          };
+        }));
   }
 
   public getLanCuoiDangNhap() {
@@ -123,11 +178,11 @@ export class ChatPageFriendsLeftServiceWsService {
     let ma_tai_khoan = JSON.parse(localStorage.getItem("ma_tai_khoan_dn_ws"));
     let loop = 6000;
     // set biến lặp cho phù hợp để tránh trùng nhau, khoảng cách giữa 2 lần lặp = 6s
-    if(this.allBoxData != null && this.allBoxData.length > 0) {
-      for (let i= 0; i < this.allBoxData.length; i++) {
-          for (let j = 0; j <this.allBoxData[i].thong_tin_thanh_vien.length; j++) 
-              loop += j * 2000;
-          loop += i * 2000;
+    if (this.allBoxData != null && this.allBoxData.length > 0) {
+      for (let i = 0; i < this.allBoxData.length; i++) {
+        for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++)
+          loop += j * 2000;
+        loop += i * 2000;
       }
       loop += 6000;
     }
@@ -137,45 +192,45 @@ export class ChatPageFriendsLeftServiceWsService {
       if (this.allBoxData != null && this.allBoxData.length > 0) {
         for (let i = 0; i < this.allBoxData.length; i++) {
           this.allBoxData[i].trang_thai_online_websocket = false;
-        setTimeout(() => {
-          for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
-            setTimeout(() => {
-              if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
-                this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
-                
-                  if(set.val().trang_thai_hoat_dong == 'bat') {
-                    if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
-                      if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
-                        
+          setTimeout(() => {
+            for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
+              setTimeout(() => {
+                if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
+                  this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
+
+                    if (set.val().trang_thai_hoat_dong == 'bat') {
+                      if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                        if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
+
+                          this.chat_page_friends_websocket.checkOnlineFriendsChat(this.allBoxData[i].thong_tin_thanh_vien[j].email);
+                          this.chat_page_friends_websocket.messages_online_friends_chat.subscribe((data) => {
+                            let value = JSON.parse(JSON.stringify(data));
+                            if (value.status == "success" && value.data.status)
+                              this.allBoxData[i].trang_thai_online_websocket = value.data.status;
+
+                          });
+
+                        }
+                      } else {
                         this.chat_page_friends_websocket.checkOnlineFriendsChat(this.allBoxData[i].thong_tin_thanh_vien[j].email);
-                        this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
+                        this.chat_page_friends_websocket.messages_online_friends_chat.subscribe((data) => {
                           let value = JSON.parse(JSON.stringify(data));
                           if (value.status == "success" && value.data.status)
-                              this.allBoxData[i].trang_thai_online_websocket = value.data.status;
-                            
+                            this.allBoxData[i].trang_thai_online_websocket = value.data.status;
+
                         });
-                      
+
                       }
-                    } else {
-                      this.chat_page_friends_websocket.checkOnlineFriendsChat(this.allBoxData[i].thong_tin_thanh_vien[j].email);
-                      this.chat_page_friends_websocket.messages_online_friends_chat.subscribe( (data) => {
-                        let value =  JSON.parse(JSON.stringify(data));
-                        if (value.status == "success" && value.data.status)
-                              this.allBoxData[i].trang_thai_online_websocket = value.data.status;
-                            
-                      });
-                      
                     }
-                  }
-                 
-                })
-              } 
-            }, j * 2000);
-            if(this.allBoxData[i].trang_thai_online_websocket)
+
+                  })
+                }
+              }, j * 2000);
+              if (this.allBoxData[i].trang_thai_online_websocket)
                 break;
-          }
+            }
           }, i * 2000);
-         
+
         }
       }
       this.updateWebSocket();
@@ -377,7 +432,7 @@ export class ChatPageFriendsLeftServiceWsService {
   public dienTinNhan(key: string, value: object) {
     for (let i = 0; i < this.allBoxData.length; i++) {
       if (this.allBoxData[i].cuoc_tro_truyen.ma_cuoc_tro_chuyen == key) {
-      
+
         let tin_nhans: ChatPageTinNhanWS[] = [];
         Object.entries(value).forEach(([ma_tin_nhan, data_tin_nhan]) => {
           let tin_nhan = new ChatPageTinNhanWS();
@@ -417,7 +472,7 @@ export class ChatPageFriendsLeftServiceWsService {
         this.allBoxData[i].getNoiDungCuoiCung();
         // Tin nhắn cuối cùng được đọc chưa
         this.allBoxData[i].getIsReaded();
-    
+
         // Kiểm tra thử vị trí cuối cùng có phải là của bản thân hay không
         this.allBoxData[i].isMe();
         // Kiểm tra xem ông nào nhậ nchuwa
@@ -490,6 +545,159 @@ export class ChatPageFriendsLeftServiceWsService {
           // Điền hết tình trạgn xem của tin nhắn thì get imgseened
           this.allBoxData[i].getImgUserSeened();
         }
+      }
+    }
+  }
+
+  public actionWs(): void {
+    this.ws_get_all_user.next(
+      {
+        "action": "onchat",
+        "data": {
+          "event": "GET_USER_LIST"
+        }
+      }
+    );
+  }
+
+  public sendRequestGetNhom(ten_nhom, page) {
+    this.get_nhom_ws.next(
+      {
+        "action": "onchat",
+        "data": {
+          "event": "GET_ROOM_CHAT_MES",
+          "data": {
+            "name": ten_nhom,
+            "page": page
+          }
+        }
+      }
+    );
+  }
+
+  public sendRequestGetDon(ten, page) {
+    this.get_nhom_ws.next(
+      {
+        "action": "onchat",
+        "data": {
+          "event": "GET_PEOPLE_CHAT_MES",
+          "data": {
+            "name": ten,
+            "page": page
+          }
+        }
+      }
+    );
+  }
+
+  actionWsNew(object: ChatDataWs) {
+    if(this.all == null){
+      this.all = [];
+    }
+    let value = new BoxNhomWs();
+    value.chatData = [];
+    value.chatData.push(object);
+    this.all.push(value);
+  }
+
+  public subscribe_ws_user_list(value) {
+    let array: BoxCuocTroChuyenWs[] = [];
+    for (let i = 0; i < value.data.length; i++) {
+      let object = new BoxCuocTroChuyenWs();
+      object.actionTime = value.data[i].actionTime;
+      object.name = value.data[i].name;
+      object.type = value.data[i].type;
+      array.push(object)
+    }
+    this.boxCuocTroChuyenWss = array;
+    this.nhom_ws = [];
+    this.don_ws = [];
+    for (let i = 0; i < this.boxCuocTroChuyenWss.length; i++) {
+      if (this.boxCuocTroChuyenWss[i].type == "1") {
+        let object = new BoxNhomWs();
+        object.name = this.boxCuocTroChuyenWss[i].name;
+        object.page = 1;
+        this.nhom_ws.push(object);
+        this.sendRequestGetNhom(this.boxCuocTroChuyenWss[i].name, 1);
+      } else if (this.boxCuocTroChuyenWss[i].type == "0") {
+        let object = new BoxDonWs();
+        object.name = this.boxCuocTroChuyenWss[i].name;
+        object.page = 1;
+        this.don_ws.push(object);
+        this.sendRequestGetDon(this.boxCuocTroChuyenWss[i].name, 1);
+      }
+    }
+  }
+
+  public show() {
+    console.log(this.don_ws);
+  }
+
+  public subscribe_ws_don(value) {
+    if (value.data.length != 0) {
+      let name = value.data[0].to;
+      for (let i = 0; i < this.don_ws.length; i++) {
+        if (this.don_ws[i].name == name) {
+          if (this.don_ws[i].chatData == null) {
+            this.don_ws[i].chatData = [];
+          }
+          if (value.data.length != 0) {
+            for (let j = 0; j < value.data.length; j++) {
+              let chat = new ChatDataWs();
+              chat.id = value.data[j].id;
+              chat.createAt = value.data[j].createAt;
+              chat.mes = value.data[j].mes;
+              chat.name = value.data[j].name;
+              chat.to = value.data[j].to;
+              chat.type = value.data[j].type;
+              this.don_ws[i].chatData.push(chat);
+            }
+            this.don_ws[i].page = this.don_ws[i].page + 1;
+            this.sendRequestGetDon(this.don_ws[i].name, this.don_ws[i].page);
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  public subscribe_ws_nhom(value) {
+    let name = value.data.name;
+    for (let i = 0; i < this.nhom_ws.length; i++) {
+      if (this.nhom_ws[i].name == name) {
+        if (this.nhom_ws[i].id == null) {
+          this.nhom_ws[i].id = value.data.id;
+        }
+        if (this.nhom_ws[i].own == null) {
+          this.nhom_ws[i].own = value.data.own;
+        }
+        if (this.nhom_ws[i].userList == null) {
+          this.nhom_ws[i].userList = [];
+          for (let j = 0; j < value.data.userList.length; j++) {
+            let user = new BoxNhomUserList();
+            user.id = value.data.userList[j].id;
+            user.name = value.data.userList[j].name;
+            this.nhom_ws[i].userList.push(user);
+          }
+        }
+        if (this.nhom_ws[i].chatData == null) {
+          this.nhom_ws[i].chatData = [];
+        }
+        if (value.data.chatData.length != 0) {
+          for (let j = 0; j < value.data.chatData.length; j++) {
+            let chat = new ChatDataWs();
+            chat.id = value.data.chatData[j].id;
+            chat.createAt = value.data.chatData[j].createAt;
+            chat.mes = value.data.chatData[j].mes;
+            chat.name = value.data.chatData[j].name;
+            chat.to = value.data.chatData[j].to;
+            chat.type = value.data.chatData[j].type;
+            this.nhom_ws[i].chatData.push(chat);
+          }
+          this.nhom_ws[i].page = this.nhom_ws[i].page + 1;
+          this.sendRequestGetNhom(this.nhom_ws[i].name, this.nhom_ws[i].page);
+        }
+        break;
       }
     }
   }
@@ -583,26 +791,26 @@ export class ChatPageFriendsLeftServiceWsService {
           for (let j = 0; j < this.allBoxData[i].thong_tin_thanh_vien.length; j++) {
             if (this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan != ma_tai_khoan) {
               this.db.database.ref('cai_dat_ws').child(this.allBoxData[i].thong_tin_thanh_vien[j].ma_tai_khoan).on('value', set => {
-               
-                  if(set.val().trang_thai_hoat_dong == 'bat') {
-                    if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
-                      if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
-                        let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
-                        let overTime = currentTime - last_time;
-                        if (overTime < 10000) {
-                          isOnline = true;
-                        }
-                      }
-                    } else {
+
+                if (set.val().trang_thai_hoat_dong == 'bat') {
+                  if (this.allBoxData[i].cuoc_tro_truyen.loai_cuoc_tro_truyen == 'nhom') {
+                    if (this.allBoxData[i].thong_tin_thanh_vien[j].roi_chua == 'chua') {
                       let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
                       let overTime = currentTime - last_time;
                       if (overTime < 10000) {
                         isOnline = true;
                       }
                     }
+                  } else {
+                    let last_time = this.allBoxData[i].thong_tin_thanh_vien[j].lan_cuoi_dang_nhap;
+                    let overTime = currentTime - last_time;
+                    if (overTime < 10000) {
+                      isOnline = true;
+                    }
                   }
+                }
               })
-              if(isOnline)
+              if (isOnline)
                 break;
             }
           }

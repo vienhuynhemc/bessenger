@@ -27,7 +27,7 @@ export class FriendsListWsComponent implements OnInit {
       // Scroll ban đầu
       public left_scroll: LeftScrollWsService,
       private settingsService: SettingServiceWsService
-  ) { }
+    ) { }
 
 
   ngOnInit(): void {
@@ -49,6 +49,8 @@ export class FriendsListWsComponent implements OnInit {
       this.chat_page_friends_service.getSettings();
     });
     // Lấy thông tin
+    // Data websocket
+    this.chat_page_friend_left_service.actionWs();
     // Nếu như service của trang chưa được chạy lần nào
     // => đó là lần chạy đầu tiên ta phải lấy dữ liêu đầu tiên
     if (this.chat_page_friends_service.ban_bes == null) {
@@ -62,7 +64,7 @@ export class FriendsListWsComponent implements OnInit {
     this.left_scroll.register(document.getElementById("danh-sach-box-chat"))
   }
 
-  
+
   // GET data online
   public getDataOnline(): void {
     // lấy danh sách ma_tai_khoan bạn bè của tài khoản này
@@ -362,8 +364,8 @@ export class FriendsListWsComponent implements OnInit {
 
   changeStateStatus() {
     let idUser = JSON.parse(localStorage.getItem('ma_tai_khoan_dn_ws'));
-      this.settingsService.accessSettings(idUser).update({
-        trang_thai_hoat_dong: 'bat'
-      })
+    this.settingsService.accessSettings(idUser).update({
+      trang_thai_hoat_dong: 'bat'
+    })
   }
 }

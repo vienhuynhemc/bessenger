@@ -79,8 +79,16 @@ export class CallVideoWsService {
       });
       this.all_user = array;
       if (isCall) {
-        this.is_show = true;
-      }else{
+        this.getVideoUserAndShow()
+      } else {
+        this.is_close_camera = false
+        try {
+          this.localStream.getTracks().forEach(function (track) {
+            track.enabled = true;
+          });
+        } catch {
+
+        }
         this.is_show = false;
       }
     })
