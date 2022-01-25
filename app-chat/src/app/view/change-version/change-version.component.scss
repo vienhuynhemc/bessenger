@@ -4,24 +4,23 @@
 }
 
 .container {
+  user-select: none;
   position: absolute;
   z-index: 3;
-  left: 969px;
+  right: 60px;
   top: 10px;
 }
 
 .open {
   background-color: #e7f3ff !important;
+
   i {
-    filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%)
-      saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg)
-      brightness(97%) contrast(96%);
+    filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg) brightness(97%) contrast(96%);
   }
 }
 
 .open-option {
   position: relative;
-  left: 325px;
   width: 40px;
   height: 40px;
   background-color: #e4e6eb;
@@ -31,21 +30,17 @@
   align-items: center;
   box-shadow: 17px 20px 14px 4px #dbdae4;
   cursor: pointer;
+  margin-left: auto;
 
   i {
-    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yA/r/W8VX4aUw2vn.png);
-    background-position: -42px -88px;
-    background-size: auto;
-    width: 20px;
-    height: 20px;
-    background-repeat: no-repeat;
-    display: inline-block;
+    color: #050505;
+    font-size: 23px;
   }
 }
 
 .tab {
   box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
-    inset 0 0 0 1px #ffffff80;
+  inset 0 0 0 1px #ffffff80;
   background: white;
   border-radius: 8px;
   width: 327px;
@@ -58,6 +53,7 @@
     padding-left: 10px;
     display: flex;
     align-items: center;
+
     div {
       width: 60px;
       height: 60px;
@@ -65,11 +61,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       img {
         width: 45px;
         height: 45px;
       }
     }
+
     p {
       color: #050505;
       font-family: "Raleway";
@@ -93,6 +91,7 @@
     cursor: pointer;
     display: flex;
     margin-left: 18px;
+
     .img {
       width: 45px;
       height: 45px;
@@ -100,10 +99,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       img {
         width: 30px;
       }
     }
+
     .text {
       .title {
         color: #050505;
@@ -113,6 +114,7 @@
         margin-left: 5px;
         margin-top: 9px;
       }
+
       .mes {
         color: #65676b;
         font-family: "Raleway";
