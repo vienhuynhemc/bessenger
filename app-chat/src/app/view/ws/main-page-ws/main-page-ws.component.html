@@ -1,79 +1,81 @@
-<!-- Change version -->
-<app-change-version></app-change-version>
+<div class="main-page">
+  <!-- Change version -->
+  <app-change-version></app-change-version>
 
-<div class="container">
+  <div class="container">
 
     <div class="container-left">
-        <div class="container-left-icon">
-            <i class="fas fa-dragon"></i>
+      <div class="container-left-icon">
+        <i class="fas fa-dragon"></i>
+      </div>
+      <div class="container-left-avatar">
+        <div class="container-left-avatar-image">
+          <img [src]="this.main_page_service_ws.img || 'assets/images/loading.gif'" alt="">
         </div>
-        <div class="container-left-avatar">
-            <div class="container-left-avatar-image">
-                <img [src]="this.main_page_service_ws.img || 'assets/images/loading.gif'" alt="">
-            </div>
+      </div>
+      <div class="container-left-menu" id="container-left-menu">
+
+        <div *ngIf="!main_page_service_ws.isSelectHomePage()" class="container-left-menu-icon" matTooltip="Trang chủ"
+             matTooltipClass="tooltip" (click)="moveToHomePage()">
+          <i class="fas fa-pager"></i>
         </div>
-        <div class="container-left-menu" id="container-left-menu">
-
-            <div *ngIf="!main_page_service_ws.isSelectHomePage()" class="container-left-menu-icon" matTooltip="Trang chủ"
-                matTooltipClass="tooltip" (click)="moveToHomePage()">
-                <i class="fas fa-pager"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectHomePage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-pager"></i>
-            </div>
-
-            <div *ngIf="!main_page_service_ws.isSelectPersonalPage()" class="container-left-menu-icon"
-                matTooltip="Thông tin tài khoản" matTooltipClass="tooltip" (click)="moveToPersonalPage()">
-                <i class="fas fa-user-cog"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectPersonalPage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-user-cog"></i>
-            </div>
-
-            <div *ngIf="!main_page_service_ws.isSelectFriendsPage()" class="container-left-menu-icon" matTooltip="Bạn bè"
-                matTooltipClass="tooltip" (click)="moveToFriendsPage()">
-                <i class="fas fa-user-friends"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectFriendsPage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-user-friends"></i>
-            </div>
-
-            <div *ngIf="!main_page_service_ws.isSelectChatPage()" class="container-left-menu-icon" matTooltip="Tin nhắn"
-                matTooltipClass="tooltip" (click)="moveToChatPage()">
-                <i class="fas fa-comment-alt"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectChatPage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-comment-alt"></i>
-            </div>
-
-            <div *ngIf="!main_page_service_ws.isSelectChatRequestPage()" class="container-left-menu-icon"
-                matTooltip="Tin nhắn ẩn" matTooltipClass="tooltip" (click)="moveToChatRequestPage()">
-                <i class="fas fa-comment-dots"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectChatRequestPage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-comment-dots"></i>
-            </div>
-
-            <div *ngIf="!main_page_service_ws.isSelectSettingPage()" class="container-left-menu-icon" matTooltip="Cài đặt"
-                matTooltipClass="tooltip" (click)="moveToSettingPage()">
-                <i class="fas fa-cogs"></i>
-            </div>
-            <div *ngIf="main_page_service_ws.isSelectSettingPage()"
-                class="container-left-menu-icon container-left-menu-icon-selected">
-                <i class="fas fa-cogs"></i>
-            </div>
-
-            <div class="container-left-menu-icon" (click)="logOut()" matTooltip="Đăng xuất" matTooltipClass="tooltip">
-                <i class="fas fa-sign-out-alt"></i>
-            </div>
+        <div *ngIf="main_page_service_ws.isSelectHomePage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-pager"></i>
         </div>
+
+        <div *ngIf="!main_page_service_ws.isSelectPersonalPage()" class="container-left-menu-icon"
+             matTooltip="Thông tin tài khoản" matTooltipClass="tooltip" (click)="moveToPersonalPage()">
+          <i class="fas fa-user-cog"></i>
+        </div>
+        <div *ngIf="main_page_service_ws.isSelectPersonalPage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <div *ngIf="!main_page_service_ws.isSelectFriendsPage()" class="container-left-menu-icon" matTooltip="Bạn bè"
+             matTooltipClass="tooltip" (click)="moveToFriendsPage()">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <div *ngIf="main_page_service_ws.isSelectFriendsPage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-user-friends"></i>
+        </div>
+
+        <div *ngIf="!main_page_service_ws.isSelectChatPage()" class="container-left-menu-icon" matTooltip="Tin nhắn"
+             matTooltipClass="tooltip" (click)="moveToChatPage()">
+          <i class="fas fa-comment-alt"></i>
+        </div>
+        <div *ngIf="main_page_service_ws.isSelectChatPage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-comment-alt"></i>
+        </div>
+
+        <div *ngIf="!main_page_service_ws.isSelectChatRequestPage()" class="container-left-menu-icon"
+             matTooltip="Tin nhắn ẩn" matTooltipClass="tooltip" (click)="moveToChatRequestPage()">
+          <i class="fas fa-comment-dots"></i>
+        </div>
+        <div *ngIf="main_page_service_ws.isSelectChatRequestPage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-comment-dots"></i>
+        </div>
+
+        <div *ngIf="!main_page_service_ws.isSelectSettingPage()" class="container-left-menu-icon" matTooltip="Cài đặt"
+             matTooltipClass="tooltip" (click)="moveToSettingPage()">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <div *ngIf="main_page_service_ws.isSelectSettingPage()"
+             class="container-left-menu-icon container-left-menu-icon-selected">
+          <i class="fas fa-cogs"></i>
+        </div>
+
+        <div class="container-left-menu-icon" (click)="logOut()" matTooltip="Đăng xuất" matTooltipClass="tooltip">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+      </div>
     </div>
 
     <router-outlet></router-outlet>
 
+  </div>
 </div>
