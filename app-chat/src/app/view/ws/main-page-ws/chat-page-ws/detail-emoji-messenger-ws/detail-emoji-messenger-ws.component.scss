@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .doi-ten {
     width: 100vw;
     height: 100vh;
@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     &-main {
       width: 548px;
       height: 360px;
@@ -24,7 +24,7 @@
       background-color: white;
       box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
         inset 0 0 0 1px #ffffff80;
-  
+
       &-header {
         position: relative;
         width: 100%;
@@ -32,7 +32,7 @@
         border-bottom: 1px solid #0000001a;
         display: flex;
         align-items: center;
-  
+
         &-name {
           font-family: "Raleway";
           font-weight: 700;
@@ -42,7 +42,7 @@
           justify-content: center;
           align-items: center;
         }
-  
+
         &-icon {
           position: absolute;
           cursor: pointer;
@@ -56,8 +56,8 @@
           align-items: center;
           background-color: #e4e6eb;
           i {
-            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
-            background-position: 0px -452px;
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/W6QImUVyJuR.png);
+            background-position: -126px -71px;
             background-size: auto;
             width: 20px;
             height: 20px;
@@ -68,11 +68,11 @@
           }
         }
       }
-  
+
       &-content {
         margin-top: 5px;
         width: 100%;
-  
+
         &-header {
           display: flex;
           align-items: center;
@@ -125,7 +125,7 @@
             background-color: white;
           }
         }
-  
+
         &-content {
           overflow-y: scroll;
           width: 538px;
@@ -188,12 +188,12 @@
         }
       }
     }
-  
+
     .none-now {
       height: 431px;
     }
   }
-  
+
   ::-webkit-scrollbar-track {
     border-radius: 20px;
     background: #00000000;
@@ -209,4 +209,3 @@
   ::-webkit-scrollbar:hover {
     background: #0700001c !important;
   }
-  

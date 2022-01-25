@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .loading {
     width: 100vw;
     height: 100vh;
@@ -22,7 +22,7 @@
       height: 300px;
     }
   }
-  
+
   .container {
     position: relative;
     background-color: #f5f9fc;
@@ -30,7 +30,7 @@
     height: 800px;
     width: 1144px;
   }
-  
+
   .doi-ten {
     width: 100vw;
     height: 100vh;
@@ -42,7 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     &-main {
       width: 700px;
       height: 215px;
@@ -52,7 +52,7 @@
       background-color: white;
       box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
         inset 0 0 0 1px #ffffff80;
-  
+
       &-header {
         position: relative;
         width: 100%;
@@ -60,7 +60,7 @@
         border-bottom: 1px solid #0000001a;
         display: flex;
         align-items: center;
-  
+
         &-name {
           font-family: "Raleway";
           font-weight: 700;
@@ -70,7 +70,7 @@
           justify-content: center;
           align-items: center;
         }
-  
+
         &-icon {
           position: absolute;
           cursor: pointer;
@@ -84,8 +84,8 @@
           align-items: center;
           background-color: #e4e6eb;
           i {
-            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
-            background-position: 0px -452px;
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/W6QImUVyJuR.png);
+            background-position: -126px -71px;
             background-size: auto;
             width: 20px;
             height: 20px;
@@ -96,11 +96,11 @@
           }
         }
       }
-  
+
       &-content {
         margin-top: 20px;
         width: 100%;
-  
+
         .p1 {
           font-family: "Raleway";
           font-size: 13px;
@@ -112,14 +112,14 @@
           margin-right: auto;
           line-height: 20px;
         }
-  
+
         &-buttons {
           margin-top: 22px;
           margin-left: 12px;
           width: 637px;
           justify-content: flex-end;
           display: flex;
-  
+
           &-item {
             border-radius: 6px;
             color: #050505;
@@ -135,12 +135,12 @@
             margin-left: 8px;
             cursor: pointer;
           }
-  
+
           &-item-select {
             background-color: #1877f2;
             color: white;
           }
-  
+
           &-item-done {
             cursor: not-allowed;
             color: #bcc0c4;
@@ -150,6 +150,5 @@
       }
     }
   }
-  
-  
-  
+
+

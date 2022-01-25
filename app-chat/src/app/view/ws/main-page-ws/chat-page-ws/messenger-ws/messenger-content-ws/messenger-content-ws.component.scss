@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .container {
     background-color: white;
     width: 100%;
@@ -13,7 +13,7 @@
     margin-bottom: 10px;
     z-index: 0;
     position: relative;
-  
+
     .first {
       display: flex;
       align-items: center;
@@ -39,7 +39,7 @@
             object-fit: cover;
             border-radius: 50%;
           }
-  
+
           .hinh-2 {
             box-shadow: 0 0 2px #909090;
             z-index: 9;
@@ -74,7 +74,7 @@
           justify-content: center;
           align-items: center;
           border-radius: 50%;
-  
+
           .child {
             width: 11px;
             height: 11px;
@@ -92,7 +92,7 @@
         letter-spacing: 0.5px;
       }
     }
-  
+
     .thong_bao {
       display: flex;
       justify-content: center;
@@ -123,7 +123,7 @@
         line-height: 13px;
       }
     }
-  
+
     .list-dang-nhap {
       padding-left: 2px;
       padding-top: 7px;
@@ -160,7 +160,7 @@
         }
       }
     }
-  
+
     .gui_text {
       display: flex;
       overflow: hidden;
@@ -355,7 +355,7 @@
           margin-left: 4px;
           display: flex;
           justify-content: center;
-  
+
           .nguoi_xem {
             img {
               width: 14px;
@@ -610,7 +610,7 @@
           margin-left: 4px;
           display: flex;
           justify-content: center;
-  
+
           .nguoi_xem {
             img {
               width: 14px;
@@ -863,8 +863,8 @@
               height: 36px;
               border-radius: 50%;
               i {
-                background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
-                background-position: 0px -745px;
+                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/5ZUCUdHlb0s.png);
+                background-position: 0px -339px;
                 background-size: auto;
                 width: 20px;
                 height: 20px;
@@ -909,8 +909,8 @@
               height: 36px;
               border-radius: 50%;
               i {
-                background-image: url(https://www.facebook.com/rsrc.php/v3/yv/r/iz24jk574XF.png);
-                background-position: 0px -745px;
+                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/5ZUCUdHlb0s.png);
+                background-position: 0px -339px;
                 background-size: auto;
                 width: 20px;
                 height: 20px;
@@ -949,7 +949,7 @@
           margin-left: 4px;
           display: flex;
           justify-content: center;
-  
+
           .nguoi_xem {
             img {
               width: 14px;
@@ -1086,9 +1086,9 @@
               left: 10px;
               top: 10px;
               i {
-                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yu/r/rDfNIM4_UpO.png);
-                background-position: -34px -70px;
-                background-size: 52px 1338px;
+                background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/FP_pQnfuqge.png);
+                background-position: 0px -323px;
+                background-size: auto;
                 background-repeat: no-repeat;
                 width: 16px;
                 height: 16px;
@@ -1116,7 +1116,7 @@
       }
     }
   }
-  
+
   .nen {
     width: 475px;
     height: 602px;
@@ -1126,7 +1126,7 @@
     margin-bottom: 10px;
     margin-left: 10px;
   }
-  
+
   .content {
     width: 482px;
     height: 612px;
@@ -1136,7 +1136,7 @@
     margin-left: 10px;
     position: relative;
     z-index: 2;
-  
+
     #danh-sach-tin-nhan {
       width: 100%;
     }
@@ -1156,4 +1156,3 @@
   ::-webkit-scrollbar:hover {
     background: #0700001c !important;
   }
-  
