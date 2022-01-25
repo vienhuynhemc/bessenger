@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .container {
     width: 100%;
     margin-top: 10px;
@@ -63,17 +63,17 @@
         padding: 14px 10px;
         margin-left: 10px;
         margin-right: 5px;
-  
+
         p {
           color: #050505;
           font-weight: 600;
           font-family: "Raleway";
           font-size: 14px;
         }
-  
+
         .nhom-chat {
-          background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/Z8VkIC_Hc4p.png);
-          background-position: 0px -977px;
+          background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/h0LC7R-FUed.png);
+          background-position: 0px -551px;
           background-size: auto;
           width: 20px;
           height: 20px;
@@ -83,7 +83,7 @@
           filter: invert(8%) sepia(10%) saturate(200%) saturate(200%)
             saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);
         }
-  
+
         .chu-de {
           margin-right: 14px;
           display: flex;
@@ -99,11 +99,11 @@
             background-color: white;
           }
         }
-  
+
         svg {
           margin-right: 12px;
         }
-  
+
         .emoji-btcx{
           margin-right: 12px;
           display: flex;
@@ -131,7 +131,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-  
+
       &-main {
         width: 548px;
         height: 215px;
@@ -141,7 +141,7 @@
         background-color: white;
         box-shadow: 0 12px 28px 0 #00000033, 0 2px 4px 0 #0000001a,
           inset 0 0 0 1px #ffffff80;
-  
+
         &-header {
           position: relative;
           width: 100%;
@@ -149,7 +149,7 @@
           border-bottom: 1px solid #0000001a;
           display: flex;
           align-items: center;
-  
+
           &-name {
             font-family: "Raleway";
             font-weight: 700;
@@ -159,7 +159,7 @@
             justify-content: center;
             align-items: center;
           }
-  
+
           &-icon {
             position: absolute;
             cursor: pointer;
@@ -173,8 +173,8 @@
             align-items: center;
             background-color: #e4e6eb;
             i {
-              background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/05sBKW1EH-5.png);
-              background-position: 0px -452px;
+              background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/W6QImUVyJuR.png);
+              background-position: -126px -71px;
               background-size: auto;
               width: 20px;
               height: 20px;
@@ -185,11 +185,11 @@
             }
           }
         }
-  
+
         &-content {
           margin-top: 12px;
           width: 100%;
-  
+
           .p1 {
             font-family: "Raleway";
             font-size: 13px;
@@ -198,7 +198,7 @@
             margin-top: 12px;
             font-weight: 500;
           }
-  
+
           .input1 {
             height: 34px;
             width: 498px;
@@ -214,14 +214,14 @@
             padding: 0px 12px;
             font-weight: 600;
           }
-  
+
           &-buttons {
             margin-top: 12px;
             margin-left: 12px;
             width: 522px;
             justify-content: flex-end;
             display: flex;
-  
+
             &-item {
               border-radius: 6px;
               color: #050505;
@@ -237,12 +237,12 @@
               margin-left: 8px;
               cursor: pointer;
             }
-  
+
             &-item-select {
               background-color: #1877f2;
               color: white;
             }
-  
+
             &-item-done {
               cursor: not-allowed;
               color: #bcc0c4;
@@ -251,13 +251,13 @@
           }
         }
       }
-  
+
       .editColor {
         height: 441px;
         width: 635px;
         display: flex;
         align-items: center;
-  
+
         .editColorContent {
           display: flex;
           margin-top: 10px;
@@ -265,7 +265,7 @@
           justify-content: center;
           align-items: center;
           width: 592px;
-  
+
           .itemEditColor {
             cursor: pointer;
             border-radius: 30%;
@@ -281,26 +281,26 @@
               border-radius: 50%;
             }
           }
-  
+
           .itemEditColor:hover {
             background: #ececec78;
           }
-  
+
           .itemEditColorSelected {
             background: #ececec78;
           }
         }
-  
+
         .doi-ten-main-content-buttons {
           width: 595px;
           margin-top: 5px;
         }
       }
-  
+
       .editEmoji {
         width: 365px;
         height: 484px;
-  
+
         .now-emoji {
           display: flex;
           width: 293px;
@@ -309,7 +309,7 @@
           margin-left: auto;
           margin-right: auto;
           margin-top: 10px;
-  
+
           .now-emoji-thong-tin {
             p {
               font-family: "Raleway";
@@ -323,7 +323,7 @@
               image-rendering: -webkit-optimize-contrast;
             }
           }
-  
+
           .now-emoji-button {
             display: flex;
             justify-content: center;
@@ -360,10 +360,9 @@
           position: relative;
         }
       }
-  
+
       .none-now {
         height: 431px;
       }
     }
   }
-  
